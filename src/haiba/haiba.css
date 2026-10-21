@@ -53,7 +53,7 @@
 .hb-motion-reveal {
   overflow: hidden;
 }
-.hb-app .hb-motion-experience [data-hb-motion] {
+.hb-app .hb-motion-experience :is(.hb-rise, .hb-pop, .hb-peek, .hb-in-r, .hb-in-l, .hb-stamp, .hb-flip, .hb-drop, .hb-up, .hb-stagger > *, .hb-pops > *, .hb-flips > *, .hb-stamps > *, .hb-home-carousel > *, .hb-float, .hb-wobble, .hb-run, .hb-nudge, .hb-coin, .hb-spin, .hb-shade, .hb-pulse, .hb-jump, .hb-press, .hb-lift, .hb-ease) {
   animation: none !important;
   transition-property: background-color, color, border-color, box-shadow;
 }
