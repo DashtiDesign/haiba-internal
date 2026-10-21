@@ -1,3 +1,4 @@
+import type React from "react";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 /**
@@ -61,7 +62,9 @@ type Api = {
   reset: () => void;
 };
 
-const Ctx = createContext<Api | null>(null);
+// Keep one context across hot reloads so screens never lose the provider.
+const g = globalThis as unknown as { __haibaCtx?: React.Context<Api | null> };
+const Ctx = (g.__haibaCtx ??= createContext<Api | null>(null));
 
 export function HaibaProvider({ children }: { children: ReactNode }) {
   // The page is server rendered, so saved state loads after the first render in the browser.
