@@ -1,33 +1,13 @@
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board. Page state works like the canvas; shared keys live in the Haiba store.
-import { useEffect } from "react";
+import { useMotionProgress } from "../useMotionProgress";
 import { useDC } from "../dc";
 
 export function useVals() {
   const { state, setState, props, nav } = useDC({ stop: 1, t: 0, worth: 0 });
-  useEffect(() => {
-    var reduce = false;
-    try {
-      reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    } catch (e) {}
-    if (reduce || typeof requestAnimationFrame !== "function") {
-      setState({ t: 1 });
-      return;
-    }
-    var t0 = null;
-    var step = function (ts) {
-      if (t0 === null) t0 = ts;
-      var p = Math.min(1, (ts - t0) / 1100);
-      setState({ t: 1 - Math.pow(1 - p, 3) });
-      if (p < 1) requestAnimationFrame(step);
-    };
-    setTimeout(function () {
-      requestAnimationFrame(step);
-    }, 120);
-  }, []);
 
   var isNew = (props.member ?? "Active member") === "New member";
-  var t = state.t;
+  var t = useMotionProgress();
   var visits = [2, 4, 8, 12];
   var items = [
     "A pastry at Caribou",

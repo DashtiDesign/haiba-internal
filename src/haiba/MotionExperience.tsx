@@ -3,8 +3,8 @@ import { useLocation } from "@tanstack/react-router";
 import { animate } from "motion/mini";
 import { useReducedMotion } from "motion/react";
 
-const entranceSelector = ".hb-rise, .hb-pop, .hb-peek, .hb-in-r, .hb-in-l, .hb-stamp, .hb-flip, .hb-drop, .hb-stagger > *, .hb-pops > *, .hb-flips > *";
-const ambientSelector = ".hb-float, .hb-wobble, .hb-run, .hb-nudge";
+const entranceSelector = ".hb-rise, .hb-pop, .hb-peek, .hb-in-r, .hb-in-l, .hb-stamp, .hb-flip, .hb-drop, .hb-up, .hb-stagger > *, .hb-pops > *, .hb-flips > *, .hb-stamps > *, .hb-home-carousel > *";
+const ambientSelector = ".hb-float, .hb-wobble, .hb-run, .hb-nudge, .hb-coin, .hb-spin, .hb-shade, .hb-pulse, .hb-jump";
 const ease = [0.22, 1, 0.36, 1] as const;
 
 /** Motion owns the existing canvas animation hooks without changing their layout. */
@@ -28,8 +28,8 @@ export default function MotionExperience({ children }: { children: ReactNode }) 
         const element = entry.target;
         observer.unobserve(element);
         if (reduced) continue;
-        const popping = element.matches(".hb-pop, .hb-stamp, .hb-flip, .hb-pops > *, .hb-flips > *");
-        const index = element.parentElement?.matches(".hb-stagger, .hb-pops, .hb-flips")
+        const popping = element.matches(".hb-pop, .hb-stamp, .hb-flip, .hb-pops > *, .hb-flips > *, .hb-stamps > *");
+        const index = element.parentElement?.matches(".hb-stagger, .hb-pops, .hb-flips, .hb-stamps, .hb-home-carousel")
           ? Array.from(element.parentElement.children).indexOf(element) : 0;
         // Individual CSS transforms preserve canvas rotation and fixed positioning.
         const fixedAncestor = element.querySelector(".hb-fixed-bottom") || getComputedStyle(element).position === "fixed";
@@ -41,16 +41,17 @@ export default function MotionExperience({ children }: { children: ReactNode }) 
     }, { threshold: 0.06 });
 
     const scan = () => {
-      root.querySelectorAll<HTMLElement>(`${entranceSelector}, ${ambientSelector}, .hb-press, .hb-lift`).forEach((element) => {
+      root.querySelectorAll<HTMLElement>(`${entranceSelector}, ${ambientSelector}, .hb-press, .hb-lift, .hb-ease`).forEach((element) => {
         if (seen.has(element)) return;
         seen.add(element);
         element.dataset['hbMotion'] = "true";
         element.style.setProperty("--hb-base-transform", element.style.transform || "none");
         if (element.matches(entranceSelector)) observer.observe(element);
         if (!reduced && element.matches(ambientSelector)) {
-          track(animate(element, { translate: ["0 0", "0 -4px", "0 0"] }, {
+          const decorative = element.matches(".hb-spin, .hb-shade, .hb-pulse");
+          track(animate(element, decorative ? { opacity: [1, 0.8, 1] } : { translate: ["0 0", "0 -4px", "0 0"] }, {
             duration: element.matches(".hb-run") ? 1.2 : 3.6,
-            ease: "easeInOut", repeat: Infinity,
+            ease: "easeInOut", repeat: element.matches(".hb-jump") ? 0 : Infinity,
           }));
         }
       });
