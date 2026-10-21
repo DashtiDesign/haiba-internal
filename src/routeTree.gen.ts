@@ -10,33 +10,141 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as HaibaIndexRouteImport } from './routes/haiba/index'
+import { Route as HaibaBasketRouteImport } from './routes/haiba/basket'
+import { Route as HaibaPlansRouteImport } from './routes/haiba/plans'
+import { Route as HaibaPointsRouteImport } from './routes/haiba/points'
+import { Route as HaibaWalletRouteImport } from './routes/haiba/wallet'
+import { Route as HaibaWelcomeRouteImport } from './routes/haiba/welcome'
+import { Route as ShopCoffeeBeanIndexRouteImport } from './routes/shop/coffee-bean/index'
+import { Route as ShopCoffeeBeanRedeemRouteImport } from './routes/shop/coffee-bean/redeem'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HaibaIndexRoute = HaibaIndexRouteImport.update({
+  id: '/haiba/',
+  path: '/haiba/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaBasketRoute = HaibaBasketRouteImport.update({
+  id: '/haiba/basket',
+  path: '/haiba/basket',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaPlansRoute = HaibaPlansRouteImport.update({
+  id: '/haiba/plans',
+  path: '/haiba/plans',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaPointsRoute = HaibaPointsRouteImport.update({
+  id: '/haiba/points',
+  path: '/haiba/points',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaWalletRoute = HaibaWalletRouteImport.update({
+  id: '/haiba/wallet',
+  path: '/haiba/wallet',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaWelcomeRoute = HaibaWelcomeRouteImport.update({
+  id: '/haiba/welcome',
+  path: '/haiba/welcome',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopCoffeeBeanIndexRoute = ShopCoffeeBeanIndexRouteImport.update({
+  id: '/shop/coffee-bean/',
+  path: '/shop/coffee-bean/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopCoffeeBeanRedeemRoute = ShopCoffeeBeanRedeemRouteImport.update({
+  id: '/shop/coffee-bean/redeem',
+  path: '/shop/coffee-bean/redeem',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/haiba/basket': typeof HaibaBasketRoute
+  '/haiba/plans': typeof HaibaPlansRoute
+  '/haiba/points': typeof HaibaPointsRoute
+  '/haiba/wallet': typeof HaibaWalletRoute
+  '/haiba/welcome': typeof HaibaWelcomeRoute
+  '/haiba/': typeof HaibaIndexRoute
+  '/shop/coffee-bean/redeem': typeof ShopCoffeeBeanRedeemRoute
+  '/shop/coffee-bean/': typeof ShopCoffeeBeanIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/haiba/basket': typeof HaibaBasketRoute
+  '/haiba/plans': typeof HaibaPlansRoute
+  '/haiba/points': typeof HaibaPointsRoute
+  '/haiba/wallet': typeof HaibaWalletRoute
+  '/haiba/welcome': typeof HaibaWelcomeRoute
+  '/haiba': typeof HaibaIndexRoute
+  '/shop/coffee-bean/redeem': typeof ShopCoffeeBeanRedeemRoute
+  '/shop/coffee-bean': typeof ShopCoffeeBeanIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/haiba/basket': typeof HaibaBasketRoute
+  '/haiba/plans': typeof HaibaPlansRoute
+  '/haiba/points': typeof HaibaPointsRoute
+  '/haiba/wallet': typeof HaibaWalletRoute
+  '/haiba/welcome': typeof HaibaWelcomeRoute
+  '/haiba/': typeof HaibaIndexRoute
+  '/shop/coffee-bean/redeem': typeof ShopCoffeeBeanRedeemRoute
+  '/shop/coffee-bean/': typeof ShopCoffeeBeanIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/haiba/basket'
+    | '/haiba/plans'
+    | '/haiba/points'
+    | '/haiba/wallet'
+    | '/haiba/welcome'
+    | '/haiba/'
+    | '/shop/coffee-bean/redeem'
+    | '/shop/coffee-bean/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/haiba/basket'
+    | '/haiba/plans'
+    | '/haiba/points'
+    | '/haiba/wallet'
+    | '/haiba/welcome'
+    | '/haiba'
+    | '/shop/coffee-bean/redeem'
+    | '/shop/coffee-bean'
+  id:
+    | '__root__'
+    | '/'
+    | '/haiba/basket'
+    | '/haiba/plans'
+    | '/haiba/points'
+    | '/haiba/wallet'
+    | '/haiba/welcome'
+    | '/haiba/'
+    | '/shop/coffee-bean/redeem'
+    | '/shop/coffee-bean/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HaibaBasketRoute: typeof HaibaBasketRoute
+  HaibaPlansRoute: typeof HaibaPlansRoute
+  HaibaPointsRoute: typeof HaibaPointsRoute
+  HaibaWalletRoute: typeof HaibaWalletRoute
+  HaibaWelcomeRoute: typeof HaibaWelcomeRoute
+  HaibaIndexRoute: typeof HaibaIndexRoute
+  ShopCoffeeBeanRedeemRoute: typeof ShopCoffeeBeanRedeemRoute
+  ShopCoffeeBeanIndexRoute: typeof ShopCoffeeBeanIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +156,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/haiba/': {
+      id: '/haiba/'
+      path: '/haiba'
+      fullPath: '/haiba/'
+      preLoaderRoute: typeof HaibaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/basket': {
+      id: '/haiba/basket'
+      path: '/haiba/basket'
+      fullPath: '/haiba/basket'
+      preLoaderRoute: typeof HaibaBasketRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/plans': {
+      id: '/haiba/plans'
+      path: '/haiba/plans'
+      fullPath: '/haiba/plans'
+      preLoaderRoute: typeof HaibaPlansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/points': {
+      id: '/haiba/points'
+      path: '/haiba/points'
+      fullPath: '/haiba/points'
+      preLoaderRoute: typeof HaibaPointsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/wallet': {
+      id: '/haiba/wallet'
+      path: '/haiba/wallet'
+      fullPath: '/haiba/wallet'
+      preLoaderRoute: typeof HaibaWalletRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/welcome': {
+      id: '/haiba/welcome'
+      path: '/haiba/welcome'
+      fullPath: '/haiba/welcome'
+      preLoaderRoute: typeof HaibaWelcomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop/coffee-bean/': {
+      id: '/shop/coffee-bean/'
+      path: '/shop/coffee-bean'
+      fullPath: '/shop/coffee-bean/'
+      preLoaderRoute: typeof ShopCoffeeBeanIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop/coffee-bean/redeem': {
+      id: '/shop/coffee-bean/redeem'
+      path: '/shop/coffee-bean/redeem'
+      fullPath: '/shop/coffee-bean/redeem'
+      preLoaderRoute: typeof ShopCoffeeBeanRedeemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HaibaBasketRoute: HaibaBasketRoute,
+  HaibaPlansRoute: HaibaPlansRoute,
+  HaibaPointsRoute: HaibaPointsRoute,
+  HaibaWalletRoute: HaibaWalletRoute,
+  HaibaWelcomeRoute: HaibaWelcomeRoute,
+  HaibaIndexRoute: HaibaIndexRoute,
+  ShopCoffeeBeanRedeemRoute: ShopCoffeeBeanRedeemRoute,
+  ShopCoffeeBeanIndexRoute: ShopCoffeeBeanIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

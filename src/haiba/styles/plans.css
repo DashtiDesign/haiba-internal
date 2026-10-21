@@ -1,0 +1,156 @@
+.pg-plans a {
+  color: #6c3ffa;
+}
+.pg-plans a:hover {
+  color: #5428e0;
+}
+@keyframes plans-hb-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes plans-hb-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.07);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes plans-hb-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes plans-hb-peek {
+  0% {
+    opacity: 0;
+    transform: translateX(70px) rotate(8deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) rotate(0);
+  }
+}
+.pg-plans .hb-rise {
+  animation: plans-hb-rise 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-plans .hb-pop {
+  animation: plans-hb-pop 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-plans .hb-float {
+  animation: plans-hb-float 3.4s ease-in-out infinite;
+}
+.pg-plans .hb-peek {
+  animation: plans-hb-peek 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both;
+}
+.pg-plans .hb-stagger > * {
+  animation: plans-hb-rise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-plans .hb-stagger > *:nth-child(2) {
+  animation-delay: 0.06s;
+}
+.pg-plans .hb-stagger > *:nth-child(3) {
+  animation-delay: 0.12s;
+}
+.pg-plans .hb-stagger > *:nth-child(4) {
+  animation-delay: 0.18s;
+}
+.pg-plans .hb-stagger > *:nth-child(5) {
+  animation-delay: 0.24s;
+}
+.pg-plans .hb-stagger > *:nth-child(6) {
+  animation-delay: 0.3s;
+}
+.pg-plans .hb-stagger > *:nth-child(7) {
+  animation-delay: 0.36s;
+}
+.pg-plans .hb-stagger > *:nth-child(8) {
+  animation-delay: 0.42s;
+}
+.pg-plans .hb-stagger > *:nth-child(9) {
+  animation-delay: 0.48s;
+}
+.pg-plans .hb-pops > * {
+  animation: plans-hb-pop 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-plans .hb-pops > *:nth-child(2) {
+  animation-delay: 0.06s;
+}
+.pg-plans .hb-pops > *:nth-child(3) {
+  animation-delay: 0.12s;
+}
+.pg-plans .hb-pops > *:nth-child(4) {
+  animation-delay: 0.18s;
+}
+.pg-plans .hb-pops > *:nth-child(5) {
+  animation-delay: 0.24s;
+}
+.pg-plans .hb-pops > *:nth-child(6) {
+  animation-delay: 0.3s;
+}
+.pg-plans .hb-d1 {
+  animation-delay: 0.12s;
+}
+.pg-plans .hb-d2 {
+  animation-delay: 0.24s;
+}
+.pg-plans .hb-d3 {
+  animation-delay: 0.36s;
+}
+.pg-plans .hb-press {
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+.pg-plans .hb-press:active {
+  transform: scale(0.97);
+}
+.pg-plans .hb-lift {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.pg-plans .hb-lift:hover {
+  transform: translateY(-3px);
+}
+.pg-plans .hb-row {
+  transition: background 0.15s ease;
+}
+.pg-plans .hb-row:hover {
+  background: #faf9fd;
+}
+.pg-plans .hb-ease {
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pg-plans .hb-rise,
+  .pg-plans .hb-pop,
+  .pg-plans .hb-float,
+  .pg-plans .hb-peek,
+  .pg-plans .hb-stagger > *,
+  .pg-plans .hb-pops > * {
+    animation: none;
+  }
+  .pg-plans .hb-ease,
+  .pg-plans .hb-press,
+  .pg-plans .hb-lift {
+    transition: none;
+  }
+}

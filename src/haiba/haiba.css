@@ -1,0 +1,133 @@
+/* Fonts are self hosted in public/fonts (Figtree and Plus Jakarta Sans, both Google Fonts). */
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/figtree-latin-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/figtree-latin-500-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/figtree-latin-600-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/figtree-latin-700-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/fonts/figtree-latin-800-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/plus-jakarta-sans-latin-700-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/fonts/plus-jakarta-sans-latin-800-normal.woff2") format("woff2");
+}
+
+/* App shell: a phone width column, centred on bigger screens. */
+.hb-app {
+  min-height: 100vh;
+  background: #e9e7ef;
+  -webkit-font-smoothing: antialiased;
+}
+.hb-app img {
+  max-width: none;
+}
+.hb-app button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Bars that sit at the bottom of the screen (nav, main buttons, basket bar). */
+.hb-fixed-bottom {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  pointer-events: none;
+}
+.hb-fixed-inner {
+  position: relative;
+  max-width: 390px;
+  height: 0;
+  margin: 0 auto;
+  pointer-events: none;
+}
+.hb-fixed-inner > * {
+  pointer-events: auto;
+}
+
+/*
+ * The screens were designed on a canvas with plain browser defaults.
+ * Tailwind's base styles change two of those (box sizing and line height),
+ * so the canvas defaults are restored inside the Haiba screens only.
+ */
+.pg-hub,
+.pg-plans,
+.pg-points,
+.pg-story,
+.pg-wallet,
+.pg-redeem,
+.pg-shop,
+.pg-basket,
+.pg-hub *,
+.pg-plans *,
+.pg-points *,
+.pg-story *,
+.pg-wallet *,
+.pg-redeem *,
+.pg-shop *,
+.pg-basket *,
+.pg-hub *::before,
+.pg-plans *::before,
+.pg-points *::before,
+.pg-story *::before,
+.pg-wallet *::before,
+.pg-redeem *::before,
+.pg-shop *::before,
+.pg-basket *::before,
+.pg-hub *::after,
+.pg-plans *::after,
+.pg-points *::after,
+.pg-story *::after,
+.pg-wallet *::after,
+.pg-redeem *::after,
+.pg-shop *::after,
+.pg-basket *::after {
+  box-sizing: content-box;
+}
+.pg-hub,
+.pg-plans,
+.pg-points,
+.pg-story,
+.pg-wallet,
+.pg-redeem,
+.pg-shop,
+.pg-basket {
+  line-height: normal;
+}

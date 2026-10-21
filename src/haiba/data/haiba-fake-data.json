@@ -1,0 +1,1399 @@
+{
+  "meta": {
+    "name": "Haiba prototype fake data v4",
+    "prototypeToday": "2026-10-19",
+    "version": 4,
+    "note": "No student accounts in this version: the tester starts as a new student and builds history by clicking. Shops, offer titles and offer savings come from real Unipal transactions (Jul to Oct 2026). Bahrain cinemas (VOX, Cineco, Epix) are partners but do not appear in the transaction data, so their offers are placeholders. Reward items, reward prices, Unipass items, limits and subscription member prices are placeholders to confirm with partners. Rewards depend on what each brand offers; not every shop has one at 500 points or less.",
+    "displayRules": "BHD for Bahrain and SAR for Saudi, always 2 decimals. Points with a thousands comma. Every shop earns points. codeEntry says how the shop will check codes in the real build; in the prototype every shop uses the same shop dashboard screen.",
+    "startState": {
+      "status": "not a member",
+      "points": 0,
+      "codes": [],
+      "unipassPicks": {},
+      "subscriptionsUsed": []
+    }
+  },
+  "markets": {
+    "BH": {
+      "currency": "BHD",
+      "vatRate": 0.1,
+      "payment": "BenefitPay (fake)",
+      "plans": [
+        {
+          "id": "bh-monthly",
+          "name": "Monthly",
+          "priceBeforeVat": 2.0,
+          "priceWithVat": 2.2,
+          "period": "month"
+        },
+        {
+          "id": "bh-yearly",
+          "name": "Yearly",
+          "priceBeforeVat": 18.0,
+          "priceWithVat": 19.8,
+          "period": "year",
+          "saveVsMonthlyWithVat": 6.6
+        }
+      ]
+    },
+    "SA": {
+      "currency": "SAR",
+      "vatRate": 0.15,
+      "payment": "Card (method to be confirmed, fake)",
+      "plans": [
+        {
+          "id": "sa-yearly",
+          "name": "Yearly",
+          "priceBeforeVat": 180.0,
+          "priceWithVat": 207.0,
+          "period": "year",
+          "placeholder": "SAR price not decided. 180 is about BHD 18"
+        }
+      ]
+    }
+  },
+  "pointsRules": {
+    "basePoints": 40,
+    "welcomePoints": 500,
+    "firstAndSecondAtShop": 80,
+    "every5thAtShop": 200,
+    "earningLimit": "1 transaction per shop per day earns points",
+    "bonusCountsPerShop": true,
+    "pointValue": "1,000 points = BHD 1.00 of rewards (SAR 10.00 in Saudi)",
+    "codeLifeDays": 30,
+    "pointsExpiry": "6 months with no transaction or redemption",
+    "membershipEndGraceDays": 30,
+    "whoEarns": "Haiba members only",
+    "unipassCanChangePickUntilUsed": true
+  },
+  "shops": [
+    {
+      "id": "jasmis",
+      "name": "Jasmi's",
+      "category": "Fast food",
+      "codeEntry": "Unipal shop dashboard",
+      "offers": [
+        {
+          "id": "jasmis-o1",
+          "title": "BD 2 per meal only!",
+          "realSaving": 0.86,
+          "octoberUses": 5934
+        }
+      ],
+      "rewards": [
+        {
+          "id": "jasmis-r1",
+          "name": "Soft drink",
+          "points": 350,
+          "value": 0.35
+        },
+        {
+          "id": "jasmis-r2",
+          "name": "Chicken sandwich",
+          "points": 1200,
+          "value": 1.2
+        },
+        {
+          "id": "jasmis-r3",
+          "name": "Regular meal",
+          "points": 2850,
+          "value": 2.85
+        }
+      ],
+      "market": "BH",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "coffeebean",
+      "name": "The Coffee Bean & Tea Leaf",
+      "category": "Coffee",
+      "codeEntry": "Unipal shop app",
+      "offers": [
+        {
+          "id": "coffeebean-o1",
+          "title": "Upsize Your Drinks!",
+          "realSaving": 0.3,
+          "octoberUses": 2197
+        }
+      ],
+      "rewards": [
+        {
+          "id": "coffeebean-r1",
+          "name": "Free upsize",
+          "points": 300,
+          "value": 0.3
+        },
+        {
+          "id": "coffeebean-r2",
+          "name": "Cookie",
+          "points": 700,
+          "value": 0.7
+        },
+        {
+          "id": "coffeebean-r3",
+          "name": "Regular drink",
+          "points": 1900,
+          "value": 1.9
+        }
+      ],
+      "market": "BH",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "caribou",
+      "name": "Caribou Coffee",
+      "category": "Coffee",
+      "codeEntry": "Unipal shop dashboard",
+      "offers": [
+        {
+          "id": "caribou-o1",
+          "title": "Free Upgrade!",
+          "realSaving": 0.2,
+          "octoberUses": 1180
+        },
+        {
+          "id": "caribou-o2",
+          "title": "2 BD Deals",
+          "realSaving": 0.86,
+          "octoberUses": 114
+        }
+      ],
+      "rewards": [
+        {
+          "id": "caribou-r1",
+          "name": "Free upgrade",
+          "points": 200,
+          "value": 0.2
+        },
+        {
+          "id": "caribou-r2",
+          "name": "Pastry",
+          "points": 900,
+          "value": 0.9
+        },
+        {
+          "id": "caribou-r3",
+          "name": "Regular coffee",
+          "points": 1800,
+          "value": 1.8
+        }
+      ],
+      "market": "BH",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "barns",
+      "name": "Barn's",
+      "category": "Coffee",
+      "codeEntry": "Unipal shop dashboard",
+      "offers": [
+        {
+          "id": "barns-o1",
+          "title": "20% off",
+          "realSaving": 0.42,
+          "octoberUses": 653
+        }
+      ],
+      "rewards": [
+        {
+          "id": "barns-r1",
+          "name": "Cookie",
+          "points": 500,
+          "value": 0.5
+        },
+        {
+          "id": "barns-r2",
+          "name": "Regular drink",
+          "points": 2100,
+          "value": 2.1
+        }
+      ],
+      "market": "BH",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "wingman",
+      "name": "Wingman",
+      "category": "Wings",
+      "codeEntry": "Unipal shop app",
+      "offers": [
+        {
+          "id": "wingman-o1",
+          "title": "15% Off",
+          "realSaving": 0.84,
+          "octoberUses": 483
+        },
+        {
+          "id": "wingman-o2",
+          "title": "Meal for 4 is Here!",
+          "realSaving": 4.29,
+          "octoberUses": 30
+        }
+      ],
+      "rewards": [
+        {
+          "id": "wingman-r1",
+          "name": "Dip",
+          "points": 300,
+          "value": 0.3
+        },
+        {
+          "id": "wingman-r2",
+          "name": "Fries",
+          "points": 800,
+          "value": 0.8
+        },
+        {
+          "id": "wingman-r3",
+          "name": "6 wings",
+          "points": 2500,
+          "value": 2.5
+        }
+      ],
+      "market": "BH",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "mug",
+      "name": "Mug Coffee & Roastery",
+      "category": "Coffee",
+      "codeEntry": "Unipal shop app",
+      "offers": [
+        {
+          "id": "mug-o1",
+          "title": "15% Off!",
+          "realSaving": 0.07,
+          "octoberUses": 210
+        }
+      ],
+      "rewards": [
+        {
+          "id": "mug-r1",
+          "name": "Cookie",
+          "points": 500,
+          "value": 0.5
+        },
+        {
+          "id": "mug-r2",
+          "name": "Spanish latte",
+          "points": 1600,
+          "value": 1.6
+        }
+      ],
+      "market": "BH",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "pastaexpress",
+      "name": "Pasta Express",
+      "category": "Pasta",
+      "codeEntry": "Unipal shop app",
+      "offers": [
+        {
+          "id": "pastaexpress-o1",
+          "title": "25% OFF the Full Menu!",
+          "realSaving": 1.35,
+          "octoberUses": 353
+        }
+      ],
+      "rewards": [
+        {
+          "id": "pastaexpress-r1",
+          "name": "Garlic bread",
+          "points": 500,
+          "value": 0.5
+        },
+        {
+          "id": "pastaexpress-r2",
+          "name": "Regular pasta",
+          "points": 3500,
+          "value": 3.5
+        }
+      ],
+      "market": "BH",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "timhortons-bh",
+      "name": "Tim Hortons",
+      "category": "Coffee",
+      "codeEntry": "Unipal shop app",
+      "offers": [
+        {
+          "id": "timhortons-bh-o1",
+          "title": "20% Off!",
+          "realSaving": 0.44,
+          "octoberUses": 396
+        }
+      ],
+      "rewards": [
+        {
+          "id": "timhortons-bh-r1",
+          "name": "5 Timbits",
+          "points": 500,
+          "value": 0.5
+        },
+        {
+          "id": "timhortons-bh-r2",
+          "name": "Iced capp",
+          "points": 1600,
+          "value": 1.6
+        }
+      ],
+      "market": "BH",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "costa-bh",
+      "name": "Costa Coffee",
+      "category": "Coffee",
+      "codeEntry": "Unipal shop app",
+      "offers": [
+        {
+          "id": "costa-bh-o1",
+          "title": "25% Off!",
+          "realSaving": 0.65,
+          "octoberUses": 357
+        }
+      ],
+      "rewards": [
+        {
+          "id": "costa-bh-r1",
+          "name": "Extra shot",
+          "points": 300,
+          "value": 0.3
+        },
+        {
+          "id": "costa-bh-r2",
+          "name": "Medium latte",
+          "points": 2400,
+          "value": 2.4
+        }
+      ],
+      "market": "BH",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "texaschicken",
+      "name": "Texas Chicken",
+      "category": "Fast food",
+      "codeEntry": "Unipal shop dashboard",
+      "offers": [
+        {
+          "id": "texaschicken-o1",
+          "title": "2 BD Deal",
+          "realSaving": 2.0,
+          "octoberUses": 156
+        }
+      ],
+      "rewards": [
+        {
+          "id": "texaschicken-r1",
+          "name": "Honey butter biscuit",
+          "points": 300,
+          "value": 0.3
+        },
+        {
+          "id": "texaschicken-r2",
+          "name": "Fries",
+          "points": 600,
+          "value": 0.6
+        },
+        {
+          "id": "texaschicken-r3",
+          "name": "Combo meal",
+          "points": 4000,
+          "value": 4.0
+        }
+      ],
+      "market": "BH",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "alkuwaiti",
+      "name": "Alkuwaiti Auto Services",
+      "category": "Car care",
+      "codeEntry": "Unipal shop dashboard",
+      "offers": [
+        {
+          "id": "alkuwaiti-o1",
+          "title": "50% Off on our Car Wash!",
+          "realSaving": 1.75,
+          "octoberUses": 129
+        },
+        {
+          "id": "alkuwaiti-o2",
+          "title": "20% off Oil change + Free Oil filter",
+          "realSaving": 2.75,
+          "octoberUses": 18
+        }
+      ],
+      "rewards": [
+        {
+          "id": "alkuwaiti-r1",
+          "name": "BHD 0.50 off your bill",
+          "points": 500,
+          "value": 0.5
+        },
+        {
+          "id": "alkuwaiti-r2",
+          "name": "Exterior car wash",
+          "points": 3500,
+          "value": 3.5
+        }
+      ],
+      "market": "BH",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "vox",
+      "name": "VOX Cinemas",
+      "category": "Cinema",
+      "codeEntry": "Cinema booking (to confirm)",
+      "offers": [
+        {
+          "id": "vox-o1",
+          "title": "Student ticket offer (title to confirm)",
+          "realSaving": null,
+          "octoberUses": null
+        }
+      ],
+      "rewards": [
+        {
+          "id": "vox-r1",
+          "name": "Regular popcorn",
+          "points": 1500,
+          "value": 1.5
+        },
+        {
+          "id": "vox-r2",
+          "name": "Standard ticket",
+          "points": 3500,
+          "value": 3.5
+        }
+      ],
+      "market": "BH",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "cineco",
+      "name": "Cineco",
+      "category": "Cinema",
+      "codeEntry": "Cinema booking (to confirm)",
+      "offers": [
+        {
+          "id": "cineco-o1",
+          "title": "Student ticket offer (title to confirm)",
+          "realSaving": null,
+          "octoberUses": null
+        }
+      ],
+      "rewards": [
+        {
+          "id": "cineco-r1",
+          "name": "Regular popcorn",
+          "points": 1500,
+          "value": 1.5
+        },
+        {
+          "id": "cineco-r2",
+          "name": "Standard ticket",
+          "points": 3000,
+          "value": 3.0
+        }
+      ],
+      "market": "BH",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "epix",
+      "name": "Epix Cinemas",
+      "category": "Cinema",
+      "codeEntry": "Cinema booking (to confirm)",
+      "offers": [
+        {
+          "id": "epix-o1",
+          "title": "Student ticket offer (title to confirm)",
+          "realSaving": null,
+          "octoberUses": null
+        }
+      ],
+      "rewards": [
+        {
+          "id": "epix-r1",
+          "name": "Regular popcorn",
+          "points": 1500,
+          "value": 1.5
+        },
+        {
+          "id": "epix-r2",
+          "name": "Standard ticket",
+          "points": 3000,
+          "value": 3.0
+        }
+      ],
+      "market": "BH",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "funland",
+      "name": "Funland",
+      "category": "Bowling and fun",
+      "codeEntry": "Unipal shop app",
+      "offers": [
+        {
+          "id": "funland-o1",
+          "title": "Funland offer",
+          "realSaving": 1.2,
+          "octoberUses": null
+        }
+      ],
+      "rewards": [
+        {
+          "id": "funland-r1",
+          "name": "Bowling game",
+          "points": 1800,
+          "value": 1.8
+        }
+      ],
+      "market": "BH",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "milkd",
+      "name": "Milkd",
+      "category": "Dessert",
+      "codeEntry": "Unipal shop app",
+      "offers": [
+        {
+          "id": "milkd-o1",
+          "title": "30% Off!",
+          "realSaving": 1.05,
+          "octoberUses": 197
+        }
+      ],
+      "rewards": [
+        {
+          "id": "milkd-r1",
+          "name": "Regular milkshake",
+          "points": 2500,
+          "value": 2.5
+        }
+      ],
+      "market": "BH",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "laundry1991",
+      "name": "1991 Laundry",
+      "category": "Laundry",
+      "codeEntry": "Unipal shop dashboard",
+      "offers": [
+        {
+          "id": "laundry1991-o1",
+          "title": "Laundry offer",
+          "realSaving": 2.1,
+          "octoberUses": null
+        }
+      ],
+      "rewards": [
+        {
+          "id": "laundry1991-r1",
+          "name": "Wash and fold, 1 bag",
+          "points": 3000,
+          "value": 3.0
+        }
+      ],
+      "market": "BH",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "fitnesstrack",
+      "name": "Fitness Track",
+      "category": "Gym",
+      "codeEntry": "Unipal shop dashboard",
+      "offers": [
+        {
+          "id": "fitnesstrack-o1",
+          "title": "1 Month Membership - BD35",
+          "realSaving": 7.0,
+          "octoberUses": 98
+        }
+      ],
+      "rewards": [
+        {
+          "id": "fitnesstrack-r1",
+          "name": "BHD 0.50 off your bill",
+          "points": 500,
+          "value": 0.5
+        },
+        {
+          "id": "fitnesstrack-r2",
+          "name": "Day pass",
+          "points": 3000,
+          "value": 3.0
+        }
+      ],
+      "market": "BH",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "timhortons-sa",
+      "name": "Tim Hortons",
+      "category": "Coffee",
+      "codeEntry": "Unipal shop dashboard",
+      "offers": [
+        {
+          "id": "timhortons-sa-o1",
+          "title": "15% Off!",
+          "realSaving": 4.24,
+          "octoberUses": 503
+        }
+      ],
+      "rewards": [
+        {
+          "id": "timhortons-sa-r1",
+          "name": "10 Timbits",
+          "points": 500,
+          "value": 5.0
+        },
+        {
+          "id": "timhortons-sa-r2",
+          "name": "Iced capp",
+          "points": 1600,
+          "value": 16.0
+        }
+      ],
+      "market": "SA",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "thirdwave",
+      "name": "THiRDWAVE",
+      "category": "Coffee",
+      "codeEntry": "Unipal shop dashboard",
+      "offers": [
+        {
+          "id": "thirdwave-o1",
+          "title": "15% Off!",
+          "realSaving": 3.3,
+          "octoberUses": 471
+        }
+      ],
+      "rewards": [
+        {
+          "id": "thirdwave-r1",
+          "name": "Cookie",
+          "points": 500,
+          "value": 5.0
+        },
+        {
+          "id": "thirdwave-r2",
+          "name": "Spanish latte",
+          "points": 1900,
+          "value": 19.0
+        }
+      ],
+      "market": "SA",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "cacti",
+      "name": "Cacti",
+      "category": "Coffee",
+      "codeEntry": "Unipal shop dashboard",
+      "offers": [
+        {
+          "id": "cacti-o1",
+          "title": "20% Off!",
+          "realSaving": 4.0,
+          "octoberUses": 310
+        }
+      ],
+      "rewards": [
+        {
+          "id": "cacti-r1",
+          "name": "Cookie",
+          "points": 500,
+          "value": 5.0
+        },
+        {
+          "id": "cacti-r2",
+          "name": "Regular drink",
+          "points": 1800,
+          "value": 18.0
+        }
+      ],
+      "market": "SA",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "whoatea",
+      "name": "WHOA TEA",
+      "category": "Tea",
+      "codeEntry": "Unipal shop app",
+      "offers": [
+        {
+          "id": "whoatea-o1",
+          "title": "16% Off!",
+          "realSaving": 4.38,
+          "octoberUses": 178
+        }
+      ],
+      "rewards": [
+        {
+          "id": "whoatea-r1",
+          "name": "Extra topping",
+          "points": 300,
+          "value": 3.0
+        },
+        {
+          "id": "whoatea-r2",
+          "name": "Regular tea",
+          "points": 2700,
+          "value": 27.0
+        }
+      ],
+      "market": "SA",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "xbowl",
+      "name": "XBOWL Club",
+      "category": "Bowling",
+      "codeEntry": "Unipal shop app",
+      "offers": [
+        {
+          "id": "xbowl-o1",
+          "title": "Bowling Round for SAR33.75 Per Person!",
+          "realSaving": 11.3,
+          "octoberUses": 99
+        }
+      ],
+      "rewards": [
+        {
+          "id": "xbowl-r1",
+          "name": "SAR 5.00 off your bill",
+          "points": 500,
+          "value": 5.0
+        },
+        {
+          "id": "xbowl-r2",
+          "name": "Bowling round",
+          "points": 4500,
+          "value": 45.0
+        }
+      ],
+      "market": "SA",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "addressbarber",
+      "name": "The Address Barber",
+      "category": "Barber",
+      "codeEntry": "Unipal shop dashboard",
+      "offers": [
+        {
+          "id": "addressbarber-o1",
+          "title": "15% Off!",
+          "realSaving": 7.5,
+          "octoberUses": 126
+        },
+        {
+          "id": "addressbarber-o2",
+          "title": "30% Off on all services!",
+          "realSaving": 15.0,
+          "octoberUses": 69
+        }
+      ],
+      "rewards": [
+        {
+          "id": "addressbarber-r1",
+          "name": "SAR 5.00 off your bill",
+          "points": 500,
+          "value": 5.0
+        },
+        {
+          "id": "addressbarber-r2",
+          "name": "Beard trim",
+          "points": 2500,
+          "value": 25.0
+        }
+      ],
+      "market": "SA",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "escape",
+      "name": "Unknown Escape Game",
+      "category": "Escape room",
+      "codeEntry": "Unipal shop dashboard",
+      "offers": [
+        {
+          "id": "escape-o1",
+          "title": "Escape room offer",
+          "realSaving": 192.0,
+          "octoberUses": null
+        }
+      ],
+      "rewards": [
+        {
+          "id": "escape-r1",
+          "name": "SAR 50.00 off a room",
+          "points": 5000,
+          "value": 50.0
+        }
+      ],
+      "market": "SA",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "wjsalon",
+      "name": "W&J Salon",
+      "category": "Salon",
+      "codeEntry": "Unipal shop dashboard",
+      "offers": [
+        {
+          "id": "wjsalon-o1",
+          "title": "Salon offer",
+          "realSaving": 85.0,
+          "octoberUses": null
+        }
+      ],
+      "rewards": [
+        {
+          "id": "wjsalon-r1",
+          "name": "Blow dry",
+          "points": 8000,
+          "value": 80.0
+        }
+      ],
+      "market": "SA",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "ggarena",
+      "name": "GG ARENA",
+      "category": "Gaming",
+      "codeEntry": "Unipal shop app",
+      "offers": [
+        {
+          "id": "ggarena-o1",
+          "title": "20% Off!",
+          "realSaving": 8.0,
+          "octoberUses": 163
+        }
+      ],
+      "rewards": [
+        {
+          "id": "ggarena-r1",
+          "name": "SAR 5.00 off your bill",
+          "points": 500,
+          "value": 5.0
+        },
+        {
+          "id": "ggarena-r2",
+          "name": "1 hour of gaming",
+          "points": 3500,
+          "value": 35.0
+        }
+      ],
+      "market": "SA",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "temper",
+      "name": "Temper Roastery",
+      "category": "Coffee",
+      "codeEntry": "Foodics",
+      "offers": [
+        {
+          "id": "temper-o1",
+          "title": "20% Off!",
+          "realSaving": 3.6,
+          "octoberUses": 546
+        }
+      ],
+      "rewards": [
+        {
+          "id": "temper-r1",
+          "name": "Cookie",
+          "points": 500,
+          "value": 5.0
+        },
+        {
+          "id": "temper-r2",
+          "name": "Regular drink",
+          "points": 1800,
+          "value": 18.0
+        }
+      ],
+      "market": "SA",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "bluepay",
+      "name": "Blue Pay Bowling",
+      "category": "Bowling",
+      "codeEntry": "Foodics",
+      "offers": [
+        {
+          "id": "bluepay-o1",
+          "title": "Bowling Round for SAR 36 Per Person!",
+          "realSaving": 18.0,
+          "octoberUses": 487
+        },
+        {
+          "id": "bluepay-o2",
+          "title": "Weekend offer SAR 52 Only!!",
+          "realSaving": 39.0,
+          "octoberUses": 185
+        }
+      ],
+      "rewards": [
+        {
+          "id": "bluepay-r1",
+          "name": "Shoe rental",
+          "points": 1000,
+          "value": 10.0
+        },
+        {
+          "id": "bluepay-r2",
+          "name": "Bowling round",
+          "points": 4500,
+          "value": 45.0
+        }
+      ],
+      "market": "SA",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "modawar",
+      "name": "Modawar",
+      "category": "Coffee",
+      "codeEntry": "Foodics",
+      "offers": [
+        {
+          "id": "modawar-o1",
+          "title": "15% Off!",
+          "realSaving": 2.78,
+          "octoberUses": 469
+        }
+      ],
+      "rewards": [
+        {
+          "id": "modawar-r1",
+          "name": "Regular drink",
+          "points": 1800,
+          "value": 18.0
+        }
+      ],
+      "market": "SA",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "crispish",
+      "name": "Crispish",
+      "category": "Restaurant",
+      "codeEntry": "Foodics",
+      "offers": [
+        {
+          "id": "crispish-o1",
+          "title": "25% Off!",
+          "realSaving": 9.75,
+          "octoberUses": 225
+        }
+      ],
+      "rewards": [
+        {
+          "id": "crispish-r1",
+          "name": "Fries",
+          "points": 1200,
+          "value": 12.0
+        },
+        {
+          "id": "crispish-r2",
+          "name": "Regular meal",
+          "points": 4000,
+          "value": 40.0
+        }
+      ],
+      "market": "SA",
+      "rewardsAvailable": true
+    },
+    {
+      "id": "muvi",
+      "name": "muvi Cinemas",
+      "category": "Cinema",
+      "codeEntry": "muvi booking system",
+      "offers": [
+        {
+          "id": "muvi-o1",
+          "title": "Experiences Tickets + Lg Salted Popcorn for 60 SAR only",
+          "realSaving": null,
+          "octoberUses": 1076
+        },
+        {
+          "id": "muvi-o2",
+          "title": "Premium Seats + Popcorn 35 SR",
+          "realSaving": null,
+          "octoberUses": 190
+        }
+      ],
+      "rewards": [
+        {
+          "id": "muvi-r1",
+          "name": "Large popcorn",
+          "points": 2500,
+          "value": 25.0
+        },
+        {
+          "id": "muvi-r2",
+          "name": "Standard ticket",
+          "points": 3600,
+          "value": 36.0
+        }
+      ],
+      "market": "SA",
+      "rewardsAvailable": true
+    }
+  ],
+  "unipassCatalog": [
+    {
+      "id": "up-jasmis",
+      "brand": "Jasmi's",
+      "market": "BH",
+      "category": "Restaurant",
+      "item": "Free regular meal",
+      "terms": "Any regular meal, all branches",
+      "value": 2.85,
+      "monthlyLimit": 300,
+      "claimedThisMonth": 112
+    },
+    {
+      "id": "up-wingman",
+      "brand": "Wingman",
+      "market": "BH",
+      "category": "Restaurant",
+      "item": "Free 6 wings",
+      "terms": "Dine in or pick up",
+      "value": 2.5,
+      "monthlyLimit": 100,
+      "claimedThisMonth": 100
+    },
+    {
+      "id": "up-pastaexpress",
+      "brand": "Pasta Express",
+      "market": "BH",
+      "category": "Restaurant",
+      "item": "Free regular pasta",
+      "terms": "Any regular pasta",
+      "value": 3.5,
+      "monthlyLimit": 100,
+      "claimedThisMonth": 27
+    },
+    {
+      "id": "up-coffeebean",
+      "brand": "The Coffee Bean & Tea Leaf",
+      "market": "BH",
+      "category": "Coffee",
+      "item": "Free regular drink",
+      "terms": "Any regular hot or iced drink",
+      "value": 1.9,
+      "monthlyLimit": 200,
+      "claimedThisMonth": 61
+    },
+    {
+      "id": "up-caribou",
+      "brand": "Caribou Coffee",
+      "market": "BH",
+      "category": "Coffee",
+      "item": "Free regular coffee",
+      "terms": "Any regular coffee",
+      "value": 1.8,
+      "monthlyLimit": 200,
+      "claimedThisMonth": 48
+    },
+    {
+      "id": "up-milkd",
+      "brand": "Milkd",
+      "market": "BH",
+      "category": "Dessert",
+      "item": "Free regular milkshake",
+      "terms": "Any regular shake",
+      "value": 2.5,
+      "monthlyLimit": 100,
+      "claimedThisMonth": 14
+    },
+    {
+      "id": "up-vox",
+      "brand": "VOX Cinemas",
+      "market": "BH",
+      "category": "Cinema",
+      "item": "Free standard ticket",
+      "terms": "Sunday to Wednesday, standard screen, with any snack combo",
+      "value": 3.5,
+      "monthlyLimit": 150,
+      "claimedThisMonth": 66
+    },
+    {
+      "id": "up-cineco",
+      "brand": "Cineco",
+      "market": "BH",
+      "category": "Cinema",
+      "item": "Free standard ticket",
+      "terms": "Sunday to Wednesday, standard screen, with any snack combo",
+      "value": 3.0,
+      "monthlyLimit": 150,
+      "claimedThisMonth": 38
+    },
+    {
+      "id": "up-epix",
+      "brand": "Epix Cinemas",
+      "market": "BH",
+      "category": "Cinema",
+      "item": "Free standard ticket",
+      "terms": "Sunday to Wednesday, standard screen, with any snack combo",
+      "value": 3.0,
+      "monthlyLimit": 150,
+      "claimedThisMonth": 21
+    },
+    {
+      "id": "up-funland",
+      "brand": "Funland",
+      "market": "BH",
+      "category": "Bowling and fun",
+      "item": "Free bowling game",
+      "terms": "1 game, shoes included",
+      "value": 1.8,
+      "monthlyLimit": 100,
+      "claimedThisMonth": 17
+    },
+    {
+      "id": "up-alkuwaiti",
+      "brand": "Alkuwaiti Auto Services",
+      "market": "BH",
+      "category": "Car wash",
+      "item": "Free exterior car wash",
+      "terms": "Sunday to Wednesday",
+      "value": 3.5,
+      "monthlyLimit": 80,
+      "claimedThisMonth": 19
+    },
+    {
+      "id": "up-fitnesstrack",
+      "brand": "Fitness Track",
+      "market": "BH",
+      "category": "Gym",
+      "item": "Free day pass",
+      "terms": "1 visit, bring your student ID",
+      "value": 3.0,
+      "monthlyLimit": 60,
+      "claimedThisMonth": 9
+    },
+    {
+      "id": "up-laundry1991",
+      "brand": "1991 Laundry",
+      "market": "BH",
+      "category": "Laundry",
+      "item": "Free wash and fold, 1 bag",
+      "terms": "Up to 5 kg",
+      "value": 3.0,
+      "monthlyLimit": 60,
+      "claimedThisMonth": 11
+    },
+    {
+      "id": "up-muvi",
+      "brand": "muvi Cinemas",
+      "market": "SA",
+      "category": "Cinema",
+      "item": "Free standard ticket",
+      "terms": "Sunday to Wednesday, standard screen, with any popcorn combo",
+      "value": 36.0,
+      "monthlyLimit": 300,
+      "claimedThisMonth": 131
+    },
+    {
+      "id": "up-bluepay",
+      "brand": "Blue Pay Bowling",
+      "market": "SA",
+      "category": "Bowling",
+      "item": "Free bowling game",
+      "terms": "Sunday to Wednesday, 1 round",
+      "value": 45.0,
+      "monthlyLimit": 150,
+      "claimedThisMonth": 58
+    },
+    {
+      "id": "up-xbowl",
+      "brand": "XBOWL Club",
+      "market": "SA",
+      "category": "Bowling",
+      "item": "Free bowling game",
+      "terms": "Sunday to Wednesday, 1 round",
+      "value": 45.0,
+      "monthlyLimit": 100,
+      "claimedThisMonth": 33
+    },
+    {
+      "id": "up-crispish",
+      "brand": "Crispish",
+      "market": "SA",
+      "category": "Restaurant",
+      "item": "Free regular meal",
+      "terms": "Dine in or pick up",
+      "value": 40.0,
+      "monthlyLimit": 100,
+      "claimedThisMonth": 29
+    },
+    {
+      "id": "up-temper",
+      "brand": "Temper Roastery",
+      "market": "SA",
+      "category": "Coffee",
+      "item": "Free regular drink",
+      "terms": "Any regular drink",
+      "value": 18.0,
+      "monthlyLimit": 200,
+      "claimedThisMonth": 71
+    },
+    {
+      "id": "up-timhortons-sa",
+      "brand": "Tim Hortons",
+      "market": "SA",
+      "category": "Coffee",
+      "item": "Free iced capp",
+      "terms": "Regular size",
+      "value": 16.0,
+      "monthlyLimit": 200,
+      "claimedThisMonth": 54
+    },
+    {
+      "id": "up-ggarena",
+      "brand": "GG ARENA",
+      "market": "SA",
+      "category": "Gaming",
+      "item": "Free 1 hour of gaming",
+      "terms": "PC or console",
+      "value": 40.0,
+      "monthlyLimit": 80,
+      "claimedThisMonth": 20
+    },
+    {
+      "id": "up-addressbarber",
+      "brand": "The Address Barber",
+      "market": "SA",
+      "category": "Barber",
+      "item": "Free beard trim",
+      "terms": "Book ahead",
+      "value": 25.0,
+      "monthlyLimit": 60,
+      "claimedThisMonth": 60
+    },
+    {
+      "id": "up-wjsalon",
+      "brand": "W&J Salon",
+      "market": "SA",
+      "category": "Salon",
+      "item": "Free blow dry",
+      "terms": "Book ahead",
+      "value": 80.0,
+      "monthlyLimit": 30,
+      "claimedThisMonth": 8
+    },
+    {
+      "id": "up-escape",
+      "brand": "Unknown Escape Game",
+      "market": "SA",
+      "category": "Escape room",
+      "item": "1 free player",
+      "terms": "When you book a room for 4 or more",
+      "value": 50.0,
+      "monthlyLimit": 40,
+      "claimedThisMonth": 6
+    }
+  ],
+  "subscriptions": [
+    {
+      "id": "sub-spotify",
+      "partner": "Spotify Premium",
+      "type": "Music",
+      "status": "not signed",
+      "prices": {
+        "SA": {
+          "normal": 23.99,
+          "member": 19.19
+        },
+        "BH": {
+          "normal": 2.4,
+          "member": 1.92,
+          "note": "placeholder until checked in app"
+        }
+      },
+      "memberDiscount": "20% (placeholder)",
+      "per": "month",
+      "note": "Spotify Student already costs SAR 12.99 in Saudi"
+    },
+    {
+      "id": "sub-netflix",
+      "partner": "Netflix",
+      "type": "Series and films",
+      "status": "not signed",
+      "prices": {
+        "SA": {
+          "normal": 32.0,
+          "member": 25.6
+        },
+        "BH": {
+          "normal": 3.2,
+          "member": 2.56,
+          "note": "placeholder until checked in app"
+        }
+      },
+      "memberDiscount": "20% (placeholder)",
+      "per": "month",
+      "note": "Basic plan, price from Aug 2025"
+    },
+    {
+      "id": "sub-youtube",
+      "partner": "YouTube Premium",
+      "type": "Video and music",
+      "status": "not signed",
+      "prices": {
+        "SA": {
+          "normal": 25.0,
+          "member": 20.0,
+          "note": "placeholder until checked in app"
+        },
+        "BH": {
+          "normal": 2.5,
+          "member": 2.0,
+          "note": "placeholder until checked in app"
+        }
+      },
+      "memberDiscount": "20% (placeholder)",
+      "per": "month",
+      "note": "Has a student plan in Bahrain and Saudi. Price to check"
+    },
+    {
+      "id": "sub-shahid",
+      "partner": "Shahid VIP",
+      "type": "Arabic series, films and live TV",
+      "status": "not signed",
+      "prices": {
+        "SA": {
+          "normal": 29.0,
+          "member": 23.2
+        },
+        "BH": {
+          "normal": 2.9,
+          "member": 2.32,
+          "note": "placeholder until checked in app"
+        }
+      },
+      "memberDiscount": "20% (placeholder)",
+      "per": "month",
+      "note": "Biggest paid video service in MENA by subscribers"
+    }
+  ]
+}

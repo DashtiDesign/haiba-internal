@@ -1,0 +1,154 @@
+.pg-wallet a {
+  color: #6c3ffa;
+}
+.pg-wallet a:hover {
+  color: #5428e0;
+}
+@keyframes wallet-hb-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes wallet-hb-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.07);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes wallet-hb-wobble {
+  0%,
+  100% {
+    transform: rotate(-14deg);
+  }
+  50% {
+    transform: rotate(-4deg);
+  }
+}
+@keyframes wallet-hb-peek {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.pg-wallet .hb-rise {
+  animation: wallet-hb-rise 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-wallet .hb-pop {
+  animation: wallet-hb-pop 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-wallet .hb-wobble {
+  animation: wallet-hb-wobble 2.8s ease-in-out infinite;
+}
+@keyframes wallet-hb-runbob {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(4px, -6px);
+  }
+}
+.pg-wallet .hb-run {
+  animation: wallet-hb-runbob 0.45s ease-in-out infinite;
+}
+.pg-wallet .hb-peek {
+  animation: wallet-hb-peek 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s both;
+}
+.pg-wallet .hb-stagger > * {
+  animation: wallet-hb-rise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-wallet .hb-stagger > *:nth-child(2) {
+  animation-delay: 0.06s;
+}
+.pg-wallet .hb-stagger > *:nth-child(3) {
+  animation-delay: 0.12s;
+}
+.pg-wallet .hb-stagger > *:nth-child(4) {
+  animation-delay: 0.18s;
+}
+.pg-wallet .hb-stagger > *:nth-child(5) {
+  animation-delay: 0.24s;
+}
+.pg-wallet .hb-pops > * {
+  animation: wallet-hb-pop 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-wallet .hb-pops > *:nth-child(2) {
+  animation-delay: 0.07s;
+}
+.pg-wallet .hb-pops > *:nth-child(3) {
+  animation-delay: 0.14s;
+}
+.pg-wallet .hb-pops > *:nth-child(4) {
+  animation-delay: 0.21s;
+}
+.pg-wallet .hb-d1 {
+  animation-delay: 0.12s;
+}
+.pg-wallet .hb-d2 {
+  animation-delay: 0.24s;
+}
+.pg-wallet .hb-d3 {
+  animation-delay: 0.36s;
+}
+.pg-wallet .hb-d4 {
+  animation-delay: 0.48s;
+}
+.pg-wallet .hb-press {
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+.pg-wallet .hb-press:active {
+  transform: scale(0.96);
+}
+.pg-wallet .hb-lift {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.pg-wallet .hb-lift:hover {
+  transform: translateY(-3px);
+}
+.pg-wallet .hb-row {
+  transition: background 0.15s ease;
+}
+.pg-wallet .hb-row:hover {
+  background: #faf9fd;
+}
+.pg-wallet .hb-ease {
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pg-wallet .hb-rise,
+  .pg-wallet .hb-pop,
+  .pg-wallet .hb-wobble,
+  .pg-wallet .hb-run,
+  .pg-wallet .hb-peek,
+  .pg-wallet .hb-stagger > *,
+  .pg-wallet .hb-pops > * {
+    animation: none;
+  }
+  .pg-wallet .hb-ease,
+  .pg-wallet .hb-press,
+  .pg-wallet .hb-lift {
+    transition: none;
+  }
+}

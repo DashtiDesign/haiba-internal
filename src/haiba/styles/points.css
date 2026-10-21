@@ -1,0 +1,144 @@
+.pg-points a {
+  color: #6c3ffa;
+}
+.pg-points a:hover {
+  color: #5428e0;
+}
+@keyframes points-hb-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes points-hb-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.07);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes points-hb-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes points-hb-coin {
+  0%,
+  100% {
+    transform: rotate(-8deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+@keyframes points-hb-spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes points-hb-peek {
+  0% {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.pg-points .hb-rise {
+  animation: points-hb-rise 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-points .hb-pop {
+  animation: points-hb-pop 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-points .hb-float {
+  animation: points-hb-float 3.4s ease-in-out infinite;
+}
+.pg-points .hb-coin {
+  animation: points-hb-coin 4s ease-in-out infinite;
+}
+.pg-points .hb-spin {
+  animation: points-hb-spin 18s linear infinite;
+}
+.pg-points .hb-peek {
+  animation: points-hb-peek 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.25s both;
+}
+.pg-points .hb-stagger > * {
+  animation: points-hb-rise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-points .hb-stagger > *:nth-child(2) {
+  animation-delay: 0.07s;
+}
+.pg-points .hb-stagger > *:nth-child(3) {
+  animation-delay: 0.14s;
+}
+.pg-points .hb-stagger > *:nth-child(4) {
+  animation-delay: 0.21s;
+}
+.pg-points .hb-d1 {
+  animation-delay: 0.12s;
+}
+.pg-points .hb-d2 {
+  animation-delay: 0.24s;
+}
+.pg-points .hb-d3 {
+  animation-delay: 0.36s;
+}
+.pg-points .hb-d4 {
+  animation-delay: 0.5s;
+}
+.pg-points .hb-d5 {
+  animation-delay: 0.65s;
+}
+.pg-points .hb-press {
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+.pg-points .hb-press:active {
+  transform: scale(0.97);
+}
+.pg-points .hb-row {
+  transition: background 0.15s ease;
+}
+.pg-points .hb-row:hover {
+  background: #faf9fd;
+}
+.pg-points .hb-ease {
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pg-points .hb-rise,
+  .pg-points .hb-pop,
+  .pg-points .hb-float,
+  .pg-points .hb-coin,
+  .pg-points .hb-spin,
+  .pg-points .hb-peek,
+  .pg-points .hb-stagger > * {
+    animation: none;
+  }
+  .pg-points .hb-ease,
+  .pg-points .hb-press {
+    transition: none;
+  }
+}

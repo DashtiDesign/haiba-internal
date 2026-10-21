@@ -36,5 +36,17 @@ export default tseslint.config(
       "@typescript-eslint/no-unused-vars": "off",
     },
   },
+  {
+    // Haiba screens and their logic are ported 1:1 from the design canvas.
+    // They keep the canvas code style so they stay easy to compare with the design.
+    files: ["src/haiba/screens/**/*.tsx", "src/haiba/logic/**/*.ts", "src/haiba/dc.ts"],
+    rules: {
+      "no-var": "off",
+      "no-empty": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/ban-ts-comment": "off",
+      "react-hooks/exhaustive-deps": "off",
+    },
+  },
   eslintPluginPrettier,
 );

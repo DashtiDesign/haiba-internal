@@ -1,0 +1,105 @@
+.pg-redeem a {
+  color: #0b1fb3;
+}
+.pg-redeem a:hover {
+  color: #08177f;
+}
+@keyframes redeem-hb-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes redeem-hb-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.07);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes redeem-hb-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes redeem-hb-nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(8px);
+  }
+}
+.pg-redeem .hb-rise {
+  animation: redeem-hb-rise 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-redeem .hb-pop {
+  animation: redeem-hb-pop 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-redeem .hb-drop {
+  animation: redeem-hb-drop 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-redeem .hb-nudge {
+  animation: redeem-hb-nudge 1.4s ease-in-out infinite;
+}
+.pg-redeem .hb-stagger > * {
+  animation: redeem-hb-rise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-redeem .hb-stagger > *:nth-child(2) {
+  animation-delay: 0.08s;
+}
+.pg-redeem .hb-stagger > *:nth-child(3) {
+  animation-delay: 0.16s;
+}
+.pg-redeem .hb-stagger > *:nth-child(4) {
+  animation-delay: 0.24s;
+}
+.pg-redeem .hb-stagger > *:nth-child(5) {
+  animation-delay: 0.32s;
+}
+.pg-redeem .hb-press {
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+.pg-redeem .hb-press:active {
+  transform: scale(0.97);
+}
+.pg-redeem .hb-ease {
+  transition: all 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pg-redeem .hb-rise,
+  .pg-redeem .hb-pop,
+  .pg-redeem .hb-drop,
+  .pg-redeem .hb-nudge,
+  .pg-redeem .hb-stagger > * {
+    animation: none;
+  }
+  .pg-redeem .hb-ease,
+  .pg-redeem .hb-press {
+    transition: none;
+  }
+}

@@ -2,6 +2,17 @@
 @source "../src";
 @import "tw-animate-css";
 
+/* Haiba prototype: app shell, fonts and the styles of each screen (ported 1:1 from the design canvas). */
+@import "./haiba/haiba.css";
+@import "./haiba/styles/hub.css";
+@import "./haiba/styles/plans.css";
+@import "./haiba/styles/points.css";
+@import "./haiba/styles/story.css";
+@import "./haiba/styles/wallet.css";
+@import "./haiba/styles/redeem.css";
+@import "./haiba/styles/shop.css";
+@import "./haiba/styles/basket.css";
+
 @custom-variant dark (&:is(.dark *));
 
 /*

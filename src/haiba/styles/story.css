@@ -1,0 +1,166 @@
+.pg-story a {
+  color: #6c3ffa;
+}
+.pg-story a:hover {
+  color: #5428e0;
+}
+@keyframes story-hb-in-r {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes story-hb-in-l {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes story-hb-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes story-hb-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes story-hb-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes story-hb-stamp {
+  0% {
+    opacity: 0;
+    transform: scale(1.8) rotate(-12deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(0.92) rotate(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+@keyframes story-hb-flip {
+  from {
+    opacity: 0;
+    transform: perspective(600px) rotateY(-70deg);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(600px) rotateY(0);
+  }
+}
+.pg-story .hb-in-r {
+  animation: story-hb-in-r 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-story .hb-in-l {
+  animation: story-hb-in-l 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-story .hb-rise {
+  animation: story-hb-rise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-story .hb-pop {
+  animation: story-hb-pop 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-story .hb-float {
+  animation: story-hb-float 3.4s ease-in-out infinite;
+}
+.pg-story .hb-flip {
+  animation: story-hb-flip 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s both;
+}
+.pg-story .hb-stamps > * {
+  animation: story-hb-stamp 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-story .hb-stamps > *:nth-child(2) {
+  animation-delay: 0.12s;
+}
+.pg-story .hb-stamps > *:nth-child(3) {
+  animation-delay: 0.24s;
+}
+.pg-story .hb-stamps > *:nth-child(4) {
+  animation-delay: 0.36s;
+}
+.pg-story .hb-stamps > *:nth-child(5) {
+  animation-delay: 0.48s;
+}
+.pg-story .hb-pops > * {
+  animation: story-hb-pop 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-story .hb-pops > *:nth-child(2) {
+  animation-delay: 0.08s;
+}
+.pg-story .hb-pops > *:nth-child(3) {
+  animation-delay: 0.16s;
+}
+.pg-story .hb-pops > *:nth-child(4) {
+  animation-delay: 0.24s;
+}
+.pg-story .hb-d1 {
+  animation-delay: 0.15s;
+}
+.pg-story .hb-d2 {
+  animation-delay: 0.3s;
+}
+.pg-story .hb-d3 {
+  animation-delay: 0.45s;
+}
+.pg-story .hb-press {
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    opacity 0.2s ease;
+}
+.pg-story .hb-press:active {
+  transform: scale(0.96);
+}
+.pg-story .hb-ease {
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pg-story .hb-in-r,
+  .pg-story .hb-in-l,
+  .pg-story .hb-rise,
+  .pg-story .hb-pop,
+  .pg-story .hb-float,
+  .pg-story .hb-flip,
+  .pg-story .hb-stamps > *,
+  .pg-story .hb-pops > * {
+    animation: none;
+  }
+  .pg-story .hb-ease,
+  .pg-story .hb-press {
+    transition: none;
+  }
+}

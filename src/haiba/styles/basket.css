@@ -1,0 +1,127 @@
+.pg-basket a {
+  color: #0b1fb3;
+}
+.pg-basket a:hover {
+  color: #08177f;
+}
+@keyframes basket-hb-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes basket-hb-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.07);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes basket-hb-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes basket-hb-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes basket-hb-flip {
+  from {
+    opacity: 0;
+    transform: perspective(600px) rotateY(-60deg);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(600px) rotateY(0);
+  }
+}
+.pg-basket .hb-rise {
+  animation: basket-hb-rise 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-basket .hb-pop {
+  animation: basket-hb-pop 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-basket .hb-drop {
+  animation: basket-hb-drop 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-basket .hb-float {
+  animation: basket-hb-float 3.4s ease-in-out infinite;
+}
+.pg-basket .hb-flips > * {
+  animation: basket-hb-flip 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  transform-origin: left center;
+}
+.pg-basket .hb-flips > *:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.pg-basket .hb-flips > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.pg-basket .hb-stagger > * {
+  animation: basket-hb-rise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-basket .hb-stagger > *:nth-child(2) {
+  animation-delay: 0.07s;
+}
+.pg-basket .hb-stagger > *:nth-child(3) {
+  animation-delay: 0.14s;
+}
+.pg-basket .hb-stagger > *:nth-child(4) {
+  animation-delay: 0.21s;
+}
+.pg-basket .hb-stagger > *:nth-child(5) {
+  animation-delay: 0.28s;
+}
+.pg-basket .hb-press {
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    opacity 0.2s ease;
+}
+.pg-basket .hb-press:active {
+  transform: scale(0.96);
+}
+.pg-basket .hb-ease {
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pg-basket .hb-rise,
+  .pg-basket .hb-pop,
+  .pg-basket .hb-drop,
+  .pg-basket .hb-float,
+  .pg-basket .hb-flips > *,
+  .pg-basket .hb-stagger > * {
+    animation: none;
+  }
+  .pg-basket .hb-ease,
+  .pg-basket .hb-press {
+    transition: none;
+  }
+}
