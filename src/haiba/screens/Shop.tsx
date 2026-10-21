@@ -87,7 +87,7 @@ export default function Shop() {
                 justifyContent: "center",
                 textDecoration: "none",
               }}
-              to="/haiba"
+              to="/"
             >
               <svg
                 aria-hidden="true"
