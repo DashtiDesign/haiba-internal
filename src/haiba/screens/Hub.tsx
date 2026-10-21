@@ -1,7 +1,6 @@
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board "Character.dc.html". Styles are copied value for value.
 import { Fragment } from "react";
-import MotionReveal from "../MotionReveal";
 import { Link, useNavigate } from "../nav";
 import { useHaiba } from "../store";
 import { useVals } from "../logic/hub";
@@ -337,226 +336,302 @@ export default function Hub() {
             <span style={{ fontSize: "15px", fontWeight: "600", color: "#5B5574" }}>
               {v.subLine}
             </span>
-            <div
+          </div>
+          <div
+            className="hb-pops"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+              gap: "8px",
+              marginTop: "20px",
+              padding: "0 22px",
+            }}
+          >
+            {(v.actions || []).map((a: any, idx0: number) => (
+              <Fragment key={idx0}>
+                <a
+                  className="hb-press"
+                  style={{
+                    textDecoration: "none",
+                    color: "#1E1B2E",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "8px",
+                    fontSize: "13.5px",
+                    fontWeight: "700",
+                  }}
+                  href="#"
+                  onClick={(e: any) => {
+                    e.preventDefault();
+                    if (a.href) go(a.href);
+                  }}
+                >
+                  <span
+                    style={{
+                      position: "relative",
+                      width: "56px",
+                      height: "56px",
+                      borderRadius: "50%",
+                      background: "#FFFFFF",
+                      color: "#6C3FFA",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      boxShadow: "0 6px 16px rgba(76,52,140,0.12)",
+                    }}
+                  >
+                    <svg
+                      aria-hidden="true"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d={a.icon}></path>
+                    </svg>
+                    {a.hasBadge ? (
+                      <>
+                        <span
+                          style={{
+                            position: "absolute",
+                            top: "-3px",
+                            right: "-3px",
+                            minWidth: "22px",
+                            height: "22px",
+                            boxSizing: "border-box",
+                            padding: "0 6px",
+                            borderRadius: "999px",
+                            background: "#C0F402",
+                            color: "#1F2600",
+                            border: "2px solid #F3F0FA",
+                            fontSize: "12px",
+                            fontWeight: "800",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          {a.badge}
+                        </span>
+                      </>
+                    ) : null}
+                  </span>{" "}
+                  {a.label}{" "}
+                </a>
+              </Fragment>
+            ))}
+          </div>
+          <a
+            className="hb-press hb-rise hb-d2"
+            style={{
+              textDecoration: "none",
+              color: "#1F2600",
+              background: "#C0F402",
+              borderRadius: "24px",
+              marginTop: "30px",
+              padding: "20px 18px 18px 18px",
+              position: "relative",
+              overflow: "hidden",
+              display: "flex",
+              flexDirection: "column",
+              gap: "6px",
+              boxShadow: "0 14px 28px rgba(110,140,0,0.22)",
+            }}
+            href="#"
+            onClick={(e: any) => e.preventDefault()}
+          >
+            <span
+              aria-hidden="true"
               style={{
+                position: "absolute",
+                right: "-50px",
+                top: "-60px",
+                width: "200px",
+                height: "200px",
+                borderRadius: "50%",
+                background: "rgba(255,255,255,0.32)",
+              }}
+            ></span>
+            <img
+              src="/haiba/birds/10-gift.png"
+              alt=""
+              style={{
+                position: "absolute",
+                right: "-2px",
+                bottom: "0",
+                height: "156px",
+                width: "auto",
+                display: "block",
+                filter: "drop-shadow(0 8px 10px rgba(31,38,0,0.22))",
+              }}
+            />
+            <span
+              style={{ position: "relative", display: "flex", alignItems: "center", gap: "8px" }}
+            >
+              <span
+                style={{
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                }}
+              >
+                {"Unipass gift"}
+              </span>
+              <span
+                style={{
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  background: "#1F2600",
+                  color: "#C0F402",
+                  borderRadius: "999px",
+                  padding: "4px 9px",
+                }}
+              >
+                {v.giftLeft}
+              </span>
+            </span>
+            <span
+              style={{
+                position: "relative",
+                fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                fontSize: "25px",
+                fontWeight: "800",
+                letterSpacing: "-0.02em",
+                lineHeight: "1.1",
+                maxWidth: "200px",
+                marginTop: "4px",
+              }}
+            >
+              {"Pick your October gift"}
+            </span>
+            <span
+              style={{
+                position: "relative",
+                fontSize: "14px",
+                fontWeight: "600",
+                opacity: "0.8",
+                maxWidth: "236px",
+                lineHeight: "1.35",
+              }}
+            >
+              {"Free for members. 1 of 13 items."}
+            </span>
+            <span
+              style={{
+                position: "relative",
                 display: "flex",
-                gap: "8px",
-                flexWrap: "wrap",
-                justifyContent: "center",
+                alignItems: "center",
+                gap: "12px",
                 marginTop: "12px",
               }}
             >
-              <button
-                onClick={v.toggleSaved}
-                aria-expanded={v.savedOpenStr}
-                className="hb-press"
-                style={{
-                  font: "inherit",
-                  fontSize: "14px",
-                  fontWeight: "700",
-                  border: "0",
-                  borderRadius: "999px",
-                  padding: "9px 14px 9px 10px",
-                  cursor: "pointer",
-                  background: "#C0F402",
-                  color: "#1F2600",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                }}
-              >
-                <svg
-                  aria-hidden="true"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M12 3v18"></path>
-                  <path d="M17 7.5c0-1.9-2.2-3-5-3s-5 1.1-5 3 2.2 3 5 3 5 1.1 5 3-2.2 3-5 3-5-1.1-5-3"></path>
-                </svg>
-                {v.savedChip}
-                <svg
-                  aria-hidden="true"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d={v.chev}></path>
-                </svg>
-              </button>
+              <span style={{ display: "flex", paddingLeft: "8px" }}>
+                {(v.giftMarks || []).map((g: any, idx0: number) => (
+                  <Fragment key={idx0}>
+                    <span
+                      style={{
+                        width: "34px",
+                        height: "34px",
+                        marginLeft: "-8px",
+                        borderRadius: "50%",
+                        background: g.bg,
+                        color: g.ink,
+                        border: "2px solid #C0F402",
+                        fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                        fontSize: "12px",
+                        fontWeight: "800",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {g.mark}
+                    </span>
+                  </Fragment>
+                ))}
+              </span>
               <span
                 style={{
                   fontSize: "14px",
-                  fontWeight: "700",
+                  fontWeight: "800",
+                  background: "#1F2600",
+                  color: "#C0F402",
                   borderRadius: "999px",
-                  padding: "9px 14px",
-                  background: "#F0ECFF",
-                  color: "#4F25D6",
+                  padding: "10px 14px",
                   display: "flex",
                   alignItems: "center",
                   gap: "6px",
                 }}
               >
-                <svg
-                  aria-hidden="true"
-                  width="15"
-                  height="15"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4z"></path>
-                </svg>
-                {v.codesChip}
-              </span>
-              <Link
-                className="hb-press"
-                style={{
-                  textDecoration: "none",
-                  background: "#6C3FFA",
-                  color: "#FFFFFF",
-                  fontSize: "14px",
-                  fontWeight: "700",
-                  borderRadius: "999px",
-                  padding: "9px 16px",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  flex: "none",
-                  boxShadow: "0 8px 18px rgba(108,63,250,0.3)",
-                }}
-                to="/haiba/wallet"
-              >
-                {"Wallet"}
+                {"Pick my gift"}
                 <svg
                   aria-hidden="true"
                   width="14"
                   height="14"
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="#FFFFFF"
+                  stroke="currentColor"
                   strokeWidth="3"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
                   <path d="M9 6l6 6-6 6"></path>
                 </svg>
-              </Link>
-            </div>
-          </div>
-          <div style={{ marginTop: "14px" }}>
-            <MotionReveal open={v.savedOpen}>
-                <div
-                  className="hb-pop"
-                  style={{
-                    background: "#1E1B2E",
-                    color: "#FFFFFF",
-                    borderRadius: "22px",
-                    padding: "6px 18px 14px 18px",
-                    transformOrigin: "top center",
-                  }}
-                >
-                  {(v.savedRows || []).map((s: any, idx0: number) => (
-                    <Fragment key={idx0}>
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          padding: "11px 0",
-                          borderBottom: s.rule,
-                        }}
-                      >
-                        <span style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
-                          <span style={{ fontSize: "15px", fontWeight: "600" }}>{s.title}</span>
-                          <span style={{ fontSize: "12.5px", fontWeight: "500", color: "#B9B3CC" }}>
-                            {s.sub}
-                          </span>
-                        </span>
-                        <span
-                          style={{
-                            fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
-                            fontSize: "16px",
-                            fontWeight: "800",
-                            color: "#C0F402",
-                          }}
-                        >
-                          {s.amt}
-                        </span>
-                      </div>
-                    </Fragment>
-                  ))}
-                  <div
-                    style={{
-                      fontSize: "12.5px",
-                      fontWeight: "500",
-                      color: "#B9B3CC",
-                      marginTop: "10px",
-                      lineHeight: "1.4",
-                    }}
-                  >
-                    {"A reward counts when the shop accepts your code."}
-                  </div>
-                </div>
-            </MotionReveal>
-          </div>
+              </span>
+            </span>
+          </a>
           <div
             style={{
               display: "flex",
               justifyContent: "space-between",
               alignItems: "baseline",
-              marginTop: "30px",
+              marginTop: "32px",
               padding: "0 4px",
             }}
           >
-            <span style={{ fontSize: "22px", fontWeight: "700" }}>{"Ready for you"}</span>
-            <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
-              {v.monthLeft}
+            <span
+              style={{
+                fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                fontSize: "19px",
+                fontWeight: "800",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              {"Ready to use"}
+            </span>
+            <span style={{ fontSize: "13.5px", fontWeight: "600", color: "#6B6880" }}>
+              {v.readyCount}
             </span>
           </div>
           <div
-            className="hb-pops"
+            className="hb-rise hb-d2"
             style={{
-              display: "flex",
-              gap: "10px",
               marginTop: "12px",
+              background: "#FFFFFF",
+              border: "1px solid #E9E5F4",
+              borderRadius: "22px",
               overflow: "hidden",
-              marginRight: "-16px",
+              boxShadow: "0 6px 18px rgba(76,52,140,0.06)",
             }}
           >
             {(v.ready || []).map((r: any, idx0: number) => (
               <Fragment key={idx0}>
                 <a
-                  className="hb-lift"
+                  className="hb-row"
                   style={{
                     textDecoration: "none",
-                    flex: "none",
-                    width: "196px",
-                    height: "176px",
-                    boxSizing: "border-box",
-                    borderRadius: "20px",
-                    background: r.bg,
-                    color: r.ink,
-                    padding: "18px",
+                    color: "#1E1B2E",
                     display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    boxShadow: "0 12px 26px rgba(30,27,46,0.14)",
-                    position: "relative",
-                    overflow: "hidden",
+                    alignItems: "center",
+                    gap: "14px",
+                    padding: "14px 16px",
+                    borderTop: r.rule,
                   }}
                   href="#"
                   onClick={(e: any) => {
@@ -565,193 +640,51 @@ export default function Hub() {
                   }}
                 >
                   <span
-                    aria-hidden="true"
                     style={{
-                      position: "absolute",
-                      right: "-30px",
-                      top: "-40px",
-                      width: "120px",
-                      height: "120px",
-                      borderRadius: "50%",
-                      background: r.orb,
-                    }}
-                  ></span>
-                  <span
-                    style={{
-                      position: "relative",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontSize: "12px",
-                        fontWeight: "700",
-                        letterSpacing: "0.1em",
-                        textTransform: "uppercase",
-                        opacity: "0.8",
-                      }}
-                    >
-                      {r.kind}
-                    </span>
-                    <span
-                      style={{
-                        width: "36px",
-                        height: "36px",
-                        borderRadius: "12px",
-                        background: r.logoBg,
-                        color: r.logoInk,
-                        fontSize: "14px",
-                        fontWeight: "800",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {r.logo}
-                    </span>
-                  </span>
-                  <img
-                    src={r.bird}
-                    alt=""
-                    style={{
-                      position: "absolute",
-                      right: "6px",
-                      bottom: "8px",
-                      height: "118px",
-                      width: "auto",
-                      display: r.birdDisp,
-                      filter: "drop-shadow(0 6px 8px rgba(31,38,0,0.25))",
-                    }}
-                  />
-                  <span
-                    style={{
-                      position: "relative",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "6px",
-                      maxWidth: r.titleW,
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
-                        fontSize: "21px",
-                        fontWeight: "800",
-                        letterSpacing: "-0.02em",
-                        lineHeight: "1.1",
-                      }}
-                    >
-                      {r.title}
-                    </span>
-                    <span
-                      style={{
-                        fontSize: "13.5px",
-                        fontWeight: "600",
-                        opacity: "0.85",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "5px",
-                      }}
-                    >
-                      <svg
-                        aria-hidden="true"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.6"
-                        strokeLinecap="round"
-                      >
-                        <circle cx="12" cy="13" r="8"></circle>
-                        <path d="M12 9v4l2.5 2"></path>
-                        <path d="M9 2h6"></path>
-                      </svg>
-                      {r.time}
-                    </span>
-                  </span>
-                </a>
-              </Fragment>
-            ))}
-          </div>
-          <div style={{ fontSize: "22px", fontWeight: "700", marginTop: "30px", padding: "0 4px" }}>
-            {"Your benefits"}
-          </div>
-          <div
-            className="hb-pops"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-              gap: "10px",
-              marginTop: "12px",
-            }}
-          >
-            {(v.benefits || []).map((b: any, idx0: number) => (
-              <Fragment key={idx0}>
-                <a
-                  className="hb-lift"
-                  style={{
-                    textDecoration: "none",
-                    color: "#1E1B2E",
-                    background: "#FFFFFF",
-                    border: "1px solid #E6E2F2",
-                    borderRadius: "20px",
-                    padding: "16px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "14px",
-                    boxShadow: "0 6px 18px rgba(76,52,140,0.06)",
-                    minHeight: "128px",
-                    boxSizing: "border-box",
-                  }}
-                  href="#"
-                  onClick={(e: any) => {
-                    e.preventDefault();
-                    if (b.href) go(b.href);
-                  }}
-                >
-                  <span
-                    style={{
-                      width: "42px",
-                      height: "42px",
+                      width: "44px",
+                      height: "44px",
+                      flex: "none",
                       borderRadius: "14px",
-                      background: b.bg,
-                      color: b.ink,
+                      background: r.bg,
+                      color: r.ink,
+                      fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                      fontSize: "15px",
+                      fontWeight: "800",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
                   >
-                    <svg
-                      aria-hidden="true"
-                      width="22"
-                      height="22"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d={b.icon}></path>
-                    </svg>
+                    {r.mark}
                   </span>
-                  <span style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
+                  <span
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "3px",
+                      flex: "1",
+                      minWidth: "0",
+                    }}
+                  >
                     <span style={{ fontSize: "15.5px", fontWeight: "700", lineHeight: "1.25" }}>
-                      {b.title}
+                      {r.title}
                     </span>
-                    <span
-                      style={{
-                        fontSize: "13px",
-                        fontWeight: "500",
-                        color: "#6B6880",
-                        lineHeight: "1.35",
-                      }}
-                    >
-                      {b.sub}
+                    <span style={{ fontSize: "13.5px", fontWeight: "600", color: r.metaInk }}>
+                      {r.meta}
                     </span>
+                  </span>
+                  <span
+                    style={{
+                      flex: "none",
+                      fontSize: "13px",
+                      fontWeight: "800",
+                      borderRadius: "999px",
+                      padding: "7px 12px",
+                      background: r.pillBg,
+                      color: r.pillInk,
+                    }}
+                  >
+                    {r.pill}
                   </span>
                 </a>
               </Fragment>
@@ -762,351 +695,325 @@ export default function Hub() {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "baseline",
-              marginTop: "30px",
+              marginTop: "32px",
               padding: "0 4px",
             }}
           >
-            <span style={{ fontSize: "22px", fontWeight: "700" }}>{"Unipass gift"}</span>
-            <a
-              style={{ fontSize: "15px", fontWeight: "600", textDecoration: "none" }}
-              href="#"
-              onClick={(e: any) => e.preventDefault()}
+            <span
+              style={{
+                fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                fontSize: "19px",
+                fontWeight: "800",
+                letterSpacing: "-0.02em",
+              }}
             >
-              {"Pick 1 of 13"}
-            </a>
+              {"You saved"}
+            </span>
+            <span style={{ fontSize: "13.5px", fontWeight: "600", color: "#6B6880" }}>
+              {"Since you joined"}
+            </span>
           </div>
           <div
-            className="hb-pops"
+            className="hb-rise hb-d3"
             style={{
-              display: "flex",
-              gap: "12px",
               marginTop: "12px",
-              overflow: "hidden",
-              marginRight: "-16px",
+              background: "#FFFFFF",
+              border: "1px solid #E9E5F4",
+              borderRadius: "22px",
+              padding: "18px 18px 16px 18px",
+              boxShadow: "0 6px 18px rgba(76,52,140,0.06)",
             }}
           >
-            {(v.gifts || []).map((g: any, idx0: number) => (
-              <Fragment key={idx0}>
-                <a
-                  className="hb-lift"
-                  style={{
-                    textDecoration: "none",
-                    color: "#1E1B2E",
-                    flex: "none",
-                    width: "84px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "8px",
-                    textAlign: "center",
-                  }}
-                  href="#"
-                  onClick={(e: any) => e.preventDefault()}
-                >
+            <div
+              style={{
+                fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                fontSize: "34px",
+                fontWeight: "800",
+                letterSpacing: "-0.03em",
+                lineHeight: "1.05",
+              }}
+            >
+              {v.savedTotal}
+            </div>
+            <div
+              aria-hidden="true"
+              style={{ display: "flex", gap: "3px", height: "10px", marginTop: "14px" }}
+            >
+              {(v.savedBar || []).map((b: any, idx0: number) => (
+                <Fragment key={idx0}>
                   <span
                     style={{
-                      width: "70px",
-                      height: "70px",
-                      borderRadius: "50%",
-                      background: g.bg,
-                      color: g.ink,
-                      fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
-                      fontSize: "20px",
-                      fontWeight: "800",
+                      flex: b.grow,
+                      height: "10px",
+                      borderRadius: "999px",
+                      background: b.color,
+                    }}
+                  ></span>
+                </Fragment>
+              ))}
+            </div>
+            <div style={{ marginTop: "8px" }}>
+              {(v.savedRows || []).map((s: any, idx0: number) => (
+                <Fragment key={idx0}>
+                  <div
+                    style={{
                       display: "flex",
                       alignItems: "center",
-                      justifyContent: "center",
-                      border: "3px solid #FFFFFF",
-                      boxShadow: "0 0 0 1px #E6E2F2, 0 6px 14px rgba(30,27,46,0.12)",
+                      gap: "12px",
+                      padding: "11px 0",
+                      borderBottom: s.rule,
                     }}
                   >
-                    {g.mark}
-                  </span>
-                  <span style={{ fontSize: "13px", fontWeight: "700", lineHeight: "1.2" }}>
-                    {g.item}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "12px",
-                      fontWeight: "500",
-                      color: "#6B6880",
-                      lineHeight: "1.2",
-                    }}
-                  >
-                    {g.brand}
-                  </span>
-                </a>
-              </Fragment>
-            ))}
+                    <span
+                      style={{
+                        width: "10px",
+                        height: "10px",
+                        flex: "none",
+                        borderRadius: "3px",
+                        background: s.color,
+                      }}
+                    ></span>
+                    <span
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "1px",
+                        flex: "1",
+                        minWidth: "0",
+                      }}
+                    >
+                      <span style={{ fontSize: "15px", fontWeight: "700" }}>{s.title}</span>
+                      <span style={{ fontSize: "13px", fontWeight: "500", color: "#6B6880" }}>
+                        {s.sub}
+                      </span>
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                        fontSize: "15px",
+                        fontWeight: "800",
+                        fontVariantNumeric: "tabular-nums",
+                      }}
+                    >
+                      {s.amt}
+                    </span>
+                  </div>
+                </Fragment>
+              ))}
+            </div>
+            <div
+              style={{
+                fontSize: "13px",
+                fontWeight: "500",
+                color: "#6B6880",
+                lineHeight: "1.4",
+                marginTop: "10px",
+              }}
+            >
+              {"A reward counts when the shop accepts your code."}
+            </div>
           </div>
           <div
             style={{
               display: "flex",
               justifyContent: "space-between",
-              alignItems: "center",
-              marginTop: "30px",
+              alignItems: "baseline",
+              marginTop: "32px",
               padding: "0 4px",
             }}
           >
-            <span style={{ fontSize: "22px", fontWeight: "700" }}>{"Activity"}</span>
-            <div
-              role="tablist"
-              aria-label="Filter activity"
+            <span
               style={{
-                position: "relative",
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 64px)",
-                background: "#FFFFFF",
-                borderRadius: "999px",
-                padding: "3px",
-                boxShadow: "0 4px 12px rgba(76,52,140,0.08)",
+                fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                fontSize: "19px",
+                fontWeight: "800",
+                letterSpacing: "-0.02em",
               }}
             >
-              <span
-                aria-hidden="true"
-                className="hb-ease"
-                style={{
-                  position: "absolute",
-                  top: "3px",
-                  bottom: "3px",
-                  width: "64px",
-                  borderRadius: "999px",
-                  background: "#1E1B2E",
-                  left: v.indLeft,
-                }}
-              ></span>
-              {(v.filters || []).map((f: any, idx0: number) => (
-                <Fragment key={idx0}>
-                  <button
-                    role="tab"
-                    aria-selected={f.sel}
-                    onClick={f.pick}
-                    className="hb-ease"
-                    style={{
-                      position: "relative",
-                      font: "inherit",
-                      fontSize: "13px",
-                      fontWeight: "700",
-                      border: "0",
-                      background: "transparent",
-                      padding: "7px 0",
-                      borderRadius: "999px",
-                      cursor: "pointer",
-                      color: f.ink,
-                    }}
-                  >
-                    {f.label}
-                  </button>
-                </Fragment>
-              ))}
-            </div>
+              {"Activity"}
+            </span>
+            <a
+              style={{ fontSize: "14px", fontWeight: "700", textDecoration: "none" }}
+              href="#"
+              onClick={(e: any) => e.preventDefault()}
+            >
+              {"See all"}
+            </a>
           </div>
           <div
-            className="hb-rise hb-d1"
+            className="hb-rise hb-d3"
             style={{
               marginTop: "12px",
               background: "#FFFFFF",
-              border: "1px solid #E6E2F2",
-              borderRadius: "20px",
-              padding: "4px 18px 8px 18px",
+              border: "1px solid #E9E5F4",
+              borderRadius: "22px",
+              padding: "2px 16px 8px 16px",
               boxShadow: "0 6px 18px rgba(76,52,140,0.06)",
             }}
           >
-            <div className="hb-stagger">
-              {(v.groups || []).map((g: any, idx0: number) => (
-                <Fragment key={idx0}>
-                  <div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        padding: "16px 0 6px 0",
-                      }}
-                    >
-                      <span style={{ fontSize: "13px", fontWeight: "700", color: "#6B6880" }}>
-                        {g.day}
-                      </span>
-                      <span style={{ fontSize: "13px", fontWeight: "700", color: g.totalInk }}>
-                        {g.total}
-                      </span>
-                    </div>
-                    {(g.rows || []).map((t: any, idx1: number) => (
-                      <Fragment key={idx1}>
-                        <a
-                          className="hb-row"
+            {(v.groups || []).map((g: any, idx0: number) => (
+              <Fragment key={idx0}>
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      padding: "14px 0 4px 0",
+                    }}
+                  >
+                    <span style={{ fontSize: "13px", fontWeight: "700", color: "#6B6880" }}>
+                      {g.day}
+                    </span>
+                    <span style={{ fontSize: "13px", fontWeight: "700", color: g.totalInk }}>
+                      {g.total}
+                    </span>
+                  </div>
+                  {(g.rows || []).map((t: any, idx1: number) => (
+                    <Fragment key={idx1}>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "12px",
+                          padding: "9px 0",
+                        }}
+                      >
+                        <span
                           style={{
-                            textDecoration: "none",
-                            color: "#1E1B2E",
+                            width: "40px",
+                            height: "40px",
+                            flex: "none",
+                            borderRadius: "12px",
+                            background: t.bg,
+                            color: t.ink,
+                            fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                            fontSize: "14px",
+                            fontWeight: "800",
                             display: "flex",
                             alignItems: "center",
-                            gap: "14px",
-                            padding: "10px 0",
-                            borderRadius: "14px",
+                            justifyContent: "center",
                           }}
-                          href="#"
-                          onClick={(e: any) => e.preventDefault()}
+                        >
+                          {t.mark}
+                        </span>
+                        <span
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: "2px",
+                            flex: "1",
+                            minWidth: "0",
+                          }}
+                        >
+                          <span style={{ fontSize: "15.5px", fontWeight: "700" }}>{t.name}</span>
+                          <span style={{ fontSize: "13px", fontWeight: "500", color: "#6B6880" }}>
+                            {t.sub}
+                          </span>
+                        </span>
+                        <span
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "flex-end",
+                            gap: "2px",
+                            flex: "none",
+                          }}
                         >
                           <span
                             style={{
-                              position: "relative",
-                              width: "48px",
-                              height: "48px",
-                              flex: "none",
+                              fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                              fontSize: "16px",
+                              fontWeight: "800",
+                              color: t.amtInk,
+                              fontVariantNumeric: "tabular-nums",
                             }}
                           >
-                            <span
-                              style={{
-                                width: "48px",
-                                height: "48px",
-                                borderRadius: "16px",
-                                background: t.bg,
-                                color: t.ink,
-                                fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
-                                fontSize: "16px",
-                                fontWeight: "800",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                              }}
-                            >
-                              {t.mark}
-                            </span>
-                            <span
-                              style={{
-                                position: "absolute",
-                                right: "-4px",
-                                bottom: "-4px",
-                                width: "20px",
-                                height: "20px",
-                                borderRadius: "50%",
-                                background: t.badgeBg,
-                                border: "2px solid #FFFFFF",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                color: t.badgeInk,
-                              }}
-                            >
-                              <svg
-                                aria-hidden="true"
-                                width="11"
-                                height="11"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="3.4"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              >
-                                <path d={t.badgeIcon}></path>
-                              </svg>
-                            </span>
+                            {t.amt}
                           </span>
-                          <span
-                            style={{
-                              display: "flex",
-                              flexDirection: "column",
-                              gap: "2px",
-                              flex: "1",
-                              minWidth: "0",
-                            }}
-                          >
-                            <span style={{ fontSize: "16px", fontWeight: "700" }}>{t.name}</span>
-                            <span
-                              style={{ fontSize: "13.5px", fontWeight: "500", color: "#6B6880" }}
-                            >
-                              {t.sub}
-                            </span>
+                          <span style={{ fontSize: "12.5px", fontWeight: "600", color: "#6B6880" }}>
+                            {t.note}
                           </span>
-                          <span
-                            style={{
-                              display: "flex",
-                              flexDirection: "column",
-                              alignItems: "flex-end",
-                              gap: "2px",
-                              flex: "none",
-                            }}
-                          >
-                            <span
-                              style={{
-                                fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
-                                fontSize: "17px",
-                                fontWeight: "800",
-                                color: t.amtInk,
-                                letterSpacing: "-0.01em",
-                              }}
-                            >
-                              {t.amt}
-                            </span>
-                            <span
-                              style={{
-                                fontSize: "12px",
-                                fontWeight: "600",
-                                color: t.noteInk,
-                                background: t.noteBg,
-                                borderRadius: "999px",
-                                padding: "2px 8px",
-                              }}
-                            >
-                              {t.note}
-                            </span>
-                          </span>
-                        </a>
-                      </Fragment>
-                    ))}
-                  </div>
-                </Fragment>
-              ))}
-            </div>
-            {v.noRows ? (
-              <>
-                <div
-                  className="hb-rise"
-                  style={{
-                    padding: "18px 0 10px 0",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "8px",
-                    fontSize: "15px",
-                    fontWeight: "600",
-                    color: "#6B6880",
-                    textAlign: "center",
-                  }}
-                >
-                  <img
-                    src="/haiba/birds/14-sit.png"
-                    alt=""
-                    style={{ height: "130px", width: "auto", display: "block" }}
-                  />
-                  {"Nothing here yet. Use an offer to start."}
+                        </span>
+                      </div>
+                    </Fragment>
+                  ))}
                 </div>
-              </>
-            ) : null}
-            <a
-              className="hb-press"
+              </Fragment>
+            ))}
+          </div>
+          <Link
+            className="hb-press"
+            style={{
+              textDecoration: "none",
+              color: "#1E1B2E",
+              marginTop: "16px",
+              background: "#FFFFFF",
+              border: "1px solid #E9E5F4",
+              borderRadius: "22px",
+              padding: "14px 16px",
+              display: "flex",
+              alignItems: "center",
+              gap: "14px",
+            }}
+            to="/haiba/points"
+          >
+            <span
               style={{
-                display: "block",
-                margin: "10px 0 8px 0",
-                textAlign: "center",
-                textDecoration: "none",
-                background: "#F3F0FA",
-                color: "#1E1B2E",
-                borderRadius: "999px",
-                padding: "13px",
-                fontSize: "15px",
-                fontWeight: "700",
-              }}
-              href="#"
-              onClick={(e: any) => {
-                e.preventDefault();
-                go("/haiba/wallet");
+                width: "44px",
+                height: "44px",
+                flex: "none",
+                borderRadius: "14px",
+                background: "#F0ECFF",
+                color: "#6C3FFA",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              {"See all activity"}
-            </a>
-          </div>
+              <svg
+                aria-hidden="true"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"></path>
+              </svg>
+            </span>
+            <span
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "2px",
+                flex: "1",
+                minWidth: "0",
+              }}
+            >
+              <span style={{ fontSize: "15.5px", fontWeight: "700" }}>{"How points work"}</span>
+              <span style={{ fontSize: "13px", fontWeight: "500", color: "#6B6880" }}>
+                {"40 a visit. 5x on every 5th visit."}
+              </span>
+            </span>
+            <svg
+              aria-hidden="true"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#A9A6B8"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{ flex: "none" }}
+            >
+              <path d="M9 6l6 6-6 6"></path>
+            </svg>
+          </Link>
         </div>
         {v.navTipOpen ? (
           <>

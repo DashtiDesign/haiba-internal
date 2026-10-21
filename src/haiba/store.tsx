@@ -52,6 +52,8 @@ type Api = {
   state: HaibaState;
   base: number; // points before any codes
   available: number; // points not held in codes or used
+  liveCodes: number; // codes held and not yet accepted by the shop
+  savedRewards: number; // BHD value of rewards the shop accepted
   set: (patch: Partial<HaibaState>) => void;
   join: () => void;
   setMember: (m: Member) => void;
@@ -83,6 +85,7 @@ export function HaibaProvider({ children }: { children: ReactNode }) {
   const base = BASE_POINTS[s.member];
   let committed = 0;
   const liveIds: string[] = [];
+  let acceptedPoints = 0;
   if (s.done && s.codesQty) {
     s.codesQty.forEach((n, i) => {
       for (let k = 0; k < n; k++) {
@@ -90,6 +93,7 @@ export function HaibaProvider({ children }: { children: ReactNode }) {
         if (s.cancelled.includes(id)) continue;
         committed += REWARD_POINTS[i] ?? 0;
         if (!s.accepted.includes(id)) liveIds.push(id);
+        else acceptedPoints += REWARD_POINTS[i] ?? 0;
       }
     });
   }
@@ -99,6 +103,8 @@ export function HaibaProvider({ children }: { children: ReactNode }) {
     state: s,
     base,
     available: base - committed,
+    liveCodes: liveIds.length,
+    savedRewards: acceptedPoints / 1000,
     set: (patch) => setS((p) => ({ ...p, ...patch })),
     join: () => setS((p) => ({ ...INITIAL, visit: p.visit, member: "new" })),
     setMember: (m) => setS((p) => ({ ...INITIAL, visit: p.visit, member: m })),

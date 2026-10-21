@@ -37,6 +37,8 @@ export function useDC(initial) {
     visit: VISIT_LABEL[hb.state.visit],
     available: hb.available,
     base: hb.base,
+    codes: hb.liveCodes,
+    savedRewards: hb.savedRewards,
   };
 
   return { state, setState, props, nav };

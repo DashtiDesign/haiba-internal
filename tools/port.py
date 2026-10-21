@@ -42,7 +42,7 @@ GO_VAR = 'href="#" onClick={(e: any) => { e.preventDefault(); if (v.navTipHref) 
 
 # Placeholder links (href="#") in the order they appear in each screen. None = stays a placeholder.
 LINKS = {
-    "Hub": [go_item("r"), go_item("b"), None, None, None, go("/haiba/wallet"), GO_VAR, go("/"), None, go("/haiba"), None, None],
+    "Hub": [go_item("a"), None, go_item("r"), None, GO_VAR, go("/"), None, go("/haiba"), None, None],
     "Plans": [None, go("/")],
     "Wallet": [go_item("a"), go("/shop/coffee-bean/redeem"), None, None, go("/shop/coffee-bean"), go("/shop/coffee-bean")],
 }
@@ -69,7 +69,6 @@ LOGIC = {
     "Hub": [
         ("var target = isNew ? 500 : 1240;", "var target = props.available;"),
         ("var pct = (isNew ? 1 : 1240 / 1800) * t;", "var pct = (isNew ? 1 : Math.min(1, props.available / 1800)) * t;"),
-        ("    var gifts = [", "    ready[1].href = isNew ? '/shop/coffee-bean' : '/haiba/basket';\n    benefits[0].href = '/haiba/points'; benefits[1].href = '/shop/coffee-bean';\n    var gifts = ["),
         ("      navTipCta:", "      navTipHref: isNew ? '' : '/shop/coffee-bean/redeem',\n      navTipCta:"),
     ],
     "Wallet": [
