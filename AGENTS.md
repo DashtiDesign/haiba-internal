@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep shared mobile sizing and safe-area safeguards in `src/haiba/haiba.css`; use named screen classes for narrow-layout exceptions so the original canvas styles remain isolated.
+- Use the shared MotionExperience layer for canvas animation hooks and control feedback; use Motion React at explicit panel boundaries so animations preserve inline transforms and fixed-bottom layout.

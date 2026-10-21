@@ -50,6 +50,18 @@
 }
 
 /* App shell: a phone width column, centred on bigger screens. */
+.hb-motion-reveal {
+  overflow: hidden;
+}
+.hb-app .hb-motion-experience [data-hb-motion] {
+  animation: none !important;
+  transition-property: background-color, color, border-color, box-shadow;
+}
+.hb-app .hb-motion-experience [data-hb-motion].hb-press:active,
+.hb-app .hb-motion-experience [data-hb-motion].hb-lift:hover {
+  transform: var(--hb-base-transform, none);
+}
+
 .hb-app {
   min-height: 100vh;
   background: #e9e7ef;

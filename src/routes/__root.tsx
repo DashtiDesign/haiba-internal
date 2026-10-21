@@ -13,6 +13,8 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { HaibaProvider } from "../haiba/store";
 import PrototypePanel from "../haiba/PrototypePanel";
+import MotionExperience from "../haiba/MotionExperience";
+import { MotionConfig } from "motion/react";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -127,9 +129,13 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <HaibaProvider>
         <div className="hb-app">
+          <MotionConfig reducedMotion="user">
+          <MotionExperience>
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
           <PrototypePanel />
+          </MotionExperience>
+          </MotionConfig>
         </div>
       </HaibaProvider>
     </QueryClientProvider>
