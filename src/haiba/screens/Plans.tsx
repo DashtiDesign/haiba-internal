@@ -122,6 +122,7 @@ export default function Plans() {
                 transition={{ duration: reduced ? 0 : 0.26, ease: [0.22, 1, 0.36, 1] }}
                 style={{
                   position: "absolute",
+                  left: v.indLeft,
                   top: "4px",
                   bottom: "4px",
                   width: "134px",

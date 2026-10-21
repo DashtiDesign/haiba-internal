@@ -12,3 +12,4 @@
 - Keep shared mobile sizing and safe-area safeguards in `src/haiba/haiba.css`; use named screen classes for narrow-layout exceptions so the original canvas styles remain isolated.
 - Use the shared MotionExperience layer for canvas animation hooks and control feedback; use Motion React at explicit panel boundaries so animations preserve inline transforms and fixed-bottom layout.
 - Keep text-bearing entrance animations fully opaque and preserve decorative baseline opacity; motion must not reduce foreground/background contrast.
+- Disable legacy canvas CSS animations before hydration and supply initial animated positions in styles so first paint is complete; preload route chunks on navigation intent.
