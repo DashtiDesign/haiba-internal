@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep shared mobile sizing and safe-area safeguards in `src/haiba/haiba.css`; use named screen classes for narrow-layout exceptions so the original canvas styles remain isolated.

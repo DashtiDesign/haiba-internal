@@ -73,6 +73,7 @@
 }
 .hb-fixed-inner {
   position: relative;
+  width: 100%;
   max-width: 390px;
   height: 0;
   margin: 0 auto;
@@ -130,4 +131,42 @@
 .pg-shop,
 .pg-basket {
   line-height: normal;
+}
+
+/* Fluid layout safeguards for the original phone-width designs. */
+.hb-app :where(div, span, a, button, input) {
+  min-width: 0;
+}
+.hb-app :where(h1, h2, h3, p, button, a) {
+  overflow-wrap: break-word;
+}
+.hb-app button[style*="width: 100%"] {
+  box-sizing: border-box;
+}
+.hb-fixed-bottom {
+  bottom: env(safe-area-inset-bottom, 0px);
+}
+.hb-app :is(.pg-home, .pg-hub, .pg-plans, .pg-points, .pg-story, .pg-wallet, .pg-redeem, .pg-shop, .pg-basket) {
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.hb-home-carousel {
+  overflow-x: auto !important;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.hb-home-carousel::-webkit-scrollbar {
+  display: none;
+}
+.hb-plan-tabs {
+  max-width: 100%;
+}
+@media (max-width: 389px) {
+  .hb-plan-artwork .hb-peek {
+    top: -30px;
+    bottom: auto !important;
+  }
+  .hb-plan-artwork .hb-peek img {
+    height: 140px !important;
+  }
 }

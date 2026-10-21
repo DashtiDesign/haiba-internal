@@ -88,7 +88,7 @@ export function HaibaProvider({ children }: { children: ReactNode }) {
       for (let k = 0; k < n; k++) {
         const id = i + "-" + k;
         if (s.cancelled.includes(id)) continue;
-        committed += REWARD_POINTS[i];
+        committed += REWARD_POINTS[i] ?? 0;
         if (!s.accepted.includes(id)) liveIds.push(id);
       }
     });
