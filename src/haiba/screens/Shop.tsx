@@ -411,7 +411,7 @@ export default function Shop() {
           </div>
           <div style={{ fontSize: "22px", fontWeight: "700", marginTop: "28px" }}>{"Offers"}</div>
           <div
-            className="hb-rise"
+            className="hb-rise hb-visit-summary"
             style={{
               marginTop: "14px",
               background: "#FFFFFF",
@@ -975,7 +975,7 @@ export default function Shop() {
                   style={{ position: "absolute", left: "12px", right: "12px", bottom: "22px" }}
                 >
                   <Link
-                    className="hb-press"
+                    className="hb-press hb-basket-summary"
                     style={{
                       textDecoration: "none",
                       background: "#1E1B2E",
