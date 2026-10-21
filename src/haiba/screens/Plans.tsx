@@ -102,6 +102,7 @@ export default function Plans() {
           >
             <div
               role="tablist"
+              className="hb-plan-tabs"
               aria-label="Plans"
               style={{
                 position: "relative",
@@ -182,6 +183,7 @@ export default function Plans() {
                 }}
               >
                 <div
+                  className="hb-plan-artwork"
                   style={{
                     position: "relative",
                     height: "210px",

@@ -337,7 +337,7 @@ export default function Shop() {
             {"View Branches"}
           </a>
           <div
-            className="hb-rise"
+            className="hb-rise hb-visit-summary"
             style={{
               marginTop: "18px",
               background: "linear-gradient(135deg, #6C3FFA 0%, #4F25D6 100%)",
@@ -975,7 +975,7 @@ export default function Shop() {
                   style={{ position: "absolute", left: "12px", right: "12px", bottom: "22px" }}
                 >
                   <Link
-                    className="hb-press"
+                    className="hb-press hb-basket-summary"
                     style={{
                       textDecoration: "none",
                       background: "#1E1B2E",

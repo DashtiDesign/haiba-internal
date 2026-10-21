@@ -27,7 +27,7 @@ const popular = [
   { name: "Caribou Coffee", offer: "Free Upgrade!", rating: "4.7", bg: "#3B2A22", to: "" },
 ];
 
-function NavIcon({ d, fill }: { d: string; fill?: boolean }) {
+function NavIcon({ d, fill }: { d: string; fill?: boolean | undefined }) {
   return (
     <svg
       aria-hidden="true"
@@ -50,6 +50,7 @@ export default function Home() {
   const member = state.member !== "none";
   return (
     <div
+      className="pg-home"
       style={{
         width: "100%",
         maxWidth: 390,
@@ -135,7 +136,7 @@ export default function Home() {
         </svg>
       </div>
 
-      <div style={{ display: "flex", gap: 12, padding: "22px 16px 0 16px", overflow: "hidden" }}>
+      <div className="hb-home-carousel" style={{ display: "flex", gap: 12, padding: "22px 16px 0 16px", overflow: "hidden" }}>
         {cats.map((c) => (
           <div
             key={c.label}
@@ -236,7 +237,7 @@ export default function Home() {
       <div style={{ padding: "26px 16px 0 16px", fontSize: 22, fontWeight: 700 }}>
         Popular this week
       </div>
-      <div style={{ display: "flex", gap: 14, padding: "14px 16px 0 16px", overflow: "hidden" }}>
+      <div className="hb-home-carousel" style={{ display: "flex", gap: 14, padding: "14px 16px 0 16px", overflow: "hidden" }}>
         {popular.map((p) => {
           const inner = (
             <>

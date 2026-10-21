@@ -4,7 +4,7 @@ import { Navigate } from "@/haiba/nav";
 import { useHaiba } from "@/haiba/store";
 
 export const Route = createFileRoute("/haiba/")({
-  head: () => ({ meta: [{ title: "Haiba" }] }),
+  head: () => ({ meta: [{ title: "Haiba · Member hub" }, { name: "description", content: "Your Haiba points, rewards, gifts and savings in one place." }, { property: "og:title", content: "Haiba · Member hub" }, { property: "og:description", content: "Your Haiba points, rewards, gifts and savings in one place." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: HaibaTab,
 });
 

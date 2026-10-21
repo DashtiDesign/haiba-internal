@@ -178,7 +178,8 @@ export default function Hub() {
             display: "flex",
             flexDirection: "column",
             padding: "14px 16px 150px 16px",
-            width: "358px",
+            width: "100%",
+            boxSizing: "border-box",
           }}
         >
           <div
