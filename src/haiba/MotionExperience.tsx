@@ -35,7 +35,10 @@ export default function MotionExperience({ children }: { children: ReactNode }) 
         const fixedAncestor = element.querySelector(".hb-fixed-bottom") || getComputedStyle(element).position === "fixed";
         track(animate(element, {
           opacity: [0, 1],
-          ...(!fixedAncestor ? { translate: ["0 10px", "0 0"], ...(popping ? { scale: [0.94, 1] } : {}) } : {}),
+          ...(!fixedAncestor ? {
+            translate: [element.matches(".hb-in-r") ? "14px 0" : element.matches(".hb-in-l") ? "-14px 0" : "0 10px", "0 0"],
+            ...(popping ? { scale: [0.94, 1] } : {}),
+          } : {}),
         }, { duration: 0.38, delay: Math.min(index * 0.045, 0.18), ease }));
       }
     }, { threshold: 0.06 });

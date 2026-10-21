@@ -1,6 +1,7 @@
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board "Plans.dc.html". Styles are copied value for value.
 import { Fragment } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { Link, useNavigate } from "../nav";
 import { useHaiba } from "../store";
 import { useVals } from "../logic/plans";
@@ -9,6 +10,7 @@ export default function Plans() {
   const v: any = useVals();
   const go = useNavigate();
   const hb = useHaiba();
+  const reduced = useReducedMotion();
   return (
     <div className="pg-plans">
       <div
@@ -114,9 +116,10 @@ export default function Plans() {
                 boxShadow: "0 6px 16px rgba(76,52,140,0.10)",
               }}
             >
-              <span
+              <motion.span
                 aria-hidden="true"
-                className="hb-ease"
+                animate={{ left: v.indLeft }}
+                transition={{ duration: reduced ? 0 : 0.26, ease: [0.22, 1, 0.36, 1] }}
                 style={{
                   position: "absolute",
                   top: "4px",
@@ -125,9 +128,8 @@ export default function Plans() {
                   borderRadius: "999px",
                   background: "#6C3FFA",
                   boxShadow: "0 6px 16px rgba(108,63,250,0.35)",
-                  left: v.indLeft,
                 }}
-              ></span>
+              ></motion.span>
               <button
                 role="tab"
                 aria-selected={v.freeSel}
