@@ -50,6 +50,9 @@
 }
 
 /* App shell: a phone width column, centred on bigger screens. */
+.hb-motion-reveal {
+  overflow: hidden;
+}
 .hb-app .hb-motion-experience [data-hb-motion] {
   animation: none !important;
   transition-property: background-color, color, border-color, box-shadow;

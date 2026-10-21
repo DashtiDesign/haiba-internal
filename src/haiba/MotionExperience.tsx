@@ -44,7 +44,7 @@ export default function MotionExperience({ children }: { children: ReactNode }) 
       root.querySelectorAll<HTMLElement>(`${entranceSelector}, ${ambientSelector}, .hb-press, .hb-lift`).forEach((element) => {
         if (seen.has(element)) return;
         seen.add(element);
-        element.dataset.hbMotion = "true";
+        element.dataset['hbMotion'] = "true";
         element.style.setProperty("--hb-base-transform", element.style.transform || "none");
         if (element.matches(entranceSelector)) observer.observe(element);
         if (!reduced && element.matches(ambientSelector)) {
@@ -92,7 +92,6 @@ export default function MotionExperience({ children }: { children: ReactNode }) 
       observer.disconnect();
       mutations.disconnect();
       animations.forEach((animation) => animation.cancel());
-      root.addEventListener("pointerdown", down);
       root.removeEventListener("pointerdown", down);
       root.removeEventListener("pointerover", hover);
       root.removeEventListener("pointerout", hover);

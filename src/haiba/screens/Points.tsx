@@ -1,6 +1,7 @@
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board "Points.dc.html". Styles are copied value for value.
 import { Fragment } from "react";
+import MotionReveal from "../MotionReveal";
 import { Link, useNavigate } from "../nav";
 import { useHaiba } from "../store";
 import { useVals } from "../logic/points";
@@ -297,8 +298,7 @@ export default function Points() {
                       <path d="M6 9l6 6 6-6"></path>
                     </svg>
                   </button>
-                  {r.open ? (
-                    <>
+                  <MotionReveal open={r.open}>
                       <div
                         className="hb-rise"
                         style={{
@@ -327,8 +327,7 @@ export default function Points() {
                           {r.example}
                         </span>
                       </div>
-                    </>
-                  ) : null}
+                  </MotionReveal>
                 </div>
               </Fragment>
             ))}

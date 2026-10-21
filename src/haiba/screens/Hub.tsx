@@ -1,6 +1,7 @@
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board "Character.dc.html". Styles are copied value for value.
 import { Fragment } from "react";
+import MotionReveal from "../MotionReveal";
 import { Link, useNavigate } from "../nav";
 import { useHaiba } from "../store";
 import { useVals } from "../logic/hub";
@@ -457,8 +458,7 @@ export default function Hub() {
             </div>
           </div>
           <div style={{ marginTop: "14px" }}>
-            {v.savedOpen ? (
-              <>
+            <MotionReveal open={v.savedOpen}>
                 <div
                   className="hb-pop"
                   style={{
@@ -511,8 +511,7 @@ export default function Hub() {
                     {"A reward counts when the shop accepts your code."}
                   </div>
                 </div>
-              </>
-            ) : null}
+            </MotionReveal>
           </div>
           <div
             style={{
