@@ -1,13 +1,15 @@
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board "Shop.dc.html". Styles are copied value for value.
 import { Fragment } from "react";
-import { Link, useNavigate } from "../nav";
+import { useRouter } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
+import { Link } from "../nav";
 import { useHaiba } from "../store";
 import { useVals } from "../logic/shop";
 
 export default function Shop() {
   const v: any = useVals();
-  const go = useNavigate();
+  const router = useRouter();
   const hb = useHaiba();
   return (
     <div className="pg-shop">
@@ -73,8 +75,12 @@ export default function Shop() {
               justifyContent: "space-between",
             }}
           >
-            <Link
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
               aria-label="Back"
+              title="Back"
               className="hb-press"
               style={{
                 width: "44px",
@@ -87,7 +93,7 @@ export default function Shop() {
                 justifyContent: "center",
                 textDecoration: "none",
               }}
-              to="/"
+              onClick={() => router.history.back()}
             >
               <svg
                 aria-hidden="true"
@@ -103,7 +109,7 @@ export default function Shop() {
                 <path d="M19 12H5"></path>
                 <path d="M11 6l-6 6 6 6"></path>
               </svg>
-            </Link>
+            </Button>
             <span style={{ display: "flex", gap: "10px" }}>
               <button
                 aria-label="Share"
