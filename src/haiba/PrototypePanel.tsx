@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Link } from "./nav";
 import { useHaiba, type Member } from "./store";
 
@@ -40,6 +41,7 @@ const chip = (on: boolean) => ({
 export default function PrototypePanel() {
   const hb = useHaiba();
   const [open, setOpen] = useState(false);
+  const reduced = useReducedMotion();
   const s = hb.state;
   return (
     <>
@@ -65,8 +67,14 @@ export default function PrototypePanel() {
       >
         Prototype
       </button>
+      <AnimatePresence>
       {open && (
-        <div
+        <motion.div
+          key="prototype-backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: reduced ? 0 : 0.18 }}
           onClick={() => setOpen(false)}
           style={{
             position: "fixed",
@@ -78,7 +86,14 @@ export default function PrototypePanel() {
             justifyContent: "center",
           }}
         >
-          <div
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Prototype panel"
+            initial={{ y: reduced ? 0 : "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: reduced ? 0 : "100%" }}
+            transition={{ type: "spring", stiffness: 380, damping: 38 }}
             onClick={(e) => e.stopPropagation()}
             style={{
               width: "100%",
@@ -202,9 +217,10 @@ export default function PrototypePanel() {
                 </Link>
               ))}
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
+      </AnimatePresence>
     </>
   );
 }
