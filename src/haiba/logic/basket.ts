@@ -114,7 +114,7 @@ export function useVals() {
         pillBg: gone ? "#F1F1F4" : acc ? "#1F2600" : "#C0F402",
         pillInk: gone ? "#6B6B78" : acc ? "#C0F402" : "#1F2600",
         phBg: gone ? "#F1F1F4" : acc ? "rgba(31,38,0,0.1)" : "rgba(255,255,255,0.18)",
-        phInk: gone ? "#8A8A96" : acc ? "#1F2600" : "#FFFFFF",
+        phInk: gone ? "var(--hb-muted-ink)" : acc ? "#1F2600" : "#FFFFFF",
         cancel: (function (id) {
           return function () {
             setState({ cancelled: cancelled.concat([id]) });
@@ -144,7 +144,7 @@ export function useVals() {
       ? "Your basket is empty"
       : used.toLocaleString("en-US") + " points will be held, not spent",
     ctaBg: empty ? "#E4E4EA" : "#1E1B2E",
-    ctaInk: empty ? "#8A8A96" : "#C0F402",
+    ctaInk: empty ? "var(--hb-muted-ink)" : "#C0F402",
     confirm: function () {
       if (!empty)
         setState({ done: true, cancelled: [], accepted: [], codesQty: q, qty: [0, 0, 0] });

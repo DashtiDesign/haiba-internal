@@ -34,7 +34,6 @@ export default function MotionExperience({ children }: { children: ReactNode }) 
         // Individual CSS transforms preserve canvas rotation and fixed positioning.
         const fixedAncestor = element.querySelector(".hb-fixed-bottom") || getComputedStyle(element).position === "fixed";
         track(animate(element, {
-          opacity: [0, 1],
           ...(!fixedAncestor ? {
             translate: [element.matches(".hb-in-r") ? "14px 0" : element.matches(".hb-in-l") ? "-14px 0" : "0 10px", "0 0"],
             ...(popping ? { scale: [0.94, 1] } : {}),
@@ -52,7 +51,8 @@ export default function MotionExperience({ children }: { children: ReactNode }) 
         if (element.matches(entranceSelector)) observer.observe(element);
         if (!reduced && element.matches(ambientSelector)) {
           const decorative = element.matches(".hb-spin, .hb-shade, .hb-pulse");
-          track(animate(element, decorative ? { opacity: [1, 0.8, 1] } : { translate: ["0 0", "0 -4px", "0 0"] }, {
+          const baseOpacity = Number(getComputedStyle(element).opacity);
+          track(animate(element, decorative && !element.matches(".hb-pulse") ? { opacity: [baseOpacity, baseOpacity * 0.8, baseOpacity] } : { translate: ["0 0", "0 -4px", "0 0"] }, {
             duration: element.matches(".hb-run") ? 1.2 : 3.6,
             ease: "easeInOut", repeat: element.matches(".hb-jump") ? 0 : Infinity,
           }));
@@ -62,7 +62,6 @@ export default function MotionExperience({ children }: { children: ReactNode }) 
     scan();
     const mutations = new MutationObserver(scan);
     mutations.observe(root, { childList: true, subtree: true });
-    if (!reduced) track(animate(root, { opacity: [0.6, 1] }, { duration: 0.2, ease: "easeOut" }));
 
     let pressed: HTMLElement | null = null;
     const interactive = (target: EventTarget | null) => {
