@@ -337,7 +337,7 @@ export default function Shop() {
             {"View Branches"}
           </a>
           <div
-            className="hb-rise"
+            className="hb-rise hb-visit-summary"
             style={{
               marginTop: "18px",
               background: "linear-gradient(135deg, #6C3FFA 0%, #4F25D6 100%)",
@@ -411,7 +411,7 @@ export default function Shop() {
           </div>
           <div style={{ fontSize: "22px", fontWeight: "700", marginTop: "28px" }}>{"Offers"}</div>
           <div
-            className="hb-rise hb-visit-summary"
+            className="hb-rise"
             style={{
               marginTop: "14px",
               background: "#FFFFFF",

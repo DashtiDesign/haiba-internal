@@ -163,6 +163,10 @@
   overscroll-behavior-x: contain;
   scrollbar-width: none;
 }
+.pg-hub .hb-pops > .hb-lift {
+  min-height: 176px;
+  height: auto !important;
+}
 .hb-plan-tabs {
   max-width: 100%;
 }
