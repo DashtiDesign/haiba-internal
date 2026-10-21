@@ -54,7 +54,7 @@ export function useVals() {
       bg: d.bg,
       ink: d.ink,
       ptsBg: can || !zero ? "#F0ECFF" : "#F1F1F4",
-      ptsInk: can || !zero ? "#4F25D6" : "#8A8A96",
+      ptsInk: can || !zero ? "#4F25D6" : "var(--hb-muted-ink)",
       op: zero && !can ? "0.55" : "1",
       zero: zero,
       some: !zero,

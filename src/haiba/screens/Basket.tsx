@@ -592,7 +592,7 @@ export default function Basket() {
                     >
                       {v.ctaTitle}
                     </span>
-                    <span style={{ fontSize: "13px", fontWeight: "500", opacity: "0.8" }}>
+                    <span style={{ fontSize: "13px", fontWeight: "500", opacity: v.empty ? "1" : "0.8" }}>
                       {v.ctaSub}
                     </span>
                   </button>
