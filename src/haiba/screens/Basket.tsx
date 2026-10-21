@@ -303,89 +303,119 @@ export default function Basket() {
               </div>
               <div
                 style={{
-                  background: "#1E1B2E",
-                  color: "#FFFFFF",
+                  background: "#FFFFFF",
+                  border: "1px solid #E4E4EA",
                   borderRadius: "20px",
                   padding: "18px 18px 16px 18px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "12px",
                 }}
               >
+                <div style={{ fontSize: "17px", fontWeight: "700" }}>{"Summary"}</div>
                 <div
-                  style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "10px",
+                    marginTop: "14px",
+                  }}
                 >
-                  <span style={{ fontSize: "14px", fontWeight: "600", color: "#B9B3CC" }}>
-                    {"You have"}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
-                      fontSize: "16px",
-                      fontWeight: "800",
-                    }}
-                  >
-                    {v.haveLine}
-                  </span>
+                  {(v.items || []).map((it: any, idx0: number) => (
+                    <Fragment key={idx0}>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "baseline",
+                          gap: "12px",
+                        }}
+                      >
+                        <span style={{ fontSize: "15px", fontWeight: "500", color: "#3A3A44" }}>
+                          {it.sumLabel}
+                        </span>
+                        <span
+                          className="hb-ease"
+                          style={{
+                            fontSize: "15px",
+                            fontWeight: "600",
+                            color: "#1A1A1A",
+                            fontVariantNumeric: "tabular-nums",
+                          }}
+                        >
+                          {it.sumPts}
+                        </span>
+                      </div>
+                    </Fragment>
+                  ))}
                 </div>
+                <div style={{ height: "1px", background: "#EFEFF3", margin: "14px 0" }}></div>
                 <div
-                  style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "baseline",
+                    gap: "12px",
+                  }}
                 >
-                  <span style={{ fontSize: "14px", fontWeight: "600", color: "#B9B3CC" }}>
-                    {"This basket holds"}
-                  </span>
+                  <span style={{ fontSize: "17px", fontWeight: "700" }}>{"Total"}</span>
                   <span
                     className="hb-ease"
                     style={{
                       fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
-                      fontSize: "16px",
+                      fontSize: "20px",
                       fontWeight: "800",
-                      color: "#C0F402",
+                      letterSpacing: "-0.01em",
+                      fontVariantNumeric: "tabular-nums",
                     }}
                   >
                     {v.usedLine}
                   </span>
                 </div>
-                <div
-                  style={{
-                    height: "8px",
-                    borderRadius: "999px",
-                    background: "#3A3550",
-                    overflow: "hidden",
-                  }}
-                >
-                  <span
-                    className="hb-ease"
+                <div style={{ height: "1px", background: "#EFEFF3", margin: "14px 0" }}></div>
+                <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                  <div
                     style={{
-                      display: "block",
-                      height: "100%",
-                      width: v.pct,
-                      background: "#C0F402",
-                      borderRadius: "999px",
-                    }}
-                  ></span>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    paddingTop: "4px",
-                    borderTop: "1px solid #3A3550",
-                  }}
-                >
-                  <span style={{ fontSize: "15px", fontWeight: "700" }}>{"Left after this"}</span>
-                  <span
-                    className="hb-ease"
-                    style={{
-                      fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
-                      fontSize: "22px",
-                      fontWeight: "800",
-                      letterSpacing: "-0.02em",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "baseline",
+                      gap: "12px",
                     }}
                   >
-                    {v.leftLine}
-                  </span>
+                    <span style={{ fontSize: "15px", fontWeight: "500", color: "#6B6B78" }}>
+                      {"Your points"}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: "15px",
+                        fontWeight: "600",
+                        color: "#1A1A1A",
+                        fontVariantNumeric: "tabular-nums",
+                      }}
+                    >
+                      {v.haveLine}
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "baseline",
+                      gap: "12px",
+                    }}
+                  >
+                    <span style={{ fontSize: "15px", fontWeight: "500", color: "#6B6B78" }}>
+                      {"Left after this"}
+                    </span>
+                    <span
+                      className="hb-ease"
+                      style={{
+                        fontSize: "15px",
+                        fontWeight: "700",
+                        color: "#1E7A34",
+                        fontVariantNumeric: "tabular-nums",
+                      }}
+                    >
+                      {v.leftLine}
+                    </span>
+                  </div>
                 </div>
               </div>
               <div
@@ -592,7 +622,13 @@ export default function Basket() {
                     >
                       {v.ctaTitle}
                     </span>
-                    <span style={{ fontSize: "13px", fontWeight: "500", opacity: v.empty ? "1" : "0.8" }}>
+                    <span
+                      style={{
+                        fontSize: "13px",
+                        fontWeight: "500",
+                        opacity: v.empty ? "1" : "0.8",
+                      }}
+                    >
                       {v.ctaSub}
                     </span>
                   </button>

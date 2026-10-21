@@ -1,16 +1,17 @@
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board "Shop.dc.html". Styles are copied value for value.
 import { Fragment } from "react";
+import { Link, useNavigate } from "../nav";
+import { useHaiba } from "../store";
 import { useRouter } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { Link } from "../nav";
-import { useHaiba } from "../store";
 import { useVals } from "../logic/shop";
 
 export default function Shop() {
   const v: any = useVals();
-  const router = useRouter();
+  const go = useNavigate();
   const hb = useHaiba();
+  const router = useRouter();
   return (
     <div className="pg-shop">
       <div
@@ -343,77 +344,120 @@ export default function Shop() {
             {"View Branches"}
           </a>
           <div
-            className="hb-rise hb-visit-summary"
+            className="hb-rise"
             style={{
               marginTop: "18px",
               background: "linear-gradient(135deg, #6C3FFA 0%, #4F25D6 100%)",
               borderRadius: "20px",
-              padding: "16px 18px",
+              padding: "18px 18px 16px 18px",
               color: "#FFFFFF",
-              display: "flex",
-              alignItems: "center",
-              gap: "14px",
-              position: "relative",
-              overflow: "hidden",
               boxShadow: "0 12px 26px rgba(108,63,250,0.22)",
             }}
           >
-            <span
-              aria-hidden="true"
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <img
+                src="/haiba/logo-lime.svg"
+                alt="Haiba"
+                style={{ height: "18px", width: "auto", display: "block" }}
+              />
+              <span
+                style={{
+                  fontSize: "12.5px",
+                  fontWeight: "700",
+                  background: "rgba(255,255,255,0.16)",
+                  borderRadius: "999px",
+                  padding: "5px 10px",
+                }}
+              >
+                {v.visitPill}
+              </span>
+            </div>
+            <div
               style={{
-                position: "absolute",
-                right: "-40px",
-                top: "-50px",
-                width: "150px",
-                height: "150px",
-                borderRadius: "50%",
-                border: "2px dashed rgba(192,244,2,0.35)",
+                fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                fontSize: "21px",
+                fontWeight: "800",
+                letterSpacing: "-0.02em",
+                lineHeight: "1.2",
+                marginTop: "14px",
               }}
-            ></span>
-            <span style={{ display: "flex", gap: "5px", flex: "none", position: "relative" }}>
+            >
+              {v.visitLine}
+            </div>
+            <div
+              style={{ fontSize: "14px", fontWeight: "500", color: "#E4DBFF", marginTop: "4px" }}
+            >
+              {v.visitSub}
+            </div>
+            <div
+              style={{
+                position: "relative",
+                display: "grid",
+                gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
+                marginTop: "18px",
+              }}
+            >
+              <span
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  left: "10%",
+                  right: "10%",
+                  top: "17px",
+                  height: "2px",
+                  background: "rgba(255,255,255,0.22)",
+                }}
+              ></span>
               {(v.stamps || []).map((s: any, idx0: number) => (
                 <Fragment key={idx0}>
                   <span
                     style={{
-                      width: "22px",
-                      height: "22px",
-                      borderRadius: "50%",
-                      background: s.bg,
-                      color: s.ink,
-                      border: `2px solid ${s.ring}`,
-                      boxSizing: "border-box",
-                      fontSize: "9px",
-                      fontWeight: "800",
+                      position: "relative",
                       display: "flex",
+                      flexDirection: "column",
                       alignItems: "center",
-                      justifyContent: "center",
+                      gap: "6px",
                     }}
                   >
-                    {s.tag}
+                    <span
+                      style={{
+                        width: "36px",
+                        height: "36px",
+                        boxSizing: "border-box",
+                        borderRadius: "50%",
+                        background: s.bg,
+                        color: s.ink,
+                        border: `2px solid ${s.ring}`,
+                        boxShadow: s.glow,
+                        fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                        fontSize: "12px",
+                        fontWeight: "800",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {s.tag}
+                    </span>
+                    <span style={{ fontSize: "12.5px", fontWeight: "700", color: s.labelInk }}>
+                      {s.pts}
+                    </span>
                   </span>
                 </Fragment>
               ))}
-            </span>
-            <span
+            </div>
+            <div
               style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "2px",
-                flex: "1",
-                minWidth: "0",
-                position: "relative",
+                marginTop: "14px",
+                paddingTop: "12px",
+                borderTop: "1px solid rgba(255,255,255,0.16)",
+                fontSize: "13px",
+                fontWeight: "500",
+                color: "#E4DBFF",
               }}
             >
-              <span style={{ fontSize: "15px", fontWeight: "700" }}>{v.visitLine}</span>
-              <span style={{ fontSize: "13px", fontWeight: "500", color: "#E4DBFF" }}>
-                {v.visitSub}
-              </span>
-            </span>
-            <img
-              src="/haiba/logo-lime.svg"
-              alt="Haiba"
-              style={{ height: "18px", width: "auto", flex: "none", position: "relative" }}
-            />
+              {"Visit 5 earns 200 points. Then the card starts again."}
+            </div>
           </div>
           <div style={{ fontSize: "22px", fontWeight: "700", marginTop: "28px" }}>{"Offers"}</div>
           <div

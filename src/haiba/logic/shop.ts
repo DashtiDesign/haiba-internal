@@ -77,21 +77,28 @@ export function useVals() {
       },
     };
   });
-  var stamps = [];
-  for (var k = 1; k <= 5; k++) {
-    var done = k < 2,
-      now = k === 2;
-    stamps.push({
-      tag: k <= 2 ? "2x" : k === 5 ? "5x" : "",
-      bg: now ? "#C0F402" : done ? "#FFFFFF" : "rgba(255,255,255,0.12)",
-      ink: now ? "#1F2600" : done ? "#4F25D6" : "#E4DBFF",
-      ring: now || done ? "#FFFFFF" : "rgba(255,255,255,0.35)",
-    });
-  }
+  var visitNow = 2;
+  var stampPts = [80, 80, 40, 40, 200];
+  var stamps = stampPts.map(function (pts, k) {
+    var n = k + 1,
+      done = n < visitNow,
+      now = n === visitNow,
+      five = n === 5;
+    return {
+      tag: done ? "✓" : now ? "2x" : five ? "5x" : "",
+      pts: String(pts),
+      bg: done ? "#FFFFFF" : now ? "#C0F402" : "#5B33E8",
+      ink: done ? "#4F25D6" : now ? "#1F2600" : "#C0F402",
+      ring: done ? "#FFFFFF" : now ? "#C0F402" : five ? "#C0F402" : "rgba(255,255,255,0.35)",
+      glow: now ? "0 0 0 5px rgba(192,244,2,0.25)" : "none",
+      labelInk: done || now ? "#FFFFFF" : "#CFC2FF",
+    };
+  });
   return {
     stamps: stamps,
-    visitLine: "Your next visit here earns 2x",
-    visitSub: "Visit 2 of 5. 80 points, then 40 a visit, 200 on the 5th.",
+    visitPill: "Visit " + visitNow + " of 5 here",
+    visitLine: "Your next visit earns 2x",
+    visitSub: "That is 80 points instead of 40.",
     offerPts: "+80",
     balance: left.toLocaleString("en-US"),
     items: items,

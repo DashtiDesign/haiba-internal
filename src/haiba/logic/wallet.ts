@@ -9,26 +9,62 @@ export function useVals() {
   var isNew = (props.member ?? "Active member") === "New member";
   var t = useMotionProgress();
   var visits = [2, 4, 8, 12];
-  var items = [
-    "A pastry at Caribou",
-    "A regular coffee",
-    "A pasta at Pasta Express",
-    "A VOX ticket and popcorn",
-  ];
   var i = state.stop;
   var stops = visits.map(function (v, k) {
     var on = k === i;
     return {
+      v: String(v),
       label: v + " visits a month",
       on: String(on),
-      size: on ? "36px" : "12px",
-      bg: on ? "#C0F402" : k < i ? "#C0F402" : "#6B6584",
-      shadow: on ? "0 0 0 6px rgba(192,244,2,0.25)" : "none",
+      ink: on ? "#1F2600" : "#CFC9E0",
       pick: function () {
         setState({ stop: k });
       },
     };
   });
+  // A year of visits with the real rules: 2x on the first 2 visits at a shop, 5x on every 5th.
+  // Each month: 1 new shop, the rest spread over your favourite shops.
+  var V = visits[i];
+  var favs = { 2: 1, 4: 2, 8: 3, 12: 4 }[V];
+  var seen = {},
+    yearPts = 500,
+    flatPts = 500,
+    cum = 0.5,
+    payback = 0;
+  for (var m = 0; m < 12; m++) {
+    var monthPts = 0;
+    var shops = ["new" + m];
+    for (var k2 = 0; k2 < V - 1; k2++) shops.push("fav" + (k2 % favs));
+    shops.forEach(function (sh) {
+      var nth = (seen[sh] || 0) + 1;
+      seen[sh] = nth;
+      monthPts += nth <= 2 ? 80 : nth % 5 === 0 ? 200 : 40;
+      flatPts += 40;
+    });
+    yearPts += monthPts;
+    cum += 2.5 + monthPts / 1000;
+    if (!payback && cum >= 19.8) payback = m + 1;
+  }
+  // Spend the points on Coffee Bean rewards: regular drink 1,900, cookie 700, upsize 300.
+  var left = yearPts;
+  var drinks = Math.floor(left / 1900);
+  left -= drinks * 1900;
+  var cookies = Math.floor(left / 700);
+  left -= cookies * 700;
+  var ups = Math.floor(left / 300);
+  var itemsVal = drinks * 1.9 + cookies * 0.7 + ups * 0.3;
+  var parts = [];
+  if (drinks) parts.push(drinks + (drinks === 1 ? " regular drink" : " regular drinks"));
+  if (cookies) parts.push(cookies + (cookies === 1 ? " cookie" : " cookies"));
+  if (ups) parts.push(ups + (ups === 1 ? " upsize" : " upsizes"));
+  var itemsText =
+    parts.length > 1
+      ? parts.slice(0, -1).join(", ") + " and " + parts[parts.length - 1]
+      : parts[0] || "your first reward";
+  var total = 30 + itemsVal;
+  var bhd = function (x) {
+    return "BHD " + x.toFixed(2);
+  };
   var green = "#2F7D32";
   var worths = isNew
     ? [
@@ -66,11 +102,21 @@ export function useVals() {
       : "Your next visit at Jasmi’s earns 5x",
     bannerCta: isNew ? "See shops" : "See the offer",
     bannerBadge: isNew ? "2x" : "5x",
-    calcVisits: String(visits[i]),
-    calcYear: (visits[i] * 40 * 12).toLocaleString("en-US"),
-    calcItem: items[i],
-    fillPct: Math.round((i / 3) * 100) + "%",
     stops: stops,
+    segLeft: "calc(4px + " + i + " * (100% - 8px) / 4)",
+    saveTotal: bhd(total),
+    saveSub:
+      "That is " +
+      (total / 19.8).toFixed(1) +
+      "x what Haiba costs. The gifts alone pay for it, and it pays for itself by month " +
+      payback +
+      ".",
+    costPct: Math.round((19.8 / total) * 100) + "%",
+    extraLine: "+" + bhd(total - 19.8) + " on top",
+    ptsLine: yearPts.toLocaleString("en-US") + " points",
+    ptsItems: "Enough for " + itemsText,
+    ptsSave: bhd(itemsVal),
+    bonusLine: "+" + (yearPts - flatPts).toLocaleString("en-US") + " from 2x and 5x bonuses",
     history: [
       {
         mark: "CB",

@@ -51,6 +51,8 @@ export function useVals() {
         (d.pts * q[i]).toLocaleString("en-US") +
         " points" +
         (q[i] > 1 ? " · " + q[i] + " codes" : " · 1 code"),
+      sumLabel: d.name + (q[i] > 1 ? " × " + q[i] : ""),
+      sumPts: (d.pts * q[i]).toLocaleString("en-US") + " points",
       addOp: can ? "1" : "0.35",
       rule: "1px solid #EFEFF3",
       add: function () {
@@ -134,6 +136,7 @@ export function useVals() {
     done: showDone,
     items: items,
     empty: empty,
+    haveLine: balance.toLocaleString("en-US") + " points",
     usedLine: used.toLocaleString("en-US") + " points",
     leftLine: left.toLocaleString("en-US") + " points",
     pct: Math.round((used / balance) * 100) + "%",
@@ -160,7 +163,6 @@ export function useVals() {
         : heldNow.toLocaleString("en-US") + " points held",
     doneTitle: "Your " + (count === 1 ? "code is" : count + " codes are") + " ready",
     codes: codes,
-    haveLine: balance.toLocaleString("en-US") + " points",
     walletLine: (balance - heldNow - usedNow).toLocaleString("en-US") + " points free to use",
     walletSub:
       heldNow.toLocaleString("en-US") +

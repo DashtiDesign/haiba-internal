@@ -445,8 +445,8 @@ export default function Wallet() {
               marginTop: "92px",
               background: "#1E1B2E",
               color: "#FFFFFF",
-              borderRadius: "26px",
-              padding: "20px 16px",
+              borderRadius: "28px",
+              padding: "22px 20px 20px 20px",
               position: "relative",
             }}
           >
@@ -462,189 +462,307 @@ export default function Wallet() {
             </span>
             <div
               style={{
-                fontSize: "13.5px",
+                fontSize: "13px",
                 fontWeight: "700",
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
-                color: "#E4DBFF",
+                color: "#C0F402",
               }}
             >
-              {"Your visits add up"}
+              {"A year of Haiba"}
             </div>
             <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-                gap: "8px",
-                marginTop: "14px",
-              }}
+              style={{ fontSize: "15px", fontWeight: "600", color: "#CFC9E0", marginTop: "14px" }}
             >
-              <div
-                style={{
-                  background: "#FBF8F2",
-                  color: "#1E1B2E",
-                  borderRadius: "14px",
-                  padding: "10px 10px 12px 10px",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "11.5px",
-                    fontWeight: "700",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    color: "#6B6880",
-                  }}
-                >
-                  {"Visits"}
-                </div>
-                <div style={{ fontSize: "19px", fontWeight: "700", marginTop: "4px" }}>
-                  {v.calcVisits}
-                  <span style={{ fontSize: "12px", fontWeight: "600" }}>{" /mo"}</span>
-                </div>
-              </div>
-              <div
-                style={{
-                  background: "#FBF8F2",
-                  color: "#1E1B2E",
-                  borderRadius: "14px",
-                  padding: "10px 10px 12px 10px",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "11.5px",
-                    fontWeight: "700",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    color: "#6B6880",
-                  }}
-                >
-                  {"A year"}
-                </div>
-                <div style={{ fontSize: "19px", fontWeight: "700", marginTop: "4px" }}>
-                  {v.calcYear}
-                  <span style={{ fontSize: "12px", fontWeight: "600" }}>{" pts"}</span>
-                </div>
-              </div>
-              <div
-                style={{
-                  background: "#C0F402",
-                  color: "#1F2600",
-                  borderRadius: "14px",
-                  padding: "10px 10px 12px 10px",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "11.5px",
-                    fontWeight: "700",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    color: "#3D5000",
-                  }}
-                >
-                  {"Gets you"}
-                </div>
-                <div
-                  style={{
-                    fontSize: "14px",
-                    fontWeight: "700",
-                    marginTop: "4px",
-                    lineHeight: "1.25",
-                  }}
-                >
-                  {v.calcItem}
-                </div>
-              </div>
+              {"How often do you use Unipal?"}
             </div>
             <div
-              style={{
-                marginTop: "10px",
-                border: "1px solid #3A3550",
-                borderRadius: "14px",
-                padding: "12px 14px",
-                fontSize: "14.5px",
-                fontWeight: "500",
-                color: "#E8E4F4",
-                lineHeight: "1.4",
-              }}
-            >
-              {"At least, before 2x and 5x bonuses. New shops earn more."}
-            </div>
-            <div
-              role="group"
+              role="radiogroup"
               aria-label="Visits a month"
-              style={{ position: "relative", margin: "22px 8px 4px 8px", height: "36px" }}
+              style={{
+                position: "relative",
+                display: "grid",
+                gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+                background: "#2B2740",
+                borderRadius: "999px",
+                padding: "4px",
+                marginTop: "10px",
+              }}
             >
               <span
+                aria-hidden="true"
+                className="hb-ease"
+                style={{
+                  position: "absolute",
+                  top: "4px",
+                  bottom: "4px",
+                  left: v.segLeft,
+                  width: "calc((100% - 8px) / 4)",
+                  borderRadius: "999px",
+                  background: "#C0F402",
+                }}
+              ></span>
+              {(v.stops || []).map((s: any, idx0: number) => (
+                <Fragment key={idx0}>
+                  <button
+                    role="radio"
+                    aria-checked={s.on}
+                    aria-label={s.label}
+                    onClick={s.pick}
+                    className="hb-ease"
+                    style={{
+                      position: "relative",
+                      font: "inherit",
+                      border: "0",
+                      background: "transparent",
+                      cursor: "pointer",
+                      padding: "10px 0",
+                      borderRadius: "999px",
+                      color: s.ink,
+                      fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                      fontSize: "16px",
+                      fontWeight: "800",
+                    }}
+                  >
+                    {s.v}
+                    <span
+                      style={{
+                        fontFamily: "Figtree, system-ui, sans-serif",
+                        fontSize: "12px",
+                        fontWeight: "600",
+                        opacity: "0.7",
+                      }}
+                    >
+                      {" /mo"}
+                    </span>
+                  </button>
+                </Fragment>
+              ))}
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "baseline",
+                gap: "8px",
+                flexWrap: "wrap",
+                marginTop: "24px",
+              }}
+            >
+              <span
+                className="hb-ease"
+                style={{
+                  fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                  fontSize: "46px",
+                  fontWeight: "800",
+                  letterSpacing: "-0.04em",
+                  lineHeight: "1",
+                  color: "#C0F402",
+                }}
+              >
+                {v.saveTotal}
+              </span>
+              <span style={{ fontSize: "16px", fontWeight: "600", color: "#E8E4F4" }}>
+                {"saved a year"}
+              </span>
+            </div>
+            <div
+              style={{
+                fontSize: "15px",
+                fontWeight: "500",
+                color: "#CFC9E0",
+                lineHeight: "1.45",
+                marginTop: "8px",
+              }}
+            >
+              {v.saveSub}
+            </div>
+            <div
+              style={{
+                position: "relative",
+                height: "10px",
+                marginTop: "18px",
+                borderRadius: "999px",
+                overflow: "hidden",
+                background: "#3A3550",
+              }}
+            >
+              <span
+                className="hb-ease"
                 style={{
                   position: "absolute",
                   left: "0",
-                  right: "0",
-                  top: "16px",
-                  height: "4px",
-                  borderRadius: "999px",
-                  background: "#3A3550",
+                  top: "0",
+                  bottom: "0",
+                  width: v.costPct,
+                  background: "#6C3FFA",
                 }}
               ></span>
               <span
                 className="hb-ease"
                 style={{
                   position: "absolute",
-                  left: "0",
-                  top: "16px",
-                  height: "4px",
-                  borderRadius: "999px",
+                  top: "0",
+                  bottom: "0",
+                  right: "0",
+                  left: v.costPct,
                   background: "#C0F402",
-                  width: v.fillPct,
                 }}
               ></span>
-              <div
-                style={{
-                  position: "absolute",
-                  inset: "0",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                {(v.stops || []).map((s: any, idx0: number) => (
-                  <Fragment key={idx0}>
-                    <button
-                      aria-label={s.label}
-                      aria-pressed={s.on}
-                      onClick={s.pick}
-                      className="hb-ease"
-                      style={{
-                        width: s.size,
-                        height: s.size,
-                        borderRadius: "50%",
-                        border: "0",
-                        padding: "0",
-                        cursor: "pointer",
-                        background: s.bg,
-                        boxShadow: s.shadow,
-                      }}
-                    ></button>
-                  </Fragment>
-                ))}
-              </div>
             </div>
             <div
               style={{
                 display: "flex",
                 justifyContent: "space-between",
-                margin: "6px 0 0 0",
-                fontSize: "12.5px",
+                marginTop: "8px",
+                fontSize: "13px",
                 fontWeight: "600",
-                color: "#A9A3C0",
               }}
             >
-              <span>{"2"}</span>
-              <span>{"4"}</span>
-              <span>{"8"}</span>
-              <span>{"12"}</span>
+              <span style={{ color: "#B9B3CC" }}>{"Haiba costs BHD 19.80"}</span>
+              <span className="hb-ease" style={{ color: "#C0F402" }}>
+                {v.extraLine}
+              </span>
+            </div>
+            <div style={{ marginTop: "18px", borderTop: "1px solid #3A3550" }}>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                  gap: "12px",
+                  alignItems: "center",
+                  padding: "14px 0",
+                  borderBottom: "1px solid #3A3550",
+                }}
+              >
+                <span
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "14px",
+                    background: "#C0F402",
+                    color: "#1F2600",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <svg
+                    aria-hidden="true"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M20 12v9H4v-9M2 7h20v5H2zM12 7v14M12 7c-2-4-7-4-7-1s5 1 7 1zm0 0c2-4 7-4 7-1s-5 1-7 1z"></path>
+                  </svg>
+                </span>
+                <span
+                  style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}
+                >
+                  <span style={{ fontSize: "16px", fontWeight: "700" }}>{"12 Unipass gifts"}</span>
+                  <span style={{ fontSize: "13.5px", fontWeight: "500", color: "#B9B3CC" }}>
+                    {"1 free item every month"}
+                  </span>
+                </span>
+                <span
+                  style={{
+                    fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                    fontSize: "17px",
+                    fontWeight: "800",
+                    textAlign: "right",
+                  }}
+                >
+                  {"BHD 30.00"}
+                </span>
+              </div>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                  gap: "12px",
+                  alignItems: "center",
+                  padding: "14px 0",
+                }}
+              >
+                <span
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "14px",
+                    background: "#6C3FFA",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <span
+                    style={{
+                      width: "22px",
+                      height: "22px",
+                      borderRadius: "50%",
+                      background: "#6C3FFA",
+                      boxShadow: "inset 0 0 0 4px #C0F402",
+                    }}
+                  ></span>
+                </span>
+                <span
+                  style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}
+                >
+                  <span className="hb-ease" style={{ fontSize: "16px", fontWeight: "700" }}>
+                    {v.ptsLine}
+                  </span>
+                  <span
+                    className="hb-ease"
+                    style={{ fontSize: "13.5px", fontWeight: "500", color: "#B9B3CC" }}
+                  >
+                    {v.ptsItems}
+                  </span>
+                </span>
+                <span
+                  className="hb-ease"
+                  style={{
+                    fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                    fontSize: "17px",
+                    fontWeight: "800",
+                    textAlign: "right",
+                  }}
+                >
+                  {v.ptsSave}
+                </span>
+                <span></span>
+                <span
+                  className="hb-ease"
+                  style={{
+                    gridColumn: "2 / 4",
+                    justifySelf: "start",
+                    fontSize: "12.5px",
+                    fontWeight: "700",
+                    color: "#1F2600",
+                    background: "#C0F402",
+                    borderRadius: "999px",
+                    padding: "4px 10px",
+                  }}
+                >
+                  {v.bonusLine}
+                </span>
+              </div>
+            </div>
+            <div
+              style={{
+                fontSize: "12.5px",
+                fontWeight: "500",
+                color: "#8F89A8",
+                lineHeight: "1.45",
+                marginTop: "6px",
+              }}
+            >
+              {
+                "Based on 1 new shop a month and the rest at your favourites. Unipass gifts are worth about BHD 2.50 each."
+              }
             </div>
           </div>
           <div
