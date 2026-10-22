@@ -1061,7 +1061,7 @@ export default function Plans() {
             </>
           ) : null}
         </div>
-        <div className="hb-fixed-bottom">
+        <div className="hb-fixed-bottom hb-cta-dock">
           <div className="hb-fixed-inner">
             <div
               style={{
@@ -1069,7 +1069,7 @@ export default function Plans() {
                 left: "0",
                 right: "0",
                 bottom: "0",
-                padding: "36px 16px 22px 16px",
+                padding: "36px 16px calc(22px + env(safe-area-inset-bottom, 0px)) 16px",
                 background: "linear-gradient(180deg, rgba(243,240,250,0) 0%, #F3F0FA 30%)",
                 display: "flex",
                 flexDirection: "column",
