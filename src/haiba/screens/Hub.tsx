@@ -1,3 +1,4 @@
+import Artwork from "../Artwork";
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board "Character.dc.html". Styles are copied value for value.
 import { Fragment } from "react";
@@ -135,7 +136,7 @@ export default function Hub() {
               pointerEvents: "auto",
             }}
           >
-            <img
+            <Artwork priority
               src={v.birdSrc}
               alt=""
               style={{
@@ -457,7 +458,7 @@ export default function Hub() {
                 background: "rgba(255,255,255,0.32)",
               }}
             ></span>
-            <img
+            <Artwork
               src="/haiba/birds/10-gift.png"
               alt=""
               style={{
@@ -1287,7 +1288,7 @@ export default function Hub() {
                   position: "relative",
                 }}
               >
-                <img
+                <Artwork
                   src="/haiba/birds/03-wink.png"
                   alt=""
                   style={{ width: "62px", height: "auto", display: "block", marginTop: "5px" }}

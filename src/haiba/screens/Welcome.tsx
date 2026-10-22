@@ -1,3 +1,4 @@
+import Artwork from "../Artwork";
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board "Story.dc.html". Styles are copied value for value.
 import { Fragment } from "react";
@@ -202,7 +203,7 @@ export default function Welcome() {
                   className="hb-rise hb-d2"
                   style={{ position: "absolute", right: "10px", bottom: "-22px", display: "block" }}
                 >
-                  <img
+                  <Artwork priority
                     src="/haiba/birds/07-phone.png"
                     alt=""
                     style={{ height: "238px", width: "auto", display: "block" }}
@@ -287,7 +288,7 @@ export default function Welcome() {
                   className="hb-rise hb-d2"
                   style={{ position: "absolute", right: "8px", bottom: "-34px", display: "block" }}
                 >
-                  <img
+                  <Artwork priority
                     src="/haiba/birds/08-stamp.png"
                     alt=""
                     style={{ height: "220px", width: "auto", display: "block" }}
@@ -379,7 +380,7 @@ export default function Welcome() {
                     transformOrigin: "bottom left",
                   }}
                 >
-                  <img
+                  <Artwork priority
                     src="/haiba/birds/09-show.png"
                     alt=""
                     style={{
@@ -457,7 +458,7 @@ export default function Welcome() {
                   className="hb-rise hb-d2"
                   style={{ position: "absolute", right: "12px", bottom: "-20px", display: "block" }}
                 >
-                  <img
+                  <Artwork priority
                     src="/haiba/birds/10-gift.png"
                     alt=""
                     style={{ height: "262px", width: "auto", display: "block" }}

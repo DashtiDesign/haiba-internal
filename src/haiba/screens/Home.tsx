@@ -1,3 +1,4 @@
+import Artwork from "../Artwork";
 import { Link } from "../nav";
 import { useHaiba } from "../store";
 
@@ -226,7 +227,7 @@ export default function Home() {
               <path d="M9 6l6 6-6 6" />
             </svg>
           </span>
-          <img
+          <Artwork priority
             src="/haiba/birds/04-peek.png"
             alt=""
             style={{ position: "absolute", right: 0, bottom: -60, height: 230, width: "auto" }}

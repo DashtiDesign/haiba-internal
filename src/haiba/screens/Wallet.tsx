@@ -1,3 +1,4 @@
+import Artwork from "../Artwork";
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board "Wallet.dc.html". Styles are copied value for value.
 import { Fragment } from "react";
@@ -378,7 +379,7 @@ export default function Wallet() {
                 margin: "-14px -12px -14px 0",
               }}
             >
-              <img
+              <Artwork priority
                 src="/haiba/birds/11-run.png"
                 alt=""
                 style={{
@@ -454,7 +455,7 @@ export default function Wallet() {
               className="hb-peek"
               style={{ position: "absolute", right: "20px", top: "-84px", display: "block" }}
             >
-              <img
+              <Artwork
                 src="/haiba/birds/12-ledge.png"
                 alt=""
                 style={{ height: "88px", width: "auto", display: "block" }}

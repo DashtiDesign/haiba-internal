@@ -1,3 +1,4 @@
+import Artwork from "../Artwork";
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board "Plans.dc.html". Styles are copied value for value.
 import { Fragment } from "react";
@@ -258,7 +259,7 @@ export default function Plans() {
                     className="hb-peek"
                     style={{ position: "absolute", right: "0", bottom: "-78px", display: "block" }}
                   >
-                    <img
+                    <Artwork priority
                       src="/haiba/birds/04-peek.png"
                       alt="The Unipal bird giving a thumbs up"
                       style={{
@@ -441,7 +442,7 @@ export default function Plans() {
                       display: "block",
                     }}
                   >
-                    <img
+                    <Artwork priority
                       src="/haiba/birds/05-shrug.png"
                       alt="The Unipal bird shrugging"
                       style={{

@@ -1,3 +1,4 @@
+import Artwork from "../Artwork";
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board "Offer.dc.html". Styles are copied value for value.
 import { Fragment } from "react";
@@ -306,7 +307,7 @@ export default function Redeem() {
                 border: "2px dashed rgba(192,244,2,0.35)",
               }}
             ></span>
-            <img
+            <Artwork priority
               src="/haiba/birds/03-wink.png"
               alt=""
               style={{
@@ -605,7 +606,7 @@ export default function Redeem() {
                         justifyContent: "center",
                       }}
                     >
-                      <img
+                      <Artwork
                         src="/haiba/birds/13-fist.png"
                         alt=""
                         style={{
