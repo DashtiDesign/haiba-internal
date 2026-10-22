@@ -1059,55 +1059,30 @@ export default function Hub() {
                   position: "absolute",
                   right: "16px",
                   bottom: "96px",
-                  width: "62px",
-                  height: "62px",
+                  width: "60px",
+                  height: "60px",
                   borderRadius: "50%",
-                  background: "#C0F402",
+                  background: "#6C3FFA",
                   border: "3px solid #FFFFFF",
                   boxSizing: "border-box",
                   display: "flex",
-                  alignItems: "flex-start",
+                  alignItems: "center",
                   justifyContent: "center",
-                  boxShadow: "0 0 0 2px #6C3FFA, 0 10px 24px rgba(76,52,140,0.28)",
+                  boxShadow: "0 0 0 2px #C0F402, 0 10px 24px rgba(108,63,250,0.35)",
                   padding: "0",
                   cursor: "pointer",
                 }}
               >
-                <span
+                <Artwork
+                  src="/haiba/logo-lime.svg"
+                  alt=""
                   style={{
-                    width: "56px",
-                    height: "56px",
-                    borderRadius: "50%",
-                    overflow: "hidden",
-                    display: "flex",
-                    justifyContent: "center",
+                    width: "40px",
+                    height: "auto",
+                    display: "block",
+                    transform: "rotate(-8deg)",
                   }}
-                >
-                  <Artwork
-                    src="/haiba/birds/03-wink.png"
-                    alt=""
-                    style={{ width: "56px", height: "auto", display: "block", marginTop: "4px" }}
-                  />
-                </span>
-                <span
-                  aria-hidden="true"
-                  style={{
-                    position: "absolute",
-                    left: "50%",
-                    bottom: "-9px",
-                    transform: "translateX(-50%)",
-                    background: "#6C3FFA",
-                    color: "#C0F402",
-                    fontSize: "10.5px",
-                    fontWeight: "800",
-                    letterSpacing: "0.02em",
-                    borderRadius: "999px",
-                    padding: "2px 7px",
-                    border: "2px solid #FFFFFF",
-                  }}
-                >
-                  {"Haiba"}
-                </span>
+                />
                 <span
                   aria-hidden="true"
                   style={{
@@ -1117,7 +1092,7 @@ export default function Hub() {
                     width: "14px",
                     height: "14px",
                     borderRadius: "50%",
-                    background: "#6C3FFA",
+                    background: "#C0F402",
                     border: "2px solid #FFFFFF",
                     display: v.dotDisp,
                   }}

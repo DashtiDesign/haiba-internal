@@ -313,54 +313,24 @@ export default function Home() {
                 position: "absolute",
                 right: 16,
                 bottom: 96,
-                width: 62,
-                height: 62,
+                width: 60,
+                height: 60,
                 borderRadius: "50%",
-                background: "#C0F402",
+                background: "#6C3FFA",
                 border: "3px solid #FFFFFF",
                 boxSizing: "border-box",
                 display: "flex",
-                alignItems: "flex-start",
+                alignItems: "center",
                 justifyContent: "center",
-                boxShadow: "0 10px 24px rgba(76,52,140,0.28)",
+                boxShadow: "0 10px 24px rgba(108,63,250,0.35)",
                 textDecoration: "none",
               }}
             >
-              <span
-                style={{
-                  width: 56,
-                  height: 56,
-                  borderRadius: "50%",
-                  overflow: "hidden",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <Artwork
-                  src="/haiba/birds/03-wink.png"
-                  alt=""
-                  style={{ width: 56, height: "auto", display: "block", marginTop: 4 }}
-                />
-              </span>
-              <span
-                aria-hidden="true"
-                style={{
-                  position: "absolute",
-                  left: "50%",
-                  bottom: -9,
-                  transform: "translateX(-50%)",
-                  background: "#6C3FFA",
-                  color: "#C0F402",
-                  fontSize: 10.5,
-                  fontWeight: 800,
-                  letterSpacing: "0.02em",
-                  borderRadius: 999,
-                  padding: "2px 7px",
-                  border: "2px solid #FFFFFF",
-                }}
-              >
-                Haiba
-              </span>
+              <img
+                src="/haiba/logo-lime.svg"
+                alt=""
+                style={{ width: 40, height: "auto", display: "block", transform: "rotate(-8deg)" }}
+              />
             </Link>
           ) : null}
           <nav
