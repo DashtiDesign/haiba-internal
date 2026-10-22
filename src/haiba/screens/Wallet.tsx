@@ -124,7 +124,7 @@ export default function Wallet() {
             <div
               style={{
                 background: "#FFFFFF",
-                borderRadius: "26px",
+                borderRadius: "16px",
                 padding: "20px 14px",
                 display: "flex",
                 flexDirection: "column",
@@ -171,7 +171,7 @@ export default function Wallet() {
             <div
               style={{
                 background: "#FFFFFF",
-                borderRadius: "26px",
+                borderRadius: "16px",
                 padding: "20px 14px",
                 display: "flex",
                 flexDirection: "column",
@@ -231,7 +231,7 @@ export default function Wallet() {
               textAlign: "left",
               border: "0",
               background: "#FFFFFF",
-              borderRadius: "20px",
+              borderRadius: "16px",
               padding: "14px 16px",
               boxShadow: "0 8px 20px rgba(76,52,140,0.08)",
               display: "flex",
@@ -327,7 +327,7 @@ export default function Wallet() {
             style={{
               marginTop: "22px",
               background: "#F4FFD1",
-              borderRadius: "22px",
+              borderRadius: "16px",
               padding: "18px",
               display: "flex",
               alignItems: "center",
@@ -467,7 +467,7 @@ export default function Wallet() {
                 style={{
                   marginTop: "12px",
                   background: "#FFFFFF",
-                  borderRadius: "26px",
+                  borderRadius: "16px",
                   padding: "4px 18px",
                   boxShadow: "0 10px 26px rgba(76,52,140,0.08)",
                 }}
@@ -589,7 +589,7 @@ export default function Wallet() {
                         width: "168px",
                         height: "200px",
                         boxSizing: "border-box",
-                        borderRadius: "22px",
+                        borderRadius: "16px",
                         background: p.bg,
                         color: "#FFFFFF",
                         padding: "16px",

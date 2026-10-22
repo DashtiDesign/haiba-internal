@@ -230,7 +230,7 @@ export default function Points() {
               display: "flex",
               flexDirection: "column",
               background: "#FFFFFF",
-              borderRadius: "28px",
+              borderRadius: "16px",
               padding: "4px 12px",
               boxShadow: "0 10px 26px rgba(76,52,140,0.08)",
             }}
@@ -367,7 +367,7 @@ export default function Points() {
               display: "flex",
               flexDirection: "column",
               background: "#FFFFFF",
-              borderRadius: "28px",
+              borderRadius: "16px",
               padding: "4px 12px",
               boxShadow: "0 10px 26px rgba(76,52,140,0.08)",
             }}
@@ -506,7 +506,7 @@ export default function Points() {
               display: "flex",
               flexDirection: "column",
               background: "#FFFFFF",
-              borderRadius: "28px",
+              borderRadius: "16px",
               padding: "4px 12px",
               boxShadow: "0 10px 26px rgba(76,52,140,0.08)",
             }}

@@ -526,7 +526,7 @@ export default function Plans() {
                             position: "relative",
                             width: "68px",
                             height: "68px",
-                            borderRadius: "20px",
+                            borderRadius: "16px",
                             background: "#FFFFFF",
                             display: "flex",
                             alignItems: "center",
@@ -540,7 +540,7 @@ export default function Plans() {
                             style={{
                               width: "68px",
                               height: "68px",
-                              borderRadius: "20px",
+                              borderRadius: "16px",
                               objectFit: "cover",
                               display: "block",
                             }}

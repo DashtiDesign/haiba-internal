@@ -133,7 +133,7 @@ export default function Welcome() {
           style={{
             margin: "20px 16px 0 16px",
             height: "340px",
-            borderRadius: "32px",
+            borderRadius: "16px",
             background: "#FFFFFF",
             position: "relative",
             overflow: "hidden",
@@ -151,7 +151,7 @@ export default function Welcome() {
                     right: "22px",
                     top: "34px",
                     background: "#F7F5FC",
-                    borderRadius: "20px",
+                    borderRadius: "16px",
                     padding: "16px",
                     display: "flex",
                     alignItems: "center",
@@ -206,7 +206,7 @@ export default function Welcome() {
                     style={{
                       background: "#1E1B2E",
                       color: "#FFFFFF",
-                      borderRadius: "18px",
+                      borderRadius: "16px",
                       padding: "12px 14px",
                       display: "flex",
                       alignItems: "center",
@@ -261,7 +261,7 @@ export default function Welcome() {
                     right: "22px",
                     top: "30px",
                     background: "#F7F5FC",
-                    borderRadius: "20px",
+                    borderRadius: "16px",
                     padding: "14px 16px 16px 16px",
                   }}
                 >
@@ -339,7 +339,7 @@ export default function Welcome() {
                     style={{
                       background: "#1E1B2E",
                       color: "#FFFFFF",
-                      borderRadius: "18px",
+                      borderRadius: "16px",
                       padding: "12px 14px",
                       display: "flex",
                       alignItems: "center",
@@ -421,7 +421,7 @@ export default function Welcome() {
                       height: "100%",
                       boxSizing: "border-box",
                       background: "#6C3FFA",
-                      borderRadius: "24px",
+                      borderRadius: "16px",
                       color: "#FFFFFF",
                       padding: "22px",
                       display: "flex",
@@ -526,7 +526,7 @@ export default function Welcome() {
                           cursor: "pointer",
                           height: "112px",
                           boxSizing: "border-box",
-                          borderRadius: "18px",
+                          borderRadius: "16px",
                           overflow: "hidden",
                           background: "#FFFFFF",
                           color: "#1E1B2E",

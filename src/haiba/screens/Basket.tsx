@@ -131,7 +131,7 @@ export default function Basket() {
                 style={{
                   background: "#FFFFFF",
                   border: "1px solid #E4E4EA",
-                  borderRadius: "20px",
+                  borderRadius: "16px",
                   padding: "4px 16px",
                 }}
               >
@@ -307,7 +307,7 @@ export default function Basket() {
                 style={{
                   background: "#FFFFFF",
                   border: "1px solid #E4E4EA",
-                  borderRadius: "20px",
+                  borderRadius: "16px",
                   padding: "18px 18px 16px 18px",
                 }}
               >
@@ -424,7 +424,7 @@ export default function Basket() {
                 style={{
                   background: "#FFFFFF",
                   border: "1px solid #E4E4EA",
-                  borderRadius: "20px",
+                  borderRadius: "16px",
                   padding: "18px",
                   display: "flex",
                   flexDirection: "column",
@@ -787,7 +787,7 @@ export default function Basket() {
                       style={{
                         background: c.bg,
                         color: c.ink,
-                        borderRadius: "20px",
+                        borderRadius: "16px",
                         padding: "18px",
                         display: "flex",
                         flexDirection: "column",

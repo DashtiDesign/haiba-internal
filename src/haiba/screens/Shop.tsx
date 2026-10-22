@@ -313,7 +313,7 @@ export default function Shop() {
             style={{
               marginTop: "14px",
               height: "80px",
-              borderRadius: "18px",
+              borderRadius: "16px",
               background: "linear-gradient(90deg, #DDEFF8 0%, #E9F1E4 100%)",
               display: "flex",
               alignItems: "center",
@@ -349,7 +349,7 @@ export default function Shop() {
             style={{
               marginTop: "18px",
               background: "linear-gradient(135deg, #6C3FFA 0%, #4F25D6 100%)",
-              borderRadius: "20px",
+              borderRadius: "16px",
               padding: "18px 18px 16px 18px",
               color: "#FFFFFF",
               boxShadow: "0 12px 26px rgba(108,63,250,0.22)",
@@ -468,7 +468,7 @@ export default function Shop() {
               marginTop: "14px",
               background: "#FFFFFF",
               border: "1px solid #E4E4EA",
-              borderRadius: "20px",
+              borderRadius: "16px",
               overflow: "hidden",
             }}
           >
@@ -687,7 +687,7 @@ export default function Shop() {
               marginTop: "14px",
               background: "#FFFFFF",
               border: "1px solid #E4E4EA",
-              borderRadius: "20px",
+              borderRadius: "16px",
               padding: "4px 16px",
             }}
           >
@@ -862,7 +862,7 @@ export default function Shop() {
                         style={{
                           marginTop: "12px",
                           background: "linear-gradient(135deg, #6C3FFA 0%, #4F25D6 100%)",
-                          borderRadius: "18px",
+                          borderRadius: "16px",
                           padding: "16px",
                           color: "#FFFFFF",
                           display: "flex",
@@ -1007,7 +1007,7 @@ export default function Shop() {
             style={{
               marginTop: "22px",
               background: "#C0F402",
-              borderRadius: "20px",
+              borderRadius: "16px",
               padding: "16px 18px",
               display: "flex",
               alignItems: "center",

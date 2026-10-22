@@ -79,7 +79,7 @@ export default function Redeem() {
             style={{
               background: "#FFFFFF",
               border: "1px solid #E4E4EA",
-              borderRadius: "22px",
+              borderRadius: "16px",
               padding: "22px 20px",
               display: "flex",
               flexDirection: "column",
@@ -196,7 +196,7 @@ export default function Redeem() {
             style={{
               background: "#FFFFFF",
               border: "1px solid #E4E4EA",
-              borderRadius: "22px",
+              borderRadius: "16px",
               padding: "22px 20px",
               display: "flex",
               flexDirection: "column",
@@ -288,7 +288,7 @@ export default function Redeem() {
             style={{
               position: "relative",
               background: "linear-gradient(135deg, #6C3FFA 0%, #4F25D6 100%)",
-              borderRadius: "22px",
+              borderRadius: "16px",
               padding: "20px 20px 18px 20px",
               color: "#FFFFFF",
               overflow: "hidden",
@@ -423,7 +423,7 @@ export default function Redeem() {
             style={{
               background: "#FFFFFF",
               border: "1px solid #E4E4EA",
-              borderRadius: "22px",
+              borderRadius: "16px",
               overflow: "hidden",
             }}
           >
@@ -585,7 +585,7 @@ export default function Redeem() {
                     style={{
                       background: "#1E1B2E",
                       color: "#FFFFFF",
-                      borderRadius: "18px",
+                      borderRadius: "16px",
                       padding: "12px 14px",
                       display: "flex",
                       alignItems: "center",
