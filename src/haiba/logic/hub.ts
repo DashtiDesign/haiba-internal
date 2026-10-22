@@ -274,16 +274,6 @@ export function useVals() {
   return {
     greeting: "Hi Sara",
     points: shown.toLocaleString("en-US"),
-    subLine:
-      heldCodes > 0 && isNew
-        ? "Your reward code is ready to show"
-        : target >= 1900
-          ? "Enough for a free drink at The Coffee Bean"
-          : target >= 700
-            ? "Enough for a free cookie at The Coffee Bean"
-            : target >= 300
-              ? "Enough for a free upsize at The Coffee Bean"
-              : 300 - target + " more points for a free upsize",
     actions: actions,
     giftLeft: "10 days left",
     giftMarks: giftMarks,

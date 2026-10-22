@@ -52,21 +52,6 @@ export default function Hub() {
         <svg
           aria-hidden="true"
           width="390"
-          height="340"
-          viewBox="0 0 390 340"
-          fill="none"
-          style={{ position: "absolute", left: "0", top: "0", display: "block" }}
-        >
-          <path
-            d="M 55 330 A 140 140 0 0 1 335 330"
-            stroke="rgba(255,255,255,0.75)"
-            strokeWidth="16"
-            strokeLinecap="round"
-          ></path>
-        </svg>
-        <svg
-          aria-hidden="true"
-          width="390"
           height="140"
           viewBox="0 0 390 140"
           preserveAspectRatio="none"
@@ -310,9 +295,6 @@ export default function Hub() {
             >
               {v.points}
               {" points"}
-            </span>
-            <span style={{ fontSize: "15px", fontWeight: "600", color: "#5B5574" }}>
-              {v.subLine}
             </span>
           </div>
           <div
