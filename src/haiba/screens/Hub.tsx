@@ -32,11 +32,28 @@ export default function Hub() {
             left: "0",
             right: "0",
             top: "0",
-            height: "290px",
+            height: "310px",
             background:
-              "radial-gradient(circle at 50% 58%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 40%), linear-gradient(180deg, #D6C6FF 0%, #E4DAFF 70%, #EAE3FF 100%)",
+              "radial-gradient(circle at 50% 58%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 38%), radial-gradient(circle at 4% 70%, rgba(108,63,250,0.22) 0%, rgba(108,63,250,0) 40%), linear-gradient(180deg, #D3C2FF 0%, #E2D7FF 70%, #EAE3FF 100%)",
           }}
         ></div>
+        <Artwork
+          priority
+          src="/haiba/logo-purple.svg"
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "92px",
+            width: "400px",
+            height: "auto",
+            marginLeft: "-200px",
+            opacity: "0.09",
+            transform: "rotate(-8deg)",
+            display: "block",
+          }}
+        />
         <svg
           aria-hidden="true"
           width="390"
@@ -51,9 +68,9 @@ export default function Hub() {
           aria-hidden="true"
           style={{
             position: "absolute",
-            left: "125px",
-            top: "262px",
-            width: "140px",
+            left: "131px",
+            top: "258px",
+            width: "128px",
             height: "18px",
             borderRadius: "50%",
             background: "#1E1B2E",
@@ -66,7 +83,7 @@ export default function Hub() {
             position: "absolute",
             left: "0",
             right: "0",
-            top: "14px",
+            top: "30px",
             zIndex: "2",
             display: "flex",
             justifyContent: "center",
@@ -86,11 +103,10 @@ export default function Hub() {
             }}
           >
             <Artwork
-              priority
               src={v.birdSrc}
               alt=""
               style={{
-                height: "260px",
+                height: "238px",
                 width: "auto",
                 display: "block",
                 filter: "drop-shadow(0 10px 10px rgba(30,27,46,0.12))",
