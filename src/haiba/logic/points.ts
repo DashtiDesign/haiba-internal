@@ -52,6 +52,7 @@ export function useVals() {
       return Object.assign({}, d, {
         open: open,
         openStr: String(open),
+        line: k === defs.length - 1 ? "0" : "1px solid #F3F1F8",
         rot: open ? "180deg" : "0deg",
         bg: open ? "#1E1B2E" : d.bg,
         ink: open ? "#C0F402" : d.ink,
