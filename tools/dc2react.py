@@ -37,6 +37,12 @@ BLOBS = {
     "36a5914ac8036e7186a3395e9a9de81b": "/haiba/birds/16-torn.png",
     "7f6ac18dcfbb818170a44d52804fa31d": "/haiba/logo-lime.svg",
     "11627cd42f9669ec15cd306145b7e143": "/haiba/logo-purple.svg",
+    "0d4c5d010234f99775c06dab4dc63dac": "/haiba/brands/vox.webp",
+    "b3ce18ae9ceabe70d7fdb718dccf7f32": "/haiba/brands/coffee-bean.webp",
+    "50e30abfee8086245e24b82e5f33529b": "/haiba/brands/alkuwaiti.webp",
+    "82364cb26b1195be0a503039925a2eb0": "/haiba/brands/grip.webp",
+    "9163726a14d1e4869c71e417a3a87155": "/haiba/brands/albayan.webp",
+    "c1e6f5f43bf6c8ea66f354b776557213": "/haiba/brands/wingman.webp",
 }
 ATTR_CASE = {
     "viewbox": "viewBox", "preserveaspectratio": "preserveAspectRatio", "onclick": "onClick",

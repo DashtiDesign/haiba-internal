@@ -1060,24 +1060,13 @@
   ],
   "unipassCatalog": [
     {
-      "id": "up-jasmis",
-      "brand": "Jasmi's",
-      "market": "BH",
-      "category": "Restaurant",
-      "item": "Free regular meal",
-      "terms": "Any regular meal, all branches",
-      "value": 2.85,
-      "monthlyLimit": 300,
-      "claimedThisMonth": 112
-    },
-    {
       "id": "up-wingman",
       "brand": "Wingman",
       "market": "BH",
       "category": "Restaurant",
-      "item": "Free 6 wings",
-      "terms": "Dine in or pick up",
-      "value": 2.5,
+      "item": "Free student box meal",
+      "terms": "Dine in or pick up, show your student ID",
+      "value": 2.85,
       "monthlyLimit": 100,
       "claimedThisMonth": 100
     },
@@ -1159,15 +1148,15 @@
       "claimedThisMonth": 21
     },
     {
-      "id": "up-funland",
-      "brand": "Funland",
+      "id": "up-albayan",
+      "brand": "Albayan Perfumes",
       "market": "BH",
-      "category": "Bowling and fun",
-      "item": "Free bowling game",
-      "terms": "1 game, shoes included",
-      "value": 1.8,
-      "monthlyLimit": 100,
-      "claimedThisMonth": 17
+      "category": "Perfume",
+      "item": "Free 100ml perfume",
+      "terms": "Selected perfumes, 1 bottle",
+      "value": 6.0,
+      "monthlyLimit": 50,
+      "claimedThisMonth": 12
     },
     {
       "id": "up-alkuwaiti",
@@ -1181,11 +1170,11 @@
       "claimedThisMonth": 19
     },
     {
-      "id": "up-fitnesstrack",
-      "brand": "Fitness Track",
+      "id": "up-grip",
+      "brand": "Grip",
       "market": "BH",
       "category": "Gym",
-      "item": "Free day pass",
+      "item": "Free gym day pass",
       "terms": "1 visit, bring your student ID",
       "value": 3.0,
       "monthlyLimit": 60,

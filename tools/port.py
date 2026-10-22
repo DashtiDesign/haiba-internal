@@ -42,7 +42,7 @@ GO_VAR = 'href="#" onClick={(e: any) => { e.preventDefault(); if (v.navTipHref) 
 
 # Placeholder links (href="#") in the order they appear in each screen. None = stays a placeholder.
 LINKS = {
-    "Hub": [go_item("a"), None, go_item("r"), None, GO_VAR, go("/"), None, go("/haiba"), None, None],
+    "Hub": [go_item("a"), None, go_item("r"), None, GO_VAR, go("/"), None, None, None],
     "Plans": [None, go("/")],
     "Wallet": [go_item("a"), go("/shop/coffee-bean/redeem"), None, None, go("/shop/coffee-bean"), go("/shop/coffee-bean")],
 }
@@ -61,6 +61,8 @@ SCREEN = {
     # Lovable: full opacity for the empty basket hint
     "Basket": [(re.compile(r'opacity: "0\.8" \}\}>(\s*)\{v\.ctaSub\}'), r'opacity: v.empty ? "1" : "0.8" }}>\1{v.ctaSub}')],
     "Plans": [
+        # Lovable: hook class for the small phone layout of the plan artwork
+        ('<div style={{ position: "relative", height: "210px",', '<div className="hb-plan-artwork" style={{ position: "relative", height: "210px",'),
         ('to="/haiba/welcome"', 'to="/haiba/welcome" onClick={() => hb.join()}'),
         ('<button aria-label="Close"', '<button onClick={() => go("/")} aria-label="Close"'),
     ],
@@ -68,7 +70,6 @@ SCREEN = {
 LOGIC = {
     "Hub": [
         ("var target = isNew ? 500 : 1240;", "var target = props.available;"),
-        ("var pct = (isNew ? 1 : 1240 / 1800) * t;", "var pct = (isNew ? 1 : Math.min(1, props.available / 1800)) * t;"),
         ("      navTipCta:", "      navTipHref: isNew ? '' : '/shop/coffee-bean/redeem',\n      navTipCta:"),
     ],
     "Wallet": [
@@ -117,6 +118,10 @@ def patch_screen(name):
     s = s.replace('import { Link } from "react-router-dom";', 'import { Link, useNavigate } from "../nav";\nimport { useHaiba } from "../store";')
     s = re.sub(r'import "\.\./styles/[\w-]+\.css";\n', "", s)
     s = s.replace("  const v: any = useVals();", "  const v: any = useVals();\n  const go = useNavigate();\n  const hb = useHaiba();")
+    if "<img" in s:
+        # Lovable: images go through the shared Artwork component (WebP registry); the first one loads first
+        s = s.replace('import { useHaiba } from "../store";', 'import { useHaiba } from "../store";\nimport Artwork from "../Artwork";', 1)
+        s = s.replace("<img", "<Artwork priority", 1).replace("<img", "<Artwork")
     plan = LINKS.get(name)
     if plan is not None:
         parts = s.split(PD)

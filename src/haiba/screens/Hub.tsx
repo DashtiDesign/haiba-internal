@@ -1,9 +1,9 @@
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board "Character.dc.html". Styles are copied value for value.
-import Artwork from "../Artwork";
 import { Fragment } from "react";
 import { Link, useNavigate } from "../nav";
 import { useHaiba } from "../store";
+import Artwork from "../Artwork";
 import { useVals } from "../logic/hub";
 
 export default function Hub() {
@@ -63,31 +63,7 @@ export default function Hub() {
             strokeWidth="16"
             strokeLinecap="round"
           ></path>
-          <path
-            d="M 55 330 A 140 140 0 0 1 335 330"
-            stroke="#6C3FFA"
-            strokeWidth="16"
-            strokeLinecap="round"
-            strokeDasharray={v.arcDash}
-          ></path>
         </svg>
-        <span
-          className="hb-pop hb-d4"
-          style={{
-            position: "absolute",
-            left: "318px",
-            top: "226px",
-            display: "block",
-            transform: "rotate(58deg)",
-            transformOrigin: "left center",
-            fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
-            fontSize: "13px",
-            fontWeight: "800",
-            color: "#6C3FFA",
-          }}
-        >
-          {v.arcGoal}
-        </span>
         <svg
           aria-hidden="true"
           width="390"
@@ -136,7 +112,8 @@ export default function Hub() {
               pointerEvents: "auto",
             }}
           >
-            <Artwork priority
+            <Artwork
+              priority
               src={v.birdSrc}
               alt=""
               style={{
@@ -521,7 +498,7 @@ export default function Hub() {
                 lineHeight: "1.35",
               }}
             >
-              {"Free for members. 1 of 13 items."}
+              {"Free for members. 1 of 12 items."}
             </span>
             <span
               style={{
@@ -541,8 +518,9 @@ export default function Hub() {
                         height: "34px",
                         marginLeft: "-8px",
                         borderRadius: "50%",
-                        background: g.bg,
-                        color: g.ink,
+                        overflow: "hidden",
+                        background: "#FFFFFF",
+                        color: "#1F2600",
                         border: "2px solid #C0F402",
                         fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
                         fontSize: "12px",
@@ -552,6 +530,20 @@ export default function Hub() {
                         justifyContent: "center",
                       }}
                     >
+                      {g.hasLogo ? (
+                        <>
+                          <Artwork
+                            src={g.logo}
+                            alt={g.name}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "cover",
+                              display: "block",
+                            }}
+                          />
+                        </>
+                      ) : null}
                       {g.mark}
                     </span>
                   </Fragment>
@@ -1016,289 +1008,130 @@ export default function Hub() {
             </svg>
           </Link>
         </div>
-        {v.navTipOpen ? (
-          <>
-            <div className="hb-fixed-bottom">
-              <div className="hb-fixed-inner">
-                <div
-                  className="hb-pop"
-                  style={{
-                    position: "absolute",
-                    right: "14px",
-                    bottom: "100px",
-                    width: "262px",
-                    background: "#1E1B2E",
-                    color: "#FFFFFF",
-                    borderRadius: "22px 22px 4px 22px",
-                    padding: "14px 16px",
-                    boxShadow: "0 16px 34px rgba(30,27,46,0.28)",
-                    transformOrigin: "bottom right",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "10px",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: "12px",
-                      fontWeight: "700",
-                      letterSpacing: "0.12em",
-                      textTransform: "uppercase",
-                      color: "#C0F402",
-                    }}
-                  >
-                    {"Tip from the bird"}
-                  </span>
-                  <span style={{ fontSize: "15px", fontWeight: "600", lineHeight: "1.4" }}>
-                    {v.navTip}
-                  </span>
-                  <a
-                    className="hb-press"
-                    style={{
-                      alignSelf: "flex-start",
-                      textDecoration: "none",
-                      background: "#C0F402",
-                      color: "#1F2600",
-                      fontSize: "14px",
-                      fontWeight: "700",
-                      borderRadius: "999px",
-                      padding: "9px 14px",
-                    }}
-                    href="#"
-                    onClick={(e: any) => {
-                      e.preventDefault();
-                      if (v.navTipHref) go(v.navTipHref);
-                    }}
-                  >
-                    {v.navTipCta}
-                  </a>
-                </div>
-              </div>
-            </div>
-          </>
-        ) : null}
         <div className="hb-fixed-bottom">
           <div className="hb-fixed-inner">
-            <div
-              style={{
-                position: "absolute",
-                left: "12px",
-                right: "12px",
-                bottom: "22px",
-                display: "flex",
-                gap: "10px",
-                alignItems: "center",
-              }}
-            >
-              <nav
-                aria-label="Unipal"
-                style={{
-                  flex: "1",
-                  background: "rgba(255,255,255,0.96)",
-                  borderRadius: "28px",
-                  padding: "6px",
-                  display: "grid",
-                  gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
-                  gap: "2px",
-                  boxShadow: "0 12px 30px rgba(30,27,46,0.14)",
-                }}
-              >
-                <a
-                  className="hb-press"
-                  style={{
-                    textDecoration: "none",
-                    color: "#6B6880",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "3px",
-                    padding: "8px 0",
-                    borderRadius: "22px",
-                    fontSize: "11px",
-                    fontWeight: "600",
-                  }}
-                  href="#"
-                  onClick={(e: any) => {
-                    e.preventDefault();
-                    go("/");
-                  }}
-                >
-                  <svg
-                    aria-hidden="true"
-                    width="22"
-                    height="22"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.1"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+            <div style={{ position: "absolute", left: "0", right: "0", bottom: "0" }}>
+              {v.navTipOpen ? (
+                <>
+                  <div
+                    className="hb-pop"
+                    style={{
+                      position: "absolute",
+                      right: "14px",
+                      bottom: "170px",
+                      width: "262px",
+                      background: "#1E1B2E",
+                      color: "#FFFFFF",
+                      borderRadius: "22px 22px 4px 22px",
+                      padding: "14px 16px",
+                      boxShadow: "0 16px 34px rgba(30,27,46,0.28)",
+                      transformOrigin: "bottom right",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "10px",
+                    }}
                   >
-                    <path d="M3 10.6L12 3l9 7.6V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path>
-                  </svg>
-                  {"Home"}
-                </a>
-                <a
-                  className="hb-press"
-                  style={{
-                    textDecoration: "none",
-                    color: "#6B6880",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "3px",
-                    padding: "8px 0",
-                    borderRadius: "22px",
-                    fontSize: "11px",
-                    fontWeight: "600",
-                  }}
-                  href="#"
-                  onClick={(e: any) => e.preventDefault()}
-                >
-                  <svg
-                    aria-hidden="true"
-                    width="22"
-                    height="22"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.1"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"></path>
-                    <circle cx="12" cy="9.5" r="2.5"></circle>
-                  </svg>
-                  {"Map"}
-                </a>
-                <a
-                  aria-current="page"
-                  className="hb-press"
-                  style={{
-                    textDecoration: "none",
-                    color: "#FFFFFF",
-                    background: "#6C3FFA",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "3px",
-                    padding: "8px 0",
-                    borderRadius: "22px",
-                    fontSize: "11px",
-                    fontWeight: "700",
-                    boxShadow: "0 8px 18px rgba(108,63,250,0.35)",
-                  }}
-                  href="#"
-                  onClick={(e: any) => {
-                    e.preventDefault();
-                    go("/haiba");
-                  }}
-                >
-                  <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="#C0F402">
-                    <path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"></path>
-                  </svg>
-                  {"Haiba"}
-                </a>
-                <a
-                  className="hb-press"
-                  style={{
-                    textDecoration: "none",
-                    color: "#6B6880",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "3px",
-                    padding: "8px 0",
-                    borderRadius: "22px",
-                    fontSize: "11px",
-                    fontWeight: "600",
-                  }}
-                  href="#"
-                  onClick={(e: any) => e.preventDefault()}
-                >
-                  <svg
-                    aria-hidden="true"
-                    width="22"
-                    height="22"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.1"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
-                    <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
-                  </svg>
-                  {"Alerts"}
-                </a>
-                <a
-                  className="hb-press"
-                  style={{
-                    textDecoration: "none",
-                    color: "#6B6880",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "3px",
-                    padding: "8px 0",
-                    borderRadius: "22px",
-                    fontSize: "11px",
-                    fontWeight: "600",
-                  }}
-                  href="#"
-                  onClick={(e: any) => e.preventDefault()}
-                >
-                  <svg
-                    aria-hidden="true"
-                    width="22"
-                    height="22"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.1"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <circle cx="12" cy="8" r="4.2"></circle>
-                    <path d="M4 21c1.4-4.2 4.5-6.2 8-6.2s6.6 2 8 6.2"></path>
-                  </svg>
-                  {"Profile"}
-                </a>
-              </nav>
+                    <span
+                      style={{
+                        fontSize: "12px",
+                        fontWeight: "700",
+                        letterSpacing: "0.12em",
+                        textTransform: "uppercase",
+                        color: "#C0F402",
+                      }}
+                    >
+                      {"Tip from the bird"}
+                    </span>
+                    <span style={{ fontSize: "15px", fontWeight: "600", lineHeight: "1.4" }}>
+                      {v.navTip}
+                    </span>
+                    <a
+                      className="hb-press"
+                      style={{
+                        alignSelf: "flex-start",
+                        textDecoration: "none",
+                        background: "#C0F402",
+                        color: "#1F2600",
+                        fontSize: "14px",
+                        fontWeight: "700",
+                        borderRadius: "999px",
+                        padding: "9px 14px",
+                      }}
+                      href="#"
+                      onClick={(e: any) => {
+                        e.preventDefault();
+                        if (v.navTipHref) go(v.navTipHref);
+                      }}
+                    >
+                      {v.navTipCta}
+                    </a>
+                  </div>
+                </>
+              ) : null}
               <button
-                aria-label="Tip from the Unipal bird"
+                aria-label="Haiba. Tip from the Unipal bird"
                 aria-expanded={v.navTipOpenStr}
                 onClick={v.toggleNavTip}
-                className={v.navBtnClass}
+                className="hb-press"
                 style={{
-                  width: "64px",
-                  height: "64px",
-                  flex: "none",
+                  position: "absolute",
+                  right: "16px",
+                  bottom: "96px",
+                  width: "62px",
+                  height: "62px",
                   borderRadius: "50%",
                   background: "#C0F402",
-                  border: "0",
+                  border: "3px solid #FFFFFF",
+                  boxSizing: "border-box",
                   display: "flex",
                   alignItems: "flex-start",
                   justifyContent: "center",
-                  boxShadow: "0 10px 24px rgba(108,63,250,0.3)",
+                  boxShadow: "0 0 0 2px #6C3FFA, 0 10px 24px rgba(76,52,140,0.28)",
                   padding: "0",
                   cursor: "pointer",
-                  overflow: "hidden",
-                  position: "relative",
                 }}
               >
-                <Artwork
-                  src="/haiba/birds/03-wink.png"
-                  alt=""
-                  style={{ width: "62px", height: "auto", display: "block", marginTop: "5px" }}
-                />
+                <span
+                  style={{
+                    width: "56px",
+                    height: "56px",
+                    borderRadius: "50%",
+                    overflow: "hidden",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Artwork
+                    src="/haiba/birds/03-wink.png"
+                    alt=""
+                    style={{ width: "56px", height: "auto", display: "block", marginTop: "4px" }}
+                  />
+                </span>
                 <span
                   aria-hidden="true"
                   style={{
                     position: "absolute",
-                    top: "4px",
-                    right: "4px",
+                    left: "50%",
+                    bottom: "-9px",
+                    transform: "translateX(-50%)",
+                    background: "#6C3FFA",
+                    color: "#C0F402",
+                    fontSize: "10.5px",
+                    fontWeight: "800",
+                    letterSpacing: "0.02em",
+                    borderRadius: "999px",
+                    padding: "2px 7px",
+                    border: "2px solid #FFFFFF",
+                  }}
+                >
+                  {"Haiba"}
+                </span>
+                <span
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    top: "-2px",
+                    right: "-2px",
                     width: "14px",
                     height: "14px",
                     borderRadius: "50%",
@@ -1308,6 +1141,139 @@ export default function Hub() {
                   }}
                 ></span>
               </button>
+              <nav
+                aria-label="Unipal"
+                style={{
+                  background: "#FFFFFF",
+                  borderTop: "1px solid #EEEEF2",
+                  display: "grid",
+                  gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+                  padding: "10px 6px 26px 6px",
+                }}
+              >
+                <a
+                  style={{
+                    textDecoration: "none",
+                    color: "#4A4B52",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "4px",
+                    fontSize: "13px",
+                    fontWeight: "500",
+                  }}
+                  href="#"
+                  onClick={(e: any) => {
+                    e.preventDefault();
+                    go("/");
+                  }}
+                >
+                  <svg
+                    aria-hidden="true"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M3 10.6L12 3l9 7.6V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path>
+                  </svg>
+                  {"Home"}
+                </a>
+                <a
+                  style={{
+                    textDecoration: "none",
+                    color: "#4A4B52",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "4px",
+                    fontSize: "13px",
+                    fontWeight: "500",
+                  }}
+                  href="#"
+                  onClick={(e: any) => e.preventDefault()}
+                >
+                  <svg
+                    aria-hidden="true"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"></path>
+                    <circle cx="12" cy="9.5" r="2.5"></circle>
+                  </svg>
+                  {"Map"}
+                </a>
+                <a
+                  style={{
+                    textDecoration: "none",
+                    color: "#4A4B52",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "4px",
+                    fontSize: "13px",
+                    fontWeight: "500",
+                  }}
+                  href="#"
+                  onClick={(e: any) => e.preventDefault()}
+                >
+                  <svg
+                    aria-hidden="true"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                    <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                  </svg>
+                  {"Alerts"}
+                </a>
+                <a
+                  style={{
+                    textDecoration: "none",
+                    color: "#4A4B52",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "4px",
+                    fontSize: "13px",
+                    fontWeight: "500",
+                  }}
+                  href="#"
+                  onClick={(e: any) => e.preventDefault()}
+                >
+                  <svg
+                    aria-hidden="true"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="12" cy="8" r="4.2"></circle>
+                    <path d="M4 21c1.4-4.2 4.5-6.2 8-6.2s6.6 2 8 6.2"></path>
+                  </svg>
+                  {"Profile"}
+                </a>
+              </nav>
             </div>
           </div>
         </div>

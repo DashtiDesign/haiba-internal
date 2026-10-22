@@ -1,17 +1,15 @@
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board "Plans.dc.html". Styles are copied value for value.
-import Artwork from "../Artwork";
 import { Fragment } from "react";
-import { motion, useReducedMotion } from "motion/react";
 import { Link, useNavigate } from "../nav";
 import { useHaiba } from "../store";
+import Artwork from "../Artwork";
 import { useVals } from "../logic/plans";
 
 export default function Plans() {
   const v: any = useVals();
   const go = useNavigate();
   const hb = useHaiba();
-  const reduced = useReducedMotion();
   return (
     <div className="pg-plans">
       <div
@@ -95,84 +93,9 @@ export default function Plans() {
                 letterSpacing: "-0.01em",
               }}
             >
-              {"Choose your plan"}
+              {"Haiba membership"}
             </span>
             <span style={{ width: "44px" }}></span>
-          </div>
-          <div
-            className="hb-rise hb-d1"
-            style={{ display: "flex", justifyContent: "center", marginTop: "14px" }}
-          >
-            <div
-              role="tablist"
-              className="hb-plan-tabs"
-              aria-label="Plans"
-              style={{
-                position: "relative",
-                display: "grid",
-                gridTemplateColumns: "repeat(2, 134px)",
-                background: "#FFFFFF",
-                borderRadius: "999px",
-                padding: "4px",
-                boxShadow: "0 6px 16px rgba(76,52,140,0.10)",
-              }}
-            >
-              <motion.span
-                aria-hidden="true"
-                animate={{ left: v.indLeft }}
-                transition={{ duration: reduced ? 0 : 0.26, ease: [0.22, 1, 0.36, 1] }}
-                style={{
-                  position: "absolute",
-                  left: v.indLeft,
-                  top: "4px",
-                  bottom: "4px",
-                  width: "134px",
-                  borderRadius: "999px",
-                  background: "#6C3FFA",
-                  boxShadow: "0 6px 16px rgba(108,63,250,0.35)",
-                }}
-              ></motion.span>
-              <button
-                role="tab"
-                aria-selected={v.freeSel}
-                onClick={v.pickFree}
-                className="hb-ease"
-                style={{
-                  position: "relative",
-                  font: "inherit",
-                  fontSize: "16px",
-                  fontWeight: "600",
-                  borderRadius: "999px",
-                  padding: "10px 0",
-                  cursor: "pointer",
-                  border: "0",
-                  background: "transparent",
-                  color: v.freeTabInk,
-                }}
-              >
-                {"Unipal Free"}
-              </button>
-              <button
-                role="tab"
-                aria-selected={v.haibaSel}
-                onClick={v.pickHaiba}
-                className="hb-ease"
-                style={{
-                  position: "relative",
-                  font: "inherit",
-                  fontSize: "16px",
-                  fontWeight: "600",
-                  borderRadius: "999px",
-                  padding: "10px 0",
-                  cursor: "pointer",
-                  border: "0",
-                  background: "transparent",
-                  color: v.haibaTabInk,
-                }}
-              >
-                {"Haiba"}
-              </button>
-            </div>
           </div>
           {v.isHaiba ? (
             <>
@@ -210,7 +133,8 @@ export default function Plans() {
                       border: "2px dashed rgba(192,244,2,0.35)",
                     }}
                   ></span>
-                  <img
+                  <Artwork
+                    priority
                     src="/haiba/logo-lime.svg"
                     alt="Haiba"
                     style={{
@@ -259,7 +183,7 @@ export default function Plans() {
                     className="hb-peek"
                     style={{ position: "absolute", right: "0", bottom: "-78px", display: "block" }}
                   >
-                    <Artwork priority
+                    <Artwork
                       src="/haiba/birds/04-peek.png"
                       alt="The Unipal bird giving a thumbs up"
                       style={{
@@ -389,167 +313,6 @@ export default function Plans() {
               </div>
             </>
           ) : null}
-          {v.isFree ? (
-            <>
-              <div
-                className="hb-rise"
-                style={{
-                  marginTop: "18px",
-                  background: "#FFFFFF",
-                  borderRadius: "30px",
-                  overflow: "hidden",
-                  boxShadow: "0 14px 30px rgba(30,27,46,0.10)",
-                }}
-              >
-                <div
-                  style={{
-                    position: "relative",
-                    height: "150px",
-                    background: "#E4E2EB",
-                    padding: "20px",
-                    boxSizing: "border-box",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-end",
-                  }}
-                >
-                  <div
-                    style={{
-                      fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
-                      fontSize: "32px",
-                      fontWeight: "800",
-                      letterSpacing: "-0.03em",
-                    }}
-                  >
-                    {"Unipal Free"}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "15px",
-                      fontWeight: "600",
-                      color: "#3B3654",
-                      marginTop: "2px",
-                    }}
-                  >
-                    {"Your plan today"}
-                  </div>
-                  <span
-                    className="hb-peek"
-                    style={{
-                      position: "absolute",
-                      right: "12px",
-                      bottom: "-34px",
-                      display: "block",
-                    }}
-                  >
-                    <Artwork priority
-                      src="/haiba/birds/05-shrug.png"
-                      alt="The Unipal bird shrugging"
-                      style={{
-                        height: "160px",
-                        width: "auto",
-                        display: "block",
-                        filter: "drop-shadow(0 8px 10px rgba(30,27,46,0.18))",
-                      }}
-                    />
-                  </span>
-                </div>
-                <div
-                  className="hb-stagger"
-                  style={{
-                    padding: "6px 20px 18px 20px",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      gap: "14px",
-                      padding: "12px 0",
-                    }}
-                  >
-                    <span
-                      style={{
-                        width: "26px",
-                        height: "26px",
-                        flex: "none",
-                        borderRadius: "50%",
-                        background: "#1E1B2E",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <svg
-                        aria-hidden="true"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="#FFFFFF"
-                        strokeWidth="3.4"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M5 12.5l4.5 4.5L19 7.5"></path>
-                      </svg>
-                    </span>
-                    <span style={{ fontSize: "16.5px", fontWeight: "600", lineHeight: "1.3" }}>
-                      {"Student offers at 390+ shops"}
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      gap: "14px",
-                      padding: "12px 0",
-                    }}
-                  >
-                    <span
-                      style={{
-                        width: "26px",
-                        height: "26px",
-                        flex: "none",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: "#6C3FFA",
-                      }}
-                    >
-                      <svg
-                        aria-hidden="true"
-                        width="18"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <rect x="4" y="10" width="16" height="12" rx="3"></rect>
-                        <path
-                          d="M8 10V7a4 4 0 0 1 8 0v3"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2.4"
-                        ></path>
-                      </svg>
-                    </span>
-                    <span
-                      style={{
-                        fontSize: "16.5px",
-                        fontWeight: "600",
-                        lineHeight: "1.3",
-                        color: "#3B3654",
-                      }}
-                    >
-                      {"Points, rewards and Unipass gifts come with Haiba"}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </>
-          ) : null}
           <div
             className="hb-rise hb-d2"
             style={{
@@ -667,18 +430,24 @@ export default function Plans() {
                         width: "68px",
                         height: "68px",
                         borderRadius: "20px",
-                        background: g.bg,
-                        color: g.ink,
-                        fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
-                        fontSize: "22px",
-                        fontWeight: "800",
+                        background: "#FFFFFF",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        boxShadow: "0 8px 16px rgba(30,27,46,0.14)",
+                        boxShadow: "0 0 0 1px #ECE8F5, 0 8px 16px rgba(30,27,46,0.10)",
                       }}
                     >
-                      {g.mark}
+                      <Artwork
+                        src={g.logo}
+                        alt={g.brand}
+                        style={{
+                          width: "68px",
+                          height: "68px",
+                          borderRadius: "20px",
+                          objectFit: "cover",
+                          display: "block",
+                        }}
+                      />
                       <span
                         className="hb-ease"
                         style={{
@@ -738,7 +507,7 @@ export default function Plans() {
                 color: "#3B3654",
               }}
             >
-              {"Plus 7 more brands. Pick 1 every month."}
+              {"Plus 6 more. Pick 1 every month."}
             </div>
           </div>
           <div

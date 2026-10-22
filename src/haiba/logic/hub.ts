@@ -15,8 +15,6 @@ export function useVals() {
   var t = useMotionProgress();
   var target = props.available;
   var shown = Math.round(target * t);
-  var arcLen = 440;
-  var pct = (isNew ? 1 : Math.min(1, props.available / 1800)) * t;
   var green = "#2F7D32";
   var plum = "#1E1B2E";
   var heldCodes = props.codes ?? 0;
@@ -46,10 +44,10 @@ export function useVals() {
   actions[1].hasBadge = codes > 0;
   actions[1].badge = String(codes);
   var giftMarks = [
-    { mark: "J", bg: "#D62828", ink: "#FFFFFF" },
-    { mark: "V", bg: "#1E1B2E", ink: "#FFFFFF" },
-    { mark: "CB", bg: "#4B2E83", ink: "#FFFFFF" },
-    { mark: "+10", bg: "#FFFFFF", ink: "#1F2600" },
+    { hasLogo: true, logo: "/haiba/brands/wingman.webp", name: "Wingman", mark: "" },
+    { hasLogo: true, logo: "/haiba/brands/vox.webp", name: "VOX Cinemas", mark: "" },
+    { hasLogo: true, logo: "/haiba/brands/grip.webp", name: "Grip", mark: "" },
+    { hasLogo: false, logo: "", name: "", mark: "+9" },
   ];
   var purple = { pillBg: "#6C3FFA", pillInk: "#FFFFFF" };
   var lime = { pillBg: "#F4FFD1", pillInk: "#3D5000" };
@@ -165,7 +163,7 @@ export function useVals() {
         { title: "Member promos", sub: "Spotify, 3 months free", amt: 0, color: "#B9A5FF" },
       ]
     : [
-        { title: "Unipass gifts", sub: "1 gift, Jasmi’s", amt: 2.85, color: "#6C3FFA" },
+        { title: "Unipass gifts", sub: "1 gift, Wingman", amt: 2.85, color: "#6C3FFA" },
         { title: "Rewards", sub: "Accepted at the shop", amt: 2.45 + savedExtra, color: "#9CC400" },
         { title: "Member promos", sub: "Spotify, month 1", amt: 2.4, color: "#B9A5FF" },
       ];
@@ -276,15 +274,16 @@ export function useVals() {
   return {
     greeting: "Hi Sara",
     points: shown.toLocaleString("en-US"),
-    arcDash: Math.round(arcLen * pct) + " " + arcLen,
-    arcGoal: isNew ? "500" : "1,800",
-    subLine: isNew
-      ? heldCodes > 0
+    subLine:
+      heldCodes > 0 && isNew
         ? "Your reward code is ready to show"
-        : "Enough for your first reward today"
-      : target < 1800
-        ? (1800 - target).toLocaleString("en-US") + " more points for a free coffee at Caribou"
-        : "Enough for a free coffee at Caribou",
+        : target >= 1900
+          ? "Enough for a free drink at The Coffee Bean"
+          : target >= 700
+            ? "Enough for a free cookie at The Coffee Bean"
+            : target >= 300
+              ? "Enough for a free upsize at The Coffee Bean"
+              : 300 - target + " more points for a free upsize",
     actions: actions,
     giftLeft: "10 days left",
     giftMarks: giftMarks,
@@ -308,7 +307,6 @@ export function useVals() {
       : "Hi! One more visit at Jasmi’s and you earn 5x.",
     navTipOpen: state.navTipOpen,
     navTipOpenStr: String(state.navTipOpen),
-    navBtnClass: state.navTipOpen ? "hb-press" : "hb-press hb-pulse",
     dotDisp: state.navTipOpen ? "none" : "block",
     toggleNavTip: function () {
       setState({ navTipOpen: !state.navTipOpen });

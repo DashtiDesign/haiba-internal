@@ -7,7 +7,7 @@ import { useHaiba } from "../store";
  * It is only here so testers start where students start, and find Haiba from the nav or the banner.
  */
 
-const BLUE = "#0B1FB3";
+const BLUE = "#001A9C";
 
 const cats = [
   { label: "Cafes", bg: "#F1E7DC" },
@@ -137,7 +137,10 @@ export default function Home() {
         </svg>
       </div>
 
-      <div className="hb-home-carousel" style={{ display: "flex", gap: 12, padding: "22px 16px 0 16px", overflow: "hidden" }}>
+      <div
+        className="hb-home-carousel"
+        style={{ display: "flex", gap: 12, padding: "22px 16px 0 16px", overflow: "hidden" }}
+      >
         {cats.map((c) => (
           <div
             key={c.label}
@@ -227,7 +230,8 @@ export default function Home() {
               <path d="M9 6l6 6-6 6" />
             </svg>
           </span>
-          <Artwork priority
+          <Artwork
+            priority
             src="/haiba/birds/04-peek.png"
             alt=""
             style={{ position: "absolute", right: 0, bottom: -60, height: 230, width: "auto" }}
@@ -238,7 +242,10 @@ export default function Home() {
       <div style={{ padding: "26px 16px 0 16px", fontSize: 22, fontWeight: 700 }}>
         Popular this week
       </div>
-      <div className="hb-home-carousel" style={{ display: "flex", gap: 14, padding: "14px 16px 0 16px", overflow: "hidden" }}>
+      <div
+        className="hb-home-carousel"
+        style={{ display: "flex", gap: 14, padding: "14px 16px 0 16px", overflow: "hidden" }}
+      >
         {popular.map((p) => {
           const inner = (
             <>
@@ -297,6 +304,65 @@ export default function Home() {
 
       <div className="hb-fixed-bottom">
         <div className="hb-fixed-inner">
+          {member ? (
+            <Link
+              to="/haiba"
+              aria-label="Haiba"
+              className="hb-press"
+              style={{
+                position: "absolute",
+                right: 16,
+                bottom: 96,
+                width: 62,
+                height: 62,
+                borderRadius: "50%",
+                background: "#C0F402",
+                border: "3px solid #FFFFFF",
+                boxSizing: "border-box",
+                display: "flex",
+                alignItems: "flex-start",
+                justifyContent: "center",
+                boxShadow: "0 10px 24px rgba(76,52,140,0.28)",
+                textDecoration: "none",
+              }}
+            >
+              <span
+                style={{
+                  width: 56,
+                  height: 56,
+                  borderRadius: "50%",
+                  overflow: "hidden",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <Artwork
+                  src="/haiba/birds/03-wink.png"
+                  alt=""
+                  style={{ width: 56, height: "auto", display: "block", marginTop: 4 }}
+                />
+              </span>
+              <span
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  left: "50%",
+                  bottom: -9,
+                  transform: "translateX(-50%)",
+                  background: "#6C3FFA",
+                  color: "#C0F402",
+                  fontSize: 10.5,
+                  fontWeight: 800,
+                  letterSpacing: "0.02em",
+                  borderRadius: 999,
+                  padding: "2px 7px",
+                  border: "2px solid #FFFFFF",
+                }}
+              >
+                Haiba
+              </span>
+            </Link>
+          ) : null}
           <nav
             aria-label="Unipal"
             style={{
@@ -307,7 +373,7 @@ export default function Home() {
               background: "#FFFFFF",
               borderTop: "1px solid #EEEEF2",
               display: "grid",
-              gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
+              gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
               padding: "10px 6px 26px 6px",
             }}
           >
@@ -323,12 +389,6 @@ export default function Home() {
                 to: "",
                 d: "M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z",
               },
-              {
-                label: "Haiba",
-                to: "/haiba",
-                d: "M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z",
-                haiba: true,
-              },
               { label: "Alerts", to: "", d: "M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" },
               {
                 label: "Profile",
@@ -343,12 +403,12 @@ export default function Home() {
                 alignItems: "center",
                 gap: 4,
                 fontSize: 13,
-                fontWeight: 600,
-                color: t.on ? BLUE : t.haiba ? "#6C3FFA" : "#3A3A44",
+                fontWeight: 500,
+                color: t.on ? BLUE : "#4A4B52",
               };
               const body = (
                 <>
-                  <NavIcon d={t.d} fill={t.haiba} />
+                  <NavIcon d={t.d} />
                   {t.label}
                 </>
               );

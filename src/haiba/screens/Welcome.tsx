@@ -1,9 +1,9 @@
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board "Story.dc.html". Styles are copied value for value.
-import Artwork from "../Artwork";
 import { Fragment } from "react";
 import { Link, useNavigate } from "../nav";
 import { useHaiba } from "../store";
+import Artwork from "../Artwork";
 import { useVals } from "../logic/story";
 
 export default function Welcome() {
@@ -26,8 +26,33 @@ export default function Welcome() {
           overflow: "hidden",
         }}
       >
+        <div style={{ display: "flex", gap: "6px", padding: "14px 16px 0 16px" }}>
+          {(v.dashes || []).map((d: any, idx0: number) => (
+            <Fragment key={idx0}>
+              <button
+                aria-label={d.label}
+                onClick={d.go}
+                className="hb-ease"
+                style={{
+                  flex: "1",
+                  height: "4px",
+                  borderRadius: "999px",
+                  border: "0",
+                  padding: "0",
+                  cursor: "pointer",
+                  background: d.bg,
+                }}
+              ></button>
+            </Fragment>
+          ))}
+        </div>
         <div
-          style={{ display: "flex", justifyContent: "space-between", padding: "18px 16px 0 16px" }}
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: "12px 16px 0 16px",
+          }}
         >
           <button
             aria-label="Back"
@@ -63,6 +88,16 @@ export default function Welcome() {
               <path d="M11 6l-6 6 6 6"></path>
             </svg>
           </button>
+          <span
+            style={{
+              fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+              fontSize: "17px",
+              fontWeight: "800",
+              letterSpacing: "-0.01em",
+            }}
+          >
+            {"How Haiba works"}
+          </span>
           <Link
             aria-label="Close"
             className="hb-press"
@@ -96,7 +131,7 @@ export default function Welcome() {
         </div>
         <div
           style={{
-            margin: "26px 16px 0 16px",
+            margin: "20px 16px 0 16px",
             height: "340px",
             borderRadius: "32px",
             background: "#FFFFFF",
@@ -203,7 +238,8 @@ export default function Welcome() {
                   className="hb-rise hb-d2"
                   style={{ position: "absolute", right: "10px", bottom: "-22px", display: "block" }}
                 >
-                  <Artwork priority
+                  <Artwork
+                    priority
                     src="/haiba/birds/07-phone.png"
                     alt=""
                     style={{ height: "238px", width: "auto", display: "block" }}
@@ -288,7 +324,7 @@ export default function Welcome() {
                   className="hb-rise hb-d2"
                   style={{ position: "absolute", right: "8px", bottom: "-34px", display: "block" }}
                 >
-                  <Artwork priority
+                  <Artwork
                     src="/haiba/birds/08-stamp.png"
                     alt=""
                     style={{ height: "220px", width: "auto", display: "block" }}
@@ -380,7 +416,7 @@ export default function Welcome() {
                     transformOrigin: "bottom left",
                   }}
                 >
-                  <Artwork priority
+                  <Artwork
                     src="/haiba/birds/09-show.png"
                     alt=""
                     style={{
@@ -404,8 +440,8 @@ export default function Welcome() {
                     left: "22px",
                     top: "34px",
                     display: "grid",
-                    gridTemplateColumns: "repeat(2, 92px)",
-                    gap: "12px",
+                    gridTemplateColumns: "repeat(2, 96px)",
+                    gap: "10px",
                   }}
                 >
                   {(v.gifts || []).map((g: any, idx0: number) => (
@@ -417,23 +453,35 @@ export default function Welcome() {
                         style={{
                           font: "inherit",
                           border: "0",
-                          padding: "0",
+                          padding: "8px 6px 9px 6px",
                           cursor: "pointer",
-                          height: "92px",
+                          height: "100px",
+                          boxSizing: "border-box",
                           borderRadius: "22px",
-                          background: g.bg,
-                          color: g.ink,
+                          background: "#FFFFFF",
+                          color: "#1E1B2E",
                           display: "flex",
                           flexDirection: "column",
                           alignItems: "center",
-                          justifyContent: "center",
-                          gap: "4px",
+                          justifyContent: "space-between",
                           boxShadow: g.shadow,
                           transform: `scale(${g.scale})`,
                         }}
                       >
-                        <span style={{ fontSize: "22px", fontWeight: "800" }}>{g.mark}</span>
-                        <span style={{ fontSize: "11.5px", fontWeight: "700" }}>{g.item}</span>
+                        <Artwork
+                          src={g.logo}
+                          alt={g.brand}
+                          style={{
+                            width: "56px",
+                            height: "56px",
+                            borderRadius: "16px",
+                            objectFit: "cover",
+                            display: "block",
+                          }}
+                        />
+                        <span style={{ fontSize: "11.5px", fontWeight: "700", lineHeight: "1.2" }}>
+                          {g.item}
+                        </span>
                       </button>
                     </Fragment>
                   ))}
@@ -458,7 +506,7 @@ export default function Welcome() {
                   className="hb-rise hb-d2"
                   style={{ position: "absolute", right: "12px", bottom: "-20px", display: "block" }}
                 >
-                  <Artwork priority
+                  <Artwork
                     src="/haiba/birds/10-gift.png"
                     alt=""
                     style={{ height: "262px", width: "auto", display: "block" }}
@@ -468,21 +516,17 @@ export default function Welcome() {
             </>
           ) : null}
         </div>
-        <div style={{ padding: "26px 20px 0 20px" }}>
+        <div style={{ padding: "24px 20px 0 20px" }}>
           <span
             style={{
-              display: "inline-block",
-              fontSize: "12px",
-              fontWeight: "700",
-              letterSpacing: "0.14em",
+              display: "block",
+              fontSize: "13px",
+              fontWeight: "800",
+              letterSpacing: "0.1em",
               textTransform: "uppercase",
-              background: "#1E1B2E",
-              color: "#C0F402",
-              borderRadius: "999px",
-              padding: "8px 14px",
+              color: "#6C3FFA",
             }}
           >
-            {"How it works \u00b7 "}
             {v.stepLabel}
           </span>
           {v.s0 ? (
@@ -495,7 +539,7 @@ export default function Welcome() {
                   fontWeight: "800",
                   letterSpacing: "-0.02em",
                   lineHeight: "1.2",
-                  marginTop: "18px",
+                  marginTop: "8px",
                   minHeight: "102px",
                 }}
               >
@@ -513,7 +557,7 @@ export default function Welcome() {
                   fontWeight: "800",
                   letterSpacing: "-0.02em",
                   lineHeight: "1.2",
-                  marginTop: "18px",
+                  marginTop: "8px",
                   minHeight: "102px",
                 }}
               >
@@ -531,7 +575,7 @@ export default function Welcome() {
                   fontWeight: "800",
                   letterSpacing: "-0.02em",
                   lineHeight: "1.2",
-                  marginTop: "18px",
+                  marginTop: "8px",
                   minHeight: "102px",
                 }}
               >
@@ -549,7 +593,7 @@ export default function Welcome() {
                   fontWeight: "800",
                   letterSpacing: "-0.02em",
                   lineHeight: "1.2",
-                  marginTop: "18px",
+                  marginTop: "8px",
                   minHeight: "102px",
                 }}
               >
@@ -557,26 +601,6 @@ export default function Welcome() {
               </div>
             </>
           ) : null}
-          <div style={{ display: "flex", gap: "8px", marginTop: "18px" }}>
-            {(v.dashes || []).map((d: any, idx0: number) => (
-              <Fragment key={idx0}>
-                <button
-                  aria-label={d.label}
-                  onClick={d.go}
-                  className="hb-ease"
-                  style={{
-                    width: d.w,
-                    height: "6px",
-                    borderRadius: "999px",
-                    border: "0",
-                    padding: "0",
-                    cursor: "pointer",
-                    background: d.bg,
-                  }}
-                ></button>
-              </Fragment>
-            ))}
-          </div>
         </div>
         <div className="hb-fixed-bottom">
           <div className="hb-fixed-inner">
