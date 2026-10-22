@@ -1,4 +1,5 @@
 import Artwork from "../Artwork";
+import haibaLogo from "@/assets/haiba/logo-purple.svg.asset.json";
 import { Link } from "../nav";
 import { useHaiba } from "../store";
 
@@ -179,7 +180,7 @@ export default function Home() {
           }}
         >
           <img
-            src="/haiba/logo-purple.svg"
+            src={haibaLogo.url}
             alt="Haiba"
             style={{ height: 30, width: "auto", display: "block" }}
           />
