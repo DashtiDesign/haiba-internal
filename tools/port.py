@@ -58,6 +58,11 @@ SCREEN = {
     ],
     # Lovable: full opacity for the empty basket hint
     "Basket": [(re.compile(r'opacity: "0\.8" \}\}>(\s*)\{v\.ctaSub\}'), r'opacity: v.empty ? "1" : "0.8" }}>\1{v.ctaSub}')],
+    # Lovable: the example under each rule opens with the shared MotionReveal panel
+    "Points": [
+        ('import { useHaiba } from "../store";', 'import { useHaiba } from "../store";\nimport MotionReveal from "../MotionReveal";'),
+        (re.compile(r'\{r\.open \? \(\n(\s*)<>\n(.*?)\n(\s*)</>\n(\s*)\) : null\}', re.S), r'<MotionReveal open={r.open}>\n\2\n\4</MotionReveal>'),
+    ],
     "Plans": [
         # Lovable: hook class for the small phone layout of the plan artwork
         ('<div style={{ position: "relative", height: "210px",', '<div className="hb-plan-artwork" style={{ position: "relative", height: "210px",'),

@@ -995,16 +995,18 @@ export default function Hub() {
                         color: u.pillInk,
                       }}
                     >
-                      <span
+                      <Artwork
+                        src="/haiba/coins/coin-front.webp"
+                        alt=""
                         style={{
-                          width: "12px",
-                          height: "12px",
-                          borderRadius: "50%",
-                          background: "#6C3FFA",
-                          boxShadow: "inset 0 0 0 2.5px #C0F402",
+                          width: "14px",
+                          height: "14px",
+                          objectFit: "contain",
+                          display: "block",
+                          flex: "none",
                           opacity: u.dotOp,
                         }}
-                      ></span>
+                      />
                       {u.pts}
                     </span>
                   </span>

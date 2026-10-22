@@ -215,15 +215,18 @@ export default function Welcome() {
                       boxShadow: "0 12px 24px rgba(30,27,46,0.25)",
                     }}
                   >
-                    <span
+                    <Artwork
+                      priority
+                      src="/haiba/coins/coin-34.webp"
+                      alt=""
                       style={{
-                        width: "30px",
-                        height: "30px",
-                        borderRadius: "50%",
-                        background: "#6C3FFA",
-                        boxShadow: "inset 0 0 0 4px #C0F402",
+                        width: "32px",
+                        height: "32px",
+                        objectFit: "contain",
+                        display: "block",
+                        flex: "none",
                       }}
-                    ></span>
+                    />
                     <span style={{ display: "flex", flexDirection: "column" }}>
                       <span style={{ fontSize: "16px", fontWeight: "800", color: "#C0F402" }}>
                         {"+80 points"}
@@ -239,7 +242,6 @@ export default function Welcome() {
                   style={{ position: "absolute", right: "10px", bottom: "-22px", display: "block" }}
                 >
                   <Artwork
-                    priority
                     src="/haiba/birds/07-phone.png"
                     alt=""
                     style={{ height: "238px", width: "auto", display: "block" }}

@@ -1,10 +1,10 @@
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board "Points.dc.html". Styles are copied value for value.
-import Artwork from "../Artwork";
 import { Fragment } from "react";
-import MotionReveal from "../MotionReveal";
 import { Link, useNavigate } from "../nav";
 import { useHaiba } from "../store";
+import MotionReveal from "../MotionReveal";
+import Artwork from "../Artwork";
 import { useVals } from "../logic/points";
 
 export default function Points() {
@@ -117,11 +117,12 @@ export default function Points() {
                 justifyContent: "center",
               }}
             >
-              <Artwork priority
-                src="/haiba/birds/06-coin.png"
-                alt="The Unipal bird tossing a points coin"
+              <Artwork
+                priority
+                src="/haiba/birds/17-coin-toss.webp"
+                alt="The Unipal bird tossing a Haiba coin"
                 style={{
-                  height: "272px",
+                  height: "300px",
                   width: "auto",
                   display: "block",
                   filter: "drop-shadow(0 14px 14px rgba(30,27,46,0.18))",
@@ -300,34 +301,34 @@ export default function Points() {
                     </svg>
                   </button>
                   <MotionReveal open={r.open}>
-                      <div
-                        className="hb-rise"
+                    <div
+                      className="hb-rise"
+                      style={{
+                        margin: "0 4px 16px 64px",
+                        background: "#1E1B2E",
+                        color: "#FFFFFF",
+                        borderRadius: "16px",
+                        padding: "12px 14px",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "8px",
+                      }}
+                    >
+                      <span
                         style={{
-                          margin: "0 4px 16px 64px",
-                          background: "#1E1B2E",
-                          color: "#FFFFFF",
-                          borderRadius: "16px",
-                          padding: "12px 14px",
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "8px",
+                          fontSize: "12px",
+                          fontWeight: "700",
+                          letterSpacing: "0.12em",
+                          textTransform: "uppercase",
+                          color: "#C0F402",
                         }}
                       >
-                        <span
-                          style={{
-                            fontSize: "12px",
-                            fontWeight: "700",
-                            letterSpacing: "0.12em",
-                            textTransform: "uppercase",
-                            color: "#C0F402",
-                          }}
-                        >
-                          {"Example"}
-                        </span>
-                        <span style={{ fontSize: "14.5px", fontWeight: "500", lineHeight: "1.45" }}>
-                          {r.example}
-                        </span>
-                      </div>
+                        {"Example"}
+                      </span>
+                      <span style={{ fontSize: "14.5px", fontWeight: "500", lineHeight: "1.45" }}>
+                        {r.example}
+                      </span>
+                    </div>
                   </MotionReveal>
                 </div>
               </Fragment>

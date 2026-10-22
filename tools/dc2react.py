@@ -43,6 +43,11 @@ BLOBS = {
     "82364cb26b1195be0a503039925a2eb0": "/haiba/brands/grip.webp",
     "9163726a14d1e4869c71e417a3a87155": "/haiba/brands/albayan.webp",
     "c1e6f5f43bf6c8ea66f354b776557213": "/haiba/brands/wingman.webp",
+    "badc2628e905d2a79b03cb243d1a8c66": "/haiba/birds/17-coin-toss.webp",
+    "9fe36060ebeb5decae4a3f854cbec118": "/haiba/coins/coin-front.webp",
+    "9291b1502bc66437ec6d75fd7f955c77": "/haiba/coins/coin-34.webp",
+    "84fd2f8fb8654cb616f9930c21d9459c": "/haiba/coins/coin-flip.webp",
+    "0d9e8a337892ba1efe85bd1f2977f6cb": "/haiba/coins/coin-stack.webp",
 }
 ATTR_CASE = {
     "viewbox": "viewBox", "preserveaspectratio": "preserveAspectRatio", "onclick": "onClick",

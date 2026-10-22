@@ -97,15 +97,18 @@ export default function Wallet() {
                 boxShadow: "0 8px 20px rgba(30,27,46,0.2)",
               }}
             >
-              <span
+              <Artwork
+                priority
+                src="/haiba/coins/coin-34.webp"
+                alt=""
                 style={{
-                  width: "26px",
-                  height: "26px",
-                  borderRadius: "50%",
-                  background: "#6C3FFA",
-                  boxShadow: "inset 0 0 0 5px #C0F402",
+                  width: "28px",
+                  height: "28px",
+                  objectFit: "contain",
+                  display: "block",
+                  flex: "none",
                 }}
-              ></span>
+              />
               {v.points}
             </span>
           </div>
@@ -131,15 +134,17 @@ export default function Wallet() {
                 boxShadow: "0 12px 28px rgba(76,52,140,0.10)",
               }}
             >
-              <span
+              <Artwork
+                src="/haiba/coins/coin-stack.webp"
+                alt=""
                 style={{
-                  width: "46px",
-                  height: "46px",
-                  borderRadius: "50%",
-                  background: "#6C3FFA",
-                  boxShadow: "inset 0 0 0 7px #C0F402, 0 6px 12px rgba(108,63,250,0.25)",
+                  width: "54px",
+                  height: "54px",
+                  objectFit: "contain",
+                  display: "block",
+                  flex: "none",
                 }}
-              ></span>
+              />
               <span
                 style={{
                   fontFamily: "Figtree, system-ui, sans-serif",
@@ -236,16 +241,18 @@ export default function Wallet() {
               color: "#1E1B2E",
             }}
           >
-            <span
+            <Artwork
+              src="/haiba/coins/coin-34.webp"
+              alt=""
               style={{
-                width: "28px",
-                height: "28px",
+                width: "30px",
+                height: "30px",
+                objectFit: "contain",
+                display: "block",
                 flex: "none",
-                borderRadius: "50%",
-                background: "#6C3FFA",
-                boxShadow: "inset 0 0 0 4px #C0F402",
+                flex: "none",
               }}
-            ></span>
+            />
             <span style={{ fontSize: "15.5px", fontWeight: "500", lineHeight: "1.4", flex: "1" }}>
               {v.worthLine}
             </span>
@@ -380,7 +387,6 @@ export default function Wallet() {
               }}
             >
               <Artwork
-                priority
                 src="/haiba/birds/11-run.png"
                 alt=""
                 style={{
@@ -620,15 +626,17 @@ export default function Wallet() {
                             fontWeight: "600",
                           }}
                         >
-                          <span
+                          <Artwork
+                            src="/haiba/coins/coin-front.webp"
+                            alt=""
                             style={{
-                              width: "14px",
-                              height: "14px",
-                              borderRadius: "50%",
-                              background: "#6C3FFA",
-                              boxShadow: "inset 0 0 0 3px #C0F402",
+                              width: "16px",
+                              height: "16px",
+                              objectFit: "contain",
+                              display: "block",
+                              flex: "none",
                             }}
-                          ></span>
+                          />
                           {p.pts}
                         </span>
                       </span>

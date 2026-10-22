@@ -508,15 +508,17 @@ export default function Shop() {
                   padding: "5px 10px 5px 6px",
                 }}
               >
-                <span
+                <Artwork
+                  src="/haiba/coins/coin-front.webp"
+                  alt=""
                   style={{
-                    width: "16px",
-                    height: "16px",
-                    borderRadius: "50%",
-                    background: "#6C3FFA",
-                    boxShadow: "inset 0 0 0 3px #C0F402",
+                    width: "18px",
+                    height: "18px",
+                    objectFit: "contain",
+                    display: "block",
+                    flex: "none",
                   }}
-                ></span>
+                />
                 {v.offerPts}
                 {" points for Haiba members"}
               </span>
@@ -640,15 +642,17 @@ export default function Shop() {
                 padding: "7px 12px 7px 7px",
               }}
             >
-              <span
+              <Artwork
+                src="/haiba/coins/coin-front.webp"
+                alt=""
                 style={{
-                  width: "20px",
-                  height: "20px",
-                  borderRadius: "50%",
-                  background: "#6C3FFA",
-                  boxShadow: "inset 0 0 0 4px #C0F402",
+                  width: "22px",
+                  height: "22px",
+                  objectFit: "contain",
+                  display: "block",
+                  flex: "none",
                 }}
-              ></span>
+              />
               {v.balance}
             </span>
           </div>
@@ -738,15 +742,17 @@ export default function Shop() {
                           padding: "3px 9px 3px 5px",
                         }}
                       >
-                        <span
+                        <Artwork
+                          src="/haiba/coins/coin-front.webp"
+                          alt=""
                           style={{
-                            width: "14px",
-                            height: "14px",
-                            borderRadius: "50%",
-                            background: "#6C3FFA",
-                            boxShadow: "inset 0 0 0 3px #C0F402",
+                            width: "16px",
+                            height: "16px",
+                            objectFit: "contain",
+                            display: "block",
+                            flex: "none",
                           }}
-                        ></span>
+                        />
                         {it.pts}
                       </span>
                     </span>
