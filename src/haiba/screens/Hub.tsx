@@ -620,18 +620,17 @@ export default function Hub() {
             </div>
             <div
               aria-hidden="true"
-              style={{ display: "flex", gap: "3px", height: "10px", marginTop: "14px" }}
+              style={{
+                display: "flex",
+                height: "10px",
+                marginTop: "14px",
+                borderRadius: "999px",
+                overflow: "hidden",
+              }}
             >
               {(v.savedBar || []).map((b: any, idx0: number) => (
                 <Fragment key={idx0}>
-                  <span
-                    style={{
-                      flex: b.grow,
-                      height: "10px",
-                      borderRadius: "999px",
-                      background: b.color,
-                    }}
-                  ></span>
+                  <span style={{ flex: b.grow, height: "10px", background: b.color }}></span>
                 </Fragment>
               ))}
             </div>
