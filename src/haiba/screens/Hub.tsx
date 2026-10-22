@@ -37,23 +37,32 @@ export default function Hub() {
               "radial-gradient(circle at 50% 58%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 38%), radial-gradient(circle at 4% 70%, rgba(108,63,250,0.22) 0%, rgba(108,63,250,0) 40%), linear-gradient(180deg, #D3C2FF 0%, #E2D7FF 70%, #EAE3FF 100%)",
           }}
         ></div>
-        <Artwork
-          priority
-          src="/haiba/logo-purple.svg"
-          alt=""
+        <div
           aria-hidden="true"
           style={{
             position: "absolute",
-            left: "50%",
-            top: "92px",
-            width: "400px",
-            height: "auto",
-            marginLeft: "-200px",
-            opacity: "0.09",
-            transform: "rotate(-8deg)",
-            display: "block",
+            left: "0",
+            right: "0",
+            top: "0",
+            height: "300px",
+            overflow: "hidden",
           }}
-        />
+        >
+          <div
+            style={{
+              position: "absolute",
+              left: "-120px",
+              top: "-140px",
+              width: "640px",
+              height: "560px",
+              transform: "rotate(-14deg)",
+              backgroundImage: "url(/haiba/logo-purple.svg)",
+              backgroundSize: "64px auto",
+              backgroundRepeat: "space",
+              opacity: "0.08",
+            }}
+          ></div>
+        </div>
         <svg
           aria-hidden="true"
           width="390"
@@ -103,6 +112,7 @@ export default function Hub() {
             }}
           >
             <Artwork
+              priority
               src={v.birdSrc}
               alt=""
               style={{
