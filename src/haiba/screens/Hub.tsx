@@ -32,9 +32,9 @@ export default function Hub() {
             left: "0",
             right: "0",
             top: "0",
-            height: "296px",
+            height: "290px",
             background:
-              "radial-gradient(circle at 50% 62%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 40%), linear-gradient(180deg, #D6C6FF 0%, #E4DAFF 70%, #EAE3FF 100%)",
+              "radial-gradient(circle at 50% 58%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 40%), linear-gradient(180deg, #D6C6FF 0%, #E4DAFF 70%, #EAE3FF 100%)",
           }}
         ></div>
         <svg
@@ -43,7 +43,7 @@ export default function Hub() {
           height="140"
           viewBox="0 0 390 140"
           preserveAspectRatio="none"
-          style={{ position: "absolute", left: "0", top: "206px", display: "block" }}
+          style={{ position: "absolute", left: "0", top: "228px", display: "block" }}
         >
           <path d="M0 70 Q195 -10 390 70 V140 H0Z" fill="#F3F0FA"></path>
         </svg>
@@ -51,9 +51,9 @@ export default function Hub() {
           aria-hidden="true"
           style={{
             position: "absolute",
-            left: "133px",
-            top: "260px",
-            width: "124px",
+            left: "125px",
+            top: "262px",
+            width: "140px",
             height: "18px",
             borderRadius: "50%",
             background: "#1E1B2E",
@@ -66,7 +66,7 @@ export default function Hub() {
             position: "absolute",
             left: "0",
             right: "0",
-            top: "42px",
+            top: "14px",
             zIndex: "2",
             display: "flex",
             justifyContent: "center",
@@ -90,7 +90,7 @@ export default function Hub() {
               src={v.birdSrc}
               alt=""
               style={{
-                height: "226px",
+                height: "260px",
                 width: "auto",
                 display: "block",
                 filter: "drop-shadow(0 10px 10px rgba(30,27,46,0.12))",
@@ -105,7 +105,7 @@ export default function Hub() {
               style={{
                 position: "absolute",
                 left: "16px",
-                top: "72px",
+                top: "60px",
                 width: "118px",
                 zIndex: "3",
                 background: "#FFFFFF",
@@ -133,7 +133,7 @@ export default function Hub() {
             boxSizing: "border-box",
           }}
         >
-          <div aria-hidden="true" style={{ height: "300px" }}></div>
+          <div aria-hidden="true" style={{ height: "282px" }}></div>
           <div
             className="hb-rise hb-d1"
             style={{
