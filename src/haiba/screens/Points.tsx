@@ -223,7 +223,9 @@ export default function Points() {
           >
             {(v.rules || []).map((r: any, idx0: number) => (
               <Fragment key={idx0}>
-                <div style={{ borderBottom: "1px solid #F3F1F8" }}>
+                <div
+                  style={{ borderBottom: idx0 === v.rules.length - 1 ? "0" : "1px solid #F3F1F8" }}
+                >
                   <button
                     onClick={r.toggle}
                     aria-expanded={r.openStr}
