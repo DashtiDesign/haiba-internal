@@ -1,4 +1,5 @@
 # Mobile layouts
+- [ ] Use the supplied Haiba logo and favicon; add and verify home-screen app metadata and icons without offline caching.
 - [x] Optimize artwork delivery and prioritize first-screen images; verify image loading across pages.
 - [x] Fix incomplete Plans first paint and shared loading animation delays; verify initial loading and navigation.
 - [x] Correct foreground/background contrast regressions and verify both plan states and other pages.
