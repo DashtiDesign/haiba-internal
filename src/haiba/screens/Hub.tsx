@@ -33,7 +33,8 @@ export default function Hub() {
             right: "0",
             top: "0",
             height: "320px",
-            background: "linear-gradient(180deg, #D6C6FF 0%, #E4DAFF 70%, #EAE3FF 100%)",
+            background:
+              "radial-gradient(circle at 50% 62%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 40%), linear-gradient(180deg, #D6C6FF 0%, #E4DAFF 70%, #EAE3FF 100%)",
           }}
         ></div>
         <span
@@ -158,7 +159,7 @@ export default function Hub() {
                   borderRadius: "50%",
                   background: "#1E1B2E",
                   color: "#C0F402",
-                  fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                  fontFamily: "Figtree, system-ui, sans-serif",
                   fontWeight: "800",
                   fontSize: "15px",
                   display: "flex",
@@ -179,11 +180,11 @@ export default function Hub() {
                     textTransform: "uppercase",
                   }}
                 >
-                  {"Haiba member"}
+                  {"Welcome back"}
                 </span>
                 <span
                   style={{
-                    fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                    fontFamily: "Figtree, system-ui, sans-serif",
                     fontSize: "22px",
                     fontWeight: "800",
                     letterSpacing: "-0.02em",
@@ -286,7 +287,7 @@ export default function Hub() {
           >
             <span
               style={{
-                fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                fontFamily: "Figtree, system-ui, sans-serif",
                 fontSize: "36px",
                 fontWeight: "800",
                 letterSpacing: "-0.03em",
@@ -295,6 +296,28 @@ export default function Hub() {
             >
               {v.points}
               {" points"}
+            </span>
+            <span
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+                marginTop: "2px",
+                fontSize: "13px",
+                fontWeight: "600",
+                color: "#4F25D6",
+                background: "#FFFFFF",
+                border: "1px solid #E6DFFB",
+                borderRadius: "999px",
+                padding: "5px 11px 5px 9px",
+              }}
+            >
+              <Artwork
+                src="/haiba/logo-purple.svg"
+                alt="Haiba"
+                style={{ height: "13px", width: "auto", display: "block" }}
+              />
+              {v.memberLine}
             </span>
           </div>
           <div
@@ -459,7 +482,7 @@ export default function Hub() {
             <span
               style={{
                 position: "relative",
-                fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                fontFamily: "Figtree, system-ui, sans-serif",
                 fontSize: "25px",
                 fontWeight: "800",
                 letterSpacing: "-0.02em",
@@ -504,7 +527,7 @@ export default function Hub() {
                         background: "#FFFFFF",
                         color: "#1F2600",
                         border: "2px solid #C0F402",
-                        fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                        fontFamily: "Figtree, system-ui, sans-serif",
                         fontSize: "12px",
                         fontWeight: "800",
                         display: "flex",
@@ -572,7 +595,7 @@ export default function Hub() {
           >
             <span
               style={{
-                fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                fontFamily: "Figtree, system-ui, sans-serif",
                 fontSize: "19px",
                 fontWeight: "800",
                 letterSpacing: "-0.02em",
@@ -622,7 +645,7 @@ export default function Hub() {
                       borderRadius: "14px",
                       background: r.bg,
                       color: r.ink,
-                      fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                      fontFamily: "Figtree, system-ui, sans-serif",
                       fontSize: "15px",
                       fontWeight: "800",
                       display: "flex",
@@ -676,7 +699,7 @@ export default function Hub() {
           >
             <span
               style={{
-                fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                fontFamily: "Figtree, system-ui, sans-serif",
                 fontSize: "19px",
                 fontWeight: "800",
                 letterSpacing: "-0.02em",
@@ -701,7 +724,7 @@ export default function Hub() {
           >
             <div
               style={{
-                fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                fontFamily: "Figtree, system-ui, sans-serif",
                 fontSize: "34px",
                 fontWeight: "800",
                 letterSpacing: "-0.03em",
@@ -764,7 +787,7 @@ export default function Hub() {
                     </span>
                     <span
                       style={{
-                        fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                        fontFamily: "Figtree, system-ui, sans-serif",
                         fontSize: "15px",
                         fontWeight: "800",
                         fontVariantNumeric: "tabular-nums",
@@ -799,7 +822,7 @@ export default function Hub() {
           >
             <span
               style={{
-                fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                fontFamily: "Figtree, system-ui, sans-serif",
                 fontSize: "19px",
                 fontWeight: "800",
                 letterSpacing: "-0.02em",
@@ -862,7 +885,7 @@ export default function Hub() {
                             borderRadius: "12px",
                             background: t.bg,
                             color: t.ink,
-                            fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                            fontFamily: "Figtree, system-ui, sans-serif",
                             fontSize: "14px",
                             fontWeight: "800",
                             display: "flex",
@@ -897,7 +920,7 @@ export default function Hub() {
                         >
                           <span
                             style={{
-                              fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                              fontFamily: "Figtree, system-ui, sans-serif",
                               fontSize: "16px",
                               fontWeight: "800",
                               color: t.amtInk,

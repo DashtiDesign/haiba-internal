@@ -275,6 +275,7 @@ export function useVals() {
     greeting: "Hi Sara",
     points: shown.toLocaleString("en-US"),
     actions: actions,
+    memberLine: isNew ? "Member since today" : "Member since August",
     giftLeft: "10 days left",
     giftMarks: giftMarks,
     ready: ready,
