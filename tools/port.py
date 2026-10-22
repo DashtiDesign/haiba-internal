@@ -120,6 +120,11 @@ def patch_screen(name):
     s = s.replace('import { Link } from "react-router-dom";', 'import { Link, useNavigate } from "../nav";\nimport { useHaiba } from "../store";')
     s = re.sub(r'import "\.\./styles/[\w-]+\.css";\n', "", s)
     s = s.replace("  const v: any = useVals();", "  const v: any = useVals();\n  const go = useNavigate();\n  const hb = useHaiba();")
+    if "/haiba/logo-purple.svg" in s:
+        # Lovable: the purple logo is served from the asset registry
+        s = s.replace('import { useHaiba } from "../store";', 'import { useHaiba } from "../store";\nimport haibaLogo from "@/assets/haiba/logo-purple.svg.asset.json";', 1)
+        s = s.replace('src="/haiba/logo-purple.svg"', "src={haibaLogo.url}")
+        s = s.replace('"url(/haiba/logo-purple.svg)"', "`url(${haibaLogo.url})`")
     if "<img" in s:
         # Lovable: images go through the shared Artwork component (WebP registry); the first one loads first
         s = s.replace('import { useHaiba } from "../store";', 'import { useHaiba } from "../store";\nimport Artwork from "../Artwork";', 1)
