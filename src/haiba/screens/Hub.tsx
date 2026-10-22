@@ -979,7 +979,19 @@ export default function Hub() {
                       borderTop: "1px solid #F1EFF7",
                     }}
                   >
-                    <span style={{ fontSize: "13.5px", fontWeight: "700", lineHeight: "1.2" }}>
+                    <span
+                      style={{
+                        fontSize: "13.5px",
+                        fontWeight: "700",
+                        lineHeight: "1.2",
+                        height: "2.4em",
+                        display: "-webkit-box",
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                        overflowWrap: "anywhere",
+                      }}
+                    >
                       {u.name}
                     </span>
                     <span
