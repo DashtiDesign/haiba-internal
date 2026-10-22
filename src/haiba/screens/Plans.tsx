@@ -1,6 +1,6 @@
-import Artwork from "../Artwork";
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board "Plans.dc.html". Styles are copied value for value.
+import Artwork from "../Artwork";
 import { Fragment } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { Link, useNavigate } from "../nav";

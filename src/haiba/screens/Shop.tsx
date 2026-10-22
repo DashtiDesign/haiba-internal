@@ -1,6 +1,6 @@
-import Artwork from "../Artwork";
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board "Shop.dc.html". Styles are copied value for value.
+import Artwork from "../Artwork";
 import { Fragment } from "react";
 import { Link, useNavigate } from "../nav";
 import { useHaiba } from "../store";
