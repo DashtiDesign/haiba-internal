@@ -90,7 +90,7 @@ export default function Welcome() {
           </button>
           <span
             style={{
-              fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+              fontFamily: "Figtree, system-ui, sans-serif",
               fontSize: "17px",
               fontWeight: "800",
               letterSpacing: "-0.01em",
@@ -386,7 +386,7 @@ export default function Welcome() {
                         borderRadius: "16px",
                         padding: "14px",
                         textAlign: "center",
-                        fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                        fontFamily: "Figtree, system-ui, sans-serif",
                         fontSize: "28px",
                         fontWeight: "800",
                         letterSpacing: "0.06em",
@@ -534,7 +534,7 @@ export default function Welcome() {
               <div
                 className="hb-rise"
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                  fontFamily: "Figtree, system-ui, sans-serif",
                   fontSize: "27px",
                   fontWeight: "800",
                   letterSpacing: "-0.02em",
@@ -552,7 +552,7 @@ export default function Welcome() {
               <div
                 className="hb-rise"
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                  fontFamily: "Figtree, system-ui, sans-serif",
                   fontSize: "27px",
                   fontWeight: "800",
                   letterSpacing: "-0.02em",
@@ -570,7 +570,7 @@ export default function Welcome() {
               <div
                 className="hb-rise"
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                  fontFamily: "Figtree, system-ui, sans-serif",
                   fontSize: "27px",
                   fontWeight: "800",
                   letterSpacing: "-0.02em",
@@ -588,7 +588,7 @@ export default function Welcome() {
               <div
                 className="hb-rise"
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                  fontFamily: "Figtree, system-ui, sans-serif",
                   fontSize: "27px",
                   fontWeight: "800",
                   letterSpacing: "-0.02em",
@@ -611,7 +611,7 @@ export default function Welcome() {
                 style={{
                   width: "100%",
                   font: "inherit",
-                  fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                  fontFamily: "Figtree, system-ui, sans-serif",
                   fontSize: "17px",
                   fontWeight: "800",
                   border: "0",

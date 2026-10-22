@@ -350,7 +350,7 @@ export default function Redeem() {
             >
               <span
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                  fontFamily: "Figtree, system-ui, sans-serif",
                   fontSize: "44px",
                   fontWeight: "800",
                   letterSpacing: "-0.03em",
@@ -550,7 +550,7 @@ export default function Redeem() {
                     </span>
                     <span
                       style={{
-                        fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                        fontFamily: "Figtree, system-ui, sans-serif",
                         fontSize: "34px",
                         fontWeight: "800",
                         letterSpacing: "0.08em",
@@ -628,7 +628,7 @@ export default function Redeem() {
                     >
                       <span
                         style={{
-                          fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                          fontFamily: "Figtree, system-ui, sans-serif",
                           fontSize: "16px",
                           fontWeight: "800",
                           color: "#C0F402",

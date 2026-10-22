@@ -54,7 +54,7 @@ export default function Shop() {
           ></span>
           <span
             style={{
-              fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+              fontFamily: "Figtree, system-ui, sans-serif",
               fontSize: "14px",
               fontWeight: "800",
               letterSpacing: "0.14em",
@@ -230,7 +230,7 @@ export default function Shop() {
                 borderRadius: "16px",
                 background: "#4B2E83",
                 color: "#FFFFFF",
-                fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                fontFamily: "Figtree, system-ui, sans-serif",
                 fontSize: "20px",
                 fontWeight: "800",
                 display: "flex",
@@ -375,7 +375,7 @@ export default function Shop() {
             </div>
             <div
               style={{
-                fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                fontFamily: "Figtree, system-ui, sans-serif",
                 fontSize: "21px",
                 fontWeight: "800",
                 letterSpacing: "-0.02em",
@@ -430,7 +430,7 @@ export default function Shop() {
                         color: s.ink,
                         border: `2px solid ${s.ring}`,
                         boxShadow: s.glow,
-                        fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                        fontFamily: "Figtree, system-ui, sans-serif",
                         fontSize: "12px",
                         fontWeight: "800",
                         display: "flex",
@@ -633,7 +633,7 @@ export default function Shop() {
                 gap: "6px",
                 background: "#1E1B2E",
                 color: "#FFFFFF",
-                fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                fontFamily: "Figtree, system-ui, sans-serif",
                 fontSize: "14px",
                 fontWeight: "800",
                 borderRadius: "999px",
@@ -846,7 +846,7 @@ export default function Shop() {
                           style={{
                             minWidth: "18px",
                             textAlign: "center",
-                            fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                            fontFamily: "Figtree, system-ui, sans-serif",
                             fontSize: "15px",
                             fontWeight: "800",
                             color: "#C0F402",
@@ -1058,7 +1058,7 @@ export default function Shop() {
                       style={{
                         background: "#C0F402",
                         color: "#1F2600",
-                        fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                        fontFamily: "Figtree, system-ui, sans-serif",
                         fontSize: "15px",
                         fontWeight: "800",
                         borderRadius: "999px",

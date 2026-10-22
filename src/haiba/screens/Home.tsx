@@ -185,7 +185,7 @@ export default function Home() {
           />
           <div
             style={{
-              fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+              fontFamily: "Figtree, system-ui, sans-serif",
               fontSize: 24,
               fontWeight: 800,
               letterSpacing: "-0.02em",

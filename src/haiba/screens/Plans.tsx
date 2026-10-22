@@ -87,7 +87,7 @@ export default function Plans() {
             </button>
             <span
               style={{
-                fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                fontFamily: "Figtree, system-ui, sans-serif",
                 fontSize: "18px",
                 fontWeight: "800",
                 letterSpacing: "-0.01em",
@@ -147,7 +147,7 @@ export default function Plans() {
                   />
                   <div
                     style={{
-                      fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                      fontFamily: "Figtree, system-ui, sans-serif",
                       fontSize: "34px",
                       fontWeight: "800",
                       letterSpacing: "-0.03em",
@@ -389,7 +389,7 @@ export default function Plans() {
               ) : null}
               <span
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                  fontFamily: "Figtree, system-ui, sans-serif",
                   fontSize: "17px",
                   fontWeight: "800",
                   letterSpacing: "-0.01em",
@@ -705,7 +705,7 @@ export default function Plans() {
                 <span
                   style={{
                     color: "#C0F402",
-                    fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                    fontFamily: "Figtree, system-ui, sans-serif",
                     fontSize: "17px",
                     fontWeight: "800",
                   }}

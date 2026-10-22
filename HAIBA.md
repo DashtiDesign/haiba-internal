@@ -45,7 +45,7 @@ Students never see this panel.
 - `src/haiba/store.tsx`: the one shared state (member, basket, codes, accepted codes, points).
 - `src/haiba/data/haiba-fake-data.json`: shops, rewards, Unipass and the points rules.
 - `public/haiba/`: the 16 bird poses and the two Haiba logos.
-- `public/fonts/`: Figtree and Plus Jakarta Sans, self hosted.
+- `public/fonts/`: Figtree, self hosted.
 - `tools/dc2react.py`: the converter used to port a canvas board into a screen.
 
 ## Rules to keep
@@ -54,4 +54,4 @@ Students never see this panel.
 - Points are shown as points. Rewards are described as items, never as money.
 - "You saved" counts a reward only when the shop accepts the code.
 - Copy is simple English, no dashes.
-- Fonts: Figtree for text, Plus Jakarta Sans for numbers and headlines. Never Syne.
+- Font: Figtree for everything, text, numbers and headlines. Never Syne.

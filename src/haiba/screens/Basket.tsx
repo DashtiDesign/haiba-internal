@@ -94,7 +94,7 @@ export default function Basket() {
                     borderRadius: "12px",
                     background: "#4B2E83",
                     color: "#FFFFFF",
-                    fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                    fontFamily: "Figtree, system-ui, sans-serif",
                     fontSize: "14px",
                     fontWeight: "800",
                     display: "flex",
@@ -227,7 +227,7 @@ export default function Basket() {
                           style={{
                             minWidth: "18px",
                             textAlign: "center",
-                            fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                            fontFamily: "Figtree, system-ui, sans-serif",
                             fontSize: "15px",
                             fontWeight: "800",
                             color: "#C0F402",
@@ -360,7 +360,7 @@ export default function Basket() {
                   <span
                     className="hb-ease"
                     style={{
-                      fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                      fontFamily: "Figtree, system-ui, sans-serif",
                       fontSize: "20px",
                       fontWeight: "800",
                       letterSpacing: "-0.01em",
@@ -543,7 +543,7 @@ export default function Basket() {
                     borderRadius: "50%",
                     background: "#C0F402",
                     color: "#1F2600",
-                    fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                    fontFamily: "Figtree, system-ui, sans-serif",
                     fontSize: "14px",
                     fontWeight: "800",
                     display: "flex",
@@ -616,7 +616,7 @@ export default function Basket() {
                   >
                     <span
                       style={{
-                        fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                        fontFamily: "Figtree, system-ui, sans-serif",
                         fontSize: "17px",
                         fontWeight: "800",
                       }}
@@ -731,7 +731,7 @@ export default function Basket() {
                     display: "block",
                     background: "#1E1B2E",
                     color: "#C0F402",
-                    fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                    fontFamily: "Figtree, system-ui, sans-serif",
                     fontSize: "15px",
                     fontWeight: "800",
                     borderRadius: "999px",
@@ -764,7 +764,7 @@ export default function Basket() {
               >
                 <span
                   style={{
-                    fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                    fontFamily: "Figtree, system-ui, sans-serif",
                     fontSize: "28px",
                     fontWeight: "800",
                     letterSpacing: "-0.03em",
@@ -879,7 +879,7 @@ export default function Basket() {
                         >
                           <span
                             style={{
-                              fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                              fontFamily: "Figtree, system-ui, sans-serif",
                               fontSize: "20px",
                               fontWeight: "800",
                               letterSpacing: "-0.02em",
@@ -902,7 +902,7 @@ export default function Basket() {
                               borderRadius: "14px",
                               padding: "12px",
                               textAlign: "center",
-                              fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                              fontFamily: "Figtree, system-ui, sans-serif",
                               fontSize: "26px",
                               fontWeight: "800",
                               letterSpacing: "0.08em",
@@ -1020,7 +1020,7 @@ export default function Basket() {
                             </span>
                             <span
                               style={{
-                                fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                                fontFamily: "Figtree, system-ui, sans-serif",
                                 fontSize: "34px",
                                 fontWeight: "800",
                                 letterSpacing: "-0.03em",
@@ -1143,7 +1143,7 @@ export default function Basket() {
                       textAlign: "center",
                       background: "#1E1B2E",
                       color: "#C0F402",
-                      fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                      fontFamily: "Figtree, system-ui, sans-serif",
                       fontSize: "17px",
                       fontWeight: "800",
                       borderRadius: "999px",

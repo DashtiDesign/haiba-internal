@@ -1,4 +1,4 @@
-/* Fonts are self hosted in public/fonts (Figtree and Plus Jakarta Sans, both Google Fonts). */
+/* Fonts are self hosted in public/fonts (Figtree, a Google Font). */
 @font-face {
   font-family: "Figtree";
   font-style: normal;
@@ -33,20 +33,6 @@
   font-weight: 800;
   font-display: swap;
   src: url("/fonts/figtree-latin-800-normal.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Plus Jakarta Sans";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("/fonts/plus-jakarta-sans-latin-700-normal.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Plus Jakarta Sans";
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  src: url("/fonts/plus-jakarta-sans-latin-800-normal.woff2") format("woff2");
 }
 
 /* App shell: a phone width column, centred on bigger screens. */

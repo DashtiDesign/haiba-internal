@@ -91,7 +91,7 @@ export default function Wallet() {
                 display: "flex",
                 alignItems: "center",
                 gap: "8px",
-                fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                fontFamily: "Figtree, system-ui, sans-serif",
                 fontSize: "17px",
                 fontWeight: "800",
                 boxShadow: "0 8px 20px rgba(30,27,46,0.2)",
@@ -142,7 +142,7 @@ export default function Wallet() {
               ></span>
               <span
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                  fontFamily: "Figtree, system-ui, sans-serif",
                   fontSize: "34px",
                   fontWeight: "800",
                   letterSpacing: "-0.03em",
@@ -195,7 +195,7 @@ export default function Wallet() {
               </span>
               <span
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                  fontFamily: "Figtree, system-ui, sans-serif",
                   fontSize: "34px",
                   fontWeight: "800",
                   letterSpacing: "-0.03em",
@@ -302,7 +302,7 @@ export default function Wallet() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                      fontFamily: "Figtree, system-ui, sans-serif",
                       fontSize: "22px",
                       fontWeight: "800",
                       boxShadow: "0 8px 18px rgba(76,52,140,0.12)",
@@ -340,7 +340,7 @@ export default function Wallet() {
             >
               <span
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                  fontFamily: "Figtree, system-ui, sans-serif",
                   fontSize: "19px",
                   fontWeight: "800",
                   letterSpacing: "-0.02em",
@@ -397,7 +397,7 @@ export default function Wallet() {
                   top: "0",
                   background: "#6C3FFA",
                   color: "#C0F402",
-                  fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                  fontFamily: "Figtree, system-ui, sans-serif",
                   fontSize: "20px",
                   fontWeight: "800",
                   borderRadius: "999px",
@@ -520,7 +520,7 @@ export default function Wallet() {
                       padding: "10px 0",
                       borderRadius: "999px",
                       color: s.ink,
-                      fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                      fontFamily: "Figtree, system-ui, sans-serif",
                       fontSize: "16px",
                       fontWeight: "800",
                     }}
@@ -552,7 +552,7 @@ export default function Wallet() {
               <span
                 className="hb-ease"
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                  fontFamily: "Figtree, system-ui, sans-serif",
                   fontSize: "46px",
                   fontWeight: "800",
                   letterSpacing: "-0.04em",
@@ -671,7 +671,7 @@ export default function Wallet() {
                 </span>
                 <span
                   style={{
-                    fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                    fontFamily: "Figtree, system-ui, sans-serif",
                     fontSize: "17px",
                     fontWeight: "800",
                     textAlign: "right",
@@ -726,7 +726,7 @@ export default function Wallet() {
                 <span
                   className="hb-ease"
                   style={{
-                    fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                    fontFamily: "Figtree, system-ui, sans-serif",
                     fontSize: "17px",
                     fontWeight: "800",
                     textAlign: "right",
@@ -815,7 +815,7 @@ export default function Wallet() {
                           borderRadius: "15px",
                           background: t.bg,
                           color: t.ink,
-                          fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                          fontFamily: "Figtree, system-ui, sans-serif",
                           fontSize: "15px",
                           fontWeight: "800",
                           display: "flex",
@@ -841,7 +841,7 @@ export default function Wallet() {
                       </span>
                       <span
                         style={{
-                          fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                          fontFamily: "Figtree, system-ui, sans-serif",
                           fontSize: "17px",
                           fontWeight: "800",
                           color: t.amtInk,
@@ -925,7 +925,7 @@ export default function Wallet() {
                     >
                       <span
                         style={{
-                          fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                          fontFamily: "Figtree, system-ui, sans-serif",
                           fontSize: "28px",
                           fontWeight: "800",
                           letterSpacing: "-0.02em",

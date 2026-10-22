@@ -193,7 +193,7 @@ export default function Points() {
             className="hb-rise hb-d1"
             style={{
               margin: "6px 0 0 0",
-              fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+              fontFamily: "Figtree, system-ui, sans-serif",
               fontSize: "34px",
               fontWeight: "800",
               lineHeight: "1.08",
@@ -250,7 +250,7 @@ export default function Points() {
                         borderRadius: "14px",
                         background: r.bg,
                         color: r.ink,
-                        fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                        fontFamily: "Figtree, system-ui, sans-serif",
                         fontSize: "14px",
                         fontWeight: "800",
                         display: "flex",
@@ -361,7 +361,7 @@ export default function Points() {
                   textAlign: "center",
                   background: "#1E1B2E",
                   color: "#C0F402",
-                  fontFamily: "'Plus Jakarta Sans', Figtree, sans-serif",
+                  fontFamily: "Figtree, system-ui, sans-serif",
                   fontSize: "17px",
                   fontWeight: "800",
                   borderRadius: "999px",
