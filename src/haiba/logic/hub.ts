@@ -272,7 +272,6 @@ export function useVals() {
     }
   });
   return {
-    greeting: "Hi Sara",
     points: shown.toLocaleString("en-US"),
     actions: actions,
     memberLine: isNew ? "Member since today" : "Member since August",

@@ -32,31 +32,74 @@ export default function Hub() {
             left: "0",
             right: "0",
             top: "0",
-            height: "320px",
+            height: "296px",
             background:
               "radial-gradient(circle at 50% 62%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 40%), linear-gradient(180deg, #D6C6FF 0%, #E4DAFF 70%, #EAE3FF 100%)",
           }}
         ></div>
-        <span
+        <div
           aria-hidden="true"
           style={{
             position: "absolute",
-            left: "-90px",
-            top: "-120px",
-            width: "320px",
-            height: "320px",
-            borderRadius: "50%",
-            background: "rgba(255,255,255,0.35)",
-            filter: "blur(2px)",
+            left: "0",
+            right: "0",
+            top: "0",
+            height: "296px",
+            backgroundImage: "radial-gradient(rgba(108,63,250,0.16) 1.2px, transparent 1.3px)",
+            backgroundSize: "18px 18px",
+            WebkitMaskImage: "linear-gradient(180deg, #000 0%, rgba(0,0,0,0) 85%)",
+            maskImage: "linear-gradient(180deg, #000 0%, rgba(0,0,0,0) 85%)",
           }}
-        ></span>
+        ></div>
+        <svg
+          aria-hidden="true"
+          width="26"
+          height="26"
+          viewBox="0 0 24 24"
+          style={{ position: "absolute", left: "92px", top: "108px" }}
+        >
+          <path
+            d="M12 1.5c.7 5.6 2.9 7.8 8.5 8.5-5.6.7-7.8 2.9-8.5 8.5-.7-5.6-2.9-7.8-8.5-8.5 5.6-.7 7.8-2.9 8.5-8.5z"
+            fill="#C0F402"
+            stroke="#6C3FFA"
+            strokeWidth="1.2"
+            strokeLinejoin="round"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          style={{ position: "absolute", left: "116px", top: "80px" }}
+        >
+          <path
+            d="M12 1.5c.7 5.6 2.9 7.8 8.5 8.5-5.6.7-7.8 2.9-8.5 8.5-.7-5.6-2.9-7.8-8.5-8.5 5.6-.7 7.8-2.9 8.5-8.5z"
+            fill="#FFFFFF"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          style={{ position: "absolute", left: "282px", top: "162px" }}
+        >
+          <path
+            d="M12 1.5c.7 5.6 2.9 7.8 8.5 8.5-5.6.7-7.8 2.9-8.5 8.5-.7-5.6-2.9-7.8-8.5-8.5 5.6-.7 7.8-2.9 8.5-8.5z"
+            fill="#C0F402"
+            stroke="#6C3FFA"
+            strokeWidth="1.2"
+            strokeLinejoin="round"
+          ></path>
+        </svg>
         <svg
           aria-hidden="true"
           width="390"
           height="140"
           viewBox="0 0 390 140"
           preserveAspectRatio="none"
-          style={{ position: "absolute", left: "0", top: "230px", display: "block" }}
+          style={{ position: "absolute", left: "0", top: "206px", display: "block" }}
         >
           <path d="M0 70 Q195 -10 390 70 V140 H0Z" fill="#F3F0FA"></path>
         </svg>
@@ -65,7 +108,7 @@ export default function Hub() {
           style={{
             position: "absolute",
             left: "133px",
-            top: "284px",
+            top: "260px",
             width: "124px",
             height: "18px",
             borderRadius: "50%",
@@ -79,7 +122,7 @@ export default function Hub() {
             position: "absolute",
             left: "0",
             right: "0",
-            top: "66px",
+            top: "42px",
             zIndex: "2",
             display: "flex",
             justifyContent: "center",
@@ -118,7 +161,7 @@ export default function Hub() {
               style={{
                 position: "absolute",
                 left: "16px",
-                top: "96px",
+                top: "72px",
                 width: "118px",
                 zIndex: "3",
                 background: "#FFFFFF",
@@ -146,135 +189,7 @@ export default function Hub() {
             boxSizing: "border-box",
           }}
         >
-          <div
-            className="hb-rise"
-            style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-              <span
-                style={{
-                  width: "44px",
-                  height: "44px",
-                  flex: "none",
-                  borderRadius: "50%",
-                  background: "#1E1B2E",
-                  color: "#C0F402",
-                  fontFamily: "Figtree, system-ui, sans-serif",
-                  fontWeight: "800",
-                  fontSize: "15px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  boxShadow: "0 6px 14px rgba(30,27,46,0.18)",
-                }}
-              >
-                {"SA"}
-              </span>
-              <span style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
-                <span
-                  style={{
-                    fontSize: "13px",
-                    fontWeight: "600",
-                    color: "#5B5574",
-                    letterSpacing: "0.04em",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {"Welcome back"}
-                </span>
-                <span
-                  style={{
-                    fontFamily: "Figtree, system-ui, sans-serif",
-                    fontSize: "22px",
-                    fontWeight: "800",
-                    letterSpacing: "-0.02em",
-                    lineHeight: "1.1",
-                  }}
-                >
-                  {v.greeting}
-                </span>
-              </span>
-            </div>
-            <div style={{ display: "flex", gap: "8px" }}>
-              <button
-                aria-label="Search"
-                className="hb-press"
-                style={{
-                  width: "44px",
-                  height: "44px",
-                  borderRadius: "50%",
-                  border: "0",
-                  background: "rgba(255,255,255,0.7)",
-                  color: "#1E1B2E",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "0",
-                  cursor: "pointer",
-                }}
-              >
-                <svg
-                  aria-hidden="true"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                >
-                  <circle cx="11" cy="11" r="7"></circle>
-                  <path d="M20 20l-3.5-3.5"></path>
-                </svg>
-              </button>
-              <button
-                aria-label="Alerts"
-                className="hb-press"
-                style={{
-                  width: "44px",
-                  height: "44px",
-                  borderRadius: "50%",
-                  border: "0",
-                  background: "rgba(255,255,255,0.7)",
-                  color: "#1E1B2E",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "0",
-                  cursor: "pointer",
-                  position: "relative",
-                }}
-              >
-                <svg
-                  aria-hidden="true"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
-                  <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
-                </svg>
-                <span
-                  style={{
-                    position: "absolute",
-                    top: "9px",
-                    right: "10px",
-                    width: "9px",
-                    height: "9px",
-                    borderRadius: "50%",
-                    background: "#C0F402",
-                    border: "2px solid #FFFFFF",
-                  }}
-                ></span>
-              </button>
-            </div>
-          </div>
-          <div aria-hidden="true" style={{ height: "280px" }}></div>
+          <div aria-hidden="true" style={{ height: "300px" }}></div>
           <div
             className="hb-rise hb-d1"
             style={{
