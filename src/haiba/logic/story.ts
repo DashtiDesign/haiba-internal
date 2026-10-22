@@ -22,17 +22,18 @@ export function useVals() {
     { tag: "5x", pts: "200", bg: "#C0F402", ink: "#1F2600", ring: "#C0F402" },
   ];
   var giftDefs = [
-    { brand: "Wingman", item: "Student box", logo: "/haiba/brands/wingman.webp" },
-    { brand: "VOX Cinemas", item: "Cinema ticket", logo: "/haiba/brands/vox.webp" },
-    { brand: "Grip", item: "Gym day pass", logo: "/haiba/brands/grip.webp" },
-    { brand: "Albayan", item: "Perfume 100ml", logo: "/haiba/brands/albayan.webp" },
+    { brand: "Wingman", item: "Student box", bg: "#F9F9F9", logo: "/haiba/brands/wingman.webp" },
+    { brand: "VOX Cinemas", item: "Cinema ticket", bg: "#FFFFFF", logo: "/haiba/brands/vox.webp" },
+    { brand: "Grip", item: "Gym day pass", bg: "#000000", logo: "/haiba/brands/grip.webp" },
+    { brand: "Albayan", item: "Perfume 100ml", bg: "#FFFFFF", logo: "/haiba/brands/albayan.webp" },
   ];
   var gifts = giftDefs.map(function (d, k) {
     var sel = k === g;
     var dim = g >= 0 && !sel;
     return Object.assign({}, d, {
       selStr: String(sel),
-      scale: sel ? "1.06" : dim ? "0.94" : "1",
+      tickDisp: sel ? "flex" : "none",
+      scale: sel ? "1.04" : dim ? "0.96" : "1",
       shadow: sel
         ? "0 0 0 3px #6C3FFA, 0 12px 22px rgba(30,27,46,0.18)"
         : "0 0 0 1px #ECE8F5, 0 6px 14px rgba(30,27,46,0.08)",

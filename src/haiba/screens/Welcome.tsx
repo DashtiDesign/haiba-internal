@@ -505,9 +505,9 @@ export default function Welcome() {
                   style={{
                     position: "absolute",
                     left: "22px",
-                    top: "34px",
+                    top: "26px",
                     display: "grid",
-                    gridTemplateColumns: "repeat(2, 96px)",
+                    gridTemplateColumns: "repeat(2, 100px)",
                     gap: "10px",
                   }}
                 >
@@ -520,34 +520,77 @@ export default function Welcome() {
                         style={{
                           font: "inherit",
                           border: "0",
-                          padding: "8px 6px 9px 6px",
+                          padding: "0",
                           cursor: "pointer",
-                          height: "100px",
+                          height: "112px",
                           boxSizing: "border-box",
-                          borderRadius: "22px",
+                          borderRadius: "18px",
+                          overflow: "hidden",
                           background: "#FFFFFF",
                           color: "#1E1B2E",
                           display: "flex",
                           flexDirection: "column",
-                          alignItems: "center",
-                          justifyContent: "space-between",
                           boxShadow: g.shadow,
                           transform: `scale(${g.scale})`,
+                          position: "relative",
                         }}
                       >
                         <Artwork
                           src={g.logo}
                           alt={g.brand}
                           style={{
-                            width: "56px",
-                            height: "56px",
-                            borderRadius: "16px",
-                            objectFit: "cover",
+                            width: "100%",
+                            height: "78px",
+                            boxSizing: "border-box",
+                            padding: "4px 0",
+                            objectFit: "contain",
+                            background: g.bg,
                             display: "block",
                           }}
                         />
-                        <span style={{ fontSize: "11.5px", fontWeight: "700", lineHeight: "1.2" }}>
+                        <span
+                          style={{
+                            flex: "1",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            fontSize: "12px",
+                            fontWeight: "700",
+                            lineHeight: "1.2",
+                            borderTop: "1px solid #F1EFF7",
+                          }}
+                        >
                           {g.item}
+                        </span>
+                        <span
+                          style={{
+                            position: "absolute",
+                            top: "6px",
+                            right: "6px",
+                            width: "22px",
+                            height: "22px",
+                            borderRadius: "50%",
+                            background: "#6C3FFA",
+                            color: "#FFFFFF",
+                            display: g.tickDisp,
+                            alignItems: "center",
+                            justifyContent: "center",
+                            boxShadow: "0 0 0 2px #FFFFFF",
+                          }}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            width="12"
+                            height="12"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="3.4"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                          </svg>
                         </span>
                       </button>
                     </Fragment>
@@ -558,7 +601,7 @@ export default function Welcome() {
                   style={{
                     position: "absolute",
                     left: "22px",
-                    bottom: "26px",
+                    bottom: "22px",
                     background: v.pickBg,
                     color: v.pickInk,
                     fontSize: "14px",
