@@ -212,18 +212,30 @@ export default function Points() {
             }
           </div>
           <div
+            className="hb-rise hb-d2"
+            style={{
+              fontSize: "13px",
+              fontWeight: "800",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "#6C3FFA",
+              margin: "24px 0 10px 4px",
+            }}
+          >
+            {"Earn points"}
+          </div>
+          <div
             className="hb-stagger"
             style={{
               display: "flex",
               flexDirection: "column",
-              marginTop: "18px",
               background: "#FFFFFF",
               borderRadius: "28px",
               padding: "4px 12px",
               boxShadow: "0 10px 26px rgba(76,52,140,0.08)",
             }}
           >
-            {(v.rules || []).map((r: any, idx0: number) => (
+            {(v.earn || []).map((r: any, idx0: number) => (
               <Fragment key={idx0}>
                 <div style={{ borderBottom: r.line }}>
                   <button
@@ -332,6 +344,284 @@ export default function Points() {
                       </span>
                     </div>
                   </MotionReveal>
+                </div>
+              </Fragment>
+            ))}
+          </div>
+          <div
+            className="hb-rise hb-d3"
+            style={{
+              fontSize: "13px",
+              fontWeight: "800",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "#6C3FFA",
+              margin: "24px 0 10px 4px",
+            }}
+          >
+            {"Spend points"}
+          </div>
+          <div
+            className="hb-stagger"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              background: "#FFFFFF",
+              borderRadius: "28px",
+              padding: "4px 12px",
+              boxShadow: "0 10px 26px rgba(76,52,140,0.08)",
+            }}
+          >
+            {(v.spend || []).map((r: any, idx0: number) => (
+              <Fragment key={idx0}>
+                <div style={{ borderBottom: r.line }}>
+                  <button
+                    onClick={r.toggle}
+                    aria-expanded={r.openStr}
+                    className="hb-row"
+                    style={{
+                      width: "100%",
+                      font: "inherit",
+                      textAlign: "left",
+                      border: "0",
+                      background: "transparent",
+                      color: "#1E1B2E",
+                      display: "flex",
+                      gap: "16px",
+                      padding: "16px 4px",
+                      cursor: "pointer",
+                      borderRadius: "14px",
+                    }}
+                  >
+                    <span
+                      className="hb-ease"
+                      style={{
+                        width: "44px",
+                        height: "44px",
+                        flex: "none",
+                        borderRadius: "14px",
+                        background: r.bg,
+                        color: r.ink,
+                        fontFamily: "Figtree, system-ui, sans-serif",
+                        fontSize: "14px",
+                        fontWeight: "800",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {r.mark}
+                    </span>
+                    <span
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "3px",
+                        flex: "1",
+                        minWidth: "0",
+                      }}
+                    >
+                      <span style={{ fontSize: "16.5px", fontWeight: "700", lineHeight: "1.3" }}>
+                        {r.title}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "14px",
+                          fontWeight: "500",
+                          color: "#6B6880",
+                          lineHeight: "1.4",
+                        }}
+                      >
+                        {r.sub}
+                      </span>
+                    </span>
+                    <svg
+                      aria-hidden="true"
+                      className="hb-ease"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#A9A6B8"
+                      strokeWidth="2.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      style={{ flex: "none", marginTop: "4px", transform: `rotate(${r.rot})` }}
+                    >
+                      <path d="M6 9l6 6 6-6"></path>
+                    </svg>
+                  </button>
+                  {r.open ? (
+                    <>
+                      <div
+                        className="hb-rise"
+                        style={{
+                          margin: "0 4px 16px 64px",
+                          background: "#1E1B2E",
+                          color: "#FFFFFF",
+                          borderRadius: "16px",
+                          padding: "12px 14px",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "8px",
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontSize: "12px",
+                            fontWeight: "700",
+                            letterSpacing: "0.12em",
+                            textTransform: "uppercase",
+                            color: "#C0F402",
+                          }}
+                        >
+                          {"Example"}
+                        </span>
+                        <span style={{ fontSize: "14.5px", fontWeight: "500", lineHeight: "1.45" }}>
+                          {r.example}
+                        </span>
+                      </div>
+                    </>
+                  ) : null}
+                </div>
+              </Fragment>
+            ))}
+          </div>
+          <div
+            className="hb-rise hb-d3"
+            style={{
+              fontSize: "13px",
+              fontWeight: "800",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "#6C3FFA",
+              margin: "24px 0 10px 4px",
+            }}
+          >
+            {"Keep your points"}
+          </div>
+          <div
+            className="hb-stagger"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              background: "#FFFFFF",
+              borderRadius: "28px",
+              padding: "4px 12px",
+              boxShadow: "0 10px 26px rgba(76,52,140,0.08)",
+            }}
+          >
+            {(v.keep || []).map((r: any, idx0: number) => (
+              <Fragment key={idx0}>
+                <div style={{ borderBottom: r.line }}>
+                  <button
+                    onClick={r.toggle}
+                    aria-expanded={r.openStr}
+                    className="hb-row"
+                    style={{
+                      width: "100%",
+                      font: "inherit",
+                      textAlign: "left",
+                      border: "0",
+                      background: "transparent",
+                      color: "#1E1B2E",
+                      display: "flex",
+                      gap: "16px",
+                      padding: "16px 4px",
+                      cursor: "pointer",
+                      borderRadius: "14px",
+                    }}
+                  >
+                    <span
+                      className="hb-ease"
+                      style={{
+                        width: "44px",
+                        height: "44px",
+                        flex: "none",
+                        borderRadius: "14px",
+                        background: r.bg,
+                        color: r.ink,
+                        fontFamily: "Figtree, system-ui, sans-serif",
+                        fontSize: "14px",
+                        fontWeight: "800",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {r.mark}
+                    </span>
+                    <span
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "3px",
+                        flex: "1",
+                        minWidth: "0",
+                      }}
+                    >
+                      <span style={{ fontSize: "16.5px", fontWeight: "700", lineHeight: "1.3" }}>
+                        {r.title}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "14px",
+                          fontWeight: "500",
+                          color: "#6B6880",
+                          lineHeight: "1.4",
+                        }}
+                      >
+                        {r.sub}
+                      </span>
+                    </span>
+                    <svg
+                      aria-hidden="true"
+                      className="hb-ease"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#A9A6B8"
+                      strokeWidth="2.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      style={{ flex: "none", marginTop: "4px", transform: `rotate(${r.rot})` }}
+                    >
+                      <path d="M6 9l6 6 6-6"></path>
+                    </svg>
+                  </button>
+                  {r.open ? (
+                    <>
+                      <div
+                        className="hb-rise"
+                        style={{
+                          margin: "0 4px 16px 64px",
+                          background: "#1E1B2E",
+                          color: "#FFFFFF",
+                          borderRadius: "16px",
+                          padding: "12px 14px",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "8px",
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontSize: "12px",
+                            fontWeight: "700",
+                            letterSpacing: "0.12em",
+                            textTransform: "uppercase",
+                            color: "#C0F402",
+                          }}
+                        >
+                          {"Example"}
+                        </span>
+                        <span style={{ fontSize: "14.5px", fontWeight: "500", lineHeight: "1.45" }}>
+                          {r.example}
+                        </span>
+                      </div>
+                    </>
+                  ) : null}
                 </div>
               </Fragment>
             ))}

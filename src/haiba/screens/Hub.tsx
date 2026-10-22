@@ -918,7 +918,7 @@ export default function Hub() {
               padding: "0 4px",
             }}
           >
-            {"Free items at 18 shops. Tap one to get a code."}
+            {"Free items at 200+ shops. Tap one to get a code."}
           </div>
           <div
             className="hb-pops"

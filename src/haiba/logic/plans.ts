@@ -72,7 +72,7 @@ export function useVals() {
     ["Student offers", yes, yes],
     ["Points on every offer", no, "40 to 200"],
     ["Welcome points", no, "500"],
-    ["Rewards with points", no, "18 shops"],
+    ["Rewards with points", no, "200+ shops"],
     ["Unipass gift", no, "1 a month"],
     ["Member promos", no, yes],
     ["“You saved” tracker", no, yes],

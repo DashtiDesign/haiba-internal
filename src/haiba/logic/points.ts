@@ -49,7 +49,7 @@ export function useVals() {
       mark: "★",
       bg: "#F4FFD1",
       ink: "#3D5000",
-      title: "Spend points at 18 shops",
+      title: "Spend points at 200+ shops",
       sub: "Free drinks, meals, popcorn and more",
       example:
         "Upsize at Coffee Bean, 300. Shake at Grip, 500. Popcorn at VOX, 600. Tap Use, then show the code at the shop.",
@@ -64,13 +64,14 @@ export function useVals() {
         "Use an offer or a reward at least once every 6 months and your points stay. We remind you 30 days and 7 days before they go.",
     },
   ];
-  return {
-    rules: defs.map(function (d, k) {
+  var rows = function (from, to) {
+    return defs.slice(from, to).map(function (d, j) {
+      var k = from + j;
       var open = k === o;
       return Object.assign({}, d, {
         open: open,
         openStr: String(open),
-        line: k === defs.length - 1 ? "0" : "1px solid #F3F1F8",
+        line: k === to - 1 ? "0" : "1px solid #F3F1F8",
         rot: open ? "180deg" : "0deg",
         bg: open ? "#1E1B2E" : d.bg,
         ink: open ? "#C0F402" : d.ink,
@@ -78,6 +79,7 @@ export function useVals() {
           setState({ open: open ? -1 : k });
         },
       });
-    }),
+    });
   };
+  return { earn: rows(0, 4), spend: rows(4, 5), keep: rows(5, 6) };
 }
