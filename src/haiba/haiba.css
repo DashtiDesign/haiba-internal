@@ -190,3 +190,31 @@
     font-size: 9px !important;
   }
 }
+
+/*
+ * Unipal nav bar: always flush with the bottom of the screen on every phone height.
+ * The bar sits at bottom 0 (not lifted by the safe area) and grows its own bottom padding
+ * into the home indicator area instead, so no page content shows below it.
+ * It spans the full screen width; the tabs stay centred on the 390px column.
+ */
+.hb-fixed-bottom:has(nav[aria-label="Unipal"]) {
+  bottom: 0;
+}
+.hb-fixed-bottom:has(nav[aria-label="Unipal"]) > .hb-fixed-inner {
+  max-width: none;
+}
+.hb-app nav[aria-label="Unipal"] {
+  box-sizing: border-box;
+  padding-top: 10px !important;
+  padding-bottom: max(14px, calc(8px + env(safe-area-inset-bottom, 0px))) !important;
+  padding-left: max(6px, calc((100% - 378px) / 2)) !important;
+  padding-right: max(6px, calc((100% - 378px) / 2)) !important;
+  line-height: 1.2;
+}
+/* The floating Haiba button and its tip sit just above the nav, whatever the safe area. */
+.hb-fixed-bottom :is(button[aria-label^="Haiba"], a[aria-label="Haiba"]) {
+  bottom: calc(84px + env(safe-area-inset-bottom, 0px)) !important;
+}
+.hb-fixed-bottom .hb-pop[style*="bottom: 170px"] {
+  bottom: calc(158px + env(safe-area-inset-bottom, 0px)) !important;
+}
