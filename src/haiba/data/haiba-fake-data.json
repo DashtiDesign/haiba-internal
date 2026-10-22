@@ -57,7 +57,7 @@
     "welcomePoints": 500,
     "firstAndSecondAtShop": 80,
     "every5thAtShop": 200,
-    "earningLimit": "1 transaction per shop per day earns points",
+    "earningLimit": "None. Every transaction earns points, at any number of shops a day",
     "bonusCountsPerShop": true,
     "pointValue": "1,000 points = BHD 1.00 of rewards (SAR 10.00 in Saudi)",
     "codeLifeDays": 30,

@@ -388,7 +388,7 @@ export default function Points() {
                     color: "#1E1B2E",
                   }}
                 >
-                  {"1 visit per shop per day earns points"}
+                  {"Every visit earns points, even 4 shops in 1 day"}
                 </span>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
