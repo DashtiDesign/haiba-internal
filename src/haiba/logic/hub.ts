@@ -31,46 +31,7 @@ export function useVals() {
   var lime = { pillBg: "#F4FFD1", pillInk: "#3D5000" };
   var soft = { pillBg: "#E3F5E8", pillInk: "#1B6B36" };
   var ready = isNew
-    ? [
-        Object.assign(
-          {
-            mark: "CB",
-            bg: "#4B2E83",
-            ink: "#FFFFFF",
-            title: "Your first reward",
-            meta: "Enough for an upsize",
-            metaInk: "#6B6880",
-            pill: "Use points",
-            href: "/shop/coffee-bean",
-          },
-          purple,
-        ),
-        Object.assign(
-          {
-            mark: "CB",
-            bg: "#4B2E83",
-            ink: "#FFFFFF",
-            title: "The Coffee Bean, 2x points",
-            meta: "Your first 2 visits earn 80",
-            metaInk: "#6B6880",
-            pill: "2x",
-            href: "/shop/coffee-bean",
-          },
-          lime,
-        ),
-        Object.assign(
-          {
-            mark: "S",
-            bg: "#E3F5E8",
-            ink: "#1B6B36",
-            title: "Spotify, 3 months free",
-            meta: "Claim by 31 Oct",
-            metaInk: "#B4471F",
-            pill: "Claim",
-          },
-          soft,
-        ),
-      ]
+    ? []
     : [
         Object.assign(
           {
@@ -87,31 +48,6 @@ export function useVals() {
             useBy: "Use by 12 Nov",
           },
           purple,
-        ),
-        Object.assign(
-          {
-            mark: "CB",
-            bg: "#4B2E83",
-            ink: "#FFFFFF",
-            title: "The Coffee Bean, 2x points",
-            meta: "Your next visit earns 80",
-            metaInk: "#6B6880",
-            pill: "+80",
-            href: "/shop/coffee-bean",
-          },
-          lime,
-        ),
-        Object.assign(
-          {
-            mark: "S",
-            bg: "#E3F5E8",
-            ink: "#1B6B36",
-            title: "Spotify Premium",
-            meta: "Month 2 of 3 free",
-            metaInk: "#6B6880",
-            pill: "Active",
-          },
-          soft,
         ),
       ];
   var rw = [
@@ -153,21 +89,15 @@ export function useVals() {
       purple,
     );
   });
-  if (isNew && codeRows.length) ready.shift();
   ready = codeRows.concat(ready);
   ready.forEach(function (r) {
     if (r.isCode) {
       var open = state.openCode === r.key;
       r.open = open;
       r.openStr = String(open);
-      r.isLink = false;
       r.tap = function () {
         setState({ openCode: open ? "" : r.key });
       };
-    } else {
-      r.isCode = false;
-      r.open = false;
-      r.isLink = true;
     }
   });
   ready.forEach(function (r, k) {
@@ -299,24 +229,60 @@ export function useVals() {
     giftLeft: "10 days left",
     giftMarks: giftMarks,
     ready: ready,
-    readyCount: ready.length + " things",
-    spend: rw.map(function (d, k) {
-      var can = d.pts <= target;
-      return {
-        name: d.name,
-        shop: "The Coffee Bean",
-        ph: d.ph,
-        bg: d.bg,
-        ink: d.ink,
+    readyCount: ready.length ? ready.length + " to use" : "",
+    noActive: ready.length === 0,
+    spend: [
+      {
+        brand: "The Coffee Bean",
+        name: "Free upsize",
+        pts: 300,
+        logo: "/haiba/brands/coffee-bean.webp",
+        bg: "#FCF4E9",
         href: "/shop/coffee-bean",
-        pill: can
-          ? d.pts.toLocaleString("en-US")
-          : (d.pts - target).toLocaleString("en-US") + " more",
+      },
+      {
+        brand: "Grip",
+        name: "Protein shake",
+        pts: 500,
+        logo: "/haiba/brands/grip.webp",
+        bg: "#000000",
+      },
+      {
+        brand: "VOX Cinemas",
+        name: "Popcorn",
+        pts: 600,
+        logo: "/haiba/brands/vox.webp",
+        bg: "#FFFFFF",
+      },
+      {
+        brand: "Wingman",
+        name: "6 wings",
+        pts: 900,
+        logo: "/haiba/brands/wingman.webp",
+        bg: "#F9F9F9",
+      },
+      {
+        brand: "Alkuwaiti",
+        name: "Interior clean",
+        pts: 1500,
+        logo: "/haiba/brands/alkuwaiti.webp",
+        bg: "#FFFFFF",
+      },
+      {
+        brand: "Albayan",
+        name: "Travel perfume",
+        pts: 2000,
+        logo: "/haiba/brands/albayan.webp",
+        bg: "#FFFFFF",
+      },
+    ].map(function (d) {
+      var can = d.pts <= target;
+      return Object.assign({}, d, {
+        pts: d.pts.toLocaleString("en-US"),
         pillBg: can ? "#F0ECFF" : "#F1F1F4",
         pillInk: can ? "#4F25D6" : "#6B6880",
         dotOp: can ? "1" : "0.35",
-        rule: k === 0 ? "none" : "1px solid #F1EFF7",
-      };
+      });
     }),
     savedTotal: "BHD " + savedSum.toFixed(2),
     savedBar: savedBar,

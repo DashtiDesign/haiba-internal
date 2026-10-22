@@ -42,7 +42,7 @@ GO_VAR = 'href="#" onClick={(e: any) => { e.preventDefault(); if (v.navTipHref) 
 
 # Placeholder links (href="#") in the order they appear in each screen. None = stays a placeholder.
 LINKS = {
-    "Hub": [None, go_item("r"), None, go_item("u"), None, GO_VAR, go("/"), None, None, None],
+    "Hub": [None, None, None, go_item("u"), GO_VAR, go("/"), None, None, None],
     "Plans": [None, go("/")],
     "Wallet": [go_item("a"), go("/shop/coffee-bean/redeem"), None, None, go("/shop/coffee-bean"), go("/shop/coffee-bean")],
 }

@@ -282,29 +282,69 @@ export default function Plans() {
                     ))}
                   </div>
                   <Link
+                    className="hb-press"
                     style={{
-                      marginTop: "6px",
-                      alignSelf: "flex-start",
-                      fontSize: "15px",
-                      fontWeight: "600",
+                      marginTop: "10px",
                       textDecoration: "none",
+                      background: "#F0ECFF",
+                      color: "#4F25D6",
+                      borderRadius: "14px",
+                      padding: "12px 14px",
                       display: "flex",
                       alignItems: "center",
-                      gap: "4px",
+                      gap: "12px",
                     }}
                     to="/haiba/points"
                   >
-                    {"How points work"}
+                    <span
+                      style={{
+                        width: "32px",
+                        height: "32px",
+                        flex: "none",
+                        borderRadius: "50%",
+                        background: "#6C3FFA",
+                        color: "#FFFFFF",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <svg
+                        aria-hidden="true"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.6"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M9.2 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4.5"></path>
+                        <path d="M12 18.2h.01"></path>
+                      </svg>
+                    </span>
+                    <span
+                      style={{ flex: "1", display: "flex", flexDirection: "column", gap: "1px" }}
+                    >
+                      <span style={{ fontSize: "15.5px", fontWeight: "800" }}>
+                        {"How points work"}
+                      </span>
+                      <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B5BB8" }}>
+                        {"2x, 5x and what you can get"}
+                      </span>
+                    </span>
                     <svg
                       aria-hidden="true"
-                      width="14"
-                      height="14"
+                      width="18"
+                      height="18"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2.6"
                       strokeLinecap="round"
                       strokeLinejoin="round"
+                      style={{ flex: "none" }}
                     >
                       <path d="M9 6l6 6-6 6"></path>
                     </svg>

@@ -124,6 +124,42 @@ export default function Hub() {
             />
           </button>
         </div>
+        <Link
+          aria-label="How points work"
+          className="hb-press"
+          style={{
+            position: "absolute",
+            right: "16px",
+            top: "14px",
+            zIndex: "3",
+            width: "40px",
+            height: "40px",
+            borderRadius: "50%",
+            background: "rgba(255,255,255,0.8)",
+            color: "#1E1B2E",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            textDecoration: "none",
+            boxShadow: "0 4px 12px rgba(76,52,140,0.12)",
+          }}
+          to="/haiba/points"
+        >
+          <svg
+            aria-hidden="true"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M9.2 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4.5"></path>
+            <path d="M12 18.2h.01"></path>
+          </svg>
+        </Link>
         {v.tipOpen ? (
           <>
             <div
@@ -397,7 +433,7 @@ export default function Hub() {
                 letterSpacing: "-0.02em",
               }}
             >
-              {"Ready to use"}
+              {"Active rewards"}
             </span>
             <span style={{ fontSize: "13.5px", fontWeight: "600", color: "#6B6880" }}>
               {v.readyCount}
@@ -417,76 +453,6 @@ export default function Hub() {
             {(v.ready || []).map((r: any, idx0: number) => (
               <Fragment key={idx0}>
                 <div style={{ borderTop: r.rule }}>
-                  {r.isLink ? (
-                    <>
-                      <a
-                        className="hb-row"
-                        style={{
-                          textDecoration: "none",
-                          color: "#1E1B2E",
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "14px",
-                          padding: "14px 16px",
-                        }}
-                        href="#"
-                        onClick={(e: any) => {
-                          e.preventDefault();
-                          if (r.href) go(r.href);
-                        }}
-                      >
-                        <span
-                          style={{
-                            width: "44px",
-                            height: "44px",
-                            flex: "none",
-                            borderRadius: "14px",
-                            background: r.bg,
-                            color: r.ink,
-                            fontFamily: "Figtree, system-ui, sans-serif",
-                            fontSize: "15px",
-                            fontWeight: "800",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                          }}
-                        >
-                          {r.mark}
-                        </span>
-                        <span
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: "3px",
-                            flex: "1",
-                            minWidth: "0",
-                          }}
-                        >
-                          <span
-                            style={{ fontSize: "15.5px", fontWeight: "700", lineHeight: "1.25" }}
-                          >
-                            {r.title}
-                          </span>
-                          <span style={{ fontSize: "13.5px", fontWeight: "600", color: r.metaInk }}>
-                            {r.meta}
-                          </span>
-                        </span>
-                        <span
-                          style={{
-                            flex: "none",
-                            fontSize: "13px",
-                            fontWeight: "800",
-                            borderRadius: "999px",
-                            padding: "7px 12px",
-                            background: r.pillBg,
-                            color: r.pillInk,
-                          }}
-                        >
-                          {r.pill}
-                        </span>
-                      </a>
-                    </>
-                  ) : null}
                   {r.isCode ? (
                     <>
                       <button
@@ -608,129 +574,61 @@ export default function Hub() {
                 </div>
               </Fragment>
             ))}
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "baseline",
-              marginTop: "32px",
-              padding: "0 4px",
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "Figtree, system-ui, sans-serif",
-                fontSize: "19px",
-                fontWeight: "800",
-                letterSpacing: "-0.02em",
-              }}
-            >
-              {"Use your points"}
-            </span>
-            <a
-              style={{ fontSize: "14px", fontWeight: "700", textDecoration: "none" }}
-              href="#"
-              onClick={(e: any) => e.preventDefault()}
-            >
-              {"See all"}
-            </a>
-          </div>
-          <div
-            className="hb-rise hb-d2"
-            style={{
-              marginTop: "12px",
-              background: "#FFFFFF",
-              border: "1px solid #E9E5F4",
-              borderRadius: "22px",
-              overflow: "hidden",
-              boxShadow: "0 6px 18px rgba(76,52,140,0.06)",
-            }}
-          >
-            {(v.spend || []).map((u: any, idx0: number) => (
-              <Fragment key={idx0}>
-                <a
-                  className="hb-row"
+            {v.noActive ? (
+              <>
+                <div
                   style={{
-                    textDecoration: "none",
-                    color: "#1E1B2E",
+                    padding: "18px 16px",
                     display: "flex",
                     alignItems: "center",
                     gap: "14px",
-                    padding: "12px 16px",
-                    borderTop: u.rule,
-                  }}
-                  href="#"
-                  onClick={(e: any) => {
-                    e.preventDefault();
-                    if (u.href) go(u.href);
                   }}
                 >
                   <span
                     style={{
-                      width: "52px",
-                      height: "52px",
+                      width: "44px",
+                      height: "44px",
                       flex: "none",
                       borderRadius: "14px",
-                      background: u.bg,
-                      color: u.ink,
-                      fontSize: "9.5px",
-                      fontWeight: "800",
-                      letterSpacing: "0.06em",
-                      textAlign: "center",
-                      lineHeight: "1.2",
+                      background: "#F0ECFF",
+                      color: "#6C3FFA",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
                   >
-                    {u.ph}
+                    <svg
+                      aria-hidden="true"
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4z"></path>
+                    </svg>
                   </span>
-                  <span
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "3px",
-                      flex: "1",
-                      minWidth: "0",
-                    }}
-                  >
-                    <span style={{ fontSize: "15.5px", fontWeight: "700", lineHeight: "1.25" }}>
-                      {u.name}
+                  <span style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                    <span style={{ fontSize: "15px", fontWeight: "700" }}>
+                      {"No active rewards"}
                     </span>
-                    <span style={{ fontSize: "13.5px", fontWeight: "600", color: "#6B6880" }}>
-                      {u.shop}
-                    </span>
-                  </span>
-                  <span
-                    style={{
-                      flex: "none",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "5px",
-                      fontSize: "13px",
-                      fontWeight: "800",
-                      borderRadius: "999px",
-                      padding: "5px 10px 5px 6px",
-                      background: u.pillBg,
-                      color: u.pillInk,
-                    }}
-                  >
                     <span
                       style={{
-                        width: "14px",
-                        height: "14px",
-                        borderRadius: "50%",
-                        background: "#6C3FFA",
-                        boxShadow: "inset 0 0 0 3px #C0F402",
-                        opacity: u.dotOp,
+                        fontSize: "13.5px",
+                        fontWeight: "500",
+                        color: "#6B6880",
+                        lineHeight: "1.35",
                       }}
-                    ></span>
-                    {u.pill}
+                    >
+                      {"Use your points on a reward and its code shows here."}
+                    </span>
                   </span>
-                </a>
-              </Fragment>
-            ))}
+                </div>
+              </>
+            ) : null}
           </div>
           <div
             style={{
@@ -983,78 +881,137 @@ export default function Hub() {
               </Fragment>
             ))}
           </div>
-          <Link
-            className="hb-press"
+          <div
             style={{
-              textDecoration: "none",
-              color: "#1E1B2E",
-              marginTop: "16px",
-              background: "#FFFFFF",
-              border: "1px solid #E9E5F4",
-              borderRadius: "22px",
-              padding: "14px 16px",
               display: "flex",
-              alignItems: "center",
-              gap: "14px",
+              justifyContent: "space-between",
+              alignItems: "baseline",
+              marginTop: "32px",
+              padding: "0 4px",
             }}
-            to="/haiba/points"
           >
             <span
               style={{
-                width: "44px",
-                height: "44px",
-                flex: "none",
-                borderRadius: "14px",
-                background: "#F0ECFF",
-                color: "#6C3FFA",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                fontFamily: "Figtree, system-ui, sans-serif",
+                fontSize: "19px",
+                fontWeight: "800",
+                letterSpacing: "-0.02em",
               }}
             >
-              <svg
-                aria-hidden="true"
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"></path>
-              </svg>
+              {"Where to use your points"}
             </span>
-            <span
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "2px",
-                flex: "1",
-                minWidth: "0",
-              }}
+            <a
+              style={{ fontSize: "14px", fontWeight: "700", textDecoration: "none" }}
+              href="#"
+              onClick={(e: any) => e.preventDefault()}
             >
-              <span style={{ fontSize: "15.5px", fontWeight: "700" }}>{"How points work"}</span>
-              <span style={{ fontSize: "13px", fontWeight: "500", color: "#6B6880" }}>
-                {"40 a visit. 5x on every 5th visit."}
-              </span>
-            </span>
-            <svg
-              aria-hidden="true"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#A9A6B8"
-              strokeWidth="2.4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              style={{ flex: "none" }}
-            >
-              <path d="M9 6l6 6-6 6"></path>
-            </svg>
-          </Link>
+              {"See all"}
+            </a>
+          </div>
+          <div
+            style={{
+              fontSize: "13.5px",
+              fontWeight: "500",
+              color: "#6B6880",
+              marginTop: "4px",
+              padding: "0 4px",
+            }}
+          >
+            {"Free items at 18 shops. Tap one to get a code."}
+          </div>
+          <div
+            className="hb-pops"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+              gap: "10px",
+              marginTop: "12px",
+            }}
+          >
+            {(v.spend || []).map((u: any, idx0: number) => (
+              <Fragment key={idx0}>
+                <a
+                  className="hb-press"
+                  style={{
+                    textDecoration: "none",
+                    color: "#1E1B2E",
+                    background: "#FFFFFF",
+                    border: "1px solid #E9E5F4",
+                    borderRadius: "16px",
+                    overflow: "hidden",
+                    display: "flex",
+                    flexDirection: "column",
+                    boxShadow: "0 6px 16px rgba(76,52,140,0.06)",
+                  }}
+                  href="#"
+                  onClick={(e: any) => {
+                    e.preventDefault();
+                    if (u.href) go(u.href);
+                  }}
+                >
+                  <span
+                    style={{
+                      height: "76px",
+                      background: u.bg,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Artwork
+                      src={u.logo}
+                      alt={u.brand}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
+                        display: "block",
+                      }}
+                    />
+                  </span>
+                  <span
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "6px",
+                      padding: "9px 10px 10px 10px",
+                      borderTop: "1px solid #F1EFF7",
+                    }}
+                  >
+                    <span style={{ fontSize: "13.5px", fontWeight: "700", lineHeight: "1.2" }}>
+                      {u.name}
+                    </span>
+                    <span
+                      style={{
+                        alignSelf: "flex-start",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "4px",
+                        fontSize: "12px",
+                        fontWeight: "800",
+                        borderRadius: "999px",
+                        padding: "3px 8px 3px 4px",
+                        background: u.pillBg,
+                        color: u.pillInk,
+                      }}
+                    >
+                      <span
+                        style={{
+                          width: "12px",
+                          height: "12px",
+                          borderRadius: "50%",
+                          background: "#6C3FFA",
+                          boxShadow: "inset 0 0 0 2.5px #C0F402",
+                          opacity: u.dotOp,
+                        }}
+                      ></span>
+                      {u.pts}
+                    </span>
+                  </span>
+                </a>
+              </Fragment>
+            ))}
+          </div>
         </div>
         <div className="hb-fixed-bottom">
           <div className="hb-fixed-inner">
