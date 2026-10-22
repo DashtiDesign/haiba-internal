@@ -190,7 +190,7 @@ export default function Hub() {
                 marginTop: "2px",
                 fontSize: "13px",
                 fontWeight: "600",
-                color: "#4F25D6",
+                color: "#1E1B2E",
                 background: "#FFFFFF",
                 border: "1px solid #E6DFFB",
                 borderRadius: "999px",
