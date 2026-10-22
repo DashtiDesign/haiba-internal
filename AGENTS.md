@@ -13,3 +13,4 @@
 - Use the shared MotionExperience layer for canvas animation hooks and control feedback; use Motion React at explicit panel boundaries so animations preserve inline transforms and fixed-bottom layout.
 - Keep text-bearing entrance animations fully opaque and preserve decorative baseline opacity; motion must not reduce foreground/background contrast.
 - Disable legacy canvas CSS animations before hydration and supply initial animated positions in styles so first paint is complete; preload route chunks on navigation intent.
+- Deliver canvas bird images through the shared Artwork component and immutable WebP asset registry; preserve intrinsic dimensions and preload only initial route artwork to avoid late layout shifts and competing downloads.

@@ -1,5 +1,6 @@
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board "Basket.dc.html". Styles are copied value for value.
+import Artwork from "../Artwork";
 import { Fragment } from "react";
 import { Link, useNavigate } from "../nav";
 import { useHaiba } from "../store";
@@ -285,7 +286,7 @@ export default function Basket() {
                         color: "#6B6B78",
                       }}
                     >
-                      <img
+                      <Artwork priority
                         src="/haiba/birds/14-sit.png"
                         alt=""
                         style={{ height: "130px", width: "auto", display: "block" }}
@@ -711,7 +712,7 @@ export default function Basket() {
                 justifyContent: "center",
               }}
             >
-              <img
+              <Artwork priority
                 src={v.heroSrc}
                 alt=""
                 style={{
@@ -983,7 +984,7 @@ export default function Basket() {
                       ) : null}
                       {c.acc ? (
                         <>
-                          <img
+                          <Artwork
                             src="/haiba/birds/15-receipt.png"
                             alt=""
                             className="hb-pop"
@@ -1063,7 +1064,7 @@ export default function Basket() {
                             {c.pts}
                             {" points are back in your wallet."}
                           </div>
-                          <img
+                          <Artwork
                             src="/haiba/birds/16-torn.png"
                             alt=""
                             className="hb-pop"

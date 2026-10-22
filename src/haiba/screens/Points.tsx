@@ -1,5 +1,6 @@
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board "Points.dc.html". Styles are copied value for value.
+import Artwork from "../Artwork";
 import { Fragment } from "react";
 import MotionReveal from "../MotionReveal";
 import { Link, useNavigate } from "../nav";
@@ -116,7 +117,7 @@ export default function Points() {
                 justifyContent: "center",
               }}
             >
-              <img
+              <Artwork priority
                 src="/haiba/birds/06-coin.png"
                 alt="The Unipal bird tossing a points coin"
                 style={{
