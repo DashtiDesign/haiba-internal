@@ -252,18 +252,37 @@ export default function Welcome() {
             <>
               <div className={v.inClass} style={{ position: "absolute", inset: "0" }}>
                 <div
+                  className="hb-rise hb-d1"
                   style={{
                     position: "absolute",
                     left: "22px",
                     right: "22px",
-                    top: "40px",
+                    top: "30px",
                     background: "#F7F5FC",
-                    borderRadius: "22px",
-                    padding: "18px",
+                    borderRadius: "20px",
+                    padding: "14px 16px 16px 16px",
                   }}
                 >
-                  <div style={{ fontSize: "14px", fontWeight: "700", color: "#6B6880" }}>
-                    {"Caribou Coffee"}
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <span style={{ fontSize: "15px", fontWeight: "700" }}>{"Caribou Coffee"}</span>
+                    <span
+                      style={{
+                        fontSize: "13px",
+                        fontWeight: "700",
+                        color: "#6C3FFA",
+                        background: "#FFFFFF",
+                        borderRadius: "999px",
+                        padding: "4px 10px",
+                      }}
+                    >
+                      {"3 of 5 visits"}
+                    </span>
                   </div>
                   <div
                     className="hb-stamps"
@@ -306,28 +325,76 @@ export default function Welcome() {
                   </div>
                 </div>
                 <div
+                  className="hb-pop hb-d3"
+                  style={{
+                    position: "absolute",
+                    left: "22px",
+                    top: "186px",
+                    transformOrigin: "left center",
+                  }}
+                >
+                  <div
+                    style={{
+                      background: "#1E1B2E",
+                      color: "#FFFFFF",
+                      borderRadius: "18px",
+                      padding: "12px 14px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                      transform: "rotate(-3deg)",
+                      boxShadow: "0 12px 24px rgba(30,27,46,0.25)",
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                        borderRadius: "50%",
+                        background: "#C0F402",
+                        color: "#1F2600",
+                        fontSize: "12px",
+                        fontWeight: "800",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {"5x"}
+                    </span>
+                    <span style={{ display: "flex", flexDirection: "column" }}>
+                      <span style={{ fontSize: "16px", fontWeight: "800", color: "#C0F402" }}>
+                        {"+200 points"}
+                      </span>
+                      <span style={{ fontSize: "12.5px", fontWeight: "500", color: "#CFC9E0" }}>
+                        {"On your 5th visit here"}
+                      </span>
+                    </span>
+                  </div>
+                </div>
+                <div
                   className="hb-rise hb-d3"
                   style={{
                     position: "absolute",
                     left: "22px",
-                    right: "160px",
-                    bottom: "30px",
-                    fontSize: "14px",
+                    bottom: "26px",
+                    fontSize: "13.5px",
                     fontWeight: "600",
-                    color: "#4A4660",
-                    lineHeight: "1.4",
+                    color: "#6B6880",
+                    lineHeight: "1.35",
+                    maxWidth: "150px",
                   }}
                 >
                   {"Counted per shop, like a stamp card."}
                 </div>
                 <span
                   className="hb-rise hb-d2"
-                  style={{ position: "absolute", right: "8px", bottom: "-34px", display: "block" }}
+                  style={{ position: "absolute", right: "4px", bottom: "-30px", display: "block" }}
                 >
                   <Artwork
                     src="/haiba/birds/08-stamp.png"
                     alt=""
-                    style={{ height: "220px", width: "auto", display: "block" }}
+                    style={{ height: "200px", width: "auto", display: "block" }}
                   />
                 </span>
               </div>
