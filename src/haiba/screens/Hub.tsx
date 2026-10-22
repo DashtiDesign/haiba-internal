@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import { Link, useNavigate } from "../nav";
 import { useHaiba } from "../store";
 import Artwork from "../Artwork";
+import haibaLogo from "@/assets/haiba/logo-purple.svg.asset.json";
 import { useVals } from "../logic/hub";
 
 export default function Hub() {
@@ -56,7 +57,7 @@ export default function Hub() {
               width: "640px",
               height: "560px",
               transform: "rotate(-14deg)",
-              backgroundImage: "url(/haiba/logo-purple.svg)",
+              backgroundImage: `url(${haibaLogo.url})`,
               backgroundSize: "64px auto",
               backgroundRepeat: "space",
               opacity: "0.08",
@@ -234,7 +235,7 @@ export default function Hub() {
               }}
             >
               <Artwork
-                src="/haiba/logo-purple.svg"
+                src={haibaLogo.url}
                 alt="Haiba"
                 style={{ height: "13px", width: "auto", display: "block" }}
               />
