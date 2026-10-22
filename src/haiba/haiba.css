@@ -218,3 +218,8 @@
 .hb-fixed-bottom .hb-pop[style*="bottom: 170px"] {
   bottom: calc(158px + env(safe-area-inset-bottom, 0px)) !important;
 }
+
+/* CTA docks paint their own safe-area padding so they sit flush on the screen edge. */
+.hb-fixed-bottom.hb-cta-dock {
+  bottom: 0;
+}
