@@ -37,62 +37,6 @@ export default function Hub() {
               "radial-gradient(circle at 50% 62%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 40%), linear-gradient(180deg, #D6C6FF 0%, #E4DAFF 70%, #EAE3FF 100%)",
           }}
         ></div>
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            left: "0",
-            right: "0",
-            top: "0",
-            height: "296px",
-            backgroundImage: "radial-gradient(rgba(108,63,250,0.16) 1.2px, transparent 1.3px)",
-            backgroundSize: "18px 18px",
-            WebkitMaskImage: "linear-gradient(180deg, #000 0%, rgba(0,0,0,0) 85%)",
-            maskImage: "linear-gradient(180deg, #000 0%, rgba(0,0,0,0) 85%)",
-          }}
-        ></div>
-        <svg
-          aria-hidden="true"
-          width="26"
-          height="26"
-          viewBox="0 0 24 24"
-          style={{ position: "absolute", left: "92px", top: "108px" }}
-        >
-          <path
-            d="M12 1.5c.7 5.6 2.9 7.8 8.5 8.5-5.6.7-7.8 2.9-8.5 8.5-.7-5.6-2.9-7.8-8.5-8.5 5.6-.7 7.8-2.9 8.5-8.5z"
-            fill="#C0F402"
-            stroke="#6C3FFA"
-            strokeWidth="1.2"
-            strokeLinejoin="round"
-          ></path>
-        </svg>
-        <svg
-          aria-hidden="true"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          style={{ position: "absolute", left: "116px", top: "80px" }}
-        >
-          <path
-            d="M12 1.5c.7 5.6 2.9 7.8 8.5 8.5-5.6.7-7.8 2.9-8.5 8.5-.7-5.6-2.9-7.8-8.5-8.5 5.6-.7 7.8-2.9 8.5-8.5z"
-            fill="#FFFFFF"
-          ></path>
-        </svg>
-        <svg
-          aria-hidden="true"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          style={{ position: "absolute", left: "282px", top: "162px" }}
-        >
-          <path
-            d="M12 1.5c.7 5.6 2.9 7.8 8.5 8.5-5.6.7-7.8 2.9-8.5 8.5-.7-5.6-2.9-7.8-8.5-8.5 5.6-.7 7.8-2.9 8.5-8.5z"
-            fill="#C0F402"
-            stroke="#6C3FFA"
-            strokeWidth="1.2"
-            strokeLinejoin="round"
-          ></path>
-        </svg>
         <svg
           aria-hidden="true"
           width="390"
