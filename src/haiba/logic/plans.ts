@@ -79,7 +79,7 @@ export function useVals() {
     table: table,
     freeColInk: isHaiba ? "#6B6880" : "#1E1B2E",
     freeColBg: isHaiba ? "#FFFFFF" : "#F4F3F7",
-    haibaColBg: isHaiba ? "#F0ECFF" : "#FFFFFF",
+    haibaColBg: isHaiba ? "#F6F3FF" : "#FFFFFF",
     ctaTitle: isHaiba ? "Join Haiba" : "Upgrade to Haiba",
   };
 }

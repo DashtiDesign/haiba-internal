@@ -104,7 +104,7 @@ export default function Plans() {
                 style={{
                   marginTop: "18px",
                   background: "#FFFFFF",
-                  borderRadius: "30px",
+                  borderRadius: "16px",
                   overflow: "hidden",
                   boxShadow: "0 18px 40px rgba(76,52,140,0.16)",
                 }}
@@ -318,7 +318,7 @@ export default function Plans() {
             style={{
               marginTop: "26px",
               background: "#FFFFFF",
-              borderRadius: "28px",
+              borderRadius: "16px",
               padding: "18px 16px 20px 16px",
               boxShadow: "0 10px 26px rgba(76,52,140,0.08)",
             }}
@@ -515,7 +515,8 @@ export default function Plans() {
             style={{
               marginTop: "26px",
               background: "#FFFFFF",
-              borderRadius: "28px",
+              border: "1px solid #E2DCF2",
+              borderRadius: "16px",
               overflow: "hidden",
               boxShadow: "0 10px 26px rgba(76,52,140,0.08)",
             }}
@@ -549,9 +550,9 @@ export default function Plans() {
                   borderLeft: "1px solid #ECEAF3",
                   textAlign: "center",
                   fontSize: "15px",
-                  fontWeight: "700",
-                  color: "#6C3FFA",
-                  background: v.haibaColBg,
+                  fontWeight: "800",
+                  color: "#FFFFFF",
+                  background: "#6C3FFA",
                 }}
               >
                 {"Haiba"}
@@ -634,7 +635,7 @@ export default function Plans() {
             <div
               style={{
                 background: "#FFFFFF",
-                borderRadius: "20px",
+                borderRadius: "16px",
                 padding: "16px",
                 display: "flex",
                 gap: "14px",
