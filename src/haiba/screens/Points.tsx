@@ -207,7 +207,9 @@ export default function Points() {
             className="hb-rise hb-d2"
             style={{ fontSize: "17px", fontWeight: "500", color: "#4A4660", marginTop: "8px" }}
           >
-            {"40 points each time you use a Unipal offer. Tap a rule to see an example."}
+            {
+              "Haiba members earn points every time they use a Unipal offer. Tap a rule to see an example."
+            }
           </div>
           <div
             className="hb-stagger"
@@ -333,144 +335,6 @@ export default function Points() {
                 </div>
               </Fragment>
             ))}
-          </div>
-          <div className="hb-rise hb-d3" style={{ marginTop: "26px", padding: "0 4px" }}>
-            <div
-              style={{
-                fontSize: "13px",
-                fontWeight: "800",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: "#6C3FFA",
-              }}
-            >
-              {"Good to know"}
-            </div>
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "14px", marginTop: "14px" }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                <span
-                  style={{
-                    width: "36px",
-                    height: "36px",
-                    flex: "none",
-                    borderRadius: "50%",
-                    background: "#FFFFFF",
-                    color: "#6C3FFA",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <svg
-                    aria-hidden="true"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <rect x="3.5" y="5" width="17" height="15.5" rx="3"></rect>
-                    <path d="M3.5 10h17"></path>
-                    <path d="M8 3v4"></path>
-                    <path d="M16 3v4"></path>
-                  </svg>
-                </span>
-                <span
-                  style={{
-                    fontSize: "15.5px",
-                    fontWeight: "600",
-                    lineHeight: "1.35",
-                    color: "#1E1B2E",
-                  }}
-                >
-                  {"Every visit earns points, even 4 shops in 1 day"}
-                </span>
-              </div>
-              <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                <span
-                  style={{
-                    width: "36px",
-                    height: "36px",
-                    flex: "none",
-                    borderRadius: "50%",
-                    background: "#FFFFFF",
-                    color: "#6C3FFA",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <svg
-                    aria-hidden="true"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <circle cx="12" cy="12" r="8.5"></circle>
-                    <path d="M12 7.5V12l3 2"></path>
-                  </svg>
-                </span>
-                <span
-                  style={{
-                    fontSize: "15.5px",
-                    fontWeight: "600",
-                    lineHeight: "1.35",
-                    color: "#1E1B2E",
-                  }}
-                >
-                  {"Points last 6 months after your last visit or reward"}
-                </span>
-              </div>
-              <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                <span
-                  style={{
-                    width: "36px",
-                    height: "36px",
-                    flex: "none",
-                    borderRadius: "50%",
-                    background: "#FFFFFF",
-                    color: "#6C3FFA",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <svg
-                    aria-hidden="true"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M12 3l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.8z"></path>
-                  </svg>
-                </span>
-                <span
-                  style={{
-                    fontSize: "15.5px",
-                    fontWeight: "600",
-                    lineHeight: "1.35",
-                    color: "#1E1B2E",
-                  }}
-                >
-                  {"Only Haiba members earn points"}
-                </span>
-              </div>
-            </div>
           </div>
         </div>
         <div className="hb-fixed-bottom">

@@ -16,7 +16,16 @@ export function useVals() {
       title: "500 welcome points",
       sub: "Enough for your first reward on day one",
       example:
-        "Join today and 500 points land in your wallet. A soft drink at Jasmi’s costs 350, so you can use a reward before your first visit.",
+        "Join today and 500 points land on your hub. An upsize at Coffee Bean costs 300, so you can use a reward before your first visit.",
+    },
+    {
+      mark: "40",
+      bg: "#F0ECFF",
+      ink: "#6C3FFA",
+      title: "40 points every visit",
+      sub: "At every shop, as often as you go. No daily limit",
+      example:
+        "Coffee Bean in the morning, Wingman at lunch, VOX at night, Grip after. 4 shops in 1 day, points at all 4.",
     },
     {
       mark: "2x",
@@ -25,7 +34,7 @@ export function useVals() {
       title: "Double points on your first 2 visits",
       sub: "At every shop. Try somewhere new, earn 80",
       example:
-        "Jasmi’s: visit 1 earns 80, visit 2 earns 80. From visit 3 you earn 40. Then the same again at Caribou, VOX and every other shop.",
+        "Coffee Bean: visit 1 earns 80, visit 2 earns 80. From visit 3 you earn 40. Then the same again at Wingman, VOX and every other shop.",
     },
     {
       mark: "5x",
@@ -34,7 +43,7 @@ export function useVals() {
       title: "5x on every 5th visit",
       sub: "Counted per shop, like a stamp card. 200 points",
       example:
-        "Jasmi’s: visit 5 earns 200, visit 10 earns 200 again. Your first 5 visits at one shop add up to 440 points.",
+        "Coffee Bean: visit 5 earns 200, visit 10 earns 200 again. Your first 5 visits at one shop add up to 440 points.",
     },
     {
       mark: "★",
@@ -43,7 +52,16 @@ export function useVals() {
       title: "Spend points at 18 shops",
       sub: "Free drinks, meals, popcorn and more",
       example:
-        "Free upgrade at Caribou, 200. Soft drink at Jasmi’s, 350. Popcorn at VOX, 600. Confirm, then show the code at the till.",
+        "Upsize at Coffee Bean, 300. Shake at Grip, 500. Popcorn at VOX, 600. Tap Use, then show the code at the shop.",
+    },
+    {
+      mark: "6m",
+      bg: "#F0ECFF",
+      ink: "#6C3FFA",
+      title: "Points last 6 months",
+      sub: "Counted from your last visit or reward",
+      example:
+        "Use an offer or a reward at least once every 6 months and your points stay. We remind you 30 days and 7 days before they go.",
     },
   ];
   return {
