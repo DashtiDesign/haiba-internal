@@ -205,95 +205,6 @@ export default function Hub() {
               {v.memberLine}
             </span>
           </div>
-          <div
-            className="hb-pops"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-              gap: "8px",
-              marginTop: "20px",
-              padding: "0 22px",
-            }}
-          >
-            {(v.actions || []).map((a: any, idx0: number) => (
-              <Fragment key={idx0}>
-                <a
-                  className="hb-press"
-                  style={{
-                    textDecoration: "none",
-                    color: "#1E1B2E",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "8px",
-                    fontSize: "13.5px",
-                    fontWeight: "700",
-                  }}
-                  href="#"
-                  onClick={(e: any) => {
-                    e.preventDefault();
-                    if (a.href) go(a.href);
-                  }}
-                >
-                  <span
-                    style={{
-                      position: "relative",
-                      width: "56px",
-                      height: "56px",
-                      borderRadius: "50%",
-                      background: "#FFFFFF",
-                      color: "#6C3FFA",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      boxShadow: "0 6px 16px rgba(76,52,140,0.12)",
-                    }}
-                  >
-                    <svg
-                      aria-hidden="true"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d={a.icon}></path>
-                    </svg>
-                    {a.hasBadge ? (
-                      <>
-                        <span
-                          style={{
-                            position: "absolute",
-                            top: "-3px",
-                            right: "-3px",
-                            minWidth: "22px",
-                            height: "22px",
-                            boxSizing: "border-box",
-                            padding: "0 6px",
-                            borderRadius: "999px",
-                            background: "#C0F402",
-                            color: "#1F2600",
-                            border: "2px solid #F3F0FA",
-                            fontSize: "12px",
-                            fontWeight: "800",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                          }}
-                        >
-                          {a.badge}
-                        </span>
-                      </>
-                    ) : null}
-                  </span>{" "}
-                  {a.label}{" "}
-                </a>
-              </Fragment>
-            ))}
-          </div>
           <a
             className="hb-press hb-rise hb-d2"
             style={{
@@ -301,7 +212,7 @@ export default function Hub() {
               color: "#1F2600",
               background: "#C0F402",
               borderRadius: "24px",
-              marginTop: "30px",
+              marginTop: "28px",
               padding: "20px 18px 18px 18px",
               position: "relative",
               overflow: "hidden",
@@ -505,6 +416,239 @@ export default function Hub() {
           >
             {(v.ready || []).map((r: any, idx0: number) => (
               <Fragment key={idx0}>
+                <div style={{ borderTop: r.rule }}>
+                  {r.isLink ? (
+                    <>
+                      <a
+                        className="hb-row"
+                        style={{
+                          textDecoration: "none",
+                          color: "#1E1B2E",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "14px",
+                          padding: "14px 16px",
+                        }}
+                        href="#"
+                        onClick={(e: any) => {
+                          e.preventDefault();
+                          if (r.href) go(r.href);
+                        }}
+                      >
+                        <span
+                          style={{
+                            width: "44px",
+                            height: "44px",
+                            flex: "none",
+                            borderRadius: "14px",
+                            background: r.bg,
+                            color: r.ink,
+                            fontFamily: "Figtree, system-ui, sans-serif",
+                            fontSize: "15px",
+                            fontWeight: "800",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          {r.mark}
+                        </span>
+                        <span
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: "3px",
+                            flex: "1",
+                            minWidth: "0",
+                          }}
+                        >
+                          <span
+                            style={{ fontSize: "15.5px", fontWeight: "700", lineHeight: "1.25" }}
+                          >
+                            {r.title}
+                          </span>
+                          <span style={{ fontSize: "13.5px", fontWeight: "600", color: r.metaInk }}>
+                            {r.meta}
+                          </span>
+                        </span>
+                        <span
+                          style={{
+                            flex: "none",
+                            fontSize: "13px",
+                            fontWeight: "800",
+                            borderRadius: "999px",
+                            padding: "7px 12px",
+                            background: r.pillBg,
+                            color: r.pillInk,
+                          }}
+                        >
+                          {r.pill}
+                        </span>
+                      </a>
+                    </>
+                  ) : null}
+                  {r.isCode ? (
+                    <>
+                      <button
+                        onClick={r.tap}
+                        aria-expanded={r.openStr}
+                        className="hb-row"
+                        style={{
+                          font: "inherit",
+                          width: "100%",
+                          textAlign: "left",
+                          border: "0",
+                          background: "transparent",
+                          color: "#1E1B2E",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "14px",
+                          padding: "14px 16px",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <span
+                          style={{
+                            width: "44px",
+                            height: "44px",
+                            flex: "none",
+                            borderRadius: "14px",
+                            background: r.bg,
+                            color: r.ink,
+                            fontFamily: "Figtree, system-ui, sans-serif",
+                            fontSize: "15px",
+                            fontWeight: "800",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          {r.mark}
+                        </span>
+                        <span
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: "3px",
+                            flex: "1",
+                            minWidth: "0",
+                          }}
+                        >
+                          <span
+                            style={{ fontSize: "15.5px", fontWeight: "700", lineHeight: "1.25" }}
+                          >
+                            {r.title}
+                          </span>
+                          <span style={{ fontSize: "13.5px", fontWeight: "600", color: r.metaInk }}>
+                            {r.meta}
+                          </span>
+                        </span>
+                        <span
+                          style={{
+                            flex: "none",
+                            fontSize: "13px",
+                            fontWeight: "800",
+                            borderRadius: "999px",
+                            padding: "7px 12px",
+                            background: r.pillBg,
+                            color: r.pillInk,
+                          }}
+                        >
+                          {r.pill}
+                        </span>
+                      </button>
+                      {r.open ? (
+                        <>
+                          <div
+                            className="hb-pop"
+                            style={{
+                              margin: "0 16px 16px 16px",
+                              background: "linear-gradient(135deg, #6C3FFA 0%, #4F25D6 100%)",
+                              borderRadius: "18px",
+                              padding: "14px 16px 16px 16px",
+                              color: "#FFFFFF",
+                              display: "flex",
+                              flexDirection: "column",
+                              gap: "10px",
+                              transformOrigin: "top center",
+                            }}
+                          >
+                            <span
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                fontSize: "13px",
+                                fontWeight: "700",
+                                color: "#E4DBFF",
+                              }}
+                            >
+                              <span>{"Show this at the till"}</span>
+                              <span>{r.useBy}</span>
+                            </span>
+                            <span
+                              style={{
+                                background: "#FFFFFF",
+                                color: "#1E1B2E",
+                                borderRadius: "14px",
+                                padding: "12px",
+                                textAlign: "center",
+                                fontFamily: "Figtree, system-ui, sans-serif",
+                                fontSize: "26px",
+                                fontWeight: "800",
+                                letterSpacing: "0.08em",
+                              }}
+                            >
+                              {r.code}
+                            </span>
+                          </div>
+                        </>
+                      ) : null}
+                    </>
+                  ) : null}
+                </div>
+              </Fragment>
+            ))}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "baseline",
+              marginTop: "32px",
+              padding: "0 4px",
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "Figtree, system-ui, sans-serif",
+                fontSize: "19px",
+                fontWeight: "800",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              {"Use your points"}
+            </span>
+            <a
+              style={{ fontSize: "14px", fontWeight: "700", textDecoration: "none" }}
+              href="#"
+              onClick={(e: any) => e.preventDefault()}
+            >
+              {"See all"}
+            </a>
+          </div>
+          <div
+            className="hb-rise hb-d2"
+            style={{
+              marginTop: "12px",
+              background: "#FFFFFF",
+              border: "1px solid #E9E5F4",
+              borderRadius: "22px",
+              overflow: "hidden",
+              boxShadow: "0 6px 18px rgba(76,52,140,0.06)",
+            }}
+          >
+            {(v.spend || []).map((u: any, idx0: number) => (
+              <Fragment key={idx0}>
                 <a
                   className="hb-row"
                   style={{
@@ -513,32 +657,34 @@ export default function Hub() {
                     display: "flex",
                     alignItems: "center",
                     gap: "14px",
-                    padding: "14px 16px",
-                    borderTop: r.rule,
+                    padding: "12px 16px",
+                    borderTop: u.rule,
                   }}
                   href="#"
                   onClick={(e: any) => {
                     e.preventDefault();
-                    if (r.href) go(r.href);
+                    if (u.href) go(u.href);
                   }}
                 >
                   <span
                     style={{
-                      width: "44px",
-                      height: "44px",
+                      width: "52px",
+                      height: "52px",
                       flex: "none",
                       borderRadius: "14px",
-                      background: r.bg,
-                      color: r.ink,
-                      fontFamily: "Figtree, system-ui, sans-serif",
-                      fontSize: "15px",
+                      background: u.bg,
+                      color: u.ink,
+                      fontSize: "9.5px",
                       fontWeight: "800",
+                      letterSpacing: "0.06em",
+                      textAlign: "center",
+                      lineHeight: "1.2",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
                   >
-                    {r.mark}
+                    {u.ph}
                   </span>
                   <span
                     style={{
@@ -550,24 +696,37 @@ export default function Hub() {
                     }}
                   >
                     <span style={{ fontSize: "15.5px", fontWeight: "700", lineHeight: "1.25" }}>
-                      {r.title}
+                      {u.name}
                     </span>
-                    <span style={{ fontSize: "13.5px", fontWeight: "600", color: r.metaInk }}>
-                      {r.meta}
+                    <span style={{ fontSize: "13.5px", fontWeight: "600", color: "#6B6880" }}>
+                      {u.shop}
                     </span>
                   </span>
                   <span
                     style={{
                       flex: "none",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "5px",
                       fontSize: "13px",
                       fontWeight: "800",
                       borderRadius: "999px",
-                      padding: "7px 12px",
-                      background: r.pillBg,
-                      color: r.pillInk,
+                      padding: "5px 10px 5px 6px",
+                      background: u.pillBg,
+                      color: u.pillInk,
                     }}
                   >
-                    {r.pill}
+                    <span
+                      style={{
+                        width: "14px",
+                        height: "14px",
+                        borderRadius: "50%",
+                        background: "#6C3FFA",
+                        boxShadow: "inset 0 0 0 3px #C0F402",
+                        opacity: u.dotOp,
+                      }}
+                    ></span>
+                    {u.pill}
                   </span>
                 </a>
               </Fragment>

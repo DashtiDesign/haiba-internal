@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useDC } from "../dc";
 
 export function useVals() {
-  const { state, setState, props, nav } = useDC({ tab: "haiba", stop: 1 });
+  const { state, setState, props, nav } = useDC({ tab: "haiba", stop: 1, sec: 0 });
   useEffect(() => {}, []);
 
   var isHaiba = state.tab === "haiba";
@@ -138,6 +138,21 @@ export function useVals() {
     freeColBg: isHaiba ? "#FFFFFF" : "#F4F3F7",
     haibaColBg: isHaiba ? "#F6F3FF" : "#FFFFFF",
     ctaTitle: isHaiba ? "Join Haiba" : "Upgrade to Haiba",
+    secs: ["Gifts", "Compare", "Your year"].map(function (l, k) {
+      var on = state.sec === k;
+      return {
+        label: l,
+        on: String(on),
+        ink: on ? "#C0F402" : "#3B3654",
+        pick: function () {
+          setState({ sec: k });
+        },
+      };
+    }),
+    secLeft: "calc(4px + " + state.sec + " * (100% - 8px) / 3)",
+    secGifts: state.sec === 0,
+    secCompare: state.sec === 1,
+    secYear: state.sec === 2,
     stops: stops,
     segLeft: "calc(4px + " + i + " * (100% - 8px) / 4)",
     saveTotal: bhd(total),

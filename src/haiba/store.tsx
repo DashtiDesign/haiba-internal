@@ -54,6 +54,7 @@ type Api = {
   base: number; // points before any codes
   available: number; // points not held in codes or used
   liveCodes: number; // codes held and not yet accepted by the shop
+  liveCodeIds: string[]; // ids of those codes, item-index plus count, for example 0-1
   savedRewards: number; // BHD value of rewards the shop accepted
   set: (patch: Partial<HaibaState>) => void;
   join: () => void;
@@ -107,6 +108,7 @@ export function HaibaProvider({ children }: { children: ReactNode }) {
     base,
     available: base - committed,
     liveCodes: liveIds.length,
+    liveCodeIds: liveIds,
     savedRewards: acceptedPoints / 1000,
     set: (patch) => setS((p) => ({ ...p, ...patch })),
     join: () => setS((p) => ({ ...INITIAL, visit: p.visit, member: "new" })),

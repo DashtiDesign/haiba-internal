@@ -4,76 +4,126 @@ import { useEffect } from "react";
 import { useDC } from "../dc";
 
 export function useVals() {
-  const { state, setState, props, nav } = useDC({ qty: [0, 0, 0] });
+  const { state, setState, props, nav } = useDC({
+    ask: -1,
+    codesQty: [0, 0, 0],
+    cancelled: [],
+    accepted: [],
+    done: false,
+  });
   useEffect(() => {}, []);
 
-  var balance = props.available;
+  var balance = props.base;
   var defs = [
     {
       name: "Free upsize",
       sub: "Any drink, one size up",
       pts: 300,
+      value: 0.3,
       ph: "DRINK PHOTO",
       bg: "#EDE4FF",
       ink: "#4F25D6",
+      code: "8K3Q",
     },
     {
       name: "Cookie",
       sub: "Chocolate chip or oat",
       pts: 700,
+      value: 0.7,
       ph: "COOKIE PHOTO",
       bg: "#F6E7D2",
       ink: "#7A4E2D",
+      code: "5TR2",
     },
     {
       name: "Regular drink",
       sub: "Hot or iced, regular size",
       pts: 1900,
+      value: 1.9,
       ph: "DRINK PHOTO",
       bg: "#E3DCD6",
       ink: "#3B2A22",
+      code: "9MX7",
     },
   ];
-  var q = state.qty;
-  var used = 0,
-    count = 0;
+  var cq = (state.codesQty || [0, 0, 0]).slice();
+  while (cq.length < 3) cq.push(0);
+  var cancelled = state.cancelled || [];
+  var accepted = state.accepted || [];
+  var committed = 0;
   defs.forEach(function (d, i) {
-    used += d.pts * q[i];
-    count += q[i];
+    for (var k = 0; k < cq[i]; k++) {
+      if (cancelled.indexOf(i + "-" + k) < 0) committed += d.pts;
+    }
   });
-  var left = balance - used;
+  var left = balance - committed;
   var items = defs.map(function (d, i) {
+    var last = -1;
+    for (var k = cq[i] - 1; k >= 0; k--) {
+      if (cancelled.indexOf(i + "-" + k) < 0) {
+        last = k;
+        break;
+      }
+    }
+    var id = i + "-" + last;
+    var held = last >= 0 && accepted.indexOf(id) < 0;
+    var used = last >= 0 && !held;
     var can = d.pts <= left;
-    var zero = q[i] === 0;
-    var short = d.pts - left;
+    var asking = state.ask === i && !held;
+    var usedCount = 0;
+    for (var k3 = 0; k3 < cq[i]; k3++) {
+      if (accepted.indexOf(i + "-" + k3) >= 0) usedCount++;
+    }
     return {
       name: d.name,
-      sub: zero && !can ? short.toLocaleString("en-US") + " more points needed" : d.sub,
+      sub:
+        !can && !held && !used
+          ? (d.pts - left).toLocaleString("en-US") + " more points needed"
+          : d.sub,
       pts: d.pts.toLocaleString("en-US") + " points",
+      ptsShort: d.pts.toLocaleString("en-US"),
       ph: d.ph,
       bg: d.bg,
       ink: d.ink,
-      ptsBg: can || !zero ? "#F0ECFF" : "#F1F1F4",
-      ptsInk: can || !zero ? "#4F25D6" : "var(--hb-muted-ink)",
-      op: "1",
-      zero: zero,
-      some: !zero,
-      qty: String(q[i]),
+      ptsBg: can || held || used ? "#F0ECFF" : "#F1F1F4",
+      ptsInk: can || held || used ? "#4F25D6" : "var(--hb-muted-ink)",
+      showUse: !held && !used && !asking,
+      isUsed: used && !asking,
+      held: held,
+      asking: asking,
+      askLine:
+        "Use " +
+        d.pts.toLocaleString("en-US") +
+        " points for a " +
+        d.name.toLowerCase() +
+        "? Your code shows here.",
+      useLabel: "Use " + d.pts + " points for " + d.name,
       btnBg: can ? "#1E1B2E" : "#E4E4EA",
       btnInk: can ? "#C0F402" : "#8A8A96",
-      addLabel: "Add " + d.name,
-      addOp: can ? "1" : "0.35",
+      cursor: can ? "pointer" : "default",
+      code: "HB-" + d.code + "-" + (last + 1),
+      savedLine: "You saved BHD " + (d.value * usedCount).toFixed(2),
+      againOp: can ? "1" : "0.4",
       rule: i === defs.length - 1 ? "none" : "1px solid #EFEFF3",
-      add: function () {
-        if (!can) return;
-        var n = q.slice();
-        n[i]++;
-        setState({ qty: n });
+      ask: function () {
+        if (can) setState({ ask: i });
       },
-      remove: function () {
-        var n = q.slice();
-        if (n[i] > 0) n[i]--;
-        setState({ qty: n });
+      notNow: function () {
+        setState({ ask: -1 });
+      },
+      confirm: function () {
+        var n = cq.slice();
+        n[i] = n[i] + 1;
+        setState({ ask: -1, codesQty: n, done: true });
+      },
+      cancel: function () {
+        setState({ cancelled: cancelled.concat([id]) });
+      },
+      accept: function () {
+        setState({ accepted: accepted.concat([id]) });
+      },
+      again: function () {
+        if (can) setState({ ask: i });
       },
     };
   });
@@ -102,9 +152,5 @@ export function useVals() {
     offerPts: "+80",
     balance: left.toLocaleString("en-US"),
     items: items,
-    hasBasket: count > 0,
-    basketLine:
-      count + (count === 1 ? " item" : " items") + " · " + used.toLocaleString("en-US") + " points",
-    basketSub: left.toLocaleString("en-US") + " points left after this",
   };
 }

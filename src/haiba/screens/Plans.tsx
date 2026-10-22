@@ -315,162 +315,121 @@ export default function Plans() {
           ) : null}
           <div
             className="hb-rise hb-d2"
+            role="tablist"
+            aria-label="More about Haiba"
             style={{
-              marginTop: "26px",
+              position: "relative",
+              display: "grid",
+              gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
               background: "#FFFFFF",
-              borderRadius: "16px",
-              padding: "18px 16px 20px 16px",
-              boxShadow: "0 10px 26px rgba(76,52,140,0.08)",
+              borderRadius: "999px",
+              padding: "4px",
+              marginTop: "22px",
+              boxShadow: "0 6px 16px rgba(76,52,140,0.08)",
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", gap: "12px", padding: "0 4px" }}>
-              {v.isHaiba ? (
-                <>
-                  <span
-                    className="hb-pop"
-                    style={{
-                      width: "26px",
-                      height: "26px",
-                      flex: "none",
-                      borderRadius: "50%",
-                      background: "#1E1B2E",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <svg
-                      aria-hidden="true"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#C0F402"
-                      strokeWidth="3.4"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M5 12.5l4.5 4.5L19 7.5"></path>
-                    </svg>
-                  </span>
-                </>
-              ) : null}
-              {v.isFree ? (
-                <>
-                  <span
-                    className="hb-pop"
-                    style={{
-                      width: "26px",
-                      height: "26px",
-                      flex: "none",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: "#6C3FFA",
-                    }}
-                  >
-                    <svg
-                      aria-hidden="true"
-                      width="18"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <rect x="4" y="10" width="16" height="12" rx="3"></rect>
-                      <path
-                        d="M8 10V7a4 4 0 0 1 8 0v3"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.4"
-                      ></path>
-                    </svg>
-                  </span>
-                </>
-              ) : null}
-              <span
+            <span
+              aria-hidden="true"
+              className="hb-ease"
+              style={{
+                position: "absolute",
+                top: "4px",
+                bottom: "4px",
+                left: v.secLeft,
+                width: "calc((100% - 8px) / 3)",
+                borderRadius: "999px",
+                background: "#1E1B2E",
+              }}
+            ></span>
+            {(v.secs || []).map((t: any, idx0: number) => (
+              <Fragment key={idx0}>
+                <button
+                  role="tab"
+                  aria-selected={t.on}
+                  onClick={t.pick}
+                  className="hb-ease"
+                  style={{
+                    position: "relative",
+                    font: "inherit",
+                    fontSize: "14.5px",
+                    fontWeight: "700",
+                    border: "0",
+                    background: "transparent",
+                    padding: "11px 0",
+                    borderRadius: "999px",
+                    cursor: "pointer",
+                    color: t.ink,
+                  }}
+                >
+                  {t.label}
+                </button>
+              </Fragment>
+            ))}
+          </div>
+          {v.secGifts ? (
+            <>
+              <div
+                className="hb-rise"
                 style={{
-                  fontFamily: "Figtree, system-ui, sans-serif",
-                  fontSize: "17px",
-                  fontWeight: "800",
-                  letterSpacing: "-0.01em",
-                  color: "#1E1B2E",
+                  marginTop: "14px",
+                  background: "#FFFFFF",
+                  borderRadius: "16px",
+                  padding: "18px 16px 20px 16px",
+                  boxShadow: "0 10px 26px rgba(76,52,140,0.08)",
                 }}
               >
-                {v.giftHead}
-              </span>
-            </div>
-            <div
-              className="hb-pops"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-                gap: "18px 8px",
-                marginTop: "20px",
-              }}
-            >
-              {(v.gifts || []).map((g: any, idx0: number) => (
-                <Fragment key={idx0}>
-                  <a
-                    className="hb-lift"
-                    style={{
-                      textDecoration: "none",
-                      color: "#1E1B2E",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      gap: "8px",
-                      textAlign: "center",
-                    }}
-                    href="#"
-                    onClick={(e: any) => e.preventDefault()}
-                  >
-                    <span
-                      style={{
-                        position: "relative",
-                        width: "68px",
-                        height: "68px",
-                        borderRadius: "20px",
-                        background: "#FFFFFF",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        boxShadow: "0 0 0 1px #ECE8F5, 0 8px 16px rgba(30,27,46,0.10)",
-                      }}
-                    >
-                      <Artwork
-                        src={g.logo}
-                        alt={g.brand}
-                        style={{
-                          width: "68px",
-                          height: "68px",
-                          borderRadius: "20px",
-                          objectFit: "cover",
-                          display: "block",
-                        }}
-                      />
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "12px", padding: "0 4px" }}
+                >
+                  {v.isHaiba ? (
+                    <>
                       <span
-                        className="hb-ease"
+                        className="hb-pop"
                         style={{
-                          position: "absolute",
-                          right: "-6px",
-                          bottom: "-6px",
                           width: "26px",
                           height: "26px",
+                          flex: "none",
                           borderRadius: "50%",
-                          background: "#FFFFFF",
-                          border: "1.5px solid #D9D6E3",
-                          color: "#1E1B2E",
+                          background: "#1E1B2E",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
-                          opacity: v.lockOp,
-                          transform: `scale(${v.lockScale})`,
                         }}
                       >
                         <svg
                           aria-hidden="true"
-                          width="12"
-                          height="13"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="#C0F402"
+                          strokeWidth="3.4"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                        </svg>
+                      </span>
+                    </>
+                  ) : null}
+                  {v.isFree ? (
+                    <>
+                      <span
+                        className="hb-pop"
+                        style={{
+                          width: "26px",
+                          height: "26px",
+                          flex: "none",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#6C3FFA",
+                        }}
+                      >
+                        <svg
+                          aria-hidden="true"
+                          width="18"
+                          height="20"
                           viewBox="0 0 24 24"
                           fill="currentColor"
                         >
@@ -479,522 +438,586 @@ export default function Plans() {
                             d="M8 10V7a4 4 0 0 1 8 0v3"
                             fill="none"
                             stroke="currentColor"
-                            strokeWidth="2.6"
+                            strokeWidth="2.4"
                           ></path>
                         </svg>
+                      </span>
+                    </>
+                  ) : null}
+                  <span
+                    style={{
+                      fontFamily: "Figtree, system-ui, sans-serif",
+                      fontSize: "17px",
+                      fontWeight: "800",
+                      letterSpacing: "-0.01em",
+                      color: "#1E1B2E",
+                    }}
+                  >
+                    {v.giftHead}
+                  </span>
+                </div>
+                <div
+                  className="hb-pops"
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+                    gap: "18px 8px",
+                    marginTop: "20px",
+                  }}
+                >
+                  {(v.gifts || []).map((g: any, idx0: number) => (
+                    <Fragment key={idx0}>
+                      <a
+                        className="hb-lift"
+                        style={{
+                          textDecoration: "none",
+                          color: "#1E1B2E",
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          gap: "8px",
+                          textAlign: "center",
+                        }}
+                        href="#"
+                        onClick={(e: any) => e.preventDefault()}
+                      >
+                        <span
+                          style={{
+                            position: "relative",
+                            width: "68px",
+                            height: "68px",
+                            borderRadius: "20px",
+                            background: "#FFFFFF",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            boxShadow: "0 0 0 1px #ECE8F5, 0 8px 16px rgba(30,27,46,0.10)",
+                          }}
+                        >
+                          <Artwork
+                            src={g.logo}
+                            alt={g.brand}
+                            style={{
+                              width: "68px",
+                              height: "68px",
+                              borderRadius: "20px",
+                              objectFit: "cover",
+                              display: "block",
+                            }}
+                          />
+                          <span
+                            className="hb-ease"
+                            style={{
+                              position: "absolute",
+                              right: "-6px",
+                              bottom: "-6px",
+                              width: "26px",
+                              height: "26px",
+                              borderRadius: "50%",
+                              background: "#FFFFFF",
+                              border: "1.5px solid #D9D6E3",
+                              color: "#1E1B2E",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              opacity: v.lockOp,
+                              transform: `scale(${v.lockScale})`,
+                            }}
+                          >
+                            <svg
+                              aria-hidden="true"
+                              width="12"
+                              height="13"
+                              viewBox="0 0 24 24"
+                              fill="currentColor"
+                            >
+                              <rect x="4" y="10" width="16" height="12" rx="3"></rect>
+                              <path
+                                d="M8 10V7a4 4 0 0 1 8 0v3"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2.6"
+                              ></path>
+                            </svg>
+                          </span>
+                        </span>
+                        <span
+                          style={{
+                            fontSize: "13.5px",
+                            fontWeight: "600",
+                            lineHeight: "1.25",
+                            color: "#2E2A40",
+                          }}
+                        >
+                          {g.label}
+                        </span>
+                      </a>
+                    </Fragment>
+                  ))}
+                </div>
+                <div
+                  style={{
+                    textAlign: "center",
+                    marginTop: "16px",
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    color: "#3B3654",
+                  }}
+                >
+                  {"Plus 6 more. Pick 1 every month."}
+                </div>
+              </div>
+            </>
+          ) : null}
+          {v.secCompare ? (
+            <>
+              <div
+                className="hb-rise"
+                style={{
+                  marginTop: "14px",
+                  background: "#FFFFFF",
+                  border: "1px solid #E2DCF2",
+                  borderRadius: "16px",
+                  overflow: "hidden",
+                  boxShadow: "0 10px 26px rgba(76,52,140,0.08)",
+                }}
+              >
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "minmax(0, 1fr) 76px 104px",
+                    borderBottom: "1px solid #ECEAF3",
+                  }}
+                >
+                  <span></span>
+                  <span
+                    className="hb-ease"
+                    style={{
+                      padding: "16px 4px",
+                      borderLeft: "1px solid #ECEAF3",
+                      textAlign: "center",
+                      fontSize: "15px",
+                      fontWeight: "700",
+                      color: v.freeColInk,
+                      background: v.freeColBg,
+                    }}
+                  >
+                    {"Free"}
+                  </span>
+                  <span
+                    className="hb-ease"
+                    style={{
+                      padding: "16px 4px",
+                      borderLeft: "1px solid #ECEAF3",
+                      textAlign: "center",
+                      fontSize: "15px",
+                      fontWeight: "800",
+                      color: "#FFFFFF",
+                      background: "#6C3FFA",
+                    }}
+                  >
+                    {"Haiba"}
+                  </span>
+                </div>
+                <div className="hb-stagger">
+                  {(v.table || []).map((r: any, idx0: number) => (
+                    <Fragment key={idx0}>
+                      <div
+                        className="hb-row"
+                        style={{
+                          display: "grid",
+                          gridTemplateColumns: "minmax(0, 1fr) 76px 104px",
+                          borderBottom: r.rule,
+                        }}
+                      >
+                        <span
+                          style={{
+                            padding: "16px 14px",
+                            fontSize: "15px",
+                            fontWeight: "600",
+                            lineHeight: "1.3",
+                          }}
+                        >
+                          {r.label}
+                        </span>
+                        <span
+                          className="hb-ease"
+                          style={{
+                            padding: "16px 4px",
+                            borderLeft: "1px solid #ECEAF3",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            textAlign: "center",
+                            fontSize: "15px",
+                            fontWeight: "600",
+                            color: r.freeInk,
+                            background: v.freeColBg,
+                          }}
+                        >
+                          {r.free}
+                        </span>
+                        <span
+                          className="hb-ease"
+                          style={{
+                            padding: "16px 6px",
+                            borderLeft: "1px solid #ECEAF3",
+                            background: v.haibaColBg,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            textAlign: "center",
+                            fontSize: "15px",
+                            fontWeight: "700",
+                            color: r.haibaInk,
+                          }}
+                        >
+                          {r.haiba}
+                        </span>
+                      </div>
+                    </Fragment>
+                  ))}
+                </div>
+              </div>
+            </>
+          ) : null}
+          {v.secYear ? (
+            <>
+              <div
+                className="hb-rise"
+                style={{
+                  marginTop: "14px",
+                  background: "#1E1B2E",
+                  color: "#FFFFFF",
+                  borderRadius: "16px",
+                  padding: "22px 20px 20px 20px",
+                  position: "relative",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: "13px",
+                    fontWeight: "700",
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    color: "#C0F402",
+                  }}
+                >
+                  {"A year of Haiba"}
+                </div>
+                <div
+                  style={{
+                    fontSize: "15px",
+                    fontWeight: "600",
+                    color: "#CFC9E0",
+                    marginTop: "14px",
+                  }}
+                >
+                  {"How often do you use Unipal?"}
+                </div>
+                <div
+                  role="radiogroup"
+                  aria-label="Visits a month"
+                  style={{
+                    position: "relative",
+                    display: "grid",
+                    gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+                    background: "#2B2740",
+                    borderRadius: "999px",
+                    padding: "4px",
+                    marginTop: "10px",
+                  }}
+                >
+                  <span
+                    aria-hidden="true"
+                    className="hb-ease"
+                    style={{
+                      position: "absolute",
+                      top: "4px",
+                      bottom: "4px",
+                      left: v.segLeft,
+                      width: "calc((100% - 8px) / 4)",
+                      borderRadius: "999px",
+                      background: "#C0F402",
+                    }}
+                  ></span>
+                  {(v.stops || []).map((s: any, idx0: number) => (
+                    <Fragment key={idx0}>
+                      <button
+                        role="radio"
+                        aria-checked={s.on}
+                        aria-label={s.label}
+                        onClick={s.pick}
+                        className="hb-ease"
+                        style={{
+                          position: "relative",
+                          font: "inherit",
+                          border: "0",
+                          background: "transparent",
+                          cursor: "pointer",
+                          padding: "10px 0",
+                          borderRadius: "999px",
+                          color: s.ink,
+                          fontFamily: "Figtree, system-ui, sans-serif",
+                          fontSize: "16px",
+                          fontWeight: "800",
+                        }}
+                      >
+                        {s.v}
+                        <span
+                          style={{
+                            fontFamily: "Figtree, system-ui, sans-serif",
+                            fontSize: "12px",
+                            fontWeight: "600",
+                            opacity: "0.7",
+                          }}
+                        >
+                          {" /mo"}
+                        </span>
+                      </button>
+                    </Fragment>
+                  ))}
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "baseline",
+                    gap: "8px",
+                    flexWrap: "wrap",
+                    marginTop: "24px",
+                  }}
+                >
+                  <span
+                    className="hb-ease"
+                    style={{
+                      fontFamily: "Figtree, system-ui, sans-serif",
+                      fontSize: "46px",
+                      fontWeight: "800",
+                      letterSpacing: "-0.04em",
+                      lineHeight: "1",
+                      color: "#C0F402",
+                    }}
+                  >
+                    {v.saveTotal}
+                  </span>
+                  <span style={{ fontSize: "16px", fontWeight: "600", color: "#E8E4F4" }}>
+                    {"saved a year"}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    fontSize: "15px",
+                    fontWeight: "500",
+                    color: "#CFC9E0",
+                    lineHeight: "1.45",
+                    marginTop: "8px",
+                  }}
+                >
+                  {v.saveSub}
+                </div>
+                <div
+                  style={{
+                    position: "relative",
+                    height: "10px",
+                    marginTop: "18px",
+                    borderRadius: "999px",
+                    overflow: "hidden",
+                    background: "#3A3550",
+                  }}
+                >
+                  <span
+                    className="hb-ease"
+                    style={{
+                      position: "absolute",
+                      left: "0",
+                      top: "0",
+                      bottom: "0",
+                      width: v.costPct,
+                      background: "#6C3FFA",
+                    }}
+                  ></span>
+                  <span
+                    className="hb-ease"
+                    style={{
+                      position: "absolute",
+                      top: "0",
+                      bottom: "0",
+                      right: "0",
+                      left: v.costPct,
+                      background: "#C0F402",
+                    }}
+                  ></span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginTop: "8px",
+                    fontSize: "13px",
+                    fontWeight: "600",
+                  }}
+                >
+                  <span style={{ color: "#B9B3CC" }}>{"Haiba costs BHD 19.80"}</span>
+                  <span className="hb-ease" style={{ color: "#C0F402" }}>
+                    {v.extraLine}
+                  </span>
+                </div>
+                <div style={{ marginTop: "18px", borderTop: "1px solid #3A3550" }}>
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                      gap: "12px",
+                      alignItems: "center",
+                      padding: "14px 0",
+                      borderBottom: "1px solid #3A3550",
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: "44px",
+                        height: "44px",
+                        borderRadius: "14px",
+                        background: "#C0F402",
+                        color: "#1F2600",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <svg
+                        aria-hidden="true"
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M20 12v9H4v-9M2 7h20v5H2zM12 7v14M12 7c-2-4-7-4-7-1s5 1 7 1zm0 0c2-4 7-4 7-1s-5 1-7 1z"></path>
+                      </svg>
+                    </span>
+                    <span
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "2px",
+                        minWidth: "0",
+                      }}
+                    >
+                      <span style={{ fontSize: "16px", fontWeight: "700" }}>
+                        {"12 Unipass gifts"}
+                      </span>
+                      <span style={{ fontSize: "13.5px", fontWeight: "500", color: "#B9B3CC" }}>
+                        {"1 free item every month"}
                       </span>
                     </span>
                     <span
                       style={{
-                        fontSize: "13.5px",
-                        fontWeight: "600",
-                        lineHeight: "1.25",
-                        color: "#2E2A40",
+                        fontFamily: "Figtree, system-ui, sans-serif",
+                        fontSize: "17px",
+                        fontWeight: "800",
+                        textAlign: "right",
                       }}
                     >
-                      {g.label}
-                    </span>
-                  </a>
-                </Fragment>
-              ))}
-            </div>
-            <div
-              style={{
-                textAlign: "center",
-                marginTop: "16px",
-                fontSize: "14px",
-                fontWeight: "600",
-                color: "#3B3654",
-              }}
-            >
-              {"Plus 6 more. Pick 1 every month."}
-            </div>
-          </div>
-          <div
-            className="hb-rise hb-d3"
-            style={{
-              marginTop: "26px",
-              background: "#FFFFFF",
-              border: "1px solid #E2DCF2",
-              borderRadius: "16px",
-              overflow: "hidden",
-              boxShadow: "0 10px 26px rgba(76,52,140,0.08)",
-            }}
-          >
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "minmax(0, 1fr) 76px 104px",
-                borderBottom: "1px solid #ECEAF3",
-              }}
-            >
-              <span></span>
-              <span
-                className="hb-ease"
-                style={{
-                  padding: "16px 4px",
-                  borderLeft: "1px solid #ECEAF3",
-                  textAlign: "center",
-                  fontSize: "15px",
-                  fontWeight: "700",
-                  color: v.freeColInk,
-                  background: v.freeColBg,
-                }}
-              >
-                {"Free"}
-              </span>
-              <span
-                className="hb-ease"
-                style={{
-                  padding: "16px 4px",
-                  borderLeft: "1px solid #ECEAF3",
-                  textAlign: "center",
-                  fontSize: "15px",
-                  fontWeight: "800",
-                  color: "#FFFFFF",
-                  background: "#6C3FFA",
-                }}
-              >
-                {"Haiba"}
-              </span>
-            </div>
-            <div className="hb-stagger">
-              {(v.table || []).map((r: any, idx0: number) => (
-                <Fragment key={idx0}>
-                  <div
-                    className="hb-row"
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "minmax(0, 1fr) 76px 104px",
-                      borderBottom: r.rule,
-                    }}
-                  >
-                    <span
-                      style={{
-                        padding: "16px 14px",
-                        fontSize: "15px",
-                        fontWeight: "600",
-                        lineHeight: "1.3",
-                      }}
-                    >
-                      {r.label}
-                    </span>
-                    <span
-                      className="hb-ease"
-                      style={{
-                        padding: "16px 4px",
-                        borderLeft: "1px solid #ECEAF3",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        textAlign: "center",
-                        fontSize: "15px",
-                        fontWeight: "600",
-                        color: r.freeInk,
-                        background: v.freeColBg,
-                      }}
-                    >
-                      {r.free}
-                    </span>
-                    <span
-                      className="hb-ease"
-                      style={{
-                        padding: "16px 6px",
-                        borderLeft: "1px solid #ECEAF3",
-                        background: v.haibaColBg,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        textAlign: "center",
-                        fontSize: "15px",
-                        fontWeight: "700",
-                        color: r.haibaInk,
-                      }}
-                    >
-                      {r.haiba}
+                      {"BHD 30.00"}
                     </span>
                   </div>
-                </Fragment>
-              ))}
-            </div>
-          </div>
-          <div
-            className="hb-rise hb-d3"
-            style={{
-              marginTop: "100px",
-              background: "#1E1B2E",
-              color: "#FFFFFF",
-              borderRadius: "16px",
-              padding: "22px 20px 20px 20px",
-              position: "relative",
-            }}
-          >
-            <span
-              className="hb-peek"
-              style={{ position: "absolute", right: "20px", top: "-84px", display: "block" }}
-            >
-              <Artwork
-                src="/haiba/birds/12-ledge.png"
-                alt=""
-                style={{ height: "88px", width: "auto", display: "block" }}
-              />
-            </span>
-            <div
-              style={{
-                fontSize: "13px",
-                fontWeight: "700",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: "#C0F402",
-              }}
-            >
-              {"A year of Haiba"}
-            </div>
-            <div
-              style={{ fontSize: "15px", fontWeight: "600", color: "#CFC9E0", marginTop: "14px" }}
-            >
-              {"How often do you use Unipal?"}
-            </div>
-            <div
-              role="radiogroup"
-              aria-label="Visits a month"
-              style={{
-                position: "relative",
-                display: "grid",
-                gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-                background: "#2B2740",
-                borderRadius: "999px",
-                padding: "4px",
-                marginTop: "10px",
-              }}
-            >
-              <span
-                aria-hidden="true"
-                className="hb-ease"
-                style={{
-                  position: "absolute",
-                  top: "4px",
-                  bottom: "4px",
-                  left: v.segLeft,
-                  width: "calc((100% - 8px) / 4)",
-                  borderRadius: "999px",
-                  background: "#C0F402",
-                }}
-              ></span>
-              {(v.stops || []).map((s: any, idx0: number) => (
-                <Fragment key={idx0}>
-                  <button
-                    role="radio"
-                    aria-checked={s.on}
-                    aria-label={s.label}
-                    onClick={s.pick}
-                    className="hb-ease"
+                  <div
                     style={{
-                      position: "relative",
-                      font: "inherit",
-                      border: "0",
-                      background: "transparent",
-                      cursor: "pointer",
-                      padding: "10px 0",
-                      borderRadius: "999px",
-                      color: s.ink,
-                      fontFamily: "Figtree, system-ui, sans-serif",
-                      fontSize: "16px",
-                      fontWeight: "800",
+                      display: "grid",
+                      gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                      gap: "12px",
+                      alignItems: "center",
+                      padding: "14px 0",
                     }}
                   >
-                    {s.v}
                     <span
                       style={{
-                        fontFamily: "Figtree, system-ui, sans-serif",
-                        fontSize: "12px",
-                        fontWeight: "600",
-                        opacity: "0.7",
+                        width: "44px",
+                        height: "44px",
+                        borderRadius: "14px",
+                        background: "#6C3FFA",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
                       }}
                     >
-                      {" /mo"}
+                      <span
+                        style={{
+                          width: "22px",
+                          height: "22px",
+                          borderRadius: "50%",
+                          background: "#6C3FFA",
+                          boxShadow: "inset 0 0 0 4px #C0F402",
+                        }}
+                      ></span>
                     </span>
-                  </button>
-                </Fragment>
-              ))}
-            </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "baseline",
-                gap: "8px",
-                flexWrap: "wrap",
-                marginTop: "24px",
-              }}
-            >
-              <span
-                className="hb-ease"
-                style={{
-                  fontFamily: "Figtree, system-ui, sans-serif",
-                  fontSize: "46px",
-                  fontWeight: "800",
-                  letterSpacing: "-0.04em",
-                  lineHeight: "1",
-                  color: "#C0F402",
-                }}
-              >
-                {v.saveTotal}
-              </span>
-              <span style={{ fontSize: "16px", fontWeight: "600", color: "#E8E4F4" }}>
-                {"saved a year"}
-              </span>
-            </div>
-            <div
-              style={{
-                fontSize: "15px",
-                fontWeight: "500",
-                color: "#CFC9E0",
-                lineHeight: "1.45",
-                marginTop: "8px",
-              }}
-            >
-              {v.saveSub}
-            </div>
-            <div
-              style={{
-                position: "relative",
-                height: "10px",
-                marginTop: "18px",
-                borderRadius: "999px",
-                overflow: "hidden",
-                background: "#3A3550",
-              }}
-            >
-              <span
-                className="hb-ease"
-                style={{
-                  position: "absolute",
-                  left: "0",
-                  top: "0",
-                  bottom: "0",
-                  width: v.costPct,
-                  background: "#6C3FFA",
-                }}
-              ></span>
-              <span
-                className="hb-ease"
-                style={{
-                  position: "absolute",
-                  top: "0",
-                  bottom: "0",
-                  right: "0",
-                  left: v.costPct,
-                  background: "#C0F402",
-                }}
-              ></span>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginTop: "8px",
-                fontSize: "13px",
-                fontWeight: "600",
-              }}
-            >
-              <span style={{ color: "#B9B3CC" }}>{"Haiba costs BHD 19.80"}</span>
-              <span className="hb-ease" style={{ color: "#C0F402" }}>
-                {v.extraLine}
-              </span>
-            </div>
-            <div style={{ marginTop: "18px", borderTop: "1px solid #3A3550" }}>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "44px minmax(0, 1fr) auto",
-                  gap: "12px",
-                  alignItems: "center",
-                  padding: "14px 0",
-                  borderBottom: "1px solid #3A3550",
-                }}
-              >
-                <span
+                    <span
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "2px",
+                        minWidth: "0",
+                      }}
+                    >
+                      <span className="hb-ease" style={{ fontSize: "16px", fontWeight: "700" }}>
+                        {v.ptsLine}
+                      </span>
+                      <span
+                        className="hb-ease"
+                        style={{ fontSize: "13.5px", fontWeight: "500", color: "#B9B3CC" }}
+                      >
+                        {v.ptsItems}
+                      </span>
+                    </span>
+                    <span
+                      className="hb-ease"
+                      style={{
+                        fontFamily: "Figtree, system-ui, sans-serif",
+                        fontSize: "17px",
+                        fontWeight: "800",
+                        textAlign: "right",
+                      }}
+                    >
+                      {v.ptsSave}
+                    </span>
+                    <span></span>
+                    <span
+                      className="hb-ease"
+                      style={{
+                        gridColumn: "2 / 4",
+                        justifySelf: "start",
+                        fontSize: "12.5px",
+                        fontWeight: "700",
+                        color: "#1F2600",
+                        background: "#C0F402",
+                        borderRadius: "999px",
+                        padding: "4px 10px",
+                      }}
+                    >
+                      {v.bonusLine}
+                    </span>
+                  </div>
+                </div>
+                <div
                   style={{
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "14px",
-                    background: "#C0F402",
-                    color: "#1F2600",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <svg
-                    aria-hidden="true"
-                    width="22"
-                    height="22"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M20 12v9H4v-9M2 7h20v5H2zM12 7v14M12 7c-2-4-7-4-7-1s5 1 7 1zm0 0c2-4 7-4 7-1s-5 1-7 1z"></path>
-                  </svg>
-                </span>
-                <span
-                  style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}
-                >
-                  <span style={{ fontSize: "16px", fontWeight: "700" }}>{"12 Unipass gifts"}</span>
-                  <span style={{ fontSize: "13.5px", fontWeight: "500", color: "#B9B3CC" }}>
-                    {"1 free item every month"}
-                  </span>
-                </span>
-                <span
-                  style={{
-                    fontFamily: "Figtree, system-ui, sans-serif",
-                    fontSize: "17px",
-                    fontWeight: "800",
-                    textAlign: "right",
-                  }}
-                >
-                  {"BHD 30.00"}
-                </span>
-              </div>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "44px minmax(0, 1fr) auto",
-                  gap: "12px",
-                  alignItems: "center",
-                  padding: "14px 0",
-                }}
-              >
-                <span
-                  style={{
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "14px",
-                    background: "#6C3FFA",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <span
-                    style={{
-                      width: "22px",
-                      height: "22px",
-                      borderRadius: "50%",
-                      background: "#6C3FFA",
-                      boxShadow: "inset 0 0 0 4px #C0F402",
-                    }}
-                  ></span>
-                </span>
-                <span
-                  style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}
-                >
-                  <span className="hb-ease" style={{ fontSize: "16px", fontWeight: "700" }}>
-                    {v.ptsLine}
-                  </span>
-                  <span
-                    className="hb-ease"
-                    style={{ fontSize: "13.5px", fontWeight: "500", color: "#B9B3CC" }}
-                  >
-                    {v.ptsItems}
-                  </span>
-                </span>
-                <span
-                  className="hb-ease"
-                  style={{
-                    fontFamily: "Figtree, system-ui, sans-serif",
-                    fontSize: "17px",
-                    fontWeight: "800",
-                    textAlign: "right",
-                  }}
-                >
-                  {v.ptsSave}
-                </span>
-                <span></span>
-                <span
-                  className="hb-ease"
-                  style={{
-                    gridColumn: "2 / 4",
-                    justifySelf: "start",
                     fontSize: "12.5px",
-                    fontWeight: "700",
-                    color: "#1F2600",
-                    background: "#C0F402",
-                    borderRadius: "999px",
-                    padding: "4px 10px",
+                    fontWeight: "500",
+                    color: "#8F89A8",
+                    lineHeight: "1.45",
+                    marginTop: "6px",
                   }}
                 >
-                  {v.bonusLine}
-                </span>
+                  {
+                    "Based on 1 new shop a month and the rest at your favourites. Unipass gifts are worth about BHD 2.50 each."
+                  }
+                </div>
               </div>
-            </div>
-            <div
-              style={{
-                fontSize: "12.5px",
-                fontWeight: "500",
-                color: "#8F89A8",
-                lineHeight: "1.45",
-                marginTop: "6px",
-              }}
-            >
-              {
-                "Based on 1 new shop a month and the rest at your favourites. Unipass gifts are worth about BHD 2.50 each."
-              }
-            </div>
-          </div>
-          <div
-            style={{
-              fontSize: "13px",
-              fontWeight: "700",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "#6B6880",
-              marginTop: "30px",
-              padding: "0 4px",
-            }}
-          >
-            {"Good to know"}
-          </div>
-          <div style={{ marginTop: "12px", display: "flex", flexDirection: "column", gap: "10px" }}>
-            <div
-              style={{
-                background: "#FFFFFF",
-                borderRadius: "16px",
-                padding: "16px",
-                display: "flex",
-                gap: "14px",
-                alignItems: "center",
-                boxShadow: "0 8px 20px rgba(76,52,140,0.06)",
-              }}
-            >
-              <span
-                style={{
-                  width: "36px",
-                  height: "36px",
-                  flex: "none",
-                  borderRadius: "50%",
-                  border: "1.5px solid #1E1B2E",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "11px",
-                  fontWeight: "800",
-                }}
-              >
-                {"BHD"}
-              </span>
-              <span style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-                <span style={{ fontSize: "16px", fontWeight: "600" }}>
-                  {"You pay BHD 19.80 a year"}
-                </span>
-                <span style={{ fontSize: "14px", fontWeight: "500", color: "#6B6880" }}>
-                  {"Includes VAT. Or BHD 2.20 a month"}
-                </span>
-              </span>
-            </div>
-          </div>
+            </>
+          ) : null}
         </div>
         <div className="hb-fixed-bottom">
           <div className="hb-fixed-inner">

@@ -38,6 +38,7 @@ export function useDC(initial) {
     available: hb.available,
     base: hb.base,
     codes: hb.liveCodes,
+    codeIds: hb.liveCodeIds,
     savedRewards: hb.savedRewards,
   };
 

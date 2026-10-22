@@ -9,6 +9,7 @@ export function useVals() {
     jump: false,
     tipOpen: false,
     navTipOpen: false,
+    openCode: "",
   });
 
   var isNew = (props.member ?? "Active member") === "New member";
@@ -19,30 +20,7 @@ export function useVals() {
   var plum = "#1E1B2E";
   var heldCodes = props.codes ?? 0;
   var savedExtra = props.savedRewards ?? 0;
-  var codes = (isNew ? 0 : 1) + heldCodes;
-  var actions = [
-    {
-      label: "Rewards",
-      href: "/shop/coffee-bean",
-      icon: "M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z",
-    },
-    {
-      label: "My codes",
-      href: "/haiba/basket",
-      icon: "M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4zM14 6v2M14 11v2M14 16v2",
-    },
-    {
-      label: "Wallet",
-      href: "/haiba/wallet",
-      icon: "M20 12V8H6a2 2 0 0 1 0-4h12v4M4 6v12a2 2 0 0 0 2 2h14v-4M18 12a2 2 0 0 0 0 4h4v-4z",
-    },
-  ];
-  actions.forEach(function (a) {
-    a.hasBadge = false;
-    a.badge = "";
-  });
-  actions[1].hasBadge = codes > 0;
-  actions[1].badge = String(codes);
+  var codeIds = props.codeIds ?? [];
   var giftMarks = [
     { hasLogo: true, logo: "/haiba/brands/wingman.webp", name: "Wingman", mark: "" },
     { hasLogo: true, logo: "/haiba/brands/vox.webp", name: "VOX Cinemas", mark: "" },
@@ -96,14 +74,17 @@ export function useVals() {
     : [
         Object.assign(
           {
+            isCode: true,
+            key: "caribou",
             mark: "C",
             bg: "#3B2A22",
             ink: "#FFFFFF",
             title: "Caribou, free upgrade",
-            meta: "Use by 12 Nov",
+            meta: "Code ready. Tap to show",
             metaInk: "#6B6880",
             pill: "Show code",
-            href: "/haiba/basket",
+            code: "HB-7K2Q-9X",
+            useBy: "Use by 12 Nov",
           },
           purple,
         ),
@@ -133,21 +114,62 @@ export function useVals() {
           soft,
         ),
       ];
-  if (isNew && heldCodes > 0) {
-    ready[0] = Object.assign(
+  var rw = [
+    {
+      name: "Free upsize",
+      ph: "DRINK PHOTO",
+      bg: "#EDE4FF",
+      ink: "#4F25D6",
+      code: "8K3Q",
+      pts: 300,
+    },
+    { name: "Cookie", ph: "COOKIE PHOTO", bg: "#F6E7D2", ink: "#7A4E2D", code: "5TR2", pts: 700 },
+    {
+      name: "Regular drink",
+      ph: "DRINK PHOTO",
+      bg: "#E3DCD6",
+      ink: "#3B2A22",
+      code: "9MX7",
+      pts: 1900,
+    },
+  ];
+  var codeRows = codeIds.map(function (id) {
+    var i = parseInt(id.split("-")[0], 10),
+      k = parseInt(id.split("-")[1], 10);
+    return Object.assign(
       {
+        isCode: true,
+        key: id,
         mark: "CB",
         bg: "#4B2E83",
         ink: "#FFFFFF",
-        title: "The Coffee Bean, your reward",
-        meta: heldCodes === 1 ? "1 code ready to show" : heldCodes + " codes ready to show",
+        title: "The Coffee Bean, " + rw[i].name.toLowerCase(),
+        meta: "Code ready. Tap to show",
         metaInk: "#6B6880",
         pill: "Show code",
-        href: "/haiba/basket",
+        code: "HB-" + rw[i].code + "-" + (k + 1),
+        useBy: "Use by 20 Nov",
       },
       purple,
     );
-  }
+  });
+  if (isNew && codeRows.length) ready.shift();
+  ready = codeRows.concat(ready);
+  ready.forEach(function (r) {
+    if (r.isCode) {
+      var open = state.openCode === r.key;
+      r.open = open;
+      r.openStr = String(open);
+      r.isLink = false;
+      r.tap = function () {
+        setState({ openCode: open ? "" : r.key });
+      };
+    } else {
+      r.isCode = false;
+      r.open = false;
+      r.isLink = true;
+    }
+  });
   ready.forEach(function (r, k) {
     r.rule = k === 0 ? "none" : "1px solid #F1EFF7";
   });
@@ -273,12 +295,29 @@ export function useVals() {
   });
   return {
     points: shown.toLocaleString("en-US"),
-    actions: actions,
     memberLine: isNew ? "Member since today" : "Member since August",
     giftLeft: "10 days left",
     giftMarks: giftMarks,
     ready: ready,
     readyCount: ready.length + " things",
+    spend: rw.map(function (d, k) {
+      var can = d.pts <= target;
+      return {
+        name: d.name,
+        shop: "The Coffee Bean",
+        ph: d.ph,
+        bg: d.bg,
+        ink: d.ink,
+        href: "/shop/coffee-bean",
+        pill: can
+          ? d.pts.toLocaleString("en-US")
+          : (d.pts - target).toLocaleString("en-US") + " more",
+        pillBg: can ? "#F0ECFF" : "#F1F1F4",
+        pillInk: can ? "#4F25D6" : "#6B6880",
+        dotOp: can ? "1" : "0.35",
+        rule: k === 0 ? "none" : "1px solid #F1EFF7",
+      };
+    }),
     savedTotal: "BHD " + savedSum.toFixed(2),
     savedBar: savedBar,
     savedRows: savedRows,

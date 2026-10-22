@@ -42,7 +42,7 @@ GO_VAR = 'href="#" onClick={(e: any) => { e.preventDefault(); if (v.navTipHref) 
 
 # Placeholder links (href="#") in the order they appear in each screen. None = stays a placeholder.
 LINKS = {
-    "Hub": [go_item("a"), None, go_item("r"), None, GO_VAR, go("/"), None, None, None],
+    "Hub": [None, go_item("r"), None, go_item("u"), None, GO_VAR, go("/"), None, None, None],
     "Plans": [None, go("/")],
     "Wallet": [go_item("a"), go("/shop/coffee-bean/redeem"), None, None, go("/shop/coffee-bean"), go("/shop/coffee-bean")],
 }
@@ -55,8 +55,6 @@ SCREEN = {
         ("  const hb = useHaiba();", "  const hb = useHaiba();\n  const router = useRouter();"),
         (re.compile(r'<Link aria-label="Back" className="hb-press" (style=\{\{.*?\}\}) to="/haiba">(.*?)</Link>', re.S),
          r'<Button type="button" variant="ghost" size="icon" aria-label="Back" title="Back" className="hb-press" \1 onClick={() => router.history.back()}>\2</Button>'),
-        ('<Link className="hb-press" style={{ textDecoration: "none", background: "#1E1B2E", color: "#FFFFFF", borderRadius: "22px"',
-         '<Link className="hb-press hb-basket-summary" style={{ textDecoration: "none", background: "#1E1B2E", color: "#FFFFFF", borderRadius: "22px"'),
     ],
     # Lovable: full opacity for the empty basket hint
     "Basket": [(re.compile(r'opacity: "0\.8" \}\}>(\s*)\{v\.ctaSub\}'), r'opacity: v.empty ? "1" : "0.8" }}>\1{v.ctaSub}')],
@@ -79,10 +77,9 @@ LOGIC = {
         ("{ mark: '#', label: 'My codes' }", "{ mark: '#', label: 'My codes', href: '/haiba/basket' }"),
     ],
     "Shop": [
-        ("var balance = 1240;", "var balance = props.available;"),
-        # Lovable: one shared muted grey, and no fading of locked rewards
-        ("ptsInk: can || !zero ? '#4F25D6' : '#8A8A96',", "ptsInk: can || !zero ? '#4F25D6' : 'var(--hb-muted-ink)',"),
-        ("op: zero && !can ? '0.55' : '1',", "op: '1',"),
+        ("var balance = 1240;", "var balance = props.base;"),
+        # Lovable: one shared muted grey
+        ("ptsInk: can || held || used ? '#4F25D6' : '#8A8A96',", "ptsInk: can || held || used ? '#4F25D6' : 'var(--hb-muted-ink)',"),
     ],
     "Welcome": [("if (st === 3) { setState({ step: 0, dir: 'l', gift: -1 }); }", "if (st === 3) { nav('/haiba'); }")],
     "Basket": [

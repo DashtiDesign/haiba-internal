@@ -1,11 +1,11 @@
 // @ts-nocheck
 // Ported 1:1 from the Design canvas board "Shop.dc.html". Styles are copied value for value.
-import Artwork from "../Artwork";
 import { Fragment } from "react";
 import { Link, useNavigate } from "../nav";
 import { useHaiba } from "../store";
 import { useRouter } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import Artwork from "../Artwork";
 import { useVals } from "../logic/shop";
 
 export default function Shop() {
@@ -356,7 +356,8 @@ export default function Shop() {
             }}
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <img
+              <Artwork
+                priority
                 src="/haiba/logo-lime.svg"
                 alt="Haiba"
                 style={{ height: "18px", width: "auto", display: "block" }}
@@ -625,9 +626,8 @@ export default function Shop() {
             }}
           >
             <span style={{ fontSize: "22px", fontWeight: "700" }}>{"Haiba rewards"}</span>
-            <Link
+            <span
               style={{
-                textDecoration: "none",
                 display: "flex",
                 alignItems: "center",
                 gap: "6px",
@@ -639,7 +639,6 @@ export default function Shop() {
                 borderRadius: "999px",
                 padding: "7px 12px 7px 7px",
               }}
-              to="/haiba/wallet"
             >
               <span
                 style={{
@@ -651,7 +650,7 @@ export default function Shop() {
                 }}
               ></span>
               {v.balance}
-            </Link>
+            </span>
           </div>
           <div style={{ display: "flex", alignItems: "flex-end", gap: "10px", marginTop: "4px" }}>
             <span
@@ -663,9 +662,9 @@ export default function Shop() {
                 flex: "1",
               }}
             >
-              {"Free items for your points. Add to your basket, then show the code at the till."}
+              {"Free items for your points. Tap one to get its code, then show it at the till."}
             </span>
-            <Artwork loading="lazy"
+            <Artwork
               src="/haiba/birds/12-ledge.png"
               alt=""
               style={{
@@ -690,203 +689,294 @@ export default function Shop() {
           >
             {(v.items || []).map((it: any, idx0: number) => (
               <Fragment key={idx0}>
-                <div
-                  className="hb-row"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "14px",
-                    padding: "14px 0",
-                    borderBottom: it.rule,
-                    opacity: it.op,
-                  }}
-                >
-                  <span
-                    style={{
-                      width: "64px",
-                      height: "64px",
-                      flex: "none",
-                      borderRadius: "14px",
-                      background: it.bg,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: it.ink,
-                      fontSize: "11px",
-                      fontWeight: "800",
-                      letterSpacing: "0.06em",
-                      textAlign: "center",
-                      lineHeight: "1.2",
-                    }}
-                  >
-                    {it.ph}
-                  </span>
-                  <span
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "4px",
-                      flex: "1",
-                      minWidth: "0",
-                    }}
-                  >
-                    <span style={{ fontSize: "16px", fontWeight: "700" }}>{it.name}</span>
-                    <span style={{ fontSize: "13px", fontWeight: "500", color: "#6B6B78" }}>
-                      {it.sub}
+                <div style={{ borderBottom: it.rule, padding: "14px 0" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                    <span
+                      style={{
+                        width: "64px",
+                        height: "64px",
+                        flex: "none",
+                        borderRadius: "14px",
+                        background: it.bg,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: it.ink,
+                        fontSize: "11px",
+                        fontWeight: "800",
+                        letterSpacing: "0.06em",
+                        textAlign: "center",
+                        lineHeight: "1.2",
+                      }}
+                    >
+                      {it.ph}
                     </span>
                     <span
                       style={{
-                        alignSelf: "flex-start",
                         display: "flex",
-                        alignItems: "center",
-                        gap: "5px",
-                        fontSize: "13px",
-                        fontWeight: "700",
-                        color: it.ptsInk,
-                        background: it.ptsBg,
-                        borderRadius: "999px",
-                        padding: "3px 9px 3px 5px",
+                        flexDirection: "column",
+                        gap: "4px",
+                        flex: "1",
+                        minWidth: "0",
                       }}
                     >
+                      <span style={{ fontSize: "16px", fontWeight: "700" }}>{it.name}</span>
+                      <span style={{ fontSize: "13px", fontWeight: "500", color: "#6B6B78" }}>
+                        {it.sub}
+                      </span>
                       <span
                         style={{
-                          width: "14px",
-                          height: "14px",
-                          borderRadius: "50%",
-                          background: "#6C3FFA",
-                          boxShadow: "inset 0 0 0 3px #C0F402",
-                        }}
-                      ></span>
-                      {it.pts}
-                    </span>
-                  </span>
-                  {it.zero ? (
-                    <>
-                      <button
-                        onClick={it.add}
-                        aria-label={it.addLabel}
-                        className="hb-press"
-                        style={{
-                          width: "40px",
-                          height: "40px",
-                          flex: "none",
-                          borderRadius: "50%",
-                          border: "0",
-                          background: it.btnBg,
-                          color: it.btnInk,
+                          alignSelf: "flex-start",
                           display: "flex",
                           alignItems: "center",
-                          justifyContent: "center",
-                          padding: "0",
-                          cursor: "pointer",
-                        }}
-                      >
-                        <svg
-                          aria-hidden="true"
-                          width="18"
-                          height="18"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2.8"
-                          strokeLinecap="round"
-                        >
-                          <path d="M12 5v14M5 12h14"></path>
-                        </svg>
-                      </button>
-                    </>
-                  ) : null}
-                  {it.some ? (
-                    <>
-                      <span
-                        className="hb-pop"
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "2px",
-                          background: "#1E1B2E",
-                          color: "#FFFFFF",
+                          gap: "5px",
+                          fontSize: "13px",
+                          fontWeight: "700",
+                          color: it.ptsInk,
+                          background: it.ptsBg,
                           borderRadius: "999px",
-                          padding: "3px",
-                          flex: "none",
+                          padding: "3px 9px 3px 5px",
                         }}
                       >
-                        <button
-                          onClick={it.remove}
-                          aria-label="Remove one"
-                          className="hb-press"
-                          style={{
-                            width: "32px",
-                            height: "32px",
-                            borderRadius: "50%",
-                            border: "0",
-                            background: "transparent",
-                            color: "#FFFFFF",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            padding: "0",
-                            cursor: "pointer",
-                          }}
-                        >
-                          <svg
-                            aria-hidden="true"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2.8"
-                            strokeLinecap="round"
-                          >
-                            <path d="M5 12h14"></path>
-                          </svg>
-                        </button>
                         <span
                           style={{
-                            minWidth: "18px",
-                            textAlign: "center",
-                            fontFamily: "Figtree, system-ui, sans-serif",
-                            fontSize: "15px",
-                            fontWeight: "800",
-                            color: "#C0F402",
+                            width: "14px",
+                            height: "14px",
+                            borderRadius: "50%",
+                            background: "#6C3FFA",
+                            boxShadow: "inset 0 0 0 3px #C0F402",
                           }}
-                        >
-                          {it.qty}
-                        </span>
+                        ></span>
+                        {it.pts}
+                      </span>
+                    </span>
+                    {it.showUse ? (
+                      <>
                         <button
-                          onClick={it.add}
-                          aria-label="Add one"
+                          onClick={it.ask}
+                          aria-label={it.useLabel}
                           className="hb-press"
                           style={{
-                            width: "32px",
-                            height: "32px",
-                            borderRadius: "50%",
+                            font: "inherit",
+                            fontSize: "14px",
+                            fontWeight: "800",
+                            flex: "none",
+                            borderRadius: "999px",
                             border: "0",
-                            background: "transparent",
-                            color: "#FFFFFF",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            padding: "0",
-                            cursor: "pointer",
-                            opacity: it.addOp,
+                            padding: "10px 16px",
+                            cursor: it.cursor,
+                            background: it.btnBg,
+                            color: it.btnInk,
                           }}
                         >
-                          <svg
-                            aria-hidden="true"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2.8"
-                            strokeLinecap="round"
-                          >
-                            <path d="M12 5v14M5 12h14"></path>
-                          </svg>
+                          {"Use"}
                         </button>
-                      </span>
+                      </>
+                    ) : null}
+                    {it.isUsed ? (
+                      <>
+                        <span
+                          style={{
+                            flex: "none",
+                            fontSize: "13px",
+                            fontWeight: "800",
+                            color: "#1E7A34",
+                            background: "#E6F4EA",
+                            borderRadius: "999px",
+                            padding: "7px 12px",
+                          }}
+                        >
+                          {"Used"}
+                        </span>
+                      </>
+                    ) : null}
+                  </div>
+                  {it.asking ? (
+                    <>
+                      <div
+                        className="hb-pop"
+                        style={{
+                          marginTop: "12px",
+                          background: "#F4F1FD",
+                          borderRadius: "16px",
+                          padding: "14px",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "12px",
+                          transformOrigin: "top center",
+                        }}
+                      >
+                        <span style={{ fontSize: "15px", fontWeight: "700", lineHeight: "1.35" }}>
+                          {it.askLine}
+                        </span>
+                        <span style={{ display: "flex", gap: "8px" }}>
+                          <button
+                            onClick={it.confirm}
+                            className="hb-press"
+                            style={{
+                              font: "inherit",
+                              flex: "1",
+                              fontSize: "15px",
+                              fontWeight: "800",
+                              border: "0",
+                              borderRadius: "999px",
+                              padding: "12px",
+                              cursor: "pointer",
+                              background: "#1E1B2E",
+                              color: "#C0F402",
+                            }}
+                          >
+                            {"Get my code"}
+                          </button>
+                          <button
+                            onClick={it.notNow}
+                            className="hb-press"
+                            style={{
+                              font: "inherit",
+                              fontSize: "15px",
+                              fontWeight: "700",
+                              border: "0",
+                              borderRadius: "999px",
+                              padding: "12px 16px",
+                              cursor: "pointer",
+                              background: "#FFFFFF",
+                              color: "#1E1B2E",
+                            }}
+                          >
+                            {"Not now"}
+                          </button>
+                        </span>
+                      </div>
+                    </>
+                  ) : null}
+                  {it.held ? (
+                    <>
+                      <div
+                        className="hb-pop"
+                        style={{
+                          marginTop: "12px",
+                          background: "linear-gradient(135deg, #6C3FFA 0%, #4F25D6 100%)",
+                          borderRadius: "18px",
+                          padding: "16px",
+                          color: "#FFFFFF",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "12px",
+                          transformOrigin: "top center",
+                        }}
+                      >
+                        <span
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            fontSize: "13px",
+                            fontWeight: "700",
+                            color: "#E4DBFF",
+                          }}
+                        >
+                          <span>{"Show this at the till"}</span>
+                          <span>{"Use by 20 Nov"}</span>
+                        </span>
+                        <span
+                          style={{
+                            background: "#FFFFFF",
+                            color: "#1E1B2E",
+                            borderRadius: "14px",
+                            padding: "14px",
+                            textAlign: "center",
+                            fontFamily: "Figtree, system-ui, sans-serif",
+                            fontSize: "28px",
+                            fontWeight: "800",
+                            letterSpacing: "0.08em",
+                          }}
+                        >
+                          {it.code}
+                        </span>
+                        <span
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            gap: "10px",
+                          }}
+                        >
+                          <button
+                            onClick={it.cancel}
+                            className="hb-press"
+                            style={{
+                              font: "inherit",
+                              fontSize: "13.5px",
+                              fontWeight: "700",
+                              border: "0",
+                              background: "transparent",
+                              color: "#E4DBFF",
+                              padding: "4px 0",
+                              cursor: "pointer",
+                              textDecoration: "underline",
+                            }}
+                          >
+                            {"Cancel, points back"}
+                          </button>
+                          <button
+                            onClick={it.accept}
+                            aria-label="Prototype: the shop accepts this code"
+                            className="hb-press"
+                            style={{
+                              font: "inherit",
+                              fontSize: "12.5px",
+                              fontWeight: "700",
+                              border: "1.5px dashed rgba(255,255,255,0.5)",
+                              background: "transparent",
+                              color: "#FFFFFF",
+                              borderRadius: "999px",
+                              padding: "6px 10px",
+                              cursor: "pointer",
+                            }}
+                          >
+                            {"Test: shop accepts"}
+                          </button>
+                        </span>
+                      </div>
+                    </>
+                  ) : null}
+                  {it.isUsed ? (
+                    <>
+                      <div
+                        className="hb-pop"
+                        style={{
+                          marginTop: "12px",
+                          background: "#E6F4EA",
+                          color: "#1E5E2E",
+                          borderRadius: "14px",
+                          padding: "12px 14px",
+                          fontSize: "14px",
+                          fontWeight: "700",
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          gap: "10px",
+                        }}
+                      >
+                        <span>{it.savedLine}</span>
+                        <button
+                          onClick={it.again}
+                          className="hb-press"
+                          style={{
+                            font: "inherit",
+                            fontSize: "13.5px",
+                            fontWeight: "800",
+                            border: "0",
+                            borderRadius: "999px",
+                            padding: "8px 12px",
+                            cursor: "pointer",
+                            background: "#1E1B2E",
+                            color: "#C0F402",
+                            opacity: it.againOp,
+                          }}
+                        >
+                          {"Use again"}
+                        </button>
+                      </div>
                     </>
                   ) : null}
                 </div>
@@ -903,7 +993,7 @@ export default function Shop() {
             }}
           >
             {
-              "One shop per basket. You get one code per item, and each code lasts 30 days. Points are held until the shop accepts the code."
+              "One code per item. Each code lasts 30 days. Your points are held until the shop accepts the code, and come back if you cancel."
             }
           </div>
           <div
@@ -920,7 +1010,7 @@ export default function Shop() {
               overflow: "hidden",
             }}
           >
-            <Artwork loading="lazy"
+            <Artwork
               src="/haiba/birds/10-gift.png"
               alt=""
               style={{
@@ -1017,79 +1107,6 @@ export default function Shop() {
             </svg>
           </a>
         </div>
-        {v.hasBasket ? (
-          <>
-            <div className="hb-fixed-bottom">
-              <div className="hb-fixed-inner">
-                <div
-                  className="hb-up"
-                  style={{ position: "absolute", left: "12px", right: "12px", bottom: "22px" }}
-                >
-                  <Link
-                    className="hb-press hb-basket-summary"
-                    style={{
-                      textDecoration: "none",
-                      background: "#1E1B2E",
-                      color: "#FFFFFF",
-                      borderRadius: "22px",
-                      padding: "12px 12px 12px 18px",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "12px",
-                      boxShadow: "0 16px 34px rgba(30,27,46,0.3)",
-                    }}
-                    to="/haiba/basket"
-                  >
-                    <span
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "1px",
-                        flex: "1",
-                        minWidth: "0",
-                      }}
-                    >
-                      <span style={{ fontSize: "15px", fontWeight: "700" }}>{v.basketLine}</span>
-                      <span style={{ fontSize: "13px", fontWeight: "500", color: "#CFC9E0" }}>
-                        {v.basketSub}
-                      </span>
-                    </span>
-                    <span
-                      style={{
-                        background: "#C0F402",
-                        color: "#1F2600",
-                        fontFamily: "Figtree, system-ui, sans-serif",
-                        fontSize: "15px",
-                        fontWeight: "800",
-                        borderRadius: "999px",
-                        padding: "12px 16px",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "6px",
-                        flex: "none",
-                      }}
-                    >
-                      {"Get codes"}
-                      <svg
-                        aria-hidden="true"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M9 6l6 6-6 6"></path>
-                      </svg>
-                    </span>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </>
-        ) : null}
       </div>
     </div>
   );

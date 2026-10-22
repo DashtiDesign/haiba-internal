@@ -17,12 +17,14 @@ A clickable prototype of Haiba, the Unipal membership, for the internal test. It
 | Choose your plan (Free vs Haiba)                  | `/haiba/plans`             |
 | How points work                                   | `/haiba/points`            |
 | How it works (after joining)                      | `/haiba/welcome`           |
-| Points wallet                                     | `/haiba/wallet`            |
-| Basket and codes                                  | `/haiba/basket`            |
+| Points wallet (out of the flow, kept for reference) | `/haiba/wallet`          |
+| Basket and codes (out of the flow, kept for reference) | `/haiba/basket`       |
 | Shop page, The Coffee Bean                        | `/shop/coffee-bean`        |
 | Redeem an offer, earn points                      | `/shop/coffee-bean/redeem` |
 
 Join on the plans page makes you a new member with 500 points.
+
+Rewards: on the shop page, tap Use on a reward, confirm, and the code shows right there. One code per item, no basket. Held codes also show on the hub under Ready to use; tap one to show it.
 
 ## Prototype panel
 
