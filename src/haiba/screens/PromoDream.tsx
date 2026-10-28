@@ -99,7 +99,8 @@ export default function PromoDream() {
               lineHeight: "1.1",
             }}
           >
-            {"Something free every month. All year."}
+            {"Something free every month. "}
+            <span style={{ color: "#C0F402" }}>{"All year."}</span>
           </h1>
           <div
             className="hb-rise hb-d1"
@@ -522,8 +523,8 @@ export default function PromoDream() {
                 position: "absolute",
                 right: "14px",
                 top: "-14px",
-                background: "#6C3FFA",
-                color: "#FFFFFF",
+                background: "#C0F402",
+                color: "#1F2600",
                 fontSize: "15px",
                 fontWeight: "800",
                 borderRadius: "999px",

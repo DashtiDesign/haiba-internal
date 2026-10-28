@@ -101,7 +101,7 @@ export default function PromoYear() {
           >
             {v.headPay}
             <br />
-            {v.headGet}
+            <span style={{ color: "#C0F402" }}>{v.headGet}</span>
           </h1>
           <div
             className="hb-rise hb-d1"
@@ -131,8 +131,8 @@ export default function PromoYear() {
                 position: "absolute",
                 right: "14px",
                 top: "-14px",
-                background: "#6C3FFA",
-                color: "#FFFFFF",
+                background: "#C0F402",
+                color: "#1F2600",
                 fontSize: "15px",
                 fontWeight: "800",
                 borderRadius: "999px",
