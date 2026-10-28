@@ -103,17 +103,16 @@ export function useVals() {
   };
   var active = state.active != null ? state.active : firstEmpty(slots, 0);
   var pts = sim(1).pts;
-  var base = 12.0 + pts / 1000;
-  var worthOf = function (s) {
-    return (
-      base +
-      s.reduce(function (a, gi) {
-        return a + (gi >= 0 ? G[gi].v : 0);
-      }, 0)
-    );
+  var subs = 12.0;
+  var giftsOf = function (s) {
+    return s.reduce(function (a, gi) {
+      return a + (gi >= 0 ? G[gi].v : 0);
+    }, 0);
   };
-  var target = worthOf(slots);
-  var worthN = state.disp != null ? state.disp : target;
+  var worthOf = function (s) {
+    return subs + pts / 1000 + giftsOf(s);
+  };
+  var worthN = state.disp != null ? state.disp : worthOf(slots);
   var whole = function (x) {
     return "BHD " + Math.floor(x) + "+";
   };
@@ -135,8 +134,10 @@ export function useVals() {
   var place = function (gi, mi) {
     if (mi < 0) return;
     var s = slots.slice();
+    var before = s[mi];
     s[mi] = gi;
-    setState({ slots: s, active: firstEmpty(s, mi + 1), bump: !state.bump });
+    var d = G[gi].v - (before >= 0 ? G[before].v : 0);
+    setState({ slots: s, active: firstEmpty(s, mi + 1), bump: !state.bump, delta: d });
     animateTo(worthOf(s));
   };
   var months = labels.map(function (l, mi) {
@@ -148,9 +149,7 @@ export function useVals() {
       filled: isOn,
       empty: !isOn,
       logo: isOn ? G[gi].logo : "",
-      val: isOn ? "BHD " + G[gi].v.toFixed(2) : "",
-      hint: isActive ? "Drop here" : "Pick",
-      bg: isOn ? "#FFFFFF" : isActive ? "rgba(192,244,2,0.14)" : "rgba(255,255,255,0.08)",
+      bg: isOn ? "#FFFFFF" : isActive ? "rgba(192,244,2,0.16)" : "rgba(255,255,255,0.08)",
       border: isOn ? "0" : isActive ? "2px dashed #C0F402" : "1px solid rgba(255,255,255,0.18)",
       labInk: isOn ? "#6C3FFA" : isActive ? "#C0F402" : "#E4DBFF",
       dash: isActive ? "#C0F402" : "rgba(255,255,255,0.55)",
@@ -160,7 +159,7 @@ export function useVals() {
         if (isOn) {
           var s = slots.slice();
           s[mi] = -1;
-          setState({ slots: s, active: mi, bump: !state.bump });
+          setState({ slots: s, active: mi, bump: !state.bump, delta: -G[gi].v });
           animateTo(worthOf(s));
         } else setState({ active: mi });
       },
@@ -174,7 +173,7 @@ export function useVals() {
   });
   var gifts = G.map(function (g, gi) {
     return Object.assign({}, g, {
-      val: "Worth BHD " + g.v.toFixed(2),
+      val: "BHD " + g.v.toFixed(2),
       aria: "Put " + g.item + " in " + (active >= 0 ? labels[active] : "a month"),
       pick: function () {
         place(gi, active);
@@ -187,32 +186,25 @@ export function useVals() {
       },
     });
   });
-  var max =
-    base +
-    12 *
-      Math.max.apply(
-        null,
-        G.map(function (g) {
-          return g.v;
-        }),
-      );
+  var d = state.delta;
   return Object.assign(common, {
-    hello: "Hi " + name + ", build your year.",
+    hello: "Hi " + name + ".",
     worth: whole(worthN),
-    free: worthN > p ? whole(worthN - p) + " free" : "Keep picking",
+    delta: d == null ? "" : (d >= 0 ? "+" : "−") + "BHD " + Math.abs(d).toFixed(2),
+    deltaOp: d == null ? "0" : "1",
     bump: state.bump ? "hb-bump-a" : "hb-bump-b",
-    fillPct: Math.round((filled / 12) * 100) + "%",
-    fillLine:
-      filled === 12
-        ? "All 12 months picked. Tap a month to swap."
-        : filled + " of 12 months picked. Fill them all for up to " + whole(max) + ".",
-    trayLine:
-      active >= 0 ? "Tap or drag a gift into " + labels[active] : "Tap a month to swap its gift",
+    breakdown:
+      "Gifts BHD " +
+      giftsOf(slots).toFixed(2) +
+      " + Spotify and ChatGPT BHD " +
+      subs.toFixed(2) +
+      " + points",
+    count: filled + " of 12 picked",
+    trayLine: active >= 0 ? "Tap or drag into " + labels[active] : "Tap a month to swap",
     months: months,
     gifts: gifts,
     allowDrop: function (e) {
       e.preventDefault();
     },
-    ptsVal: "+BHD " + (pts / 1000).toFixed(2),
   });
 }

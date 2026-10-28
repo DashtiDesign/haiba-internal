@@ -78,159 +78,120 @@ export default function PromoDream() {
             />
             <span style={{ width: "44px" }}></span>
           </div>
-          <div
+          <h1
             className="hb-rise"
             style={{
-              margin: "24px 4px 0 4px",
-              fontSize: "16px",
-              fontWeight: "600",
-              color: "#E4DBFF",
+              margin: "18px 4px 0 4px",
+              fontSize: "28px",
+              fontWeight: "800",
+              letterSpacing: "-0.03em",
+              lineHeight: "1.1",
             }}
           >
             {v.hello}
-          </div>
-          <h1
-            className="hb-rise hb-d1"
-            style={{
-              margin: "6px 4px 0 4px",
-              fontSize: "32px",
-              fontWeight: "800",
-              letterSpacing: "-0.03em",
-              lineHeight: "1.08",
-            }}
-          >
-            {"Something free every month. "}
-            <span style={{ color: "#C0F402" }}>{"You pick."}</span>
+            <br />
+            <span style={{ color: "#C0F402" }}>{"Pick a free gift for every month."}</span>
           </h1>
           <div
-            className="hb-rise hb-d2"
+            className="hb-rise hb-d1"
             style={{
-              position: "relative",
-              marginTop: "20px",
+              marginTop: "14px",
               background: "#1E1B2E",
               borderRadius: "16px",
-              padding: "18px 20px",
+              padding: "14px 16px 16px 16px",
             }}
           >
-            <span
-              className="hb-pop hb-d3"
-              style={{
-                position: "absolute",
-                right: "14px",
-                top: "-14px",
-                background: "#C0F402",
-                color: "#1F2600",
-                fontSize: "15px",
-                fontWeight: "800",
-                borderRadius: "999px",
-                padding: "7px 12px",
-                transform: "rotate(6deg)",
-                boxShadow: "0 8px 18px rgba(0,0,0,0.25)",
-              }}
-            >
-              {v.free}
-            </span>
-            <div
-              style={{
-                fontSize: "13px",
-                fontWeight: "800",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: "#B9B3CC",
-              }}
-            >
-              {"Your Haiba year"}
-            </div>
             <div
               style={{
                 display: "flex",
-                alignItems: "baseline",
+                alignItems: "center",
                 justifyContent: "space-between",
                 gap: "10px",
-                marginTop: "8px",
               }}
             >
-              <span
-                className={v.bump}
-                style={{
-                  fontSize: "48px",
-                  fontWeight: "800",
-                  letterSpacing: "-0.04em",
-                  lineHeight: "1",
-                  color: "#C0F402",
-                }}
-              >
-                {v.worth}
+              <span style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                <span
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: "800",
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    color: "#B9B3CC",
+                  }}
+                >
+                  {"Your Haiba year"}
+                </span>
+                <span
+                  style={{ position: "relative", display: "inline-block", whiteSpace: "nowrap" }}
+                >
+                  <span
+                    className={v.bump}
+                    style={{
+                      fontSize: "40px",
+                      fontWeight: "800",
+                      letterSpacing: "-0.04em",
+                      lineHeight: "1",
+                      color: "#C0F402",
+                    }}
+                  >
+                    {v.worth}
+                  </span>
+                  <span
+                    className={v.bump}
+                    style={{
+                      position: "absolute",
+                      left: "100%",
+                      top: "-8px",
+                      marginLeft: "8px",
+                      whiteSpace: "nowrap",
+                      fontSize: "13px",
+                      fontWeight: "800",
+                      color: "#1F2600",
+                      background: "#C0F402",
+                      borderRadius: "999px",
+                      padding: "3px 8px",
+                      opacity: v.deltaOp,
+                    }}
+                  >
+                    {v.delta}
+                  </span>
+                </span>
               </span>
               <span
                 style={{
-                  fontSize: "15px",
-                  fontWeight: "700",
-                  color: "#E8E4F4",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-end",
+                  gap: "2px",
                   textAlign: "right",
                 }}
               >
-                {"for "}
-                {v.price}
+                <span style={{ fontSize: "13px", fontWeight: "700", color: "#B9B3CC" }}>
+                  {"You pay"}
+                </span>
+                <span style={{ fontSize: "17px", fontWeight: "800", whiteSpace: "nowrap" }}>
+                  {v.price}
+                </span>
               </span>
             </div>
             <div
               style={{
-                position: "relative",
-                height: "8px",
-                marginTop: "14px",
-                borderRadius: "999px",
-                overflow: "hidden",
-                background: "#3A3550",
+                fontSize: "12.5px",
+                fontWeight: "600",
+                color: "#CFC9E0",
+                marginTop: "8px",
+                lineHeight: "1.4",
               }}
             >
-              <span
-                className="hb-ease"
-                style={{
-                  position: "absolute",
-                  left: "0",
-                  top: "0",
-                  bottom: "0",
-                  width: v.fillPct,
-                  background: "#C0F402",
-                  borderRadius: "999px",
-                }}
-              ></span>
+              {v.breakdown}
             </div>
-            <div
-              style={{ fontSize: "13.5px", fontWeight: "600", color: "#CFC9E0", marginTop: "8px" }}
-            >
-              {v.fillLine}
-            </div>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "baseline",
-              margin: "22px 4px 10px 4px",
-            }}
-          >
-            <span
-              style={{
-                fontSize: "13px",
-                fontWeight: "800",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: "#E4DBFF",
-              }}
-            >
-              {"Your 12 months"}
-            </span>
-            <span style={{ fontSize: "13px", fontWeight: "700", color: "#E4DBFF" }}>
-              {"Tap a month to change it"}
-            </span>
           </div>
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-              gap: "8px",
+              gridTemplateColumns: "repeat(6, minmax(0, 1fr))",
+              gap: "6px",
+              marginTop: "14px",
             }}
           >
             {(v.months || []).map((m: any, idx0: number) => (
@@ -248,11 +209,11 @@ export default function PromoDream() {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    gap: "4px",
-                    height: "92px",
+                    gap: "3px",
+                    height: "70px",
                     boxSizing: "border-box",
-                    padding: "8px 4px 8px 4px",
-                    borderRadius: "14px",
+                    padding: "6px 2px",
+                    borderRadius: "12px",
                     background: m.bg,
                     border: m.border,
                     color: "#FFFFFF",
@@ -260,9 +221,9 @@ export default function PromoDream() {
                 >
                   <span
                     style={{
-                      fontSize: "11.5px",
+                      fontSize: "10.5px",
                       fontWeight: "800",
-                      letterSpacing: "0.08em",
+                      letterSpacing: "0.06em",
                       textTransform: "uppercase",
                       color: m.labInk,
                     }}
@@ -276,17 +237,14 @@ export default function PromoDream() {
                         src={m.logo}
                         alt=""
                         style={{
-                          width: "36px",
-                          height: "36px",
-                          borderRadius: "10px",
+                          width: "34px",
+                          height: "34px",
+                          borderRadius: "9px",
                           objectFit: "cover",
                           display: "block",
                           boxShadow: "0 0 0 2px #FFFFFF",
                         }}
                       />
-                      <span style={{ fontSize: "11.5px", fontWeight: "800", color: "#1E1B2E" }}>
-                        {m.val}
-                      </span>
                     </>
                   ) : null}
                   {m.empty ? (
@@ -300,15 +258,12 @@ export default function PromoDream() {
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
-                          fontSize: "18px",
+                          fontSize: "17px",
                           fontWeight: "700",
                           color: m.dash,
                         }}
                       >
                         {"+"}
-                      </span>
-                      <span style={{ fontSize: "11px", fontWeight: "700", color: m.labInk }}>
-                        {m.hint}
                       </span>
                     </>
                   ) : null}
@@ -318,21 +273,32 @@ export default function PromoDream() {
           </div>
           <div
             style={{
-              margin: "18px 4px 10px 4px",
-              fontSize: "13px",
-              fontWeight: "800",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "#C0F402",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "baseline",
+              margin: "14px 4px 8px 4px",
             }}
           >
-            {v.trayLine}
+            <span
+              style={{
+                fontSize: "13px",
+                fontWeight: "800",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: "#C0F402",
+              }}
+            >
+              {v.trayLine}
+            </span>
+            <span style={{ fontSize: "12.5px", fontWeight: "700", color: "#E4DBFF" }}>
+              {v.count}
+            </span>
           </div>
           <div
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-              gap: "8px",
+              gap: "6px",
             }}
           >
             {(v.gifts || []).map((g: any, idx0: number) => (
@@ -347,14 +313,14 @@ export default function PromoDream() {
                     font: "inherit",
                     cursor: "grab",
                     border: "0",
-                    padding: "0",
+                    padding: "8px",
                     textAlign: "left",
                     background: "#FFFFFF",
                     color: "#1E1B2E",
-                    borderRadius: "14px",
-                    overflow: "hidden",
+                    borderRadius: "12px",
                     display: "flex",
-                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "8px",
                     boxShadow: "0 8px 18px rgba(20,8,60,0.25)",
                   }}
                 >
@@ -362,26 +328,21 @@ export default function PromoDream() {
                     src={g.logo}
                     alt={g.brand}
                     style={{
-                      width: "100%",
-                      height: "56px",
-                      objectFit: "contain",
+                      width: "34px",
+                      height: "34px",
+                      borderRadius: "9px",
+                      objectFit: "cover",
                       display: "block",
-                      background: g.bg,
+                      flex: "none",
                       pointerEvents: "none",
+                      boxShadow: "0 0 0 1px #ECE8F5",
                     }}
                   />
-                  <span
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "1px",
-                      padding: "8px 10px 10px 10px",
-                    }}
-                  >
-                    <span style={{ fontSize: "12.5px", fontWeight: "800", lineHeight: "1.2" }}>
+                  <span style={{ display: "flex", flexDirection: "column", minWidth: "0" }}>
+                    <span style={{ fontSize: "12px", fontWeight: "800", lineHeight: "1.15" }}>
                       {g.item}
                     </span>
-                    <span style={{ fontSize: "12px", fontWeight: "700", color: "#6C3FFA" }}>
+                    <span style={{ fontSize: "11.5px", fontWeight: "800", color: "#6C3FFA" }}>
                       {g.val}
                     </span>
                   </span>
@@ -391,162 +352,223 @@ export default function PromoDream() {
           </div>
           <div
             style={{
-              margin: "24px 4px 10px 4px",
-              fontSize: "13px",
+              margin: "28px 4px 4px 4px",
+              fontSize: "28px",
               fontWeight: "800",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
+              letterSpacing: "-0.02em",
+              lineHeight: "1.1",
+            }}
+          >
+            {"And on us, "}
+            <span style={{ color: "#C0F402" }}>{"from day one."}</span>
+          </div>
+          <div
+            style={{
+              margin: "0 4px 14px 4px",
+              fontSize: "15px",
+              fontWeight: "600",
               color: "#E4DBFF",
             }}
           >
-            {"Also yours"}
+            {"The apps you already use. Free for 3 months."}
           </div>
-          <div style={{ background: "#1E1B2E", borderRadius: "16px", padding: "4px 18px" }}>
-            <div
+          <div
+            className="hb-stagger"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+              gap: "10px",
+            }}
+          >
+            <span
               style={{
-                display: "grid",
-                gridTemplateColumns: "44px minmax(0, 1fr) auto",
-                gap: "12px",
-                alignItems: "center",
-                padding: "14px 0",
-                borderBottom: "1px solid #3A3550",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                gap: "18px",
+                minHeight: "176px",
+                boxSizing: "border-box",
+                padding: "16px",
+                borderRadius: "16px",
+                background: "#000000",
+                color: "#FFFFFF",
               }}
             >
               <span
                 style={{
-                  width: "44px",
-                  height: "44px",
-                  borderRadius: "14px",
-                  overflow: "hidden",
-                  display: "block",
-                  boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
                 }}
               >
                 <Artwork
                   src="/haiba/brands/spotify.webp"
-                  alt="Spotify"
-                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  alt="Spotify Premium Student"
+                  style={{
+                    width: "52px",
+                    height: "52px",
+                    borderRadius: "14px",
+                    objectFit: "cover",
+                    display: "block",
+                    boxShadow: "0 0 0 1px rgba(255,255,255,0.15)",
+                  }}
                 />
-              </span>
-              <span style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}>
-                <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
-                  {"Spotify Premium Student"}
-                </span>
                 <span
                   style={{
-                    fontSize: "13.5px",
-                    fontWeight: "500",
+                    background: "#C0F402",
+                    color: "#1F2600",
+                    fontSize: "13px",
+                    fontWeight: "800",
+                    borderRadius: "999px",
+                    padding: "5px 10px",
+                  }}
+                >
+                  {"BHD 3.00"}
+                </span>
+              </span>
+              <span style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                <span
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: "800",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
                     color: "#B9B3CC",
-                    lineHeight: "1.35",
                   }}
                 >
                   {"3 months free"}
                 </span>
+                <span style={{ fontSize: "19px", fontWeight: "800", lineHeight: "1.15" }}>
+                  {"Spotify Premium Student"}
+                </span>
+                <span style={{ fontSize: "13px", fontWeight: "600", color: "#B9B3CC" }}>
+                  {"Ad free music, offline"}
+                </span>
               </span>
-              <span
-                style={{
-                  fontSize: "16px",
-                  fontWeight: "800",
-                  textAlign: "right",
-                  color: "#FFFFFF",
-                }}
-              >
-                {"BHD 3.00"}
-              </span>
-            </div>
-            <div
+            </span>
+            <span
               style={{
-                display: "grid",
-                gridTemplateColumns: "44px minmax(0, 1fr) auto",
-                gap: "12px",
-                alignItems: "center",
-                padding: "14px 0",
-                borderBottom: "1px solid #3A3550",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                gap: "18px",
+                minHeight: "176px",
+                boxSizing: "border-box",
+                padding: "16px",
+                borderRadius: "16px",
+                background: "#FFFFFF",
+                color: "#1E1B2E",
               }}
             >
               <span
                 style={{
-                  width: "44px",
-                  height: "44px",
-                  borderRadius: "14px",
-                  overflow: "hidden",
-                  display: "block",
-                  boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
                 }}
               >
                 <Artwork
                   src="/haiba/brands/chatgpt.webp"
-                  alt="ChatGPT"
-                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  alt="ChatGPT Go"
+                  style={{
+                    width: "52px",
+                    height: "52px",
+                    borderRadius: "14px",
+                    objectFit: "cover",
+                    display: "block",
+                    boxShadow: "0 0 0 1px rgba(255,255,255,0.15)",
+                  }}
                 />
-              </span>
-              <span style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}>
-                <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
-                  {"ChatGPT Go"}
-                </span>
                 <span
                   style={{
-                    fontSize: "13.5px",
-                    fontWeight: "500",
-                    color: "#B9B3CC",
-                    lineHeight: "1.35",
+                    background: "#C0F402",
+                    color: "#1F2600",
+                    fontSize: "13px",
+                    fontWeight: "800",
+                    borderRadius: "999px",
+                    padding: "5px 10px",
+                  }}
+                >
+                  {"BHD 9.00"}
+                </span>
+              </span>
+              <span style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                <span
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: "800",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    color: "#6B6880",
                   }}
                 >
                   {"3 months free"}
                 </span>
+                <span style={{ fontSize: "19px", fontWeight: "800", lineHeight: "1.15" }}>
+                  {"ChatGPT Go"}
+                </span>
+                <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                  {"Help with study and more"}
+                </span>
               </span>
-              <span
-                style={{
-                  fontSize: "16px",
-                  fontWeight: "800",
-                  textAlign: "right",
-                  color: "#FFFFFF",
-                }}
-              >
-                {"BHD 9.00"}
-              </span>
-            </div>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "44px minmax(0, 1fr) auto",
-                gap: "12px",
-                alignItems: "center",
-                padding: "14px 0",
-                borderBottom: "0",
-              }}
-            >
+            </span>
+          </div>
+          <div
+            style={{
+              marginTop: "10px",
+              display: "flex",
+              alignItems: "center",
+              gap: "14px",
+              border: "1.5px dashed rgba(192,244,2,0.7)",
+              background: "rgba(30,27,46,0.30)",
+              borderRadius: "16px",
+              padding: "14px 16px",
+            }}
+          >
+            <span style={{ position: "relative", width: "48px", height: "48px", flex: "none" }}>
               <Artwork
                 src="/haiba/coins/coin-34.webp"
                 alt=""
-                style={{ width: "44px", height: "44px", objectFit: "contain", display: "block" }}
+                style={{ width: "48px", height: "48px", objectFit: "contain", display: "block" }}
               />
-              <span style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}>
-                <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
-                  {"Points every visit"}
-                </span>
-                <span
-                  style={{
-                    fontSize: "13.5px",
-                    fontWeight: "500",
-                    color: "#B9B3CC",
-                    lineHeight: "1.35",
-                  }}
-                >
-                  {"500 to start. Spend them at 200+ shops."}
-                </span>
-              </span>
               <span
                 style={{
+                  position: "absolute",
+                  right: "-6px",
+                  top: "-6px",
+                  width: "22px",
+                  height: "22px",
+                  borderRadius: "50%",
+                  background: "#C0F402",
+                  color: "#1F2600",
                   fontSize: "16px",
                   fontWeight: "800",
-                  textAlign: "right",
-                  color: "#FFFFFF",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxShadow: "0 0 0 2px #4F25D6",
                 }}
               >
-                {v.ptsVal}
+                {"+"}
               </span>
-            </div>
+            </span>
+            <span style={{ display: "flex", flexDirection: "column", gap: "2px", flex: "1" }}>
+              <span
+                style={{
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: "#C0F402",
+                }}
+              >
+                {"The cherry on top"}
+              </span>
+              <span style={{ fontSize: "17px", fontWeight: "800" }}>{"Points every visit"}</span>
+              <span style={{ fontSize: "13.5px", fontWeight: "600", color: "#E4DBFF" }}>
+                {"500 to start. Spend them at 200+ shops."}
+              </span>
+            </span>
           </div>
         </div>
         <div className="hb-fixed-bottom hb-cta-dock">
