@@ -125,7 +125,9 @@ export default function Travel() {
               lineHeight: "1.4",
             }}
           >
-            {"Unipal is in 4 countries. Your deals work in all of them, and the data is on us."}
+            {
+              "Unipal is in Bahrain and Saudi, with Qatar and Oman coming soon. Wherever you go, the data is on us."
+            }
           </div>
           <div className="hb-rise hb-d2" style={{ position: "relative" }}>
             <div
