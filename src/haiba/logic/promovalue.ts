@@ -31,43 +31,15 @@ export function useVals() {
       setState({ sheet: false });
     },
   };
-  var lines = [
-    {
-      mark: "Gift",
-      bg: "#C0F402",
-      ink: "#1F2600",
-      title: "12 free gifts",
-      sub: "1 every month from brands you love",
-      val: "BHD 30.00",
-      valInk: "#1E1B2E",
-    },
-    {
-      mark: "500",
-      bg: "#F0ECFF",
-      ink: "#6C3FFA",
-      title: "500 welcome points",
-      sub: "A free item on day one",
-      val: "Free item",
-      valInk: "#6C3FFA",
-    },
-    {
-      mark: "2x",
-      bg: "#F0ECFF",
-      ink: "#6C3FFA",
-      title: "Points on every offer",
-      sub: "2x at new shops, 5x every 5th visit",
-      val: "Free items",
-      valInk: "#6C3FFA",
-    },
-    {
-      mark: "App",
-      bg: "#F0ECFF",
-      ink: "#6C3FFA",
-      title: "Member promos",
-      sub: "Free months of apps students use",
-      val: "Bonus",
-      valInk: "#6C3FFA",
-    },
-  ];
-  return Object.assign(common, { lines: lines, payPct: Math.round((p / 30) * 100) + "%" });
+  var worthN = 42.0;
+  var round5 = function (x) {
+    return "BHD " + Math.floor(x / 5) * 5 + "+";
+  };
+  var worth = round5(worthN);
+  var free = round5(worthN - p) + " free";
+  return Object.assign(common, {
+    worth: worth,
+    free: free,
+    payPct: Math.round((p / worthN) * 100) + "%",
+  });
 }

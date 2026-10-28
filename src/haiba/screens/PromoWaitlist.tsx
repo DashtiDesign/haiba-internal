@@ -32,7 +32,7 @@ export default function PromoWaitlist() {
             background: "linear-gradient(160deg, #6C3FFA 0%, #3E1BB8 100%)",
             color: "#FFFFFF",
             padding: "14px 20px 0 20px",
-            height: "520px",
+            height: "500px",
             boxSizing: "border-box",
             overflow: "hidden",
           }}
@@ -118,28 +118,30 @@ export default function PromoWaitlist() {
             style={{
               position: "relative",
               margin: "18px 0 0 0",
-              fontSize: "36px",
+              fontSize: "38px",
               fontWeight: "800",
               letterSpacing: "-0.03em",
               lineHeight: "1.05",
               maxWidth: "250px",
             }}
           >
-            {"The student membership that gives back"}
+            {"Free stuff."}
+            <br />
+            <span style={{ color: "#C0F402" }}>{"Every month."}</span>
           </h1>
           <div
             className="hb-rise hb-d2"
             style={{
               position: "relative",
               fontSize: "16px",
-              fontWeight: "500",
+              fontWeight: "600",
               color: "#E4DBFF",
               lineHeight: "1.45",
               marginTop: "12px",
               maxWidth: "220px",
             }}
           >
-            {"A free gift every month and points every time you use Unipal."}
+            {"Gifts, Spotify, ChatGPT and bonus points. Be first in."}
           </div>
           <span
             className="hb-peek"
@@ -163,72 +165,252 @@ export default function PromoWaitlist() {
             marginTop: "-26px",
             background: "#FFFFFF",
             borderRadius: "16px 16px 0 0",
-            padding: "26px 20px 200px 20px",
+            padding: "24px 20px 200px 20px",
           }}
         >
-          <div
-            style={{
-              fontSize: "13px",
-              fontWeight: "800",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "#6C3FFA",
-            }}
-          >
-            {"What you will get"}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+            <span
+              style={{
+                fontSize: "13px",
+                fontWeight: "800",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "#6C3FFA",
+              }}
+            >
+              {"What you get"}
+            </span>
+            <span style={{ fontSize: "15px", fontWeight: "800", color: "#1E1B2E" }}>
+              {"Worth "}
+              {v.worth}
+              {" a year"}
+            </span>
+          </div>
+          <div style={{ marginTop: "4px" }}>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                gap: "12px",
+                alignItems: "center",
+                padding: "14px 0",
+                borderBottom: "1px solid #F1EFF7",
+              }}
+            >
+              <span
+                style={{
+                  width: "44px",
+                  height: "44px",
+                  borderRadius: "14px",
+                  background: "#6C3FFA",
+                  color: "#FFFFFF",
+                  fontSize: "13px",
+                  fontWeight: "800",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {"Gift"}
+              </span>
+              <span style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}>
+                <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
+                  {"12 free gifts"}
+                </span>
+                <span
+                  style={{
+                    fontSize: "13.5px",
+                    fontWeight: "500",
+                    color: "#6B6880",
+                    lineHeight: "1.35",
+                  }}
+                >
+                  {"1 every month, you pick"}
+                </span>
+              </span>
+              <span
+                style={{
+                  fontSize: "16px",
+                  fontWeight: "800",
+                  textAlign: "right",
+                  color: "#1E1B2E",
+                }}
+              ></span>
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                gap: "12px",
+                alignItems: "center",
+                padding: "14px 0",
+                borderBottom: "1px solid #F1EFF7",
+              }}
+            >
+              <span
+                style={{
+                  width: "44px",
+                  height: "44px",
+                  borderRadius: "14px",
+                  overflow: "hidden",
+                  display: "block",
+                  boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                }}
+              >
+                <Artwork
+                  src="/haiba/brands/spotify.webp"
+                  alt="Spotify Premium Student"
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                />
+              </span>
+              <span style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}>
+                <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
+                  {"Spotify Premium Student"}
+                </span>
+                <span
+                  style={{
+                    fontSize: "13.5px",
+                    fontWeight: "500",
+                    color: "#6B6880",
+                    lineHeight: "1.35",
+                  }}
+                >
+                  {"3 months free"}
+                </span>
+              </span>
+              <span
+                style={{
+                  fontSize: "16px",
+                  fontWeight: "800",
+                  textAlign: "right",
+                  color: "#1E1B2E",
+                }}
+              ></span>
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                gap: "12px",
+                alignItems: "center",
+                padding: "14px 0",
+                borderBottom: "0",
+              }}
+            >
+              <span
+                style={{
+                  width: "44px",
+                  height: "44px",
+                  borderRadius: "14px",
+                  overflow: "hidden",
+                  display: "block",
+                  boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                }}
+              >
+                <Artwork
+                  src="/haiba/brands/chatgpt.webp"
+                  alt="ChatGPT Go"
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                />
+              </span>
+              <span style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}>
+                <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
+                  {"ChatGPT Go"}
+                </span>
+                <span
+                  style={{
+                    fontSize: "13.5px",
+                    fontWeight: "500",
+                    color: "#6B6880",
+                    lineHeight: "1.35",
+                  }}
+                >
+                  {"3 months free"}
+                </span>
+              </span>
+              <span
+                style={{
+                  fontSize: "16px",
+                  fontWeight: "800",
+                  textAlign: "right",
+                  color: "#1E1B2E",
+                }}
+              ></span>
+            </div>
           </div>
           <div
-            className="hb-stagger"
-            style={{ display: "flex", flexDirection: "column", marginTop: "6px" }}
+            style={{
+              marginTop: "14px",
+              border: "1.5px dashed #6C3FFA",
+              background: "#F6F3FF",
+              borderRadius: "16px",
+              padding: "14px 16px",
+              display: "flex",
+              alignItems: "center",
+              gap: "14px",
+            }}
           >
-            {(v.perks || []).map((k: any, idx0: number) => (
-              <Fragment key={idx0}>
-                <div
-                  style={{ display: "flex", gap: "14px", padding: "14px 0", borderBottom: k.line }}
-                >
-                  <span
-                    style={{
-                      width: "44px",
-                      height: "44px",
-                      flex: "none",
-                      borderRadius: "14px",
-                      background: k.bg,
-                      color: k.ink,
-                      fontSize: "15px",
-                      fontWeight: "800",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    {k.mark}
-                  </span>
-                  <span
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "3px",
-                      flex: "1",
-                      minWidth: "0",
-                    }}
-                  >
-                    <span style={{ fontSize: "17px", fontWeight: "700", lineHeight: "1.3" }}>
-                      {k.title}
-                    </span>
-                    <span
-                      style={{
-                        fontSize: "14.5px",
-                        fontWeight: "500",
-                        color: "#6B6880",
-                        lineHeight: "1.4",
-                      }}
-                    >
-                      {k.sub}
-                    </span>
-                  </span>
-                </div>
-              </Fragment>
-            ))}
+            <span style={{ position: "relative", width: "44px", height: "44px", flex: "none" }}>
+              <Artwork
+                src="/haiba/coins/coin-34.webp"
+                alt=""
+                style={{ width: "44px", height: "44px", objectFit: "contain", display: "block" }}
+              />
+              <span
+                style={{
+                  position: "absolute",
+                  right: "-6px",
+                  top: "-6px",
+                  width: "22px",
+                  height: "22px",
+                  borderRadius: "50%",
+                  background: "#C0F402",
+                  color: "#1F2600",
+                  fontSize: "16px",
+                  fontWeight: "800",
+                  lineHeight: "1",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxShadow: "0 0 0 2px #FFFFFF",
+                }}
+              >
+                {"+"}
+              </span>
+            </span>
+            <span style={{ display: "flex", flexDirection: "column", gap: "3px", minWidth: "0" }}>
+              <span
+                style={{
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: "#6C3FFA",
+                }}
+              >
+                {"The cherry on top"}
+              </span>
+              <span
+                style={{
+                  fontSize: "17px",
+                  fontWeight: "800",
+                  lineHeight: "1.25",
+                  color: "#1E1B2E",
+                }}
+              >
+                {"+ Bonus points every visit"}
+              </span>
+              <span
+                style={{
+                  fontSize: "13.5px",
+                  fontWeight: "500",
+                  color: "#6B6880",
+                  lineHeight: "1.4",
+                }}
+              >
+                {"Spend them on free drinks, meals and popcorn."}
+              </span>
+            </span>
           </div>
           <div
             style={{
@@ -350,7 +532,7 @@ export default function PromoWaitlist() {
           </div>
           <div
             style={{
-              marginTop: "26px",
+              marginTop: "24px",
               background: "#F3F0FA",
               borderRadius: "16px",
               padding: "16px",
@@ -365,13 +547,11 @@ export default function PromoWaitlist() {
               style={{ width: "44px", height: "44px", objectFit: "contain", flex: "none" }}
             />
             <span style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
-              <span style={{ fontSize: "16px", fontWeight: "800" }}>
-                {"Early access is limited"}
-              </span>
+              <span style={{ fontSize: "16px", fontWeight: "800" }}>{"Spots are limited"}</span>
               <span
                 style={{ fontSize: "14px", fontWeight: "500", color: "#4A4660", lineHeight: "1.4" }}
               >
-                {"A small group of students gets Haiba first. Join the list to be one of them."}
+                {"The first on the list get in first."}
               </span>
             </span>
           </div>
@@ -420,7 +600,7 @@ export default function PromoWaitlist() {
                   color: "#6B6880",
                 }}
               >
-                {"Free to join the list. No payment."}
+                {"Free to join. No payment."}
               </span>
             </div>
           </div>

@@ -43,6 +43,8 @@ BLOBS = {
     "82364cb26b1195be0a503039925a2eb0": "/haiba/brands/grip.webp",
     "9163726a14d1e4869c71e417a3a87155": "/haiba/brands/albayan.webp",
     "c1e6f5f43bf6c8ea66f354b776557213": "/haiba/brands/wingman.webp",
+    "5d48aef36235ae8fec275b6e002242fb": "/haiba/brands/spotify.webp",
+    "8b3c887e681b9be68b9f81af3de4af22": "/haiba/brands/chatgpt.webp",
     "badc2628e905d2a79b03cb243d1a8c66": "/haiba/birds/17-coin-toss.webp",
     "9fe36060ebeb5decae4a3f854cbec118": "/haiba/coins/coin-front.webp",
     "9291b1502bc66437ec6d75fd7f955c77": "/haiba/coins/coin-34.webp",

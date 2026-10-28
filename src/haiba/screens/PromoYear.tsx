@@ -93,28 +93,22 @@ export default function PromoYear() {
             className="hb-rise hb-d1"
             style={{
               margin: "8px 4px 0 4px",
-              fontSize: "32px",
+              fontSize: "34px",
               fontWeight: "800",
               letterSpacing: "-0.03em",
-              lineHeight: "1.1",
+              lineHeight: "1.08",
             }}
           >
-            {v.headPay}
+            {"Pay "}
+            {v.price}
+            {"."}
             <br />
-            <span style={{ color: "#C0F402" }}>{v.headGet}</span>
+            <span style={{ color: "#C0F402" }}>
+              {"Get "}
+              {v.worth}
+              {" back."}
+            </span>
           </h1>
-          <div
-            className="hb-rise hb-d1"
-            style={{
-              margin: "10px 4px 0 4px",
-              fontSize: "15px",
-              fontWeight: "500",
-              color: "#B9B3CC",
-              lineHeight: "1.45",
-            }}
-          >
-            {v.basis}
-          </div>
           <div
             className="hb-rise hb-d2"
             style={{
@@ -122,7 +116,7 @@ export default function PromoYear() {
               marginTop: "24px",
               background: "#2B2740",
               borderRadius: "16px",
-              padding: "20px",
+              padding: "20px 20px 4px 20px",
             }}
           >
             <span
@@ -138,7 +132,7 @@ export default function PromoYear() {
                 borderRadius: "999px",
                 padding: "7px 12px",
                 transform: "rotate(6deg)",
-                boxShadow: "0 8px 18px rgba(0,0,0,0.3)",
+                boxShadow: "0 8px 18px rgba(0,0,0,0.25)",
               }}
             >
               {v.free}
@@ -152,7 +146,7 @@ export default function PromoYear() {
                 color: "#B9B3CC",
               }}
             >
-              {"Your year is worth"}
+              {"Your Haiba year"}
             </div>
             <div
               style={{
@@ -164,16 +158,18 @@ export default function PromoYear() {
                 color: "#C0F402",
               }}
             >
-              {v.total}
+              {v.worth}
             </div>
             <div
               style={{ fontSize: "16px", fontWeight: "600", color: "#E8E4F4", marginTop: "10px" }}
             >
-              {"You pay only "}
+              {"All for "}
               <span style={{ color: "#FFFFFF", fontWeight: "800" }}>{v.price}</span>
-              {". The rest is free on top."}
+              {". Just "}
+              {v.perMonth}
+              {" a month."}
             </div>
-            <div style={{ marginTop: "18px", borderTop: "1px solid #3A3550" }}>
+            <div style={{ marginTop: "16px", borderTop: "1px solid #3A3550" }}>
               <div
                 style={{
                   display: "grid",
@@ -200,13 +196,33 @@ export default function PromoYear() {
                 >
                   {"Gift"}
                 </span>
-                <span style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-                  <span style={{ fontSize: "16px", fontWeight: "700" }}>{"12 free gifts"}</span>
-                  <span style={{ fontSize: "13.5px", fontWeight: "500", color: "#B9B3CC" }}>
-                    {"1 every month"}
+                <span
+                  style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}
+                >
+                  <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
+                    {"12 free gifts"}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "13.5px",
+                      fontWeight: "500",
+                      color: "#B9B3CC",
+                      lineHeight: "1.35",
+                    }}
+                  >
+                    {"1 every month, you pick"}
                   </span>
                 </span>
-                <span style={{ fontSize: "17px", fontWeight: "800" }}>{"BHD 30.00"}</span>
+                <span
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "800",
+                    textAlign: "right",
+                    color: "#FFFFFF",
+                  }}
+                >
+                  {"BHD 30.00"}
+                </span>
               </div>
               <div
                 style={{
@@ -223,107 +239,179 @@ export default function PromoYear() {
                     width: "44px",
                     height: "44px",
                     borderRadius: "14px",
-                    background: "#3A3550",
-                    color: "#FFFFFF",
-                    fontSize: "13px",
-                    fontWeight: "800",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  {"Music"}
-                </span>
-                <span
-                  style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}
-                >
-                  <span style={{ fontSize: "16px", fontWeight: "700" }}>
-                    {"Spotify Premium Student"}
-                  </span>
-                  <span style={{ fontSize: "13.5px", fontWeight: "500", color: "#B9B3CC" }}>
-                    {"3 months free when you join"}
-                  </span>
-                </span>
-                <span style={{ fontSize: "17px", fontWeight: "800" }}>{"BHD 3.00"}</span>
-              </div>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "44px minmax(0, 1fr) auto",
-                  gap: "12px",
-                  alignItems: "center",
-                  padding: "14px 0",
-                  borderBottom: "1px solid #3A3550",
-                }}
-              >
-                <span
-                  style={{
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "14px",
-                    background: "#3A3550",
-                    color: "#FFFFFF",
-                    fontSize: "13px",
-                    fontWeight: "800",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  {"AI"}
-                </span>
-                <span
-                  style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}
-                >
-                  <span style={{ fontSize: "16px", fontWeight: "700" }}>{"ChatGPT Go"}</span>
-                  <span style={{ fontSize: "13.5px", fontWeight: "500", color: "#B9B3CC" }}>
-                    {"3 months free when you join"}
-                  </span>
-                </span>
-                <span style={{ fontSize: "17px", fontWeight: "800" }}>{"BHD 9.00"}</span>
-              </div>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "44px minmax(0, 1fr) auto",
-                  gap: "12px",
-                  alignItems: "center",
-                  padding: "14px 0",
-                }}
-              >
-                <span
-                  style={{
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "14px",
-                    background: "#3A3550",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
+                    overflow: "hidden",
+                    display: "block",
+                    boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
                   }}
                 >
                   <Artwork
-                    src="/haiba/coins/coin-front.webp"
-                    alt=""
-                    style={{ width: "24px", height: "24px", objectFit: "contain" }}
+                    src="/haiba/brands/spotify.webp"
+                    alt="Spotify Premium Student"
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
                   />
                 </span>
                 <span
                   style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}
                 >
-                  <span style={{ fontSize: "16px", fontWeight: "700" }}>{v.ptsLine}</span>
-                  <span style={{ fontSize: "13.5px", fontWeight: "500", color: "#B9B3CC" }}>
-                    {v.ptsItems}
+                  <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
+                    {"Spotify Premium Student"}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "13.5px",
+                      fontWeight: "500",
+                      color: "#B9B3CC",
+                      lineHeight: "1.35",
+                    }}
+                  >
+                    {"3 months free"}
                   </span>
                 </span>
-                <span style={{ fontSize: "17px", fontWeight: "800" }}>{v.ptsVal}</span>
+                <span
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "800",
+                    textAlign: "right",
+                    color: "#FFFFFF",
+                  }}
+                >
+                  {"BHD 3.00"}
+                </span>
+              </div>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                  gap: "12px",
+                  alignItems: "center",
+                  padding: "14px 0",
+                  borderBottom: "0",
+                }}
+              >
+                <span
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "14px",
+                    overflow: "hidden",
+                    display: "block",
+                    boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                  }}
+                >
+                  <Artwork
+                    src="/haiba/brands/chatgpt.webp"
+                    alt="ChatGPT Go"
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  />
+                </span>
+                <span
+                  style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}
+                >
+                  <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
+                    {"ChatGPT Go"}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "13.5px",
+                      fontWeight: "500",
+                      color: "#B9B3CC",
+                      lineHeight: "1.35",
+                    }}
+                  >
+                    {"3 months free"}
+                  </span>
+                </span>
+                <span
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "800",
+                    textAlign: "right",
+                    color: "#FFFFFF",
+                  }}
+                >
+                  {"BHD 9.00"}
+                </span>
               </div>
             </div>
           </div>
           <div
+            style={{
+              marginTop: "14px",
+              border: "1.5px dashed rgba(192,244,2,0.55)",
+              background: "rgba(192,244,2,0.06)",
+              borderRadius: "16px",
+              padding: "14px 16px",
+              display: "flex",
+              alignItems: "center",
+              gap: "14px",
+            }}
+          >
+            <span style={{ position: "relative", width: "44px", height: "44px", flex: "none" }}>
+              <Artwork
+                src="/haiba/coins/coin-34.webp"
+                alt=""
+                style={{ width: "44px", height: "44px", objectFit: "contain", display: "block" }}
+              />
+              <span
+                style={{
+                  position: "absolute",
+                  right: "-6px",
+                  top: "-6px",
+                  width: "22px",
+                  height: "22px",
+                  borderRadius: "50%",
+                  background: "#C0F402",
+                  color: "#1F2600",
+                  fontSize: "16px",
+                  fontWeight: "800",
+                  lineHeight: "1",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxShadow: "0 0 0 2px #1E1B2E",
+                }}
+              >
+                {"+"}
+              </span>
+            </span>
+            <span style={{ display: "flex", flexDirection: "column", gap: "3px", minWidth: "0" }}>
+              <span
+                style={{
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: "#C0F402",
+                }}
+              >
+                {"The cherry on top"}
+              </span>
+              <span
+                style={{
+                  fontSize: "17px",
+                  fontWeight: "800",
+                  lineHeight: "1.25",
+                  color: "#FFFFFF",
+                }}
+              >
+                {v.ptsTitle}
+              </span>
+              <span
+                style={{
+                  fontSize: "13.5px",
+                  fontWeight: "500",
+                  color: "#B9B3CC",
+                  lineHeight: "1.4",
+                }}
+              >
+                {v.ptsSub}
+              </span>
+            </span>
+          </div>
+          <div
             className="hb-rise hb-d3"
             style={{
-              marginTop: "16px",
+              marginTop: "14px",
               background: "#2B2740",
               borderRadius: "16px",
               padding: "18px 20px",
@@ -337,23 +425,23 @@ export default function PromoYear() {
                 fontWeight: "700",
               }}
             >
-              <span style={{ color: "#B9B3CC" }}>
+              <span style={{ color: "#E8E4F4" }}>
                 {"You pay "}
                 {v.price}
               </span>
-              <span style={{ color: "#FFFFFF" }}>
+              <span style={{ color: "#C0F402" }}>
                 {"You get "}
-                {v.total}
+                {v.worth}
               </span>
             </div>
             <div
               style={{
                 position: "relative",
-                height: "10px",
+                height: "12px",
                 marginTop: "10px",
                 borderRadius: "999px",
                 overflow: "hidden",
-                background: "#6C3FFA",
+                background: "#C0F402",
               }}
             >
               <span
@@ -363,13 +451,14 @@ export default function PromoYear() {
                   left: "0",
                   top: "0",
                   bottom: "0",
-                  width: v.costPct,
-                  background: "#4A4560",
+                  width: v.payPct,
+                  background: "#8F7BFF",
+                  borderRight: "2px solid #1E1B2E",
                 }}
               ></span>
             </div>
             <div
-              style={{ fontSize: "14px", fontWeight: "600", color: "#CFC9E0", marginTop: "10px" }}
+              style={{ fontSize: "14px", fontWeight: "600", color: "#CFC9E0", marginTop: "12px" }}
             >
               {v.payback}
             </div>
@@ -411,7 +500,7 @@ export default function PromoYear() {
               >
                 <span style={{ color: "#1F2600", fontSize: "17px", fontWeight: "800" }}>
                   {"Get "}
-                  {v.total}
+                  {v.worth}
                   {" for "}
                   {v.price}
                 </span>

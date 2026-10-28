@@ -85,25 +85,25 @@ export default function PromoCompare() {
           <div
             className="hb-rise hb-d1"
             style={{
-              fontSize: "16px",
-              fontWeight: "500",
-              color: "#4A4660",
+              fontSize: "17px",
+              fontWeight: "700",
+              color: "#1E1B2E",
               margin: "12px 4px 0 4px",
-              lineHeight: "1.45",
+              lineHeight: "1.4",
             }}
           >
-            {"You keep every Unipal offer. Haiba adds gifts and points on top."}
+            {"Same Unipal. Way more free stuff."}
           </div>
           <div
             className="hb-rise hb-d2"
             style={{
-              marginTop: "22px",
+              marginTop: "20px",
               border: "1px solid #E2DCF2",
               borderRadius: "16px",
               overflow: "hidden",
             }}
           >
-            <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) 70px 92px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) 64px 96px" }}>
               <span></span>
               <span
                 style={{
@@ -134,23 +134,42 @@ export default function PromoCompare() {
                 <div
                   style={{
                     display: "grid",
-                    gridTemplateColumns: "minmax(0, 1fr) 70px 92px",
+                    gridTemplateColumns: "minmax(0, 1fr) 64px 96px",
                     borderTop: "1px solid #ECEAF3",
                   }}
                 >
                   <span
                     style={{
-                      padding: "15px 14px",
+                      padding: "12px 14px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
                       fontSize: "15px",
                       fontWeight: "600",
                       lineHeight: "1.3",
                     }}
                   >
+                    {r.hasLogo ? (
+                      <>
+                        <Artwork
+                          src={r.logo}
+                          alt=""
+                          style={{
+                            width: "26px",
+                            height: "26px",
+                            borderRadius: "8px",
+                            display: "block",
+                            flex: "none",
+                            boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                          }}
+                        />
+                      </>
+                    ) : null}
                     {r.label}
                   </span>
                   <span
                     style={{
-                      padding: "15px 4px",
+                      padding: "12px 4px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -163,7 +182,7 @@ export default function PromoCompare() {
                   </span>
                   <span
                     style={{
-                      padding: "15px 4px",
+                      padding: "12px 4px",
                       background: "#F6F3FF",
                       display: "flex",
                       alignItems: "center",
@@ -183,40 +202,66 @@ export default function PromoCompare() {
           <div
             className="hb-rise hb-d3"
             style={{
+              position: "relative",
               marginTop: "18px",
               border: "2px solid #6C3FFA",
               borderRadius: "16px",
               padding: "16px 18px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: "12px",
               background: "#FAF8FF",
             }}
           >
-            <span style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-              <span
-                style={{
-                  fontSize: "13px",
-                  fontWeight: "800",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: "#6C3FFA",
-                }}
-              >
-                {"Haiba yearly"}
-              </span>
-              <span style={{ fontSize: "26px", fontWeight: "800", letterSpacing: "-0.02em" }}>
+            <span
+              className="hb-pop hb-d3"
+              style={{
+                position: "absolute",
+                right: "14px",
+                top: "-14px",
+                background: "#C0F402",
+                color: "#1F2600",
+                fontSize: "15px",
+                fontWeight: "800",
+                borderRadius: "999px",
+                padding: "7px 12px",
+                transform: "rotate(6deg)",
+                boxShadow: "0 8px 18px rgba(0,0,0,0.25)",
+              }}
+            >
+              {v.free}
+            </span>
+            <div
+              style={{
+                fontSize: "13px",
+                fontWeight: "800",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: "#6C3FFA",
+              }}
+            >
+              {"Haiba yearly"}
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "baseline",
+                justifyContent: "space-between",
+                marginTop: "4px",
+              }}
+            >
+              <span style={{ fontSize: "28px", fontWeight: "800", letterSpacing: "-0.02em" }}>
                 {v.price}
               </span>
-            </span>
-            <span
-              style={{ fontSize: "15px", fontWeight: "700", color: "#4A4660", textAlign: "right" }}
+              <span style={{ fontSize: "15px", fontWeight: "700", color: "#4A4660" }}>
+                {"Worth "}
+                {v.worth}
+              </span>
+            </div>
+            <div
+              style={{ fontSize: "14px", fontWeight: "600", color: "#6B6880", marginTop: "2px" }}
             >
+              {"Only "}
               {v.perMonth}
-              <br />
-              <span style={{ fontWeight: "500", color: "#6B6880" }}>{"a month"}</span>
-            </span>
+              {" a month"}
+            </div>
           </div>
         </div>
         <div className="hb-fixed-bottom hb-cta-dock">
@@ -258,7 +303,8 @@ export default function PromoCompare() {
                 </span>
                 <span style={{ color: "#CFC9E0", fontSize: "13.5px", fontWeight: "500" }}>
                   {v.price}
-                  {" a year"}
+                  {" a year \u00b7 worth "}
+                  {v.worth}
                 </span>
               </button>
               <a

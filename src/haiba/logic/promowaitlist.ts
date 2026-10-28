@@ -31,37 +31,18 @@ export function useVals() {
       setState({ sheet: false });
     },
   };
+  var worthN = 42.0;
+  var round5 = function (x) {
+    return "BHD " + Math.floor(x / 5) * 5 + "+";
+  };
+  var worth = round5(worthN);
+  var free = round5(worthN - p) + " free";
   var on = !!state.joined;
-  var perks = [
-    {
-      mark: "Gift",
-      bg: "#C0F402",
-      ink: "#1F2600",
-      title: "1 free gift every month",
-      sub: "A meal, a coffee, a cinema ticket, a gym pass and more",
-    },
-    {
-      mark: "500",
-      bg: "#F0ECFF",
-      ink: "#6C3FFA",
-      title: "500 points to start",
-      sub: "Enough for your first reward on day one",
-    },
-    {
-      mark: "2x",
-      bg: "#F0ECFF",
-      ink: "#6C3FFA",
-      title: "Points every time you use Unipal",
-      sub: "Turn them into free drinks, meals and popcorn at 200+ shops",
-    },
-  ].map(function (d, i, a) {
-    return Object.assign({}, d, { line: i === a.length - 1 ? "0" : "1px solid #F1EFF7" });
-  });
   return Object.assign(common, {
-    perks: perks,
+    worth: worth,
     sheetTitle: "You are on the list",
     sheetNote: "Free, no payment needed",
-    sheetBody: "We will tell you first when Haiba opens in December.",
+    sheetBody: "You will hear from us first when Haiba opens in December.",
     join: function () {
       setState({ joined: true, sheet: true });
     },

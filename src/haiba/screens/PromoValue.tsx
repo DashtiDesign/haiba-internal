@@ -81,194 +81,365 @@ export default function PromoValue() {
             className="hb-rise"
             style={{
               margin: "26px 4px 0 4px",
-              fontSize: "34px",
+              fontSize: "36px",
               fontWeight: "800",
               letterSpacing: "-0.03em",
-              lineHeight: "1.08",
+              lineHeight: "1.05",
             }}
           >
-            {"Get more back than you pay"}
+            {v.worth}
+            {" of free stuff."}
+            <br />
+            <span style={{ color: "#6C3FFA" }}>
+              {"For "}
+              {v.price}
+              {"."}
+            </span>
           </h1>
           <div
             className="hb-rise hb-d1"
             style={{
               fontSize: "16px",
-              fontWeight: "500",
+              fontWeight: "600",
               color: "#4A4660",
               margin: "10px 4px 0 4px",
               lineHeight: "1.45",
             }}
           >
-            {"Here is what one year of Haiba gives you."}
+            {"One year of Haiba. Do the maths."}
           </div>
           <div
             className="hb-rise hb-d2"
             style={{
+              position: "relative",
               marginTop: "22px",
               background: "#FFFFFF",
               borderRadius: "16px",
               boxShadow: "0 14px 34px rgba(76,52,140,0.12)",
-              overflow: "hidden",
             }}
           >
-            <div style={{ padding: "8px 18px 0 18px" }} className="hb-stagger">
-              {(v.lines || []).map((l: any, idx0: number) => (
-                <Fragment key={idx0}>
-                  <div
+            <span
+              className="hb-pop hb-d3"
+              style={{
+                position: "absolute",
+                right: "14px",
+                top: "-14px",
+                background: "#C0F402",
+                color: "#1F2600",
+                fontSize: "15px",
+                fontWeight: "800",
+                borderRadius: "999px",
+                padding: "7px 12px",
+                transform: "rotate(6deg)",
+                boxShadow: "0 8px 18px rgba(0,0,0,0.25)",
+              }}
+            >
+              {v.free}
+            </span>
+            <div style={{ padding: "6px 18px 0 18px" }}>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                  gap: "12px",
+                  alignItems: "center",
+                  padding: "14px 0",
+                  borderBottom: "1px solid #F1EFF7",
+                }}
+              >
+                <span
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "14px",
+                    background: "#6C3FFA",
+                    color: "#FFFFFF",
+                    fontSize: "13px",
+                    fontWeight: "800",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {"Gift"}
+                </span>
+                <span
+                  style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}
+                >
+                  <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
+                    {"12 free gifts"}
+                  </span>
+                  <span
                     style={{
-                      display: "grid",
-                      gridTemplateColumns: "40px minmax(0, 1fr) auto",
-                      gap: "12px",
-                      alignItems: "center",
-                      padding: "14px 0",
-                      borderBottom: "1px solid #F1EFF7",
+                      fontSize: "13.5px",
+                      fontWeight: "500",
+                      color: "#6B6880",
+                      lineHeight: "1.35",
                     }}
                   >
-                    <span
-                      style={{
-                        width: "40px",
-                        height: "40px",
-                        borderRadius: "12px",
-                        background: l.bg,
-                        color: l.ink,
-                        fontSize: "13px",
-                        fontWeight: "800",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {l.mark}
-                    </span>
-                    <span
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "2px",
-                        minWidth: "0",
-                      }}
-                    >
-                      <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
-                        {l.title}
-                      </span>
-                      <span
-                        style={{
-                          fontSize: "13.5px",
-                          fontWeight: "500",
-                          color: "#6B6880",
-                          lineHeight: "1.35",
-                        }}
-                      >
-                        {l.sub}
-                      </span>
-                    </span>
-                    <span
-                      style={{
-                        fontSize: "15.5px",
-                        fontWeight: "800",
-                        textAlign: "right",
-                        color: l.valInk,
-                      }}
-                    >
-                      {l.val}
-                    </span>
-                  </div>
-                </Fragment>
-              ))}
+                    {"1 every month, you pick"}
+                  </span>
+                </span>
+                <span
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "800",
+                    textAlign: "right",
+                    color: "#1E1B2E",
+                  }}
+                >
+                  {"BHD 30.00"}
+                </span>
+              </div>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                  gap: "12px",
+                  alignItems: "center",
+                  padding: "14px 0",
+                  borderBottom: "1px solid #F1EFF7",
+                }}
+              >
+                <span
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "14px",
+                    overflow: "hidden",
+                    display: "block",
+                    boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                  }}
+                >
+                  <Artwork
+                    src="/haiba/brands/spotify.webp"
+                    alt="Spotify Premium Student"
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  />
+                </span>
+                <span
+                  style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}
+                >
+                  <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
+                    {"Spotify Premium Student"}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "13.5px",
+                      fontWeight: "500",
+                      color: "#6B6880",
+                      lineHeight: "1.35",
+                    }}
+                  >
+                    {"3 months free"}
+                  </span>
+                </span>
+                <span
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "800",
+                    textAlign: "right",
+                    color: "#1E1B2E",
+                  }}
+                >
+                  {"BHD 3.00"}
+                </span>
+              </div>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                  gap: "12px",
+                  alignItems: "center",
+                  padding: "14px 0",
+                  borderBottom: "0",
+                }}
+              >
+                <span
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "14px",
+                    overflow: "hidden",
+                    display: "block",
+                    boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                  }}
+                >
+                  <Artwork
+                    src="/haiba/brands/chatgpt.webp"
+                    alt="ChatGPT Go"
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  />
+                </span>
+                <span
+                  style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}
+                >
+                  <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
+                    {"ChatGPT Go"}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "13.5px",
+                      fontWeight: "500",
+                      color: "#6B6880",
+                      lineHeight: "1.35",
+                    }}
+                  >
+                    {"3 months free"}
+                  </span>
+                </span>
+                <span
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "800",
+                    textAlign: "right",
+                    color: "#1E1B2E",
+                  }}
+                >
+                  {"BHD 9.00"}
+                </span>
+              </div>
             </div>
-            <div style={{ padding: "16px 18px 18px 18px", background: "#FAF9FD" }}>
+            <div
+              style={{
+                padding: "16px 18px 18px 18px",
+                background: "#FAF9FD",
+                borderRadius: "0 0 16px 16px",
+                borderTop: "1px solid #F1EFF7",
+              }}
+            >
               <div
                 style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}
               >
                 <span style={{ fontSize: "15px", fontWeight: "700", color: "#4A4660" }}>
-                  {"Worth in a year"}
+                  {"Worth"}
                 </span>
-                <span style={{ fontSize: "22px", fontWeight: "800", color: "#6C3FFA" }}>
-                  {"BHD 30.00+"}
-                </span>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "baseline",
-                  marginTop: "6px",
-                }}
-              >
-                <span style={{ fontSize: "15px", fontWeight: "700", color: "#4A4660" }}>
-                  {"You pay"}
-                </span>
-                <span style={{ fontSize: "22px", fontWeight: "800" }}>{v.price}</span>
-              </div>
-              <div
-                style={{
-                  position: "relative",
-                  height: "10px",
-                  borderRadius: "999px",
-                  overflow: "hidden",
-                  background: "#C0F402",
-                  marginTop: "14px",
-                }}
-              >
                 <span
-                  className="hb-ease"
                   style={{
-                    position: "absolute",
-                    left: "0",
-                    top: "0",
-                    bottom: "0",
-                    width: v.payPct,
-                    background: "#1E1B2E",
+                    fontSize: "30px",
+                    fontWeight: "800",
+                    letterSpacing: "-0.02em",
+                    color: "#1E1B2E",
                   }}
-                ></span>
+                >
+                  {v.worth}
+                </span>
               </div>
-              <div
-                style={{
-                  fontSize: "13.5px",
-                  fontWeight: "600",
-                  color: "#4A4660",
-                  marginTop: "8px",
-                }}
-              >
-                {"The gifts alone are worth more than the price"}
+              <div style={{ marginTop: "14px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    fontSize: "14px",
+                    fontWeight: "700",
+                  }}
+                >
+                  <span style={{ color: "#4A4660" }}>
+                    {"You pay "}
+                    {v.price}
+                  </span>
+                  <span style={{ color: "#1E1B2E" }}>
+                    {"You get "}
+                    {v.worth}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    position: "relative",
+                    height: "12px",
+                    marginTop: "10px",
+                    borderRadius: "999px",
+                    overflow: "hidden",
+                    background: "#C0F402",
+                  }}
+                >
+                  <span
+                    className="hb-ease"
+                    style={{
+                      position: "absolute",
+                      left: "0",
+                      top: "0",
+                      bottom: "0",
+                      width: v.payPct,
+                      background: "#1E1B2E",
+                      borderRight: "2px solid #FFFFFF",
+                    }}
+                  ></span>
+                </div>
               </div>
             </div>
           </div>
           <div
-            className="hb-rise hb-d3"
             style={{
-              marginTop: "16px",
-              background: "#1E1B2E",
-              color: "#FFFFFF",
+              marginTop: "14px",
+              border: "1.5px dashed #6C3FFA",
+              background: "#F6F3FF",
               borderRadius: "16px",
-              padding: "18px",
+              padding: "14px 16px",
               display: "flex",
               alignItems: "center",
               gap: "14px",
             }}
           >
-            <Artwork
-              src="/haiba/coins/coin-34.webp"
-              alt=""
-              style={{ width: "48px", height: "48px", objectFit: "contain", flex: "none" }}
-            />
-            <span style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+            <span style={{ position: "relative", width: "44px", height: "44px", flex: "none" }}>
+              <Artwork
+                src="/haiba/coins/coin-34.webp"
+                alt=""
+                style={{ width: "44px", height: "44px", objectFit: "contain", display: "block" }}
+              />
               <span
                 style={{
-                  fontSize: "26px",
+                  position: "absolute",
+                  right: "-6px",
+                  top: "-6px",
+                  width: "22px",
+                  height: "22px",
+                  borderRadius: "50%",
+                  background: "#C0F402",
+                  color: "#1F2600",
+                  fontSize: "16px",
                   fontWeight: "800",
-                  letterSpacing: "-0.02em",
-                  color: "#C0F402",
+                  lineHeight: "1",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxShadow: "0 0 0 2px #FFFFFF",
                 }}
               >
-                {v.perMonth}
-                <span style={{ fontSize: "15px", fontWeight: "700", color: "#FFFFFF" }}>
-                  {" a month"}
-                </span>
+                {"+"}
               </span>
-              <span style={{ fontSize: "14px", fontWeight: "500", color: "#CFC9E0" }}>
-                {v.price}
-                {" paid once a year"}
+            </span>
+            <span style={{ display: "flex", flexDirection: "column", gap: "3px", minWidth: "0" }}>
+              <span
+                style={{
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: "#6C3FFA",
+                }}
+              >
+                {"The cherry on top"}
+              </span>
+              <span
+                style={{
+                  fontSize: "17px",
+                  fontWeight: "800",
+                  lineHeight: "1.25",
+                  color: "#1E1B2E",
+                }}
+              >
+                {"+ Bonus points every visit"}
+              </span>
+              <span
+                style={{
+                  fontSize: "13.5px",
+                  fontWeight: "500",
+                  color: "#6B6880",
+                  lineHeight: "1.4",
+                }}
+              >
+                {"2x at new shops. 5x every 5th visit. Spend them on free drinks and meals."}
               </span>
             </span>
           </div>
@@ -308,11 +479,13 @@ export default function PromoValue() {
                 }}
               >
                 <span style={{ color: "#C0F402", fontSize: "17px", fontWeight: "800" }}>
-                  {"Join Haiba for "}
+                  {"Get "}
+                  {v.worth}
+                  {" for "}
                   {v.price}
                 </span>
                 <span style={{ color: "#CFC9E0", fontSize: "13.5px", fontWeight: "500" }}>
-                  {"a year \u00b7 that is "}
+                  {"a year \u00b7 only "}
                   {v.perMonth}
                   {" a month"}
                 </span>

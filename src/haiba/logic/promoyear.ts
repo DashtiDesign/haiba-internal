@@ -31,17 +31,19 @@ export function useVals() {
       setState({ sheet: false });
     },
   };
+  var worthN = 42.0;
   var round5 = function (x) {
     return "BHD " + Math.floor(x / 5) * 5 + "+";
   };
+  var worth = round5(worthN);
+  var free = round5(worthN - p) + " free";
   var V = Number(props.visits ?? "4");
   var name = props.name ?? "Sara";
-  var subs = 12.0;
   // Same rules as the membership board: 1 new shop a month, the rest at favourite shops.
   var favs = { 2: 1, 4: 2, 8: 3, 12: 4 }[V] || 2;
   var seen = {},
-    pts = 500,
-    cum = subs,
+    pts = 0,
+    cum = 12.0,
     payback = 0;
   for (var m = 0; m < 12; m++) {
     var monthPts = 0,
@@ -53,31 +55,19 @@ export function useVals() {
       monthPts += n <= 2 ? 80 : n % 5 === 0 ? 200 : 40;
     });
     pts += monthPts;
-    cum += 2.5 + monthPts / 1000;
+    cum += 2.5;
     if (!payback && cum >= p) payback = m + 1;
   }
-  var left = pts;
-  var drinks = Math.floor(left / 1900);
-  left -= drinks * 1900;
-  var ups = Math.floor(left / 300);
-  var itemsVal = drinks * 1.9 + ups * 0.3;
-  var parts = [];
-  if (drinks) parts.push(drinks + (drinks === 1 ? " free drink" : " free drinks"));
-  if (ups) parts.push(ups + (ups === 1 ? " upsize" : " upsizes"));
-  var total = 30 + subs + itemsVal;
+  var shown = Math.floor((pts + 500) / 500) * 500;
   return Object.assign(common, {
-    hello: "Hi " + name + ",",
-    basis: "Based on how you use Unipal: about " + V + " offers a month.",
-    headPay: "Pay " + price + ".",
-    headGet: "Get " + round5(total) + " back.",
-    total: round5(total),
-    free: round5(total - p) + " free",
-    ptsLine: pts.toLocaleString("en-US") + " points",
-    ptsItems: "Enough for " + (parts.join(" and ") || "your first reward"),
-    ptsVal: bhd(itemsVal),
-    costPct: Math.min(100, Math.round((p / total) * 100)) + "%",
+    worth: worth,
+    free: free,
+    hello: "Hi " + name + ", here is your year.",
+    ptsTitle: shown.toLocaleString("en-US") + "+ bonus points",
+    ptsSub: "From your " + V + " visits a month. Go more, get more.",
+    payPct: Math.round((p / worthN) * 100) + "%",
     payback: payback
-      ? "It pays for itself by month " + payback + "."
+      ? "Pays for itself by month " + payback + ". Everything after is free."
       : "Use it more and it pays for itself.",
   });
 }

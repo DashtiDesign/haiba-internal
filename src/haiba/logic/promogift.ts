@@ -31,6 +31,12 @@ export function useVals() {
       setState({ sheet: false });
     },
   };
+  var worthN = 42.0;
+  var round5 = function (x) {
+    return "BHD " + Math.floor(x / 5) * 5 + "+";
+  };
+  var worth = round5(worthN);
+  var free = round5(worthN - p) + " free";
   var g = state.gift;
   var defs = [
     {
@@ -65,7 +71,9 @@ export function useVals() {
   });
   return Object.assign(common, {
     gifts: gifts,
-    ctaTitle: g >= 0 ? "Get my " + defs[g].item.toLowerCase() + " with Haiba" : "Join Haiba",
+    worth: worth,
+    free: free,
+    ctaTitle: g >= 0 ? "Get my " + defs[g].item.toLowerCase() + " with Haiba" : "Get Haiba",
     sheetBody:
       (g >= 0 ? "Your " + defs[g].item.toLowerCase() + " is saved for you. " : "") +
       "Haiba opens in December. We saved your spot at " +

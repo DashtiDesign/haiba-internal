@@ -31,14 +31,17 @@ export function useVals() {
       setState({ sheet: false });
     },
   };
+  var worthN = 42.0;
   var round5 = function (x) {
     return "BHD " + Math.floor(x / 5) * 5 + "+";
   };
+  var worth = round5(worthN);
+  var free = round5(worthN - p) + " free";
   var name = props.name ?? "Sara";
-  var total = 30 + 12.0;
   return Object.assign(common, {
+    worth: worth,
+    free: free,
     hello: "Hi " + name + ",",
-    total: round5(total),
-    free: round5(total - p) + " free",
+    payPct: Math.round((p / worthN) * 100) + "%",
   });
 }
