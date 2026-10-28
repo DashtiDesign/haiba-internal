@@ -1,0 +1,118 @@
+@keyframes promogift-hb-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes promogift-hb-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.07);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes promogift-hb-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes promogift-hb-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes promogift-hb-peek {
+  0% {
+    opacity: 0;
+    transform: translateX(70px) rotate(8deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) rotate(0);
+  }
+}
+.pg-promogift .hb-rise {
+  animation: promogift-hb-rise 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-promogift .hb-pop {
+  animation: promogift-hb-pop 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-promogift .hb-up {
+  animation: promogift-hb-up 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-promogift .hb-fade {
+  animation: promogift-hb-fade 0.25s ease both;
+}
+.pg-promogift .hb-peek {
+  animation: promogift-hb-peek 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both;
+}
+.pg-promogift .hb-stagger > * {
+  animation: promogift-hb-rise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pg-promogift .hb-stagger > *:nth-child(2) {
+  animation-delay: 0.06s;
+}
+.pg-promogift .hb-stagger > *:nth-child(3) {
+  animation-delay: 0.12s;
+}
+.pg-promogift .hb-stagger > *:nth-child(4) {
+  animation-delay: 0.18s;
+}
+.pg-promogift .hb-stagger > *:nth-child(5) {
+  animation-delay: 0.24s;
+}
+.pg-promogift .hb-stagger > *:nth-child(6) {
+  animation-delay: 0.3s;
+}
+.pg-promogift .hb-d1 {
+  animation-delay: 0.12s;
+}
+.pg-promogift .hb-d2 {
+  animation-delay: 0.24s;
+}
+.pg-promogift .hb-d3 {
+  animation-delay: 0.36s;
+}
+.pg-promogift .hb-press {
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+.pg-promogift .hb-press:active {
+  transform: scale(0.97);
+}
+.pg-promogift .hb-ease {
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pg-promogift .hb-rise,
+  .pg-promogift .hb-pop,
+  .pg-promogift .hb-up,
+  .pg-promogift .hb-fade,
+  .pg-promogift .hb-peek,
+  .pg-promogift .hb-stagger > * {
+    animation: none;
+  }
+  .pg-promogift .hb-ease,
+  .pg-promogift .hb-press {
+    transition: none;
+  }
+}

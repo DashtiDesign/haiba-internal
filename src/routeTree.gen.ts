@@ -16,6 +16,11 @@ import { Route as HaibaPlansRouteImport } from './routes/haiba/plans'
 import { Route as HaibaPointsRouteImport } from './routes/haiba/points'
 import { Route as HaibaWalletRouteImport } from './routes/haiba/wallet'
 import { Route as HaibaWelcomeRouteImport } from './routes/haiba/welcome'
+import { Route as HaibaPromoCompareRouteImport } from './routes/haiba/promo.compare'
+import { Route as HaibaPromoGiftRouteImport } from './routes/haiba/promo.gift'
+import { Route as HaibaPromoValueRouteImport } from './routes/haiba/promo.value'
+import { Route as HaibaPromoWaitlistRouteImport } from './routes/haiba/promo.waitlist'
+import { Route as HaibaPromoYearRouteImport } from './routes/haiba/promo.year'
 import { Route as ShopCoffeeBeanIndexRouteImport } from './routes/shop/coffee-bean/index'
 import { Route as ShopCoffeeBeanRedeemRouteImport } from './routes/shop/coffee-bean/redeem'
 
@@ -54,6 +59,31 @@ const HaibaWelcomeRoute = HaibaWelcomeRouteImport.update({
   path: '/haiba/welcome',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HaibaPromoCompareRoute = HaibaPromoCompareRouteImport.update({
+  id: '/haiba/promo/compare',
+  path: '/haiba/promo/compare',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaPromoGiftRoute = HaibaPromoGiftRouteImport.update({
+  id: '/haiba/promo/gift',
+  path: '/haiba/promo/gift',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaPromoValueRoute = HaibaPromoValueRouteImport.update({
+  id: '/haiba/promo/value',
+  path: '/haiba/promo/value',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaPromoWaitlistRoute = HaibaPromoWaitlistRouteImport.update({
+  id: '/haiba/promo/waitlist',
+  path: '/haiba/promo/waitlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaPromoYearRoute = HaibaPromoYearRouteImport.update({
+  id: '/haiba/promo/year',
+  path: '/haiba/promo/year',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShopCoffeeBeanIndexRoute = ShopCoffeeBeanIndexRouteImport.update({
   id: '/shop/coffee-bean/',
   path: '/shop/coffee-bean/',
@@ -73,6 +103,11 @@ export interface FileRoutesByFullPath {
   '/haiba/wallet': typeof HaibaWalletRoute
   '/haiba/welcome': typeof HaibaWelcomeRoute
   '/haiba/': typeof HaibaIndexRoute
+  '/haiba/promo/compare': typeof HaibaPromoCompareRoute
+  '/haiba/promo/gift': typeof HaibaPromoGiftRoute
+  '/haiba/promo/value': typeof HaibaPromoValueRoute
+  '/haiba/promo/waitlist': typeof HaibaPromoWaitlistRoute
+  '/haiba/promo/year': typeof HaibaPromoYearRoute
   '/shop/coffee-bean/redeem': typeof ShopCoffeeBeanRedeemRoute
   '/shop/coffee-bean/': typeof ShopCoffeeBeanIndexRoute
 }
@@ -84,6 +119,11 @@ export interface FileRoutesByTo {
   '/haiba/wallet': typeof HaibaWalletRoute
   '/haiba/welcome': typeof HaibaWelcomeRoute
   '/haiba': typeof HaibaIndexRoute
+  '/haiba/promo/compare': typeof HaibaPromoCompareRoute
+  '/haiba/promo/gift': typeof HaibaPromoGiftRoute
+  '/haiba/promo/value': typeof HaibaPromoValueRoute
+  '/haiba/promo/waitlist': typeof HaibaPromoWaitlistRoute
+  '/haiba/promo/year': typeof HaibaPromoYearRoute
   '/shop/coffee-bean/redeem': typeof ShopCoffeeBeanRedeemRoute
   '/shop/coffee-bean': typeof ShopCoffeeBeanIndexRoute
 }
@@ -96,6 +136,11 @@ export interface FileRoutesById {
   '/haiba/wallet': typeof HaibaWalletRoute
   '/haiba/welcome': typeof HaibaWelcomeRoute
   '/haiba/': typeof HaibaIndexRoute
+  '/haiba/promo/compare': typeof HaibaPromoCompareRoute
+  '/haiba/promo/gift': typeof HaibaPromoGiftRoute
+  '/haiba/promo/value': typeof HaibaPromoValueRoute
+  '/haiba/promo/waitlist': typeof HaibaPromoWaitlistRoute
+  '/haiba/promo/year': typeof HaibaPromoYearRoute
   '/shop/coffee-bean/redeem': typeof ShopCoffeeBeanRedeemRoute
   '/shop/coffee-bean/': typeof ShopCoffeeBeanIndexRoute
 }
@@ -109,6 +154,11 @@ export interface FileRouteTypes {
     | '/haiba/wallet'
     | '/haiba/welcome'
     | '/haiba/'
+    | '/haiba/promo/compare'
+    | '/haiba/promo/gift'
+    | '/haiba/promo/value'
+    | '/haiba/promo/waitlist'
+    | '/haiba/promo/year'
     | '/shop/coffee-bean/redeem'
     | '/shop/coffee-bean/'
   fileRoutesByTo: FileRoutesByTo
@@ -120,6 +170,11 @@ export interface FileRouteTypes {
     | '/haiba/wallet'
     | '/haiba/welcome'
     | '/haiba'
+    | '/haiba/promo/compare'
+    | '/haiba/promo/gift'
+    | '/haiba/promo/value'
+    | '/haiba/promo/waitlist'
+    | '/haiba/promo/year'
     | '/shop/coffee-bean/redeem'
     | '/shop/coffee-bean'
   id:
@@ -131,6 +186,11 @@ export interface FileRouteTypes {
     | '/haiba/wallet'
     | '/haiba/welcome'
     | '/haiba/'
+    | '/haiba/promo/compare'
+    | '/haiba/promo/gift'
+    | '/haiba/promo/value'
+    | '/haiba/promo/waitlist'
+    | '/haiba/promo/year'
     | '/shop/coffee-bean/redeem'
     | '/shop/coffee-bean/'
   fileRoutesById: FileRoutesById
@@ -143,6 +203,11 @@ export interface RootRouteChildren {
   HaibaWalletRoute: typeof HaibaWalletRoute
   HaibaWelcomeRoute: typeof HaibaWelcomeRoute
   HaibaIndexRoute: typeof HaibaIndexRoute
+  HaibaPromoCompareRoute: typeof HaibaPromoCompareRoute
+  HaibaPromoGiftRoute: typeof HaibaPromoGiftRoute
+  HaibaPromoValueRoute: typeof HaibaPromoValueRoute
+  HaibaPromoWaitlistRoute: typeof HaibaPromoWaitlistRoute
+  HaibaPromoYearRoute: typeof HaibaPromoYearRoute
   ShopCoffeeBeanRedeemRoute: typeof ShopCoffeeBeanRedeemRoute
   ShopCoffeeBeanIndexRoute: typeof ShopCoffeeBeanIndexRoute
 }
@@ -198,6 +263,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HaibaWelcomeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/haiba/promo/compare': {
+      id: '/haiba/promo/compare'
+      path: '/haiba/promo/compare'
+      fullPath: '/haiba/promo/compare'
+      preLoaderRoute: typeof HaibaPromoCompareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/promo/gift': {
+      id: '/haiba/promo/gift'
+      path: '/haiba/promo/gift'
+      fullPath: '/haiba/promo/gift'
+      preLoaderRoute: typeof HaibaPromoGiftRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/promo/value': {
+      id: '/haiba/promo/value'
+      path: '/haiba/promo/value'
+      fullPath: '/haiba/promo/value'
+      preLoaderRoute: typeof HaibaPromoValueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/promo/waitlist': {
+      id: '/haiba/promo/waitlist'
+      path: '/haiba/promo/waitlist'
+      fullPath: '/haiba/promo/waitlist'
+      preLoaderRoute: typeof HaibaPromoWaitlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/promo/year': {
+      id: '/haiba/promo/year'
+      path: '/haiba/promo/year'
+      fullPath: '/haiba/promo/year'
+      preLoaderRoute: typeof HaibaPromoYearRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shop/coffee-bean/': {
       id: '/shop/coffee-bean/'
       path: '/shop/coffee-bean'
@@ -223,6 +323,11 @@ const rootRouteChildren: RootRouteChildren = {
   HaibaWalletRoute: HaibaWalletRoute,
   HaibaWelcomeRoute: HaibaWelcomeRoute,
   HaibaIndexRoute: HaibaIndexRoute,
+  HaibaPromoCompareRoute: HaibaPromoCompareRoute,
+  HaibaPromoGiftRoute: HaibaPromoGiftRoute,
+  HaibaPromoValueRoute: HaibaPromoValueRoute,
+  HaibaPromoWaitlistRoute: HaibaPromoWaitlistRoute,
+  HaibaPromoYearRoute: HaibaPromoYearRoute,
   ShopCoffeeBeanRedeemRoute: ShopCoffeeBeanRedeemRoute,
   ShopCoffeeBeanIndexRoute: ShopCoffeeBeanIndexRoute,
 }

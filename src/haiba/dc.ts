@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { useState } from "react";
+import { useRouterState } from "@tanstack/react-router";
 import { useNavigate } from "./nav";
 import { useHaiba } from "./store";
 
@@ -32,6 +33,10 @@ export function useDC(initial) {
     if (Object.keys(own).length) setLocal((l) => ({ ...l, ...own }));
   };
 
+  // Promo page tests read their setup from the URL: ?price=18&name=Sara&visits=4
+  // Read through the router so the server render and the first client render agree (no price flash).
+  const q = useRouterState({ select: (r) => r.location.search }) || {};
+
   const props = {
     member: hb.state.member === "new" ? "New member" : "Active member",
     visit: VISIT_LABEL[hb.state.visit],
@@ -40,6 +45,9 @@ export function useDC(initial) {
     codes: hb.liveCodes,
     codeIds: hb.liveCodeIds,
     savedRewards: hb.savedRewards,
+    price: q.price != null ? String(q.price) : undefined,
+    name: q.name != null ? String(q.name) : undefined,
+    visits: q.visits != null ? String(q.visits) : undefined,
   };
 
   return { state, setState, props, nav };
