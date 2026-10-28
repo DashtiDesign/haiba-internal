@@ -99,109 +99,81 @@ export default function PromoYear() {
               lineHeight: "1.08",
             }}
           >
-            {"You left "}
-            <span style={{ color: "#C0F402" }}>{v.missed}</span>
-            {" on the table."}
+            {"Pay "}
+            {v.price}
+            {"."}
+            <br />
+            <span style={{ color: "#C0F402" }}>
+              {"Get "}
+              <span className={v.bump}>{v.worth}</span>
+              {" back."}
+            </span>
           </h1>
           <div
             className="hb-rise hb-d2"
             style={{
-              marginTop: "22px",
+              marginTop: "20px",
               background: "#2B2740",
               borderRadius: "16px",
-              padding: "18px 20px",
+              padding: "16px 18px 14px 18px",
+              boxShadow: "none",
             }}
           >
             <div
-              style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}
+              style={{
+                display: "flex",
+                alignItems: "baseline",
+                gap: "8px",
+                color: "#FFFFFF",
+                fontSize: "16px",
+                fontWeight: "700",
+              }}
             >
+              {"I use Unipal "}
               <span
-                style={{
-                  fontSize: "13px",
-                  fontWeight: "800",
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  color: "#B9B3CC",
-                }}
+                className={v.bump}
+                style={{ fontSize: "30px", fontWeight: "800", letterSpacing: "-0.02em" }}
               >
-                {"Missed so far"}
-              </span>
-              <span style={{ fontSize: "14px", fontWeight: "700", color: "#E8E4F4" }}>
-                {v.offers}
-              </span>
+                {v.visits}
+              </span>{" "}
+              {v.times}
+              {" a month"}
             </div>
+            <input
+              type="range"
+              min="1"
+              max="12"
+              step="1"
+              value={v.visits}
+              onInput={v.onVisits}
+              onChange={v.onVisits}
+              aria-label="How many times you use Unipal a month"
+              className="hb-range"
+              style={{ marginTop: "14px", background: v.rangeBg }}
+            />
             <div
               style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-                gap: "12px",
-                alignItems: "end",
-                height: "150px",
-                marginTop: "18px",
-              }}
-            >
-              {(v.months || []).map((m: any, idx0: number) => (
-                <Fragment key={idx0}>
-                  <span
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "stretch",
-                      gap: "8px",
-                      height: "100%",
-                      justifyContent: "flex-end",
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontSize: "15px",
-                        fontWeight: "800",
-                        textAlign: "center",
-                        color: "#FFFFFF",
-                      }}
-                    >
-                      {m.val}
-                    </span>
-                    <span
-                      className="hb-ease"
-                      style={{ height: m.h, borderRadius: "10px 10px 4px 4px", background: m.bg }}
-                    ></span>
-                    <span
-                      style={{
-                        fontSize: "13px",
-                        fontWeight: "700",
-                        textAlign: "center",
-                        color: "#B9B3CC",
-                      }}
-                    >
-                      {m.label}
-                    </span>
-                  </span>
-                </Fragment>
-              ))}
-            </div>
-            <div
-              style={{
-                fontSize: "13.5px",
-                fontWeight: "500",
+                display: "flex",
+                justifyContent: "space-between",
+                fontSize: "12.5px",
+                fontWeight: "700",
                 color: "#B9B3CC",
-                marginTop: "14px",
-                lineHeight: "1.4",
+                marginTop: "8px",
               }}
             >
-              {
-                "Adds up month by month: your free gift, bonus points, and Spotify and ChatGPT from day one."
-              }
+              <span>{"1"}</span>
+              <span>{"Drag to see your year"}</span>
+              <span>{"12"}</span>
             </div>
           </div>
           <div
-            className="hb-rise hb-d3"
+            className="hb-rise hb-d2"
             style={{
               position: "relative",
-              marginTop: "16px",
+              marginTop: "24px",
               background: "#2B2740",
               borderRadius: "16px",
-              padding: "20px",
+              padding: "20px 20px 4px 20px",
             }}
           >
             <span
@@ -231,7 +203,7 @@ export default function PromoYear() {
                 color: "#B9B3CC",
               }}
             >
-              {"Your next 12 months"}
+              {"Your Haiba year"}
             </div>
             <div
               style={{
@@ -243,7 +215,7 @@ export default function PromoYear() {
                 color: "#C0F402",
               }}
             >
-              {v.worth}
+              <span className={v.bump}>{v.worth}</span>
             </div>
             <div
               style={{ fontSize: "16px", fontWeight: "600", color: "#E8E4F4", marginTop: "10px" }}
@@ -253,6 +225,170 @@ export default function PromoYear() {
               {". Just "}
               {v.perMonth}
               {" a month."}
+            </div>
+            <div style={{ marginTop: "16px", borderTop: "1px solid #3A3550" }}>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                  gap: "12px",
+                  alignItems: "center",
+                  padding: "14px 0",
+                  borderBottom: "1px solid #3A3550",
+                }}
+              >
+                <span
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "14px",
+                    background: "#6C3FFA",
+                    color: "#FFFFFF",
+                    fontSize: "13px",
+                    fontWeight: "800",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {"Gift"}
+                </span>
+                <span
+                  style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}
+                >
+                  <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
+                    {"12 free gifts"}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "13.5px",
+                      fontWeight: "500",
+                      color: "#B9B3CC",
+                      lineHeight: "1.35",
+                    }}
+                  >
+                    {"1 every month, you pick"}
+                  </span>
+                </span>
+                <span
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "800",
+                    textAlign: "right",
+                    color: "#FFFFFF",
+                  }}
+                >
+                  {"BHD 30.00"}
+                </span>
+              </div>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                  gap: "12px",
+                  alignItems: "center",
+                  padding: "14px 0",
+                  borderBottom: "1px solid #3A3550",
+                }}
+              >
+                <span
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "14px",
+                    overflow: "hidden",
+                    display: "block",
+                    boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                  }}
+                >
+                  <Artwork
+                    src="/haiba/brands/spotify.webp"
+                    alt="Spotify Premium Student"
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  />
+                </span>
+                <span
+                  style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}
+                >
+                  <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
+                    {"Spotify Premium Student"}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "13.5px",
+                      fontWeight: "500",
+                      color: "#B9B3CC",
+                      lineHeight: "1.35",
+                    }}
+                  >
+                    {"3 months free"}
+                  </span>
+                </span>
+                <span
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "800",
+                    textAlign: "right",
+                    color: "#FFFFFF",
+                  }}
+                >
+                  {"BHD 3.00"}
+                </span>
+              </div>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                  gap: "12px",
+                  alignItems: "center",
+                  padding: "14px 0",
+                  borderBottom: "0",
+                }}
+              >
+                <span
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "14px",
+                    overflow: "hidden",
+                    display: "block",
+                    boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                  }}
+                >
+                  <Artwork
+                    src="/haiba/brands/chatgpt.webp"
+                    alt="ChatGPT Go"
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  />
+                </span>
+                <span
+                  style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}
+                >
+                  <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
+                    {"ChatGPT Go"}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "13.5px",
+                      fontWeight: "500",
+                      color: "#B9B3CC",
+                      lineHeight: "1.35",
+                    }}
+                  >
+                    {"3 months free"}
+                  </span>
+                </span>
+                <span
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "800",
+                    textAlign: "right",
+                    color: "#FFFFFF",
+                  }}
+                >
+                  {"BHD 9.00"}
+                </span>
+              </div>
             </div>
           </div>
           <div
@@ -348,6 +484,61 @@ export default function PromoYear() {
               {v.ptsVal}
             </span>
           </div>
+          <div
+            className="hb-rise hb-d3"
+            style={{
+              marginTop: "14px",
+              background: "#2B2740",
+              borderRadius: "16px",
+              padding: "18px 20px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                fontSize: "14px",
+                fontWeight: "700",
+              }}
+            >
+              <span style={{ color: "#E8E4F4" }}>
+                {"You pay "}
+                {v.price}
+              </span>
+              <span style={{ color: "#C0F402" }}>
+                {"You get "}
+                {v.worth}
+              </span>
+            </div>
+            <div
+              style={{
+                position: "relative",
+                height: "12px",
+                marginTop: "10px",
+                borderRadius: "999px",
+                overflow: "hidden",
+                background: "#C0F402",
+              }}
+            >
+              <span
+                className="hb-ease"
+                style={{
+                  position: "absolute",
+                  left: "0",
+                  top: "0",
+                  bottom: "0",
+                  width: v.payPct,
+                  background: "#8F7BFF",
+                  borderRight: "2px solid #1E1B2E",
+                }}
+              ></span>
+            </div>
+            <div
+              style={{ fontSize: "14px", fontWeight: "600", color: "#CFC9E0", marginTop: "12px" }}
+            >
+              {v.payback}
+            </div>
+          </div>
         </div>
         <div className="hb-fixed-bottom hb-cta-dock">
           <div className="hb-fixed-inner">
@@ -384,11 +575,13 @@ export default function PromoYear() {
                 }}
               >
                 <span style={{ color: "#1F2600", fontSize: "17px", fontWeight: "800" }}>
-                  {"Do not miss next month"}
+                  {"Get "}
+                  {v.worth}
+                  {" for "}
+                  {v.price}
                 </span>
                 <span style={{ color: "#3D5000", fontSize: "13.5px", fontWeight: "500" }}>
-                  {v.price}
-                  {" a year \u00b7 only "}
+                  {"a year \u00b7 only "}
                   {v.perMonth}
                   {" a month"}
                 </span>

@@ -21,6 +21,7 @@ import { Route as HaibaPromoDreamRouteImport } from './routes/haiba/promo.dream'
 import { Route as HaibaPromoGiftRouteImport } from './routes/haiba/promo.gift'
 import { Route as HaibaPromoValueRouteImport } from './routes/haiba/promo.value'
 import { Route as HaibaPromoWaitlistRouteImport } from './routes/haiba/promo.waitlist'
+import { Route as HaibaPromoWinbackRouteImport } from './routes/haiba/promo.winback'
 import { Route as HaibaPromoYearRouteImport } from './routes/haiba/promo.year'
 import { Route as ShopCoffeeBeanIndexRouteImport } from './routes/shop/coffee-bean/index'
 import { Route as ShopCoffeeBeanRedeemRouteImport } from './routes/shop/coffee-bean/redeem'
@@ -85,6 +86,11 @@ const HaibaPromoWaitlistRoute = HaibaPromoWaitlistRouteImport.update({
   path: '/haiba/promo/waitlist',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HaibaPromoWinbackRoute = HaibaPromoWinbackRouteImport.update({
+  id: '/haiba/promo/winback',
+  path: '/haiba/promo/winback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HaibaPromoYearRoute = HaibaPromoYearRouteImport.update({
   id: '/haiba/promo/year',
   path: '/haiba/promo/year',
@@ -114,6 +120,7 @@ export interface FileRoutesByFullPath {
   '/haiba/promo/gift': typeof HaibaPromoGiftRoute
   '/haiba/promo/value': typeof HaibaPromoValueRoute
   '/haiba/promo/waitlist': typeof HaibaPromoWaitlistRoute
+  '/haiba/promo/winback': typeof HaibaPromoWinbackRoute
   '/haiba/promo/year': typeof HaibaPromoYearRoute
   '/shop/coffee-bean/redeem': typeof ShopCoffeeBeanRedeemRoute
   '/shop/coffee-bean/': typeof ShopCoffeeBeanIndexRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/haiba/promo/gift': typeof HaibaPromoGiftRoute
   '/haiba/promo/value': typeof HaibaPromoValueRoute
   '/haiba/promo/waitlist': typeof HaibaPromoWaitlistRoute
+  '/haiba/promo/winback': typeof HaibaPromoWinbackRoute
   '/haiba/promo/year': typeof HaibaPromoYearRoute
   '/shop/coffee-bean/redeem': typeof ShopCoffeeBeanRedeemRoute
   '/shop/coffee-bean': typeof ShopCoffeeBeanIndexRoute
@@ -149,6 +157,7 @@ export interface FileRoutesById {
   '/haiba/promo/gift': typeof HaibaPromoGiftRoute
   '/haiba/promo/value': typeof HaibaPromoValueRoute
   '/haiba/promo/waitlist': typeof HaibaPromoWaitlistRoute
+  '/haiba/promo/winback': typeof HaibaPromoWinbackRoute
   '/haiba/promo/year': typeof HaibaPromoYearRoute
   '/shop/coffee-bean/redeem': typeof ShopCoffeeBeanRedeemRoute
   '/shop/coffee-bean/': typeof ShopCoffeeBeanIndexRoute
@@ -168,6 +177,7 @@ export interface FileRouteTypes {
     | '/haiba/promo/gift'
     | '/haiba/promo/value'
     | '/haiba/promo/waitlist'
+    | '/haiba/promo/winback'
     | '/haiba/promo/year'
     | '/shop/coffee-bean/redeem'
     | '/shop/coffee-bean/'
@@ -185,6 +195,7 @@ export interface FileRouteTypes {
     | '/haiba/promo/gift'
     | '/haiba/promo/value'
     | '/haiba/promo/waitlist'
+    | '/haiba/promo/winback'
     | '/haiba/promo/year'
     | '/shop/coffee-bean/redeem'
     | '/shop/coffee-bean'
@@ -202,6 +213,7 @@ export interface FileRouteTypes {
     | '/haiba/promo/gift'
     | '/haiba/promo/value'
     | '/haiba/promo/waitlist'
+    | '/haiba/promo/winback'
     | '/haiba/promo/year'
     | '/shop/coffee-bean/redeem'
     | '/shop/coffee-bean/'
@@ -220,6 +232,7 @@ export interface RootRouteChildren {
   HaibaPromoGiftRoute: typeof HaibaPromoGiftRoute
   HaibaPromoValueRoute: typeof HaibaPromoValueRoute
   HaibaPromoWaitlistRoute: typeof HaibaPromoWaitlistRoute
+  HaibaPromoWinbackRoute: typeof HaibaPromoWinbackRoute
   HaibaPromoYearRoute: typeof HaibaPromoYearRoute
   ShopCoffeeBeanRedeemRoute: typeof ShopCoffeeBeanRedeemRoute
   ShopCoffeeBeanIndexRoute: typeof ShopCoffeeBeanIndexRoute
@@ -311,6 +324,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HaibaPromoWaitlistRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/haiba/promo/winback': {
+      id: '/haiba/promo/winback'
+      path: '/haiba/promo/winback'
+      fullPath: '/haiba/promo/winback'
+      preLoaderRoute: typeof HaibaPromoWinbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/haiba/promo/year': {
       id: '/haiba/promo/year'
       path: '/haiba/promo/year'
@@ -348,6 +368,7 @@ const rootRouteChildren: RootRouteChildren = {
   HaibaPromoGiftRoute: HaibaPromoGiftRoute,
   HaibaPromoValueRoute: HaibaPromoValueRoute,
   HaibaPromoWaitlistRoute: HaibaPromoWaitlistRoute,
+  HaibaPromoWinbackRoute: HaibaPromoWinbackRoute,
   HaibaPromoYearRoute: HaibaPromoYearRoute,
   ShopCoffeeBeanRedeemRoute: ShopCoffeeBeanRedeemRoute,
   ShopCoffeeBeanIndexRoute: ShopCoffeeBeanIndexRoute,

@@ -27,7 +27,7 @@ export default function PromoCompare() {
           overflow: "hidden",
         }}
       >
-        <div style={{ position: "relative", padding: "14px 16px 200px 16px" }}>
+        <div style={{ position: "relative", padding: "14px 16px 210px 16px" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <button
               aria-label="Close"
@@ -97,148 +97,171 @@ export default function PromoCompare() {
           <div
             className="hb-rise hb-d2"
             style={{
-              position: "relative",
               marginTop: "20px",
-              display: "grid",
-              gridTemplateColumns: "minmax(0, 1fr) 62px 100px",
+              border: "1px solid #E2DCF2",
+              borderRadius: "16px",
+              overflow: "hidden",
+            }}
+          >
+            <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) 64px 96px" }}>
+              <span></span>
+              <span
+                style={{
+                  padding: "14px 4px",
+                  textAlign: "center",
+                  fontSize: "15px",
+                  fontWeight: "700",
+                  color: "#6B6880",
+                }}
+              >
+                {"Free"}
+              </span>
+              <span
+                style={{
+                  padding: "14px 4px",
+                  textAlign: "center",
+                  fontSize: "15px",
+                  fontWeight: "800",
+                  color: "#FFFFFF",
+                  background: "#6C3FFA",
+                }}
+              >
+                {"Haiba"}
+              </span>
+            </div>
+            {(v.rows || []).map((r: any, idx0: number) => (
+              <Fragment key={idx0}>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "minmax(0, 1fr) 64px 96px",
+                    borderTop: "1px solid #ECEAF3",
+                  }}
+                >
+                  <span
+                    style={{
+                      padding: "12px 14px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                      fontSize: "15px",
+                      fontWeight: "600",
+                      lineHeight: "1.3",
+                    }}
+                  >
+                    {r.hasLogo ? (
+                      <>
+                        <Artwork
+                          src={r.logo}
+                          alt=""
+                          style={{
+                            width: "26px",
+                            height: "26px",
+                            borderRadius: "8px",
+                            display: "block",
+                            flex: "none",
+                            boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                          }}
+                        />
+                      </>
+                    ) : null}
+                    {r.label}
+                  </span>
+                  <span
+                    style={{
+                      padding: "12px 4px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "19px",
+                      fontWeight: "800",
+                      color: r.freeInk,
+                    }}
+                  >
+                    {r.free}
+                  </span>
+                  <span
+                    style={{
+                      padding: "12px 4px",
+                      background: "#F6F3FF",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center",
+                      fontSize: r.haibaSize,
+                      fontWeight: "800",
+                      color: r.haibaInk,
+                    }}
+                  >
+                    {r.haiba}
+                  </span>
+                </div>
+              </Fragment>
+            ))}
+          </div>
+          <div
+            className="hb-rise hb-d3"
+            style={{
+              position: "relative",
+              marginTop: "18px",
+              border: "2px solid #6C3FFA",
+              borderRadius: "16px",
+              padding: "16px 18px",
+              background: "#FAF8FF",
             }}
           >
             <span
-              aria-hidden="true"
+              className="hb-pop hb-d3"
               style={{
                 position: "absolute",
-                right: "0",
-                top: "0",
-                bottom: "0",
-                width: "100px",
-                borderRadius: "16px",
-                background: "#6C3FFA",
-                boxShadow: "0 14px 30px rgba(108,63,250,0.30)",
-              }}
-            ></span>
-            <span></span>
-            <span
-              style={{
-                padding: "16px 4px",
-                textAlign: "center",
-                fontSize: "15px",
-                fontWeight: "700",
-                color: "#6B6880",
-              }}
-            >
-              {"Free"}
-            </span>
-            <span
-              style={{
-                position: "relative",
-                padding: "16px 4px",
-                textAlign: "center",
+                right: "14px",
+                top: "-14px",
+                background: "#C0F402",
+                color: "#1F2600",
                 fontSize: "15px",
                 fontWeight: "800",
-                color: "#C0F402",
+                borderRadius: "999px",
+                padding: "7px 12px",
+                transform: "rotate(6deg)",
+                boxShadow: "0 8px 18px rgba(0,0,0,0.25)",
               }}
             >
-              {"Haiba"}
+              {v.free}
             </span>
-            {(v.rows || []).map((r: any, idx0: number) => (
-              <Fragment key={idx0}>
-                <span
-                  style={{
-                    padding: "13px 4px",
-                    borderTop: "1px solid #ECEAF3",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
-                    fontSize: "15px",
-                    fontWeight: "600",
-                    lineHeight: "1.3",
-                  }}
-                >
-                  {r.hasLogo ? (
-                    <>
-                      <Artwork
-                        src={r.logo}
-                        alt=""
-                        style={{
-                          width: "24px",
-                          height: "24px",
-                          borderRadius: "50%",
-                          display: "block",
-                          flex: "none",
-                          boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
-                        }}
-                      />
-                    </>
-                  ) : null}
-                  {r.label}
-                </span>
-                <span
-                  style={{
-                    padding: "13px 4px",
-                    borderTop: "1px solid #ECEAF3",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "19px",
-                    fontWeight: "800",
-                    color: r.freeInk,
-                  }}
-                >
-                  {r.free}
-                </span>
-                <span
-                  style={{
-                    position: "relative",
-                    padding: "13px 4px",
-                    borderTop: "1px solid rgba(255,255,255,0.18)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    textAlign: "center",
-                    fontSize: r.haibaSize,
-                    fontWeight: "800",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  {r.haiba}
-                </span>
-              </Fragment>
-            ))}
-            <span
+            <div
               style={{
-                padding: "16px 4px",
-                borderTop: "2px solid #1E1B2E",
-                fontSize: "16px",
+                fontSize: "13px",
                 fontWeight: "800",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: "#6C3FFA",
               }}
             >
-              {"Price a year"}
-            </span>
-            <span
+              {"Haiba yearly"}
+            </div>
+            <div
               style={{
-                padding: "16px 4px",
-                borderTop: "2px solid #1E1B2E",
-                textAlign: "center",
-                fontSize: "15px",
-                fontWeight: "700",
-                color: "#6B6880",
+                display: "flex",
+                alignItems: "baseline",
+                justifyContent: "space-between",
+                marginTop: "4px",
               }}
             >
-              {"Free"}
-            </span>
-            <span
-              style={{
-                position: "relative",
-                padding: "16px 4px",
-                borderTop: "2px solid rgba(255,255,255,0.4)",
-                textAlign: "center",
-                fontSize: "15px",
-                fontWeight: "800",
-                color: "#C0F402",
-              }}
+              <span style={{ fontSize: "28px", fontWeight: "800", letterSpacing: "-0.02em" }}>
+                {v.price}
+              </span>
+              <span style={{ fontSize: "15px", fontWeight: "700", color: "#4A4660" }}>
+                {"Worth "}
+                {v.worth}
+              </span>
+            </div>
+            <div
+              style={{ fontSize: "14px", fontWeight: "600", color: "#6B6880", marginTop: "2px" }}
             >
-              {v.price}
-            </span>
+              {"Only "}
+              {v.perMonth}
+              {" a month"}
+            </div>
           </div>
         </div>
         <div className="hb-fixed-bottom hb-cta-dock">
@@ -280,9 +303,8 @@ export default function PromoCompare() {
                 </span>
                 <span style={{ color: "#CFC9E0", fontSize: "13.5px", fontWeight: "500" }}>
                   {v.price}
-                  {" a year \u00b7 only "}
-                  {v.perMonth}
-                  {" a month"}
+                  {" a year \u00b7 worth "}
+                  {v.worth}
                 </span>
               </button>
               <a

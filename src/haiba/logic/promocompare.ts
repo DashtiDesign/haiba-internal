@@ -31,14 +31,44 @@ export function useVals() {
       setState({ sheet: false });
     },
   };
+  var sim = function (V) {
+    var favs = V <= 3 ? 1 : V <= 5 ? 2 : V <= 9 ? 3 : 4;
+    var seen = {},
+      pts = 500,
+      cum = 12.0,
+      payback = 0;
+    for (var m = 0; m < 12; m++) {
+      var monthPts = 0,
+        shops = ["new" + m];
+      for (var k = 0; k < V - 1; k++) shops.push("fav" + (k % favs));
+      shops.forEach(function (sh) {
+        var n = (seen[sh] || 0) + 1;
+        seen[sh] = n;
+        monthPts += n <= 2 ? 80 : n % 5 === 0 ? 200 : 40;
+      });
+      pts += monthPts;
+      cum += 2.5 + monthPts / 1000;
+      if (!payback && cum >= p) payback = m + 1;
+    }
+    return { pts: pts, payback: payback, worth: 42.0 + pts / 1000 };
+  };
+  var at = sim(4);
+  var worthN = at.worth;
+  var round5 = function (x) {
+    return "BHD " + Math.floor(x / 5) * 5 + "+";
+  };
+  var whole = function (x) {
+    return "BHD " + Math.floor(x) + "+";
+  };
+  var worth = whole(worthN);
   var yes = "✓",
-    no = "–";
+    no = "✕";
   var rows = [
     ["Student offers", yes, yes, ""],
     ["Free gift every month", no, yes, ""],
     ["Spotify Premium Student", no, "3 months", "/haiba/brands/spotify.webp"],
     ["ChatGPT Go", no, "3 months", "/haiba/brands/chatgpt.webp"],
-    ["Bonus points", no, "Every visit", ""],
+    ["Bonus points", no, "+ + +", ""],
     ["Rewards at 200+ shops", no, yes, ""],
     ["See what you saved", no, yes, ""],
   ].map(function (r) {
@@ -48,9 +78,14 @@ export function useVals() {
       haiba: r[2],
       logo: r[3],
       hasLogo: !!r[3],
-      freeInk: r[1] === no ? "#C5C2D0" : "#2F7D32",
-      haibaSize: r[2] === yes ? "19px" : "14px",
+      freeInk: r[1] === no ? "#B5B2C2" : "#2F7D32",
+      haibaInk: r[2] === yes ? "#2F7D32" : "#6C3FFA",
+      haibaSize: r[2] === yes ? "19px" : "15px",
     };
   });
-  return Object.assign(common, { rows: rows });
+  return Object.assign(common, {
+    rows: rows,
+    worth: worth,
+    free: whole(Math.max(0, worthN - p)) + " free",
+  });
 }
