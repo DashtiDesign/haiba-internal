@@ -440,11 +440,11 @@ export default function Hub() {
               style={{
                 position: "absolute",
                 right: "-60px",
-                bottom: "-90px",
+                top: "-80px",
                 width: "190px",
                 height: "190px",
                 borderRadius: "50%",
-                border: "2px dashed rgba(192,244,2,0.30)",
+                border: "2px dashed rgba(192,244,2,0.25)",
               }}
             ></span>
             <span
@@ -493,16 +493,68 @@ export default function Hub() {
               style={{
                 position: "relative",
                 fontFamily: "Figtree, system-ui, sans-serif",
-                fontSize: "25px",
+                fontSize: "23px",
                 fontWeight: "800",
                 letterSpacing: "-0.02em",
-                lineHeight: "1.1",
+                lineHeight: "1.15",
                 marginTop: "4px",
                 opacity: v.travelOp,
               }}
             >
-              <span style={{ color: "#C0F402" }}>{"5GB"}</span>
-              {" for 7 days"}
+              {v.travelTitle} <span style={{ color: "#C0F402" }}>{"We\u2019ve got you."}</span>
+            </span>
+            <span style={{ position: "relative", display: "block", opacity: v.travelOp }}>
+              <span style={{ display: "block" }}>
+                <div
+                  style={{
+                    position: "relative",
+                    display: "grid",
+                    gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+                    marginTop: "16px",
+                  }}
+                >
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      position: "absolute",
+                      left: "12.5%",
+                      right: "12.5%",
+                      top: "16px",
+                      borderTop: "2px dashed rgba(192,244,2,0.5)",
+                    }}
+                  ></span>
+                  {(v.travelRoute || []).map((f: any, idx0: number) => (
+                    <Fragment key={idx0}>
+                      <span
+                        style={{
+                          position: "relative",
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          gap: "7px",
+                        }}
+                      >
+                        <Artwork
+                          src={f.src}
+                          alt={f.name}
+                          style={{
+                            width: "34px",
+                            height: "34px",
+                            borderRadius: "50%",
+                            objectFit: "cover",
+                            objectPosition: f.pos,
+                            display: "block",
+                            boxShadow: "0 0 0 3px #1E1B2E",
+                          }}
+                        />
+                        <span style={{ fontSize: "12.5px", fontWeight: "800", color: f.labelInk }}>
+                          {f.label}
+                        </span>
+                      </span>
+                    </Fragment>
+                  ))}
+                </div>
+              </span>
             </span>
             <span
               style={{
@@ -510,7 +562,8 @@ export default function Hub() {
                 fontSize: "14px",
                 fontWeight: "600",
                 color: "#B9B3CC",
-                lineHeight: "1.35",
+                lineHeight: "1.4",
+                marginTop: "8px",
               }}
             >
               {v.travelSub}

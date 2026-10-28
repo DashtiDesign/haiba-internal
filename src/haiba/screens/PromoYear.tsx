@@ -406,24 +406,72 @@ export default function PromoYear() {
                     flex: "none",
                     boxSizing: "border-box",
                     borderRadius: "14px",
-                    background: "#FFFFFF",
-                    display: "flex",
-                    alignItems: "center",
+                    background: "#3A3550",
+                    display: "grid",
+                    gridTemplateColumns: "repeat(2, 17px)",
+                    gap: "2px",
+                    alignContent: "center",
                     justifyContent: "center",
-                    boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
                   }}
                 >
                   <Artwork
-                    src="/haiba/brands/airalo-mark.svg"
-                    alt="Airalo"
-                    style={{ width: "27px", height: "auto", display: "block" }}
+                    src="/haiba/flags/bh.svg"
+                    alt="Bahrain"
+                    style={{
+                      width: "17px",
+                      height: "17px",
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                      objectPosition: "center",
+                      display: "block",
+                      boxShadow: "0 0 0 2px #3A3550",
+                    }}
+                  />
+                  <Artwork
+                    src="/haiba/flags/sa.svg"
+                    alt="Saudi"
+                    style={{
+                      width: "17px",
+                      height: "17px",
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                      objectPosition: "center",
+                      display: "block",
+                      boxShadow: "0 0 0 2px #3A3550",
+                    }}
+                  />
+                  <Artwork
+                    src="/haiba/flags/qa.svg"
+                    alt="Qatar"
+                    style={{
+                      width: "17px",
+                      height: "17px",
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                      objectPosition: "center",
+                      display: "block",
+                      boxShadow: "0 0 0 2px #3A3550",
+                    }}
+                  />
+                  <Artwork
+                    src="/haiba/flags/om.svg"
+                    alt="Oman"
+                    style={{
+                      width: "17px",
+                      height: "17px",
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                      objectPosition: "left",
+                      display: "block",
+                      boxShadow: "0 0 0 2px #3A3550",
+                    }}
                   />
                 </span>
                 <span
                   style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}
                 >
                   <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
-                    {"5GB travel data"}
+                    {"Free travel data"}
                   </span>
                   <span
                     style={{
@@ -433,7 +481,7 @@ export default function PromoYear() {
                       lineHeight: "1.35",
                     }}
                   >
-                    {"Airalo, 7 days in another Unipal country"}
+                    {"5GB in Bahrain, Saudi, Qatar or Oman"}
                   </span>
                 </span>
                 <span

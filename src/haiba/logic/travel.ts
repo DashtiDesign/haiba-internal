@@ -14,19 +14,44 @@ export function useVals() {
   var locked = monthly && paid < 3;
   var t = state.travel || "available";
   var revealed = t === "revealed" || t === "redeemed";
-  var all = [
-    { key: "Bahrain", code: "BH", name: "Bahrain", live: true },
-    { key: "Saudi", code: "SA", name: "Saudi Arabia", live: true },
-    { key: "Qatar", code: "QA", name: "Qatar", live: false },
-    { key: "Oman", code: "OM", name: "Oman", live: false },
-  ].filter(function (c) {
-    return c.key !== market;
+  var FL = [
+    { key: "Bahrain", name: "Bahrain", src: "/haiba/flags/bh.svg", pos: "center" },
+    { key: "Saudi", name: "Saudi", src: "/haiba/flags/sa.svg", pos: "center" },
+    { key: "Qatar", name: "Qatar", src: "/haiba/flags/qa.svg", pos: "center" },
+    { key: "Oman", name: "Oman", src: "/haiba/flags/om.svg", pos: "left" },
+  ];
+  var LIVE = { Bahrain: true, Saudi: true, Qatar: false, Oman: false };
+  var home =
+    FL.filter(function (c) {
+      return c.key === market;
+    })[0] || FL[0];
+  var route = [home]
+    .concat(
+      FL.filter(function (c) {
+        return c.key !== home.key;
+      }),
+    )
+    .map(function (c, i) {
+      return Object.assign({}, c, {
+        label: i === 0 ? "Home" : c.name,
+        labelInk: i === 0 ? "#C0F402" : "#FFFFFF",
+      });
+    });
+  var all = FL.filter(function (c) {
+    return c.key !== home.key;
+  }).map(function (c) {
+    return Object.assign({}, c, {
+      live: LIVE[c.key],
+      name: c.key === "Saudi" ? "Saudi Arabia" : c.name,
+    });
   });
   var places = all.map(function (c, i) {
     return {
-      code: c.code,
+      src: c.src,
+      pos: c.pos,
+      op: c.live ? "1" : "0.75",
       name: c.name,
-      sub: c.live ? "Use your data the day you land" : "Unipal is coming here soon",
+      sub: c.live ? "Your Unipal deals work here" : "Unipal is coming here soon",
       pill: c.live ? "Live" : "Coming soon",
       pillBg: c.live ? "#C0F402" : "#F1F1F4",
       pillInk: c.live ? "#1F2600" : "#6B6880",
@@ -74,6 +99,7 @@ export function useVals() {
       setState({ travel: "redeemed" });
     },
     places: places,
+    route: route,
     rules: [
       { text: "Yearly members get it from day one.", rule: "1px solid #F1EFF7" },
       { text: "Monthly members in Bahrain get it after 3 paid months.", rule: "1px solid #F1EFF7" },

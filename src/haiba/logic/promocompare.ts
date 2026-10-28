@@ -68,7 +68,7 @@ export function useVals() {
     ["Free gift every month", no, yes, ""],
     ["Spotify Premium Student", no, "3 months", "/haiba/brands/spotify.webp"],
     ["ChatGPT Go", no, "3 months", "/haiba/brands/chatgpt.webp"],
-    ["Travel data, Airalo", no, "5GB", "/haiba/brands/airalo-mark.svg"],
+    ["Travel data in 4 countries", no, "5GB", "/haiba/brands/airalo-mark.svg"],
     ["Bonus points", no, "+ + +", ""],
     ["Rewards at 200+ shops", no, yes, ""],
     ["See what you saved", no, yes, ""],

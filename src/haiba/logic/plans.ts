@@ -114,7 +114,7 @@ export function useVals() {
       },
       { title: "1 free Unipass gift every month", sub: "Meals, coffee, cinema, gym and more" },
       { title: "Member promos", sub: "Spotify Premium, 3 months free" },
-      { title: "Free travel data", sub: "5GB for 7 days in another Unipal country" },
+      { title: "Free travel data", sub: "5GB in Bahrain, Saudi, Qatar or Oman. We’ve got you." },
     ],
     giftHead: isHaiba ? "Your monthly gift, from all of these" : "Only available with Haiba",
     lockOp: isHaiba ? "0" : "1",

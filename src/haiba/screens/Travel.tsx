@@ -123,17 +123,82 @@ export default function Travel() {
               color: "#E4DBFF",
               marginTop: "12px",
               lineHeight: "1.45",
+            }}
+          >
+            {
+              "Unipal is in 4 countries. Wherever you land, your deals work there too. We give you the data to use them."
+            }
+          </div>
+          <div className="hb-rise hb-d2" style={{ position: "relative" }}>
+            <div
+              style={{
+                position: "relative",
+                display: "grid",
+                gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+                marginTop: "16px",
+              }}
+            >
+              <span
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  left: "12.5%",
+                  right: "12.5%",
+                  top: "19px",
+                  borderTop: "2px dashed rgba(192,244,2,0.6)",
+                }}
+              ></span>
+              {(v.route || []).map((f: any, idx0: number) => (
+                <Fragment key={idx0}>
+                  <span
+                    style={{
+                      position: "relative",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      gap: "7px",
+                    }}
+                  >
+                    <Artwork
+                      priority
+                      src={f.src}
+                      alt={f.name}
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "50%",
+                        objectFit: "cover",
+                        objectPosition: f.pos,
+                        display: "block",
+                        boxShadow: "0 0 0 3px #4F25D6",
+                      }}
+                    />
+                    <span style={{ fontSize: "12.5px", fontWeight: "800", color: f.labelInk }}>
+                      {f.label}
+                    </span>
+                  </span>
+                </Fragment>
+              ))}
+            </div>
+          </div>
+          <div
+            className="hb-rise hb-d2"
+            style={{
+              position: "relative",
               display: "flex",
               alignItems: "center",
               gap: "8px",
+              marginTop: "18px",
+              fontSize: "13px",
+              fontWeight: "700",
+              color: "#E4DBFF",
             }}
           >
             {"Free data from Haiba, powered by "}
             <Artwork
-              priority
               src="/haiba/brands/airalo-white.svg"
               alt="Airalo"
-              style={{ height: "20px", width: "auto", display: "block" }}
+              style={{ height: "18px", width: "auto", display: "block" }}
             />
           </div>
         </div>
@@ -485,7 +550,7 @@ export default function Travel() {
               margin: "26px 4px 10px 4px",
             }}
           >
-            {"Where it works"}
+            {"Where you are covered"}
           </div>
           <div
             style={{
@@ -506,23 +571,21 @@ export default function Travel() {
                     borderBottom: c.rule,
                   }}
                 >
-                  <span
+                  <Artwork
+                    src={c.src}
+                    alt=""
                     style={{
                       width: "40px",
                       height: "40px",
                       flex: "none",
-                      borderRadius: "12px",
-                      background: c.bg,
-                      color: c.ink,
-                      fontSize: "13px",
-                      fontWeight: "800",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                      objectPosition: c.pos,
+                      display: "block",
+                      boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                      opacity: c.op,
                     }}
-                  >
-                    {c.code}
-                  </span>
+                  />
                   <span style={{ display: "flex", flexDirection: "column", gap: "1px", flex: "1" }}>
                     <span style={{ fontSize: "16px", fontWeight: "800", color: c.nameInk }}>
                       {c.name}
@@ -556,7 +619,7 @@ export default function Travel() {
               lineHeight: "1.4",
             }}
           >
-            {"No need to pick a country. One plan, ready when you land."}
+            {"No need to pick a country. One plan works in all of them."}
           </div>
           <div
             style={{

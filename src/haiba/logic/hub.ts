@@ -107,7 +107,36 @@ export function useVals() {
   var tLocked = travel === "Locked, monthly";
   var tUsed = travel === "Used at Airalo";
   var tShown = travel === "Code shown";
+  var market = props.market ?? "Bahrain";
+  var FL = [
+    { key: "Bahrain", name: "Bahrain", src: "/haiba/flags/bh.svg", pos: "center" },
+    { key: "Saudi", name: "Saudi", src: "/haiba/flags/sa.svg", pos: "center" },
+    { key: "Qatar", name: "Qatar", src: "/haiba/flags/qa.svg", pos: "center" },
+    { key: "Oman", name: "Oman", src: "/haiba/flags/om.svg", pos: "left" },
+  ];
+  var home =
+    FL.filter(function (c) {
+      return c.key === market;
+    })[0] || FL[0];
+  var away = FL.filter(function (c) {
+    return c.key !== home.key;
+  });
+  var awayNames = away.map(function (c) {
+    return c.name;
+  });
   var travelVals = {
+    travelTitle:
+      "Going to " +
+      awayNames.slice(0, -1).join(", ") +
+      " or " +
+      awayNames[awayNames.length - 1] +
+      "?",
+    travelRoute: [home].concat(away).map(function (c, i) {
+      return Object.assign({}, c, {
+        label: i === 0 ? "Home" : c.name,
+        labelInk: i === 0 ? "#C0F402" : "#FFFFFF",
+      });
+    }),
     travelHasPill: tLocked || tUsed || tShown,
     travelPill: tLocked ? "Locked" : "Used",
     travelOp: tUsed ? "0.6" : "1",
@@ -117,7 +146,7 @@ export function useVals() {
         ? "Used on Airalo. You saved BHD 5.64."
         : tShown
           ? "Your Airalo code is ready to use."
-          : "In any other Unipal country. Worth BHD 5+.",
+          : "5GB free for 7 days, so your Unipal deals work the moment you land.",
     travelCta: tLocked
       ? "Unlocks after 3 months"
       : tUsed

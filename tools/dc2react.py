@@ -20,6 +20,10 @@ ROUTES = {
     "Travel.dc.html": "/haiba/travel",
 }
 BLOBS = {
+    "3e776189befee9eeac8e9c447333dc7a": "/haiba/flags/bh.svg",
+    "f9ac632ea0980393074184701678bde0": "/haiba/flags/sa.svg",
+    "eb6053f386a48c715547e5c5bdc2fd6f": "/haiba/flags/qa.svg",
+    "79458a05c9dcad05493e86fef5099509": "/haiba/flags/om.svg",
     "9eda5527dade7e2e5f147b0df22bbfcc": "/haiba/brands/airalo.svg",
     "b682e59521986d75feebe95b9ccc1959": "/haiba/brands/airalo-white.svg",
     "141cfa71010b236a2146739792a8988e": "/haiba/brands/airalo-mark.svg",
