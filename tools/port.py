@@ -31,6 +31,7 @@ BOARDS = {
     "PromoValue": ("promovalue", "PromoValue"),
     "PromoCompare": ("promocompare", "PromoCompare"),
     "PromoYear": ("promoyear", "PromoYear"),
+    "PromoDream": ("promodream", "PromoDream"),
     "PromoGift": ("promogift", "PromoGift"),
 }
 PD = 'href="#" onClick={(e: any) => e.preventDefault()}'

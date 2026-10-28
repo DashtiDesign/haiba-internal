@@ -17,6 +17,7 @@ import { Route as HaibaPointsRouteImport } from './routes/haiba/points'
 import { Route as HaibaWalletRouteImport } from './routes/haiba/wallet'
 import { Route as HaibaWelcomeRouteImport } from './routes/haiba/welcome'
 import { Route as HaibaPromoCompareRouteImport } from './routes/haiba/promo.compare'
+import { Route as HaibaPromoDreamRouteImport } from './routes/haiba/promo.dream'
 import { Route as HaibaPromoGiftRouteImport } from './routes/haiba/promo.gift'
 import { Route as HaibaPromoValueRouteImport } from './routes/haiba/promo.value'
 import { Route as HaibaPromoWaitlistRouteImport } from './routes/haiba/promo.waitlist'
@@ -64,6 +65,11 @@ const HaibaPromoCompareRoute = HaibaPromoCompareRouteImport.update({
   path: '/haiba/promo/compare',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HaibaPromoDreamRoute = HaibaPromoDreamRouteImport.update({
+  id: '/haiba/promo/dream',
+  path: '/haiba/promo/dream',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HaibaPromoGiftRoute = HaibaPromoGiftRouteImport.update({
   id: '/haiba/promo/gift',
   path: '/haiba/promo/gift',
@@ -104,6 +110,7 @@ export interface FileRoutesByFullPath {
   '/haiba/welcome': typeof HaibaWelcomeRoute
   '/haiba/': typeof HaibaIndexRoute
   '/haiba/promo/compare': typeof HaibaPromoCompareRoute
+  '/haiba/promo/dream': typeof HaibaPromoDreamRoute
   '/haiba/promo/gift': typeof HaibaPromoGiftRoute
   '/haiba/promo/value': typeof HaibaPromoValueRoute
   '/haiba/promo/waitlist': typeof HaibaPromoWaitlistRoute
@@ -120,6 +127,7 @@ export interface FileRoutesByTo {
   '/haiba/welcome': typeof HaibaWelcomeRoute
   '/haiba': typeof HaibaIndexRoute
   '/haiba/promo/compare': typeof HaibaPromoCompareRoute
+  '/haiba/promo/dream': typeof HaibaPromoDreamRoute
   '/haiba/promo/gift': typeof HaibaPromoGiftRoute
   '/haiba/promo/value': typeof HaibaPromoValueRoute
   '/haiba/promo/waitlist': typeof HaibaPromoWaitlistRoute
@@ -137,6 +145,7 @@ export interface FileRoutesById {
   '/haiba/welcome': typeof HaibaWelcomeRoute
   '/haiba/': typeof HaibaIndexRoute
   '/haiba/promo/compare': typeof HaibaPromoCompareRoute
+  '/haiba/promo/dream': typeof HaibaPromoDreamRoute
   '/haiba/promo/gift': typeof HaibaPromoGiftRoute
   '/haiba/promo/value': typeof HaibaPromoValueRoute
   '/haiba/promo/waitlist': typeof HaibaPromoWaitlistRoute
@@ -155,6 +164,7 @@ export interface FileRouteTypes {
     | '/haiba/welcome'
     | '/haiba/'
     | '/haiba/promo/compare'
+    | '/haiba/promo/dream'
     | '/haiba/promo/gift'
     | '/haiba/promo/value'
     | '/haiba/promo/waitlist'
@@ -171,6 +181,7 @@ export interface FileRouteTypes {
     | '/haiba/welcome'
     | '/haiba'
     | '/haiba/promo/compare'
+    | '/haiba/promo/dream'
     | '/haiba/promo/gift'
     | '/haiba/promo/value'
     | '/haiba/promo/waitlist'
@@ -187,6 +198,7 @@ export interface FileRouteTypes {
     | '/haiba/welcome'
     | '/haiba/'
     | '/haiba/promo/compare'
+    | '/haiba/promo/dream'
     | '/haiba/promo/gift'
     | '/haiba/promo/value'
     | '/haiba/promo/waitlist'
@@ -204,6 +216,7 @@ export interface RootRouteChildren {
   HaibaWelcomeRoute: typeof HaibaWelcomeRoute
   HaibaIndexRoute: typeof HaibaIndexRoute
   HaibaPromoCompareRoute: typeof HaibaPromoCompareRoute
+  HaibaPromoDreamRoute: typeof HaibaPromoDreamRoute
   HaibaPromoGiftRoute: typeof HaibaPromoGiftRoute
   HaibaPromoValueRoute: typeof HaibaPromoValueRoute
   HaibaPromoWaitlistRoute: typeof HaibaPromoWaitlistRoute
@@ -270,6 +283,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HaibaPromoCompareRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/haiba/promo/dream': {
+      id: '/haiba/promo/dream'
+      path: '/haiba/promo/dream'
+      fullPath: '/haiba/promo/dream'
+      preLoaderRoute: typeof HaibaPromoDreamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/haiba/promo/gift': {
       id: '/haiba/promo/gift'
       path: '/haiba/promo/gift'
@@ -324,6 +344,7 @@ const rootRouteChildren: RootRouteChildren = {
   HaibaWelcomeRoute: HaibaWelcomeRoute,
   HaibaIndexRoute: HaibaIndexRoute,
   HaibaPromoCompareRoute: HaibaPromoCompareRoute,
+  HaibaPromoDreamRoute: HaibaPromoDreamRoute,
   HaibaPromoGiftRoute: HaibaPromoGiftRoute,
   HaibaPromoValueRoute: HaibaPromoValueRoute,
   HaibaPromoWaitlistRoute: HaibaPromoWaitlistRoute,

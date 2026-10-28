@@ -99,7 +99,9 @@ export default function PromoYear() {
               lineHeight: "1.1",
             }}
           >
-            {"Here is your year with Haiba"}
+            {v.headPay}
+            <br />
+            <span style={{ color: "#C0F402" }}>{v.headGet}</span>
           </h1>
           <div
             className="hb-rise hb-d1"
@@ -122,16 +124,36 @@ export default function PromoYear() {
               padding: "20px",
             }}
           >
-            <div
-              style={{
-                fontSize: "13px",
-                fontWeight: "800",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: "#C0F402",
-              }}
-            >
-              {"You would get"}
+            <div style={{ position: "relative" }}>
+              <div
+                style={{
+                  fontSize: "13px",
+                  fontWeight: "800",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: "#C0F402",
+                }}
+              >
+                {"Your year is worth"}
+              </div>
+              <span
+                className="hb-pop hb-d3"
+                style={{
+                  position: "absolute",
+                  right: "-4px",
+                  top: "-6px",
+                  background: "#C0F402",
+                  color: "#1F2600",
+                  fontSize: "15px",
+                  fontWeight: "800",
+                  borderRadius: "999px",
+                  padding: "7px 12px",
+                  transform: "rotate(6deg)",
+                  boxShadow: "0 8px 18px rgba(0,0,0,0.3)",
+                }}
+              >
+                {v.times}
+              </span>
             </div>
             <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginTop: "10px" }}>
               <span
@@ -145,14 +167,13 @@ export default function PromoYear() {
               >
                 {v.total}
               </span>
-              <span style={{ fontSize: "16px", fontWeight: "600", color: "#E8E4F4" }}>
-                {"back"}
-              </span>
             </div>
             <div
-              style={{ fontSize: "15px", fontWeight: "600", color: "#CFC9E0", marginTop: "8px" }}
+              style={{ fontSize: "16px", fontWeight: "600", color: "#E8E4F4", marginTop: "10px" }}
             >
-              {v.times}
+              {"You pay only "}
+              <span style={{ color: "#FFFFFF", fontWeight: "800" }}>{v.price}</span>
+              {". The rest is free on top."}
             </div>
             <div style={{ marginTop: "18px", borderTop: "1px solid #3A3550" }}>
               <div
@@ -188,6 +209,42 @@ export default function PromoYear() {
                   </span>
                 </span>
                 <span style={{ fontSize: "17px", fontWeight: "800" }}>{"BHD 30.00"}</span>
+              </div>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                  gap: "12px",
+                  alignItems: "center",
+                  padding: "14px 0",
+                  borderBottom: "1px solid #3A3550",
+                }}
+              >
+                <span
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "14px",
+                    background: "#E4DBFF",
+                    color: "#4F25D6",
+                    fontSize: "13px",
+                    fontWeight: "800",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {"App"}
+                </span>
+                <span style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                  <span style={{ fontSize: "16px", fontWeight: "700" }}>
+                    {"Free app, 3 months"}
+                  </span>
+                  <span style={{ fontSize: "13.5px", fontWeight: "500", color: "#B9B3CC" }}>
+                    {"Music or streaming, free when you join"}
+                  </span>
+                </span>
+                <span style={{ fontSize: "17px", fontWeight: "800" }}>{"BHD 6.00"}</span>
               </div>
               <div
                 style={{
@@ -245,10 +302,13 @@ export default function PromoYear() {
               }}
             >
               <span style={{ color: "#B9B3CC" }}>
-                {"Haiba costs "}
+                {"You pay "}
                 {v.price}
               </span>
-              <span style={{ color: "#C0F402" }}>{v.extra}</span>
+              <span style={{ color: "#C0F402" }}>
+                {"You get "}
+                {v.total}
+              </span>
             </div>
             <div
               style={{
@@ -271,6 +331,20 @@ export default function PromoYear() {
                   background: "#6C3FFA",
                 }}
               ></span>
+            </div>
+            <div
+              style={{
+                marginTop: "14px",
+                display: "inline-flex",
+                background: "#C0F402",
+                color: "#1F2600",
+                fontSize: "15px",
+                fontWeight: "800",
+                borderRadius: "999px",
+                padding: "8px 14px",
+              }}
+            >
+              {v.extra}
             </div>
             <div
               style={{ fontSize: "14px", fontWeight: "600", color: "#CFC9E0", marginTop: "10px" }}
@@ -314,11 +388,13 @@ export default function PromoYear() {
                 }}
               >
                 <span style={{ color: "#1F2600", fontSize: "17px", fontWeight: "800" }}>
-                  {"Join Haiba for "}
+                  {"Get "}
+                  {v.total}
+                  {" for "}
                   {v.price}
                 </span>
                 <span style={{ color: "#3D5000", fontSize: "13.5px", fontWeight: "500" }}>
-                  {"a year \u00b7 "}
+                  {"a year \u00b7 only "}
                   {v.perMonth}
                   {" a month"}
                 </span>
