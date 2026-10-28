@@ -52,7 +52,7 @@ BLOBS = {
     "0d9e8a337892ba1efe85bd1f2977f6cb": "/haiba/coins/coin-stack.webp",
 }
 ATTR_CASE = {
-    "viewbox": "viewBox", "preserveaspectratio": "preserveAspectRatio", "onclick": "onClick", "oninput": "onInput", "onchange": "onChange",
+    "viewbox": "viewBox", "preserveaspectratio": "preserveAspectRatio", "onclick": "onClick", "oninput": "onInput", "onchange": "onChange", "ondragstart": "onDragStart", "ondragover": "onDragOver", "ondrop": "onDrop", "ondragend": "onDragEnd",
     "tabindex": "tabIndex", "class": "className", "for": "htmlFor", "readonly": "readOnly",
     "maxlength": "maxLength", "autocomplete": "autoComplete", "gradientunits": "gradientUnits",
 }

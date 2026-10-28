@@ -81,7 +81,7 @@ export default function PromoDream() {
           <div
             className="hb-rise"
             style={{
-              margin: "28px 4px 0 4px",
+              margin: "24px 4px 0 4px",
               fontSize: "16px",
               fontWeight: "600",
               color: "#E4DBFF",
@@ -92,8 +92,8 @@ export default function PromoDream() {
           <h1
             className="hb-rise hb-d1"
             style={{
-              margin: "8px 4px 0 4px",
-              fontSize: "34px",
+              margin: "6px 4px 0 4px",
+              fontSize: "32px",
               fontWeight: "800",
               letterSpacing: "-0.03em",
               lineHeight: "1.08",
@@ -103,922 +103,13 @@ export default function PromoDream() {
             <span style={{ color: "#C0F402" }}>{"You pick."}</span>
           </h1>
           <div
-            className="hb-rise hb-d1"
-            style={{
-              margin: "10px 4px 0 4px",
-              fontSize: "16px",
-              fontWeight: "600",
-              color: "#FFFFFF",
-              lineHeight: "1.45",
-            }}
-          >
-            {"12 months. 12 free picks. Change your mind every month."}
-          </div>
-          <div style={{ marginTop: "20px" }}>
-            <div
-              className="hb-stagger"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-                gap: "8px",
-              }}
-            >
-              <span
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: "6px",
-                  height: "74px",
-                  boxSizing: "border-box",
-                  padding: "10px 4px",
-                  borderRadius: "14px",
-                  background: "#C0F402",
-                  border: "0",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "12px",
-                    fontWeight: "800",
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "#1F2600",
-                  }}
-                >
-                  {"Dec"}
-                </span>
-                <span style={{ fontSize: "12px", fontWeight: "800", color: "#1F2600" }}>
-                  {"Your pick"}
-                </span>
-              </span>
-              <span
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: "6px",
-                  height: "74px",
-                  boxSizing: "border-box",
-                  padding: "10px 4px",
-                  borderRadius: "14px",
-                  background: "rgba(255,255,255,0.10)",
-                  border: "1px solid rgba(255,255,255,0.18)",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "12px",
-                    fontWeight: "800",
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "#E4DBFF",
-                  }}
-                >
-                  {"Jan"}
-                </span>
-                <span
-                  style={{
-                    width: "26px",
-                    height: "26px",
-                    borderRadius: "50%",
-                    border: "1.5px dashed rgba(255,255,255,0.6)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "13px",
-                    fontWeight: "800",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  {"?"}
-                </span>
-              </span>
-              <span
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: "6px",
-                  height: "74px",
-                  boxSizing: "border-box",
-                  padding: "10px 4px",
-                  borderRadius: "14px",
-                  background: "rgba(255,255,255,0.10)",
-                  border: "1px solid rgba(255,255,255,0.18)",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "12px",
-                    fontWeight: "800",
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "#E4DBFF",
-                  }}
-                >
-                  {"Feb"}
-                </span>
-                <span
-                  style={{
-                    width: "26px",
-                    height: "26px",
-                    borderRadius: "50%",
-                    border: "1.5px dashed rgba(255,255,255,0.6)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "13px",
-                    fontWeight: "800",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  {"?"}
-                </span>
-              </span>
-              <span
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: "6px",
-                  height: "74px",
-                  boxSizing: "border-box",
-                  padding: "10px 4px",
-                  borderRadius: "14px",
-                  background: "rgba(255,255,255,0.10)",
-                  border: "1px solid rgba(255,255,255,0.18)",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "12px",
-                    fontWeight: "800",
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "#E4DBFF",
-                  }}
-                >
-                  {"Mar"}
-                </span>
-                <span
-                  style={{
-                    width: "26px",
-                    height: "26px",
-                    borderRadius: "50%",
-                    border: "1.5px dashed rgba(255,255,255,0.6)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "13px",
-                    fontWeight: "800",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  {"?"}
-                </span>
-              </span>
-              <span
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: "6px",
-                  height: "74px",
-                  boxSizing: "border-box",
-                  padding: "10px 4px",
-                  borderRadius: "14px",
-                  background: "rgba(255,255,255,0.10)",
-                  border: "1px solid rgba(255,255,255,0.18)",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "12px",
-                    fontWeight: "800",
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "#E4DBFF",
-                  }}
-                >
-                  {"Apr"}
-                </span>
-                <span
-                  style={{
-                    width: "26px",
-                    height: "26px",
-                    borderRadius: "50%",
-                    border: "1.5px dashed rgba(255,255,255,0.6)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "13px",
-                    fontWeight: "800",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  {"?"}
-                </span>
-              </span>
-              <span
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: "6px",
-                  height: "74px",
-                  boxSizing: "border-box",
-                  padding: "10px 4px",
-                  borderRadius: "14px",
-                  background: "rgba(255,255,255,0.10)",
-                  border: "1px solid rgba(255,255,255,0.18)",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "12px",
-                    fontWeight: "800",
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "#E4DBFF",
-                  }}
-                >
-                  {"May"}
-                </span>
-                <span
-                  style={{
-                    width: "26px",
-                    height: "26px",
-                    borderRadius: "50%",
-                    border: "1.5px dashed rgba(255,255,255,0.6)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "13px",
-                    fontWeight: "800",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  {"?"}
-                </span>
-              </span>
-              <span
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: "6px",
-                  height: "74px",
-                  boxSizing: "border-box",
-                  padding: "10px 4px",
-                  borderRadius: "14px",
-                  background: "rgba(255,255,255,0.10)",
-                  border: "1px solid rgba(255,255,255,0.18)",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "12px",
-                    fontWeight: "800",
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "#E4DBFF",
-                  }}
-                >
-                  {"Jun"}
-                </span>
-                <span
-                  style={{
-                    width: "26px",
-                    height: "26px",
-                    borderRadius: "50%",
-                    border: "1.5px dashed rgba(255,255,255,0.6)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "13px",
-                    fontWeight: "800",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  {"?"}
-                </span>
-              </span>
-              <span
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: "6px",
-                  height: "74px",
-                  boxSizing: "border-box",
-                  padding: "10px 4px",
-                  borderRadius: "14px",
-                  background: "rgba(255,255,255,0.10)",
-                  border: "1px solid rgba(255,255,255,0.18)",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "12px",
-                    fontWeight: "800",
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "#E4DBFF",
-                  }}
-                >
-                  {"Jul"}
-                </span>
-                <span
-                  style={{
-                    width: "26px",
-                    height: "26px",
-                    borderRadius: "50%",
-                    border: "1.5px dashed rgba(255,255,255,0.6)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "13px",
-                    fontWeight: "800",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  {"?"}
-                </span>
-              </span>
-              <span
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: "6px",
-                  height: "74px",
-                  boxSizing: "border-box",
-                  padding: "10px 4px",
-                  borderRadius: "14px",
-                  background: "rgba(255,255,255,0.10)",
-                  border: "1px solid rgba(255,255,255,0.18)",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "12px",
-                    fontWeight: "800",
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "#E4DBFF",
-                  }}
-                >
-                  {"Aug"}
-                </span>
-                <span
-                  style={{
-                    width: "26px",
-                    height: "26px",
-                    borderRadius: "50%",
-                    border: "1.5px dashed rgba(255,255,255,0.6)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "13px",
-                    fontWeight: "800",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  {"?"}
-                </span>
-              </span>
-              <span
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: "6px",
-                  height: "74px",
-                  boxSizing: "border-box",
-                  padding: "10px 4px",
-                  borderRadius: "14px",
-                  background: "rgba(255,255,255,0.10)",
-                  border: "1px solid rgba(255,255,255,0.18)",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "12px",
-                    fontWeight: "800",
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "#E4DBFF",
-                  }}
-                >
-                  {"Sep"}
-                </span>
-                <span
-                  style={{
-                    width: "26px",
-                    height: "26px",
-                    borderRadius: "50%",
-                    border: "1.5px dashed rgba(255,255,255,0.6)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "13px",
-                    fontWeight: "800",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  {"?"}
-                </span>
-              </span>
-              <span
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: "6px",
-                  height: "74px",
-                  boxSizing: "border-box",
-                  padding: "10px 4px",
-                  borderRadius: "14px",
-                  background: "rgba(255,255,255,0.10)",
-                  border: "1px solid rgba(255,255,255,0.18)",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "12px",
-                    fontWeight: "800",
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "#E4DBFF",
-                  }}
-                >
-                  {"Oct"}
-                </span>
-                <span
-                  style={{
-                    width: "26px",
-                    height: "26px",
-                    borderRadius: "50%",
-                    border: "1.5px dashed rgba(255,255,255,0.6)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "13px",
-                    fontWeight: "800",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  {"?"}
-                </span>
-              </span>
-              <span
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: "6px",
-                  height: "74px",
-                  boxSizing: "border-box",
-                  padding: "10px 4px",
-                  borderRadius: "14px",
-                  background: "rgba(255,255,255,0.10)",
-                  border: "1px solid rgba(255,255,255,0.18)",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "12px",
-                    fontWeight: "800",
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "#E4DBFF",
-                  }}
-                >
-                  {"Nov"}
-                </span>
-                <span
-                  style={{
-                    width: "26px",
-                    height: "26px",
-                    borderRadius: "50%",
-                    border: "1.5px dashed rgba(255,255,255,0.6)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "13px",
-                    fontWeight: "800",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  {"?"}
-                </span>
-              </span>
-            </div>
-          </div>
-          <div
-            style={{
-              fontSize: "13px",
-              fontWeight: "800",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "#E4DBFF",
-              margin: "18px 4px 10px 4px",
-            }}
-          >
-            {"Pick from brands like"}
-          </div>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <Artwork
-              src="/haiba/brands/wingman.webp"
-              alt="Wingman"
-              style={{
-                width: "44px",
-                height: "44px",
-                borderRadius: "12px",
-                objectFit: "cover",
-                display: "block",
-                boxShadow: "0 0 0 2px rgba(255,255,255,0.9)",
-              }}
-            />
-            <Artwork
-              src="/haiba/brands/vox.webp"
-              alt="VOX Cinemas"
-              style={{
-                width: "44px",
-                height: "44px",
-                borderRadius: "12px",
-                objectFit: "cover",
-                display: "block",
-                boxShadow: "0 0 0 2px rgba(255,255,255,0.9)",
-              }}
-            />
-            <Artwork
-              src="/haiba/brands/coffee-bean.webp"
-              alt="The Coffee Bean"
-              style={{
-                width: "44px",
-                height: "44px",
-                borderRadius: "12px",
-                objectFit: "cover",
-                display: "block",
-                boxShadow: "0 0 0 2px rgba(255,255,255,0.9)",
-              }}
-            />
-            <Artwork
-              src="/haiba/brands/grip.webp"
-              alt="Grip"
-              style={{
-                width: "44px",
-                height: "44px",
-                borderRadius: "12px",
-                objectFit: "cover",
-                display: "block",
-                boxShadow: "0 0 0 2px rgba(255,255,255,0.9)",
-              }}
-            />
-            <Artwork
-              src="/haiba/brands/albayan.webp"
-              alt="Albayan"
-              style={{
-                width: "44px",
-                height: "44px",
-                borderRadius: "12px",
-                objectFit: "cover",
-                display: "block",
-                boxShadow: "0 0 0 2px rgba(255,255,255,0.9)",
-              }}
-            />
-            <Artwork
-              src="/haiba/brands/alkuwaiti.webp"
-              alt="Alkuwaiti"
-              style={{
-                width: "44px",
-                height: "44px",
-                borderRadius: "12px",
-                objectFit: "cover",
-                display: "block",
-                boxShadow: "0 0 0 2px rgba(255,255,255,0.9)",
-              }}
-            />
-          </div>
-          <div
-            style={{
-              fontSize: "13px",
-              fontWeight: "800",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "#C0F402",
-              margin: "26px 4px 10px 4px",
-            }}
-          >
-            {"And everything else in Haiba"}
-          </div>
-          <div
-            className="hb-stagger"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-              gap: "8px",
-            }}
-          >
-            <span
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
-                background: "#FFFFFF",
-                color: "#1E1B2E",
-                borderRadius: "16px",
-                padding: "14px",
-                boxShadow: "none",
-              }}
-            >
-              <span
-                style={{ display: "flex", alignItems: "center", gap: "6px", minHeight: "40px" }}
-              >
-                <Artwork
-                  src="/haiba/brands/spotify.webp"
-                  alt="Spotify"
-                  style={{
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "50%",
-                    objectFit: "cover",
-                    display: "block",
-                    boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
-                  }}
-                />
-              </span>
-              <span style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
-                <span style={{ fontSize: "15.5px", fontWeight: "800", lineHeight: "1.25" }}>
-                  {"Spotify Premium Student"}
-                </span>
-                <span
-                  style={{
-                    fontSize: "13px",
-                    fontWeight: "600",
-                    color: "#6B6880",
-                    lineHeight: "1.35",
-                  }}
-                >
-                  {"3 months free"}
-                </span>
-              </span>
-            </span>
-            <span
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
-                background: "#FFFFFF",
-                color: "#1E1B2E",
-                borderRadius: "16px",
-                padding: "14px",
-                boxShadow: "none",
-              }}
-            >
-              <span
-                style={{ display: "flex", alignItems: "center", gap: "6px", minHeight: "40px" }}
-              >
-                <Artwork
-                  src="/haiba/brands/chatgpt.webp"
-                  alt="ChatGPT"
-                  style={{
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "50%",
-                    objectFit: "cover",
-                    display: "block",
-                    boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
-                  }}
-                />
-              </span>
-              <span style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
-                <span style={{ fontSize: "15.5px", fontWeight: "800", lineHeight: "1.25" }}>
-                  {"ChatGPT Go"}
-                </span>
-                <span
-                  style={{
-                    fontSize: "13px",
-                    fontWeight: "600",
-                    color: "#6B6880",
-                    lineHeight: "1.35",
-                  }}
-                >
-                  {"3 months free"}
-                </span>
-              </span>
-            </span>
-            <span
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
-                background: "#FFFFFF",
-                color: "#1E1B2E",
-                borderRadius: "16px",
-                padding: "14px",
-                boxShadow: "none",
-              }}
-            >
-              <span
-                style={{ display: "flex", alignItems: "center", gap: "6px", minHeight: "40px" }}
-              >
-                <Artwork
-                  src="/haiba/coins/coin-34.webp"
-                  alt=""
-                  style={{ width: "40px", height: "40px", objectFit: "contain" }}
-                />
-              </span>
-              <span style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
-                <span style={{ fontSize: "15.5px", fontWeight: "800", lineHeight: "1.25" }}>
-                  {"Bonus points"}
-                </span>
-                <span
-                  style={{
-                    fontSize: "13px",
-                    fontWeight: "600",
-                    color: "#6B6880",
-                    lineHeight: "1.35",
-                  }}
-                >
-                  {"Every visit. 2x at new shops, 5x every 5th"}
-                </span>
-              </span>
-            </span>
-            <span
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
-                background: "#FFFFFF",
-                color: "#1E1B2E",
-                borderRadius: "16px",
-                padding: "14px",
-                boxShadow: "none",
-              }}
-            >
-              <span
-                style={{ display: "flex", alignItems: "center", gap: "6px", minHeight: "40px" }}
-              >
-                <span
-                  style={{
-                    height: "40px",
-                    minWidth: "40px",
-                    padding: "0 8px",
-                    boxSizing: "border-box",
-                    borderRadius: "12px",
-                    background: "#F0ECFF",
-                    color: "#6C3FFA",
-                    fontSize: "14px",
-                    fontWeight: "800",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  {"200+"}
-                </span>
-              </span>
-              <span style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
-                <span style={{ fontSize: "15.5px", fontWeight: "800", lineHeight: "1.25" }}>
-                  {"Rewards at 200+ shops"}
-                </span>
-                <span
-                  style={{
-                    fontSize: "13px",
-                    fontWeight: "600",
-                    color: "#6B6880",
-                    lineHeight: "1.35",
-                  }}
-                >
-                  {"Free drinks, meals, popcorn"}
-                </span>
-              </span>
-            </span>
-            <span
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
-                background: "#FFFFFF",
-                color: "#1E1B2E",
-                borderRadius: "16px",
-                padding: "14px",
-                boxShadow: "none",
-              }}
-            >
-              <span
-                style={{ display: "flex", alignItems: "center", gap: "6px", minHeight: "40px" }}
-              >
-                <span
-                  style={{
-                    height: "40px",
-                    minWidth: "40px",
-                    padding: "0 8px",
-                    boxSizing: "border-box",
-                    borderRadius: "12px",
-                    background: "#C0F402",
-                    color: "#1F2600",
-                    fontSize: "14px",
-                    fontWeight: "800",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  {"500"}
-                </span>
-              </span>
-              <span style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
-                <span style={{ fontSize: "15.5px", fontWeight: "800", lineHeight: "1.25" }}>
-                  {"500 welcome points"}
-                </span>
-                <span
-                  style={{
-                    fontSize: "13px",
-                    fontWeight: "600",
-                    color: "#6B6880",
-                    lineHeight: "1.35",
-                  }}
-                >
-                  {"A free treat on day one"}
-                </span>
-              </span>
-            </span>
-            <span
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
-                background: "#FFFFFF",
-                color: "#1E1B2E",
-                borderRadius: "16px",
-                padding: "14px",
-                boxShadow: "none",
-              }}
-            >
-              <span
-                style={{ display: "flex", alignItems: "center", gap: "6px", minHeight: "40px" }}
-              >
-                <span
-                  style={{
-                    height: "40px",
-                    minWidth: "40px",
-                    padding: "0 8px",
-                    boxSizing: "border-box",
-                    borderRadius: "12px",
-                    background: "#1E1B2E",
-                    color: "#C0F402",
-                    fontSize: "14px",
-                    fontWeight: "800",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  {"BHD"}
-                </span>
-              </span>
-              <span style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
-                <span style={{ fontSize: "15.5px", fontWeight: "800", lineHeight: "1.25" }}>
-                  {"See what you saved"}
-                </span>
-                <span
-                  style={{
-                    fontSize: "13px",
-                    fontWeight: "600",
-                    color: "#6B6880",
-                    lineHeight: "1.35",
-                  }}
-                >
-                  {"Every gift and reward, added up"}
-                </span>
-              </span>
-            </span>
-          </div>
-          <div
-            className="hb-rise hb-d3"
+            className="hb-rise hb-d2"
             style={{
               position: "relative",
-              marginTop: "16px",
+              marginTop: "20px",
               background: "#1E1B2E",
-              color: "#FFFFFF",
               borderRadius: "16px",
-              padding: "20px",
+              padding: "18px 20px",
             }}
           >
             <span
@@ -1048,28 +139,413 @@ export default function PromoDream() {
                 color: "#B9B3CC",
               }}
             >
-              {"Your Haiba year is worth"}
+              {"Your Haiba year"}
             </div>
             <div
               style={{
-                fontSize: "52px",
-                fontWeight: "800",
-                letterSpacing: "-0.04em",
-                lineHeight: "1",
-                marginTop: "10px",
-                color: "#C0F402",
+                display: "flex",
+                alignItems: "baseline",
+                justifyContent: "space-between",
+                gap: "10px",
+                marginTop: "8px",
               }}
             >
-              {v.worth}
+              <span
+                className={v.bump}
+                style={{
+                  fontSize: "48px",
+                  fontWeight: "800",
+                  letterSpacing: "-0.04em",
+                  lineHeight: "1",
+                  color: "#C0F402",
+                }}
+              >
+                {v.worth}
+              </span>
+              <span
+                style={{
+                  fontSize: "15px",
+                  fontWeight: "700",
+                  color: "#E8E4F4",
+                  textAlign: "right",
+                }}
+              >
+                {"for "}
+                {v.price}
+              </span>
             </div>
             <div
-              style={{ fontSize: "16px", fontWeight: "600", color: "#E8E4F4", marginTop: "10px" }}
+              style={{
+                position: "relative",
+                height: "8px",
+                marginTop: "14px",
+                borderRadius: "999px",
+                overflow: "hidden",
+                background: "#3A3550",
+              }}
             >
-              {"All for "}
-              <span style={{ color: "#FFFFFF", fontWeight: "800" }}>{v.price}</span>
-              {". Just "}
-              {v.perMonth}
-              {" a month."}
+              <span
+                className="hb-ease"
+                style={{
+                  position: "absolute",
+                  left: "0",
+                  top: "0",
+                  bottom: "0",
+                  width: v.fillPct,
+                  background: "#C0F402",
+                  borderRadius: "999px",
+                }}
+              ></span>
+            </div>
+            <div
+              style={{ fontSize: "13.5px", fontWeight: "600", color: "#CFC9E0", marginTop: "8px" }}
+            >
+              {v.fillLine}
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "baseline",
+              margin: "22px 4px 10px 4px",
+            }}
+          >
+            <span
+              style={{
+                fontSize: "13px",
+                fontWeight: "800",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "#E4DBFF",
+              }}
+            >
+              {"Your 12 months"}
+            </span>
+            <span style={{ fontSize: "13px", fontWeight: "700", color: "#E4DBFF" }}>
+              {"Tap a month to change it"}
+            </span>
+          </div>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+              gap: "8px",
+            }}
+          >
+            {(v.months || []).map((m: any, idx0: number) => (
+              <Fragment key={idx0}>
+                <button
+                  onClick={m.tap}
+                  onDragOver={v.allowDrop}
+                  onDrop={m.drop}
+                  aria-label={m.aria}
+                  className="hb-press hb-ease"
+                  style={{
+                    font: "inherit",
+                    cursor: "pointer",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: "4px",
+                    height: "92px",
+                    boxSizing: "border-box",
+                    padding: "8px 4px 8px 4px",
+                    borderRadius: "14px",
+                    background: m.bg,
+                    border: m.border,
+                    color: "#FFFFFF",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "11.5px",
+                      fontWeight: "800",
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      color: m.labInk,
+                    }}
+                  >
+                    {m.label}
+                  </span>
+                  {m.filled ? (
+                    <>
+                      <Artwork
+                        className="hb-pop"
+                        src={m.logo}
+                        alt=""
+                        style={{
+                          width: "36px",
+                          height: "36px",
+                          borderRadius: "10px",
+                          objectFit: "cover",
+                          display: "block",
+                          boxShadow: "0 0 0 2px #FFFFFF",
+                        }}
+                      />
+                      <span style={{ fontSize: "11.5px", fontWeight: "800", color: "#1E1B2E" }}>
+                        {m.val}
+                      </span>
+                    </>
+                  ) : null}
+                  {m.empty ? (
+                    <>
+                      <span
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          borderRadius: "50%",
+                          border: `1.5px dashed ${m.dash}`,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontSize: "18px",
+                          fontWeight: "700",
+                          color: m.dash,
+                        }}
+                      >
+                        {"+"}
+                      </span>
+                      <span style={{ fontSize: "11px", fontWeight: "700", color: m.labInk }}>
+                        {m.hint}
+                      </span>
+                    </>
+                  ) : null}
+                </button>
+              </Fragment>
+            ))}
+          </div>
+          <div
+            style={{
+              margin: "18px 4px 10px 4px",
+              fontSize: "13px",
+              fontWeight: "800",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "#C0F402",
+            }}
+          >
+            {v.trayLine}
+          </div>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+              gap: "8px",
+            }}
+          >
+            {(v.gifts || []).map((g: any, idx0: number) => (
+              <Fragment key={idx0}>
+                <button
+                  draggable="true"
+                  onDragStart={g.drag}
+                  onClick={g.pick}
+                  aria-label={g.aria}
+                  className="hb-press"
+                  style={{
+                    font: "inherit",
+                    cursor: "grab",
+                    border: "0",
+                    padding: "0",
+                    textAlign: "left",
+                    background: "#FFFFFF",
+                    color: "#1E1B2E",
+                    borderRadius: "14px",
+                    overflow: "hidden",
+                    display: "flex",
+                    flexDirection: "column",
+                    boxShadow: "0 8px 18px rgba(20,8,60,0.25)",
+                  }}
+                >
+                  <Artwork
+                    src={g.logo}
+                    alt={g.brand}
+                    style={{
+                      width: "100%",
+                      height: "56px",
+                      objectFit: "contain",
+                      display: "block",
+                      background: g.bg,
+                      pointerEvents: "none",
+                    }}
+                  />
+                  <span
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "1px",
+                      padding: "8px 10px 10px 10px",
+                    }}
+                  >
+                    <span style={{ fontSize: "12.5px", fontWeight: "800", lineHeight: "1.2" }}>
+                      {g.item}
+                    </span>
+                    <span style={{ fontSize: "12px", fontWeight: "700", color: "#6C3FFA" }}>
+                      {g.val}
+                    </span>
+                  </span>
+                </button>
+              </Fragment>
+            ))}
+          </div>
+          <div
+            style={{
+              margin: "24px 4px 10px 4px",
+              fontSize: "13px",
+              fontWeight: "800",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "#E4DBFF",
+            }}
+          >
+            {"Also yours"}
+          </div>
+          <div style={{ background: "#1E1B2E", borderRadius: "16px", padding: "4px 18px" }}>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                gap: "12px",
+                alignItems: "center",
+                padding: "14px 0",
+                borderBottom: "1px solid #3A3550",
+              }}
+            >
+              <span
+                style={{
+                  width: "44px",
+                  height: "44px",
+                  borderRadius: "14px",
+                  overflow: "hidden",
+                  display: "block",
+                  boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                }}
+              >
+                <Artwork
+                  src="/haiba/brands/spotify.webp"
+                  alt="Spotify"
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                />
+              </span>
+              <span style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}>
+                <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
+                  {"Spotify Premium Student"}
+                </span>
+                <span
+                  style={{
+                    fontSize: "13.5px",
+                    fontWeight: "500",
+                    color: "#B9B3CC",
+                    lineHeight: "1.35",
+                  }}
+                >
+                  {"3 months free"}
+                </span>
+              </span>
+              <span
+                style={{
+                  fontSize: "16px",
+                  fontWeight: "800",
+                  textAlign: "right",
+                  color: "#FFFFFF",
+                }}
+              >
+                {"BHD 3.00"}
+              </span>
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                gap: "12px",
+                alignItems: "center",
+                padding: "14px 0",
+                borderBottom: "1px solid #3A3550",
+              }}
+            >
+              <span
+                style={{
+                  width: "44px",
+                  height: "44px",
+                  borderRadius: "14px",
+                  overflow: "hidden",
+                  display: "block",
+                  boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                }}
+              >
+                <Artwork
+                  src="/haiba/brands/chatgpt.webp"
+                  alt="ChatGPT"
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                />
+              </span>
+              <span style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}>
+                <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
+                  {"ChatGPT Go"}
+                </span>
+                <span
+                  style={{
+                    fontSize: "13.5px",
+                    fontWeight: "500",
+                    color: "#B9B3CC",
+                    lineHeight: "1.35",
+                  }}
+                >
+                  {"3 months free"}
+                </span>
+              </span>
+              <span
+                style={{
+                  fontSize: "16px",
+                  fontWeight: "800",
+                  textAlign: "right",
+                  color: "#FFFFFF",
+                }}
+              >
+                {"BHD 9.00"}
+              </span>
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                gap: "12px",
+                alignItems: "center",
+                padding: "14px 0",
+                borderBottom: "0",
+              }}
+            >
+              <Artwork
+                src="/haiba/coins/coin-34.webp"
+                alt=""
+                style={{ width: "44px", height: "44px", objectFit: "contain", display: "block" }}
+              />
+              <span style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}>
+                <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
+                  {"Points every visit"}
+                </span>
+                <span
+                  style={{
+                    fontSize: "13.5px",
+                    fontWeight: "500",
+                    color: "#B9B3CC",
+                    lineHeight: "1.35",
+                  }}
+                >
+                  {"500 to start. Spend them at 200+ shops."}
+                </span>
+              </span>
+              <span
+                style={{
+                  fontSize: "16px",
+                  fontWeight: "800",
+                  textAlign: "right",
+                  color: "#FFFFFF",
+                }}
+              >
+                {v.ptsVal}
+              </span>
             </div>
           </div>
         </div>
