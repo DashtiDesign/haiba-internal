@@ -358,25 +358,65 @@ export default function PromoValue() {
                 background: "#1E1B2E",
                 color: "#FFFFFF",
                 borderRadius: "16px",
-                padding: "16px 16px 14px 16px",
+                padding: "14px 16px",
                 overflow: "hidden",
               }}
             >
-              <span
-                aria-hidden="true"
-                style={{
-                  position: "absolute",
-                  right: "-50px",
-                  top: "-80px",
-                  width: "180px",
-                  height: "180px",
-                  borderRadius: "50%",
-                  border: "2px dashed rgba(192,244,2,0.22)",
-                }}
-              ></span>
-              <div
-                style={{ position: "relative", display: "flex", alignItems: "center", gap: "8px" }}
-              >
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <span style={{ display: "flex", alignItems: "center", flex: "none" }}>
+                  <Artwork
+                    src="/haiba/flags/bh.svg"
+                    alt="Bahrain"
+                    style={{
+                      width: "28px",
+                      height: "28px",
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                      display: "block",
+                      marginLeft: "0px",
+                      boxShadow: "0 0 0 2px #1E1B2E",
+                    }}
+                  />
+                  <Artwork
+                    src="/haiba/flags/sa.svg"
+                    alt="Saudi"
+                    style={{
+                      width: "28px",
+                      height: "28px",
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                      display: "block",
+                      marginLeft: "-8px",
+                      boxShadow: "0 0 0 2px #1E1B2E",
+                    }}
+                  />
+                  <Artwork
+                    src="/haiba/flags/qa.svg"
+                    alt="Qatar"
+                    style={{
+                      width: "28px",
+                      height: "28px",
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                      display: "block",
+                      marginLeft: "-8px",
+                      boxShadow: "0 0 0 2px #1E1B2E",
+                    }}
+                  />
+                  <Artwork
+                    src="/haiba/flags/om.svg"
+                    alt="Oman"
+                    style={{
+                      width: "28px",
+                      height: "28px",
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                      display: "block",
+                      marginLeft: "-8px",
+                      boxShadow: "0 0 0 2px #1E1B2E",
+                    }}
+                  />
+                </span>
                 <span
                   style={{
                     fontSize: "12px",
@@ -396,7 +436,7 @@ export default function PromoValue() {
                     fontSize: "13px",
                     fontWeight: "800",
                     borderRadius: "999px",
-                    padding: "5px 10px",
+                    padding: "4px 10px",
                   }}
                 >
                   {"BHD 5"}
@@ -404,166 +444,38 @@ export default function PromoValue() {
               </div>
               <div
                 style={{
-                  position: "relative",
-                  fontSize: "21px",
+                  fontSize: "18px",
                   fontWeight: "800",
-                  letterSpacing: "-0.01em",
                   lineHeight: "1.2",
-                  marginTop: "8px",
+                  marginTop: "10px",
                 }}
               >
                 {"Wherever Unipal is, "}
                 <span style={{ color: "#C0F402" }}>{"we\u2019ve got you."}</span>
               </div>
-              <div style={{ position: "relative" }}>
-                <div
-                  style={{
-                    position: "relative",
-                    display: "grid",
-                    gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-                    marginTop: "14px",
-                  }}
-                >
-                  <span
-                    aria-hidden="true"
-                    style={{
-                      position: "absolute",
-                      left: "12.5%",
-                      right: "12.5%",
-                      top: "16px",
-                      borderTop: "2px dashed rgba(192,244,2,0.5)",
-                    }}
-                  ></span>
-                  <span
-                    style={{
-                      position: "relative",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      gap: "6px",
-                    }}
-                  >
-                    <Artwork
-                      src="/haiba/flags/bh.svg"
-                      alt="Bahrain"
-                      style={{
-                        width: "34px",
-                        height: "34px",
-                        borderRadius: "50%",
-                        objectFit: "cover",
-                        objectPosition: "center",
-                        display: "block",
-                        boxShadow: "0 0 0 2px #1E1B2E",
-                      }}
-                    />
-                    <span style={{ fontSize: "12.5px", fontWeight: "800", color: "#FFFFFF" }}>
-                      {"Bahrain"}
-                    </span>
-                  </span>
-                  <span
-                    style={{
-                      position: "relative",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      gap: "6px",
-                    }}
-                  >
-                    <Artwork
-                      src="/haiba/flags/sa.svg"
-                      alt="Saudi"
-                      style={{
-                        width: "34px",
-                        height: "34px",
-                        borderRadius: "50%",
-                        objectFit: "cover",
-                        objectPosition: "center",
-                        display: "block",
-                        boxShadow: "0 0 0 2px #1E1B2E",
-                      }}
-                    />
-                    <span style={{ fontSize: "12.5px", fontWeight: "800", color: "#FFFFFF" }}>
-                      {"Saudi"}
-                    </span>
-                  </span>
-                  <span
-                    style={{
-                      position: "relative",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      gap: "6px",
-                    }}
-                  >
-                    <Artwork
-                      src="/haiba/flags/qa.svg"
-                      alt="Qatar"
-                      style={{
-                        width: "34px",
-                        height: "34px",
-                        borderRadius: "50%",
-                        objectFit: "cover",
-                        objectPosition: "center",
-                        display: "block",
-                        boxShadow: "0 0 0 2px #1E1B2E",
-                      }}
-                    />
-                    <span style={{ fontSize: "12.5px", fontWeight: "800", color: "#FFFFFF" }}>
-                      {"Qatar"}
-                    </span>
-                  </span>
-                  <span
-                    style={{
-                      position: "relative",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      gap: "6px",
-                    }}
-                  >
-                    <Artwork
-                      src="/haiba/flags/om.svg"
-                      alt="Oman"
-                      style={{
-                        width: "34px",
-                        height: "34px",
-                        borderRadius: "50%",
-                        objectFit: "cover",
-                        objectPosition: "left",
-                        display: "block",
-                        boxShadow: "0 0 0 2px #1E1B2E",
-                      }}
-                    />
-                    <span style={{ fontSize: "12.5px", fontWeight: "800", color: "#FFFFFF" }}>
-                      {"Oman"}
-                    </span>
-                  </span>
-                </div>
-              </div>
               <div
                 style={{
-                  position: "relative",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  gap: "12px",
-                  marginTop: "14px",
+                  gap: "10px",
+                  marginTop: "4px",
                 }}
               >
                 <span
                   style={{
-                    fontSize: "13.5px",
+                    fontSize: "13px",
                     fontWeight: "600",
                     color: "#B9B3CC",
                     lineHeight: "1.4",
                   }}
                 >
-                  {"5GB for 7 days. Your Unipal deals work the moment you land."}
+                  {"5GB in Bahrain, Saudi, Qatar or Oman"}
                 </span>
                 <Artwork
                   src="/haiba/brands/airalo-white.svg"
                   alt="Airalo"
-                  style={{ height: "16px", width: "auto", display: "block", flex: "none" }}
+                  style={{ height: "15px", width: "auto", display: "block", flex: "none" }}
                 />
               </div>
             </div>

@@ -425,12 +425,12 @@ export default function Hub() {
               background: "#1E1B2E",
               borderRadius: "16px",
               marginTop: "12px",
-              padding: "18px",
+              padding: "16px",
               position: "relative",
               overflow: "hidden",
               display: "flex",
               flexDirection: "column",
-              gap: "6px",
+              gap: "4px",
               boxShadow: "0 14px 28px rgba(30,27,46,0.20)",
             }}
             to="/haiba/travel"
@@ -440,11 +440,11 @@ export default function Hub() {
               style={{
                 position: "absolute",
                 right: "-60px",
-                top: "-80px",
-                width: "190px",
-                height: "190px",
+                top: "-90px",
+                width: "180px",
+                height: "180px",
                 borderRadius: "50%",
-                border: "2px dashed rgba(192,244,2,0.25)",
+                border: "2px dashed rgba(192,244,2,0.22)",
               }}
             ></span>
             <span
@@ -453,7 +453,7 @@ export default function Hub() {
                 display: "flex",
                 alignItems: "center",
                 gap: "8px",
-                minHeight: "24px",
+                minHeight: "22px",
               }}
             >
               <span
@@ -476,7 +476,7 @@ export default function Hub() {
                       background: "#3A3550",
                       color: "#E4DBFF",
                       borderRadius: "999px",
-                      padding: "4px 9px",
+                      padding: "3px 9px",
                     }}
                   >
                     {v.travelPill}
@@ -486,84 +486,30 @@ export default function Hub() {
               <Artwork
                 src="/haiba/brands/airalo-white.svg"
                 alt="Airalo"
-                style={{ marginLeft: "auto", height: "20px", width: "auto", display: "block" }}
+                style={{ marginLeft: "auto", height: "18px", width: "auto", display: "block" }}
               />
             </span>
             <span
               style={{
                 position: "relative",
                 fontFamily: "Figtree, system-ui, sans-serif",
-                fontSize: "23px",
+                fontSize: "20px",
                 fontWeight: "800",
                 letterSpacing: "-0.02em",
-                lineHeight: "1.15",
+                lineHeight: "1.2",
                 marginTop: "4px",
                 opacity: v.travelOp,
               }}
             >
               {v.travelTitle} <span style={{ color: "#C0F402" }}>{"We\u2019ve got you."}</span>
             </span>
-            <span style={{ position: "relative", display: "block", opacity: v.travelOp }}>
-              <span style={{ display: "block" }}>
-                <div
-                  style={{
-                    position: "relative",
-                    display: "grid",
-                    gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-                    marginTop: "16px",
-                  }}
-                >
-                  <span
-                    aria-hidden="true"
-                    style={{
-                      position: "absolute",
-                      left: "12.5%",
-                      right: "12.5%",
-                      top: "16px",
-                      borderTop: "2px dashed rgba(192,244,2,0.5)",
-                    }}
-                  ></span>
-                  {(v.travelRoute || []).map((f: any, idx0: number) => (
-                    <Fragment key={idx0}>
-                      <span
-                        style={{
-                          position: "relative",
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          gap: "7px",
-                        }}
-                      >
-                        <Artwork
-                          src={f.src}
-                          alt={f.name}
-                          style={{
-                            width: "34px",
-                            height: "34px",
-                            borderRadius: "50%",
-                            objectFit: "cover",
-                            objectPosition: f.pos,
-                            display: "block",
-                            boxShadow: "0 0 0 3px #1E1B2E",
-                          }}
-                        />
-                        <span style={{ fontSize: "12.5px", fontWeight: "800", color: f.labelInk }}>
-                          {f.label}
-                        </span>
-                      </span>
-                    </Fragment>
-                  ))}
-                </div>
-              </span>
-            </span>
             <span
               style={{
                 position: "relative",
-                fontSize: "14px",
+                fontSize: "13.5px",
                 fontWeight: "600",
                 color: "#B9B3CC",
                 lineHeight: "1.4",
-                marginTop: "8px",
               }}
             >
               {v.travelSub}
@@ -571,33 +517,62 @@ export default function Hub() {
             <span
               style={{
                 position: "relative",
-                alignSelf: "flex-start",
-                marginTop: "10px",
-                fontSize: "14px",
-                fontWeight: "800",
-                background: v.travelCtaBg,
-                color: v.travelCtaInk,
-                borderRadius: "999px",
-                padding: "10px 14px",
                 display: "flex",
                 alignItems: "center",
-                gap: "6px",
+                justifyContent: "space-between",
+                gap: "10px",
+                marginTop: "10px",
               }}
             >
-              {v.travelCta}
-              <svg
-                aria-hidden="true"
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+              <span
+                style={{
+                  fontSize: "14px",
+                  fontWeight: "800",
+                  background: v.travelCtaBg,
+                  color: v.travelCtaInk,
+                  borderRadius: "999px",
+                  padding: "9px 14px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px",
+                }}
               >
-                <path d="M9 6l6 6-6 6"></path>
-              </svg>
+                {v.travelCta}
+                <svg
+                  aria-hidden="true"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M9 6l6 6-6 6"></path>
+                </svg>
+              </span>
+              <span style={{ opacity: v.travelOp }}>
+                <span style={{ display: "flex", alignItems: "center", flex: "none" }}>
+                  {(v.travelAway || []).map((f: any, idx0: number) => (
+                    <Fragment key={idx0}>
+                      <Artwork
+                        src={f.src}
+                        alt={f.name}
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          borderRadius: "50%",
+                          objectFit: "cover",
+                          display: "block",
+                          marginLeft: f.ml,
+                          boxShadow: "0 0 0 2px #1E1B2E",
+                        }}
+                      />
+                    </Fragment>
+                  ))}
+                </span>
+              </span>
             </span>
           </Link>
           <div

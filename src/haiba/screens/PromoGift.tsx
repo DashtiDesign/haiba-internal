@@ -430,7 +430,7 @@ export default function PromoGift() {
                         height: "13px",
                         borderRadius: "50%",
                         objectFit: "cover",
-                        objectPosition: "left",
+                        objectPosition: "center",
                         display: "block",
                         boxShadow: "0 0 0 2px #FFFFFF",
                       }}

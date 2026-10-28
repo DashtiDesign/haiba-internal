@@ -18,7 +18,7 @@ export function useVals() {
     { key: "Bahrain", name: "Bahrain", src: "/haiba/flags/bh.svg", pos: "center" },
     { key: "Saudi", name: "Saudi", src: "/haiba/flags/sa.svg", pos: "center" },
     { key: "Qatar", name: "Qatar", src: "/haiba/flags/qa.svg", pos: "center" },
-    { key: "Oman", name: "Oman", src: "/haiba/flags/om.svg", pos: "left" },
+    { key: "Oman", name: "Oman", src: "/haiba/flags/om.svg", pos: "center" },
   ];
   var LIVE = { Bahrain: true, Saudi: true, Qatar: false, Oman: false };
   var home =

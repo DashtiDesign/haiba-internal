@@ -112,7 +112,7 @@ export function useVals() {
     { key: "Bahrain", name: "Bahrain", src: "/haiba/flags/bh.svg", pos: "center" },
     { key: "Saudi", name: "Saudi", src: "/haiba/flags/sa.svg", pos: "center" },
     { key: "Qatar", name: "Qatar", src: "/haiba/flags/qa.svg", pos: "center" },
-    { key: "Oman", name: "Oman", src: "/haiba/flags/om.svg", pos: "left" },
+    { key: "Oman", name: "Oman", src: "/haiba/flags/om.svg", pos: "center" },
   ];
   var home =
     FL.filter(function (c) {
@@ -131,11 +131,8 @@ export function useVals() {
       " or " +
       awayNames[awayNames.length - 1] +
       "?",
-    travelRoute: [home].concat(away).map(function (c, i) {
-      return Object.assign({}, c, {
-        label: i === 0 ? "Home" : c.name,
-        labelInk: i === 0 ? "#C0F402" : "#FFFFFF",
-      });
+    travelAway: away.map(function (c, i) {
+      return Object.assign({}, c, { ml: i === 0 ? "0" : "-8px" });
     }),
     travelHasPill: tLocked || tUsed || tShown,
     travelPill: tLocked ? "Locked" : "Used",
@@ -146,7 +143,7 @@ export function useVals() {
         ? "Used on Airalo. You saved BHD 5.64."
         : tShown
           ? "Your Airalo code is ready to use."
-          : "5GB free for 7 days, so your Unipal deals work the moment you land.",
+          : "5GB free for 7 days, worth BHD 5+.",
     travelCta: tLocked
       ? "Unlocks after 3 months"
       : tUsed

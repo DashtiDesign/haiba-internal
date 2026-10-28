@@ -31,7 +31,7 @@ export default function Travel() {
             position: "relative",
             background: "linear-gradient(160deg, #6C3FFA 0%, #3E1BB8 100%)",
             color: "#FFFFFF",
-            padding: "14px 20px 120px 20px",
+            padding: "14px 20px 96px 20px",
             overflow: "hidden",
           }}
         >
@@ -104,8 +104,8 @@ export default function Travel() {
             className="hb-rise"
             style={{
               position: "relative",
-              margin: "26px 0 0 0",
-              fontSize: "32px",
+              margin: "16px 0 0 0",
+              fontSize: "28px",
               fontWeight: "800",
               letterSpacing: "-0.03em",
               lineHeight: "1.08",
@@ -118,16 +118,14 @@ export default function Travel() {
             className="hb-rise hb-d1"
             style={{
               position: "relative",
-              fontSize: "16px",
+              fontSize: "15px",
               fontWeight: "600",
               color: "#E4DBFF",
-              marginTop: "12px",
-              lineHeight: "1.45",
+              marginTop: "8px",
+              lineHeight: "1.4",
             }}
           >
-            {
-              "Unipal is in 4 countries. Wherever you land, your deals work there too. We give you the data to use them."
-            }
+            {"Unipal is in 4 countries. Your deals work in all of them, and the data is on us."}
           </div>
           <div className="hb-rise hb-d2" style={{ position: "relative" }}>
             <div
@@ -144,7 +142,7 @@ export default function Travel() {
                   position: "absolute",
                   left: "12.5%",
                   right: "12.5%",
-                  top: "19px",
+                  top: "16px",
                   borderTop: "2px dashed rgba(192,244,2,0.6)",
                 }}
               ></span>
@@ -164,8 +162,8 @@ export default function Travel() {
                       src={f.src}
                       alt={f.name}
                       style={{
-                        width: "40px",
-                        height: "40px",
+                        width: "34px",
+                        height: "34px",
                         borderRadius: "50%",
                         objectFit: "cover",
                         objectPosition: f.pos,
@@ -188,7 +186,7 @@ export default function Travel() {
               display: "flex",
               alignItems: "center",
               gap: "8px",
-              marginTop: "18px",
+              marginTop: "12px",
               fontSize: "13px",
               fontWeight: "700",
               color: "#E4DBFF",
@@ -202,7 +200,7 @@ export default function Travel() {
             />
           </div>
         </div>
-        <div style={{ position: "relative", marginTop: "-96px", padding: "0 16px 200px 16px" }}>
+        <div style={{ position: "relative", marginTop: "-76px", padding: "0 16px 200px 16px" }}>
           <div
             className="hb-rise hb-d2"
             style={{
@@ -210,7 +208,7 @@ export default function Travel() {
               background: "#1E1B2E",
               color: "#FFFFFF",
               borderRadius: "16px",
-              padding: "20px",
+              padding: "16px 18px",
               boxShadow: "0 18px 40px rgba(30,27,46,0.30)",
               overflow: "hidden",
             }}
@@ -252,12 +250,10 @@ export default function Travel() {
                 {v.status}
               </span>
             </div>
-            <div
-              style={{ display: "flex", alignItems: "baseline", gap: "10px", marginTop: "10px" }}
-            >
+            <div style={{ display: "flex", alignItems: "baseline", gap: "10px", marginTop: "6px" }}>
               <span
                 style={{
-                  fontSize: "64px",
+                  fontSize: "48px",
                   fontWeight: "800",
                   letterSpacing: "-0.04em",
                   lineHeight: "1",
@@ -268,13 +264,13 @@ export default function Travel() {
               </span>
               <span style={{ fontSize: "18px", fontWeight: "800" }}>{"for 7 days"}</span>
             </div>
-            <div style={{ display: "flex", gap: "8px", marginTop: "16px", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: "8px", marginTop: "12px", flexWrap: "wrap" }}>
               <span
                 style={{
                   background: "rgba(255,255,255,0.10)",
                   borderRadius: "999px",
-                  padding: "7px 12px",
-                  fontSize: "13.5px",
+                  padding: "6px 11px",
+                  fontSize: "13px",
                   fontWeight: "700",
                 }}
               >
@@ -284,8 +280,8 @@ export default function Travel() {
                 style={{
                   background: "rgba(255,255,255,0.10)",
                   borderRadius: "999px",
-                  padding: "7px 12px",
-                  fontSize: "13.5px",
+                  padding: "6px 11px",
+                  fontSize: "13px",
                   fontWeight: "700",
                 }}
               >
@@ -547,7 +543,7 @@ export default function Travel() {
               fontSize: "19px",
               fontWeight: "800",
               letterSpacing: "-0.02em",
-              margin: "26px 4px 10px 4px",
+              margin: "22px 4px 8px 4px",
             }}
           >
             {"Where you are covered"}
@@ -567,7 +563,7 @@ export default function Travel() {
                     display: "flex",
                     alignItems: "center",
                     gap: "12px",
-                    padding: "14px 0",
+                    padding: "10px 0",
                     borderBottom: c.rule,
                   }}
                 >
@@ -575,8 +571,8 @@ export default function Travel() {
                     src={c.src}
                     alt=""
                     style={{
-                      width: "40px",
-                      height: "40px",
+                      width: "34px",
+                      height: "34px",
                       flex: "none",
                       borderRadius: "50%",
                       objectFit: "cover",
@@ -612,10 +608,10 @@ export default function Travel() {
           </div>
           <div
             style={{
-              fontSize: "13.5px",
+              fontSize: "13px",
               fontWeight: "600",
               color: "#6B6880",
-              margin: "10px 4px 0 4px",
+              margin: "8px 4px 0 4px",
               lineHeight: "1.4",
             }}
           >
@@ -626,7 +622,7 @@ export default function Travel() {
               fontSize: "19px",
               fontWeight: "800",
               letterSpacing: "-0.02em",
-              margin: "26px 4px 10px 4px",
+              margin: "22px 4px 8px 4px",
             }}
           >
             {"Good to know"}
@@ -646,7 +642,7 @@ export default function Travel() {
                     display: "flex",
                     gap: "12px",
                     alignItems: "flex-start",
-                    padding: "12px 0",
+                    padding: "10px 0",
                     borderBottom: r.rule,
                   }}
                 >

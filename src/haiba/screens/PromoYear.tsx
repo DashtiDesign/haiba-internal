@@ -461,7 +461,7 @@ export default function PromoYear() {
                       height: "17px",
                       borderRadius: "50%",
                       objectFit: "cover",
-                      objectPosition: "left",
+                      objectPosition: "center",
                       display: "block",
                       boxShadow: "0 0 0 2px #3A3550",
                     }}
