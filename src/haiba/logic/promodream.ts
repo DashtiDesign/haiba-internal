@@ -31,9 +31,14 @@ export function useVals() {
       setState({ sheet: false });
     },
   };
+  var round5 = function (x) {
+    return "BHD " + Math.floor(x / 5) * 5 + "+";
+  };
   var name = props.name ?? "Sara";
+  var total = 30 + 12.0;
   return Object.assign(common, {
     hello: "Hi " + name + ",",
-    times: (36 / p).toFixed(1) + "x",
+    total: round5(total),
+    free: round5(total - p) + " free",
   });
 }

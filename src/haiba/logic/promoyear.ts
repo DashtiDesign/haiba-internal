@@ -31,13 +31,17 @@ export function useVals() {
       setState({ sheet: false });
     },
   };
+  var round5 = function (x) {
+    return "BHD " + Math.floor(x / 5) * 5 + "+";
+  };
   var V = Number(props.visits ?? "4");
   var name = props.name ?? "Sara";
+  var subs = 12.0;
   // Same rules as the membership board: 1 new shop a month, the rest at favourite shops.
   var favs = { 2: 1, 4: 2, 8: 3, 12: 4 }[V] || 2;
   var seen = {},
     pts = 500,
-    cum = 6,
+    cum = subs,
     payback = 0;
   for (var m = 0; m < 12; m++) {
     var monthPts = 0,
@@ -60,19 +64,18 @@ export function useVals() {
   var parts = [];
   if (drinks) parts.push(drinks + (drinks === 1 ? " free drink" : " free drinks"));
   if (ups) parts.push(ups + (ups === 1 ? " upsize" : " upsizes"));
-  var total = 30 + 6 + itemsVal;
+  var total = 30 + subs + itemsVal;
   return Object.assign(common, {
     hello: "Hi " + name + ",",
     basis: "Based on how you use Unipal: about " + V + " offers a month.",
     headPay: "Pay " + price + ".",
-    headGet: "Get " + bhd(total) + " back.",
-    total: bhd(total),
-    times: (total / p).toFixed(1) + "x your money",
+    headGet: "Get " + round5(total) + " back.",
+    total: round5(total),
+    free: round5(total - p) + " free",
     ptsLine: pts.toLocaleString("en-US") + " points",
     ptsItems: "Enough for " + (parts.join(" and ") || "your first reward"),
     ptsVal: bhd(itemsVal),
     costPct: Math.min(100, Math.round((p / total) * 100)) + "%",
-    extra: bhd(Math.max(0, total - p)) + " more than you pay",
     payback: payback
       ? "It pays for itself by month " + payback + "."
       : "Use it more and it pays for itself.",

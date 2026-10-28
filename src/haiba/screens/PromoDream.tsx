@@ -35,7 +35,7 @@ export default function PromoDream() {
             width: "380px",
             height: "380px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(192,244,2,0.22) 0%, rgba(192,244,2,0) 70%)",
+            background: "radial-gradient(circle, rgba(108,63,250,0.5) 0%, rgba(108,63,250,0) 70%)",
           }}
         ></span>
         <div style={{ position: "relative", padding: "14px 16px 210px 16px" }}>
@@ -99,9 +99,7 @@ export default function PromoDream() {
               lineHeight: "1.1",
             }}
           >
-            {"Something free every month."}
-            <br />
-            <span style={{ color: "#C0F402" }}>{"All year."}</span>
+            {"Something free every month. All year."}
           </h1>
           <div
             className="hb-rise hb-d1"
@@ -139,7 +137,7 @@ export default function PromoDream() {
                   fontWeight: "800",
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
-                  color: "#C0F402",
+                  color: "#B9B3CC",
                   padding: "8px 10px 6px 10px",
                 }}
               >
@@ -182,7 +180,7 @@ export default function PromoDream() {
                   fontWeight: "800",
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
-                  color: "#C0F402",
+                  color: "#B9B3CC",
                   padding: "8px 10px 6px 10px",
                 }}
               >
@@ -225,7 +223,7 @@ export default function PromoDream() {
                   fontWeight: "800",
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
-                  color: "#C0F402",
+                  color: "#B9B3CC",
                   padding: "8px 10px 6px 10px",
                 }}
               >
@@ -268,7 +266,7 @@ export default function PromoDream() {
                   fontWeight: "800",
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
-                  color: "#C0F402",
+                  color: "#B9B3CC",
                   padding: "8px 10px 6px 10px",
                 }}
               >
@@ -311,7 +309,7 @@ export default function PromoDream() {
                   fontWeight: "800",
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
-                  color: "#C0F402",
+                  color: "#B9B3CC",
                   padding: "8px 10px 6px 10px",
                 }}
               >
@@ -354,7 +352,7 @@ export default function PromoDream() {
                   fontWeight: "800",
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
-                  color: "#C0F402",
+                  color: "#B9B3CC",
                   padding: "8px 10px 6px 10px",
                 }}
               >
@@ -418,8 +416,8 @@ export default function PromoDream() {
                   width: "44px",
                   height: "44px",
                   borderRadius: "14px",
-                  background: "#E4DBFF",
-                  color: "#4F25D6",
+                  background: "#3A3550",
+                  color: "#FFFFFF",
                   fontSize: "13px",
                   fontWeight: "800",
                   display: "flex",
@@ -427,15 +425,51 @@ export default function PromoDream() {
                   justifyContent: "center",
                 }}
               >
-                {"App"}
+                {"Music"}
               </span>
-              <span style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-                <span style={{ fontSize: "16px", fontWeight: "700" }}>{"Free app, 3 months"}</span>
+              <span style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}>
+                <span style={{ fontSize: "16px", fontWeight: "700" }}>
+                  {"Spotify Premium Student"}
+                </span>
                 <span style={{ fontSize: "13.5px", fontWeight: "500", color: "#B9B3CC" }}>
-                  {"Music or streaming, free when you join"}
+                  {"3 months free when you join"}
                 </span>
               </span>
-              <span style={{ fontSize: "17px", fontWeight: "800" }}>{"BHD 6.00"}</span>
+              <span style={{ fontSize: "17px", fontWeight: "800" }}>{"BHD 3.00"}</span>
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                gap: "12px",
+                alignItems: "center",
+                padding: "14px 0",
+                borderBottom: "1px solid #3A3550",
+              }}
+            >
+              <span
+                style={{
+                  width: "44px",
+                  height: "44px",
+                  borderRadius: "14px",
+                  background: "#3A3550",
+                  color: "#FFFFFF",
+                  fontSize: "13px",
+                  fontWeight: "800",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {"AI"}
+              </span>
+              <span style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}>
+                <span style={{ fontSize: "16px", fontWeight: "700" }}>{"ChatGPT Go"}</span>
+                <span style={{ fontSize: "13.5px", fontWeight: "500", color: "#B9B3CC" }}>
+                  {"3 months free when you join"}
+                </span>
+              </span>
+              <span style={{ fontSize: "17px", fontWeight: "800" }}>{"BHD 9.00"}</span>
             </div>
             <div
               style={{
@@ -451,7 +485,7 @@ export default function PromoDream() {
                   width: "44px",
                   height: "44px",
                   borderRadius: "14px",
-                  background: "#6C3FFA",
+                  background: "#3A3550",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -469,9 +503,7 @@ export default function PromoDream() {
                   {"A free treat before you even go out"}
                 </span>
               </span>
-              <span style={{ fontSize: "15px", fontWeight: "800", color: "#C0F402" }}>
-                {"Free"}
-              </span>
+              <span style={{ fontSize: "15px", fontWeight: "800" }}>{"Free"}</span>
             </div>
           </div>
           <div
@@ -479,48 +511,19 @@ export default function PromoDream() {
             style={{
               position: "relative",
               marginTop: "16px",
-              background: "#C0F402",
-              color: "#1F2600",
+              background: "#2B2740",
               borderRadius: "16px",
-              padding: "18px 20px",
+              padding: "20px",
             }}
           >
-            <div
-              style={{
-                fontSize: "13px",
-                fontWeight: "800",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-              }}
-            >
-              {"Your year is worth"}
-            </div>
-            <div
-              style={{
-                fontSize: "44px",
-                fontWeight: "800",
-                letterSpacing: "-0.04em",
-                lineHeight: "1",
-                marginTop: "8px",
-              }}
-            >
-              {"BHD 36.00+"}
-            </div>
-            <div style={{ fontSize: "16px", fontWeight: "600", marginTop: "8px" }}>
-              {"You pay only "}
-              <span style={{ fontWeight: "800" }}>{v.price}</span>
-              {". That is "}
-              {v.times}
-              {" your money."}
-            </div>
             <span
               className="hb-pop hb-d3"
               style={{
                 position: "absolute",
                 right: "14px",
                 top: "-14px",
-                background: "#1E1B2E",
-                color: "#C0F402",
+                background: "#6C3FFA",
+                color: "#FFFFFF",
                 fontSize: "15px",
                 fontWeight: "800",
                 borderRadius: "999px",
@@ -529,8 +532,38 @@ export default function PromoDream() {
                 boxShadow: "0 8px 18px rgba(0,0,0,0.3)",
               }}
             >
-              {"A steal"}
+              {v.free}
             </span>
+            <div
+              style={{
+                fontSize: "13px",
+                fontWeight: "800",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "#B9B3CC",
+              }}
+            >
+              {"Your year is worth"}
+            </div>
+            <div
+              style={{
+                fontSize: "52px",
+                fontWeight: "800",
+                letterSpacing: "-0.04em",
+                lineHeight: "1",
+                marginTop: "10px",
+                color: "#C0F402",
+              }}
+            >
+              {v.total}
+            </div>
+            <div
+              style={{ fontSize: "16px", fontWeight: "600", color: "#E8E4F4", marginTop: "10px" }}
+            >
+              {"You pay only "}
+              <span style={{ color: "#FFFFFF", fontWeight: "800" }}>{v.price}</span>
+              {". The rest is free on top."}
+            </div>
           </div>
         </div>
         <div className="hb-fixed-bottom hb-cta-dock">

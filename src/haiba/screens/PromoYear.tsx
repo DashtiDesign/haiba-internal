@@ -101,7 +101,7 @@ export default function PromoYear() {
           >
             {v.headPay}
             <br />
-            <span style={{ color: "#C0F402" }}>{v.headGet}</span>
+            {v.headGet}
           </h1>
           <div
             className="hb-rise hb-d1"
@@ -118,55 +118,53 @@ export default function PromoYear() {
           <div
             className="hb-rise hb-d2"
             style={{
+              position: "relative",
               marginTop: "24px",
               background: "#2B2740",
               borderRadius: "16px",
               padding: "20px",
             }}
           >
-            <div style={{ position: "relative" }}>
-              <div
-                style={{
-                  fontSize: "13px",
-                  fontWeight: "800",
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  color: "#C0F402",
-                }}
-              >
-                {"Your year is worth"}
-              </div>
-              <span
-                className="hb-pop hb-d3"
-                style={{
-                  position: "absolute",
-                  right: "-4px",
-                  top: "-6px",
-                  background: "#C0F402",
-                  color: "#1F2600",
-                  fontSize: "15px",
-                  fontWeight: "800",
-                  borderRadius: "999px",
-                  padding: "7px 12px",
-                  transform: "rotate(6deg)",
-                  boxShadow: "0 8px 18px rgba(0,0,0,0.3)",
-                }}
-              >
-                {v.times}
-              </span>
+            <span
+              className="hb-pop hb-d3"
+              style={{
+                position: "absolute",
+                right: "14px",
+                top: "-14px",
+                background: "#6C3FFA",
+                color: "#FFFFFF",
+                fontSize: "15px",
+                fontWeight: "800",
+                borderRadius: "999px",
+                padding: "7px 12px",
+                transform: "rotate(6deg)",
+                boxShadow: "0 8px 18px rgba(0,0,0,0.3)",
+              }}
+            >
+              {v.free}
+            </span>
+            <div
+              style={{
+                fontSize: "13px",
+                fontWeight: "800",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "#B9B3CC",
+              }}
+            >
+              {"Your year is worth"}
             </div>
-            <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginTop: "10px" }}>
-              <span
-                style={{
-                  fontSize: "50px",
-                  fontWeight: "800",
-                  letterSpacing: "-0.04em",
-                  lineHeight: "1",
-                  color: "#C0F402",
-                }}
-              >
-                {v.total}
-              </span>
+            <div
+              style={{
+                fontSize: "52px",
+                fontWeight: "800",
+                letterSpacing: "-0.04em",
+                lineHeight: "1",
+                marginTop: "10px",
+                color: "#C0F402",
+              }}
+            >
+              {v.total}
             </div>
             <div
               style={{ fontSize: "16px", fontWeight: "600", color: "#E8E4F4", marginTop: "10px" }}
@@ -191,8 +189,8 @@ export default function PromoYear() {
                     width: "44px",
                     height: "44px",
                     borderRadius: "14px",
-                    background: "#C0F402",
-                    color: "#1F2600",
+                    background: "#6C3FFA",
+                    color: "#FFFFFF",
                     fontSize: "13px",
                     fontWeight: "800",
                     display: "flex",
@@ -225,8 +223,8 @@ export default function PromoYear() {
                     width: "44px",
                     height: "44px",
                     borderRadius: "14px",
-                    background: "#E4DBFF",
-                    color: "#4F25D6",
+                    background: "#3A3550",
+                    color: "#FFFFFF",
                     fontSize: "13px",
                     fontWeight: "800",
                     display: "flex",
@@ -234,17 +232,55 @@ export default function PromoYear() {
                     justifyContent: "center",
                   }}
                 >
-                  {"App"}
+                  {"Music"}
                 </span>
-                <span style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                <span
+                  style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}
+                >
                   <span style={{ fontSize: "16px", fontWeight: "700" }}>
-                    {"Free app, 3 months"}
+                    {"Spotify Premium Student"}
                   </span>
                   <span style={{ fontSize: "13.5px", fontWeight: "500", color: "#B9B3CC" }}>
-                    {"Music or streaming, free when you join"}
+                    {"3 months free when you join"}
                   </span>
                 </span>
-                <span style={{ fontSize: "17px", fontWeight: "800" }}>{"BHD 6.00"}</span>
+                <span style={{ fontSize: "17px", fontWeight: "800" }}>{"BHD 3.00"}</span>
+              </div>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                  gap: "12px",
+                  alignItems: "center",
+                  padding: "14px 0",
+                  borderBottom: "1px solid #3A3550",
+                }}
+              >
+                <span
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "14px",
+                    background: "#3A3550",
+                    color: "#FFFFFF",
+                    fontSize: "13px",
+                    fontWeight: "800",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {"AI"}
+                </span>
+                <span
+                  style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}
+                >
+                  <span style={{ fontSize: "16px", fontWeight: "700" }}>{"ChatGPT Go"}</span>
+                  <span style={{ fontSize: "13.5px", fontWeight: "500", color: "#B9B3CC" }}>
+                    {"3 months free when you join"}
+                  </span>
+                </span>
+                <span style={{ fontSize: "17px", fontWeight: "800" }}>{"BHD 9.00"}</span>
               </div>
               <div
                 style={{
@@ -260,7 +296,7 @@ export default function PromoYear() {
                     width: "44px",
                     height: "44px",
                     borderRadius: "14px",
-                    background: "#6C3FFA",
+                    background: "#3A3550",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -305,7 +341,7 @@ export default function PromoYear() {
                 {"You pay "}
                 {v.price}
               </span>
-              <span style={{ color: "#C0F402" }}>
+              <span style={{ color: "#FFFFFF" }}>
                 {"You get "}
                 {v.total}
               </span>
@@ -317,7 +353,7 @@ export default function PromoYear() {
                 marginTop: "10px",
                 borderRadius: "999px",
                 overflow: "hidden",
-                background: "#C0F402",
+                background: "#6C3FFA",
               }}
             >
               <span
@@ -328,23 +364,9 @@ export default function PromoYear() {
                   top: "0",
                   bottom: "0",
                   width: v.costPct,
-                  background: "#6C3FFA",
+                  background: "#4A4560",
                 }}
               ></span>
-            </div>
-            <div
-              style={{
-                marginTop: "14px",
-                display: "inline-flex",
-                background: "#C0F402",
-                color: "#1F2600",
-                fontSize: "15px",
-                fontWeight: "800",
-                borderRadius: "999px",
-                padding: "8px 14px",
-              }}
-            >
-              {v.extra}
             </div>
             <div
               style={{ fontSize: "14px", fontWeight: "600", color: "#CFC9E0", marginTop: "10px" }}
