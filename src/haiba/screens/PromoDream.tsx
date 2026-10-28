@@ -19,7 +19,7 @@ export default function PromoDream() {
           margin: "0 auto",
           minHeight: "100vh",
           boxSizing: "border-box",
-          background: "#1E1B2E",
+          background: "linear-gradient(180deg, #6C3FFA 0%, #4F25D6 55%, #3E1BB8 100%)",
           fontFamily: "Figtree, system-ui, sans-serif",
           color: "#FFFFFF",
           position: "relative",
@@ -30,12 +30,12 @@ export default function PromoDream() {
           aria-hidden="true"
           style={{
             position: "absolute",
-            right: "-140px",
-            top: "-60px",
-            width: "380px",
-            height: "380px",
+            right: "-90px",
+            top: "40px",
+            width: "300px",
+            height: "300px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(108,63,250,0.5) 0%, rgba(108,63,250,0) 70%)",
+            border: "2px dashed rgba(192,244,2,0.35)",
           }}
         ></span>
         <div style={{ position: "relative", padding: "14px 16px 210px 16px" }}>
@@ -47,8 +47,8 @@ export default function PromoDream() {
                 width: "44px",
                 height: "44px",
                 borderRadius: "50%",
-                border: "1px solid rgba(255,255,255,0.18)",
-                background: "rgba(255,255,255,0.08)",
+                border: "1px solid rgba(255,255,255,0.25)",
+                background: "rgba(255,255,255,0.12)",
                 color: "#FFFFFF",
                 display: "flex",
                 alignItems: "center",
@@ -81,10 +81,10 @@ export default function PromoDream() {
           <div
             className="hb-rise"
             style={{
-              margin: "30px 4px 0 4px",
+              margin: "28px 4px 0 4px",
               fontSize: "16px",
               fontWeight: "600",
-              color: "#CFC9E0",
+              color: "#E4DBFF",
             }}
           >
             {v.hello}
@@ -108,553 +108,570 @@ export default function PromoDream() {
               margin: "10px 4px 0 4px",
               fontSize: "16px",
               fontWeight: "600",
-              color: "#E8E4F4",
+              color: "#FFFFFF",
               lineHeight: "1.45",
             }}
           >
-            {"12 free gifts. 2 free subscriptions. 1 small price."}
+            {"Here is your Haiba year."}
           </div>
-          <div
-            className="hb-stagger"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-              gap: "8px",
-              marginTop: "22px",
-            }}
-          >
-            <span
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                borderRadius: "16px",
-                overflow: "hidden",
-                background: "#2B2740",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: "#B9B3CC",
-                  padding: "8px 10px 6px 10px",
-                }}
-              >
-                {"Dec"}
-              </span>
-              <Artwork
-                src="/haiba/brands/vox.webp"
-                alt="VOX Cinemas"
-                style={{
-                  width: "100%",
-                  height: "64px",
-                  objectFit: "contain",
-                  display: "block",
-                  background: "#FFFFFF",
-                }}
-              />
-              <span
-                style={{
-                  fontSize: "13px",
-                  fontWeight: "700",
-                  padding: "8px 10px 10px 10px",
-                  lineHeight: "1.25",
-                }}
-              >
-                {"Cinema ticket"}
-              </span>
-            </span>
-            <span
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                borderRadius: "16px",
-                overflow: "hidden",
-                background: "#2B2740",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: "#B9B3CC",
-                  padding: "8px 10px 6px 10px",
-                }}
-              >
-                {"Jan"}
-              </span>
-              <Artwork
-                src="/haiba/brands/coffee-bean.webp"
-                alt="The Coffee Bean"
-                style={{
-                  width: "100%",
-                  height: "64px",
-                  objectFit: "contain",
-                  display: "block",
-                  background: "#FFFFFF",
-                }}
-              />
-              <span
-                style={{
-                  fontSize: "13px",
-                  fontWeight: "700",
-                  padding: "8px 10px 10px 10px",
-                  lineHeight: "1.25",
-                }}
-              >
-                {"Any drink"}
-              </span>
-            </span>
-            <span
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                borderRadius: "16px",
-                overflow: "hidden",
-                background: "#2B2740",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: "#B9B3CC",
-                  padding: "8px 10px 6px 10px",
-                }}
-              >
-                {"Feb"}
-              </span>
-              <Artwork
-                src="/haiba/brands/wingman.webp"
-                alt="Wingman"
-                style={{
-                  width: "100%",
-                  height: "64px",
-                  objectFit: "contain",
-                  display: "block",
-                  background: "#F9F9F9",
-                }}
-              />
-              <span
-                style={{
-                  fontSize: "13px",
-                  fontWeight: "700",
-                  padding: "8px 10px 10px 10px",
-                  lineHeight: "1.25",
-                }}
-              >
-                {"Student box meal"}
-              </span>
-            </span>
-            <span
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                borderRadius: "16px",
-                overflow: "hidden",
-                background: "#2B2740",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: "#B9B3CC",
-                  padding: "8px 10px 6px 10px",
-                }}
-              >
-                {"Mar"}
-              </span>
-              <Artwork
-                src="/haiba/brands/grip.webp"
-                alt="Grip"
-                style={{
-                  width: "100%",
-                  height: "64px",
-                  objectFit: "contain",
-                  display: "block",
-                  background: "#000000",
-                }}
-              />
-              <span
-                style={{
-                  fontSize: "13px",
-                  fontWeight: "700",
-                  padding: "8px 10px 10px 10px",
-                  lineHeight: "1.25",
-                }}
-              >
-                {"Gym day pass"}
-              </span>
-            </span>
-            <span
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                borderRadius: "16px",
-                overflow: "hidden",
-                background: "#2B2740",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: "#B9B3CC",
-                  padding: "8px 10px 6px 10px",
-                }}
-              >
-                {"Apr"}
-              </span>
-              <Artwork
-                src="/haiba/brands/alkuwaiti.webp"
-                alt="Alkuwaiti"
-                style={{
-                  width: "100%",
-                  height: "64px",
-                  objectFit: "contain",
-                  display: "block",
-                  background: "#FFFFFF",
-                }}
-              />
-              <span
-                style={{
-                  fontSize: "13px",
-                  fontWeight: "700",
-                  padding: "8px 10px 10px 10px",
-                  lineHeight: "1.25",
-                }}
-              >
-                {"Car wash"}
-              </span>
-            </span>
-            <span
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                borderRadius: "16px",
-                overflow: "hidden",
-                background: "#2B2740",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: "#B9B3CC",
-                  padding: "8px 10px 6px 10px",
-                }}
-              >
-                {"May"}
-              </span>
-              <Artwork
-                src="/haiba/brands/albayan.webp"
-                alt="Albayan"
-                style={{
-                  width: "100%",
-                  height: "64px",
-                  objectFit: "contain",
-                  display: "block",
-                  background: "#FFFFFF",
-                }}
-              />
-              <span
-                style={{
-                  fontSize: "13px",
-                  fontWeight: "700",
-                  padding: "8px 10px 10px 10px",
-                  lineHeight: "1.25",
-                }}
-              >
-                {"Perfume 100ml"}
-              </span>
-            </span>
-          </div>
-          <div
-            style={{
-              textAlign: "center",
-              fontSize: "14px",
-              fontWeight: "700",
-              color: "#B9B3CC",
-              marginTop: "12px",
-            }}
-          >
-            {"Plus 6 more. You pick."}
-          </div>
-          <div
-            className="hb-rise hb-d2"
-            style={{
-              marginTop: "18px",
-              background: "#2B2740",
-              borderRadius: "16px",
-              padding: "4px 18px",
-            }}
-          >
+          <div className="hb-stagger" style={{ marginTop: "14px" }}>
             <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "44px minmax(0, 1fr) auto",
-                gap: "12px",
-                alignItems: "center",
-                padding: "14px 0",
-                borderBottom: "1px solid #3A3550",
-              }}
+              style={{ display: "grid", gridTemplateColumns: "44px minmax(0, 1fr)", gap: "12px" }}
             >
               <span
                 style={{
-                  width: "44px",
-                  height: "44px",
-                  borderRadius: "14px",
-                  overflow: "hidden",
-                  display: "block",
-                  boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                  position: "relative",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
                 }}
               >
-                <Artwork
-                  src="/haiba/brands/spotify.webp"
-                  alt="Spotify Premium Student"
-                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                />
-              </span>
-              <span style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}>
-                <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
-                  {"Spotify Premium Student"}
+                <span
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: "800",
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    color: "#E4DBFF",
+                    paddingTop: "18px",
+                  }}
+                >
+                  {"Day 1"}
                 </span>
                 <span
                   style={{
-                    fontSize: "13.5px",
-                    fontWeight: "500",
-                    color: "#B9B3CC",
-                    lineHeight: "1.35",
+                    width: "10px",
+                    height: "10px",
+                    borderRadius: "50%",
+                    background: "#C0F402",
+                    marginTop: "6px",
                   }}
-                >
-                  {"3 months free"}
-                </span>
+                ></span>
+                <span
+                  style={{
+                    flex: "1",
+                    width: "2px",
+                    background: "rgba(255,255,255,0.25)",
+                    marginTop: "4px",
+                  }}
+                ></span>
               </span>
               <span
                 style={{
-                  fontSize: "16px",
-                  fontWeight: "800",
-                  textAlign: "right",
-                  color: "#FFFFFF",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  background: "#FFFFFF",
+                  color: "#1E1B2E",
+                  borderRadius: "16px",
+                  padding: "12px 14px",
+                  marginBottom: "8px",
                 }}
               >
-                {"BHD 3.00"}
+                <span style={{ display: "flex", gap: "4px" }}>
+                  <Artwork
+                    src="/haiba/brands/spotify.webp"
+                    alt="Spotify"
+                    style={{
+                      width: "34px",
+                      height: "34px",
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                      display: "block",
+                      boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                    }}
+                  />
+                  <Artwork
+                    src="/haiba/brands/chatgpt.webp"
+                    alt="ChatGPT"
+                    style={{
+                      width: "34px",
+                      height: "34px",
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                      display: "block",
+                      boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                    }}
+                  />
+                </span>
+                <span style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
+                  <span style={{ fontSize: "15.5px", fontWeight: "800" }}>
+                    {"Spotify and ChatGPT, free"}
+                  </span>
+                  <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                    {"3 months on us"}
+                  </span>
+                </span>
               </span>
             </div>
             <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "44px minmax(0, 1fr) auto",
-                gap: "12px",
-                alignItems: "center",
-                padding: "14px 0",
-                borderBottom: "0",
-              }}
+              style={{ display: "grid", gridTemplateColumns: "44px minmax(0, 1fr)", gap: "12px" }}
             >
               <span
                 style={{
-                  width: "44px",
-                  height: "44px",
-                  borderRadius: "14px",
-                  overflow: "hidden",
-                  display: "block",
-                  boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                  position: "relative",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
                 }}
               >
-                <Artwork
-                  src="/haiba/brands/chatgpt.webp"
-                  alt="ChatGPT Go"
-                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                />
-              </span>
-              <span style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}>
-                <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
-                  {"ChatGPT Go"}
+                <span
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: "800",
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    color: "#E4DBFF",
+                    paddingTop: "18px",
+                  }}
+                >
+                  {"Dec"}
                 </span>
                 <span
                   style={{
-                    fontSize: "13.5px",
-                    fontWeight: "500",
-                    color: "#B9B3CC",
-                    lineHeight: "1.35",
+                    width: "10px",
+                    height: "10px",
+                    borderRadius: "50%",
+                    background: "#C0F402",
+                    marginTop: "6px",
                   }}
-                >
-                  {"3 months free"}
-                </span>
+                ></span>
+                <span
+                  style={{
+                    flex: "1",
+                    width: "2px",
+                    background: "rgba(255,255,255,0.25)",
+                    marginTop: "4px",
+                  }}
+                ></span>
               </span>
               <span
                 style={{
-                  fontSize: "16px",
-                  fontWeight: "800",
-                  textAlign: "right",
-                  color: "#FFFFFF",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  background: "#FFFFFF",
+                  color: "#1E1B2E",
+                  borderRadius: "16px",
+                  padding: "12px 14px",
+                  marginBottom: "8px",
                 }}
               >
-                {"BHD 9.00"}
+                <span style={{ display: "flex", gap: "4px" }}>
+                  <Artwork
+                    src="/haiba/brands/vox.webp"
+                    alt=""
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "10px",
+                      objectFit: "cover",
+                      boxShadow: "0 0 0 1px #ECE8F5",
+                    }}
+                  />
+                </span>
+                <span style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
+                  <span style={{ fontSize: "15.5px", fontWeight: "800" }}>{"Cinema ticket"}</span>
+                  <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                    {"VOX Cinemas"}
+                  </span>
+                </span>
+              </span>
+            </div>
+            <div
+              style={{ display: "grid", gridTemplateColumns: "44px minmax(0, 1fr)", gap: "12px" }}
+            >
+              <span
+                style={{
+                  position: "relative",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: "800",
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    color: "#E4DBFF",
+                    paddingTop: "18px",
+                  }}
+                >
+                  {"Jan"}
+                </span>
+                <span
+                  style={{
+                    width: "10px",
+                    height: "10px",
+                    borderRadius: "50%",
+                    background: "#C0F402",
+                    marginTop: "6px",
+                  }}
+                ></span>
+                <span
+                  style={{
+                    flex: "1",
+                    width: "2px",
+                    background: "rgba(255,255,255,0.25)",
+                    marginTop: "4px",
+                  }}
+                ></span>
+              </span>
+              <span
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  background: "#FFFFFF",
+                  color: "#1E1B2E",
+                  borderRadius: "16px",
+                  padding: "12px 14px",
+                  marginBottom: "8px",
+                }}
+              >
+                <span style={{ display: "flex", gap: "4px" }}>
+                  <Artwork
+                    src="/haiba/brands/coffee-bean.webp"
+                    alt=""
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "10px",
+                      objectFit: "cover",
+                      boxShadow: "0 0 0 1px #ECE8F5",
+                    }}
+                  />
+                </span>
+                <span style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
+                  <span style={{ fontSize: "15.5px", fontWeight: "800" }}>{"Any drink"}</span>
+                  <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                    {"The Coffee Bean"}
+                  </span>
+                </span>
+              </span>
+            </div>
+            <div
+              style={{ display: "grid", gridTemplateColumns: "44px minmax(0, 1fr)", gap: "12px" }}
+            >
+              <span
+                style={{
+                  position: "relative",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: "800",
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    color: "#E4DBFF",
+                    paddingTop: "18px",
+                  }}
+                >
+                  {"Feb"}
+                </span>
+                <span
+                  style={{
+                    width: "10px",
+                    height: "10px",
+                    borderRadius: "50%",
+                    background: "#C0F402",
+                    marginTop: "6px",
+                  }}
+                ></span>
+                <span
+                  style={{
+                    flex: "1",
+                    width: "2px",
+                    background: "rgba(255,255,255,0.25)",
+                    marginTop: "4px",
+                  }}
+                ></span>
+              </span>
+              <span
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  background: "#FFFFFF",
+                  color: "#1E1B2E",
+                  borderRadius: "16px",
+                  padding: "12px 14px",
+                  marginBottom: "8px",
+                }}
+              >
+                <span style={{ display: "flex", gap: "4px" }}>
+                  <Artwork
+                    src="/haiba/brands/wingman.webp"
+                    alt=""
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "10px",
+                      objectFit: "cover",
+                      boxShadow: "0 0 0 1px #ECE8F5",
+                    }}
+                  />
+                </span>
+                <span style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
+                  <span style={{ fontSize: "15.5px", fontWeight: "800" }}>
+                    {"Student box meal"}
+                  </span>
+                  <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                    {"Wingman"}
+                  </span>
+                </span>
+              </span>
+            </div>
+            <div
+              style={{ display: "grid", gridTemplateColumns: "44px minmax(0, 1fr)", gap: "12px" }}
+            >
+              <span
+                style={{
+                  position: "relative",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: "800",
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    color: "#E4DBFF",
+                    paddingTop: "18px",
+                  }}
+                >
+                  {"Mar"}
+                </span>
+                <span
+                  style={{
+                    width: "10px",
+                    height: "10px",
+                    borderRadius: "50%",
+                    background: "#C0F402",
+                    marginTop: "6px",
+                  }}
+                ></span>
+                <span
+                  style={{
+                    flex: "1",
+                    width: "2px",
+                    background: "rgba(255,255,255,0.25)",
+                    marginTop: "4px",
+                  }}
+                ></span>
+              </span>
+              <span
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  background: "#FFFFFF",
+                  color: "#1E1B2E",
+                  borderRadius: "16px",
+                  padding: "12px 14px",
+                  marginBottom: "8px",
+                }}
+              >
+                <span style={{ display: "flex", gap: "4px" }}>
+                  <Artwork
+                    src="/haiba/brands/grip.webp"
+                    alt=""
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "10px",
+                      objectFit: "cover",
+                      boxShadow: "0 0 0 1px #ECE8F5",
+                    }}
+                  />
+                </span>
+                <span style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
+                  <span style={{ fontSize: "15.5px", fontWeight: "800" }}>{"Gym day pass"}</span>
+                  <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                    {"Grip"}
+                  </span>
+                </span>
+              </span>
+            </div>
+            <div
+              style={{ display: "grid", gridTemplateColumns: "44px minmax(0, 1fr)", gap: "12px" }}
+            >
+              <span
+                style={{
+                  position: "relative",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: "800",
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    color: "#E4DBFF",
+                    paddingTop: "18px",
+                  }}
+                >
+                  {"Apr"}
+                </span>
+                <span
+                  style={{
+                    width: "10px",
+                    height: "10px",
+                    borderRadius: "50%",
+                    background: "#C0F402",
+                    marginTop: "6px",
+                  }}
+                ></span>
+                <span
+                  style={{
+                    flex: "1",
+                    width: "2px",
+                    background: "rgba(255,255,255,0.25)",
+                    marginTop: "4px",
+                  }}
+                ></span>
+              </span>
+              <span
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  background: "#FFFFFF",
+                  color: "#1E1B2E",
+                  borderRadius: "16px",
+                  padding: "12px 14px",
+                  marginBottom: "8px",
+                }}
+              >
+                <span style={{ display: "flex", gap: "4px" }}>
+                  <Artwork
+                    src="/haiba/brands/alkuwaiti.webp"
+                    alt=""
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "10px",
+                      objectFit: "cover",
+                      boxShadow: "0 0 0 1px #ECE8F5",
+                    }}
+                  />
+                </span>
+                <span style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
+                  <span style={{ fontSize: "15.5px", fontWeight: "800" }}>{"Car wash"}</span>
+                  <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                    {"Alkuwaiti"}
+                  </span>
+                </span>
+              </span>
+            </div>
+            <div
+              style={{ display: "grid", gridTemplateColumns: "44px minmax(0, 1fr)", gap: "12px" }}
+            >
+              <span
+                style={{
+                  position: "relative",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: "800",
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    color: "#E4DBFF",
+                    paddingTop: "18px",
+                  }}
+                >
+                  {"May"}
+                </span>
+                <span
+                  style={{
+                    width: "10px",
+                    height: "10px",
+                    borderRadius: "50%",
+                    background: "#C0F402",
+                    marginTop: "6px",
+                  }}
+                ></span>
+              </span>
+              <span
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  background: "#FFFFFF",
+                  color: "#1E1B2E",
+                  borderRadius: "16px",
+                  padding: "12px 14px",
+                  marginBottom: "8px",
+                }}
+              >
+                <span style={{ display: "flex", gap: "4px" }}>
+                  <Artwork
+                    src="/haiba/brands/albayan.webp"
+                    alt=""
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "10px",
+                      objectFit: "cover",
+                      boxShadow: "0 0 0 1px #ECE8F5",
+                    }}
+                  />
+                </span>
+                <span style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
+                  <span style={{ fontSize: "15.5px", fontWeight: "800" }}>{"Perfume 100ml"}</span>
+                  <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                    {"Albayan"}
+                  </span>
+                </span>
               </span>
             </div>
           </div>
           <div
-            className="hb-rise hb-d2"
-            style={{
-              marginTop: "20px",
-              background: "#2B2740",
-              borderRadius: "16px",
-              padding: "16px 18px 14px 18px",
-              boxShadow: "none",
-            }}
+            style={{ paddingLeft: "56px", fontSize: "14px", fontWeight: "700", color: "#E4DBFF" }}
           >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "baseline",
-                gap: "8px",
-                color: "#FFFFFF",
-                fontSize: "16px",
-                fontWeight: "700",
-              }}
-            >
-              {"I use Unipal "}
-              <span
-                className={v.bump}
-                style={{ fontSize: "30px", fontWeight: "800", letterSpacing: "-0.02em" }}
-              >
-                {v.visits}
-              </span>{" "}
-              {v.times}
-              {" a month"}
-            </div>
-            <input
-              type="range"
-              min="1"
-              max="12"
-              step="1"
-              value={v.visits}
-              onInput={v.onVisits}
-              onChange={v.onVisits}
-              aria-label="How many times you use Unipal a month"
-              className="hb-range"
-              style={{ marginTop: "14px", background: v.rangeBg }}
-            />
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                fontSize: "12.5px",
-                fontWeight: "700",
-                color: "#B9B3CC",
-                marginTop: "8px",
-              }}
-            >
-              <span>{"1"}</span>
-              <span>{"Drag to see your year"}</span>
-              <span>{"12"}</span>
-            </div>
+            {"And a new gift every month after. You pick."}
           </div>
           <div
             style={{
-              marginTop: "14px",
-              border: "1.5px dashed rgba(192,244,2,0.55)",
-              background: "rgba(192,244,2,0.06)",
+              marginTop: "16px",
+              border: "1.5px dashed rgba(192,244,2,0.7)",
               borderRadius: "16px",
               padding: "14px 16px",
               display: "flex",
               alignItems: "center",
-              gap: "14px",
+              gap: "12px",
+              background: "rgba(30,27,46,0.25)",
             }}
           >
-            <span style={{ position: "relative", width: "44px", height: "44px", flex: "none" }}>
-              <Artwork
-                src="/haiba/coins/coin-34.webp"
-                alt=""
-                style={{ width: "44px", height: "44px", objectFit: "contain", display: "block" }}
-              />
-              <span
-                style={{
-                  position: "absolute",
-                  right: "-6px",
-                  top: "-6px",
-                  width: "22px",
-                  height: "22px",
-                  borderRadius: "50%",
-                  background: "#C0F402",
-                  color: "#1F2600",
-                  fontSize: "16px",
-                  fontWeight: "800",
-                  lineHeight: "1",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  boxShadow: "0 0 0 2px #1E1B2E",
-                }}
-              >
-                {"+"}
+            <Artwork
+              src="/haiba/coins/coin-34.webp"
+              alt=""
+              style={{ width: "40px", height: "40px", objectFit: "contain", flex: "none" }}
+            />
+            <span style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+              <span style={{ fontSize: "16px", fontWeight: "800" }}>
+                {"+ Bonus points every visit"}
               </span>
-            </span>
-            <span
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "3px",
-                minWidth: "0",
-                flex: "1",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  color: "#C0F402",
-                }}
-              >
-                {"The cherry on top"}
+              <span style={{ fontSize: "13.5px", fontWeight: "500", color: "#E4DBFF" }}>
+                {"The more you go, the more free stuff."}
               </span>
-              <span
-                style={{
-                  fontSize: "17px",
-                  fontWeight: "800",
-                  lineHeight: "1.25",
-                  color: "#FFFFFF",
-                }}
-              >
-                {v.ptsTitle}
-              </span>
-              <span
-                style={{
-                  fontSize: "13.5px",
-                  fontWeight: "500",
-                  color: "#B9B3CC",
-                  lineHeight: "1.4",
-                }}
-              >
-                {v.ptsSub}
-              </span>
-            </span>
-            <span
-              className={v.bump}
-              style={{
-                fontSize: "17px",
-                fontWeight: "800",
-                color: "#C0F402",
-                whiteSpace: "nowrap",
-              }}
-            >
-              {v.ptsVal}
             </span>
           </div>
           <div
@@ -662,7 +679,7 @@ export default function PromoDream() {
             style={{
               position: "relative",
               marginTop: "16px",
-              background: "#2B2740",
+              background: "#1E1B2E",
               borderRadius: "16px",
               padding: "20px",
             }}
@@ -694,7 +711,7 @@ export default function PromoDream() {
                 color: "#B9B3CC",
               }}
             >
-              {"Your Haiba year"}
+              {"Your Haiba year is worth"}
             </div>
             <div
               style={{
@@ -706,7 +723,7 @@ export default function PromoDream() {
                 color: "#C0F402",
               }}
             >
-              <span className={v.bump}>{v.worth}</span>
+              {v.worth}
             </div>
             <div
               style={{ fontSize: "16px", fontWeight: "600", color: "#E8E4F4", marginTop: "10px" }}
@@ -716,48 +733,6 @@ export default function PromoDream() {
               {". Just "}
               {v.perMonth}
               {" a month."}
-            </div>
-            <div style={{ marginTop: "16px" }}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  fontSize: "14px",
-                  fontWeight: "700",
-                }}
-              >
-                <span style={{ color: "#E8E4F4" }}>
-                  {"You pay "}
-                  {v.price}
-                </span>
-                <span style={{ color: "#C0F402" }}>
-                  {"You get "}
-                  {v.worth}
-                </span>
-              </div>
-              <div
-                style={{
-                  position: "relative",
-                  height: "12px",
-                  marginTop: "10px",
-                  borderRadius: "999px",
-                  overflow: "hidden",
-                  background: "#C0F402",
-                }}
-              >
-                <span
-                  className="hb-ease"
-                  style={{
-                    position: "absolute",
-                    left: "0",
-                    top: "0",
-                    bottom: "0",
-                    width: v.payPct,
-                    background: "#8F7BFF",
-                    borderRight: "2px solid #1E1B2E",
-                  }}
-                ></span>
-              </div>
             </div>
           </div>
         </div>
@@ -770,7 +745,7 @@ export default function PromoDream() {
                 right: "0",
                 bottom: "0",
                 padding: "36px 16px calc(20px + env(safe-area-inset-bottom, 0px)) 16px",
-                background: "linear-gradient(180deg, rgba(255,255,255,0) 0%, #1E1B2E 32%)",
+                background: "linear-gradient(180deg, rgba(255,255,255,0) 0%, #3E1BB8 32%)",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "stretch",

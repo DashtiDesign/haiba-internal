@@ -82,6 +82,7 @@ export function useVals() {
   var dyn = {
     worth: worth,
     free: free,
+    ahead: whole(Math.max(0, worthN - p)),
     bump: bump,
     visits: String(V),
     onVisits: onVisits,
