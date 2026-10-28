@@ -171,7 +171,7 @@ export default function PromoWaitlist() {
             className="hb-stagger"
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
               gap: "8px",
               marginTop: "12px",
             }}
@@ -252,6 +252,45 @@ export default function PromoWaitlist() {
               </span>
               <span style={{ fontSize: "14px", fontWeight: "700", lineHeight: "1.25" }}>
                 {"Spotify and ChatGPT free"}
+              </span>
+            </span>
+            <span
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "10px",
+                textAlign: "center",
+                background: "#FFFFFF",
+                borderRadius: "16px",
+                padding: "16px 8px",
+                boxShadow: "0 0 0 1px #ECE8F5",
+              }}
+            >
+              <span style={{ height: "44px", display: "flex", alignItems: "center", gap: "4px" }}>
+                <span
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    flex: "none",
+                    boxSizing: "border-box",
+                    borderRadius: "14px",
+                    background: "#FFFFFF",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                  }}
+                >
+                  <Artwork
+                    src="/haiba/brands/airalo-mark.svg"
+                    alt="Airalo"
+                    style={{ width: "27px", height: "auto", display: "block" }}
+                  />
+                </span>
+              </span>
+              <span style={{ fontSize: "14px", fontWeight: "700", lineHeight: "1.25" }}>
+                {"5GB travel data free"}
               </span>
             </span>
             <span

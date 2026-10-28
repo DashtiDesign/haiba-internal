@@ -370,7 +370,7 @@ export default function PromoDream() {
               color: "#E4DBFF",
             }}
           >
-            {"The apps you already use. Free for 3 months."}
+            {"The apps you already use, free for 3 months. Plus data for your next trip."}
           </div>
           <div
             className="hb-stagger"
@@ -511,6 +511,71 @@ export default function PromoDream() {
                   {"Help with study and more"}
                 </span>
               </span>
+            </span>
+          </div>
+          <div
+            style={{
+              marginTop: "10px",
+              display: "flex",
+              alignItems: "center",
+              gap: "14px",
+              background: "#1E1B2E",
+              borderRadius: "16px",
+              padding: "16px",
+            }}
+          >
+            <span
+              style={{
+                width: "52px",
+                height: "52px",
+                flex: "none",
+                boxSizing: "border-box",
+                borderRadius: "14px",
+                background: "#FFFFFF",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+              }}
+            >
+              <Artwork
+                src="/haiba/brands/airalo-mark.svg"
+                alt="Airalo"
+                style={{ width: "32px", height: "auto", display: "block" }}
+              />
+            </span>
+            <span style={{ display: "flex", flexDirection: "column", gap: "3px", flex: "1" }}>
+              <span
+                style={{
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "#B9B3CC",
+                }}
+              >
+                {"Free travel data"}
+              </span>
+              <span style={{ fontSize: "19px", fontWeight: "800", lineHeight: "1.15" }}>
+                <span style={{ color: "#C0F402" }}>{"5GB"}</span>
+                {" for 7 days"}
+              </span>
+              <span style={{ fontSize: "13px", fontWeight: "600", color: "#B9B3CC" }}>
+                {"Airalo, in any other Unipal country"}
+              </span>
+            </span>
+            <span
+              style={{
+                alignSelf: "flex-start",
+                background: "#C0F402",
+                color: "#1F2600",
+                fontSize: "13px",
+                fontWeight: "800",
+                borderRadius: "999px",
+                padding: "5px 10px",
+              }}
+            >
+              {"BHD 5.00"}
             </span>
           </div>
           <div

@@ -157,9 +157,12 @@ export default function PromoCompare() {
                           style={{
                             width: "26px",
                             height: "26px",
+                            boxSizing: "border-box",
                             borderRadius: "8px",
                             display: "block",
                             flex: "none",
+                            objectFit: "contain",
+                            background: "#FFFFFF",
                             boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
                           }}
                         />

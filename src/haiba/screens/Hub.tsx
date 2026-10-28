@@ -439,48 +439,22 @@ export default function Hub() {
               aria-hidden="true"
               style={{
                 position: "absolute",
-                right: "-46px",
-                top: "-54px",
-                width: "170px",
-                height: "170px",
+                right: "-60px",
+                bottom: "-90px",
+                width: "190px",
+                height: "190px",
                 borderRadius: "50%",
-                border: "2px dashed rgba(192,244,2,0.35)",
+                border: "2px dashed rgba(192,244,2,0.30)",
               }}
             ></span>
             <span
-              aria-hidden="true"
               style={{
-                position: "absolute",
-                right: "18px",
-                top: "22px",
-                width: "52px",
-                height: "52px",
-                borderRadius: "50%",
-                background: "rgba(192,244,2,0.12)",
-                color: "#C0F402",
+                position: "relative",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
+                gap: "8px",
+                minHeight: "24px",
               }}
-            >
-              <svg
-                width="26"
-                height="26"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="9"></circle>
-                <path d="M3 12h18"></path>
-                <path d="M12 3a14 14 0 0 1 0 18"></path>
-                <path d="M12 3a14 14 0 0 0 0 18"></path>
-              </svg>
-            </span>
-            <span
-              style={{ position: "relative", display: "flex", alignItems: "center", gap: "8px" }}
             >
               <span
                 style={{
@@ -493,18 +467,27 @@ export default function Hub() {
               >
                 {"Free travel data"}
               </span>
-              <span
-                style={{
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  background: v.travelPillBg,
-                  color: v.travelPillInk,
-                  borderRadius: "999px",
-                  padding: "4px 9px",
-                }}
-              >
-                {v.travelPill}
-              </span>
+              {v.travelHasPill ? (
+                <>
+                  <span
+                    style={{
+                      fontSize: "12px",
+                      fontWeight: "800",
+                      background: "#3A3550",
+                      color: "#E4DBFF",
+                      borderRadius: "999px",
+                      padding: "4px 9px",
+                    }}
+                  >
+                    {v.travelPill}
+                  </span>
+                </>
+              ) : null}
+              <Artwork
+                src="/haiba/brands/airalo-white.svg"
+                alt="Airalo"
+                style={{ marginLeft: "auto", height: "20px", width: "auto", display: "block" }}
+              />
             </span>
             <span
               style={{
@@ -527,7 +510,6 @@ export default function Hub() {
                 fontSize: "14px",
                 fontWeight: "600",
                 color: "#B9B3CC",
-                maxWidth: "236px",
                 lineHeight: "1.35",
               }}
             >

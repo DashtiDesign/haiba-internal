@@ -50,7 +50,7 @@ export function useVals() {
       cum += 2.5 + monthPts / 1000;
       if (!payback && cum >= p) payback = m + 1;
     }
-    return { pts: pts, payback: payback, worth: 42.0 + pts / 1000 };
+    return { pts: pts, payback: payback, worth: 47.0 + pts / 1000 };
   };
   var at = sim(4);
   var worthN = at.worth;
@@ -68,6 +68,7 @@ export function useVals() {
     ["Free gift every month", no, yes, ""],
     ["Spotify Premium Student", no, "3 months", "/haiba/brands/spotify.webp"],
     ["ChatGPT Go", no, "3 months", "/haiba/brands/chatgpt.webp"],
+    ["Travel data, Airalo", no, "5GB", "/haiba/brands/airalo-mark.svg"],
     ["Bonus points", no, "+ + +", ""],
     ["Rewards at 200+ shops", no, yes, ""],
     ["See what you saved", no, yes, ""],

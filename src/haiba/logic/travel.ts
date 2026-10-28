@@ -77,17 +77,14 @@ export function useVals() {
     rules: [
       { text: "Yearly members get it from day one.", rule: "1px solid #F1EFF7" },
       { text: "Monthly members in Bahrain get it after 3 paid months.", rule: "1px solid #F1EFF7" },
-      {
-        text: "1 plan per member. Once you see the code, it is yours and the plan is used.",
-        rule: "0",
-      },
+      { text: "Once you see the code, the plan is yours and shows as used.", rule: "0" },
     ],
     ctaTitle: locked ? "Unlocks after 3 months" : revealed ? "Copy my code" : "Get my free data",
     ctaSub: locked
       ? 3 - paid + (3 - paid === 1 ? " month" : " months") + " to go"
       : revealed
         ? "Use by 27 Nov 2026"
-        : "5GB for 7 days. 1 per member.",
+        : "Worth BHD 5+. Ready when you land.",
     ctaBg: locked ? "#E4DBFF" : "#1E1B2E",
     ctaInk: locked ? "#4A4660" : "#C0F402",
     ctaOp: "1",

@@ -3,6 +3,7 @@
 import { Fragment } from "react";
 import { Link, useNavigate } from "../nav";
 import { useHaiba } from "../store";
+import Artwork from "../Artwork";
 import { useVals } from "../logic/travel";
 
 export default function Travel() {
@@ -120,11 +121,20 @@ export default function Travel() {
               fontSize: "16px",
               fontWeight: "600",
               color: "#E4DBFF",
-              marginTop: "10px",
+              marginTop: "12px",
               lineHeight: "1.45",
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
             }}
           >
-            {"Free data from Haiba, powered by Airalo."}
+            {"Free data from Haiba, powered by "}
+            <Artwork
+              priority
+              src="/haiba/brands/airalo-white.svg"
+              alt="Airalo"
+              style={{ height: "20px", width: "auto", display: "block" }}
+            />
           </div>
         </div>
         <div style={{ position: "relative", marginTop: "-96px", padding: "0 16px 200px 16px" }}>
@@ -162,7 +172,7 @@ export default function Travel() {
                   color: "#B9B3CC",
                 }}
               >
-                {"Your plan"}
+                {"Your free plan"}
               </span>
               <span
                 style={{
@@ -204,17 +214,6 @@ export default function Travel() {
                 }}
               >
                 {"Worth BHD 5+"}
-              </span>
-              <span
-                style={{
-                  background: "rgba(255,255,255,0.10)",
-                  borderRadius: "999px",
-                  padding: "7px 12px",
-                  fontSize: "13.5px",
-                  fontWeight: "700",
-                }}
-              >
-                {"1 per member"}
               </span>
               <span
                 style={{

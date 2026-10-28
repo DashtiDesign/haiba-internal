@@ -342,7 +342,7 @@ export default function PromoYear() {
                   gap: "12px",
                   alignItems: "center",
                   padding: "14px 0",
-                  borderBottom: "0",
+                  borderBottom: "1px solid #3A3550",
                 }}
               >
                 <span
@@ -387,6 +387,64 @@ export default function PromoYear() {
                   }}
                 >
                   {"BHD 9.00"}
+                </span>
+              </div>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                  gap: "12px",
+                  alignItems: "center",
+                  padding: "14px 0",
+                  borderBottom: "0",
+                }}
+              >
+                <span
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    flex: "none",
+                    boxSizing: "border-box",
+                    borderRadius: "14px",
+                    background: "#FFFFFF",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                  }}
+                >
+                  <Artwork
+                    src="/haiba/brands/airalo-mark.svg"
+                    alt="Airalo"
+                    style={{ width: "27px", height: "auto", display: "block" }}
+                  />
+                </span>
+                <span
+                  style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}
+                >
+                  <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
+                    {"5GB travel data"}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "13.5px",
+                      fontWeight: "500",
+                      color: "#B9B3CC",
+                      lineHeight: "1.35",
+                    }}
+                  >
+                    {"Airalo, 7 days in another Unipal country"}
+                  </span>
+                </span>
+                <span
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "800",
+                    textAlign: "right",
+                    color: "#FFFFFF",
+                  }}
+                >
+                  {"BHD 5.00"}
                 </span>
               </div>
             </div>

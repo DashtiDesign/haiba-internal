@@ -349,6 +349,62 @@ export default function PromoValue() {
                 </span>
               </span>
             </span>
+            <span
+              style={{
+                gridColumn: "span 2",
+                position: "relative",
+                display: "flex",
+                alignItems: "center",
+                gap: "14px",
+                boxSizing: "border-box",
+                background: "#1E1B2E",
+                color: "#FFFFFF",
+                borderRadius: "16px",
+                padding: "16px",
+              }}
+            >
+              <span
+                style={{
+                  width: "44px",
+                  height: "44px",
+                  flex: "none",
+                  boxSizing: "border-box",
+                  borderRadius: "14px",
+                  background: "#FFFFFF",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                }}
+              >
+                <Artwork
+                  src="/haiba/brands/airalo-mark.svg"
+                  alt="Airalo"
+                  style={{ width: "27px", height: "auto", display: "block" }}
+                />
+              </span>
+              <span style={{ display: "flex", flexDirection: "column", gap: "3px", flex: "1" }}>
+                <span style={{ fontSize: "17px", fontWeight: "800", lineHeight: "1.2" }}>
+                  <span style={{ color: "#C0F402" }}>{"5GB"}</span>
+                  {" travel data"}
+                </span>
+                <span style={{ fontSize: "13.5px", fontWeight: "600", color: "#B9B3CC" }}>
+                  {"Airalo, 7 days in another Unipal country"}
+                </span>
+              </span>
+              <span
+                style={{
+                  background: "#C0F402",
+                  color: "#1F2600",
+                  fontSize: "13px",
+                  fontWeight: "800",
+                  borderRadius: "999px",
+                  padding: "5px 10px",
+                }}
+              >
+                {"BHD 5"}
+              </span>
+            </span>
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "12px" }}>
             <span

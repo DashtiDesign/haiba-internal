@@ -368,6 +368,70 @@ export default function PromoGift() {
                 }}
               >
                 <span style={{ flex: "none" }}>
+                  <span
+                    style={{
+                      width: "36px",
+                      height: "36px",
+                      flex: "none",
+                      boxSizing: "border-box",
+                      borderRadius: "18px",
+                      background: "#FFFFFF",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                    }}
+                  >
+                    <Artwork
+                      src="/haiba/brands/airalo-mark.svg"
+                      alt="Airalo"
+                      style={{ width: "22px", height: "auto", display: "block" }}
+                    />
+                  </span>
+                </span>
+                <span style={{ display: "flex", flexDirection: "column", gap: "1px", flex: "1" }}>
+                  <span style={{ fontSize: "15.5px", fontWeight: "800" }}>{"5GB travel data"}</span>
+                  <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                    {"Airalo, 7 days in another Unipal country"}
+                  </span>
+                </span>
+                <span
+                  style={{
+                    width: "24px",
+                    height: "24px",
+                    flex: "none",
+                    borderRadius: "50%",
+                    background: "#1E1B2E",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <svg
+                    aria-hidden="true"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#C0F402"
+                    strokeWidth="3.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                  </svg>
+                </span>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  padding: "12px 0",
+                  borderBottom: "1px solid #F1EFF7",
+                }}
+              >
+                <span style={{ flex: "none" }}>
                   <Artwork
                     src="/haiba/coins/coin-34.webp"
                     alt=""

@@ -254,6 +254,55 @@ export default function PromoWinback() {
               {v.perMonth}
               {" a month."}
             </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
+                marginTop: "16px",
+                paddingTop: "14px",
+                borderTop: "1px solid #3A3550",
+              }}
+            >
+              <span
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  flex: "none",
+                  boxSizing: "border-box",
+                  borderRadius: "12px",
+                  background: "#FFFFFF",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                }}
+              >
+                <Artwork
+                  src="/haiba/brands/airalo-mark.svg"
+                  alt="Airalo"
+                  style={{ width: "25px", height: "auto", display: "block" }}
+                />
+              </span>
+              <span style={{ display: "flex", flexDirection: "column", gap: "1px", flex: "1" }}>
+                <span style={{ fontSize: "15.5px", fontWeight: "800" }}>
+                  {"New: 5GB travel data"}
+                </span>
+                <span style={{ fontSize: "13px", fontWeight: "600", color: "#B9B3CC" }}>
+                  {"Airalo, 7 days in another Unipal country"}
+                </span>
+              </span>
+              <span
+                style={{
+                  fontSize: "15px",
+                  fontWeight: "800",
+                  color: "#C0F402",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {"BHD 5+"}
+              </span>
+            </div>
           </div>
           <div
             style={{

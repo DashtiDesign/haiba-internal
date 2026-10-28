@@ -50,7 +50,7 @@ export function useVals() {
       cum += 2.5 + monthPts / 1000;
       if (!payback && cum >= p) payback = m + 1;
     }
-    return { pts: pts, payback: payback, worth: 42.0 + pts / 1000 };
+    return { pts: pts, payback: payback, worth: 47.0 + pts / 1000 };
   };
   var W = typeof window !== "undefined" ? window : {};
   var name = props.name ?? "Sara";
@@ -103,7 +103,7 @@ export function useVals() {
   };
   var active = state.active != null ? state.active : firstEmpty(slots, 0);
   var pts = sim(1).pts;
-  var subs = 12.0;
+  var subs = 17.0;
   var giftsOf = function (s) {
     return s.reduce(function (a, gi) {
       return a + (gi >= 0 ? G[gi].v : 0);
@@ -196,7 +196,7 @@ export function useVals() {
     breakdown:
       "Gifts BHD " +
       giftsOf(slots).toFixed(2) +
-      " + Spotify and ChatGPT BHD " +
+      " + Spotify, ChatGPT and travel data BHD " +
       subs.toFixed(2) +
       " + points",
     count: filled + " of 12 picked",

@@ -50,7 +50,7 @@ export function useVals() {
       cum += 2.5 + monthPts / 1000;
       if (!payback && cum >= p) payback = m + 1;
     }
-    return { pts: pts, payback: payback, worth: 42.0 + pts / 1000 };
+    return { pts: pts, payback: payback, worth: 47.0 + pts / 1000 };
   };
   var V = Math.max(1, Math.min(12, Number(props.visits ?? "4")));
   var name = props.name ?? "Sara";

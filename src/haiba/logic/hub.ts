@@ -108,9 +108,8 @@ export function useVals() {
   var tUsed = travel === "Used at Airalo";
   var tShown = travel === "Code shown";
   var travelVals = {
-    travelPill: tLocked ? "Locked" : tUsed || tShown ? "Used" : "1 left",
-    travelPillBg: tLocked || tUsed || tShown ? "#3A3550" : "#C0F402",
-    travelPillInk: tLocked || tUsed || tShown ? "#E4DBFF" : "#1F2600",
+    travelHasPill: tLocked || tUsed || tShown,
+    travelPill: tLocked ? "Locked" : "Used",
     travelOp: tUsed ? "0.6" : "1",
     travelSub: tLocked
       ? "Unlocks after 3 months on the monthly plan."
@@ -118,7 +117,7 @@ export function useVals() {
         ? "Used on Airalo. You saved BHD 5.64."
         : tShown
           ? "Your Airalo code is ready to use."
-          : "In another Unipal country. Worth BHD 5+.",
+          : "In any other Unipal country. Worth BHD 5+.",
     travelCta: tLocked
       ? "Unlocks after 3 months"
       : tUsed
