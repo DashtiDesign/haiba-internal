@@ -103,6 +103,32 @@ export function useVals() {
   ready.forEach(function (r, k) {
     r.rule = k === 0 ? "none" : "1px solid #F1EFF7";
   });
+  var travel = props.travelStatus ?? "Available";
+  var tLocked = travel === "Locked, monthly";
+  var tUsed = travel === "Used at Airalo";
+  var tShown = travel === "Code shown";
+  var travelVals = {
+    travelPill: tLocked ? "Locked" : tUsed || tShown ? "Used" : "1 left",
+    travelPillBg: tLocked || tUsed || tShown ? "#3A3550" : "#C0F402",
+    travelPillInk: tLocked || tUsed || tShown ? "#E4DBFF" : "#1F2600",
+    travelOp: tUsed ? "0.6" : "1",
+    travelSub: tLocked
+      ? "Unlocks after 3 months on the monthly plan."
+      : tUsed
+        ? "Used on Airalo. You saved BHD 5.64."
+        : tShown
+          ? "Your Airalo code is ready to use."
+          : "In another Unipal country. Worth BHD 5+.",
+    travelCta: tLocked
+      ? "Unlocks after 3 months"
+      : tUsed
+        ? "See details"
+        : tShown
+          ? "Show my code"
+          : "Get my free data",
+    travelCtaBg: tLocked || tUsed ? "rgba(255,255,255,0.12)" : "#C0F402",
+    travelCtaInk: tLocked || tUsed ? "#FFFFFF" : "#1F2600",
+  };
   var savedDefs = isNew
     ? [
         { title: "Unipass gifts", sub: "1 free item a month", amt: 0, color: "#6C3FFA" },
@@ -119,6 +145,13 @@ export function useVals() {
         { title: "Rewards", sub: "Accepted at the shop", amt: 2.45 + savedExtra, color: "#9CC400" },
         { title: "Member promos", sub: "Spotify, month 1", amt: 2.4, color: "#B9A5FF" },
       ];
+  if (tUsed)
+    savedDefs.push({
+      title: "Travel data",
+      sub: "Airalo, 5GB for 7 days",
+      amt: 5.64,
+      color: "#1E1B2E",
+    });
   var savedSum = 0;
   savedDefs.forEach(function (s) {
     savedSum += s.amt;
@@ -203,6 +236,19 @@ export function useVals() {
           note: "4 of 5 visits",
         },
       ];
+  if (tUsed)
+    all.unshift({
+      day: "Today",
+      kind: "saved",
+      mark: "A",
+      bg: "#1E1B2E",
+      ink: "#C0F402",
+      name: "Airalo",
+      sub: "Free travel data, 5GB",
+      amt: "BHD 5.64",
+      amtInk: green,
+      note: "Saved",
+    });
   var groups = [];
   all.slice(0, 3).forEach(function (r) {
     var g =
@@ -223,7 +269,7 @@ export function useVals() {
       g.totalInk = green;
     }
   });
-  return {
+  return Object.assign(travelVals, {
     points: shown.toLocaleString("en-US"),
     memberLine: isNew ? "Member since today" : "Member since August",
     giftLeft: "10 days left",
@@ -311,5 +357,5 @@ export function useVals() {
       : "Your next visit at Jasmi’s is your 5th. It earns 200 points, not 40.",
     navTipHref: isNew ? "" : "/shop/coffee-bean/redeem",
     navTipCta: isNew ? "Pick my gift" : "See Jasmi’s offer",
-  };
+  });
 }

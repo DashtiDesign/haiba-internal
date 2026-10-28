@@ -18,6 +18,7 @@ const SCREENS = [
   ["Redeem offer", "/shop/coffee-bean/redeem"],
   ["Basket and codes", "/haiba/basket"],
   ["Wallet", "/haiba/wallet"],
+  ["Travel data", "/haiba/travel"],
 ];
 
 const MEMBERS: [Member, string][] = [
@@ -68,158 +69,219 @@ export default function PrototypePanel() {
         Prototype
       </button>
       <AnimatePresence>
-      {open && (
-        <motion.div
-          key="prototype-backdrop"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: reduced ? 0 : 0.18 }}
-          onClick={() => setOpen(false)}
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 70,
-            background: "rgba(20,16,36,0.45)",
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "center",
-          }}
-        >
+        {open && (
           <motion.div
-            role="dialog"
-            aria-modal="true"
-            aria-label="Prototype panel"
-            initial={{ y: reduced ? 0 : "100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: reduced ? 0 : "100%" }}
-            transition={{ type: "spring", stiffness: 380, damping: 38 }}
-            onClick={(e) => e.stopPropagation()}
+            key="prototype-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: reduced ? 0 : 0.18 }}
+            onClick={() => setOpen(false)}
             style={{
-              width: "100%",
-              maxWidth: 390,
-              background: "#FFFFFF",
-              borderRadius: "24px 24px 0 0",
-              padding: "18px 18px 28px 18px",
-              fontFamily: "Figtree, system-ui, sans-serif",
-              color: "#1E1B2E",
-              boxSizing: "border-box",
-              maxHeight: "86vh",
-              overflowY: "auto",
+              position: "fixed",
+              inset: 0,
+              zIndex: 70,
+              background: "rgba(20,16,36,0.45)",
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "center",
             }}
           >
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <span style={{ fontWeight: 800, fontSize: 17 }}>Prototype panel</span>
-              <button
-                onClick={() => setOpen(false)}
-                style={{ ...chip(false), padding: "6px 12px" }}
+            <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-label="Prototype panel"
+              initial={{ y: reduced ? 0 : "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: reduced ? 0 : "100%" }}
+              transition={{ type: "spring", stiffness: 380, damping: 38 }}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                width: "100%",
+                maxWidth: 390,
+                background: "#FFFFFF",
+                borderRadius: "24px 24px 0 0",
+                padding: "18px 18px 28px 18px",
+                fontFamily: "Figtree, system-ui, sans-serif",
+                color: "#1E1B2E",
+                boxSizing: "border-box",
+                maxHeight: "86vh",
+                overflowY: "auto",
+              }}
+            >
+              <div
+                style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
               >
-                Close
-              </button>
-            </div>
-            <div style={{ fontSize: 13, color: "#6B6880", marginTop: 4 }}>
-              For the internal test only. Students never see this.
-            </div>
-
-            <div
-              style={{
-                fontSize: 12,
-                fontWeight: 700,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "#6B6880",
-                marginTop: 18,
-              }}
-            >
-              Member
-            </div>
-            <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 8 }}>
-              {MEMBERS.map(([m, label]) => (
-                <button key={m} style={chip(s.member === m)} onClick={() => hb.setMember(m)}>
-                  {label}
-                </button>
-              ))}
-            </div>
-            <div style={{ fontSize: 13, color: "#6B6880", marginTop: 6 }}>
-              Points: {hb.available.toLocaleString("en-US")} free of{" "}
-              {hb.base.toLocaleString("en-US")}
-            </div>
-
-            <div
-              style={{
-                fontSize: 12,
-                fontWeight: 700,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "#6B6880",
-                marginTop: 18,
-              }}
-            >
-              Visit on the Redeem screen
-            </div>
-            <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
-              {([1, 3, 5] as const).map((n) => (
-                <button key={n} style={chip(s.visit === n)} onClick={() => hb.set({ visit: n })}>
-                  {n === 1 ? "1st" : n === 3 ? "3rd" : "5th"}
-                </button>
-              ))}
-            </div>
-
-            <div
-              style={{
-                fontSize: 12,
-                fontWeight: 700,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "#6B6880",
-                marginTop: 18,
-              }}
-            >
-              Shop side
-            </div>
-            <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 8 }}>
-              <button style={chip(false)} onClick={() => hb.acceptAll()}>
-                Shop accepts all held codes
-              </button>
-              <button style={chip(false)} onClick={() => hb.reset()}>
-                Reset everything
-              </button>
-            </div>
-
-            <div
-              style={{
-                fontSize: 12,
-                fontWeight: 700,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "#6B6880",
-                marginTop: 18,
-              }}
-            >
-              Go to screen
-            </div>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-                gap: 6,
-                marginTop: 8,
-              }}
-            >
-              {SCREENS.map(([label, to]) => (
-                <Link
-                  key={to}
-                  to={to}
+                <span style={{ fontWeight: 800, fontSize: 17 }}>Prototype panel</span>
+                <button
                   onClick={() => setOpen(false)}
-                  style={{ ...chip(false), textDecoration: "none", textAlign: "center" }}
+                  style={{ ...chip(false), padding: "6px 12px" }}
                 >
-                  {label}
-                </Link>
-              ))}
-            </div>
+                  Close
+                </button>
+              </div>
+              <div style={{ fontSize: 13, color: "#6B6880", marginTop: 4 }}>
+                For the internal test only. Students never see this.
+              </div>
+
+              <div
+                style={{
+                  fontSize: 12,
+                  fontWeight: 700,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "#6B6880",
+                  marginTop: 18,
+                }}
+              >
+                Member
+              </div>
+              <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 8 }}>
+                {MEMBERS.map(([m, label]) => (
+                  <button key={m} style={chip(s.member === m)} onClick={() => hb.setMember(m)}>
+                    {label}
+                  </button>
+                ))}
+              </div>
+              <div style={{ fontSize: 13, color: "#6B6880", marginTop: 6 }}>
+                Points: {hb.available.toLocaleString("en-US")} free of{" "}
+                {hb.base.toLocaleString("en-US")}
+              </div>
+
+              <div
+                style={{
+                  fontSize: 12,
+                  fontWeight: 700,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "#6B6880",
+                  marginTop: 18,
+                }}
+              >
+                Visit on the Redeem screen
+              </div>
+              <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
+                {([1, 3, 5] as const).map((n) => (
+                  <button key={n} style={chip(s.visit === n)} onClick={() => hb.set({ visit: n })}>
+                    {n === 1 ? "1st" : n === 3 ? "3rd" : "5th"}
+                  </button>
+                ))}
+              </div>
+
+              <div
+                style={{
+                  fontSize: 12,
+                  fontWeight: 700,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "#6B6880",
+                  marginTop: 18,
+                }}
+              >
+                Home country and plan
+              </div>
+              <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 8 }}>
+                <button style={chip(s.market === "bh")} onClick={() => hb.set({ market: "bh" })}>
+                  Bahrain
+                </button>
+                <button style={chip(s.market === "sa")} onClick={() => hb.set({ market: "sa" })}>
+                  Saudi
+                </button>
+                <button
+                  style={chip(s.plan === "yearly")}
+                  onClick={() => hb.set({ plan: "yearly" })}
+                >
+                  Yearly
+                </button>
+                {s.market === "bh" && (
+                  <button
+                    style={chip(s.plan === "monthly")}
+                    onClick={() => hb.set({ plan: "monthly" })}
+                  >
+                    Monthly
+                  </button>
+                )}
+              </div>
+              {s.plan === "monthly" && (
+                <div style={{ display: "flex", gap: 6, alignItems: "center", marginTop: 8 }}>
+                  <span style={{ fontSize: 13, color: "#6B6880" }}>Months paid</span>
+                  {[1, 2, 3].map((n) => (
+                    <button
+                      key={n}
+                      style={chip(s.monthsPaid === n)}
+                      onClick={() => hb.set({ monthsPaid: n })}
+                    >
+                      {n}
+                    </button>
+                  ))}
+                </div>
+              )}
+              <div style={{ fontSize: 13, color: "#6B6880", marginTop: 6 }}>
+                Travel data: {hb.travelLocked ? "locked until 3 months" : s.travel}
+              </div>
+
+              <div
+                style={{
+                  fontSize: 12,
+                  fontWeight: 700,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "#6B6880",
+                  marginTop: 18,
+                }}
+              >
+                Shop side
+              </div>
+              <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 8 }}>
+                <button style={chip(false)} onClick={() => hb.acceptAll()}>
+                  Shop accepts all held codes
+                </button>
+                <button
+                  style={chip(false)}
+                  disabled={s.travel !== "revealed"}
+                  onClick={() => hb.redeemTravel()}
+                >
+                  Airalo accepts the travel code
+                </button>
+                <button style={chip(false)} onClick={() => hb.reset()}>
+                  Reset everything
+                </button>
+              </div>
+
+              <div
+                style={{
+                  fontSize: 12,
+                  fontWeight: 700,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "#6B6880",
+                  marginTop: 18,
+                }}
+              >
+                Go to screen
+              </div>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                  gap: 6,
+                  marginTop: 8,
+                }}
+              >
+                {SCREENS.map(([label, to]) => (
+                  <Link
+                    key={to}
+                    to={to}
+                    onClick={() => setOpen(false)}
+                    style={{ ...chip(false), textDecoration: "none", textAlign: "center" }}
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      )}
+        )}
       </AnimatePresence>
     </>
   );

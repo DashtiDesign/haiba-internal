@@ -17,6 +17,7 @@ ROUTES = {
     "Offer.dc.html": "/shop/coffee-bean/redeem",
     "Shop.dc.html": "/shop/coffee-bean",
     "Basket.dc.html": "/haiba/basket",
+    "Travel.dc.html": "/haiba/travel",
 }
 BLOBS = {
     "e154a7d6a14c5881781f8dfe345cd94f": "/haiba/birds/01-cheer.png",

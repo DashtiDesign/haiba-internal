@@ -9,6 +9,9 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
  */
 
 export type Member = "none" | "new" | "active";
+export type Plan = "yearly" | "monthly";
+export type Market = "bh" | "sa";
+export type Travel = "available" | "revealed" | "redeemed";
 
 export type HaibaState = {
   member: Member;
@@ -18,7 +21,14 @@ export type HaibaState = {
   codesQty: number[] | null; // the basket that made the current codes
   cancelled: string[]; // code ids cancelled, points back
   accepted: string[]; // code ids the shop accepted
+  plan: Plan; // monthly is Bahrain only
+  monthsPaid: number; // monthly plan only, travel data unlocks at 3
+  market: Market; // the member's home country, hidden from travel destinations
+  travel: Travel; // free Airalo plan: available, code revealed, or used at Airalo
 };
+
+// Value of the free Airalo plan once it is used, added to "You saved".
+export const TRAVEL_SAVED = 5.64;
 
 // Coffee Bean rewards, same order as the Shop and Basket screens.
 export const REWARD_POINTS = [300, 700, 1900];
@@ -34,6 +44,10 @@ const INITIAL: HaibaState = {
   codesQty: null,
   cancelled: [],
   accepted: [],
+  plan: "yearly",
+  monthsPaid: 1,
+  market: "bh",
+  travel: "available",
 };
 
 const KEY = "haiba-prototype-v1";
@@ -48,6 +62,14 @@ function load(): HaibaState {
   return INITIAL;
 }
 
+// Prototype setup that survives a member switch: visit, plan and home country.
+const keep = (p: HaibaState) => ({
+  visit: p.visit,
+  plan: p.plan,
+  monthsPaid: p.monthsPaid,
+  market: p.market,
+});
+
 type Api = {
   ready: boolean; // saved state has loaded in the browser
   state: HaibaState;
@@ -56,10 +78,13 @@ type Api = {
   liveCodes: number; // codes held and not yet accepted by the shop
   liveCodeIds: string[]; // ids of those codes, item-index plus count, for example 0-1
   savedRewards: number; // BHD value of rewards the shop accepted
+  travelLocked: boolean; // monthly members get travel data after 3 paid months
+  savedTravel: number; // BHD 5.64 once the Airalo code is used
   set: (patch: Partial<HaibaState>) => void;
   join: () => void;
   setMember: (m: Member) => void;
   acceptAll: () => void;
+  redeemTravel: () => void;
   reset: () => void;
 };
 
@@ -102,6 +127,8 @@ export function HaibaProvider({ children }: { children: ReactNode }) {
     });
   }
 
+  const travelLocked = s.plan === "monthly" && s.monthsPaid < 3 && s.travel === "available";
+
   const api: Api = {
     ready,
     state: s,
@@ -110,11 +137,19 @@ export function HaibaProvider({ children }: { children: ReactNode }) {
     liveCodes: liveIds.length,
     liveCodeIds: liveIds,
     savedRewards: acceptedPoints / 1000,
-    set: (patch) => setS((p) => ({ ...p, ...patch })),
-    join: () => setS((p) => ({ ...INITIAL, visit: p.visit, member: "new" })),
-    setMember: (m) => setS((p) => ({ ...INITIAL, visit: p.visit, member: m })),
+    travelLocked,
+    savedTravel: s.travel === "redeemed" ? TRAVEL_SAVED : 0,
+    set: (patch) =>
+      setS((p) => {
+        const n = { ...p, ...patch };
+        if (n.market === "sa") n.plan = "yearly"; // monthly is Bahrain only
+        return n;
+      }),
+    join: () => setS((p) => ({ ...INITIAL, ...keep(p), member: "new" })),
+    setMember: (m) => setS((p) => ({ ...INITIAL, ...keep(p), member: m })),
     acceptAll: () =>
       setS((p) => ({ ...p, accepted: Array.from(new Set([...p.accepted, ...liveIds])) })),
+    redeemTravel: () => setS((p) => (p.travel === "revealed" ? { ...p, travel: "redeemed" } : p)),
     reset: () => setS(INITIAL),
   };
 

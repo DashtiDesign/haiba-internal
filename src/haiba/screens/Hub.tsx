@@ -417,6 +417,154 @@ export default function Hub() {
               </span>
             </span>
           </a>
+          <Link
+            className="hb-press hb-rise hb-d2"
+            style={{
+              textDecoration: "none",
+              color: "#FFFFFF",
+              background: "#1E1B2E",
+              borderRadius: "16px",
+              marginTop: "12px",
+              padding: "18px",
+              position: "relative",
+              overflow: "hidden",
+              display: "flex",
+              flexDirection: "column",
+              gap: "6px",
+              boxShadow: "0 14px 28px rgba(30,27,46,0.20)",
+            }}
+            to="/haiba/travel"
+          >
+            <span
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                right: "-46px",
+                top: "-54px",
+                width: "170px",
+                height: "170px",
+                borderRadius: "50%",
+                border: "2px dashed rgba(192,244,2,0.35)",
+              }}
+            ></span>
+            <span
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                right: "18px",
+                top: "22px",
+                width: "52px",
+                height: "52px",
+                borderRadius: "50%",
+                background: "rgba(192,244,2,0.12)",
+                color: "#C0F402",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <svg
+                width="26"
+                height="26"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M3 12h18"></path>
+                <path d="M12 3a14 14 0 0 1 0 18"></path>
+                <path d="M12 3a14 14 0 0 0 0 18"></path>
+              </svg>
+            </span>
+            <span
+              style={{ position: "relative", display: "flex", alignItems: "center", gap: "8px" }}
+            >
+              <span
+                style={{
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "#B9B3CC",
+                }}
+              >
+                {"Free travel data"}
+              </span>
+              <span
+                style={{
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  background: v.travelPillBg,
+                  color: v.travelPillInk,
+                  borderRadius: "999px",
+                  padding: "4px 9px",
+                }}
+              >
+                {v.travelPill}
+              </span>
+            </span>
+            <span
+              style={{
+                position: "relative",
+                fontFamily: "Figtree, system-ui, sans-serif",
+                fontSize: "25px",
+                fontWeight: "800",
+                letterSpacing: "-0.02em",
+                lineHeight: "1.1",
+                marginTop: "4px",
+                opacity: v.travelOp,
+              }}
+            >
+              <span style={{ color: "#C0F402" }}>{"5GB"}</span>
+              {" for 7 days"}
+            </span>
+            <span
+              style={{
+                position: "relative",
+                fontSize: "14px",
+                fontWeight: "600",
+                color: "#B9B3CC",
+                maxWidth: "236px",
+                lineHeight: "1.35",
+              }}
+            >
+              {v.travelSub}
+            </span>
+            <span
+              style={{
+                position: "relative",
+                alignSelf: "flex-start",
+                marginTop: "10px",
+                fontSize: "14px",
+                fontWeight: "800",
+                background: v.travelCtaBg,
+                color: v.travelCtaInk,
+                borderRadius: "999px",
+                padding: "10px 14px",
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+              }}
+            >
+              {v.travelCta}
+              <svg
+                aria-hidden="true"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M9 6l6 6-6 6"></path>
+              </svg>
+            </span>
+          </Link>
           <div
             style={{
               display: "flex",
@@ -986,7 +1134,7 @@ export default function Hub() {
                         lineHeight: "1.2",
                         height: "2.4em",
                         display: "-webkit-box",
-                        WebkitLineClamp: 2,
+                        WebkitLineClamp: "2",
                         WebkitBoxOrient: "vertical",
                         overflow: "hidden",
                         overflowWrap: "anywhere",

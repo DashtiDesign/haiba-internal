@@ -5,9 +5,11 @@ import { useNavigate } from "./nav";
 import { useHaiba } from "./store";
 
 // Keys that are shared across screens. Everything else is local to a screen.
-const SHARED = ["qty", "done", "codesQty", "cancelled", "accepted"];
+const SHARED = ["qty", "done", "codesQty", "cancelled", "accepted", "travel"];
 
 const VISIT_LABEL = { 1: "1st visit at this shop", 3: "3rd visit", 5: "5th visit" };
+
+const TRAVEL_LABEL = { available: "Available", revealed: "Code shown", redeemed: "Used at Airalo" };
 
 /**
  * Gives each ported screen the same state, setState and props it had on the design canvas,
@@ -45,6 +47,16 @@ export function useDC(initial) {
     codes: hb.liveCodes,
     codeIds: hb.liveCodeIds,
     savedRewards: hb.savedRewards,
+    market: hb.state.market === "sa" ? "Saudi" : "Bahrain",
+    plan:
+      hb.state.plan === "yearly"
+        ? "Yearly"
+        : "Monthly, " +
+          hb.state.monthsPaid +
+          (hb.state.monthsPaid === 1 ? " month" : " months") +
+          " paid",
+    travelStatus: hb.travelLocked ? "Locked, monthly" : TRAVEL_LABEL[hb.state.travel],
+    savedTravel: hb.savedTravel,
     price: q.price != null ? String(q.price) : undefined,
     name: q.name != null ? String(q.name) : undefined,
     visits: q.visits != null ? String(q.visits) : undefined,

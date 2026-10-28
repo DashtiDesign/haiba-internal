@@ -14,6 +14,7 @@ import { Route as HaibaIndexRouteImport } from './routes/haiba/index'
 import { Route as HaibaBasketRouteImport } from './routes/haiba/basket'
 import { Route as HaibaPlansRouteImport } from './routes/haiba/plans'
 import { Route as HaibaPointsRouteImport } from './routes/haiba/points'
+import { Route as HaibaTravelRouteImport } from './routes/haiba/travel'
 import { Route as HaibaWalletRouteImport } from './routes/haiba/wallet'
 import { Route as HaibaWelcomeRouteImport } from './routes/haiba/welcome'
 import { Route as HaibaPromoCompareRouteImport } from './routes/haiba/promo.compare'
@@ -49,6 +50,11 @@ const HaibaPlansRoute = HaibaPlansRouteImport.update({
 const HaibaPointsRoute = HaibaPointsRouteImport.update({
   id: '/haiba/points',
   path: '/haiba/points',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaTravelRoute = HaibaTravelRouteImport.update({
+  id: '/haiba/travel',
+  path: '/haiba/travel',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HaibaWalletRoute = HaibaWalletRouteImport.update({
@@ -112,6 +118,7 @@ export interface FileRoutesByFullPath {
   '/haiba/basket': typeof HaibaBasketRoute
   '/haiba/plans': typeof HaibaPlansRoute
   '/haiba/points': typeof HaibaPointsRoute
+  '/haiba/travel': typeof HaibaTravelRoute
   '/haiba/wallet': typeof HaibaWalletRoute
   '/haiba/welcome': typeof HaibaWelcomeRoute
   '/haiba/': typeof HaibaIndexRoute
@@ -130,6 +137,7 @@ export interface FileRoutesByTo {
   '/haiba/basket': typeof HaibaBasketRoute
   '/haiba/plans': typeof HaibaPlansRoute
   '/haiba/points': typeof HaibaPointsRoute
+  '/haiba/travel': typeof HaibaTravelRoute
   '/haiba/wallet': typeof HaibaWalletRoute
   '/haiba/welcome': typeof HaibaWelcomeRoute
   '/haiba': typeof HaibaIndexRoute
@@ -149,6 +157,7 @@ export interface FileRoutesById {
   '/haiba/basket': typeof HaibaBasketRoute
   '/haiba/plans': typeof HaibaPlansRoute
   '/haiba/points': typeof HaibaPointsRoute
+  '/haiba/travel': typeof HaibaTravelRoute
   '/haiba/wallet': typeof HaibaWalletRoute
   '/haiba/welcome': typeof HaibaWelcomeRoute
   '/haiba/': typeof HaibaIndexRoute
@@ -169,6 +178,7 @@ export interface FileRouteTypes {
     | '/haiba/basket'
     | '/haiba/plans'
     | '/haiba/points'
+    | '/haiba/travel'
     | '/haiba/wallet'
     | '/haiba/welcome'
     | '/haiba/'
@@ -187,6 +197,7 @@ export interface FileRouteTypes {
     | '/haiba/basket'
     | '/haiba/plans'
     | '/haiba/points'
+    | '/haiba/travel'
     | '/haiba/wallet'
     | '/haiba/welcome'
     | '/haiba'
@@ -205,6 +216,7 @@ export interface FileRouteTypes {
     | '/haiba/basket'
     | '/haiba/plans'
     | '/haiba/points'
+    | '/haiba/travel'
     | '/haiba/wallet'
     | '/haiba/welcome'
     | '/haiba/'
@@ -224,6 +236,7 @@ export interface RootRouteChildren {
   HaibaBasketRoute: typeof HaibaBasketRoute
   HaibaPlansRoute: typeof HaibaPlansRoute
   HaibaPointsRoute: typeof HaibaPointsRoute
+  HaibaTravelRoute: typeof HaibaTravelRoute
   HaibaWalletRoute: typeof HaibaWalletRoute
   HaibaWelcomeRoute: typeof HaibaWelcomeRoute
   HaibaIndexRoute: typeof HaibaIndexRoute
@@ -273,6 +286,13 @@ declare module '@tanstack/react-router' {
       path: '/haiba/points'
       fullPath: '/haiba/points'
       preLoaderRoute: typeof HaibaPointsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/travel': {
+      id: '/haiba/travel'
+      path: '/haiba/travel'
+      fullPath: '/haiba/travel'
+      preLoaderRoute: typeof HaibaTravelRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/haiba/wallet': {
@@ -360,6 +380,7 @@ const rootRouteChildren: RootRouteChildren = {
   HaibaBasketRoute: HaibaBasketRoute,
   HaibaPlansRoute: HaibaPlansRoute,
   HaibaPointsRoute: HaibaPointsRoute,
+  HaibaTravelRoute: HaibaTravelRoute,
   HaibaWalletRoute: HaibaWalletRoute,
   HaibaWelcomeRoute: HaibaWelcomeRoute,
   HaibaIndexRoute: HaibaIndexRoute,
