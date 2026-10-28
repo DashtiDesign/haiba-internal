@@ -378,7 +378,15 @@ export default function PromoWaitlist() {
                 {"+"}
               </span>
             </span>
-            <span style={{ display: "flex", flexDirection: "column", gap: "3px", minWidth: "0" }}>
+            <span
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "3px",
+                minWidth: "0",
+                flex: "1",
+              }}
+            >
               <span
                 style={{
                   fontSize: "12px",

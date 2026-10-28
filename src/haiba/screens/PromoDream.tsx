@@ -508,6 +508,63 @@ export default function PromoDream() {
             </div>
           </div>
           <div
+            className="hb-rise hb-d2"
+            style={{
+              marginTop: "20px",
+              background: "#2B2740",
+              borderRadius: "16px",
+              padding: "16px 18px 14px 18px",
+              boxShadow: "none",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "baseline",
+                gap: "8px",
+                color: "#FFFFFF",
+                fontSize: "16px",
+                fontWeight: "700",
+              }}
+            >
+              {"I use Unipal "}
+              <span
+                className={v.bump}
+                style={{ fontSize: "30px", fontWeight: "800", letterSpacing: "-0.02em" }}
+              >
+                {v.visits}
+              </span>{" "}
+              {v.times}
+              {" a month"}
+            </div>
+            <input
+              type="range"
+              min="1"
+              max="12"
+              step="1"
+              value={v.visits}
+              onInput={v.onVisits}
+              onChange={v.onVisits}
+              aria-label="How many times you use Unipal a month"
+              className="hb-range"
+              style={{ marginTop: "14px", background: v.rangeBg }}
+            />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                fontSize: "12.5px",
+                fontWeight: "700",
+                color: "#B9B3CC",
+                marginTop: "8px",
+              }}
+            >
+              <span>{"1"}</span>
+              <span>{"Drag to see your year"}</span>
+              <span>{"12"}</span>
+            </div>
+          </div>
+          <div
             style={{
               marginTop: "14px",
               border: "1.5px dashed rgba(192,244,2,0.55)",
@@ -547,7 +604,15 @@ export default function PromoDream() {
                 {"+"}
               </span>
             </span>
-            <span style={{ display: "flex", flexDirection: "column", gap: "3px", minWidth: "0" }}>
+            <span
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "3px",
+                minWidth: "0",
+                flex: "1",
+              }}
+            >
               <span
                 style={{
                   fontSize: "12px",
@@ -567,7 +632,7 @@ export default function PromoDream() {
                   color: "#FFFFFF",
                 }}
               >
-                {"+ Bonus points every visit"}
+                {v.ptsTitle}
               </span>
               <span
                 style={{
@@ -577,8 +642,19 @@ export default function PromoDream() {
                   lineHeight: "1.4",
                 }}
               >
-                {"Every time you use Unipal. Spend them on free drinks, meals and popcorn."}
+                {v.ptsSub}
               </span>
+            </span>
+            <span
+              className={v.bump}
+              style={{
+                fontSize: "17px",
+                fontWeight: "800",
+                color: "#C0F402",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {v.ptsVal}
             </span>
           </div>
           <div
@@ -630,7 +706,7 @@ export default function PromoDream() {
                 color: "#C0F402",
               }}
             >
-              {v.worth}
+              <span className={v.bump}>{v.worth}</span>
             </div>
             <div
               style={{ fontSize: "16px", fontWeight: "600", color: "#E8E4F4", marginTop: "10px" }}

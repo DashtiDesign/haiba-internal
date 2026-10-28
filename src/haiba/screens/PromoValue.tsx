@@ -87,7 +87,7 @@ export default function PromoValue() {
               lineHeight: "1.05",
             }}
           >
-            {v.worth}
+            <span className={v.bump}>{v.worth}</span>
             {" of free stuff."}
             <br />
             <span style={{ color: "#6C3FFA" }}>
@@ -107,6 +107,63 @@ export default function PromoValue() {
             }}
           >
             {"One year of Haiba. Do the maths."}
+          </div>
+          <div
+            className="hb-rise hb-d2"
+            style={{
+              marginTop: "20px",
+              background: "#FFFFFF",
+              borderRadius: "16px",
+              padding: "16px 18px 14px 18px",
+              boxShadow: "0 10px 26px rgba(76,52,140,0.08)",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "baseline",
+                gap: "8px",
+                color: "#1E1B2E",
+                fontSize: "16px",
+                fontWeight: "700",
+              }}
+            >
+              {"I use Unipal "}
+              <span
+                className={v.bump}
+                style={{ fontSize: "30px", fontWeight: "800", letterSpacing: "-0.02em" }}
+              >
+                {v.visits}
+              </span>{" "}
+              {v.times}
+              {" a month"}
+            </div>
+            <input
+              type="range"
+              min="1"
+              max="12"
+              step="1"
+              value={v.visits}
+              onInput={v.onVisits}
+              onChange={v.onVisits}
+              aria-label="How many times you use Unipal a month"
+              className="hb-range hb-range-light"
+              style={{ marginTop: "14px", background: v.rangeBg }}
+            />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                fontSize: "12.5px",
+                fontWeight: "700",
+                color: "#6B6880",
+                marginTop: "8px",
+              }}
+            >
+              <span>{"1"}</span>
+              <span>{"Drag to see your year"}</span>
+              <span>{"12"}</span>
+            </div>
           </div>
           <div
             className="hb-rise hb-d2"
@@ -321,6 +378,7 @@ export default function PromoValue() {
                     letterSpacing: "-0.02em",
                     color: "#1E1B2E",
                   }}
+                  className={v.bump}
                 >
                   {v.worth}
                 </span>
@@ -409,7 +467,15 @@ export default function PromoValue() {
                 {"+"}
               </span>
             </span>
-            <span style={{ display: "flex", flexDirection: "column", gap: "3px", minWidth: "0" }}>
+            <span
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "3px",
+                minWidth: "0",
+                flex: "1",
+              }}
+            >
               <span
                 style={{
                   fontSize: "12px",
@@ -429,7 +495,7 @@ export default function PromoValue() {
                   color: "#1E1B2E",
                 }}
               >
-                {"+ Bonus points every visit"}
+                {v.ptsTitle}
               </span>
               <span
                 style={{
@@ -439,8 +505,19 @@ export default function PromoValue() {
                   lineHeight: "1.4",
                 }}
               >
-                {"2x at new shops. 5x every 5th visit. Spend them on free drinks and meals."}
+                {"2x at new shops. 5x every 5th visit. All yours on top."}
               </span>
+            </span>
+            <span
+              className={v.bump}
+              style={{
+                fontSize: "17px",
+                fontWeight: "800",
+                color: "#6C3FFA",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {v.ptsVal}
             </span>
           </div>
         </div>
