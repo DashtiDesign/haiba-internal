@@ -467,20 +467,23 @@ export function useVals() {
       return a.name.localeCompare(b.name);
     });
   var rows = list.map(function (s, i, a) {
-    var c = canCount(s);
+    var can = minPts(s) <= left;
+    var names = s.rewards.map(function (d) {
+      return d.name.toLowerCase();
+    });
+    var line =
+      names.length > 1
+        ? names.slice(0, -1).join(", ") + " and " + names[names.length - 1]
+        : names[0];
     return rowOf(
       s,
       i,
       a,
-      s.rewards.length +
-        (s.rewards.length === 1 ? " reward" : " rewards") +
-        " · from " +
-        minPts(s).toLocaleString("en-US") +
-        " points",
+      line.charAt(0).toUpperCase() + line.slice(1),
       "",
-      c ? c + " to get" : "",
-      "#C0F402",
-      "#1F2600",
+      "From " + minPts(s).toLocaleString("en-US"),
+      can ? "#C0F402" : "#F1F1F4",
+      can ? "#1F2600" : "#8A8A96",
     );
   });
   var mineShops = SHOPS.filter(function (s) {
@@ -535,22 +538,22 @@ export function useVals() {
       setState({ sheet: "", ask: "", demo: "" });
     },
     hasMine: mineShops.length > 0,
-    mineNote: "Where you use Unipal",
+    mineNote: "Lime means you can get it now",
     mine: mineShops.map(function (s) {
       var c = canCount(s);
       return Object.assign(withLogo(s), {
         short: s.name.replace("The ", ""),
-        aria: s.name + ", " + c + " rewards you can get",
-        badge: c ? c + " to get" : "from " + minPts(s),
+        aria: s.name + ", rewards from " + minPts(s) + " points",
+        badge: "From " + minPts(s).toLocaleString("en-US"),
         badgeBg: c ? "#C0F402" : "#FFFFFF",
-        badgeInk: c ? "#1F2600" : "#6B6880",
+        badgeInk: c ? "#1F2600" : "#8A8A96",
         open: openShop(s.key),
       });
     }),
     canGet: canGet.slice(0, 8),
     canNote: canGet.length + " rewards",
     listTitle: browsing ? "All shops" : q ? "Results" : chip,
-    listNote: browsing ? "A to Z" : "",
+    listNote: browsing ? "Points needed" : "",
     earnOrder: "0",
   });
 }
