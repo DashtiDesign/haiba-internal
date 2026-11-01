@@ -124,6 +124,12 @@ export function useVals() {
   var awayNames = away.map(function (c) {
     return c.name;
   });
+  var travelTitle0 =
+    "Going to " +
+    awayNames.slice(0, -1).join(", ") +
+    " or " +
+    awayNames[awayNames.length - 1] +
+    "?";
   var travelVals = {
     travelTitle:
       "Going to " +
@@ -134,6 +140,13 @@ export function useVals() {
     travelAway: away.map(function (c, i) {
       return Object.assign({}, c, { ml: i === 0 ? "0" : "-8px" });
     }),
+    travelRowSub: tLocked
+      ? "Unlocks after 3 months on the monthly plan"
+      : tUsed
+        ? "Used on Airalo. You saved BHD 5.64"
+        : tShown
+          ? "Your Airalo code is ready"
+          : travelTitle0 + " 5GB on us.",
     travelHasPill: tLocked || tUsed || tShown,
     travelPill: tLocked ? "Locked" : "Used",
     travelOp: tUsed ? "0.6" : "1",
@@ -300,6 +313,7 @@ export function useVals() {
     giftLeft: "10 days left",
     giftMarks: giftMarks,
     ready: ready,
+    hasActive: ready.length > 0,
     readyCount: ready.length ? ready.length + " to use" : "",
     noActive: ready.length === 0,
     spend: [
