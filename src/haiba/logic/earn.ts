@@ -428,6 +428,7 @@ export function useVals() {
       pillBg: pillBg,
       pillInk: pillInk,
       pillOp: pill ? "1" : "0",
+      pillDisp: pill ? "block" : "none",
       rule: i === a.length - 1 ? "none" : "1px solid #F1EFF7",
       open: openShop(s.key),
     });
@@ -558,6 +559,7 @@ export function useVals() {
         short: s.name.replace("The ", ""),
         aria: s.name + ", next visit " + np + " points",
         badge: t || "+" + np,
+        badgeDisp: "block",
         badgeBg: t === "5x" ? "#C0F402" : t ? "#6C3FFA" : "#FFFFFF",
         badgeInk: t === "5x" ? "#1F2600" : t ? "#FFFFFF" : "#4A4660",
         open: openShop(s.key),

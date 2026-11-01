@@ -428,6 +428,7 @@ export function useVals() {
       pillBg: pillBg,
       pillInk: pillInk,
       pillOp: pill ? "1" : "0",
+      pillDisp: pill ? "block" : "none",
       rule: i === a.length - 1 ? "none" : "1px solid #F1EFF7",
       open: openShop(s.key),
     });
@@ -475,16 +476,7 @@ export function useVals() {
       names.length > 1
         ? names.slice(0, -1).join(", ") + " and " + names[names.length - 1]
         : names[0];
-    return rowOf(
-      s,
-      i,
-      a,
-      line.charAt(0).toUpperCase() + line.slice(1),
-      "",
-      "From " + minPts(s).toLocaleString("en-US"),
-      can ? "#C0F402" : "#F1F1F4",
-      can ? "#1F2600" : "#8A8A96",
-    );
+    return rowOf(s, i, a, line.charAt(0).toUpperCase() + line.slice(1), "", "", "", "");
   });
   var mineShops = SHOPS.filter(function (s) {
     return s.visits > 0;
@@ -538,22 +530,23 @@ export function useVals() {
       setState({ sheet: "", ask: "", demo: "" });
     },
     hasMine: mineShops.length > 0,
-    mineNote: "Lime means you can get it now",
+    mineNote: "Where you use Unipal",
     mine: mineShops.map(function (s) {
       var c = canCount(s);
       return Object.assign(withLogo(s), {
         short: s.name.replace("The ", ""),
         aria: s.name + ", rewards from " + minPts(s) + " points",
-        badge: "From " + minPts(s).toLocaleString("en-US"),
-        badgeBg: c ? "#C0F402" : "#FFFFFF",
-        badgeInk: c ? "#1F2600" : "#8A8A96",
+        badge: "",
+        badgeDisp: "none",
+        badgeBg: "#FFFFFF",
+        badgeInk: "#1E1B2E",
         open: openShop(s.key),
       });
     }),
     canGet: canGet.slice(0, 8),
     canNote: canGet.length + " rewards",
     listTitle: browsing ? "All shops" : q ? "Results" : chip,
-    listNote: browsing ? "Points needed" : "",
+    listNote: browsing ? "A to Z" : "",
     earnOrder: "0",
   });
 }

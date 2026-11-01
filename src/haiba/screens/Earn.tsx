@@ -342,6 +342,7 @@ export default function Earn() {
                             ) : null}
                             <span
                               style={{
+                                display: m.badgeDisp,
                                 position: "absolute",
                                 left: "50%",
                                 bottom: "-8px",
@@ -611,6 +612,7 @@ export default function Earn() {
                   </span>
                   <span
                     style={{
+                      display: r.pillDisp,
                       flex: "none",
                       fontSize: "13px",
                       fontWeight: "800",
