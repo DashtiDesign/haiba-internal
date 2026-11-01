@@ -154,7 +154,7 @@ export function useVals() {
     },
     reset: function () {
       setState({ done: false, cancelled: [], accepted: [], qty: [0, 0, 0], codesQty: null });
-      nav("/shop/coffee-bean");
+      nav("/haiba/rewards");
     },
     heroSrc: accepted.length ? "/haiba/birds/15-receipt.png" : "/haiba/birds/13-fist.png",
     heldBadge:

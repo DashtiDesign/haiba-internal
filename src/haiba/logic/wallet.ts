@@ -92,8 +92,8 @@ export function useVals() {
       setState({ worth: w + 1 });
     },
     actions: [
-      { mark: "+", label: "Earn", href: "/shop/coffee-bean" },
-      { mark: "★", label: "Rewards", href: "/shop/coffee-bean" },
+      { mark: "+", label: "Earn", href: "/haiba/earn" },
+      { mark: "★", label: "Rewards", href: "/haiba/rewards" },
       { mark: "#", label: "My codes", href: "/haiba/basket" },
       { mark: "U", label: "Unipass" },
     ],

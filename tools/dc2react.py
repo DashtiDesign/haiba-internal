@@ -18,6 +18,8 @@ ROUTES = {
     "Shop.dc.html": "/shop/coffee-bean",
     "Basket.dc.html": "/haiba/basket",
     "Travel.dc.html": "/haiba/travel",
+    "Rewards.dc.html": "/haiba/rewards",
+    "Earn.dc.html": "/haiba/earn",
 }
 BLOBS = {
     # Flags: flag-icons package (MIT), 1x1 set

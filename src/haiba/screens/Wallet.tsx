@@ -371,7 +371,7 @@ export default function Wallet() {
                 href="#"
                 onClick={(e: any) => {
                   e.preventDefault();
-                  go("/shop/coffee-bean/redeem");
+                  go("/haiba/earn");
                 }}
               >
                 {v.bannerCta}
@@ -601,7 +601,7 @@ export default function Wallet() {
                       href="#"
                       onClick={(e: any) => {
                         e.preventDefault();
-                        go("/shop/coffee-bean");
+                        go("/haiba/rewards");
                       }}
                     >
                       <span
@@ -662,7 +662,7 @@ export default function Wallet() {
                 href="#"
                 onClick={(e: any) => {
                   e.preventDefault();
-                  go("/shop/coffee-bean");
+                  go("/haiba/rewards");
                 }}
               >
                 {"See all rewards"}

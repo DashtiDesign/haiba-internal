@@ -242,6 +242,108 @@ export default function Hub() {
               {v.memberLine}
             </span>
           </div>
+          <div
+            className="hb-rise hb-d2"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+              gap: "10px",
+              marginTop: "22px",
+            }}
+          >
+            <Link
+              className="hb-press"
+              style={{
+                textDecoration: "none",
+                color: "#1E1B2E",
+                background: "#FFFFFF",
+                border: "1px solid #E9E5F4",
+                borderRadius: "16px",
+                padding: "12px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                boxShadow: "0 6px 16px rgba(76,52,140,0.06)",
+              }}
+              to="/haiba/earn"
+            >
+              <span
+                style={{
+                  width: "38px",
+                  height: "38px",
+                  flex: "none",
+                  borderRadius: "12px",
+                  background: "#C0F402",
+                  color: "#1F2600",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <svg
+                  aria-hidden="true"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M12 19V5"></path>
+                  <path d="M6 11l6-6 6 6"></path>
+                </svg>
+              </span>
+              <span style={{ display: "flex", flexDirection: "column", gap: "1px", minWidth: "0" }}>
+                <span style={{ fontSize: "15px", fontWeight: "800" }}>{"Earn points"}</span>
+                <span style={{ fontSize: "12.5px", fontWeight: "600", color: "#6B6880" }}>
+                  {v.earnSub}
+                </span>
+              </span>
+            </Link>
+            <Link
+              className="hb-press"
+              style={{
+                textDecoration: "none",
+                color: "#1E1B2E",
+                background: "#FFFFFF",
+                border: "1px solid #E9E5F4",
+                borderRadius: "16px",
+                padding: "12px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                boxShadow: "0 6px 16px rgba(76,52,140,0.06)",
+              }}
+              to="/haiba/rewards"
+            >
+              <span
+                style={{
+                  width: "38px",
+                  height: "38px",
+                  flex: "none",
+                  borderRadius: "12px",
+                  background: "#6C3FFA",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Artwork
+                  src="/haiba/coins/coin-34.webp"
+                  alt=""
+                  style={{ width: "26px", height: "26px", objectFit: "contain", display: "block" }}
+                />
+              </span>
+              <span style={{ display: "flex", flexDirection: "column", gap: "1px", minWidth: "0" }}>
+                <span style={{ fontSize: "15px", fontWeight: "800" }}>{"Spend points"}</span>
+                <span style={{ fontSize: "12.5px", fontWeight: "600", color: "#6B6880" }}>
+                  {"200+ shops"}
+                </span>
+              </span>
+            </Link>
+          </div>
           <a
             className="hb-press hb-rise hb-d2"
             style={{
@@ -249,7 +351,7 @@ export default function Hub() {
               color: "#1F2600",
               background: "#C0F402",
               borderRadius: "16px",
-              marginTop: "28px",
+              marginTop: "12px",
               padding: "20px 18px 18px 18px",
               position: "relative",
               overflow: "hidden",
@@ -1059,13 +1161,12 @@ export default function Hub() {
             >
               {"Where to use your points"}
             </span>
-            <a
+            <Link
               style={{ fontSize: "14px", fontWeight: "700", textDecoration: "none" }}
-              href="#"
-              onClick={(e: any) => e.preventDefault()}
+              to="/haiba/rewards"
             >
               {"See all"}
-            </a>
+            </Link>
           </div>
           <div
             style={{
@@ -1089,7 +1190,7 @@ export default function Hub() {
           >
             {(v.spend || []).map((u: any, idx0: number) => (
               <Fragment key={idx0}>
-                <a
+                <Link
                   className="hb-press"
                   style={{
                     textDecoration: "none",
@@ -1102,11 +1203,7 @@ export default function Hub() {
                     flexDirection: "column",
                     boxShadow: "0 6px 16px rgba(76,52,140,0.06)",
                   }}
-                  href="#"
-                  onClick={(e: any) => {
-                    e.preventDefault();
-                    if (u.href) go(u.href);
-                  }}
+                  to="/haiba/rewards"
                 >
                   <span
                     style={{
@@ -1181,7 +1278,7 @@ export default function Hub() {
                       {u.pts}
                     </span>
                   </span>
-                </a>
+                </Link>
               </Fragment>
             ))}
           </div>

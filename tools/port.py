@@ -36,6 +36,9 @@ BOARDS = {
     "PromoGift": ("promogift", "PromoGift"),
     # Free travel data perk (Airalo). Plan and home country come from the store, see dc.ts.
     "Travel": ("travel", "Travel"),
+    # Webview only: Haiba pages that replace the Haiba parts of core Unipal pages (shop, redeem).
+    "Rewards": ("rewards", "Rewards"),
+    "Earn": ("earn", "Earn"),
 }
 PD = 'href="#" onClick={(e: any) => e.preventDefault()}'
 
@@ -52,9 +55,9 @@ GO_VAR = 'href="#" onClick={(e: any) => { e.preventDefault(); if (v.navTipHref) 
 
 # Placeholder links (href="#") in the order they appear in each screen. None = stays a placeholder.
 LINKS = {
-    "Hub": [None, None, None, go_item("u"), GO_VAR, go("/"), None, None, None],
+    "Hub": [None, None, GO_VAR, go("/"), None, None, None],
     "Plans": [None, go("/")],
-    "Wallet": [go_item("a"), go("/shop/coffee-bean/redeem"), None, None, go("/shop/coffee-bean"), go("/shop/coffee-bean")],
+    "Wallet": [go_item("a"), go("/haiba/earn"), None, None, go("/haiba/rewards"), go("/haiba/rewards")],
 }
 
 # Extra text patches on the screen (TSX) and logic (TS) files.
@@ -81,14 +84,16 @@ SCREEN = {
     ],
 }
 LOGIC = {
+    "Rewards": [("var balance = 1240;", "var balance = props.base;")],
+    "Earn": [("var balance = 1240;", "var balance = props.available;")],
     "Hub": [
         ("var target = isNew ? 500 : 1240;", "var target = props.available;"),
-        ("      navTipCta:", "      navTipHref: isNew ? '' : '/shop/coffee-bean/redeem',\n      navTipCta:"),
+        ("      navTipCta:", "      navTipHref: isNew ? '' : '/haiba/earn',\n      navTipCta:"),
     ],
     "Wallet": [
         ("points: n(isNew ? 500 : 1240),", "points: n(props.available),"),
-        ("{ mark: '+', label: 'Earn' }", "{ mark: '+', label: 'Earn', href: '/shop/coffee-bean' }"),
-        ("{ mark: '★', label: 'Rewards' }", "{ mark: '★', label: 'Rewards', href: '/shop/coffee-bean' }"),
+        ("{ mark: '+', label: 'Earn' }", "{ mark: '+', label: 'Earn', href: '/haiba/earn' }"),
+        ("{ mark: '★', label: 'Rewards' }", "{ mark: '★', label: 'Rewards', href: '/haiba/rewards' }"),
         ("{ mark: '#', label: 'My codes' }", "{ mark: '#', label: 'My codes', href: '/haiba/basket' }"),
     ],
     "Shop": [
@@ -118,7 +123,7 @@ LOGIC = {
         ),
         (
             "reset: function () { setState({ done: false, cancelled: [], accepted: [], qty: [1, 1] }); },",
-            "reset: function () { setState({ done: false, cancelled: [], accepted: [], qty: [0, 0, 0], codesQty: null }); nav('/shop/coffee-bean'); },",
+            "reset: function () { setState({ done: false, cancelled: [], accepted: [], qty: [0, 0, 0], codesQty: null }); nav('/haiba/rewards'); },",
         ),
     ],
 }

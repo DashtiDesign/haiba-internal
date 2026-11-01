@@ -47,7 +47,7 @@ export default function Basket() {
                   color: "#1A1A1A",
                   textDecoration: "none",
                 }}
-                to="/shop/coffee-bean"
+                to="/haiba/rewards"
               >
                 <svg
                   aria-hidden="true"
@@ -122,7 +122,7 @@ export default function Basket() {
                 </span>
                 <Link
                   style={{ fontSize: "14px", fontWeight: "600", textDecoration: "none" }}
-                  to="/shop/coffee-bean"
+                  to="/haiba/rewards"
                 >
                   {"Add more"}
                 </Link>
@@ -295,7 +295,7 @@ export default function Basket() {
                       {"Your basket is empty. "}
                       <Link
                         style={{ textDecoration: "none", fontWeight: "700" }}
-                        to="/shop/coffee-bean"
+                        to="/haiba/rewards"
                       >
                         {"Add items"}
                       </Link>

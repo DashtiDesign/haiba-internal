@@ -14,8 +14,10 @@ const SCREENS = [
   ["How points work", "/haiba/points"],
   ["How it works", "/haiba/welcome"],
   ["Haiba hub", "/haiba"],
-  ["Shop page", "/shop/coffee-bean"],
-  ["Redeem offer", "/shop/coffee-bean/redeem"],
+  ["Spend points", "/haiba/rewards"],
+  ["Earn points", "/haiba/earn"],
+  ["Shop page (core)", "/shop/coffee-bean"],
+  ["Redeem offer (core)", "/shop/coffee-bean/redeem"],
   ["Basket and codes", "/haiba/basket"],
   ["Wallet", "/haiba/wallet"],
   ["Travel data", "/haiba/travel"],
@@ -146,26 +148,6 @@ export default function PrototypePanel() {
               <div style={{ fontSize: 13, color: "#6B6880", marginTop: 6 }}>
                 Points: {hb.available.toLocaleString("en-US")} free of{" "}
                 {hb.base.toLocaleString("en-US")}
-              </div>
-
-              <div
-                style={{
-                  fontSize: 12,
-                  fontWeight: 700,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: "#6B6880",
-                  marginTop: 18,
-                }}
-              >
-                Visit on the Redeem screen
-              </div>
-              <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
-                {([1, 3, 5] as const).map((n) => (
-                  <button key={n} style={chip(s.visit === n)} onClick={() => hb.set({ visit: n })}>
-                    {n === 1 ? "1st" : n === 3 ? "3rd" : "5th"}
-                  </button>
-                ))}
               </div>
 
               <div

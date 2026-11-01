@@ -309,7 +309,7 @@ export function useVals() {
         pts: 300,
         logo: "/haiba/brands/coffee-bean.webp",
         bg: "#FCF4E9",
-        href: "/shop/coffee-bean",
+        href: "/haiba/rewards",
       },
       {
         brand: "Grip",
@@ -380,7 +380,8 @@ export function useVals() {
     navTip: isNew
       ? "Pick your October Unipass gift. You have 10 days left, and it is free."
       : "Your next visit at Jasmi’s is your 5th. It earns 200 points, not 40.",
-    navTipHref: isNew ? "" : "/shop/coffee-bean/redeem",
-    navTipCta: isNew ? "Pick my gift" : "See Jasmi’s offer",
+    navTipHref: isNew ? "" : "/haiba/earn",
+    navTipCta: isNew ? "Pick my gift" : "See my bonus",
+    earnSub: isNew ? "2x at new shops" : "5x at Jasmi’s next",
   });
 }
