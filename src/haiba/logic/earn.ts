@@ -6,7 +6,11 @@ import { useDC } from "../dc";
 export function useVals() {
   const { state, setState, props, nav } = useDC({
     q: "",
-    chip: "All",
+    cat: "",
+    tag: "All",
+    sort: "a",
+    f1: false,
+    f2: false,
     sheet: "",
     ask: "",
     demo: "",
@@ -22,7 +26,10 @@ export function useVals() {
     {
       key: "cb",
       name: "The Coffee Bean",
-      cat: "Coffee",
+      cat: "Cafes",
+      tags: ["Coffee", "Dessert"],
+      dist: 780,
+      photo: "#EAD9C6",
       logo: "/haiba/brands/coffee-bean.webp",
       bg: "#FFFFFF",
       visits: 1,
@@ -61,35 +68,12 @@ export function useVals() {
       ],
     },
     {
-      key: "jasmis",
-      name: "Jasmi’s",
-      cat: "Food",
-      mark: "J",
-      bg: "#D62828",
-      visits: 4,
-      rewards: [
-        {
-          name: "Soft drink",
-          sub: "Any can or bottle",
-          pts: 350,
-          ph: "DRINK",
-          phBg: "#FDE4E4",
-          phInk: "#B11D1D",
-        },
-        {
-          name: "Fries",
-          sub: "Regular size",
-          pts: 600,
-          ph: "FRIES",
-          phBg: "#FFF1D6",
-          phInk: "#8A5A00",
-        },
-      ],
-    },
-    {
       key: "caribou",
       name: "Caribou Coffee",
-      cat: "Coffee",
+      cat: "Cafes",
+      tags: ["Coffee"],
+      dist: 1200,
+      photo: "#D8E8F2",
       mark: "C",
       bg: "#3B2A22",
       visits: 2,
@@ -113,9 +97,112 @@ export function useVals() {
       ],
     },
     {
+      key: "barns",
+      name: "Barn’s",
+      cat: "Cafes",
+      tags: ["Coffee", "Dessert"],
+      dist: 650,
+      photo: "#E6EFD9",
+      mark: "B",
+      bg: "#2F6B3A",
+      visits: 3,
+      rewards: [
+        {
+          name: "Cookie",
+          sub: "Any cookie",
+          pts: 500,
+          ph: "COOKIE",
+          phBg: "#F6E7D2",
+          phInk: "#7A4E2D",
+        },
+      ],
+    },
+    {
+      key: "teatime",
+      name: "Tea Time",
+      cat: "Cafes",
+      tags: ["Tea"],
+      dist: 780,
+      photo: "#F3D9D6",
+      mark: "T",
+      bg: "#B11D1D",
+      visits: 0,
+      rewards: [
+        {
+          name: "Karak",
+          sub: "Regular cup",
+          pts: 250,
+          ph: "KARAK",
+          phBg: "#FFF1D6",
+          phInk: "#8A5A00",
+        },
+      ],
+    },
+    {
+      key: "crepele",
+      name: "Crepele",
+      cat: "Cafes",
+      tags: ["Dessert"],
+      dist: 900,
+      photo: "#F6E1E1",
+      mark: "Cr",
+      bg: "#C2185B",
+      visits: 0,
+      rewards: [
+        {
+          name: "Black coffee",
+          sub: "Hot or iced",
+          pts: 300,
+          ph: "COFFEE",
+          phBg: "#E3DCD6",
+          phInk: "#3B2A22",
+        },
+        {
+          name: "Mini crepe",
+          sub: "Nutella or strawberry",
+          pts: 800,
+          ph: "CREPE",
+          phBg: "#FDE4E4",
+          phInk: "#B11D1D",
+        },
+      ],
+    },
+    {
+      key: "jasmis",
+      name: "Jasmi’s",
+      cat: "Restaurants",
+      tags: ["Fast food", "Burgers"],
+      dist: 1500,
+      photo: "#FBE0D6",
+      mark: "J",
+      bg: "#D62828",
+      visits: 4,
+      rewards: [
+        {
+          name: "Soft drink",
+          sub: "Any can or bottle",
+          pts: 350,
+          ph: "DRINK",
+          phBg: "#FDE4E4",
+          phInk: "#B11D1D",
+        },
+        {
+          name: "Fries",
+          sub: "Regular size",
+          pts: 600,
+          ph: "FRIES",
+          phBg: "#FFF1D6",
+          phInk: "#8A5A00",
+        },
+      ],
+    },
+    {
       key: "saffron",
       name: "Saffron Kitchen",
-      cat: "Food",
+      cat: "Restaurants",
+      tags: ["Indian"],
+      dist: 2100,
+      photo: "#FCE7C8",
       mark: "S",
       bg: "#E07A1F",
       visits: 1,
@@ -131,45 +218,12 @@ export function useVals() {
       ],
     },
     {
-      key: "barns",
-      name: "Barn’s",
-      cat: "Coffee",
-      mark: "B",
-      bg: "#7A4E2D",
-      visits: 3,
-      rewards: [
-        {
-          name: "Cookie",
-          sub: "Any cookie",
-          pts: 500,
-          ph: "COOKIE",
-          phBg: "#F6E7D2",
-          phInk: "#7A4E2D",
-        },
-      ],
-    },
-    {
-      key: "vox",
-      name: "VOX Cinemas",
-      cat: "Cinema",
-      logo: "/haiba/brands/vox.webp",
-      bg: "#FFFFFF",
-      visits: 0,
-      rewards: [
-        {
-          name: "Popcorn",
-          sub: "Regular, salted or sweet",
-          pts: 600,
-          ph: "POPCORN",
-          phBg: "#FFF4CC",
-          phInk: "#8A6A00",
-        },
-      ],
-    },
-    {
       key: "wingman",
       name: "Wingman",
-      cat: "Food",
+      cat: "Restaurants",
+      tags: ["Fast food", "Wings"],
+      dist: 1100,
+      photo: "#FDE9DA",
       logo: "/haiba/brands/wingman.webp",
       bg: "#F9F9F9",
       visits: 0,
@@ -187,7 +241,10 @@ export function useVals() {
     {
       key: "grip",
       name: "Grip",
-      cat: "Gym",
+      cat: "Fitness",
+      tags: ["Gym"],
+      dist: 2600,
+      photo: "#E2E2E2",
       logo: "/haiba/brands/grip.webp",
       bg: "#000000",
       visits: 0,
@@ -205,7 +262,10 @@ export function useVals() {
     {
       key: "albayan",
       name: "Albayan",
-      cat: "Beauty",
+      cat: "Self care",
+      tags: ["Perfume"],
+      dist: 3100,
+      photo: "#ECE6F7",
       logo: "/haiba/brands/albayan.webp",
       bg: "#FFFFFF",
       visits: 0,
@@ -221,9 +281,33 @@ export function useVals() {
       ],
     },
     {
+      key: "vox",
+      name: "VOX Cinemas",
+      cat: "Entertainment",
+      tags: ["Cinema"],
+      dist: 4200,
+      photo: "#FFF4CC",
+      logo: "/haiba/brands/vox.webp",
+      bg: "#FFFFFF",
+      visits: 0,
+      rewards: [
+        {
+          name: "Popcorn",
+          sub: "Regular, salted or sweet",
+          pts: 600,
+          ph: "POPCORN",
+          phBg: "#FFF4CC",
+          phInk: "#8A6A00",
+        },
+      ],
+    },
+    {
       key: "alkuwaiti",
       name: "Alkuwaiti",
-      cat: "Car",
+      cat: "Car care",
+      tags: ["Car wash"],
+      dist: 5300,
+      photo: "#E9F1FB",
       logo: "/haiba/brands/alkuwaiti.webp",
       bg: "#FFFFFF",
       visits: 0,
@@ -415,137 +499,195 @@ export function useVals() {
   Object.keys(sheetSrc).forEach(function (k) {
     sheetFlat["sheet_" + k] = sheetSrc[k];
   });
-  var match = function (s) {
-    return !q || s.name.toLowerCase().indexOf(q) >= 0 || s.cat.toLowerCase().indexOf(q) >= 0;
-  };
-  var browsing = !q && chip === "All";
-  var rowOf = function (s, i, a, line, lineInk, pill, pillBg, pillInk) {
-    return Object.assign(withLogo(s), {
-      name: s.name,
-      line: line,
-      lineInk: lineInk || "#6B6880",
-      pill: pill,
-      pillBg: pillBg,
-      pillInk: pillInk,
-      pillOp: pill ? "1" : "0",
-      pillDisp: pill ? "block" : "none",
-      rule: i === a.length - 1 ? "none" : "1px solid #F1EFF7",
-      open: openShop(s.key),
-    });
-  };
-  var chipDefs = [
-    "All",
-    "Bonus waiting",
-    "New to you",
-    "Coffee",
-    "Food",
-    "Cinema",
-    "Gym",
-    "Beauty",
-    "Car",
+  var cat = state.cat || "";
+  var tag = state.tag || "All";
+  var sort = state.sort || "a";
+  var f1 = !!state.f1,
+    f2 = !!state.f2;
+  var browsing = !q && !cat;
+  var CATS = [
+    { key: "Cafes" },
+    { key: "Restaurants" },
+    { key: "Fitness" },
+    { key: "Self care" },
+    { key: "Entertainment" },
+    { key: "Car care" },
   ];
-  var list = SHOPS.filter(match).filter(function (s) {
-    if (chip === "Bonus waiting") return nextPts(s.visits) > 40;
-    if (chip === "New to you") return s.visits === 0;
-    if (chip === "All") return true;
-    return s.cat === chip;
+  var km = function (m) {
+    return m < 1000 ? m + " m" : (m / 1000).toFixed(1) + " km";
+  };
+  var tiles = CATS.map(function (c) {
+    var n = SHOPS.filter(function (s) {
+      return s.cat === c.key;
+    }).length;
+    var o = {
+      key: c.key,
+      count: n + (n === 1 ? " shop" : " shops"),
+      aria: c.key + ", " + n + " shops",
+      pick: function () {
+        setState({ cat: c.key, tag: "All", q: "" });
+      },
+    };
+    CATS.forEach(function (x, j) {
+      o["i" + j] = x.key === c.key;
+    });
+    return o;
   });
-  // biggest next bonus first, then shops you know, then A to Z
-  list = list.slice().sort(function (a, b) {
+  var catShops = SHOPS.filter(function (s) {
+    return !cat || s.cat === cat;
+  });
+  var tagList = ["All"];
+  catShops.forEach(function (s) {
+    s.tags.forEach(function (t) {
+      if (tagList.indexOf(t) < 0) tagList.push(t);
+    });
+  });
+  var tags = tagList.map(function (t) {
+    var on = t === tag;
+    return {
+      label: t,
+      on: String(on),
+      bg: on ? "#1E1B2E" : "#FFFFFF",
+      ink: on ? "#C0F402" : "#1E1B2E",
+      ring: on ? "none" : "0 0 0 1px #ECE8F5",
+      pick: function () {
+        setState({ tag: t });
+      },
+    };
+  });
+  var pill = function (label, on, pick) {
+    return {
+      label: label,
+      on: String(on),
+      pick: pick,
+      bg: on ? "#1E1B2E" : "#FFFFFF",
+      ink: on ? "#FFFFFF" : "#1E1B2E",
+      line: on ? "#1E1B2E" : "#E4DFF1",
+    };
+  };
+  var match = function (s) {
     return (
-      nextPts(b.visits) - nextPts(a.visits) || b.visits - a.visits || a.name.localeCompare(b.name)
+      !q ||
+      s.name.toLowerCase().indexOf(q) >= 0 ||
+      s.cat.toLowerCase().indexOf(q) >= 0 ||
+      s.tags.join(" ").toLowerCase().indexOf(q) >= 0
     );
+  };
+  var base = catShops.filter(match).filter(function (s) {
+    return tag === "All" || s.tags.indexOf(tag) >= 0;
   });
-  var rows = list.map(function (s, i, a) {
+  var filters = [
+    pill(sort === "n" ? "Sort: Nearest" : "Sort: Biggest bonus", true, function () {
+      setState({ sort: sort === "n" ? "a" : "n" });
+    }),
+    pill("Bonus waiting", f1, function () {
+      setState({ f1: !f1 });
+    }),
+    pill("Haven’t tried yet", f2, function () {
+      setState({ f2: !f2 });
+    }),
+  ];
+  var list = base.filter(function (s) {
+    return (!f1 || nextPts(s.visits) > 40) && (!f2 || s.visits === 0);
+  });
+  list = list.slice().sort(function (a, b) {
+    return sort === "n"
+      ? a.dist - b.dist
+      : nextPts(b.visits) - nextPts(a.visits) || b.visits - a.visits || a.dist - b.dist;
+  });
+  var rows = list.map(function (s) {
     var np = nextPts(s.visits),
       t = nextTag(s.visits);
-    var line =
+    var chip =
       s.visits === 0
-        ? "New to you · 2x on your first visit"
-        : "Visit " + (s.visits % 5) + " of 5 · next visit " + (t || "normal");
-    return rowOf(
-      s,
-      i,
-      a,
-      line,
-      s.visits === 0 ? "#6B6880" : "#4A4660",
-      "+" + np,
-      np === 200 ? "#C0F402" : np === 80 ? "#F0ECFF" : "#F1F1F4",
-      np === 200 ? "#1F2600" : np === 80 ? "#4F25D6" : "#4A4660",
-    );
+        ? { label: "New to you · +80 first visit", bg: "#F0ECFF", ink: "#4F25D6" }
+        : np === 200
+          ? { label: "Next visit +200 · 5x", bg: "#C0F402", ink: "#1F2600" }
+          : np === 80
+            ? { label: "Next visit +80 · 2x", bg: "#F0ECFF", ink: "#4F25D6" }
+            : { label: "Next visit +40", bg: "#FFFFFF", ink: "#4A4660" };
+    return Object.assign(withLogo(s), {
+      name: s.name,
+      photo: s.photo,
+      meta:
+        km(s.dist) +
+        " · " +
+        s.tags.join(", ") +
+        (s.visits ? " · Visit " + (s.visits % 5) + " of 5" : ""),
+      open: openShop(s.key),
+      chips: [chip],
+    });
   });
   var mineShops = SHOPS.filter(function (s) {
     return s.visits > 0;
   }).sort(function (a, b) {
     return nextPts(b.visits) - nextPts(a.visits);
   });
-  var bonusShops = mineShops.filter(function (s) {
-    return nextPts(s.visits) > 40;
-  });
-  var bonus = bonusShops.map(function (s) {
-    var np = nextPts(s.visits),
-      five = np === 200;
-    return Object.assign(withLogo(s), {
-      name: s.name,
-      pts: "+" + np,
-      tag: nextTag(s.visits),
-      line: five
-        ? "Your 5th visit. The biggest bonus."
-        : "Your " + (s.visits === 0 ? "1st" : "2nd") + " visit here earns double.",
-      bg2: five ? "#1E1B2E" : "#FFFFFF",
-      ink2: five ? "#FFFFFF" : "#1E1B2E",
-      ptsInk: five ? "#C0F402" : "#6C3FFA",
-      shadow: five ? "0 10px 22px rgba(30,27,46,0.25)" : "0 0 0 1px #ECE8F5",
-      open: openShop(s.key),
+  var bonus = mineShops
+    .filter(function (s) {
+      return nextPts(s.visits) > 40;
+    })
+    .map(function (s) {
+      var np = nextPts(s.visits),
+        five = np === 200;
+      return Object.assign(withLogo(s), {
+        name: s.name,
+        pts: "+" + np,
+        tag: nextTag(s.visits),
+        line: five
+          ? "Your 5th visit. The biggest bonus."
+          : "Your " + (s.visits === 0 ? "1st" : "2nd") + " visit here earns double.",
+        bg2: five ? "#1E1B2E" : "#FFFFFF",
+        ink2: five ? "#FFFFFF" : "#1E1B2E",
+        ptsInk: five ? "#C0F402" : "#6C3FFA",
+        shadow: five ? "0 10px 22px rgba(30,27,46,0.25)" : "0 0 0 1px #ECE8F5",
+        open: openShop(s.key),
+      });
     });
-  });
-  // always end with the open invitation: every new shop is 2x
-  var newCount = SHOPS.filter(function (s) {
+  var fresh = SHOPS.filter(function (s) {
     return s.visits === 0;
-  }).length;
-  bonus.push({
-    hasLogo: false,
-    noLogo: true,
-    logo: "",
-    mark: "2x",
-    bg: "#6C3FFA",
-    name: "Any new shop",
-    pts: "+80",
-    tag: "2x",
-    line: newCount + " shops here are new to you. Try one.",
-    bg2: "#C0F402",
-    ink2: "#1F2600",
-    ptsInk: "#1F2600",
-    shadow: "none",
-    open: function () {
-      setState({ chip: "New to you" });
-    },
-  });
+  })
+    .sort(function (a, b) {
+      return a.dist - b.dist;
+    })
+    .slice(0, 6)
+    .map(function (s) {
+      return Object.assign(withLogo(s), {
+        name: s.name,
+        pts: "+80",
+        tag: "2x",
+        line: km(s.dist) + " away · " + s.tags[0],
+        bg2: "#FFFFFF",
+        ink2: "#1E1B2E",
+        ptsInk: "#6C3FFA",
+        shadow: "0 0 0 1px #ECE8F5",
+        open: openShop(s.key),
+      });
+    });
   return Object.assign(sheetFlat, {
+    showBrowse: browsing,
+    showList: !browsing,
+    inCat: !!cat,
+    cat: cat,
+    tiles: tiles,
+    tags: tags,
+    filters: filters,
+    rows: rows,
+    noRows: rows.length === 0,
+    countLine:
+      rows.length +
+      (rows.length === 1 ? " shop" : " shops") +
+      (cat ? " in " + cat : "") +
+      (q ? " for “" + (state.q || "") + "”" : ""),
+    emptyLine: "Nothing here yet. Try another filter.",
+    backToAll: function () {
+      setState({ cat: "", tag: "All", f1: false, f2: false });
+    },
     balance: left.toLocaleString("en-US"),
     q: state.q || "",
     onSearch: function (e) {
       setState({ q: e.target.value });
     },
-    chips: chipDefs.map(function (c) {
-      var on = c === chip;
-      return {
-        label: c,
-        on: String(on),
-        bg: on ? "#1E1B2E" : "#FFFFFF",
-        ink: on ? "#C0F402" : "#1E1B2E",
-        ring: on ? "none" : "0 0 0 1px #ECE8F5",
-        pick: function () {
-          setState({ chip: c });
-        },
-      };
-    }),
-    showBrowse: browsing,
-    rows: rows,
-    noRows: rows.length === 0,
-    moreLine: browsing
-      ? "Showing " + rows.length + " of 200+ shops. Search to find yours."
-      : rows.length + (rows.length === 1 ? " shop" : " shops"),
     sheetOpen: !!sheet,
     closeSheet: function () {
       setState({ sheet: "", ask: "", demo: "" });
@@ -565,12 +707,14 @@ export function useVals() {
         open: openShop(s.key),
       });
     }),
-    bonus: bonus,
-    bonusNote: bonusShops.length
-      ? bonusShops.length + (bonusShops.length === 1 ? " shop" : " shops") + " pay extra next visit"
-      : "Start anywhere new",
-    listTitle: browsing ? "All shops" : q ? "Results" : chip,
-    listNote: browsing ? "Biggest bonus first" : "",
+    bonus: bonus.length ? bonus : fresh.slice(0, 3),
+    r1Title: bonus.length ? "Bonus waiting" : "Start here: 2x waiting",
+    r1Note: bonus.length
+      ? bonus.length + (bonus.length === 1 ? " shop pays" : " shops pay") + " extra next visit"
+      : "Nearest first",
+    fresh: fresh,
+    r2Title: "New to you, near you",
+    r2Note: "2x on your first visit",
     earnOrder: "0",
   });
 }

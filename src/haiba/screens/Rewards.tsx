@@ -106,19 +106,23 @@ export default function Rewards() {
               {v.balance}
             </span>
           </div>
-          <h1
-            className="hb-rise"
-            style={{
-              margin: "20px 4px 0 4px",
-              fontSize: "26px",
-              fontWeight: "800",
-              letterSpacing: "-0.03em",
-              lineHeight: "1.12",
-            }}
-          >
-            {"Free stuff for "}
-            <span style={{ color: "#6C3FFA" }}>{"your points."}</span>
-          </h1>
+          {v.showBrowse ? (
+            <>
+              <h1
+                className="hb-rise"
+                style={{
+                  margin: "20px 4px 0 4px",
+                  fontSize: "26px",
+                  fontWeight: "800",
+                  letterSpacing: "-0.03em",
+                  lineHeight: "1.12",
+                }}
+              >
+                {"Free stuff for "}
+                <span style={{ color: "#6C3FFA" }}>{"your points."}</span>
+              </h1>
+            </>
+          ) : null}
           <div style={{ position: "relative", marginTop: "14px" }}>
             <svg
               aria-hidden="true"
@@ -157,42 +161,181 @@ export default function Rewards() {
               }}
             />
           </div>
-          <div
-            style={{
-              display: "flex",
-              gap: "8px",
-              margin: "12px -16px 0 -16px",
-              padding: "0 16px",
-              overflowX: "auto",
-              scrollbarWidth: "none",
-            }}
-          >
-            {(v.chips || []).map((c: any, idx0: number) => (
-              <Fragment key={idx0}>
-                <button
-                  onClick={c.pick}
-                  aria-pressed={c.on}
-                  className="hb-press"
-                  style={{
-                    font: "inherit",
-                    flex: "none",
-                    border: "0",
-                    cursor: "pointer",
-                    fontSize: "13.5px",
-                    fontWeight: "800",
-                    borderRadius: "999px",
-                    padding: "8px 13px",
-                    background: c.bg,
-                    color: c.ink,
-                    boxShadow: c.ring,
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {c.label}
-                </button>
-              </Fragment>
-            ))}
-          </div>
+          {v.showBrowse ? (
+            <>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "10px",
+                  margin: "18px -16px 0 -16px",
+                  padding: "0 16px 2px 16px",
+                  overflowX: "auto",
+                  scrollbarWidth: "none",
+                }}
+              >
+                {(v.tiles || []).map((c: any, idx0: number) => (
+                  <Fragment key={idx0}>
+                    <button
+                      onClick={c.pick}
+                      aria-label={c.aria}
+                      className="hb-press"
+                      style={{
+                        font: "inherit",
+                        flex: "none",
+                        width: "72px",
+                        border: "0",
+                        background: "transparent",
+                        padding: "0",
+                        cursor: "pointer",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        gap: "6px",
+                        color: "#1E1B2E",
+                      }}
+                    >
+                      <span
+                        style={{
+                          width: "64px",
+                          height: "64px",
+                          borderRadius: "18px",
+                          background: "#1E1B2E",
+                          color: "#C0F402",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {c.i0 ? (
+                          <>
+                            <svg
+                              aria-hidden="true"
+                              width="30"
+                              height="30"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="1.8"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"></path>
+                              <path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"></path>
+                              <path d="M9 3v3M12 3v3"></path>
+                            </svg>
+                          </>
+                        ) : null}
+                        {c.i1 ? (
+                          <>
+                            <svg
+                              aria-hidden="true"
+                              width="30"
+                              height="30"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="1.8"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10"></path>
+                              <path d="M17 21V3c-2 0-3.5 2.5-3.5 6s1.5 4 3.5 4"></path>
+                            </svg>
+                          </>
+                        ) : null}
+                        {c.i2 ? (
+                          <>
+                            <svg
+                              aria-hidden="true"
+                              width="30"
+                              height="30"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="1.8"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M6.5 6.5v11M3.5 9v6M17.5 6.5v11M20.5 9v6M6.5 12h11"></path>
+                            </svg>
+                          </>
+                        ) : null}
+                        {c.i3 ? (
+                          <>
+                            <svg
+                              aria-hidden="true"
+                              width="30"
+                              height="30"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="1.8"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M12 3l1.8 4.6L18.5 9l-4.7 1.4L12 15l-1.8-4.6L5.5 9l4.7-1.4z"></path>
+                              <path d="M18 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"></path>
+                            </svg>
+                          </>
+                        ) : null}
+                        {c.i4 ? (
+                          <>
+                            <svg
+                              aria-hidden="true"
+                              width="30"
+                              height="30"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="1.8"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <rect x="3" y="6" width="18" height="12" rx="2"></rect>
+                              <path d="M8 6v12M16 6v12M3 12h18"></path>
+                            </svg>
+                          </>
+                        ) : null}
+                        {c.i5 ? (
+                          <>
+                            <svg
+                              aria-hidden="true"
+                              width="30"
+                              height="30"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="1.8"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M5 16l1.5-5a2 2 0 0 1 1.9-1.4h7.2a2 2 0 0 1 1.9 1.4L19 16"></path>
+                              <rect x="3" y="15" width="18" height="4" rx="1.5"></rect>
+                              <circle cx="7.5" cy="19" r="1.2"></circle>
+                              <circle cx="16.5" cy="19" r="1.2"></circle>
+                            </svg>
+                          </>
+                        ) : null}
+                      </span>
+                      <span style={{ fontSize: "12.5px", fontWeight: "800", whiteSpace: "nowrap" }}>
+                        {c.key}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "11.5px",
+                          fontWeight: "600",
+                          color: "#8F89A8",
+                          marginTop: "-4px",
+                        }}
+                      >
+                        {c.count}
+                      </span>
+                    </button>
+                  </Fragment>
+                ))}
+              </div>
+            </>
+          ) : null}
           {v.showBrowse ? (
             <>
               {v.hasMine ? (
@@ -336,10 +479,10 @@ export default function Rewards() {
                 }}
               >
                 <span style={{ fontSize: "18px", fontWeight: "800", letterSpacing: "-0.02em" }}>
-                  {"You can get now"}
+                  {v.r1Title}
                 </span>
                 <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
-                  {v.canNote}
+                  {v.r1Note}
                 </span>
               </div>
               <div
@@ -374,6 +517,7 @@ export default function Rewards() {
                     >
                       <span
                         style={{
+                          position: "relative",
                           height: "84px",
                           background: g.phBg,
                           color: g.phInk,
@@ -421,16 +565,132 @@ export default function Rewards() {
                         </span>
                         <span
                           style={{
-                            alignSelf: "flex-start",
                             display: "flex",
                             alignItems: "center",
                             gap: "4px",
-                            fontSize: "12px",
+                            fontSize: "12.5px",
                             fontWeight: "800",
                             color: "#4F25D6",
-                            background: "#F0ECFF",
-                            borderRadius: "999px",
-                            padding: "2px 8px 2px 4px",
+                          }}
+                        >
+                          <Artwork
+                            src="/haiba/coins/coin-front.webp"
+                            alt=""
+                            style={{
+                              width: "14px",
+                              height: "14px",
+                              objectFit: "contain",
+                              display: "block",
+                            }}
+                          />
+                          {g.pts}
+                        </span>
+                      </span>
+                    </button>
+                  </Fragment>
+                ))}
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "baseline",
+                  margin: "22px 4px 10px 4px",
+                }}
+              >
+                <span style={{ fontSize: "18px", fontWeight: "800", letterSpacing: "-0.02em" }}>
+                  {v.r2Title}
+                </span>
+                <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                  {v.r2Note}
+                </span>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "10px",
+                  margin: "0 -16px",
+                  padding: "0 16px 4px 16px",
+                  overflowX: "auto",
+                  scrollbarWidth: "none",
+                }}
+              >
+                {(v.popular || []).map((g: any, idx0: number) => (
+                  <Fragment key={idx0}>
+                    <button
+                      onClick={g.open}
+                      className="hb-press"
+                      style={{
+                        font: "inherit",
+                        flex: "none",
+                        width: "140px",
+                        border: "0",
+                        padding: "0",
+                        cursor: "pointer",
+                        textAlign: "left",
+                        background: "#FFFFFF",
+                        color: "#1E1B2E",
+                        borderRadius: "16px",
+                        overflow: "hidden",
+                        boxShadow: "0 0 0 1px #ECE8F5",
+                      }}
+                    >
+                      <span
+                        style={{
+                          position: "relative",
+                          height: "84px",
+                          background: g.phBg,
+                          color: g.phInk,
+                          fontSize: "11px",
+                          fontWeight: "800",
+                          letterSpacing: "0.06em",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {g.ph}
+                        {" PHOTO"}
+                      </span>
+                      <span
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "3px",
+                          padding: "9px 10px 10px 10px",
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontSize: "12px",
+                            fontWeight: "700",
+                            color: "#6B6880",
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
+                        >
+                          {g.shop}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: "14.5px",
+                            fontWeight: "800",
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
+                        >
+                          {g.name}
+                        </span>
+                        <span
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "4px",
+                            fontSize: "12.5px",
+                            fontWeight: "800",
+                            color: "#4F25D6",
                           }}
                         >
                           <Artwork
@@ -452,147 +712,287 @@ export default function Rewards() {
               </div>
             </>
           ) : null}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "baseline",
-              margin: "22px 4px 8px 4px",
-            }}
-          >
-            <span style={{ fontSize: "18px", fontWeight: "800", letterSpacing: "-0.02em" }}>
-              {v.listTitle}
-            </span>
-            <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
-              {v.listNote}
-            </span>
-          </div>
-          <div
-            style={{
-              background: "#FFFFFF",
-              borderRadius: "16px",
-              padding: "2px 14px",
-              boxShadow: "0 0 0 1px #ECE8F5",
-            }}
-          >
-            {(v.rows || []).map((r: any, idx0: number) => (
-              <Fragment key={idx0}>
-                <button
-                  onClick={r.open}
-                  className="hb-row"
-                  style={{
-                    font: "inherit",
-                    width: "100%",
-                    textAlign: "left",
-                    border: "0",
-                    borderBottom: r.rule,
-                    background: "transparent",
-                    color: "#1E1B2E",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "12px",
-                    padding: "11px 0",
-                    cursor: "pointer",
-                  }}
-                >
-                  {r.hasLogo ? (
-                    <>
-                      <Artwork
-                        src={r.logo}
-                        alt=""
-                        style={{
-                          width: "40px",
-                          height: "40px",
-                          flex: "none",
-                          borderRadius: "12px",
-                          objectFit: "cover",
-                          display: "block",
-                          background: r.bg,
-                          boxShadow: "0 0 0 1px #ECE8F5",
-                        }}
-                      />
-                    </>
-                  ) : null}
-                  {r.noLogo ? (
-                    <>
-                      <span
-                        style={{
-                          width: "40px",
-                          height: "40px",
-                          flex: "none",
-                          borderRadius: "12px",
-                          background: r.bg,
-                          color: "#FFFFFF",
-                          fontSize: "15px",
-                          fontWeight: "800",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        {r.mark}
-                      </span>
-                    </>
-                  ) : null}
-                  <span
+          {v.showList ? (
+            <>
+              {v.inCat ? (
+                <>
+                  <div
                     style={{
                       display: "flex",
-                      flexDirection: "column",
-                      gap: "2px",
-                      flex: "1",
-                      minWidth: "0",
+                      alignItems: "center",
+                      gap: "10px",
+                      marginTop: "18px",
                     }}
                   >
-                    <span style={{ fontSize: "15.5px", fontWeight: "800" }}>{r.name}</span>
-                    <span style={{ fontSize: "13px", fontWeight: "600", color: r.lineInk }}>
-                      {r.line}
+                    <button
+                      onClick={v.backToAll}
+                      aria-label="All categories"
+                      className="hb-press"
+                      style={{
+                        width: "36px",
+                        height: "36px",
+                        border: "0",
+                        borderRadius: "50%",
+                        background: "#FFFFFF",
+                        color: "#1E1B2E",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                        boxShadow: "0 0 0 1px #ECE8F5",
+                      }}
+                    >
+                      <svg
+                        aria-hidden="true"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.4"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M15 6l-6 6 6 6"></path>
+                      </svg>
+                    </button>
+                    <span style={{ fontSize: "24px", fontWeight: "800", letterSpacing: "-0.02em" }}>
+                      {v.cat}
                     </span>
-                  </span>
-                  <span
+                  </div>
+                  <div
                     style={{
-                      display: r.pillDisp,
-                      flex: "none",
-                      fontSize: "13px",
-                      fontWeight: "800",
-                      borderRadius: "999px",
-                      padding: "4px 10px",
-                      background: r.pillBg,
-                      color: r.pillInk,
-                      opacity: r.pillOp,
+                      display: "flex",
+                      gap: "8px",
+                      margin: "14px -16px 0 -16px",
+                      padding: "0 16px",
+                      overflowX: "auto",
+                      scrollbarWidth: "none",
                     }}
                   >
-                    {r.pill}
-                  </span>
-                </button>
-              </Fragment>
-            ))}
-            {v.noRows ? (
-              <>
-                <div
-                  style={{
-                    padding: "18px 4px",
-                    fontSize: "14px",
-                    fontWeight: "600",
-                    color: "#6B6880",
-                    textAlign: "center",
-                  }}
-                >
-                  {"No shops match. Try another name."}
-                </div>
-              </>
-            ) : null}
-          </div>
-          <div
-            style={{
-              fontSize: "13px",
-              fontWeight: "600",
-              color: "#8F89A8",
-              textAlign: "center",
-              marginTop: "10px",
-            }}
-          >
-            {v.moreLine}
-          </div>
+                    {(v.tags || []).map((t: any, idx0: number) => (
+                      <Fragment key={idx0}>
+                        <button
+                          onClick={t.pick}
+                          aria-pressed={t.on}
+                          className="hb-press"
+                          style={{
+                            font: "inherit",
+                            flex: "none",
+                            border: "0",
+                            cursor: "pointer",
+                            fontSize: "14px",
+                            fontWeight: "800",
+                            borderRadius: "999px",
+                            padding: "8px 14px",
+                            background: t.bg,
+                            color: t.ink,
+                            boxShadow: t.ring,
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {t.label}
+                        </button>
+                      </Fragment>
+                    ))}
+                  </div>
+                </>
+              ) : null}
+              <div
+                style={{
+                  display: "flex",
+                  gap: "8px",
+                  margin: "12px -16px 0 -16px",
+                  padding: "0 16px",
+                  overflowX: "auto",
+                  scrollbarWidth: "none",
+                }}
+              >
+                {(v.filters || []).map((f: any, idx0: number) => (
+                  <Fragment key={idx0}>
+                    <button
+                      onClick={f.pick}
+                      aria-pressed={f.on}
+                      className="hb-press"
+                      style={{
+                        font: "inherit",
+                        flex: "none",
+                        cursor: "pointer",
+                        fontSize: "13px",
+                        fontWeight: "700",
+                        borderRadius: "999px",
+                        padding: "7px 12px",
+                        background: f.bg,
+                        color: f.ink,
+                        border: `1.5px solid ${f.line}`,
+                        whiteSpace: "nowrap",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "6px",
+                      }}
+                    >
+                      {f.label}
+                    </button>
+                  </Fragment>
+                ))}
+              </div>
+              <div style={{ fontSize: "14px", fontWeight: "800", margin: "16px 4px 6px 4px" }}>
+                {v.countLine}
+              </div>
+              {(v.rows || []).map((r: any, idx0: number) => (
+                <Fragment key={idx0}>
+                  <button
+                    onClick={r.open}
+                    className="hb-press"
+                    style={{
+                      font: "inherit",
+                      width: "100%",
+                      textAlign: "left",
+                      border: "0",
+                      background: "transparent",
+                      color: "#1E1B2E",
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "12px",
+                      padding: "10px 0",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <span
+                      style={{
+                        position: "relative",
+                        width: "84px",
+                        height: "84px",
+                        flex: "none",
+                        borderRadius: "16px",
+                        background: r.photo,
+                        color: "rgba(30,27,46,0.35)",
+                        fontSize: "10px",
+                        fontWeight: "800",
+                        letterSpacing: "0.06em",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {"PHOTO"}
+                      <span style={{ position: "absolute", left: "6px", top: "6px" }}>
+                        {r.hasLogo ? (
+                          <>
+                            <Artwork
+                              src={r.logo}
+                              alt=""
+                              style={{
+                                width: "30px",
+                                height: "30px",
+                                flex: "none",
+                                borderRadius: "9px",
+                                objectFit: "cover",
+                                display: "block",
+                                background: r.bg,
+                                boxShadow: "0 0 0 1px #ECE8F5",
+                              }}
+                            />
+                          </>
+                        ) : null}
+                        {r.noLogo ? (
+                          <>
+                            <span
+                              style={{
+                                width: "30px",
+                                height: "30px",
+                                flex: "none",
+                                borderRadius: "9px",
+                                background: r.bg,
+                                color: "#FFFFFF",
+                                fontSize: "11px",
+                                fontWeight: "800",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                              }}
+                            >
+                              {r.mark}
+                            </span>
+                          </>
+                        ) : null}
+                      </span>
+                    </span>
+                    <span
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "3px",
+                        flex: "1",
+                        minWidth: "0",
+                        paddingTop: "2px",
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontSize: "16px",
+                          fontWeight: "800",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {r.name}
+                      </span>
+                      <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                        {r.meta}
+                      </span>
+                      <span
+                        style={{
+                          display: "flex",
+                          gap: "6px",
+                          marginTop: "4px",
+                          overflow: "hidden",
+                        }}
+                      >
+                        {(r.chips || []).map((k: any, idx1: number) => (
+                          <Fragment key={idx1}>
+                            <span
+                              style={{
+                                flex: "none",
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "5px",
+                                fontSize: "12.5px",
+                                fontWeight: "700",
+                                borderRadius: "10px",
+                                padding: "5px 8px",
+                                background: k.bg,
+                                color: k.ink,
+                                whiteSpace: "nowrap",
+                              }}
+                            >
+                              {k.label}
+                            </span>
+                          </Fragment>
+                        ))}
+                      </span>
+                    </span>
+                  </button>
+                </Fragment>
+              ))}
+              {v.noRows ? (
+                <>
+                  <div
+                    style={{
+                      padding: "24px 4px",
+                      fontSize: "14px",
+                      fontWeight: "600",
+                      color: "#6B6880",
+                      textAlign: "center",
+                    }}
+                  >
+                    {v.emptyLine}
+                  </div>
+                </>
+              ) : null}
+            </>
+          ) : null}
         </div>
         {v.sheetOpen ? (
           <>
