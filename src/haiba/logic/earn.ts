@@ -6,11 +6,9 @@ import { useDC } from "../dc";
 export function useVals() {
   const { state, setState, props, nav } = useDC({
     q: "",
-    cat: "",
+    chip: "All",
     tag: "All",
-    sort: "a",
-    f1: false,
-    f2: false,
+    sortB: false,
     sheet: "",
     ask: "",
     demo: "",
@@ -499,72 +497,15 @@ export function useVals() {
   Object.keys(sheetSrc).forEach(function (k) {
     sheetFlat["sheet_" + k] = sheetSrc[k];
   });
-  var cat = state.cat || "";
+  var cat = chip === "All" ? "" : chip;
   var tag = state.tag || "All";
-  var sort = state.sort || "a";
-  var f1 = !!state.f1,
-    f2 = !!state.f2;
+  var sortB = !!state.sortB;
   var browsing = !q && !cat;
-  var CATS = [
-    { key: "Cafes" },
-    { key: "Restaurants" },
-    { key: "Fitness" },
-    { key: "Self care" },
-    { key: "Entertainment" },
-    { key: "Car care" },
-  ];
   var km = function (m) {
     return m < 1000 ? m + " m" : (m / 1000).toFixed(1) + " km";
   };
-  var tiles = CATS.map(function (c) {
-    var n = SHOPS.filter(function (s) {
-      return s.cat === c.key;
-    }).length;
-    var o = {
-      key: c.key,
-      count: n + (n === 1 ? " shop" : " shops"),
-      aria: c.key + ", " + n + " shops",
-      pick: function () {
-        setState({ cat: c.key, tag: "All", q: "" });
-      },
-    };
-    CATS.forEach(function (x, j) {
-      o["i" + j] = x.key === c.key;
-    });
-    return o;
-  });
-  var catShops = SHOPS.filter(function (s) {
-    return !cat || s.cat === cat;
-  });
-  var tagList = ["All"];
-  catShops.forEach(function (s) {
-    s.tags.forEach(function (t) {
-      if (tagList.indexOf(t) < 0) tagList.push(t);
-    });
-  });
-  var tags = tagList.map(function (t) {
-    var on = t === tag;
-    return {
-      label: t,
-      on: String(on),
-      bg: on ? "#1E1B2E" : "#FFFFFF",
-      ink: on ? "#C0F402" : "#1E1B2E",
-      ring: on ? "none" : "0 0 0 1px #ECE8F5",
-      pick: function () {
-        setState({ tag: t });
-      },
-    };
-  });
-  var pill = function (label, on, pick) {
-    return {
-      label: label,
-      on: String(on),
-      pick: pick,
-      bg: on ? "#1E1B2E" : "#FFFFFF",
-      ink: on ? "#FFFFFF" : "#1E1B2E",
-      line: on ? "#1E1B2E" : "#E4DFF1",
-    };
-  };
+  var CATS = ["Cafes", "Restaurants", "Fitness", "Self care", "Entertainment", "Car care"];
+  var chipDefs = ["All"].concat(CATS);
   var match = function (s) {
     return (
       !q ||
@@ -573,121 +514,197 @@ export function useVals() {
       s.tags.join(" ").toLowerCase().indexOf(q) >= 0
     );
   };
-  var base = catShops.filter(match).filter(function (s) {
-    return tag === "All" || s.tags.indexOf(tag) >= 0;
+  var tagList = ["All"];
+  SHOPS.forEach(function (s) {
+    if (s.cat === cat)
+      s.tags.forEach(function (t) {
+        if (tagList.indexOf(t) < 0) tagList.push(t);
+      });
   });
-  var filters = [
-    pill(sort === "n" ? "Sort: Nearest" : "Sort: Biggest bonus", true, function () {
-      setState({ sort: sort === "n" ? "a" : "n" });
-    }),
-    pill("Bonus waiting", f1, function () {
-      setState({ f1: !f1 });
-    }),
-    pill("Haven’t tried yet", f2, function () {
-      setState({ f2: !f2 });
-    }),
-  ];
-  var list = base.filter(function (s) {
-    return (!f1 || nextPts(s.visits) > 40) && (!f2 || s.visits === 0);
+  var tags = tagList.map(function (t) {
+    var on = t === tag;
+    return {
+      label: t,
+      on: String(on),
+      bg: on ? "#6C3FFA" : "transparent",
+      ink: on ? "#FFFFFF" : "#4A4660",
+      line: on ? "#6C3FFA" : "#D9D3EA",
+      pick: function () {
+        setState({ tag: t });
+      },
+    };
   });
-  list = list.slice().sort(function (a, b) {
-    return sort === "n"
+  var shopRow = function (s, last, line, pill, pillBg, pillInk) {
+    return Object.assign(withLogo(s), {
+      isShop: true,
+      isHead: false,
+      name: s.name,
+      line: line,
+      pill: pill || "",
+      pillDisp: pill ? "block" : "none",
+      pillBg: pillBg || "",
+      pillInk: pillInk || "",
+      rule: last ? "none" : "1px solid #F1EFF7",
+      open: openShop(s.key),
+      head: "",
+      seeAll: function () {},
+      seeLabel: "",
+      pad: "0",
+      top: "none",
+    });
+  };
+  var build = function (rank, lineOf, pillOf) {
+    var rows = [];
+    if (browsing) {
+      CATS.forEach(function (c, ci) {
+        var inC = SHOPS.filter(function (s) {
+          return s.cat === c;
+        }).sort(rank);
+        if (!inC.length) return;
+        rows.push({
+          isHead: true,
+          isShop: false,
+          head: c + " · " + inC.length,
+          seeLabel: inC.length > 3 ? "See all" : "",
+          pad: ci === 0 ? "12px 0 2px 0" : "14px 0 2px 0",
+          top: ci === 0 ? "none" : "1px solid #F1EFF7",
+          seeAll: function () {
+            setState({ chip: c, tag: "All" });
+          },
+          name: "",
+          line: "",
+          pill: "",
+          pillDisp: "none",
+          pillBg: "",
+          pillInk: "",
+          rule: "none",
+          open: function () {},
+          hasLogo: false,
+          noLogo: false,
+          logo: "",
+          mark: "",
+          bg: "",
+        });
+        var top = inC.slice(0, 3);
+        top.forEach(function (s, i) {
+          var p = pillOf(s);
+          rows.push(shopRow(s, i === top.length - 1, lineOf(s), p[0], p[1], p[2]));
+        });
+      });
+    } else {
+      var list = SHOPS.filter(match)
+        .filter(function (s) {
+          return (!cat || s.cat === cat) && (tag === "All" || s.tags.indexOf(tag) >= 0);
+        })
+        .sort(rank);
+      list.forEach(function (s, i) {
+        var p = pillOf(s);
+        rows.push(shopRow(s, i === list.length - 1, lineOf(s), p[0], p[1], p[2]));
+      });
+    }
+    return rows;
+  };
+  var sortLabels = ["Biggest bonus", "Nearest"];
+  var rank = function (a, b) {
+    return sortB && !browsing
       ? a.dist - b.dist
       : nextPts(b.visits) - nextPts(a.visits) || b.visits - a.visits || a.dist - b.dist;
-  });
-  var rows = list.map(function (s) {
-    var np = nextPts(s.visits),
-      t = nextTag(s.visits);
-    var chip =
-      s.visits === 0
-        ? { label: "New to you · +80 first visit", bg: "#F0ECFF", ink: "#4F25D6" }
-        : np === 200
-          ? { label: "Next visit +200 · 5x", bg: "#C0F402", ink: "#1F2600" }
-          : np === 80
-            ? { label: "Next visit +80 · 2x", bg: "#F0ECFF", ink: "#4F25D6" }
-            : { label: "Next visit +40", bg: "#FFFFFF", ink: "#4A4660" };
-    return Object.assign(withLogo(s), {
-      name: s.name,
-      photo: s.photo,
-      meta:
-        km(s.dist) +
-        " · " +
-        s.tags.join(", ") +
-        (s.visits ? " · Visit " + (s.visits % 5) + " of 5" : ""),
-      open: openShop(s.key),
-      chips: [chip],
-    });
-  });
+  };
+  var lineOf = function (s) {
+    return s.visits === 0
+      ? "New to you · 2x on your first visit"
+      : "Visit " + (s.visits % 5) + " of 5 · next visit " + (nextTag(s.visits) || "normal");
+  };
+  var pillOf = function (s) {
+    var np = nextPts(s.visits);
+    return [
+      "+" + np,
+      np === 200 ? "#C0F402" : np === 80 ? "#F0ECFF" : "#F1F1F4",
+      np === 200 ? "#1F2600" : np === 80 ? "#4F25D6" : "#4A4660",
+    ];
+  };
+  var rows = build(rank, lineOf, pillOf);
+  var shopCount = rows.filter(function (r) {
+    return r.isShop;
+  }).length;
   var mineShops = SHOPS.filter(function (s) {
     return s.visits > 0;
   }).sort(function (a, b) {
     return nextPts(b.visits) - nextPts(a.visits);
   });
-  var bonus = mineShops
-    .filter(function (s) {
-      return nextPts(s.visits) > 40;
-    })
-    .map(function (s) {
-      var np = nextPts(s.visits),
-        five = np === 200;
-      return Object.assign(withLogo(s), {
-        name: s.name,
-        pts: "+" + np,
-        tag: nextTag(s.visits),
-        line: five
-          ? "Your 5th visit. The biggest bonus."
-          : "Your " + (s.visits === 0 ? "1st" : "2nd") + " visit here earns double.",
-        bg2: five ? "#1E1B2E" : "#FFFFFF",
-        ink2: five ? "#FFFFFF" : "#1E1B2E",
-        ptsInk: five ? "#C0F402" : "#6C3FFA",
-        shadow: five ? "0 10px 22px rgba(30,27,46,0.25)" : "0 0 0 1px #ECE8F5",
-        open: openShop(s.key),
-      });
+  var bonusShops = mineShops.filter(function (s) {
+    return nextPts(s.visits) > 40;
+  });
+  var bonus = bonusShops.map(function (s) {
+    var np = nextPts(s.visits),
+      five = np === 200;
+    return Object.assign(withLogo(s), {
+      name: s.name,
+      pts: "+" + np,
+      tag: nextTag(s.visits),
+      line: five
+        ? "Your 5th visit. The biggest bonus."
+        : "Your " + (s.visits === 0 ? "1st" : "2nd") + " visit here earns double.",
+      bg2: five ? "#1E1B2E" : "#FFFFFF",
+      ink2: five ? "#FFFFFF" : "#1E1B2E",
+      ptsInk: five ? "#C0F402" : "#6C3FFA",
+      shadow: five ? "0 10px 22px rgba(30,27,46,0.25)" : "0 0 0 1px #ECE8F5",
+      open: openShop(s.key),
     });
+  });
   var fresh = SHOPS.filter(function (s) {
     return s.visits === 0;
-  })
-    .sort(function (a, b) {
-      return a.dist - b.dist;
-    })
-    .slice(0, 6)
-    .map(function (s) {
-      return Object.assign(withLogo(s), {
-        name: s.name,
+  }).sort(function (a, b) {
+    return a.dist - b.dist;
+  })[0];
+  if (fresh)
+    bonus.push(
+      Object.assign(withLogo(fresh), {
+        name: fresh.name,
         pts: "+80",
         tag: "2x",
-        line: km(s.dist) + " away · " + s.tags[0],
-        bg2: "#FFFFFF",
-        ink2: "#1E1B2E",
-        ptsInk: "#6C3FFA",
-        shadow: "0 0 0 1px #ECE8F5",
-        open: openShop(s.key),
-      });
-    });
+        line: "New to you, " + km(fresh.dist) + " away. Your first visit earns double.",
+        bg2: "#C0F402",
+        ink2: "#1F2600",
+        ptsInk: "#1F2600",
+        shadow: "none",
+        open: openShop(fresh.key),
+      }),
+    );
   return Object.assign(sheetFlat, {
-    showBrowse: browsing,
-    showList: !browsing,
-    inCat: !!cat,
-    cat: cat,
-    tiles: tiles,
-    tags: tags,
-    filters: filters,
-    rows: rows,
-    noRows: rows.length === 0,
-    countLine:
-      rows.length +
-      (rows.length === 1 ? " shop" : " shops") +
-      (cat ? " in " + cat : "") +
-      (q ? " for “" + (state.q || "") + "”" : ""),
-    emptyLine: "Nothing here yet. Try another filter.",
-    backToAll: function () {
-      setState({ cat: "", tag: "All", f1: false, f2: false });
-    },
     balance: left.toLocaleString("en-US"),
     q: state.q || "",
     onSearch: function (e) {
       setState({ q: e.target.value });
     },
+    chips: chipDefs.map(function (c) {
+      var on = c === chip;
+      return {
+        label: c,
+        on: String(on),
+        bg: on ? "#1E1B2E" : "#FFFFFF",
+        ink: on ? "#C0F402" : "#1E1B2E",
+        ring: on ? "none" : "0 0 0 1px #ECE8F5",
+        pick: function () {
+          setState({ chip: c, tag: "All" });
+        },
+      };
+    }),
+    showBrowse: browsing,
+    inCat: !!cat && !q,
+    tags: tags,
+    rows: rows,
+    noRows: rows.length === 0,
+    listTitle: browsing ? "All shops" : q ? "Results" : cat,
+    listNote: browsing ? "" : (sortB ? sortLabels[1] : sortLabels[0]) + " ▾",
+    sortTap: function () {
+      if (!browsing) setState({ sortB: !sortB });
+    },
+    sortCursor: browsing ? "default" : "pointer",
+    sortInk: "#6C3FFA",
+    moreLine: browsing
+      ? "Showing the top 3 in each category. 200+ shops in Unipal."
+      : shopCount + (shopCount === 1 ? " shop" : " shops"),
     sheetOpen: !!sheet,
     closeSheet: function () {
       setState({ sheet: "", ask: "", demo: "" });
@@ -707,14 +724,12 @@ export function useVals() {
         open: openShop(s.key),
       });
     }),
-    bonus: bonus.length ? bonus : fresh.slice(0, 3),
-    r1Title: bonus.length ? "Bonus waiting" : "Start here: 2x waiting",
-    r1Note: bonus.length
-      ? bonus.length + (bonus.length === 1 ? " shop pays" : " shops pay") + " extra next visit"
-      : "Nearest first",
-    fresh: fresh,
-    r2Title: "New to you, near you",
-    r2Note: "2x on your first visit",
+    bonus: bonus,
+    bonusNote: bonusShops.length
+      ? bonusShops.length +
+        (bonusShops.length === 1 ? " shop pays" : " shops pay") +
+        " extra next visit"
+      : "Start anywhere new",
     earnOrder: "0",
   });
 }

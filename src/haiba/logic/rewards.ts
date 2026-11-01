@@ -6,11 +6,9 @@ import { useDC } from "../dc";
 export function useVals() {
   const { state, setState, props, nav } = useDC({
     q: "",
-    cat: "",
+    chip: "All",
     tag: "All",
-    sort: "a",
-    f1: false,
-    f2: false,
+    sortB: false,
     sheet: "",
     ask: "",
     demo: "",
@@ -499,72 +497,15 @@ export function useVals() {
   Object.keys(sheetSrc).forEach(function (k) {
     sheetFlat["sheet_" + k] = sheetSrc[k];
   });
-  var cat = state.cat || "";
+  var cat = chip === "All" ? "" : chip;
   var tag = state.tag || "All";
-  var sort = state.sort || "a";
-  var f1 = !!state.f1,
-    f2 = !!state.f2;
+  var sortB = !!state.sortB;
   var browsing = !q && !cat;
-  var CATS = [
-    { key: "Cafes" },
-    { key: "Restaurants" },
-    { key: "Fitness" },
-    { key: "Self care" },
-    { key: "Entertainment" },
-    { key: "Car care" },
-  ];
   var km = function (m) {
     return m < 1000 ? m + " m" : (m / 1000).toFixed(1) + " km";
   };
-  var tiles = CATS.map(function (c) {
-    var n = SHOPS.filter(function (s) {
-      return s.cat === c.key;
-    }).length;
-    var o = {
-      key: c.key,
-      count: n + (n === 1 ? " shop" : " shops"),
-      aria: c.key + ", " + n + " shops",
-      pick: function () {
-        setState({ cat: c.key, tag: "All", q: "" });
-      },
-    };
-    CATS.forEach(function (x, j) {
-      o["i" + j] = x.key === c.key;
-    });
-    return o;
-  });
-  var catShops = SHOPS.filter(function (s) {
-    return !cat || s.cat === cat;
-  });
-  var tagList = ["All"];
-  catShops.forEach(function (s) {
-    s.tags.forEach(function (t) {
-      if (tagList.indexOf(t) < 0) tagList.push(t);
-    });
-  });
-  var tags = tagList.map(function (t) {
-    var on = t === tag;
-    return {
-      label: t,
-      on: String(on),
-      bg: on ? "#1E1B2E" : "#FFFFFF",
-      ink: on ? "#C0F402" : "#1E1B2E",
-      ring: on ? "none" : "0 0 0 1px #ECE8F5",
-      pick: function () {
-        setState({ tag: t });
-      },
-    };
-  });
-  var pill = function (label, on, pick) {
-    return {
-      label: label,
-      on: String(on),
-      pick: pick,
-      bg: on ? "#1E1B2E" : "#FFFFFF",
-      ink: on ? "#FFFFFF" : "#1E1B2E",
-      line: on ? "#1E1B2E" : "#E4DFF1",
-    };
-  };
+  var CATS = ["Cafes", "Restaurants", "Fitness", "Self care", "Entertainment", "Car care"];
+  var chipDefs = ["All"].concat(CATS);
   var match = function (s) {
     return (
       !q ||
@@ -573,9 +514,96 @@ export function useVals() {
       s.tags.join(" ").toLowerCase().indexOf(q) >= 0
     );
   };
-  var base = catShops.filter(match).filter(function (s) {
-    return tag === "All" || s.tags.indexOf(tag) >= 0;
+  var tagList = ["All"];
+  SHOPS.forEach(function (s) {
+    if (s.cat === cat)
+      s.tags.forEach(function (t) {
+        if (tagList.indexOf(t) < 0) tagList.push(t);
+      });
   });
+  var tags = tagList.map(function (t) {
+    var on = t === tag;
+    return {
+      label: t,
+      on: String(on),
+      bg: on ? "#6C3FFA" : "transparent",
+      ink: on ? "#FFFFFF" : "#4A4660",
+      line: on ? "#6C3FFA" : "#D9D3EA",
+      pick: function () {
+        setState({ tag: t });
+      },
+    };
+  });
+  var shopRow = function (s, last, line, pill, pillBg, pillInk) {
+    return Object.assign(withLogo(s), {
+      isShop: true,
+      isHead: false,
+      name: s.name,
+      line: line,
+      pill: pill || "",
+      pillDisp: pill ? "block" : "none",
+      pillBg: pillBg || "",
+      pillInk: pillInk || "",
+      rule: last ? "none" : "1px solid #F1EFF7",
+      open: openShop(s.key),
+      head: "",
+      seeAll: function () {},
+      seeLabel: "",
+      pad: "0",
+      top: "none",
+    });
+  };
+  var build = function (rank, lineOf, pillOf) {
+    var rows = [];
+    if (browsing) {
+      CATS.forEach(function (c, ci) {
+        var inC = SHOPS.filter(function (s) {
+          return s.cat === c;
+        }).sort(rank);
+        if (!inC.length) return;
+        rows.push({
+          isHead: true,
+          isShop: false,
+          head: c + " · " + inC.length,
+          seeLabel: inC.length > 3 ? "See all" : "",
+          pad: ci === 0 ? "12px 0 2px 0" : "14px 0 2px 0",
+          top: ci === 0 ? "none" : "1px solid #F1EFF7",
+          seeAll: function () {
+            setState({ chip: c, tag: "All" });
+          },
+          name: "",
+          line: "",
+          pill: "",
+          pillDisp: "none",
+          pillBg: "",
+          pillInk: "",
+          rule: "none",
+          open: function () {},
+          hasLogo: false,
+          noLogo: false,
+          logo: "",
+          mark: "",
+          bg: "",
+        });
+        var top = inC.slice(0, 3);
+        top.forEach(function (s, i) {
+          var p = pillOf(s);
+          rows.push(shopRow(s, i === top.length - 1, lineOf(s), p[0], p[1], p[2]));
+        });
+      });
+    } else {
+      var list = SHOPS.filter(match)
+        .filter(function (s) {
+          return (!cat || s.cat === cat) && (tag === "All" || s.tags.indexOf(tag) >= 0);
+        })
+        .sort(rank);
+      list.forEach(function (s, i) {
+        var p = pillOf(s);
+        rows.push(shopRow(s, i === list.length - 1, lineOf(s), p[0], p[1], p[2]));
+      });
+    }
+    return rows;
+  };
   var minPts = function (s) {
     return Math.min.apply(
       null,
@@ -584,101 +612,79 @@ export function useVals() {
       }),
     );
   };
-  var filters = [
-    pill(sort === "n" ? "Sort: Nearest" : "Sort: Lowest points", true, function () {
-      setState({ sort: sort === "n" ? "a" : "n" });
-    }),
-    pill("You can get now", f1, function () {
-      setState({ f1: !f1 });
-    }),
-    pill("Haven’t tried yet", f2, function () {
-      setState({ f2: !f2 });
-    }),
-  ];
-  var list = base.filter(function (s) {
-    return (!f1 || minPts(s) <= left) && (!f2 || s.visits === 0);
-  });
-  list = list.slice().sort(function (a, b) {
-    return sort === "n" ? a.dist - b.dist : minPts(a) - minPts(b);
-  });
-  var rows = list.map(function (s) {
-    return Object.assign(withLogo(s), {
-      name: s.name,
-      photo: s.photo,
-      meta: km(s.dist) + " · " + s.tags.join(", ") + (s.visits ? " · Been there" : ""),
-      open: openShop(s.key),
-      chips: s.rewards.slice(0, 2).map(function (d) {
-        var can = d.pts <= left;
-        return {
-          label: d.name + " · " + d.pts.toLocaleString("en-US"),
-          bg: "#FFFFFF",
-          ink: can ? "#4F25D6" : "#8A8A96",
-        };
-      }),
+  var sortLabels = ["Lowest points", "Nearest"];
+  var rank = function (a, b) {
+    return sortB && !browsing ? a.dist - b.dist : minPts(a) - minPts(b);
+  };
+  var lineOf = function (s) {
+    var n = s.rewards.map(function (d) {
+      return d.name.toLowerCase();
     });
+    var t = n.length > 1 ? n.slice(0, -1).join(", ") + " and " + n[n.length - 1] : n[0];
+    return t.charAt(0).toUpperCase() + t.slice(1);
+  };
+  var rows = build(rank, lineOf, function () {
+    return ["", "", ""];
   });
+  var shopCount = rows.filter(function (r) {
+    return r.isShop;
+  }).length;
   var mineShops = SHOPS.filter(function (s) {
     return s.visits > 0;
   });
-  var card = function (s, d) {
-    return {
-      shop: s.name,
-      name: d.name,
-      ph: d.ph,
-      phBg: d.phBg,
-      phInk: d.phInk,
-      pts: d.pts.toLocaleString("en-US"),
-      p: d.pts,
-      open: openShop(s.key),
-    };
-  };
   var canGet = [];
   SHOPS.forEach(function (s) {
     s.rewards.forEach(function (d) {
-      if (d.pts <= left) canGet.push(card(s, d));
+      if (d.pts <= left)
+        canGet.push({
+          shop: s.name,
+          name: d.name,
+          ph: d.ph,
+          phBg: d.phBg,
+          phInk: d.phInk,
+          pts: d.pts.toLocaleString("en-US"),
+          p: d.pts,
+          open: openShop(s.key),
+        });
     });
   });
   canGet.sort(function (a, b) {
     return b.p - a.p;
   });
-  var popularKeys = [
-    ["cb", 0],
-    ["vox", 0],
-    ["jasmis", 1],
-    ["caribou", 0],
-    ["grip", 0],
-    ["wingman", 0],
-  ];
-  var popular = popularKeys.map(function (k) {
-    var s = SHOPS.filter(function (x) {
-      return x.key === k[0];
-    })[0];
-    return card(s, s.rewards[k[1]]);
-  });
   return Object.assign(sheetFlat, {
-    showBrowse: browsing,
-    showList: !browsing,
-    inCat: !!cat,
-    cat: cat,
-    tiles: tiles,
-    tags: tags,
-    filters: filters,
-    rows: rows,
-    noRows: rows.length === 0,
-    countLine:
-      rows.length +
-      (rows.length === 1 ? " shop" : " shops") +
-      (cat ? " in " + cat : "") +
-      (q ? " for “" + (state.q || "") + "”" : ""),
-    emptyLine: "Nothing here yet. Try another filter.",
-    backToAll: function () {
-      setState({ cat: "", tag: "All", f1: false, f2: false });
-    },
     balance: left.toLocaleString("en-US"),
     q: state.q || "",
     onSearch: function (e) {
       setState({ q: e.target.value });
     },
+    chips: chipDefs.map(function (c) {
+      var on = c === chip;
+      return {
+        label: c,
+        on: String(on),
+        bg: on ? "#1E1B2E" : "#FFFFFF",
+        ink: on ? "#C0F402" : "#1E1B2E",
+        ring: on ? "none" : "0 0 0 1px #ECE8F5",
+        pick: function () {
+          setState({ chip: c, tag: "All" });
+        },
+      };
+    }),
+    showBrowse: browsing,
+    inCat: !!cat && !q,
+    tags: tags,
+    rows: rows,
+    noRows: rows.length === 0,
+    listTitle: browsing ? "All shops" : q ? "Results" : cat,
+    listNote: browsing ? "" : (sortB ? sortLabels[1] : sortLabels[0]) + " ▾",
+    sortTap: function () {
+      if (!browsing) setState({ sortB: !sortB });
+    },
+    sortCursor: browsing ? "default" : "pointer",
+    sortInk: "#6C3FFA",
+    moreLine: browsing
+      ? "Showing the top 3 in each category. 200+ shops in Unipal."
+      : shopCount + (shopCount === 1 ? " shop" : " shops"),
     sheetOpen: !!sheet,
     closeSheet: function () {
       setState({ sheet: "", ask: "", demo: "" });
@@ -697,11 +703,7 @@ export function useVals() {
       });
     }),
     canGet: canGet.slice(0, 8),
-    r1Title: "You can get now",
-    r1Note: canGet.length + " rewards",
-    popular: popular,
-    r2Title: "Popular with students",
-    r2Note: "This week",
+    canNote: canGet.length + " rewards",
     earnOrder: "0",
   });
 }
