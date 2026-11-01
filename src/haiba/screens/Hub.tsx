@@ -133,33 +133,50 @@ export default function Hub() {
             right: "16px",
             top: "14px",
             zIndex: "3",
-            width: "40px",
-            height: "40px",
-            borderRadius: "50%",
-            background: "rgba(255,255,255,0.8)",
+            height: "36px",
+            boxSizing: "border-box",
+            borderRadius: "999px",
+            background: "rgba(255,255,255,0.85)",
             color: "#1E1B2E",
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
+            gap: "6px",
+            padding: "0 12px 0 8px",
             textDecoration: "none",
+            fontSize: "13px",
+            fontWeight: "800",
             boxShadow: "0 4px 12px rgba(76,52,140,0.12)",
           }}
           to="/haiba/points"
         >
-          <svg
-            aria-hidden="true"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.4"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+          <span
+            style={{
+              width: "20px",
+              height: "20px",
+              borderRadius: "50%",
+              background: "#1E1B2E",
+              color: "#C0F402",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
-            <path d="M9.2 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4.5"></path>
-            <path d="M12 18.2h.01"></path>
-          </svg>
+            <svg
+              aria-hidden="true"
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M9.2 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4.5"></path>
+              <path d="M12 18.2h.01"></path>
+            </svg>
+          </span>
+          {"How it works"}
         </Link>
         {v.tipOpen ? (
           <>
@@ -433,16 +450,16 @@ export default function Hub() {
                               <span
                                 style={{
                                   fontSize: "15.5px",
-                                  fontWeight: "700",
+                                  fontWeight: "800",
                                   lineHeight: "1.25",
                                 }}
                               >
-                                {r.title}
+                                {r.brand}
                               </span>
                               <span
-                                style={{ fontSize: "13.5px", fontWeight: "600", color: r.metaInk }}
+                                style={{ fontSize: "13.5px", fontWeight: "600", color: "#6B6880" }}
                               >
-                                {r.meta}
+                                {r.item}
                               </span>
                             </span>
                             <span
@@ -655,18 +672,6 @@ export default function Hub() {
             <span
               style={{
                 position: "relative",
-                fontSize: "14px",
-                fontWeight: "600",
-                opacity: "0.8",
-                maxWidth: "236px",
-                lineHeight: "1.35",
-              }}
-            >
-              {"Free for members. 1 of 12 items."}
-            </span>
-            <span
-              style={{
-                position: "relative",
                 display: "flex",
                 alignItems: "center",
                 gap: "12px",
@@ -763,7 +768,7 @@ export default function Hub() {
               {"You saved"}
             </span>
             <span style={{ fontSize: "13.5px", fontWeight: "600", color: "#6B6880" }}>
-              {"Since you joined"}
+              {v.sinceLine}
             </span>
           </div>
           <div
@@ -900,7 +905,7 @@ export default function Hub() {
               padding: "0 4px",
             }}
           >
-            {"Free items at 200+ shops. Tap one to get a code."}
+            {"Free items at 200+ shops."}
           </div>
           <div
             className="hb-pops"
@@ -1006,44 +1011,38 @@ export default function Hub() {
             ))}
           </div>
           <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "baseline",
-              marginTop: "32px",
-              padding: "0 4px",
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "Figtree, system-ui, sans-serif",
-                fontSize: "19px",
-                fontWeight: "800",
-                letterSpacing: "-0.02em",
-              }}
-            >
-              {"Activity"}
-            </span>
-            <a
-              style={{ fontSize: "14px", fontWeight: "700", textDecoration: "none" }}
-              href="#"
-              onClick={(e: any) => e.preventDefault()}
-            >
-              {"See all"}
-            </a>
-          </div>
-          <div
             className="hb-rise hb-d3"
             style={{
-              marginTop: "12px",
+              marginTop: "32px",
               background: "#FFFFFF",
               border: "1px solid #E9E5F4",
               borderRadius: "16px",
-              padding: "2px 16px 8px 16px",
+              padding: "14px 16px 2px 16px",
               boxShadow: "0 6px 18px rgba(76,52,140,0.06)",
             }}
           >
-            {(v.groups || []).map((g: any, idx0: number) => (
+            <div
+              style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}
+            >
+              <span
+                style={{
+                  fontFamily: "Figtree, system-ui, sans-serif",
+                  fontSize: "17px",
+                  fontWeight: "800",
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                {"Activity"}
+              </span>
+              <a
+                style={{ fontSize: "14px", fontWeight: "700", textDecoration: "none" }}
+                href="#"
+                onClick={(e: any) => e.preventDefault()}
+              >
+                {"See all"}
+              </a>
+            </div>
+            {(v.actGroups || []).map((g: any, idx0: number) => (
               <Fragment key={idx0}>
                 <div>
                   <div
@@ -1051,13 +1050,21 @@ export default function Hub() {
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
-                      padding: "14px 0 4px 0",
+                      padding: "14px 0 2px 0",
                     }}
                   >
-                    <span style={{ fontSize: "13px", fontWeight: "700", color: "#6B6880" }}>
+                    <span
+                      style={{
+                        fontSize: "11.5px",
+                        fontWeight: "800",
+                        letterSpacing: "0.08em",
+                        textTransform: "uppercase",
+                        color: "#8F89A8",
+                      }}
+                    >
                       {g.day}
                     </span>
-                    <span style={{ fontSize: "13px", fontWeight: "700", color: g.totalInk }}>
+                    <span style={{ fontSize: "12.5px", fontWeight: "700", color: "#8F89A8" }}>
                       {g.total}
                     </span>
                   </div>
@@ -1068,26 +1075,54 @@ export default function Hub() {
                           display: "flex",
                           alignItems: "center",
                           gap: "12px",
-                          padding: "9px 0",
+                          padding: "10px 0",
                         }}
                       >
                         <span
                           style={{
-                            width: "40px",
-                            height: "40px",
+                            position: "relative",
+                            width: "42px",
+                            height: "42px",
                             flex: "none",
-                            borderRadius: "12px",
-                            background: t.bg,
-                            color: t.ink,
-                            fontFamily: "Figtree, system-ui, sans-serif",
-                            fontSize: "14px",
-                            fontWeight: "800",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
                           }}
                         >
-                          {t.mark}
+                          <span
+                            style={{
+                              width: "42px",
+                              height: "42px",
+                              borderRadius: "50%",
+                              background: t.bg,
+                              color: t.ink,
+                              fontSize: "13.5px",
+                              fontWeight: "800",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                            }}
+                          >
+                            {t.mark}
+                          </span>
+                          <span
+                            style={{
+                              position: "absolute",
+                              right: "-3px",
+                              bottom: "-3px",
+                              width: "19px",
+                              height: "19px",
+                              boxSizing: "border-box",
+                              borderRadius: "50%",
+                              background: t.badgeBg,
+                              color: t.badgeInk,
+                              border: "2px solid #FFFFFF",
+                              fontSize: "9px",
+                              fontWeight: "800",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                            }}
+                          >
+                            {t.badge}
+                          </span>
                         </span>
                         <span
                           style={{
@@ -1098,8 +1133,27 @@ export default function Hub() {
                             minWidth: "0",
                           }}
                         >
-                          <span style={{ fontSize: "15.5px", fontWeight: "700" }}>{t.name}</span>
-                          <span style={{ fontSize: "13px", fontWeight: "500", color: "#6B6880" }}>
+                          <span
+                            style={{
+                              fontSize: "15.5px",
+                              fontWeight: "700",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                            }}
+                          >
+                            {t.name}
+                          </span>
+                          <span
+                            style={{
+                              fontSize: "13px",
+                              fontWeight: "500",
+                              color: "#6B6880",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                            }}
+                          >
                             {t.sub}
                           </span>
                         </span>
@@ -1108,22 +1162,24 @@ export default function Hub() {
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "flex-end",
-                            gap: "2px",
+                            gap: "1px",
                             flex: "none",
                           }}
                         >
                           <span
                             style={{
-                              fontFamily: "Figtree, system-ui, sans-serif",
-                              fontSize: "16px",
+                              fontSize: "18px",
                               fontWeight: "800",
+                              letterSpacing: "-0.01em",
                               color: t.amtInk,
                               fontVariantNumeric: "tabular-nums",
                             }}
                           >
-                            {t.amt}
+                            <span style={{ fontSize: "12px", fontWeight: "700" }}>{t.pre}</span>
+                            {t.main}
+                            <span style={{ fontSize: "13px" }}>{t.dec}</span>
                           </span>
-                          <span style={{ fontSize: "12.5px", fontWeight: "600", color: "#6B6880" }}>
+                          <span style={{ fontSize: "12px", fontWeight: "600", color: "#8F89A8" }}>
                             {t.note}
                           </span>
                         </span>
@@ -1158,21 +1214,40 @@ export default function Hub() {
             className="hb-press hb-rise hb-d3"
             style={{
               marginTop: "12px",
+              position: "relative",
+              overflow: "hidden",
               textDecoration: "none",
-              color: "#1E1B2E",
-              background: "#FFFFFF",
-              border: "1px solid #E9E5F4",
+              color: "#FFFFFF",
+              background: "#1E1B2E",
               borderRadius: "16px",
-              padding: "14px",
+              padding: "14px 16px",
               display: "flex",
               alignItems: "center",
               gap: "12px",
-              boxShadow: "0 6px 16px rgba(76,52,140,0.06)",
+              boxShadow: "0 12px 24px rgba(30,27,46,0.18)",
             }}
             to="/haiba/travel"
           >
             <span
-              style={{ display: "flex", alignItems: "center", flex: "none", opacity: v.travelOp }}
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                right: "-50px",
+                top: "-70px",
+                width: "150px",
+                height: "150px",
+                borderRadius: "50%",
+                border: "2px dashed rgba(192,244,2,0.25)",
+              }}
+            ></span>
+            <span
+              style={{
+                position: "relative",
+                display: "flex",
+                alignItems: "center",
+                flex: "none",
+                opacity: v.travelOp,
+              }}
             >
               {(v.travelAway || []).map((f: any, idx0: number) => (
                 <Fragment key={idx0}>
@@ -1180,13 +1255,13 @@ export default function Hub() {
                     src={f.src}
                     alt={f.name}
                     style={{
-                      width: "28px",
-                      height: "28px",
+                      width: "30px",
+                      height: "30px",
                       borderRadius: "50%",
                       objectFit: "cover",
                       display: "block",
                       marginLeft: f.ml,
-                      boxShadow: "0 0 0 2px #FFFFFF",
+                      boxShadow: "0 0 0 2px #1E1B2E",
                     }}
                   />
                 </Fragment>
@@ -1194,6 +1269,7 @@ export default function Hub() {
             </span>
             <span
               style={{
+                position: "relative",
                 display: "flex",
                 flexDirection: "column",
                 gap: "2px",
@@ -1202,15 +1278,18 @@ export default function Hub() {
               }}
             >
               <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <span style={{ fontSize: "15.5px", fontWeight: "800" }}>{"Free travel data"}</span>
+                <span style={{ fontSize: "15.5px", fontWeight: "800" }}>
+                  <span style={{ color: "#C0F402" }}>{"5GB"}</span>
+                  {" free travel data"}
+                </span>
                 {v.travelHasPill ? (
                   <>
                     <span
                       style={{
                         fontSize: "11.5px",
                         fontWeight: "800",
-                        background: "#F1EFF7",
-                        color: "#4A4660",
+                        background: "#3A3550",
+                        color: "#E4DBFF",
                         borderRadius: "999px",
                         padding: "2px 8px",
                       }}
@@ -1224,32 +1303,47 @@ export default function Hub() {
                 style={{
                   fontSize: "13px",
                   fontWeight: "600",
-                  color: "#6B6880",
+                  color: "#B9B3CC",
                   lineHeight: "1.35",
                 }}
               >
                 {v.travelRowSub}
               </span>
             </span>
-            <svg
-              aria-hidden="true"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#6C3FFA"
-              strokeWidth="2.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              style={{ flex: "none" }}
+            <span
+              style={{
+                position: "relative",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-end",
+                gap: "6px",
+                flex: "none",
+              }}
             >
-              <path d="M9 6l6 6-6 6"></path>
-            </svg>
+              <Artwork
+                src="/haiba/brands/airalo-white.svg"
+                alt="Airalo"
+                style={{ height: "14px", width: "auto", display: "block" }}
+              />
+              <svg
+                aria-hidden="true"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#C0F402"
+                strokeWidth="2.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M9 6l6 6-6 6"></path>
+              </svg>
+            </span>
           </Link>
         </div>
         <div className="hb-fixed-bottom">
           <div className="hb-fixed-inner">
-            <div style={{ position: "absolute", left: "0", right: "0", bottom: "0" }}>
+            <div style={{ position: "absolute", left: "0", right: "0", bottom: "0", zIndex: "20" }}>
               {v.navTipOpen ? (
                 <>
                   <div

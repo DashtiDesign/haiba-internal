@@ -40,9 +40,8 @@ export function useVals() {
             mark: "C",
             bg: "#3B2A22",
             ink: "#FFFFFF",
-            title: "Caribou, free upgrade",
-            meta: "Code ready. Tap to show",
-            metaInk: "#6B6880",
+            brand: "Caribou Coffee",
+            item: "Free upgrade",
             pill: "Show code",
             code: "HB-7K2Q-9X",
             useBy: "Use by 12 Nov",
@@ -79,9 +78,8 @@ export function useVals() {
         mark: "CB",
         bg: "#4B2E83",
         ink: "#FFFFFF",
-        title: "The Coffee Bean, " + rw[i].name.toLowerCase(),
-        meta: "Code ready. Tap to show",
-        metaInk: "#6B6880",
+        brand: "The Coffee Bean",
+        item: rw[i].name,
         pill: "Show code",
         code: "HB-" + rw[i].code + "-" + (k + 1),
         useBy: "Use by 20 Nov",
@@ -146,7 +144,7 @@ export function useVals() {
         ? "Used on Airalo. You saved BHD 5.64"
         : tShown
           ? "Your Airalo code is ready"
-          : travelTitle0 + " 5GB on us.",
+          : travelTitle0 + " We’ve got you.",
     travelHasPill: tLocked || tUsed || tShown,
     travelPill: tLocked ? "Locked" : "Used",
     travelOp: tUsed ? "0.6" : "1",
@@ -287,6 +285,49 @@ export function useVals() {
       amtInk: green,
       note: "Saved",
     });
+  var acts = all.slice(0, 4).map(function (r, i, arr) {
+    var money = r.amt.indexOf("BHD") === 0;
+    var num = money ? r.amt.replace("BHD ", "") : r.amt;
+    return {
+      mark: r.mark,
+      bg: r.bg,
+      ink: r.ink,
+      name: r.name,
+      sub: r.sub,
+      note: r.note,
+      amtInk: r.amtInk,
+      pre: money ? "BHD " : "",
+      main: money ? num.split(".")[0] : num,
+      dec: money ? "." + num.split(".")[1] : "",
+      badge: money ? "✓" : "H",
+      badgeBg: money ? "#C0F402" : "#6C3FFA",
+      badgeInk: money ? "#1F2600" : "#C0F402",
+      rule: i === arr.length - 1 ? "none" : "1px solid #F1EFF7",
+    };
+  });
+  var actGroups = [];
+  all.slice(0, 4).forEach(function (r, i) {
+    var g =
+      actGroups.length && actGroups[actGroups.length - 1].day === r.day
+        ? actGroups[actGroups.length - 1]
+        : null;
+    if (!g) {
+      g = { day: r.day, rows: [], pts: 0, bhd: 0 };
+      actGroups.push(g);
+    }
+    g.rows.push(acts[i]);
+    if (r.kind === "points") g.pts += parseInt(r.amt.replace("−", "-"), 10);
+    else g.bhd += parseFloat(r.amt.replace("BHD ", ""));
+  });
+  actGroups.forEach(function (g) {
+    g.total = g.bhd
+      ? "BHD " + g.bhd.toFixed(2) + " saved"
+      : g.pts > 0
+        ? "+" + g.pts + " points"
+        : g.pts < 0
+          ? g.pts.toLocaleString("en-US").replace("-", "−") + " points"
+          : "";
+  });
   var groups = [];
   all.slice(0, 3).forEach(function (r) {
     var g =
@@ -309,6 +350,8 @@ export function useVals() {
   });
   return Object.assign(travelVals, {
     points: shown.toLocaleString("en-US"),
+    sinceLine: isNew ? "Since 21 Oct" : "Since 18 Aug",
+    actGroups: actGroups,
     memberLine: isNew ? "Member since today" : "Member since August",
     giftLeft: "10 days left",
     giftMarks: giftMarks,
@@ -373,6 +416,7 @@ export function useVals() {
     savedBar: savedBar,
     savedRows: savedRows,
     groups: groups,
+    acts: acts,
     birdClass: state.jump ? "hb-jump" : "",
     birdSrc: state.jump ? "/haiba/birds/02-jump.png" : "/haiba/birds/01-cheer.png",
     poke: function () {

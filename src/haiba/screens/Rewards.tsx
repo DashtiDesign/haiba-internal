@@ -32,7 +32,7 @@ export default function Rewards() {
             left: "0",
             right: "0",
             top: "0",
-            height: "260px",
+            height: "240px",
             background: "linear-gradient(180deg, #E4D9FF 0%, #F3F0FA 100%)",
           }}
         ></div>
@@ -77,7 +77,7 @@ export default function Rewards() {
                 <path d="M11 6l-6 6 6 6"></path>
               </svg>
             </Link>
-            <span style={{ fontSize: "16px", fontWeight: "800" }}>{"Spend points"}</span>
+            <span style={{ fontSize: "17px", fontWeight: "800" }}>{"Spend points"}</span>
             <span
               style={{
                 display: "flex",
@@ -109,30 +109,65 @@ export default function Rewards() {
           <h1
             className="hb-rise"
             style={{
-              margin: "22px 4px 0 4px",
-              fontSize: "28px",
+              margin: "20px 4px 0 4px",
+              fontSize: "26px",
               fontWeight: "800",
               letterSpacing: "-0.03em",
-              lineHeight: "1.1",
+              lineHeight: "1.12",
             }}
           >
             {"Free stuff for "}
             <span style={{ color: "#6C3FFA" }}>{"your points."}</span>
           </h1>
+          <div style={{ position: "relative", marginTop: "14px" }}>
+            <svg
+              aria-hidden="true"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#6B6880"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              style={{ position: "absolute", left: "14px", top: "13px" }}
+            >
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="M20 20l-3.5-3.5"></path>
+            </svg>
+            <input
+              type="search"
+              value={v.q}
+              onInput={v.onSearch}
+              onChange={v.onSearch}
+              placeholder="Search 200+ shops"
+              aria-label="Search shops"
+              style={{
+                width: "100%",
+                boxSizing: "border-box",
+                font: "inherit",
+                fontSize: "15px",
+                fontWeight: "600",
+                color: "#1E1B2E",
+                background: "#FFFFFF",
+                border: "0",
+                borderRadius: "14px",
+                padding: "12px 14px 12px 40px",
+                boxShadow: "0 0 0 1px #ECE8F5",
+                outline: "none",
+              }}
+            />
+          </div>
           <div
-            className="hb-rise hb-d1"
             style={{
-              margin: "6px 4px 0 4px",
-              fontSize: "15px",
-              fontWeight: "600",
-              color: "#4A4660",
-              lineHeight: "1.4",
+              display: "flex",
+              gap: "8px",
+              margin: "12px -16px 0 -16px",
+              padding: "0 16px",
+              overflowX: "auto",
+              scrollbarWidth: "none",
             }}
           >
-            {"Pick a reward, get a code, show it at the till."}
-          </div>
-          <div style={{ display: "flex", gap: "8px", marginTop: "16px", overflow: "hidden" }}>
-            {(v.cats || []).map((c: any, idx0: number) => (
+            {(v.chips || []).map((c: any, idx0: number) => (
               <Fragment key={idx0}>
                 <button
                   onClick={c.pick}
@@ -143,13 +178,14 @@ export default function Rewards() {
                     flex: "none",
                     border: "0",
                     cursor: "pointer",
-                    fontSize: "14px",
+                    fontSize: "13.5px",
                     fontWeight: "800",
                     borderRadius: "999px",
-                    padding: "8px 14px",
+                    padding: "8px 13px",
                     background: c.bg,
                     color: c.ink,
                     boxShadow: c.ring,
+                    whiteSpace: "nowrap",
                   }}
                 >
                   {c.label}
@@ -157,123 +193,676 @@ export default function Rewards() {
               </Fragment>
             ))}
           </div>
-          <div className="hb-stagger" style={{ marginTop: "16px" }}>
-            {(v.rows || []).map((r: any, idx0: number) => (
-              <Fragment key={idx0}>
-                {r.isHead ? (
-                  <>
-                    <div
-                      style={{
-                        marginTop: r.gap,
-                        background: "#FFFFFF",
-                        borderRadius: "16px 16px 0 0",
-                        boxShadow: "0 0 0 1px #ECE8F5",
-                        padding: "14px 16px 10px 16px",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "12px",
-                      }}
-                    >
-                      {r.hasLogo ? (
-                        <>
-                          <Artwork
-                            src={r.logo}
-                            alt=""
-                            style={{
-                              width: "40px",
-                              height: "40px",
-                              flex: "none",
-                              borderRadius: "12px",
-                              objectFit: "cover",
-                              display: "block",
-                              background: r.bg,
-                              boxShadow: "0 0 0 1px #ECE8F5",
-                            }}
-                          />
-                        </>
-                      ) : null}
-                      {r.noLogo ? (
-                        <>
+          {v.showBrowse ? (
+            <>
+              {v.hasMine ? (
+                <>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "baseline",
+                      margin: "22px 4px 10px 4px",
+                    }}
+                  >
+                    <span style={{ fontSize: "18px", fontWeight: "800", letterSpacing: "-0.02em" }}>
+                      {"Your shops"}
+                    </span>
+                    <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                      {v.mineNote}
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "14px",
+                      margin: "0 -16px",
+                      padding: "0 16px 4px 16px",
+                      overflowX: "auto",
+                      scrollbarWidth: "none",
+                    }}
+                  >
+                    {(v.mine || []).map((m: any, idx0: number) => (
+                      <Fragment key={idx0}>
+                        <button
+                          onClick={m.open}
+                          aria-label={m.aria}
+                          className="hb-press"
+                          style={{
+                            font: "inherit",
+                            border: "0",
+                            background: "transparent",
+                            padding: "0",
+                            cursor: "pointer",
+                            flex: "none",
+                            width: "66px",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            gap: "12px",
+                            color: "#1E1B2E",
+                          }}
+                        >
+                          <span style={{ position: "relative" }}>
+                            {m.hasLogo ? (
+                              <>
+                                <Artwork
+                                  src={m.logo}
+                                  alt=""
+                                  style={{
+                                    width: "56px",
+                                    height: "56px",
+                                    flex: "none",
+                                    borderRadius: "18px",
+                                    objectFit: "cover",
+                                    display: "block",
+                                    background: m.bg,
+                                    boxShadow: "0 0 0 1px #ECE8F5",
+                                  }}
+                                />
+                              </>
+                            ) : null}
+                            {m.noLogo ? (
+                              <>
+                                <span
+                                  style={{
+                                    width: "56px",
+                                    height: "56px",
+                                    flex: "none",
+                                    borderRadius: "18px",
+                                    background: m.bg,
+                                    color: "#FFFFFF",
+                                    fontSize: "18px",
+                                    fontWeight: "800",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                  }}
+                                >
+                                  {m.mark}
+                                </span>
+                              </>
+                            ) : null}
+                            <span
+                              style={{
+                                position: "absolute",
+                                left: "50%",
+                                bottom: "-8px",
+                                transform: "translateX(-50%)",
+                                whiteSpace: "nowrap",
+                                fontSize: "11px",
+                                fontWeight: "800",
+                                borderRadius: "999px",
+                                padding: "2px 6px",
+                                background: m.badgeBg,
+                                color: m.badgeInk,
+                                boxShadow: "0 0 0 2px #F3F0FA",
+                              }}
+                            >
+                              {m.badge}
+                            </span>
+                          </span>
                           <span
                             style={{
-                              width: "40px",
-                              height: "40px",
-                              flex: "none",
-                              borderRadius: "12px",
-                              background: r.bg,
-                              color: "#FFFFFF",
-                              fontSize: "15px",
-                              fontWeight: "800",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
+                              fontSize: "12.5px",
+                              fontWeight: "700",
+                              lineHeight: "1.2",
+                              textAlign: "center",
+                              maxWidth: "66px",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              whiteSpace: "nowrap",
                             }}
                           >
-                            {r.mark}
+                            {m.short}
                           </span>
-                        </>
-                      ) : null}
+                        </button>
+                      </Fragment>
+                    ))}
+                  </div>
+                </>
+              ) : null}
+            </>
+          ) : null}
+          {v.showBrowse ? (
+            <>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "baseline",
+                  margin: "22px 4px 10px 4px",
+                }}
+              >
+                <span style={{ fontSize: "18px", fontWeight: "800", letterSpacing: "-0.02em" }}>
+                  {"You can get now"}
+                </span>
+                <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                  {v.canNote}
+                </span>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "10px",
+                  margin: "0 -16px",
+                  padding: "0 16px 4px 16px",
+                  overflowX: "auto",
+                  scrollbarWidth: "none",
+                }}
+              >
+                {(v.canGet || []).map((g: any, idx0: number) => (
+                  <Fragment key={idx0}>
+                    <button
+                      onClick={g.open}
+                      className="hb-press"
+                      style={{
+                        font: "inherit",
+                        flex: "none",
+                        width: "140px",
+                        border: "0",
+                        padding: "0",
+                        cursor: "pointer",
+                        textAlign: "left",
+                        background: "#FFFFFF",
+                        color: "#1E1B2E",
+                        borderRadius: "16px",
+                        overflow: "hidden",
+                        boxShadow: "0 0 0 1px #ECE8F5",
+                      }}
+                    >
+                      <span
+                        style={{
+                          height: "84px",
+                          background: g.phBg,
+                          color: g.phInk,
+                          fontSize: "11px",
+                          fontWeight: "800",
+                          letterSpacing: "0.06em",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {g.ph}
+                        {" PHOTO"}
+                      </span>
                       <span
                         style={{
                           display: "flex",
                           flexDirection: "column",
-                          gap: "1px",
-                          flex: "1",
-                          minWidth: "0",
+                          gap: "3px",
+                          padding: "9px 10px 10px 10px",
                         }}
                       >
-                        <span style={{ fontSize: "17px", fontWeight: "800" }}>{r.shop}</span>
-                        <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
-                          {r.meta}
+                        <span
+                          style={{
+                            fontSize: "12px",
+                            fontWeight: "700",
+                            color: "#6B6880",
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
+                        >
+                          {g.shop}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: "14.5px",
+                            fontWeight: "800",
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
+                        >
+                          {g.name}
+                        </span>
+                        <span
+                          style={{
+                            alignSelf: "flex-start",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "4px",
+                            fontSize: "12px",
+                            fontWeight: "800",
+                            color: "#4F25D6",
+                            background: "#F0ECFF",
+                            borderRadius: "999px",
+                            padding: "2px 8px 2px 4px",
+                          }}
+                        >
+                          <Artwork
+                            src="/haiba/coins/coin-front.webp"
+                            alt=""
+                            style={{
+                              width: "14px",
+                              height: "14px",
+                              objectFit: "contain",
+                              display: "block",
+                            }}
+                          />
+                          {g.pts}
                         </span>
                       </span>
-                    </div>
-                  </>
-                ) : null}
-                {r.isItem ? (
-                  <>
-                    <div
+                    </button>
+                  </Fragment>
+                ))}
+              </div>
+            </>
+          ) : null}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "baseline",
+              margin: "22px 4px 8px 4px",
+            }}
+          >
+            <span style={{ fontSize: "18px", fontWeight: "800", letterSpacing: "-0.02em" }}>
+              {v.listTitle}
+            </span>
+            <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+              {v.listNote}
+            </span>
+          </div>
+          <div
+            style={{
+              background: "#FFFFFF",
+              borderRadius: "16px",
+              padding: "2px 14px",
+              boxShadow: "0 0 0 1px #ECE8F5",
+            }}
+          >
+            {(v.rows || []).map((r: any, idx0: number) => (
+              <Fragment key={idx0}>
+                <button
+                  onClick={r.open}
+                  className="hb-row"
+                  style={{
+                    font: "inherit",
+                    width: "100%",
+                    textAlign: "left",
+                    border: "0",
+                    borderBottom: r.rule,
+                    background: "transparent",
+                    color: "#1E1B2E",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "12px",
+                    padding: "11px 0",
+                    cursor: "pointer",
+                  }}
+                >
+                  {r.hasLogo ? (
+                    <>
+                      <Artwork
+                        src={r.logo}
+                        alt=""
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                          flex: "none",
+                          borderRadius: "12px",
+                          objectFit: "cover",
+                          display: "block",
+                          background: r.bg,
+                          boxShadow: "0 0 0 1px #ECE8F5",
+                        }}
+                      />
+                    </>
+                  ) : null}
+                  {r.noLogo ? (
+                    <>
+                      <span
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                          flex: "none",
+                          borderRadius: "12px",
+                          background: r.bg,
+                          color: "#FFFFFF",
+                          fontSize: "15px",
+                          fontWeight: "800",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {r.mark}
+                      </span>
+                    </>
+                  ) : null}
+                  <span
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "2px",
+                      flex: "1",
+                      minWidth: "0",
+                    }}
+                  >
+                    <span style={{ fontSize: "15.5px", fontWeight: "800" }}>{r.name}</span>
+                    <span style={{ fontSize: "13px", fontWeight: "600", color: r.lineInk }}>
+                      {r.line}
+                    </span>
+                  </span>
+                  <span
+                    style={{
+                      flex: "none",
+                      fontSize: "13px",
+                      fontWeight: "800",
+                      borderRadius: "999px",
+                      padding: "4px 10px",
+                      background: r.pillBg,
+                      color: r.pillInk,
+                      opacity: r.pillOp,
+                    }}
+                  >
+                    {r.pill}
+                  </span>
+                </button>
+              </Fragment>
+            ))}
+            {v.noRows ? (
+              <>
+                <div
+                  style={{
+                    padding: "18px 4px",
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    color: "#6B6880",
+                    textAlign: "center",
+                  }}
+                >
+                  {"No shops match. Try another name."}
+                </div>
+              </>
+            ) : null}
+          </div>
+          <div
+            style={{
+              fontSize: "13px",
+              fontWeight: "600",
+              color: "#8F89A8",
+              textAlign: "center",
+              marginTop: "10px",
+            }}
+          >
+            {v.moreLine}
+          </div>
+        </div>
+        {v.sheetOpen ? (
+          <>
+            <div
+              className="hb-fade"
+              style={{
+                position: "fixed",
+                inset: "0",
+                background: "rgba(20,16,40,0.5)",
+                zIndex: "70",
+                display: "flex",
+                alignItems: "flex-end",
+              }}
+            >
+              <button
+                onClick={v.closeSheet}
+                aria-label="Close"
+                style={{
+                  position: "absolute",
+                  inset: "0",
+                  border: "0",
+                  background: "transparent",
+                  cursor: "default",
+                }}
+              ></button>
+              <div
+                className="hb-up"
+                role="dialog"
+                aria-label={v.sheet_name}
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  maxHeight: "86vh",
+                  maxWidth: "430px",
+                  margin: "0 auto",
+                  overflowY: "auto",
+                  boxSizing: "border-box",
+                  background: "#F3F0FA",
+                  borderRadius: "20px 20px 0 0",
+                  padding: "10px 16px 28px 16px",
+                }}
+              >
+                <div
+                  style={{
+                    width: "40px",
+                    height: "5px",
+                    borderRadius: "999px",
+                    background: "#D9D3EA",
+                    margin: "0 auto 12px auto",
+                  }}
+                ></div>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  {v.sheet_hasLogo ? (
+                    <>
+                      <Artwork
+                        src={v.sheet_logo}
+                        alt=""
+                        style={{
+                          width: "52px",
+                          height: "52px",
+                          flex: "none",
+                          borderRadius: "16px",
+                          objectFit: "cover",
+                          display: "block",
+                          background: v.sheet_bg,
+                          boxShadow: "0 0 0 1px #ECE8F5",
+                        }}
+                      />
+                    </>
+                  ) : null}
+                  {v.sheet_noLogo ? (
+                    <>
+                      <span
+                        style={{
+                          width: "52px",
+                          height: "52px",
+                          flex: "none",
+                          borderRadius: "16px",
+                          background: v.sheet_bg,
+                          color: "#FFFFFF",
+                          fontSize: "18px",
+                          fontWeight: "800",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {v.sheet_mark}
+                      </span>
+                    </>
+                  ) : null}
+                  <span
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "1px",
+                      flex: "1",
+                      minWidth: "0",
+                    }}
+                  >
+                    <span style={{ fontSize: "20px", fontWeight: "800", letterSpacing: "-0.02em" }}>
+                      {v.sheet_name}
+                    </span>
+                    <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                      {v.sheet_cat}
+                    </span>
+                  </span>
+                  <button
+                    onClick={v.closeSheet}
+                    aria-label="Close"
+                    className="hb-press"
+                    style={{
+                      width: "36px",
+                      height: "36px",
+                      border: "0",
+                      borderRadius: "50%",
+                      background: "#FFFFFF",
+                      color: "#1E1B2E",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      cursor: "pointer",
+                      boxShadow: "0 0 0 1px #ECE8F5",
+                    }}
+                  >
+                    <svg
+                      aria-hidden="true"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.6"
+                      strokeLinecap="round"
+                    >
+                      <path d="M6 6l12 12M18 6L6 18"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div
+                  style={{
+                    marginTop: "16px",
+                    background: "#FFFFFF",
+                    borderRadius: "16px",
+                    padding: "14px 16px",
+                    boxShadow: "0 0 0 1px #ECE8F5",
+                    order: v.earnOrder,
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "baseline",
+                    }}
+                  >
+                    <span
                       style={{
-                        background: "#FFFFFF",
-                        boxShadow: "0 0 0 1px #ECE8F5",
-                        borderRadius: r.radius,
-                        padding: "0 16px",
+                        fontSize: "12px",
+                        fontWeight: "800",
+                        letterSpacing: "0.1em",
+                        textTransform: "uppercase",
+                        color: "#6C3FFA",
                       }}
                     >
-                      <div style={{ borderTop: "1px solid #F1EFF7", padding: "12px 0" }}>
+                      {"Earn here"}
+                    </span>
+                    <span style={{ fontSize: "15px", fontWeight: "800", color: "#6C3FFA" }}>
+                      {v.sheet_earnPts}
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "15px",
+                      fontWeight: "700",
+                      marginTop: "6px",
+                      lineHeight: "1.35",
+                    }}
+                  >
+                    {v.sheet_earnTitle}
+                  </div>
+                  <div style={{ display: "flex", gap: "6px", marginTop: "10px" }}>
+                    {(v.sheet_stamps || []).map((s: any, idx0: number) => (
+                      <Fragment key={idx0}>
+                        <span
+                          style={{
+                            width: "28px",
+                            height: "28px",
+                            boxSizing: "border-box",
+                            borderRadius: "50%",
+                            background: s.bg,
+                            color: s.ink,
+                            border: `2px solid ${s.ring}`,
+                            fontSize: "10px",
+                            fontWeight: "800",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          {s.tag}
+                        </span>
+                      </Fragment>
+                    ))}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "12.5px",
+                      fontWeight: "600",
+                      color: "#6B6880",
+                      marginTop: "10px",
+                    }}
+                  >
+                    {"Use any Unipal offer here. Points land on their own."}
+                  </div>
+                </div>
+                <div
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: "800",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    color: "#6C3FFA",
+                    margin: "18px 4px 8px 4px",
+                  }}
+                >
+                  {"Spend here"}
+                </div>
+                <div
+                  style={{
+                    background: "#FFFFFF",
+                    borderRadius: "16px",
+                    padding: "0 16px",
+                    boxShadow: "0 0 0 1px #ECE8F5",
+                  }}
+                >
+                  {(v.sheet_rewards || []).map((w: any, idx0: number) => (
+                    <Fragment key={idx0}>
+                      <div style={{ borderTop: w.rule, padding: "12px 0" }}>
                         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                           <span
                             style={{
-                              width: "56px",
-                              height: "56px",
+                              width: "52px",
+                              height: "52px",
                               flex: "none",
                               borderRadius: "14px",
-                              background: r.phBg,
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              color: r.phInk,
+                              background: w.phBg,
+                              color: w.phInk,
                               fontSize: "10px",
                               fontWeight: "800",
                               letterSpacing: "0.06em",
-                              textAlign: "center",
-                              lineHeight: "1.2",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
                             }}
                           >
-                            {r.ph}
+                            {w.ph}
                           </span>
                           <span
                             style={{
                               display: "flex",
                               flexDirection: "column",
-                              gap: "4px",
+                              gap: "3px",
                               flex: "1",
                               minWidth: "0",
                             }}
                           >
-                            <span style={{ fontSize: "16px", fontWeight: "700" }}>{r.name}</span>
-                            <span style={{ fontSize: "13px", fontWeight: "500", color: "#6B6880" }}>
-                              {r.sub}
+                            <span style={{ fontSize: "15.5px", fontWeight: "800" }}>{w.name}</span>
+                            <span
+                              style={{ fontSize: "12.5px", fontWeight: "600", color: "#6B6880" }}
+                            >
+                              {w.sub}
                             </span>
                             <span
                               style={{
@@ -281,33 +870,32 @@ export default function Rewards() {
                                 display: "flex",
                                 alignItems: "center",
                                 gap: "5px",
-                                fontSize: "13px",
-                                fontWeight: "700",
-                                color: r.ptsInk,
-                                background: r.ptsBg,
+                                fontSize: "12.5px",
+                                fontWeight: "800",
+                                color: w.ptsInk,
+                                background: w.ptsBg,
                                 borderRadius: "999px",
-                                padding: "3px 9px 3px 5px",
+                                padding: "2px 8px 2px 4px",
                               }}
                             >
                               <Artwork
                                 src="/haiba/coins/coin-front.webp"
                                 alt=""
                                 style={{
-                                  width: "16px",
-                                  height: "16px",
+                                  width: "15px",
+                                  height: "15px",
                                   objectFit: "contain",
                                   display: "block",
-                                  flex: "none",
                                 }}
                               />
-                              {r.pts}
+                              {w.pts}
                             </span>
                           </span>
-                          {r.showUse ? (
+                          {w.showUse ? (
                             <>
                               <button
-                                onClick={r.ask}
-                                aria-label={r.useLabel}
+                                onClick={w.ask}
+                                aria-label={w.useLabel}
                                 className="hb-press"
                                 style={{
                                   font: "inherit",
@@ -317,16 +905,16 @@ export default function Rewards() {
                                   borderRadius: "999px",
                                   border: "0",
                                   padding: "10px 16px",
-                                  cursor: r.cursor,
-                                  background: r.btnBg,
-                                  color: r.btnInk,
+                                  cursor: "pointer",
+                                  background: w.btnBg,
+                                  color: w.btnInk,
                                 }}
                               >
                                 {"Use"}
                               </button>
                             </>
                           ) : null}
-                          {r.isUsed ? (
+                          {w.isUsed ? (
                             <>
                               <span
                                 style={{
@@ -344,7 +932,7 @@ export default function Rewards() {
                             </>
                           ) : null}
                         </div>
-                        {r.asking ? (
+                        {w.asking ? (
                           <>
                             <div
                               className="hb-pop"
@@ -356,17 +944,16 @@ export default function Rewards() {
                                 display: "flex",
                                 flexDirection: "column",
                                 gap: "12px",
-                                transformOrigin: "top center",
                               }}
                             >
                               <span
                                 style={{ fontSize: "15px", fontWeight: "700", lineHeight: "1.35" }}
                               >
-                                {r.askLine}
+                                {w.askLine}
                               </span>
                               <span style={{ display: "flex", gap: "8px" }}>
                                 <button
-                                  onClick={r.confirm}
+                                  onClick={w.confirm}
                                   className="hb-press"
                                   style={{
                                     font: "inherit",
@@ -384,7 +971,7 @@ export default function Rewards() {
                                   {"Get my code"}
                                 </button>
                                 <button
-                                  onClick={r.notNow}
+                                  onClick={w.notNow}
                                   className="hb-press"
                                   style={{
                                     font: "inherit",
@@ -404,7 +991,7 @@ export default function Rewards() {
                             </div>
                           </>
                         ) : null}
-                        {r.held ? (
+                        {w.held ? (
                           <>
                             <div
                               className="hb-pop"
@@ -417,7 +1004,6 @@ export default function Rewards() {
                                 display: "flex",
                                 flexDirection: "column",
                                 gap: "12px",
-                                transformOrigin: "top center",
                               }}
                             >
                               <span
@@ -444,7 +1030,7 @@ export default function Rewards() {
                                   letterSpacing: "0.08em",
                                 }}
                               >
-                                {r.code}
+                                {w.code}
                               </span>
                               <span
                                 style={{
@@ -455,7 +1041,7 @@ export default function Rewards() {
                                 }}
                               >
                                 <button
-                                  onClick={r.cancel}
+                                  onClick={w.cancel}
                                   className="hb-press"
                                   style={{
                                     font: "inherit",
@@ -472,7 +1058,7 @@ export default function Rewards() {
                                   {"Cancel, points back"}
                                 </button>
                                 <button
-                                  onClick={r.accept}
+                                  onClick={w.accept}
                                   aria-label="Prototype: the shop accepts this code"
                                   className="hb-press"
                                   style={{
@@ -493,7 +1079,7 @@ export default function Rewards() {
                             </div>
                           </>
                         ) : null}
-                        {r.isUsed ? (
+                        {w.isUsed ? (
                           <>
                             <div
                               className="hb-pop"
@@ -511,9 +1097,9 @@ export default function Rewards() {
                                 gap: "10px",
                               }}
                             >
-                              <span>{r.savedLine}</span>
+                              <span>{w.savedLine}</span>
                               <button
-                                onClick={r.again}
+                                onClick={w.again}
                                 className="hb-press"
                                 style={{
                                   font: "inherit",
@@ -525,7 +1111,7 @@ export default function Rewards() {
                                   cursor: "pointer",
                                   background: "#1E1B2E",
                                   color: "#C0F402",
-                                  opacity: r.againOp,
+                                  opacity: w.againOp,
                                 }}
                               >
                                 {"Use again"}
@@ -533,7 +1119,7 @@ export default function Rewards() {
                             </div>
                           </>
                         ) : null}
-                        {r.demo ? (
+                        {w.demo ? (
                           <>
                             <div
                               className="hb-pop"
@@ -553,26 +1139,26 @@ export default function Rewards() {
                           </>
                         ) : null}
                       </div>
-                    </div>
-                  </>
-                ) : null}
-              </Fragment>
-            ))}
-          </div>
-          <div
-            style={{
-              fontSize: "13px",
-              fontWeight: "500",
-              color: "#6B6880",
-              margin: "14px 4px 0 4px",
-              lineHeight: "1.45",
-            }}
-          >
-            {
-              "One code per item. Each code lasts 30 days. Your points are held until the shop accepts the code, and come back if you cancel."
-            }
-          </div>
-        </div>
+                    </Fragment>
+                  ))}
+                </div>
+                <div
+                  style={{
+                    fontSize: "12.5px",
+                    fontWeight: "500",
+                    color: "#6B6880",
+                    margin: "10px 4px 0 4px",
+                    lineHeight: "1.45",
+                  }}
+                >
+                  {
+                    "One code per item, valid 30 days. Points are held until the shop accepts the code."
+                  }
+                </div>
+              </div>
+            </div>
+          </>
+        ) : null}
       </div>
     </div>
   );

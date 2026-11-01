@@ -85,7 +85,7 @@ SCREEN = {
 }
 LOGIC = {
     "Rewards": [("var balance = 1240;", "var balance = props.base;")],
-    "Earn": [("var balance = 1240;", "var balance = props.available;")],
+    "Earn": [("var balance = 1240;", "var balance = props.base;")],
     "Hub": [
         ("var target = isNew ? 500 : 1240;", "var target = props.available;"),
         ("      navTipCta:", "      navTipHref: isNew ? '' : '/haiba/earn',\n      navTipCta:"),
@@ -150,6 +150,10 @@ def patch_screen(name):
         s = s.replace('padding: "36px 16px 20px 16px"', 'padding: "36px 16px calc(20px + env(safe-area-inset-bottom, 0px)) 16px"', 1)
         s = s.replace('position: "absolute", inset: "0", background: "rgba(20,16,40,0.5)", zIndex: "10"', 'position: "fixed", inset: "0", background: "rgba(20,16,40,0.5)", zIndex: "60"', 1)
         s = s.replace('padding: "0 20px 26px 20px", textAlign: "center"', 'padding: "0 20px calc(26px + env(safe-area-inset-bottom, 0px)) 20px", textAlign: "center", maxWidth: "430px", margin: "0 auto"', 1)
+    if name in ("Rewards", "Earn"):
+        # Shop sheet covers the screen in the app, above the bottom nav and panel tab
+        s = s.replace('position: "absolute", inset: "0", background: "rgba(20,16,40,0.5)", zIndex: "10"', 'position: "fixed", inset: "0", background: "rgba(20,16,40,0.5)", zIndex: "70"', 1)
+        s = s.replace('maxHeight: "86%"', 'maxHeight: "86vh", maxWidth: "430px", margin: "0 auto"', 1)
     plan = LINKS.get(name)
     if plan is not None:
         parts = s.split(PD)
