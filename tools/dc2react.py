@@ -22,6 +22,7 @@ ROUTES = {
     "Earn.dc.html": "/haiba/earn",
 }
 BLOBS = {
+    "7ab45e5eada618030c6795af3ceeaaac": "/haiba/coins/coin-stack-3d.png",
     # Flags: flag-icons package (MIT), 1x1 set
     "c58fbb4c6f9b22d936ee81358bb04daf": "/haiba/flags/bh.svg",
     "89985deb2d8ae7f5ab82475d1109c20b": "/haiba/flags/sa.svg",

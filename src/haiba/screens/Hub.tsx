@@ -335,24 +335,17 @@ export default function Hub() {
               }}
               to="/haiba/rewards"
             >
-              <span
+              <Artwork
+                src="/haiba/coins/coin-stack-3d.png"
+                alt=""
                 style={{
-                  width: "38px",
-                  height: "38px",
+                  width: "40px",
+                  height: "40px",
                   flex: "none",
-                  borderRadius: "12px",
-                  background: "#6C3FFA",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  objectFit: "contain",
+                  display: "block",
                 }}
-              >
-                <Artwork
-                  src="/haiba/coins/coin-34.webp"
-                  alt=""
-                  style={{ width: "26px", height: "26px", objectFit: "contain", display: "block" }}
-                />
-              </span>
+              />
               <span style={{ display: "flex", flexDirection: "column", gap: "1px", minWidth: "0" }}>
                 <span style={{ fontSize: "15px", fontWeight: "800" }}>{"Spend points"}</span>
                 <span style={{ fontSize: "12.5px", fontWeight: "600", color: "#6B6880" }}>

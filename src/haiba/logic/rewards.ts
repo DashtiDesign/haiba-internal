@@ -6,9 +6,10 @@ import { useDC } from "../dc";
 export function useVals() {
   const { state, setState, props, nav } = useDC({
     q: "",
-    chip: "All",
+    cat: "",
     tag: "All",
-    sortB: false,
+    sortKey: "near",
+    cq: "",
     sheet: "",
     ask: "",
     demo: "",
@@ -497,21 +498,22 @@ export function useVals() {
   Object.keys(sheetSrc).forEach(function (k) {
     sheetFlat["sheet_" + k] = sheetSrc[k];
   });
-  var cat = chip === "All" ? "" : chip;
+  var cat = state.cat || "";
   var tag = state.tag || "All";
-  var sortB = !!state.sortB;
-  var browsing = !q && !cat;
+  var sortKey = state.sortKey || "near";
+  var cq = (state.cq || "").toLowerCase();
+  var onMain = !cat;
+  var browsing = onMain && !q;
   var km = function (m) {
     return m < 1000 ? m + " m" : (m / 1000).toFixed(1) + " km";
   };
   var CATS = ["Cafes", "Restaurants", "Fitness", "Self care", "Entertainment", "Car care"];
-  var chipDefs = ["All"].concat(CATS);
-  var match = function (s) {
+  var has = function (s, t) {
     return (
-      !q ||
-      s.name.toLowerCase().indexOf(q) >= 0 ||
-      s.cat.toLowerCase().indexOf(q) >= 0 ||
-      s.tags.join(" ").toLowerCase().indexOf(q) >= 0
+      !t ||
+      s.name.toLowerCase().indexOf(t) >= 0 ||
+      s.tags.join(" ").toLowerCase().indexOf(t) >= 0 ||
+      s.cat.toLowerCase().indexOf(t) >= 0
     );
   };
   var tagList = ["All"];
@@ -526,83 +528,61 @@ export function useVals() {
     return {
       label: t,
       on: String(on),
-      bg: on ? "#6C3FFA" : "transparent",
-      ink: on ? "#FFFFFF" : "#4A4660",
-      line: on ? "#6C3FFA" : "#D9D3EA",
+      bg: on ? "#1E1B2E" : "#FFFFFF",
+      ink: on ? "#C0F402" : "#1E1B2E",
+      ring: on ? "none" : "0 0 0 1px #ECE8F5",
       pick: function () {
         setState({ tag: t });
       },
     };
   });
-  var shopRow = function (s, last, line, pill, pillBg, pillInk) {
-    return Object.assign(withLogo(s), {
+  var blank = {
+    isHead: false,
+    isShop: false,
+    head: "",
+    seeAll: function () {},
+    seeLabel: "",
+    pad: "0",
+    top: "none",
+    name: "",
+    line: "",
+    pill: "",
+    pillDisp: "none",
+    pillBg: "",
+    pillInk: "",
+    rule: "none",
+    open: function () {},
+    hasLogo: false,
+    noLogo: false,
+    logo: "",
+    mark: "",
+    bg: "",
+  };
+  var shopRow = function (s, last, line, p) {
+    return Object.assign({}, blank, withLogo(s), {
       isShop: true,
-      isHead: false,
       name: s.name,
       line: line,
-      pill: pill || "",
-      pillDisp: pill ? "block" : "none",
-      pillBg: pillBg || "",
-      pillInk: pillInk || "",
+      pill: p[0] || "",
+      pillDisp: p[0] ? "block" : "none",
+      pillBg: p[1] || "",
+      pillInk: p[2] || "",
       rule: last ? "none" : "1px solid #F1EFF7",
       open: openShop(s.key),
-      head: "",
-      seeAll: function () {},
-      seeLabel: "",
-      pad: "0",
-      top: "none",
     });
   };
-  var build = function (rank, lineOf, pillOf) {
-    var rows = [];
-    if (browsing) {
-      CATS.forEach(function (c, ci) {
-        var inC = SHOPS.filter(function (s) {
-          return s.cat === c;
-        }).sort(rank);
-        if (!inC.length) return;
-        rows.push({
-          isHead: true,
-          isShop: false,
-          head: c + " · " + inC.length,
-          seeLabel: inC.length > 3 ? "See all" : "",
-          pad: ci === 0 ? "12px 0 2px 0" : "14px 0 2px 0",
-          top: ci === 0 ? "none" : "1px solid #F1EFF7",
-          seeAll: function () {
-            setState({ chip: c, tag: "All" });
-          },
-          name: "",
-          line: "",
-          pill: "",
-          pillDisp: "none",
-          pillBg: "",
-          pillInk: "",
-          rule: "none",
-          open: function () {},
-          hasLogo: false,
-          noLogo: false,
-          logo: "",
-          mark: "",
-          bg: "",
-        });
-        var top = inC.slice(0, 3);
-        top.forEach(function (s, i) {
-          var p = pillOf(s);
-          rows.push(shopRow(s, i === top.length - 1, lineOf(s), p[0], p[1], p[2]));
-        });
-      });
-    } else {
-      var list = SHOPS.filter(match)
-        .filter(function (s) {
-          return (!cat || s.cat === cat) && (tag === "All" || s.tags.indexOf(tag) >= 0);
-        })
-        .sort(rank);
-      list.forEach(function (s, i) {
-        var p = pillOf(s);
-        rows.push(shopRow(s, i === list.length - 1, lineOf(s), p[0], p[1], p[2]));
-      });
-    }
-    return rows;
+  var headRow = function (label, first) {
+    return Object.assign({}, blank, {
+      isHead: true,
+      head: label,
+      pad: first ? "12px 0 2px 0" : "14px 0 2px 0",
+      top: first ? "none" : "1px solid #F1EFF7",
+    });
+  };
+  var openCat = function (c) {
+    return function () {
+      setState({ cat: c, tag: "All", cq: "", sortKey: "near" });
+    };
   };
   var minPts = function (s) {
     return Math.min.apply(
@@ -612,23 +592,110 @@ export function useVals() {
       }),
     );
   };
-  var sortLabels = ["Lowest points", "Nearest"];
-  var rank = function (a, b) {
-    return sortB && !browsing ? a.dist - b.dist : minPts(a) - minPts(b);
+  var rankMain = function (a, b) {
+    return minPts(a) - minPts(b);
   };
+  var mainSortLabel = "Lowest points";
   var lineOf = function (s) {
     var n = s.rewards.map(function (d) {
       return d.name.toLowerCase();
     });
     var t = n.length > 1 ? n.slice(0, -1).join(", ") + " and " + n[n.length - 1] : n[0];
-    return t.charAt(0).toUpperCase() + t.slice(1);
+    return t.charAt(0).toUpperCase() + t.slice(1) + " · " + km(s.dist);
   };
-  var rows = build(rank, lineOf, function () {
+  var pillOf = function () {
     return ["", "", ""];
+  };
+  var cardSub = function (inC) {
+    var n = 0;
+    inC.forEach(function (s) {
+      s.rewards.forEach(function (d) {
+        if (d.pts <= left) n++;
+      });
+    });
+    return (
+      inC.length + (inC.length === 1 ? " shop" : " shops") + (n ? " · " + n + " you can get" : "")
+    );
+  };
+  var cardInk = function () {
+    return "#6B6880";
+  };
+  var rowsFor = function (list, lineOf, pillOf, letters) {
+    var out = [],
+      prev = "";
+    list.forEach(function (s, i) {
+      if (letters) {
+        var L = s.name.replace("The ", "").charAt(0).toUpperCase();
+        if (L !== prev) {
+          out.push(headRow(L, !out.length));
+          prev = L;
+        }
+      }
+      var nx = list[i + 1];
+      var last = !nx || (letters && nx.name.replace("The ", "").charAt(0).toUpperCase() !== prev);
+      out.push(shopRow(s, last, lineOf(s), pillOf(s)));
+    });
+    return out;
+  };
+  var catList = SHOPS.filter(function (s) {
+    return s.cat === cat && (tag === "All" || s.tags.indexOf(tag) >= 0) && has(s, cq);
   });
+  var az = function (a, b) {
+    return a.name.replace("The ", "").localeCompare(b.name.replace("The ", ""));
+  };
+  catList.sort(
+    sortKey === "near"
+      ? function (a, b) {
+          return a.dist - b.dist;
+        }
+      : sortKey === "az"
+        ? az
+        : rankMain,
+  );
+  var searchList = SHOPS.filter(function (s) {
+    return has(s, q);
+  }).sort(az);
+  var rows = cat
+    ? rowsFor(catList, lineOf, pillOf, sortKey === "az")
+    : q
+      ? rowsFor(searchList, lineOf, pillOf, false)
+      : [];
   var shopCount = rows.filter(function (r) {
     return r.isShop;
   }).length;
+  var sorts = [
+    ["near", "Nearest"],
+    ["main", mainSortLabel],
+    ["az", "A to Z"],
+  ].map(function (o) {
+    var on = o[0] === sortKey;
+    return {
+      label: o[1],
+      on: String(on),
+      bg: on ? "#FFFFFF" : "transparent",
+      ink: on ? "#1E1B2E" : "#6B6880",
+      shadow: on ? "0 2px 6px rgba(30,27,46,0.10)" : "none",
+      pick: function () {
+        setState({ sortKey: o[0] });
+      },
+    };
+  });
+  var cards = CATS.map(function (c) {
+    var inC = SHOPS.filter(function (s) {
+      return s.cat === c;
+    });
+    var top = inC.slice().sort(rankMain).slice(0, 3);
+    return {
+      name: c,
+      sub: cardSub(inC),
+      subInk: cardInk(inC),
+      aria: c + ", " + inC.length + " shops",
+      open: openCat(c),
+      logos: top.map(function (s, i) {
+        return Object.assign(withLogo(s), { ml: i === 0 ? "0" : "-8px" });
+      }),
+    };
+  });
   var mineShops = SHOPS.filter(function (s) {
     return s.visits > 0;
   });
@@ -657,34 +724,32 @@ export function useVals() {
     onSearch: function (e) {
       setState({ q: e.target.value });
     },
-    chips: chipDefs.map(function (c) {
-      var on = c === chip;
-      return {
-        label: c,
-        on: String(on),
-        bg: on ? "#1E1B2E" : "#FFFFFF",
-        ink: on ? "#C0F402" : "#1E1B2E",
-        ring: on ? "none" : "0 0 0 1px #ECE8F5",
-        pick: function () {
-          setState({ chip: c, tag: "All" });
-        },
-      };
-    }),
+    cq: state.cq || "",
+    onCatSearch: function (e) {
+      setState({ cq: e.target.value });
+    },
+    catSearchLabel: "Search " + (cat ? cat.toLowerCase() : "shops"),
+    onMain: onMain,
+    inCat: !onMain,
     showBrowse: browsing,
-    inCat: !!cat && !q,
+    showResults: onMain && !!q,
+    cat: cat,
+    backToMain: function () {
+      setState({ cat: "", tag: "All", cq: "" });
+    },
+    cards: cards,
     tags: tags,
+    sorts: sorts,
     rows: rows,
     noRows: rows.length === 0,
-    listTitle: browsing ? "All shops" : q ? "Results" : cat,
-    listNote: browsing ? "" : (sortB ? sortLabels[1] : sortLabels[0]) + " ▾",
-    sortTap: function () {
-      if (!browsing) setState({ sortB: !sortB });
-    },
-    sortCursor: browsing ? "default" : "pointer",
+    listTitle: cat ? shopCount + (shopCount === 1 ? " shop" : " shops") : "Results",
+    listNote: "",
+    sortTap: function () {},
+    sortCursor: "default",
     sortInk: "#6C3FFA",
-    moreLine: browsing
-      ? "Showing the top 3 in each category. 200+ shops in Unipal."
-      : shopCount + (shopCount === 1 ? " shop" : " shops"),
+    moreLine: cat
+      ? "In the real app, every " + cat.toLowerCase().replace(/s$/, "") + " in Unipal shows here."
+      : "",
     sheetOpen: !!sheet,
     closeSheet: function () {
       setState({ sheet: "", ask: "", demo: "" });
