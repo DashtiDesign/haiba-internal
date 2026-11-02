@@ -11,7 +11,7 @@ export default function Welcome() {
   const v: any = useVals();
   const go = useNavigate();
   const hb = useHaiba();
-  const videoStep = v.s0 ? 1 : v.s1 ? 2 : v.s3 ? 4 : v.s4 ? 5 : null;
+  const videoStep = v.s0 ? 1 : v.s1 ? 2 : v.s2 ? 3 : v.s3 ? 4 : 5;
   return (
     <div className={`pg-story hb-welcome-step-${videoStep ?? 3}`}>
       <div
@@ -29,6 +29,7 @@ export default function Welcome() {
           overflow: "hidden",
         }}
       >
+        <div className="hb-welcome-rays" aria-hidden="true"><div className="hb-spin" /></div>
         <div
           style={{
             position: "absolute",
@@ -237,7 +238,7 @@ export default function Welcome() {
           </div>
         </div>
         {videoStep ? <WelcomeVideo key={videoStep} step={videoStep} /> : null}
-        {v.s2 ? (
+        {false ? (
           <>
             {(v.stamps || []).map((d: any, idx0: number) => (
               <Fragment key={idx0}>

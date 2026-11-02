@@ -38,4 +38,10 @@ describe("Welcome video interaction", () => {
     expect(play).toHaveBeenCalledTimes(1);
     expect(container.querySelector("video")?.loop).toBe(false);
   });
+  it("plays supplied step 3 once and ignores replay while playing", () => {
+    const { container, getByRole } = render(<WelcomeVideo step={3} />);
+    expect(container.querySelector("video")?.getAttribute("src")).toBe(welcomeVideos[3].src);
+    fireEvent.click(getByRole("button"));
+    expect(play).toHaveBeenCalledTimes(1);
+  });
 });
