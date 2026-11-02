@@ -4,7 +4,7 @@ import video2 from "@/assets/haiba/welcome/smooth-clean-step-2.mp4.asset.json";
 import still2 from "@/assets/haiba/welcome/clean-step-2.webp.asset.json";
 import video3 from "@/assets/haiba/welcome/smooth-step-3.mp4.asset.json";
 import still3 from "@/assets/haiba/welcome/polished-step-3.webp.asset.json";
-import video4 from "@/assets/haiba/welcome/smooth-edge-to-edge-4.mp4.asset.json";
+import video4 from "@/assets/haiba/welcome/clear-end-4.mp4.asset.json";
 import still4 from "@/assets/haiba/welcome/empty-start-4.webp.asset.json";
 import video5 from "@/assets/haiba/welcome/smooth-clean-step-5.mp4.asset.json";
 import still5 from "@/assets/haiba/welcome/clean-step-5.webp.asset.json";
