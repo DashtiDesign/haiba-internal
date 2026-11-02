@@ -13,10 +13,10 @@ beforeEach(() => {
 afterEach(() => { cleanup(); vi.restoreAllMocks(); });
 
 describe("Welcome video interaction", () => {
-  it("starts video 1 on its final-frame poster without playing", () => {
+  it("plays video 1 on arrival while its final-frame poster covers loading", () => {
     const { container } = render(<WelcomeVideo step={1} />);
     expect(container.querySelector("img")?.getAttribute("src")).toBe(welcomeVideos[1].poster);
-    expect(play).not.toHaveBeenCalled();
+    expect(play).toHaveBeenCalledTimes(1);
   });
   it("ignores taps from playback start until the video ends, then replays from zero", () => {
     const { getByRole, container } = render(<WelcomeVideo step={1} />);
@@ -33,8 +33,8 @@ describe("Welcome video interaction", () => {
     expect(play).toHaveBeenCalledTimes(2);
     expect(video.currentTime).toBe(0);
   });
-  it("plays other supplied steps once on arrival without looping", () => {
-    const { container } = render(<WelcomeVideo step={2} />);
+  it.each([2, 3, 4, 5] as const)("plays step %s once on arrival without looping", (step) => {
+    const { container } = render(<WelcomeVideo step={step} />);
     expect(play).toHaveBeenCalledTimes(1);
     expect(container.querySelector("video")?.loop).toBe(false);
   });
