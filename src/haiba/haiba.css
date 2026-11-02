@@ -255,12 +255,21 @@
   background: transparent;
   text-shadow: none;
 }
+.pg-story.hb-welcome-step-1 {
+  --hb-welcome-surface: #aa97c1;
+  --hb-welcome-muted: #352b47;
+  --hb-welcome-accent: #40207f;
+  --hb-welcome-scene-floor: #decae9;
+  --hb-welcome-scene: linear-gradient(to bottom, var(--hb-welcome-surface) 0%, var(--hb-welcome-surface) 26%, var(--hb-welcome-scene-floor) 650px);
+}
+.pg-story.hb-welcome-step-1 .hb-bg { background: var(--hb-welcome-scene) !important; }
+.pg-story.hb-welcome-step-1 .hb-welcome-rays { display: none; }
 
 /* Welcome video bounds remain stable during loading, playback, and replay. */
 .pg-story .hb-welcome-video-stage {
   position: absolute;
   left: 0;
-  top: 250px;
+  top: 230px;
   width: 100%;
   height: auto;
   aspect-ratio: 1;
@@ -283,26 +292,40 @@
   height: 100%;
   object-fit: contain;
   pointer-events: none;
-  mask-image: linear-gradient(to right, transparent 4%, var(--hb-welcome-ray) 15%, var(--hb-welcome-ray) 85%, transparent 96%), linear-gradient(to bottom, transparent 4%, var(--hb-welcome-ray) 14%, var(--hb-welcome-ray) 87%, transparent 96%);
+}
+.pg-story.hb-welcome-step-1 .hb-welcome-video-stage { top: 230px; }
+.pg-story.hb-welcome-step-1 :is(.hb-welcome-still, .hb-welcome-video-canvas) {
+  mask-image: linear-gradient(to bottom, transparent 0%, var(--hb-welcome-ray) 2%, var(--hb-welcome-ray) 100%);
+}
+.pg-story.hb-welcome-step-2 .hb-welcome-video-stage { width: 92%; left: 4%; top: 245px; }
+.pg-story.hb-welcome-step-3 .hb-welcome-video-stage { width: 79%; left: 10.5%; top: 262px; }
+.pg-story.hb-welcome-step-4 .hb-welcome-video-stage { width: 100%; left: 0; top: 230px; }
+.pg-story.hb-welcome-step-2 :is(.hb-welcome-still, .hb-welcome-video-canvas) {
+  mask-image: linear-gradient(to right, transparent 5%, var(--hb-welcome-ray) 9%, var(--hb-welcome-ray) 91%, transparent 95%), linear-gradient(to bottom, transparent 5%, var(--hb-welcome-ray) 9%, var(--hb-welcome-ray) 91%, transparent 95%);
+  mask-composite: intersect;
+}
+.pg-story.hb-welcome-step-5 :is(.hb-welcome-still, .hb-welcome-video-canvas) {
+  mask-image: linear-gradient(to right, transparent 5%, var(--hb-welcome-ray) 7%, var(--hb-welcome-ray) 93%, transparent 95%), linear-gradient(to bottom, transparent 5%, var(--hb-welcome-ray) 7%, var(--hb-welcome-ray) 93%, transparent 95%);
   mask-composite: intersect;
 }
 .pg-story .hb-welcome-still { z-index: 1; }
 .pg-story .hb-welcome-still-hidden { visibility: hidden; }
 .pg-story .hb-welcome-video-source { display: none; }
-.pg-story.hb-welcome-step-5 .hb-welcome-video-stage { left: 10%; width: 80%; top: 250px; }
+.pg-story.hb-welcome-step-5 .hb-welcome-video-stage { left: 0; width: 100%; top: 215px; }
 .pg-story .hb-bg { min-height: max(100svh, 740px) !important; }
 .pg-story.hb-welcome-step-5 .hb-bg { min-height: max(100svh, 800px) !important; }
 @media (max-height: 700px) {
-  .pg-story .hb-welcome-video-stage {
-    top: 220px;
-    width: min(100%, calc(100svh - 340px));
+  .pg-story.hb-welcome-step-1 .hb-welcome-video-stage,
+  .pg-story.hb-welcome-step-2 .hb-welcome-video-stage,
+  .pg-story.hb-welcome-step-3 .hb-welcome-video-stage,
+  .pg-story.hb-welcome-step-4 .hb-welcome-video-stage,
+  .pg-story.hb-welcome-step-5 .hb-welcome-video-stage {
+    top: 210px;
+    width: 100%;
     left: 50%;
     transform: translateX(-50%);
   }
-  .pg-story.hb-welcome-step-5 .hb-welcome-video-stage {
-    top: 195px;
-    width: min(80%, calc(100svh - 410px));
-    left: 50%;
-  }
-  .pg-story .hb-welcome-gifts { top: calc(100svh - 215px) !important; }
+  .pg-story.hb-welcome-step-2 .hb-welcome-video-stage { width: 92%; top: 225px; }
+  .pg-story.hb-welcome-step-3 .hb-welcome-video-stage { width: 79%; top: 242px; }
+  .pg-story .hb-welcome-gifts { top: max(590px, calc(100svh - 215px)) !important; }
 }
