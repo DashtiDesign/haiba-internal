@@ -11,7 +11,7 @@ export function createTransparentRenderer(canvas: HTMLCanvasElement) {
     return shader;
   };
   const vertex = compile(gl.VERTEX_SHADER, "attribute vec2 position; varying vec2 uv; void main(){gl_Position=vec4(position,0.,1.);uv=vec2((position.x+1.)*.5,(1.-position.y)*.5);}");
-  const fragment = compile(gl.FRAGMENT_SHADER, "precision mediump float; varying vec2 uv; uniform sampler2D frame; void main(){vec3 rgb=texture2D(frame,vec2(uv.x,uv.y*.5)).rgb;float a=texture2D(frame,vec2(uv.x,.5+uv.y*.5)).r;gl_FragColor=vec4(rgb*a,a);}");
+  const fragment = compile(gl.FRAGMENT_SHADER, "precision highp float; varying vec2 uv; uniform sampler2D frame; void main(){vec2 p=clamp(uv,vec2(.5/720.),vec2(1.-.5/720.));vec3 rgb=texture2D(frame,vec2(p.x,p.y*.5)).rgb;float a=texture2D(frame,vec2(p.x,.5+p.y*.5)).r; a=smoothstep(.012,.988,a);gl_FragColor=vec4(min(rgb,vec3(a)),a);}");
   const program = gl.createProgram();
   const buffer = gl.createBuffer();
   const texture = gl.createTexture();

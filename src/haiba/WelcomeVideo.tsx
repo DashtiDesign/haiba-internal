@@ -51,8 +51,8 @@ export default function WelcomeVideo({ step }: { step: VideoStep }) {
   const finish = () => { locked.current = false; setPlaying(false); setHasFrame(false); };
   return (
     <Button variant="ghost" className="hb-welcome-video-stage" aria-label={`Replay welcome animation ${step}`} aria-disabled={playing} onClick={replay}>
-      <img src={asset.poster} width={480} height={480} alt="" className={hasFrame ? "hb-welcome-still hb-welcome-still-hidden" : "hb-welcome-still"} fetchPriority={step === 1 ? "high" : "auto"} />
-      <canvas ref={canvasRef} width={480} height={480} className="hb-welcome-video-canvas" aria-hidden="true" />
+      <img src={asset.poster} width={720} height={720} alt="" className={hasFrame ? "hb-welcome-still hb-welcome-still-hidden" : "hb-welcome-still"} fetchPriority={step === 1 ? "high" : "auto"} />
+      <canvas ref={canvasRef} width={720} height={720} className="hb-welcome-video-canvas" aria-hidden="true" />
       <video ref={videoRef} src={asset.src} crossOrigin="anonymous" muted playsInline preload={step === 1 ? "none" : "auto"} onEnded={finish} onError={finish} aria-hidden="true" className="hb-welcome-video-source" />
     </Button>
   );
