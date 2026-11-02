@@ -4,7 +4,7 @@ import WelcomeVideo from "@/haiba/WelcomeVideo";
 import { welcomeVideos } from "@/haiba/welcomeVideos";
 
 vi.mock("@/haiba/transparentVideo", () => ({ createTransparentRenderer: () => ({ draw: () => true, dispose: () => {} }) }));
-let play: ReturnType<typeof vi.fn>;
+let play = vi.fn<() => Promise<void>>();
 beforeEach(() => {
   play = vi.fn().mockResolvedValue(undefined);
   vi.spyOn(HTMLMediaElement.prototype, "play").mockImplementation(play);
