@@ -21,6 +21,13 @@ const SCREENS = [
   ["Basket and codes", "/haiba/basket"],
   ["Wallet", "/haiba/wallet"],
   ["Travel data", "/haiba/travel"],
+  ["Promo: Compare", "/haiba/promo/compare"],
+  ["Promo: Dream", "/haiba/promo/dream"],
+  ["Promo: Gift", "/haiba/promo/gift"],
+  ["Promo: Value", "/haiba/promo/value"],
+  ["Promo: Waitlist", "/haiba/promo/waitlist"],
+  ["Promo: Winback", "/haiba/promo/winback"],
+  ["Promo: Year", "/haiba/promo/year"],
 ];
 
 const MEMBERS: [Member, string][] = [
