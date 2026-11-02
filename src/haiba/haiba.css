@@ -261,7 +261,6 @@
   --hb-welcome-muted: var(--hb-welcome-ink);
   --hb-welcome-accent: var(--hb-welcome-ink);
   --hb-welcome-scene-floor: #decae9;
-  --hb-welcome-brand-surface: #ffffff;
   --hb-welcome-scene: linear-gradient(to bottom, var(--hb-welcome-surface) 0%, var(--hb-welcome-surface) 230px, var(--hb-welcome-scene-floor) 620px);
 }
 .pg-story.hb-welcome-step-1 .hb-bg { background: var(--hb-welcome-scene) !important; }
@@ -273,7 +272,7 @@
   height: 40px;
   padding: 2px 6px;
   border-radius: 4px;
-  background: var(--hb-welcome-brand-surface);
+  background: transparent;
   vertical-align: middle;
   align-items: center;
   justify-content: center;
