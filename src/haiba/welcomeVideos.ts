@@ -1,5 +1,5 @@
-import video1 from "@/assets/haiba/welcome/matte-step-1.mp4.asset.json";
-import still1 from "@/assets/haiba/welcome/matte-step-1.webp.asset.json";
+import video1 from "@/assets/haiba/welcome/sealed-step-1.mp4.asset.json";
+import still1 from "@/assets/haiba/welcome/sealed-step-1.webp.asset.json";
 import video2 from "@/assets/haiba/welcome/clean-step-2.mp4.asset.json";
 import still2 from "@/assets/haiba/welcome/clean-step-2.webp.asset.json";
 import video3 from "@/assets/haiba/welcome/polished-step-3.mp4.asset.json";
