@@ -45,3 +45,9 @@ describe("Welcome video interaction", () => {
     expect(play).toHaveBeenCalledTimes(1);
   });
 });
+describe("Welcome video speed and step changes", () => {
+  it.each([[1, 2], [2, 2], [3, 2], [4, 1], [5, 2]] as const)("step %s plays at %sx", (step, rate) => {
+    const { container } = render(<WelcomeVideo step={step} />);
+    expect(container.querySelector("video")?.playbackRate).toBe(rate);
+  });
+});
