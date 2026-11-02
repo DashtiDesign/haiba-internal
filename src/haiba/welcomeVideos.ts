@@ -1,11 +1,11 @@
-import video1 from "@/assets/haiba/welcome/sealed-step-1.mp4.asset.json";
-import still1 from "@/assets/haiba/welcome/sealed-step-1.webp.asset.json";
+import video1 from "@/assets/haiba/welcome/original-background-1.mp4.asset.json";
+import still1 from "@/assets/haiba/welcome/original-background-1.webp.asset.json";
 import video2 from "@/assets/haiba/welcome/clean-step-2.mp4.asset.json";
 import still2 from "@/assets/haiba/welcome/clean-step-2.webp.asset.json";
 import video3 from "@/assets/haiba/welcome/polished-step-3.mp4.asset.json";
 import still3 from "@/assets/haiba/welcome/polished-step-3.webp.asset.json";
-import video4 from "@/assets/haiba/welcome/refined-step-4.mp4.asset.json";
-import still4 from "@/assets/haiba/welcome/refined-step-4.webp.asset.json";
+import video4 from "@/assets/haiba/welcome/edge-to-edge-4.mp4.asset.json";
+import still4 from "@/assets/haiba/welcome/edge-to-edge-4.webp.asset.json";
 import video5 from "@/assets/haiba/welcome/clean-step-5.mp4.asset.json";
 import still5 from "@/assets/haiba/welcome/clean-step-5.webp.asset.json";
 

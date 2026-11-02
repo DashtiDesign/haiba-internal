@@ -15,5 +15,5 @@
 - Disable legacy canvas CSS animations before hydration and supply initial animated positions in styles so first paint is complete; preload route chunks on navigation intent.
 - Deliver canvas bird images through the shared Artwork component and immutable WebP asset registry; preserve intrinsic dimensions and preload only initial route artwork to avoid late layout shifts and competing downloads.
 - Keep home-screen installation manifest-only, with real public app icons and shared root head links; add no app-shell service worker unless offline support is explicitly requested, to avoid stale preview caches.
-- Deliver welcome videos as padded, pre-keyed premultiplied RGB/alpha packed H.264 through WelcomeVideo's GPU renderer with matching transparent final-frame posters; preserve matte quality, clamp sampling within each half, and avoid applying alpha twice to prevent green fringes while keeping browser-compatible playback.
-- Use a full-character idle poster for welcome footage that exits the source frame; feather source boundaries consistently on posters and playback to conceal baked-in square cuts.
+- Deliver welcome footage as RGB/alpha packed H.264 through WelcomeVideo's GPU renderer; use opaque alpha for intact-background footage and premultiplied keyed RGB for transparent footage, avoiding double alpha and clamping each half's sampling.
+- Use full-character idle posters for footage that exits the frame; apply only per-step boundary treatments and sizing in shared welcome CSS so posters and playback remain consistently framed.
