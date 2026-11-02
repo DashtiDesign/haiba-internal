@@ -8,17 +8,25 @@ export default function WelcomeVideo({ step }: { step: VideoStep }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const locked = useRef(false);
+  const attempt = useRef(0);
   const [playing, setPlaying] = useState(false);
   const [hasFrame, setHasFrame] = useState(false);
   const replay = useCallback(() => {
     const video = videoRef.current;
     if (!video || locked.current) return;
     locked.current = true;
+    const id = ++attempt.current;
     setPlaying(true);
     setHasFrame(false);
     video.currentTime = 0;
-    void video.play().catch(() => { locked.current = false; setPlaying(false); setHasFrame(false); });
-  }, []);
+    video.defaultPlaybackRate = asset.rate;
+    video.playbackRate = asset.rate;
+    // Only the latest attempt may unlock; stale aborted plays (e.g. remounts) are ignored.
+    void video.play().catch(() => {
+      if (id !== attempt.current) return;
+      locked.current = false; setPlaying(false); setHasFrame(false);
+    });
+  }, [asset.rate]);
 
   useEffect(() => {
     const video = videoRef.current;
