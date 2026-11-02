@@ -1,5 +1,5 @@
 # Mobile layouts
-- [ ] Replace welcome steps 1, 2, 4, and 5 with optimized, background-free videos and verify replay locking and first video's last-frame start.
+- [x] Replace welcome steps 1, 2, 4, and 5 with optimized, background-free videos and verify replay locking and first video's last-frame start.
 - [ ] Add welcome step 3 video once supplied (waiting on the remaining upload).
 - [x] Use the supplied Haiba logo and favicon; add and verify home-screen app metadata and icons without offline caching.
 - [x] Optimize artwork delivery and prioritize first-screen images; verify image loading across pages.
