@@ -224,18 +224,32 @@
   bottom: 0;
 }
 
-/* Calm, flat welcome surfaces keep keyed video edges and captions clear. */
+/* Shared lilac surface and quiet starburst sit behind transparent footage. */
 .pg-story {
-  --hb-welcome-surface: #d9eee5;
+  --hb-welcome-surface: #F3F0FA;
   --hb-welcome-ink: #242036;
   --hb-welcome-muted: #514a65;
   --hb-welcome-accent: #5630bb;
   --hb-welcome-track: #a19cad;
+  --hb-welcome-ray: #ffffff;
+  --hb-welcome-rays: repeating-conic-gradient(from 0deg, var(--hb-welcome-ray) 0deg 7deg, transparent 7deg 20deg);
 }
-.pg-story.hb-welcome-step-2 { --hb-welcome-surface: #dcebf5; }
-.pg-story.hb-welcome-step-3 { --hb-welcome-surface: #eef1d8; }
-.pg-story.hb-welcome-step-4 { --hb-welcome-surface: #f4dfe5; }
-.pg-story.hb-welcome-step-5 { --hb-welcome-surface: #e7e0f3; }
+.pg-story .hb-welcome-rays {
+  position: absolute;
+  width: 1000px;
+  height: 1000px;
+  left: calc(50% - 500px);
+  top: -60px;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: radial-gradient(circle, var(--hb-welcome-ray) 5%, transparent 65%);
+}
+.pg-story .hb-welcome-rays > div {
+  width: 100%;
+  height: 100%;
+  background: var(--hb-welcome-rays);
+  opacity: .7;
+}
 .pg-story .hl {
   color: var(--hb-welcome-accent);
   background: transparent;
@@ -269,6 +283,8 @@
   height: 100%;
   object-fit: contain;
   pointer-events: none;
+  mask-image: linear-gradient(to right, transparent 4%, var(--hb-welcome-ray) 15%, var(--hb-welcome-ray) 85%, transparent 96%), linear-gradient(to bottom, transparent 4%, var(--hb-welcome-ray) 14%, var(--hb-welcome-ray) 87%, transparent 96%);
+  mask-composite: intersect;
 }
 .pg-story .hb-welcome-still { z-index: 1; }
 .pg-story .hb-welcome-still-hidden { visibility: hidden; }

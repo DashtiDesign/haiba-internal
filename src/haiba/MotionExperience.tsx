@@ -52,9 +52,10 @@ export default function MotionExperience({ children }: { children: ReactNode }) 
         if (!reduced && element.matches(ambientSelector)) {
           const decorative = element.matches(".hb-spin, .hb-shade, .hb-pulse");
           const baseOpacity = Number(getComputedStyle(element).opacity);
-          track(animate(element, decorative && !element.matches(".hb-pulse") ? { opacity: [baseOpacity, baseOpacity * 0.8, baseOpacity] } : { translate: ["0 0", "0 -4px", "0 0"] }, {
-            duration: element.matches(".hb-run") ? 1.2 : 3.6,
-            ease: "easeInOut", repeat: element.matches(".hb-jump") ? 0 : Infinity,
+          const welcomeRays = element.matches(".hb-welcome-rays > .hb-spin");
+          track(animate(element, welcomeRays ? { rotate: [0, 360] } : decorative && !element.matches(".hb-pulse") ? { opacity: [baseOpacity, baseOpacity * 0.8, baseOpacity] } : { translate: ["0 0", "0 -4px", "0 0"] }, {
+            duration: welcomeRays ? 90 : element.matches(".hb-run") ? 1.2 : 3.6,
+            ease: welcomeRays ? "linear" : "easeInOut", repeat: element.matches(".hb-jump") ? 0 : Infinity,
           }));
         }
       });
