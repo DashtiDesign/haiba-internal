@@ -6,7 +6,7 @@ import { useHaiba } from "../store";
 import Artwork from "../Artwork";
 import WelcomeVideo from "../WelcomeVideo";
 import { useVals } from "../logic/story";
-import haibaLogo from "@/assets/haiba/welcome-logo-purple.svg.asset.json";
+import haibaLogo from "@/assets/haiba/welcome-logo-green.svg.asset.json";
 
 export default function Welcome() {
   const v: any = useVals();
@@ -228,7 +228,7 @@ export default function Welcome() {
           <div
             className="hb-rise hb-d2"
             style={{
-              marginTop: "12px",
+              marginTop: v.s0 ? "4px" : "12px",
               fontSize: "16px",
               fontWeight: "600",
               color: "var(--hb-welcome-muted)",
