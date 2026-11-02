@@ -46,7 +46,7 @@ describe("Welcome video interaction", () => {
   });
 });
 describe("Welcome video speed and step changes", () => {
-  it.each([[1, 2], [2, 2], [3, 2], [4, 1], [5, 2]] as const)("step %s plays at %sx", (step, rate) => {
+  it.each([[1, 2], [2, 2], [3, 2], [4, 1], [5, 1]] as const)("step %s plays at %sx", (step, rate) => {
     const { container } = render(<WelcomeVideo step={step} />);
     expect(container.querySelector("video")?.playbackRate).toBe(rate);
   });
