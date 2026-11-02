@@ -35,8 +35,8 @@ export default function WelcomeVideo({ step }: { step: VideoStep }) {
       else animationId = requestAnimationFrame(draw);
     };
     video.addEventListener("playing", draw);
-    // Step 1 deliberately stays on its exact final-frame still until tapped.
-    if (step !== 1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) replay();
+    // Each newly mounted step plays once; the final-frame poster covers loading.
+    replay();
     return () => {
       active = false;
       locked.current = false;
@@ -53,7 +53,7 @@ export default function WelcomeVideo({ step }: { step: VideoStep }) {
     <Button variant="ghost" className="hb-welcome-video-stage" aria-label={`Replay welcome animation ${step}`} aria-disabled={playing} onClick={replay}>
       <img src={asset.poster} width={720} height={720} alt="" className={hasFrame ? "hb-welcome-still hb-welcome-still-hidden" : "hb-welcome-still"} fetchPriority={step === 1 ? "high" : "auto"} />
       <canvas ref={canvasRef} width={720} height={720} className="hb-welcome-video-canvas" aria-hidden="true" />
-      <video ref={videoRef} src={asset.src} crossOrigin="anonymous" muted playsInline preload={step === 1 ? "none" : "auto"} onEnded={finish} onError={finish} aria-hidden="true" className="hb-welcome-video-source" />
+      <video ref={videoRef} src={asset.src} crossOrigin="anonymous" muted playsInline preload="auto" onEnded={finish} onError={finish} aria-hidden="true" className="hb-welcome-video-source" />
     </Button>
   );
 }
