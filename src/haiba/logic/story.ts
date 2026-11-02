@@ -15,7 +15,6 @@ export function useVals() {
       setState({ step: k });
     };
   };
-  var bgs = ["#E4F59E", "#E6DEFF", "#EEF7C9", "#FFE6D1", "#E9E1FF"];
   var giftDefs = [
     { brand: "Wingman", item: "Student box", bg: "#F9F9F9", logo: "/haiba/brands/wingman.webp" },
     { brand: "VOX Cinemas", item: "Cinema ticket", bg: "#FFFFFF", logo: "/haiba/brands/vox.webp" },
@@ -99,7 +98,6 @@ export function useVals() {
     s2: st === 2,
     s3: st === 3,
     s4: st === 4,
-    bg: bgs[st],
     sub: subs[st],
     stamps: stamps,
     confetti: confetti,
@@ -107,7 +105,7 @@ export function useVals() {
     dashes: [0, 1, 2, 3, 4].map(function (k) {
       return {
         label: "Step " + (k + 1) + " of " + N,
-        bg: k <= st ? "#1E1B2E" : "rgba(30,27,46,0.15)",
+        bg: k <= st ? "var(--hb-welcome-ink)" : "var(--hb-welcome-track)",
         go: go(k),
       };
     }),
