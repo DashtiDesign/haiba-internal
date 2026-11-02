@@ -257,9 +257,9 @@
 }
 .pg-story.hb-welcome-step-1 {
   --hb-welcome-surface: #aa97c1;
-  --hb-welcome-ink: #171222;
-  --hb-welcome-muted: #272033;
-  --hb-welcome-accent: #30165f;
+  --hb-welcome-ink: #100c18;
+  --hb-welcome-muted: var(--hb-welcome-ink);
+  --hb-welcome-accent: var(--hb-welcome-ink);
   --hb-welcome-scene-floor: #decae9;
   --hb-welcome-scene: linear-gradient(to bottom, var(--hb-welcome-surface) 0%, var(--hb-welcome-surface) 230px, var(--hb-welcome-scene-floor) 620px);
 }
