@@ -350,6 +350,7 @@ export default function Welcome() {
         {v.s4 ? (
           <>
             <div
+              className="hb-welcome-gifts"
               style={{
                 position: "absolute",
                 left: "21px",

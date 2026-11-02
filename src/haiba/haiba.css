@@ -258,3 +258,17 @@
 .pg-story.hb-welcome-step-5 .hb-welcome-video-stage { left: 10%; width: 80%; top: 260px; }
 .pg-story .hb-bg { min-height: max(100svh, 740px) !important; }
 .pg-story.hb-welcome-step-5 .hb-bg { min-height: max(100svh, 800px) !important; }
+@media (max-height: 700px) {
+  .pg-story .hb-welcome-video-stage {
+    top: 220px;
+    width: min(100%, calc(100svh - 340px));
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .pg-story.hb-welcome-step-5 .hb-welcome-video-stage {
+    top: 195px;
+    width: min(80%, calc(100svh - 410px));
+    left: 50%;
+  }
+  .pg-story .hb-welcome-gifts { top: calc(100svh - 215px) !important; }
+}
