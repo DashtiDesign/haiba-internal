@@ -45,3 +45,20 @@ describe("Welcome video interaction", () => {
     expect(play).toHaveBeenCalledTimes(1);
   });
 });
+describe("Welcome video speed and step changes", () => {
+  it.each([[1, 2], [2, 2], [3, 2], [4, 1], [5, 2]] as const)("step %s plays at %sx", (step, rate) => {
+    const { container } = render(<WelcomeVideo step={step} />);
+    expect(container.querySelector("video")?.playbackRate).toBe(rate);
+  });
+  it("a stale aborted play does not unlock the newer playback", async () => {
+    let rejectFirst: (e: Error) => void = () => {};
+    play.mockImplementationOnce(() => new Promise((_, r) => { rejectFirst = r; })).mockResolvedValue(undefined);
+    const { getByRole, unmount } = render(<WelcomeVideo step={2} />);
+    unmount();
+    const second = render(<WelcomeVideo step={3} />);
+    rejectFirst(new Error("AbortError"));
+    await Promise.resolve(); await Promise.resolve();
+    expect(second.getAllByRole("button")[0].getAttribute("aria-disabled")).toBe("true");
+    void getByRole;
+  });
+});
