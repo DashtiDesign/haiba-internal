@@ -1,4 +1,5 @@
 # Mobile layouts
+- [ ] Replace step 1 with intact-background video, normalize parrot sizes, limit fades to steps 2/5, and restore step 4 edge-to-edge travel.
 - [x] Clean video 1 artifacts, conceal source-cut edges, fix step 4 opening, restore shared lilac starburst, and add supplied step 3 video (source-cut details are softened, not reconstructed).
 - [x] Refresh welcome backgrounds with calm complementary colors and stronger readable accents; remove competing rays and glow.
 - [x] Improve welcome video edge quality, compression, blending, and uncropped on-page framing; verify playback (source-cut effects and fireworks still need native transparent exports for pristine results).
