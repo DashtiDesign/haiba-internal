@@ -6,6 +6,7 @@ import { useHaiba } from "../store";
 import Artwork from "../Artwork";
 import WelcomeVideo from "../WelcomeVideo";
 import { useVals } from "../logic/story";
+import haibaLogo from "@/assets/haiba/logo-purple.svg.asset.json";
 
 export default function Welcome() {
   const v: any = useVals();
@@ -146,7 +147,7 @@ export default function Welcome() {
                 {"You're in!"}
                 <br />
                 {"Welcome to "}
-                <span className="hl">{"Haiba"}</span>
+                <span className="hb-welcome-brand"><img src={haibaLogo.url} alt="Haiba" width={223} height={92} /></span>
               </div>
             </>
           ) : null}
@@ -444,19 +445,6 @@ export default function Welcome() {
                     }}
                   >
                     {v.cta}
-                    <svg
-                      aria-hidden="true"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M9 6l6 6-6 6"></path>
-                    </svg>
                   </button>
                 </>
               ) : null}

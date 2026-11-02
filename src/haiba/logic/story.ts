@@ -22,7 +22,7 @@ export function useVals() {
     { brand: "Albayan", item: "Perfume", bg: "#FFFFFF", logo: "/haiba/brands/albayan.webp" },
   ];
   var subs = [
-    "Here is how it works. It takes 20 seconds.",
+    "Here is how it works.",
     "They land on their own. Nothing to scan.",
     "Counted per shop, like a stamp card.",
     "Pick a reward. Show the code at the shop.",

@@ -261,11 +261,28 @@
   --hb-welcome-muted: var(--hb-welcome-ink);
   --hb-welcome-accent: var(--hb-welcome-ink);
   --hb-welcome-scene-floor: #decae9;
+  --hb-welcome-brand-surface: #ffffff;
   --hb-welcome-scene: linear-gradient(to bottom, var(--hb-welcome-surface) 0%, var(--hb-welcome-surface) 230px, var(--hb-welcome-scene-floor) 620px);
 }
 .pg-story.hb-welcome-step-1 .hb-bg { background: var(--hb-welcome-scene) !important; }
 .pg-story.hb-welcome-step-1 .hb-welcome-rays { display: none; }
 .pg-story.hb-welcome-step-1 .hl { color: var(--hb-welcome-accent) !important; }
+.pg-story .hb-welcome-brand {
+  display: inline-flex;
+  width: 96px;
+  height: 40px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--hb-welcome-brand-surface);
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+}
+.pg-story .hb-welcome-brand img {
+  display: block;
+  width: 96px;
+  height: auto;
+}
 
 /* Welcome video bounds remain stable during loading, playback, and replay. */
 .pg-story .hb-welcome-video-stage {
@@ -304,10 +321,10 @@
     rgb(255 255 255 / .5) 3%,
     rgb(255 255 255 / .84) 4.5%,
     var(--hb-welcome-ray) 6%,
-    var(--hb-welcome-ray) 94%,
-    rgb(255 255 255 / .84) 95.5%,
-    rgb(255 255 255 / .5) 97%,
-    rgb(255 255 255 / .16) 98.5%,
+    var(--hb-welcome-ray) 98%,
+    rgb(255 255 255 / .84) 98.5%,
+    rgb(255 255 255 / .5) 99%,
+    rgb(255 255 255 / .16) 99.5%,
     transparent 100%);
 }
 .pg-story.hb-welcome-step-2 .hb-welcome-video-stage { width: 92%; left: 4%; top: 245px; }
