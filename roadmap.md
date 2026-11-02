@@ -1,8 +1,9 @@
 # Mobile layouts
+- [ ] Clean video 1 artifacts, conceal source-cut edges, fix step 4 opening, restore shared lilac starburst, and add supplied step 3 video.
 - [x] Refresh welcome backgrounds with calm complementary colors and stronger readable accents; remove competing rays and glow.
 - [x] Improve welcome video edge quality, compression, blending, and uncropped on-page framing; verify playback (source-cut effects and fireworks still need native transparent exports for pristine results).
 - [x] Replace welcome steps 1, 2, 4, and 5 with optimized, background-free videos and verify replay locking and first video's last-frame start.
-- [ ] Add welcome step 3 video once supplied (waiting on the remaining upload).
+- [x] Receive remaining welcome step 3 source video.
 - [x] Use the supplied Haiba logo and favicon; add and verify home-screen app metadata and icons without offline caching.
 - [x] Optimize artwork delivery and prioritize first-screen images; verify image loading across pages.
 - [x] Fix incomplete Plans first paint and shared loading animation delays; verify initial loading and navigation.
