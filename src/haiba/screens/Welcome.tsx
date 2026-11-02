@@ -6,7 +6,7 @@ import { useHaiba } from "../store";
 import Artwork from "../Artwork";
 import WelcomeVideo from "../WelcomeVideo";
 import { useVals } from "../logic/story";
-import haibaLogo from "@/assets/haiba/logo-purple.svg.asset.json";
+import haibaLogo from "@/assets/haiba/welcome-logo-purple.svg.asset.json";
 
 export default function Welcome() {
   const v: any = useVals();
