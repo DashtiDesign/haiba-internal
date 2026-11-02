@@ -257,8 +257,9 @@
 }
 .pg-story.hb-welcome-step-1 {
   --hb-welcome-surface: #aa97c1;
-  --hb-welcome-muted: #352b47;
-  --hb-welcome-accent: #40207f;
+  --hb-welcome-ink: #171222;
+  --hb-welcome-muted: #272033;
+  --hb-welcome-accent: #30165f;
   --hb-welcome-scene-floor: #decae9;
   --hb-welcome-scene: linear-gradient(to bottom, var(--hb-welcome-surface) 0%, var(--hb-welcome-surface) 230px, var(--hb-welcome-scene-floor) 620px);
 }
@@ -296,7 +297,18 @@
 }
 .pg-story.hb-welcome-step-1 .hb-welcome-video-stage { top: 230px; }
 .pg-story.hb-welcome-step-1 :is(.hb-welcome-still, .hb-welcome-video-canvas) {
-  mask-image: linear-gradient(to bottom, transparent 0%, var(--hb-welcome-ray) 2%, var(--hb-welcome-ray) 100%);
+  /* Feather the background-only boundaries, keeping the character fully opaque. */
+  mask-image: linear-gradient(to bottom,
+    transparent 0%,
+    rgb(255 255 255 / .16) 1.5%,
+    rgb(255 255 255 / .5) 3%,
+    rgb(255 255 255 / .84) 4.5%,
+    var(--hb-welcome-ray) 6%,
+    var(--hb-welcome-ray) 94%,
+    rgb(255 255 255 / .84) 95.5%,
+    rgb(255 255 255 / .5) 97%,
+    rgb(255 255 255 / .16) 98.5%,
+    transparent 100%);
 }
 .pg-story.hb-welcome-step-2 .hb-welcome-video-stage { width: 92%; left: 4%; top: 245px; }
 .pg-story.hb-welcome-step-3 .hb-welcome-video-stage { width: 79%; left: 10.5%; top: 262px; }
