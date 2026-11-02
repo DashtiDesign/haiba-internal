@@ -101,7 +101,7 @@ LOGIC = {
         # Lovable: one shared muted grey
         ("ptsInk: can || held || used ? '#4F25D6' : '#8A8A96',", "ptsInk: can || held || used ? '#4F25D6' : 'var(--hb-muted-ink)',"),
     ],
-    "Welcome": [("if (st === 3) { setState({ step: 0, dir: 'l', gift: -1 }); }", "if (st === 3) { nav('/haiba'); }")],
+    "Welcome": [],  # last step links to the hub with a real link, no logic patch needed
     "Basket": [
         ("var balance = 1240;", "var balance = props.base;"),
         # Lovable: one shared muted grey

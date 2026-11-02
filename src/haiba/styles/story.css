@@ -1,33 +1,10 @@
 .pg-story a {
   color: #6c3ffa;
 }
-.pg-story a:hover {
-  color: #5428e0;
-}
-@keyframes story-hb-in-r {
-  from {
-    opacity: 0;
-    transform: translateX(60px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-@keyframes story-hb-in-l {
-  from {
-    opacity: 0;
-    transform: translateX(-60px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
 @keyframes story-hb-rise {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -37,15 +14,15 @@
 @keyframes story-hb-pop {
   0% {
     opacity: 0;
-    transform: scale(0.5);
+    transform: scale(0.6) translateY(30px);
   }
-  70% {
+  65% {
     opacity: 1;
-    transform: scale(1.1);
+    transform: scale(1.04) translateY(-4px);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateY(0);
   }
 }
 @keyframes story-hb-float {
@@ -54,111 +31,140 @@
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-8px);
+    transform: translateY(-10px);
+  }
+}
+@keyframes story-hb-bobl {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-5deg);
+  }
+}
+@keyframes story-hb-bobr {
+  0%,
+  100% {
+    transform: translateY(0) rotate(5deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(5deg);
+  }
+}
+@keyframes story-hb-spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 @keyframes story-hb-stamp {
   0% {
     opacity: 0;
-    transform: scale(1.8) rotate(-12deg);
+    transform: scale(1.9) rotate(-14deg);
   }
   60% {
     opacity: 1;
-    transform: scale(0.92) rotate(2deg);
+    transform: scale(0.9) rotate(3deg);
   }
   100% {
     opacity: 1;
     transform: scale(1) rotate(0);
   }
 }
-@keyframes story-hb-flip {
-  from {
+@keyframes story-hb-fall {
+  0% {
     opacity: 0;
-    transform: perspective(600px) rotateY(-70deg);
+    transform: translateY(-40px) rotate(0);
   }
-  to {
+  15% {
     opacity: 1;
-    transform: perspective(600px) rotateY(0);
   }
-}
-.pg-story .hb-in-r {
-  animation: story-hb-in-r 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-.pg-story .hb-in-l {
-  animation: story-hb-in-l 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  100% {
+    opacity: 0;
+    transform: translateY(260px) rotate(320deg);
+  }
 }
 .pg-story .hb-rise {
-  animation: story-hb-rise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: story-hb-rise 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 .pg-story .hb-pop {
-  animation: story-hb-pop 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: story-hb-pop 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  transform-origin: 50% 100%;
 }
 .pg-story .hb-float {
-  animation: story-hb-float 3.4s ease-in-out infinite;
+  animation: story-hb-float 3.6s ease-in-out infinite;
 }
-.pg-story .hb-flip {
-  animation: story-hb-flip 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s both;
+.pg-story .hb-bobl {
+  transform: rotate(-5deg);
+  animation: story-hb-bobl 3.2s ease-in-out infinite;
 }
-.pg-story .hb-stamps > * {
+.pg-story .hb-bobr {
+  transform: rotate(5deg);
+  animation: story-hb-bobr 3.4s ease-in-out infinite;
+}
+.pg-story .hb-spin {
+  animation: story-hb-spin 80s linear infinite;
+}
+.pg-story .hb-stamp {
   animation: story-hb-stamp 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
-.pg-story .hb-stamps > *:nth-child(2) {
-  animation-delay: 0.12s;
-}
-.pg-story .hb-stamps > *:nth-child(3) {
-  animation-delay: 0.24s;
-}
-.pg-story .hb-stamps > *:nth-child(4) {
-  animation-delay: 0.36s;
-}
-.pg-story .hb-stamps > *:nth-child(5) {
-  animation-delay: 0.48s;
-}
-.pg-story .hb-pops > * {
-  animation: story-hb-pop 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-.pg-story .hb-pops > *:nth-child(2) {
-  animation-delay: 0.08s;
-}
-.pg-story .hb-pops > *:nth-child(3) {
-  animation-delay: 0.16s;
-}
-.pg-story .hb-pops > *:nth-child(4) {
-  animation-delay: 0.24s;
+.pg-story .hb-fall {
+  animation: story-hb-fall 3.4s ease-in infinite;
 }
 .pg-story .hb-d1 {
-  animation-delay: 0.15s;
+  animation-delay: 0.08s;
 }
 .pg-story .hb-d2 {
-  animation-delay: 0.3s;
+  animation-delay: 0.18s;
 }
 .pg-story .hb-d3 {
-  animation-delay: 0.45s;
+  animation-delay: 0.3s;
+}
+.pg-story .hb-d4 {
+  animation-delay: 0.42s;
+}
+.pg-story .hb-d5 {
+  animation-delay: 0.54s;
+}
+.pg-story .hb-d6 {
+  animation-delay: 0.66s;
 }
 .pg-story .hb-press {
   transition:
     transform 0.16s ease,
     box-shadow 0.2s ease,
-    background 0.2s ease,
-    opacity 0.2s ease;
+    background 0.2s ease;
 }
 .pg-story .hb-press:active {
-  transform: scale(0.96);
+  transform: scale(0.95);
+}
+.pg-story .hb-bg {
+  transition: background 0.5s ease;
 }
 .pg-story .hb-ease {
-  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.pg-story .hl {
+  color: #6c3ffa;
 }
 @media (prefers-reduced-motion: reduce) {
-  .pg-story .hb-in-r,
-  .pg-story .hb-in-l,
   .pg-story .hb-rise,
   .pg-story .hb-pop,
   .pg-story .hb-float,
-  .pg-story .hb-flip,
-  .pg-story .hb-stamps > *,
-  .pg-story .hb-pops > * {
+  .pg-story .hb-bobl,
+  .pg-story .hb-bobr,
+  .pg-story .hb-spin,
+  .pg-story .hb-stamp,
+  .pg-story .hb-fall {
     animation: none;
   }
+  .pg-story .hb-fall {
+    display: none;
+  }
+  .pg-story .hb-bg,
   .pg-story .hb-ease,
   .pg-story .hb-press {
     transition: none;

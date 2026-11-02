@@ -13,45 +13,69 @@ export default function Welcome() {
   return (
     <div className="pg-story">
       <div
+        className="hb-bg"
         style={{
           width: "100%",
           maxWidth: "390px",
           margin: "0 auto",
           minHeight: "100vh",
           boxSizing: "border-box",
-          background: "linear-gradient(180deg, #D6C6FF 0%, #E9E1FF 45%, #F3F0FA 100%)",
+          background: v.bg,
           fontFamily: "Figtree, system-ui, sans-serif",
           color: "#1E1B2E",
           position: "relative",
           overflow: "hidden",
         }}
       >
-        <div style={{ display: "flex", gap: "6px", padding: "14px 16px 0 16px" }}>
-          {(v.dashes || []).map((d: any, idx0: number) => (
-            <Fragment key={idx0}>
-              <button
-                aria-label={d.label}
-                onClick={d.go}
-                className="hb-ease"
-                style={{
-                  flex: "1",
-                  height: "4px",
-                  borderRadius: "999px",
-                  border: "0",
-                  padding: "0",
-                  cursor: "pointer",
-                  background: d.bg,
-                }}
-              ></button>
-            </Fragment>
-          ))}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            left: "-305px",
+            top: "-20px",
+            width: "1000px",
+            height: "1000px",
+            pointerEvents: "none",
+            WebkitMaskImage:
+              "radial-gradient(circle at 50% 50%, #000 0%, rgba(0,0,0,0.6) 22%, transparent 48%)",
+            maskImage:
+              "radial-gradient(circle at 50% 50%, #000 0%, rgba(0,0,0,0.6) 22%, transparent 48%)",
+          }}
+        >
+          <div
+            className="hb-spin"
+            style={{
+              width: "100%",
+              height: "100%",
+              background:
+                "repeating-conic-gradient(from 0deg, rgba(255,255,255,0.75) 0deg 7deg, rgba(255,255,255,0) 7deg 20deg)",
+            }}
+          ></div>
         </div>
         <div
+          aria-hidden="true"
           style={{
+            position: "absolute",
+            left: "45px",
+            top: "330px",
+            width: "300px",
+            height: "300px",
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.5) 40%, rgba(255,255,255,0) 70%)",
+            pointerEvents: "none",
+          }}
+        ></div>
+        <div
+          style={{
+            position: "absolute",
+            left: "8px",
+            right: "8px",
+            top: "10px",
             display: "flex",
-            justifyContent: "space-between",
             alignItems: "center",
-            padding: "12px 16px 0 16px",
+            gap: "8px",
+            zIndex: "5",
           }}
         >
           <button
@@ -61,52 +85,57 @@ export default function Welcome() {
             style={{
               width: "44px",
               height: "44px",
-              borderRadius: "50%",
               border: "0",
-              background: "rgba(255,255,255,0.85)",
+              background: "transparent",
               color: "#1E1B2E",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               padding: "0",
               cursor: "pointer",
-              opacity: v.backOp,
+              visibility: v.backVis,
             }}
           >
             <svg
               aria-hidden="true"
-              width="20"
-              height="20"
+              width="22"
+              height="22"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2.4"
+              strokeWidth="2.6"
               strokeLinecap="round"
               strokeLinejoin="round"
             >
-              <path d="M19 12H5"></path>
-              <path d="M11 6l-6 6 6 6"></path>
+              <path d="M15 5l-7 7 7 7"></path>
             </svg>
           </button>
-          <span
-            style={{
-              fontFamily: "Figtree, system-ui, sans-serif",
-              fontSize: "17px",
-              fontWeight: "800",
-              letterSpacing: "-0.01em",
-            }}
-          >
-            {"How Haiba works"}
-          </span>
+          <div style={{ flex: "1", display: "flex", gap: "5px", padding: "0 6px" }}>
+            {(v.dashes || []).map((d: any, idx0: number) => (
+              <Fragment key={idx0}>
+                <button
+                  aria-label={d.label}
+                  onClick={d.go}
+                  className="hb-ease"
+                  style={{
+                    flex: "1",
+                    height: "5px",
+                    borderRadius: "999px",
+                    border: "0",
+                    padding: "0",
+                    cursor: "pointer",
+                    background: d.bg,
+                  }}
+                ></button>
+              </Fragment>
+            ))}
+          </div>
           <Link
             aria-label="Close"
             className="hb-press"
             style={{
               width: "44px",
               height: "44px",
-              borderRadius: "50%",
-              border: "0",
-              background: "rgba(255,255,255,0.85)",
               color: "#1E1B2E",
               display: "flex",
               alignItems: "center",
@@ -117,12 +146,12 @@ export default function Welcome() {
           >
             <svg
               aria-hidden="true"
-              width="20"
-              height="20"
+              width="22"
+              height="22"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2.4"
+              strokeWidth="2.6"
               strokeLinecap="round"
             >
               <path d="M6 6l12 12M18 6L6 18"></path>
@@ -131,612 +160,634 @@ export default function Welcome() {
         </div>
         <div
           style={{
-            margin: "20px 16px 0 16px",
-            height: "340px",
-            borderRadius: "16px",
-            background: "#FFFFFF",
-            position: "relative",
-            overflow: "hidden",
-            boxShadow: "0 20px 44px rgba(76,52,140,0.16)",
+            position: "absolute",
+            left: "24px",
+            right: "24px",
+            top: "78px",
+            textAlign: "center",
+            zIndex: "4",
           }}
         >
           {v.s0 ? (
             <>
-              <div className={v.inClass} style={{ position: "absolute", inset: "0" }}>
-                <div
-                  className="hb-rise hb-d1"
+              <div
+                className="hb-rise"
+                style={{
+                  fontSize: "34px",
+                  fontWeight: "900",
+                  letterSpacing: "-0.035em",
+                  lineHeight: "1.06",
+                }}
+              >
+                {"You're in!"}
+                <br />
+                {"Welcome to "}
+                <span className="hl">{"Haiba"}</span>
+              </div>
+            </>
+          ) : null}
+          {v.s1 ? (
+            <>
+              <div
+                className="hb-rise"
+                style={{
+                  fontSize: "34px",
+                  fontWeight: "900",
+                  letterSpacing: "-0.035em",
+                  lineHeight: "1.06",
+                }}
+              >
+                {"Use any Unipal offer."}
+                <br />
+                {"Earn "}
+                <span className="hl">{"points"}</span>
+              </div>
+            </>
+          ) : null}
+          {v.s2 ? (
+            <>
+              <div
+                className="hb-rise"
+                style={{
+                  fontSize: "34px",
+                  fontWeight: "900",
+                  letterSpacing: "-0.035em",
+                  lineHeight: "1.06",
+                }}
+              >
+                {"First 2 visits earn "}
+                <span className="hl">{"2x"}</span>
+                {"."}
+                <br />
+                {"Every 5th earns "}
+                <span className="hl">{"5x"}</span>
+              </div>
+            </>
+          ) : null}
+          {v.s3 ? (
+            <>
+              <div
+                className="hb-rise"
+                style={{
+                  fontSize: "34px",
+                  fontWeight: "900",
+                  letterSpacing: "-0.035em",
+                  lineHeight: "1.06",
+                }}
+              >
+                {"Spend your points"}
+                <br />
+                {"on "}
+                <span className="hl">{"free stuff"}</span>
+              </div>
+            </>
+          ) : null}
+          {v.s4 ? (
+            <>
+              <div
+                className="hb-rise"
+                style={{
+                  fontSize: "34px",
+                  fontWeight: "900",
+                  letterSpacing: "-0.035em",
+                  lineHeight: "1.06",
+                }}
+              >
+                {"Pick "}
+                <span className="hl">{"1 free gift"}</span>
+                <br />
+                {"every month"}
+              </div>
+            </>
+          ) : null}
+          <div
+            className="hb-rise hb-d2"
+            style={{
+              marginTop: "12px",
+              fontSize: "16px",
+              fontWeight: "600",
+              color: "#5B5770",
+              lineHeight: "1.35",
+            }}
+          >
+            {v.sub}
+          </div>
+        </div>
+        {v.s0 ? (
+          <>
+            <div
+              aria-hidden="true"
+              style={{ position: "absolute", inset: "0", pointerEvents: "none" }}
+            >
+              {(v.confetti || []).map((c: any, idx0: number) => (
+                <Fragment key={idx0}>
+                  <span
+                    className="hb-fall"
+                    style={{
+                      position: "absolute",
+                      left: `${c.x}px`,
+                      top: `${c.y}px`,
+                      width: `${c.w}px`,
+                      height: `${c.h}px`,
+                      borderRadius: "3px",
+                      background: c.bg,
+                      animationDelay: `${c.d}s`,
+                    }}
+                  ></span>
+                </Fragment>
+              ))}
+            </div>
+            <span
+              className="hb-pop hb-d1"
+              style={{ position: "absolute", left: "44px", top: "404px", display: "block" }}
+            >
+              <Artwork
+                priority
+                className="hb-float"
+                src="/haiba/coins/coin-34.webp"
+                alt=""
+                style={{ width: "58px", height: "58px", display: "block", animationDelay: ".4s" }}
+              />
+            </span>
+            <span
+              className="hb-pop hb-d3"
+              style={{ position: "absolute", right: "-26px", top: "600px", display: "block" }}
+            >
+              <Artwork
+                className="hb-float"
+                src="/haiba/coins/coin-34.webp"
+                alt=""
+                style={{
+                  width: "104px",
+                  height: "104px",
+                  display: "block",
+                  filter: "blur(3px)",
+                  opacity: "0.9",
+                  animationDelay: "1.1s",
+                }}
+              />
+            </span>
+            <span
+              className="hb-pop"
+              style={{
+                position: "absolute",
+                left: "78px",
+                top: "346px",
+                width: "234px",
+                display: "block",
+              }}
+            >
+              <Artwork
+                className="hb-float"
+                src="/haiba/birds/02-jump.png"
+                alt="Haiba bird jumping for joy"
+                style={{ width: "234px", height: "auto", display: "block" }}
+              />
+            </span>
+          </>
+        ) : null}
+        {v.s1 ? (
+          <>
+            <span
+              className="hb-pop"
+              style={{
+                position: "absolute",
+                left: "82px",
+                top: "366px",
+                width: "226px",
+                display: "block",
+              }}
+            >
+              <Artwork
+                className="hb-float"
+                src="/haiba/birds/07-phone.png"
+                alt="Haiba bird using an offer on a phone"
+                style={{ width: "226px", height: "auto", display: "block" }}
+              />
+            </span>
+            <span
+              className="hb-pop hb-d3"
+              style={{
+                position: "absolute",
+                left: "18px",
+                top: "318px",
+                display: "block",
+                zIndex: "2",
+              }}
+            >
+              <span
+                className="hb-bobl"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  background: "#1E1B2E",
+                  color: "#FFFFFF",
+                  borderRadius: "18px",
+                  padding: "10px 14px 10px 10px",
+                  boxShadow: "0 14px 28px rgba(30,27,46,0.28)",
+                }}
+              >
+                <Artwork
+                  src="/haiba/coins/coin-34.webp"
+                  alt=""
+                  style={{ width: "30px", height: "30px", display: "block" }}
+                />
+                <span style={{ display: "flex", flexDirection: "column" }}>
+                  <span style={{ fontSize: "17px", fontWeight: "900", color: "#C0F402" }}>
+                    {"+80 points"}
+                  </span>
+                  <span style={{ fontSize: "12.5px", fontWeight: "600", color: "#CFC9E0" }}>
+                    {"Jasmi's \u00b7 2x first visit"}
+                  </span>
+                </span>
+              </span>
+            </span>
+            <span
+              className="hb-pop hb-d2"
+              style={{ position: "absolute", left: "300px", top: "404px", display: "block" }}
+            >
+              <Artwork
+                className="hb-float"
+                src="/haiba/coins/coin-34.webp"
+                alt=""
+                style={{ width: "60px", height: "60px", display: "block", animationDelay: ".7s" }}
+              />
+            </span>
+            <span
+              className="hb-pop hb-d4"
+              style={{ position: "absolute", left: "-30px", top: "640px", display: "block" }}
+            >
+              <Artwork
+                className="hb-float"
+                src="/haiba/coins/coin-34.webp"
+                alt=""
+                style={{
+                  width: "100px",
+                  height: "100px",
+                  display: "block",
+                  filter: "blur(3px)",
+                  animationDelay: "1.3s",
+                }}
+              />
+            </span>
+          </>
+        ) : null}
+        {v.s2 ? (
+          <>
+            {(v.stamps || []).map((d: any, idx0: number) => (
+              <Fragment key={idx0}>
+                <span
+                  className={`hb-stamp ${d.delay}`}
                   style={{
                     position: "absolute",
-                    left: "22px",
-                    right: "22px",
-                    top: "34px",
-                    background: "#F7F5FC",
-                    borderRadius: "16px",
-                    padding: "16px",
+                    left: `${d.x}px`,
+                    top: `${d.y}px`,
+                    width: `${d.size}px`,
                     display: "flex",
+                    flexDirection: "column",
                     alignItems: "center",
-                    gap: "12px",
+                    gap: "5px",
+                    zIndex: "2",
                   }}
                 >
                   <span
                     style={{
-                      width: "48px",
-                      height: "48px",
-                      borderRadius: "14px",
-                      background: "#D62828",
-                      color: "#FFFFFF",
-                      fontWeight: "800",
-                      fontSize: "18px",
+                      width: `${d.size}px`,
+                      height: `${d.size}px`,
+                      borderRadius: "50%",
+                      background: d.bg,
+                      color: d.ink,
+                      border: `2.5px ${d.style} ${d.ring}`,
+                      boxSizing: "border-box",
+                      fontSize: `${d.fs}px`,
+                      fontWeight: "900",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
+                      boxShadow: d.shadow,
                     }}
                   >
-                    {"J"}
-                  </span>
-                  <span style={{ display: "flex", flexDirection: "column", gap: "2px", flex: "1" }}>
-                    <span style={{ fontSize: "16px", fontWeight: "700" }}>{"Jasmi's"}</span>
-                    <span style={{ fontSize: "13.5px", fontWeight: "500", color: "#6B6880" }}>
-                      {"BD 2 per meal only"}
-                    </span>
+                    {d.tag}
                   </span>
                   <span
                     style={{
-                      fontSize: "13px",
-                      fontWeight: "700",
-                      background: "#1E1B2E",
-                      color: "#FFFFFF",
+                      fontSize: "12px",
+                      fontWeight: "800",
+                      color: d.ptsInk,
+                      background: d.ptsBg,
                       borderRadius: "999px",
-                      padding: "7px 12px",
+                      padding: "2px 8px",
                     }}
                   >
-                    {"Redeemed"}
+                    {d.pts}
                   </span>
-                </div>
-                <div
-                  className="hb-pop hb-d3"
+                </span>
+              </Fragment>
+            ))}
+            <span
+              className="hb-pop"
+              style={{
+                position: "absolute",
+                left: "125px",
+                top: "438px",
+                width: "140px",
+                display: "block",
+              }}
+            >
+              <Artwork
+                className="hb-float"
+                src="/haiba/birds/08-stamp.png"
+                alt="Haiba bird stamping a card"
+                style={{ width: "140px", height: "auto", display: "block" }}
+              />
+            </span>
+          </>
+        ) : null}
+        {v.s3 ? (
+          <>
+            <span
+              className="hb-pop"
+              style={{
+                position: "absolute",
+                left: "129px",
+                top: "384px",
+                width: "132px",
+                display: "block",
+              }}
+            >
+              <Artwork
+                className="hb-float"
+                src="/haiba/birds/09-show.png"
+                alt="Haiba bird showing a code on a phone"
+                style={{ width: "132px", height: "auto", display: "block" }}
+              />
+            </span>
+            <span
+              className="hb-pop hb-d2"
+              style={{ position: "absolute", left: "22px", top: "520px", display: "block" }}
+            >
+              <Artwork
+                className="hb-float"
+                src="/haiba/coins/coin-stack-3d.png"
+                alt=""
+                style={{ width: "84px", height: "84px", display: "block", animationDelay: ".6s" }}
+              />
+            </span>
+            <span
+              className="hb-pop hb-d3"
+              style={{
+                position: "absolute",
+                left: "222px",
+                top: "318px",
+                display: "block",
+                zIndex: "2",
+              }}
+            >
+              <span
+                className="hb-bobr"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  width: "148px",
+                  background: "#FFFFFF",
+                  borderRadius: "18px",
+                  boxShadow: "0 14px 28px rgba(30,27,46,0.18)",
+                  overflow: "hidden",
+                }}
+              >
+                <span
                   style={{
-                    position: "absolute",
-                    left: "22px",
-                    top: "136px",
-                    transformOrigin: "left center",
+                    padding: "12px 14px 10px 14px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "2px",
                   }}
                 >
-                  <div
+                  <span style={{ fontSize: "12.5px", fontWeight: "700", color: "#6B6880" }}>
+                    {"Caribou Coffee"}
+                  </span>
+                  <span style={{ fontSize: "16px", fontWeight: "900" }}>{"Free upgrade"}</span>
+                </span>
+                <span style={{ borderTop: "2px dashed #ECE8F5", margin: "0 10px" }}></span>
+                <span
+                  style={{
+                    padding: "9px 14px 12px 14px",
+                    fontSize: "16px",
+                    fontWeight: "900",
+                    letterSpacing: "0.08em",
+                    color: "#6C3FFA",
+                  }}
+                >
+                  {"HB 7K2Q"}
+                </span>
+              </span>
+            </span>
+            <span
+              className="hb-pop hb-d4"
+              style={{ position: "absolute", left: "318px", top: "600px", display: "block" }}
+            >
+              <Artwork
+                className="hb-float"
+                src="/haiba/coins/coin-34.webp"
+                alt=""
+                style={{ width: "50px", height: "50px", display: "block", animationDelay: "1s" }}
+              />
+            </span>
+          </>
+        ) : null}
+        {v.s4 ? (
+          <>
+            <span
+              className="hb-pop"
+              style={{
+                position: "absolute",
+                left: "141px",
+                top: "300px",
+                width: "108px",
+                display: "block",
+              }}
+            >
+              <Artwork
+                className="hb-float"
+                src="/haiba/birds/10-gift.png"
+                alt="Haiba bird holding up a gift"
+                style={{ width: "108px", height: "auto", display: "block" }}
+              />
+            </span>
+            <div
+              style={{
+                position: "absolute",
+                left: "21px",
+                right: "21px",
+                top: "600px",
+                display: "grid",
+                gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+                gap: "8px",
+                zIndex: "2",
+              }}
+            >
+              {(v.gifts || []).map((g: any, idx0: number) => (
+                <Fragment key={idx0}>
+                  <button
+                    onClick={g.pick}
+                    aria-pressed={g.selStr}
+                    className={`hb-press hb-ease hb-rise ${g.delay}`}
                     style={{
-                      background: "#1E1B2E",
-                      color: "#FFFFFF",
+                      font: "inherit",
+                      border: "0",
+                      padding: "0",
+                      cursor: "pointer",
                       borderRadius: "16px",
-                      padding: "12px 14px",
+                      overflow: "hidden",
+                      background: "#FFFFFF",
+                      color: "#1E1B2E",
                       display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                      transform: "rotate(-3deg)",
-                      boxShadow: "0 12px 24px rgba(30,27,46,0.25)",
+                      flexDirection: "column",
+                      boxShadow: g.shadow,
+                      transform: `scale(${g.scale})`,
+                      opacity: g.op,
+                      position: "relative",
                     }}
                   >
                     <Artwork
-                      priority
-                      src="/haiba/coins/coin-34.webp"
-                      alt=""
+                      src={g.logo}
+                      alt={g.brand}
                       style={{
-                        width: "32px",
-                        height: "32px",
+                        width: "100%",
+                        height: "58px",
+                        boxSizing: "border-box",
+                        padding: "6px",
                         objectFit: "contain",
+                        background: g.bg,
                         display: "block",
-                        flex: "none",
                       }}
                     />
-                    <span style={{ display: "flex", flexDirection: "column" }}>
-                      <span style={{ fontSize: "16px", fontWeight: "800", color: "#C0F402" }}>
-                        {"+80 points"}
-                      </span>
-                      <span style={{ fontSize: "12.5px", fontWeight: "500", color: "#CFC9E0" }}>
-                        {"2x, your first visit here"}
-                      </span>
-                    </span>
-                  </div>
-                </div>
-                <span
-                  className="hb-rise hb-d2"
-                  style={{ position: "absolute", right: "10px", bottom: "-22px", display: "block" }}
-                >
-                  <Artwork
-                    src="/haiba/birds/07-phone.png"
-                    alt=""
-                    style={{ height: "238px", width: "auto", display: "block" }}
-                  />
-                </span>
-              </div>
-            </>
-          ) : null}
-          {v.s1 ? (
-            <>
-              <div className={v.inClass} style={{ position: "absolute", inset: "0" }}>
-                <div
-                  className="hb-rise hb-d1"
-                  style={{
-                    position: "absolute",
-                    left: "22px",
-                    right: "22px",
-                    top: "30px",
-                    background: "#F7F5FC",
-                    borderRadius: "16px",
-                    padding: "14px 16px 16px 16px",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <span style={{ fontSize: "15px", fontWeight: "700" }}>{"Caribou Coffee"}</span>
                     <span
                       style={{
-                        fontSize: "13px",
-                        fontWeight: "700",
-                        color: "#6C3FFA",
-                        background: "#FFFFFF",
-                        borderRadius: "999px",
-                        padding: "4px 10px",
+                        padding: "7px 4px 8px 4px",
+                        fontSize: "11.5px",
+                        fontWeight: "800",
+                        lineHeight: "1.15",
+                        textAlign: "center",
                       }}
                     >
-                      {"3 of 5 visits"}
+                      {g.item}
                     </span>
-                  </div>
-                  <div
-                    className="hb-stamps"
-                    style={{ display: "flex", justifyContent: "space-between", marginTop: "14px" }}
-                  >
-                    {(v.stamps || []).map((d: any, idx0: number) => (
-                      <Fragment key={idx0}>
-                        <span
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            gap: "6px",
-                          }}
-                        >
-                          <span
-                            style={{
-                              width: "46px",
-                              height: "46px",
-                              borderRadius: "50%",
-                              background: d.bg,
-                              color: d.ink,
-                              border: `2px solid ${d.ring}`,
-                              boxSizing: "border-box",
-                              fontSize: "14px",
-                              fontWeight: "800",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                            }}
-                          >
-                            {d.tag}
-                          </span>
-                          <span style={{ fontSize: "12px", fontWeight: "600", color: "#6B6880" }}>
-                            {d.pts}
-                          </span>
-                        </span>
-                      </Fragment>
-                    ))}
-                  </div>
-                </div>
-                <div
-                  className="hb-pop hb-d3"
-                  style={{
-                    position: "absolute",
-                    left: "22px",
-                    top: "186px",
-                    transformOrigin: "left center",
-                  }}
-                >
-                  <div
-                    style={{
-                      background: "#1E1B2E",
-                      color: "#FFFFFF",
-                      borderRadius: "16px",
-                      padding: "12px 14px",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                      transform: "rotate(-3deg)",
-                      boxShadow: "0 12px 24px rgba(30,27,46,0.25)",
-                    }}
-                  >
                     <span
                       style={{
-                        width: "30px",
-                        height: "30px",
+                        position: "absolute",
+                        top: "5px",
+                        right: "5px",
+                        width: "20px",
+                        height: "20px",
                         borderRadius: "50%",
-                        background: "#C0F402",
-                        color: "#1F2600",
-                        fontSize: "12px",
-                        fontWeight: "800",
-                        display: "flex",
+                        background: "#6C3FFA",
+                        color: "#FFFFFF",
+                        display: g.tickDisp,
                         alignItems: "center",
                         justifyContent: "center",
+                        boxShadow: "0 0 0 2px #FFFFFF",
                       }}
                     >
-                      {"5x"}
-                    </span>
-                    <span style={{ display: "flex", flexDirection: "column" }}>
-                      <span style={{ fontSize: "16px", fontWeight: "800", color: "#C0F402" }}>
-                        {"+200 points"}
-                      </span>
-                      <span style={{ fontSize: "12.5px", fontWeight: "500", color: "#CFC9E0" }}>
-                        {"On your 5th visit here"}
-                      </span>
-                    </span>
-                  </div>
-                </div>
-                <div
-                  className="hb-rise hb-d3"
-                  style={{
-                    position: "absolute",
-                    left: "22px",
-                    bottom: "26px",
-                    fontSize: "13.5px",
-                    fontWeight: "600",
-                    color: "#6B6880",
-                    lineHeight: "1.35",
-                    maxWidth: "150px",
-                  }}
-                >
-                  {"Counted per shop, like a stamp card."}
-                </div>
-                <span
-                  className="hb-rise hb-d2"
-                  style={{ position: "absolute", right: "4px", bottom: "-30px", display: "block" }}
-                >
-                  <Artwork
-                    src="/haiba/birds/08-stamp.png"
-                    alt=""
-                    style={{ height: "200px", width: "auto", display: "block" }}
-                  />
-                </span>
-              </div>
-            </>
-          ) : null}
-          {v.s2 ? (
-            <>
-              <div className={v.inClass} style={{ position: "absolute", inset: "0" }}>
-                <div
-                  className="hb-flip"
-                  style={{
-                    position: "absolute",
-                    left: "40px",
-                    right: "40px",
-                    top: "30px",
-                    bottom: "30px",
-                    transformOrigin: "left center",
-                  }}
-                >
-                  <div
-                    style={{
-                      height: "100%",
-                      boxSizing: "border-box",
-                      background: "#6C3FFA",
-                      borderRadius: "16px",
-                      color: "#FFFFFF",
-                      padding: "22px",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
-                      boxShadow: "0 18px 30px rgba(108,63,250,0.30)",
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        fontSize: "14px",
-                        fontWeight: "600",
-                        color: "#E4DBFF",
-                      }}
-                    >
-                      <span>{"Code 1 of 1"}</span>
-                      <span>{"Use by 20 Nov"}</span>
-                    </div>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                      <span style={{ fontSize: "15px", fontWeight: "600", color: "#E4DBFF" }}>
-                        {"Caribou Coffee"}
-                      </span>
-                      <span style={{ fontSize: "22px", fontWeight: "800" }}>{"Free upgrade"}</span>
-                    </div>
-                    <div
-                      style={{
-                        background: "#FFFFFF",
-                        color: "#1E1B2E",
-                        borderRadius: "16px",
-                        padding: "14px",
-                        textAlign: "center",
-                        fontFamily: "Figtree, system-ui, sans-serif",
-                        fontSize: "28px",
-                        fontWeight: "800",
-                        letterSpacing: "0.06em",
-                      }}
-                    >
-                      {"HB-7K2Q-9X"}
-                    </div>
-                    <div
-                      style={{
-                        fontSize: "14px",
-                        fontWeight: "600",
-                        color: "#F3EEFF",
-                        textAlign: "center",
-                      }}
-                    >
-                      {"Show this code to staff at Caribou"}
-                    </div>
-                  </div>
-                </div>
-                <span
-                  className="hb-pop hb-d3"
-                  style={{
-                    position: "absolute",
-                    left: "-4px",
-                    bottom: "-40px",
-                    display: "block",
-                    transformOrigin: "bottom left",
-                  }}
-                >
-                  <Artwork
-                    src="/haiba/birds/09-show.png"
-                    alt=""
-                    style={{
-                      height: "196px",
-                      width: "auto",
-                      display: "block",
-                      filter: "drop-shadow(0 10px 12px rgba(30,27,46,0.25))",
-                    }}
-                  />
-                </span>
-              </div>
-            </>
-          ) : null}
-          {v.s3 ? (
-            <>
-              <div className={v.inClass} style={{ position: "absolute", inset: "0" }}>
-                <div
-                  className="hb-pops"
-                  style={{
-                    position: "absolute",
-                    left: "22px",
-                    top: "26px",
-                    display: "grid",
-                    gridTemplateColumns: "repeat(2, 100px)",
-                    gap: "10px",
-                  }}
-                >
-                  {(v.gifts || []).map((g: any, idx0: number) => (
-                    <Fragment key={idx0}>
-                      <button
-                        onClick={g.pick}
-                        aria-pressed={g.selStr}
-                        className="hb-press hb-ease"
-                        style={{
-                          font: "inherit",
-                          border: "0",
-                          padding: "0",
-                          cursor: "pointer",
-                          height: "112px",
-                          boxSizing: "border-box",
-                          borderRadius: "16px",
-                          overflow: "hidden",
-                          background: "#FFFFFF",
-                          color: "#1E1B2E",
-                          display: "flex",
-                          flexDirection: "column",
-                          boxShadow: g.shadow,
-                          transform: `scale(${g.scale})`,
-                          position: "relative",
-                        }}
+                      <svg
+                        aria-hidden="true"
+                        width="11"
+                        height="11"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3.6"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       >
-                        <Artwork
-                          src={g.logo}
-                          alt={g.brand}
-                          style={{
-                            width: "100%",
-                            height: "78px",
-                            boxSizing: "border-box",
-                            padding: "4px 0",
-                            objectFit: "contain",
-                            background: g.bg,
-                            display: "block",
-                          }}
-                        />
-                        <span
-                          style={{
-                            flex: "1",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            fontSize: "12px",
-                            fontWeight: "700",
-                            lineHeight: "1.2",
-                            borderTop: "1px solid #F1EFF7",
-                          }}
-                        >
-                          {g.item}
-                        </span>
-                        <span
-                          style={{
-                            position: "absolute",
-                            top: "6px",
-                            right: "6px",
-                            width: "22px",
-                            height: "22px",
-                            borderRadius: "50%",
-                            background: "#6C3FFA",
-                            color: "#FFFFFF",
-                            display: g.tickDisp,
-                            alignItems: "center",
-                            justifyContent: "center",
-                            boxShadow: "0 0 0 2px #FFFFFF",
-                          }}
-                        >
-                          <svg
-                            aria-hidden="true"
-                            width="12"
-                            height="12"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="3.4"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="M5 12.5l4.5 4.5L19 7.5"></path>
-                          </svg>
-                        </span>
-                      </button>
-                    </Fragment>
-                  ))}
-                </div>
-                <span
-                  className="hb-ease"
-                  style={{
-                    position: "absolute",
-                    left: "22px",
-                    bottom: "22px",
-                    background: v.pickBg,
-                    color: v.pickInk,
-                    fontSize: "14px",
-                    fontWeight: "800",
-                    borderRadius: "999px",
-                    padding: "8px 14px",
-                  }}
-                >
-                  {v.pickLabel}
-                </span>
-                <span
-                  className="hb-rise hb-d2"
-                  style={{ position: "absolute", right: "12px", bottom: "-20px", display: "block" }}
-                >
-                  <Artwork
-                    src="/haiba/birds/10-gift.png"
-                    alt=""
-                    style={{ height: "262px", width: "auto", display: "block" }}
-                  />
-                </span>
-              </div>
-            </>
-          ) : null}
-        </div>
-        <div style={{ padding: "24px 20px 0 20px" }}>
-          <span
-            style={{
-              display: "block",
-              fontSize: "13px",
-              fontWeight: "800",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "#6C3FFA",
-            }}
-          >
-            {v.stepLabel}
-          </span>
-          {v.s0 ? (
-            <>
-              <div
-                className="hb-rise"
-                style={{
-                  fontFamily: "Figtree, system-ui, sans-serif",
-                  fontSize: "27px",
-                  fontWeight: "800",
-                  letterSpacing: "-0.02em",
-                  lineHeight: "1.2",
-                  marginTop: "8px",
-                  minHeight: "102px",
-                }}
-              >
-                {"Use any Unipal offer. Your points land on their own."}
-              </div>
-            </>
-          ) : null}
-          {v.s1 ? (
-            <>
-              <div
-                className="hb-rise"
-                style={{
-                  fontFamily: "Figtree, system-ui, sans-serif",
-                  fontSize: "27px",
-                  fontWeight: "800",
-                  letterSpacing: "-0.02em",
-                  lineHeight: "1.2",
-                  marginTop: "8px",
-                  minHeight: "102px",
-                }}
-              >
-                {"Your first 2 visits at a shop earn 2x. Every 5th visit earns 5x."}
-              </div>
-            </>
-          ) : null}
-          {v.s2 ? (
-            <>
-              <div
-                className="hb-rise"
-                style={{
-                  fontFamily: "Figtree, system-ui, sans-serif",
-                  fontSize: "27px",
-                  fontWeight: "800",
-                  letterSpacing: "-0.02em",
-                  lineHeight: "1.2",
-                  marginTop: "8px",
-                  minHeight: "102px",
-                }}
-              >
-                {"Spend points on free items. Show your code at the shop."}
-              </div>
-            </>
-          ) : null}
-          {v.s3 ? (
-            <>
-              <div
-                className="hb-rise"
-                style={{
-                  fontFamily: "Figtree, system-ui, sans-serif",
-                  fontSize: "27px",
-                  fontWeight: "800",
-                  letterSpacing: "-0.02em",
-                  lineHeight: "1.2",
-                  marginTop: "8px",
-                  minHeight: "102px",
-                }}
-              >
-                {"Pick 1 free Unipass gift every month. Tap one to try."}
-              </div>
-            </>
-          ) : null}
-        </div>
+                        <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                      </svg>
+                    </span>
+                  </button>
+                </Fragment>
+              ))}
+            </div>
+          </>
+        ) : null}
         <div className="hb-fixed-bottom">
           <div className="hb-fixed-inner">
-            <div style={{ position: "absolute", left: "16px", right: "16px", bottom: "30px" }}>
-              <button
-                onClick={v.next}
-                className="hb-press"
-                style={{
-                  width: "100%",
-                  font: "inherit",
-                  fontFamily: "Figtree, system-ui, sans-serif",
-                  fontSize: "17px",
-                  fontWeight: "800",
-                  border: "0",
-                  borderRadius: "999px",
-                  padding: "18px",
-                  cursor: "pointer",
-                  background: "#1E1B2E",
-                  color: "#C0F402",
-                  boxShadow: "0 10px 24px rgba(30,27,46,0.22)",
-                }}
-              >
-                {v.cta}
-              </button>
+            <div
+              style={{
+                position: "absolute",
+                left: "0",
+                right: "0",
+                bottom: "34px",
+                display: "flex",
+                justifyContent: "center",
+                zIndex: "5",
+              }}
+            >
+              {v.notLast ? (
+                <>
+                  <button
+                    onClick={v.next}
+                    className="hb-press"
+                    style={{
+                      font: "inherit",
+                      fontSize: "17px",
+                      fontWeight: "800",
+                      border: "0",
+                      borderRadius: "999px",
+                      padding: "17px 30px",
+                      minWidth: "190px",
+                      cursor: "pointer",
+                      background: "#1E1B2E",
+                      color: "#FFFFFF",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "8px",
+                      boxShadow: "0 12px 26px rgba(30,27,46,0.24)",
+                    }}
+                  >
+                    {v.cta}
+                    <svg
+                      aria-hidden="true"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M9 6l6 6-6 6"></path>
+                    </svg>
+                  </button>
+                </>
+              ) : null}
+              {v.isLast ? (
+                <>
+                  <Link
+                    className="hb-press"
+                    style={{
+                      fontSize: "17px",
+                      fontWeight: "800",
+                      borderRadius: "999px",
+                      padding: "17px 30px",
+                      minWidth: "190px",
+                      boxSizing: "border-box",
+                      background: "#1E1B2E",
+                      color: "#C0F402",
+                      textDecoration: "none",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      boxShadow: "0 12px 26px rgba(30,27,46,0.24)",
+                    }}
+                    to="/haiba"
+                  >
+                    {"Take me to Haiba"}
+                  </Link>
+                </>
+              ) : null}
             </div>
           </div>
         </div>
