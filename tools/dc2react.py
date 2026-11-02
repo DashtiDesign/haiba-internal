@@ -23,6 +23,12 @@ ROUTES = {
 }
 BLOBS = {
     "7ab45e5eada618030c6795af3ceeaaac": "/haiba/coins/coin-stack-3d.png",
+    "063548d55310ed6e3f9895fe48ccf152": "/haiba/categories/cafes.png",
+    "722775ab748379b280473732bf12710d": "/haiba/categories/restaurants.png",
+    "84d295bbf4afd632e8b18a6926df6a4c": "/haiba/categories/fitness.png",
+    "3fb8a343580276b905f080452e633175": "/haiba/categories/self-care.png",
+    "edf51bb65e92d42087797b296a1da245": "/haiba/categories/entertainment.png",
+    "ff418f59e74495300d31b877a88d880e": "/haiba/categories/car-care.png",
     # Flags: flag-icons package (MIT), 1x1 set
     "c58fbb4c6f9b22d936ee81358bb04daf": "/haiba/flags/bh.svg",
     "89985deb2d8ae7f5ab82475d1109c20b": "/haiba/flags/sa.svg",

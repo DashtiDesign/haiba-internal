@@ -508,6 +508,14 @@ export function useVals() {
     return m < 1000 ? m + " m" : (m / 1000).toFixed(1) + " km";
   };
   var CATS = ["Cafes", "Restaurants", "Fitness", "Self care", "Entertainment", "Car care"];
+  var CATIMG = {
+    Cafes: "/haiba/categories/cafes.png",
+    Restaurants: "/haiba/categories/restaurants.png",
+    Fitness: "/haiba/categories/fitness.png",
+    "Self care": "/haiba/categories/self-care.png",
+    Entertainment: "/haiba/categories/entertainment.png",
+    "Car care": "/haiba/categories/car-care.png",
+  };
   var has = function (s, t) {
     return (
       !t ||
@@ -682,16 +690,13 @@ export function useVals() {
     var inC = SHOPS.filter(function (s) {
       return s.cat === c;
     });
-    var top = inC.slice().sort(rankMain).slice(0, 3);
     return {
       name: c,
+      img: CATIMG[c],
       sub: cardSub(inC),
       subInk: cardInk(inC),
       aria: c + ", " + inC.length + " shops",
       open: openCat(c),
-      logos: top.map(function (s, i) {
-        return Object.assign(withLogo(s), { ml: i === 0 ? "0" : "-8px" });
-      }),
     };
   });
   var mineShops = SHOPS.filter(function (s) {

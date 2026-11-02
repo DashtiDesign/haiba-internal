@@ -483,82 +483,31 @@ export default function Rewards() {
                             background: "#FFFFFF",
                             color: "#1E1B2E",
                             borderRadius: "16px",
-                            padding: "14px",
+                            padding: "12px 14px 14px 14px",
                             boxShadow: "0 0 0 1px #ECE8F5",
                             display: "flex",
                             flexDirection: "column",
-                            gap: "12px",
+                            gap: "8px",
                           }}
                         >
-                          <span style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-                            <span style={{ fontSize: "16px", fontWeight: "800" }}>{c.name}</span>
-                            <span
-                              style={{ fontSize: "12.5px", fontWeight: "600", color: c.subInk }}
-                            >
-                              {c.sub}
-                            </span>
-                          </span>
                           <span
                             style={{
                               display: "flex",
-                              alignItems: "center",
+                              alignItems: "flex-start",
                               justifyContent: "space-between",
                             }}
                           >
-                            <span style={{ display: "flex", alignItems: "center" }}>
-                              {(c.logos || []).map((l: any, idx1: number) => (
-                                <Fragment key={idx1}>
-                                  <span
-                                    style={{
-                                      marginLeft: l.ml,
-                                      borderRadius: "9px",
-                                      boxShadow: "0 0 0 2px #FFFFFF",
-                                      display: "block",
-                                    }}
-                                  >
-                                    {l.hasLogo ? (
-                                      <>
-                                        <Artwork
-                                          src={l.logo}
-                                          alt=""
-                                          style={{
-                                            width: "28px",
-                                            height: "28px",
-                                            flex: "none",
-                                            borderRadius: "9px",
-                                            objectFit: "cover",
-                                            display: "block",
-                                            background: l.bg,
-                                            boxShadow: "0 0 0 1px #ECE8F5",
-                                          }}
-                                        />
-                                      </>
-                                    ) : null}
-                                    {l.noLogo ? (
-                                      <>
-                                        <span
-                                          style={{
-                                            width: "28px",
-                                            height: "28px",
-                                            flex: "none",
-                                            borderRadius: "9px",
-                                            background: l.bg,
-                                            color: "#FFFFFF",
-                                            fontSize: "11px",
-                                            fontWeight: "800",
-                                            display: "flex",
-                                            alignItems: "center",
-                                            justifyContent: "center",
-                                          }}
-                                        >
-                                          {l.mark}
-                                        </span>
-                                      </>
-                                    ) : null}
-                                  </span>
-                                </Fragment>
-                              ))}
-                            </span>
+                            <Artwork
+                              src={c.img}
+                              alt=""
+                              style={{
+                                width: "56px",
+                                height: "56px",
+                                objectFit: "contain",
+                                display: "block",
+                                flex: "none",
+                              }}
+                            />
                             <svg
                               aria-hidden="true"
                               width="16"
@@ -569,9 +518,18 @@ export default function Rewards() {
                               strokeWidth="2.6"
                               strokeLinecap="round"
                               strokeLinejoin="round"
+                              style={{ marginTop: "4px" }}
                             >
                               <path d="M9 6l6 6-6 6"></path>
                             </svg>
+                          </span>
+                          <span style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                            <span style={{ fontSize: "16px", fontWeight: "800" }}>{c.name}</span>
+                            <span
+                              style={{ fontSize: "12.5px", fontWeight: "600", color: c.subInk }}
+                            >
+                              {c.sub}
+                            </span>
                           </span>
                         </button>
                       </Fragment>
