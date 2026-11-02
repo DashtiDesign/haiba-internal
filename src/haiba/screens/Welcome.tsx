@@ -4,14 +4,16 @@ import { Fragment } from "react";
 import { Link, useNavigate } from "../nav";
 import { useHaiba } from "../store";
 import Artwork from "../Artwork";
+import WelcomeVideo from "../WelcomeVideo";
 import { useVals } from "../logic/story";
 
 export default function Welcome() {
   const v: any = useVals();
   const go = useNavigate();
   const hb = useHaiba();
+  const videoStep = v.s0 ? 1 : v.s1 ? 2 : v.s3 ? 4 : v.s4 ? 5 : null;
   return (
-    <div className="pg-story">
+    <div className={`pg-story hb-welcome-step-${videoStep ?? 3}`}>
       <div
         className="hb-bg"
         style={{
@@ -273,166 +275,7 @@ export default function Welcome() {
             {v.sub}
           </div>
         </div>
-        {v.s0 ? (
-          <>
-            <div
-              aria-hidden="true"
-              style={{ position: "absolute", inset: "0", pointerEvents: "none" }}
-            >
-              {(v.confetti || []).map((c: any, idx0: number) => (
-                <Fragment key={idx0}>
-                  <span
-                    className="hb-fall"
-                    style={{
-                      position: "absolute",
-                      left: `${c.x}px`,
-                      top: `${c.y}px`,
-                      width: `${c.w}px`,
-                      height: `${c.h}px`,
-                      borderRadius: "3px",
-                      background: c.bg,
-                      animationDelay: `${c.d}s`,
-                    }}
-                  ></span>
-                </Fragment>
-              ))}
-            </div>
-            <span
-              className="hb-pop hb-d1"
-              style={{ position: "absolute", left: "44px", top: "404px", display: "block" }}
-            >
-              <Artwork
-                priority
-                className="hb-float"
-                src="/haiba/coins/coin-34.webp"
-                alt=""
-                style={{ width: "58px", height: "58px", display: "block", animationDelay: ".4s" }}
-              />
-            </span>
-            <span
-              className="hb-pop hb-d3"
-              style={{ position: "absolute", right: "-26px", top: "600px", display: "block" }}
-            >
-              <Artwork
-                className="hb-float"
-                src="/haiba/coins/coin-34.webp"
-                alt=""
-                style={{
-                  width: "104px",
-                  height: "104px",
-                  display: "block",
-                  filter: "blur(3px)",
-                  opacity: "0.9",
-                  animationDelay: "1.1s",
-                }}
-              />
-            </span>
-            <span
-              className="hb-pop"
-              style={{
-                position: "absolute",
-                left: "78px",
-                top: "346px",
-                width: "234px",
-                display: "block",
-              }}
-            >
-              <Artwork
-                className="hb-float"
-                src="/haiba/birds/02-jump.png"
-                alt="Haiba bird jumping for joy"
-                style={{ width: "234px", height: "auto", display: "block" }}
-              />
-            </span>
-          </>
-        ) : null}
-        {v.s1 ? (
-          <>
-            <span
-              className="hb-pop"
-              style={{
-                position: "absolute",
-                left: "82px",
-                top: "366px",
-                width: "226px",
-                display: "block",
-              }}
-            >
-              <Artwork
-                className="hb-float"
-                src="/haiba/birds/07-phone.png"
-                alt="Haiba bird using an offer on a phone"
-                style={{ width: "226px", height: "auto", display: "block" }}
-              />
-            </span>
-            <span
-              className="hb-pop hb-d3"
-              style={{
-                position: "absolute",
-                left: "18px",
-                top: "318px",
-                display: "block",
-                zIndex: "2",
-              }}
-            >
-              <span
-                className="hb-bobl"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                  background: "#1E1B2E",
-                  color: "#FFFFFF",
-                  borderRadius: "18px",
-                  padding: "10px 14px 10px 10px",
-                  boxShadow: "0 14px 28px rgba(30,27,46,0.28)",
-                }}
-              >
-                <Artwork
-                  src="/haiba/coins/coin-34.webp"
-                  alt=""
-                  style={{ width: "30px", height: "30px", display: "block" }}
-                />
-                <span style={{ display: "flex", flexDirection: "column" }}>
-                  <span style={{ fontSize: "17px", fontWeight: "900", color: "#C0F402" }}>
-                    {"+80 points"}
-                  </span>
-                  <span style={{ fontSize: "12.5px", fontWeight: "600", color: "#CFC9E0" }}>
-                    {"Jasmi's \u00b7 2x first visit"}
-                  </span>
-                </span>
-              </span>
-            </span>
-            <span
-              className="hb-pop hb-d2"
-              style={{ position: "absolute", left: "300px", top: "404px", display: "block" }}
-            >
-              <Artwork
-                className="hb-float"
-                src="/haiba/coins/coin-34.webp"
-                alt=""
-                style={{ width: "60px", height: "60px", display: "block", animationDelay: ".7s" }}
-              />
-            </span>
-            <span
-              className="hb-pop hb-d4"
-              style={{ position: "absolute", left: "-30px", top: "640px", display: "block" }}
-            >
-              <Artwork
-                className="hb-float"
-                src="/haiba/coins/coin-34.webp"
-                alt=""
-                style={{
-                  width: "100px",
-                  height: "100px",
-                  display: "block",
-                  filter: "blur(3px)",
-                  animationDelay: "1.3s",
-                }}
-              />
-            </span>
-          </>
-        ) : null}
+        {videoStep ? <WelcomeVideo key={videoStep} step={videoStep} /> : null}
         {v.s2 ? (
           <>
             {(v.stamps || []).map((d: any, idx0: number) => (
@@ -504,118 +347,10 @@ export default function Welcome() {
             </span>
           </>
         ) : null}
-        {v.s3 ? (
-          <>
-            <span
-              className="hb-pop"
-              style={{
-                position: "absolute",
-                left: "129px",
-                top: "384px",
-                width: "132px",
-                display: "block",
-              }}
-            >
-              <Artwork
-                className="hb-float"
-                src="/haiba/birds/09-show.png"
-                alt="Haiba bird showing a code on a phone"
-                style={{ width: "132px", height: "auto", display: "block" }}
-              />
-            </span>
-            <span
-              className="hb-pop hb-d2"
-              style={{ position: "absolute", left: "22px", top: "520px", display: "block" }}
-            >
-              <Artwork
-                className="hb-float"
-                src="/haiba/coins/coin-stack-3d.png"
-                alt=""
-                style={{ width: "84px", height: "84px", display: "block", animationDelay: ".6s" }}
-              />
-            </span>
-            <span
-              className="hb-pop hb-d3"
-              style={{
-                position: "absolute",
-                left: "222px",
-                top: "318px",
-                display: "block",
-                zIndex: "2",
-              }}
-            >
-              <span
-                className="hb-bobr"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "148px",
-                  background: "#FFFFFF",
-                  borderRadius: "18px",
-                  boxShadow: "0 14px 28px rgba(30,27,46,0.18)",
-                  overflow: "hidden",
-                }}
-              >
-                <span
-                  style={{
-                    padding: "12px 14px 10px 14px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "2px",
-                  }}
-                >
-                  <span style={{ fontSize: "12.5px", fontWeight: "700", color: "#6B6880" }}>
-                    {"Caribou Coffee"}
-                  </span>
-                  <span style={{ fontSize: "16px", fontWeight: "900" }}>{"Free upgrade"}</span>
-                </span>
-                <span style={{ borderTop: "2px dashed #ECE8F5", margin: "0 10px" }}></span>
-                <span
-                  style={{
-                    padding: "9px 14px 12px 14px",
-                    fontSize: "16px",
-                    fontWeight: "900",
-                    letterSpacing: "0.08em",
-                    color: "#6C3FFA",
-                  }}
-                >
-                  {"HB 7K2Q"}
-                </span>
-              </span>
-            </span>
-            <span
-              className="hb-pop hb-d4"
-              style={{ position: "absolute", left: "318px", top: "600px", display: "block" }}
-            >
-              <Artwork
-                className="hb-float"
-                src="/haiba/coins/coin-34.webp"
-                alt=""
-                style={{ width: "50px", height: "50px", display: "block", animationDelay: "1s" }}
-              />
-            </span>
-          </>
-        ) : null}
         {v.s4 ? (
           <>
-            <span
-              className="hb-pop"
-              style={{
-                position: "absolute",
-                left: "141px",
-                top: "300px",
-                width: "108px",
-                display: "block",
-              }}
-            >
-              <Artwork
-                className="hb-float"
-                src="/haiba/birds/10-gift.png"
-                alt="Haiba bird holding up a gift"
-                style={{ width: "108px", height: "auto", display: "block" }}
-              />
-            </span>
             <div
+              className="hb-welcome-gifts"
               style={{
                 position: "absolute",
                 left: "21px",
