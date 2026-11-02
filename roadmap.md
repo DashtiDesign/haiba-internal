@@ -1,4 +1,5 @@
 # Mobile layouts
+- [x] Refresh welcome backgrounds with calm complementary colors and stronger readable accents; remove competing rays and glow.
 - [x] Improve welcome video edge quality, compression, blending, and uncropped on-page framing; verify playback (source-cut effects and fireworks still need native transparent exports for pristine results).
 - [x] Replace welcome steps 1, 2, 4, and 5 with optimized, background-free videos and verify replay locking and first video's last-frame start.
 - [ ] Add welcome step 3 video once supplied (waiting on the remaining upload).

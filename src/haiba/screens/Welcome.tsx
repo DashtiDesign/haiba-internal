@@ -22,52 +22,13 @@ export default function Welcome() {
           margin: "0 auto",
           minHeight: "100vh",
           boxSizing: "border-box",
-          background: v.bg,
+          background: "var(--hb-welcome-surface)",
           fontFamily: "Figtree, system-ui, sans-serif",
-          color: "#1E1B2E",
+          color: "var(--hb-welcome-ink)",
           position: "relative",
           overflow: "hidden",
         }}
       >
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            left: "-305px",
-            top: "-20px",
-            width: "1000px",
-            height: "1000px",
-            pointerEvents: "none",
-            WebkitMaskImage:
-              "radial-gradient(circle at 50% 50%, #000 0%, rgba(0,0,0,0.6) 22%, transparent 48%)",
-            maskImage:
-              "radial-gradient(circle at 50% 50%, #000 0%, rgba(0,0,0,0.6) 22%, transparent 48%)",
-          }}
-        >
-          <div
-            className="hb-spin"
-            style={{
-              width: "100%",
-              height: "100%",
-              background:
-                "repeating-conic-gradient(from 0deg, rgba(255,255,255,0.75) 0deg 7deg, rgba(255,255,255,0) 7deg 20deg)",
-            }}
-          ></div>
-        </div>
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            left: "45px",
-            top: "330px",
-            width: "300px",
-            height: "300px",
-            borderRadius: "50%",
-            background:
-              "radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.5) 40%, rgba(255,255,255,0) 70%)",
-            pointerEvents: "none",
-          }}
-        ></div>
         <div
           style={{
             position: "absolute",
@@ -89,7 +50,7 @@ export default function Welcome() {
               height: "44px",
               border: "0",
               background: "transparent",
-              color: "#1E1B2E",
+              color: "var(--hb-welcome-ink)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -138,7 +99,7 @@ export default function Welcome() {
             style={{
               width: "44px",
               height: "44px",
-              color: "#1E1B2E",
+              color: "var(--hb-welcome-ink)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -268,7 +229,7 @@ export default function Welcome() {
               marginTop: "12px",
               fontSize: "16px",
               fontWeight: "600",
-              color: "#5B5770",
+              color: "var(--hb-welcome-muted)",
               lineHeight: "1.35",
             }}
           >

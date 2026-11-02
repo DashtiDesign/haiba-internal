@@ -224,6 +224,24 @@
   bottom: 0;
 }
 
+/* Calm, flat welcome surfaces keep keyed video edges and captions clear. */
+.pg-story {
+  --hb-welcome-surface: #d9eee5;
+  --hb-welcome-ink: #242036;
+  --hb-welcome-muted: #514a65;
+  --hb-welcome-accent: #5630bb;
+  --hb-welcome-track: #a19cad;
+}
+.pg-story.hb-welcome-step-2 { --hb-welcome-surface: #dcebf5; }
+.pg-story.hb-welcome-step-3 { --hb-welcome-surface: #eef1d8; }
+.pg-story.hb-welcome-step-4 { --hb-welcome-surface: #f4dfe5; }
+.pg-story.hb-welcome-step-5 { --hb-welcome-surface: #e7e0f3; }
+.pg-story .hl {
+  color: var(--hb-welcome-accent);
+  background: transparent;
+  text-shadow: none;
+}
+
 /* Welcome video bounds remain stable during loading, playback, and replay. */
 .pg-story .hb-welcome-video-stage {
   position: absolute;
