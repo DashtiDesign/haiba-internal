@@ -22,6 +22,11 @@
 @import "./haiba/styles/redeem.css";
 @import "./haiba/styles/shop.css";
 @import "./haiba/styles/basket.css";
+@import "./haiba/styles/paywallbase.css";
+@import "./haiba/styles/paywallstory.css";
+@import "./haiba/styles/paywalltable.css";
+@import "./haiba/styles/paywalltimeline.css";
+@import "./haiba/styles/plansconvert.css";
 
 @custom-variant dark (&:is(.dark *));
 
