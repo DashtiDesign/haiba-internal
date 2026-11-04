@@ -12,7 +12,7 @@ export default function PaywallStory() {
   const hb = useHaiba();
   return (
     <div className="pg-paywallstory">
-      <div style={{ width: "100%", maxWidth: "390px", margin: "0 auto", minHeight: "100svh", boxSizing: "border-box", background: "#F3F0FA", fontFamily: "Figtree, system-ui, sans-serif", color: "#242036", position: "relative", overflow: "hidden" }}>
+      <div style={{ width: "100%", maxWidth: "390px", margin: "0 auto", minHeight: v.s4 ? "max(100svh, 880px)" : "max(100svh, 840px)", boxSizing: "border-box", background: "#F3F0FA", fontFamily: "Figtree, system-ui, sans-serif", color: "#242036", position: "relative", overflow: "hidden" }}>
         <div aria-hidden="true" style={{ position: "absolute", left: "-305px", top: "-40px", width: "1000px", height: "1000px", pointerEvents: "none", WebkitMaskImage: "radial-gradient(circle, #000 5%, transparent 62%)", maskImage: "radial-gradient(circle, #000 5%, transparent 62%)" }}>
           <div className="hb-spin" style={{ width: "100%", height: "100%", opacity: "0.7", background: "repeating-conic-gradient(from 0deg, #FFFFFF 0deg 7deg, transparent 7deg 20deg)" }}></div>
         </div>
