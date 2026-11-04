@@ -152,7 +152,8 @@ export default function PaywallTimeline() {
             {"Changed your mind? We give your BHD 1 back."}
           </div>
         </div>
-        <div className="hb-timeline-dock" style={{ position: "relative", marginTop: "auto", background: "#FFFFFF", color: "#1E1B2E", borderRadius: "24px 24px 0 0", padding: "16px 16px calc(12px + env(safe-area-inset-bottom, 0px)) 16px", zIndex: "5" }}>
+        <div style={{ flex: "1 0 28px" }} aria-hidden="true" />
+        <div className="hb-timeline-dock" style={{ position: "relative", background: "#FFFFFF", color: "#1E1B2E", borderRadius: "24px 24px 0 0", padding: "18px 16px calc(28px + env(safe-area-inset-bottom, 0px)) 16px", zIndex: "5" }}>
           <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "6px" }}>
             <span style={{ fontSize: "22px", fontWeight: "900", letterSpacing: "-0.02em" }}>
               {v.price}{" a year"}
