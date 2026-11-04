@@ -187,7 +187,7 @@ export default function PaywallTable() {
                   </span>
                 </span>
               </div>
-              <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) 72px 84px", alignItems: "center", minHeight: "64px", borderTop: "2px solid #1E1B2E" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) 72px 84px", alignItems: "center", minHeight: "64px", borderTop: "1px solid #EEEBF5" }}>
                 <span style={{ fontSize: "15px", fontWeight: "900", paddingLeft: "2px" }}>
                   {"Worth in a year"}
                 </span>
@@ -278,7 +278,7 @@ export default function PaywallTable() {
           </div>
         </div>
         <div className="hb-fixed-bottom hb-cta-dock"><div className="hb-fixed-inner">
-        <div style={{ position: "absolute", left: "0", right: "0", bottom: "0", padding: "30px 16px 16px 16px", background: "linear-gradient(180deg, rgba(243,240,250,0) 0%, rgba(243,240,250,1) 30%)", display: "flex", flexDirection: "column", gap: "2px", zIndex: "5" }}>
+        <div style={{ position: "absolute", left: "0", right: "0", bottom: "0", padding: "30px 16px calc(16px + env(safe-area-inset-bottom, 0px)) 16px", background: "linear-gradient(180deg, rgba(243,240,250,0) 0%, rgba(243,240,250,1) 30%)", display: "flex", flexDirection: "column", gap: "2px", zIndex: "5" }}>
           <button onClick={v.reserve} className="hb-press" style={{ font: "inherit", border: "0", cursor: "pointer", background: "#1E1B2E", borderRadius: "999px", padding: "13px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: "1px", boxShadow: "0 10px 24px rgba(30,27,46,0.24)" }}>
             <span style={{ display: "flex", alignItems: "center", gap: "6px", color: "#C0F402", fontSize: "17px", fontWeight: "800" }}>
               {"Reserve my spot for BHD 1"}

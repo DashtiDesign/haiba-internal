@@ -12,9 +12,9 @@ export default function PaywallTimeline() {
   const hb = useHaiba();
   return (
     <div className="pg-paywalltimeline">
-      <div style={{ width: "100%", maxWidth: "390px", margin: "0 auto", minHeight: "100svh", display: "flex", flexDirection: "column", boxSizing: "border-box", background: "#1E1B2E", fontFamily: "Figtree, system-ui, sans-serif", color: "#FFFFFF", position: "relative", overflow: "hidden" }}>
+      <div style={{ width: "100%", maxWidth: "390px", margin: "0 auto", minHeight: "100svh", boxSizing: "border-box", background: "#1E1B2E", fontFamily: "Figtree, system-ui, sans-serif", color: "#FFFFFF", position: "relative", overflow: "hidden" }}>
         <span aria-hidden="true" style={{ position: "absolute", right: "-120px", top: "-80px", width: "340px", height: "340px", borderRadius: "50%", background: "radial-gradient(circle, rgba(108,63,250,0.55) 0%, rgba(108,63,250,0) 70%)" }}></span>
-        <div style={{ position: "relative", padding: "14px 20px 0 20px" }}>
+        <div style={{ position: "relative", padding: "14px 20px 250px 20px" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <button onClick={v.openExit} aria-label="Close" className="hb-press" style={{ width: "44px", height: "44px", borderRadius: "50%", border: "0", background: "rgba(255,255,255,0.12)", color: "#FFFFFF", display: "flex", alignItems: "center", justifyContent: "center", padding: "0", cursor: "pointer", boxShadow: "0 0 0 1px rgba(255,255,255,0.2)" }}>
               <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
@@ -152,8 +152,8 @@ export default function PaywallTimeline() {
             {"Changed your mind? We give your BHD 1 back."}
           </div>
         </div>
-        <div style={{ flex: "1 0 28px" }} aria-hidden="true" />
-        <div className="hb-timeline-dock" style={{ position: "relative", background: "#FFFFFF", color: "#1E1B2E", borderRadius: "24px 24px 0 0", padding: "18px 16px calc(28px + env(safe-area-inset-bottom, 0px)) 16px", zIndex: "5" }}>
+        <div className="hb-fixed-bottom hb-cta-dock"><div className="hb-fixed-inner">
+        <div style={{ position: "absolute", left: "0", right: "0", bottom: "0", background: "#FFFFFF", color: "#1E1B2E", borderRadius: "24px 24px 0 0", padding: "18px 16px calc(16px + env(safe-area-inset-bottom, 0px)) 16px", zIndex: "5" }}>
           <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "6px" }}>
             <span style={{ fontSize: "22px", fontWeight: "900", letterSpacing: "-0.02em" }}>
               {v.price}{" a year"}
@@ -180,6 +180,7 @@ export default function PaywallTimeline() {
             {"Not now"}
           </button>
         </div>
+        </div></div>
         {v.exitOpen ? (
           <>
           <div className="hb-fade" style={{ position: "absolute", inset: "0", background: "rgba(20,16,40,0.55)", zIndex: "10", display: "flex", alignItems: "flex-end" }}>

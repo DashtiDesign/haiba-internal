@@ -104,7 +104,7 @@ export default function PaywallStory() {
           <div className="hb-stagger" style={{ position: "absolute", left: "18px", right: "18px", top: "236px", display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: "8px", zIndex: "3" }}>
             {(v.gifts || []).map((g: any, idx0: number) => (
               <Fragment key={idx0}>
-                <button onClick={g.pick} aria-pressed={g.selStr} className="hb-press hb-ease" style={{ font: "inherit", border: "0", padding: "0", cursor: "pointer", borderRadius: "16px", overflow: "hidden", background: "#FFFFFF", color: "#1E1B2E", display: "flex", flexDirection: "column", textAlign: "center", boxShadow: g.shadow, position: "relative" }}>
+                <span style={{ borderRadius: "16px", overflow: "hidden", background: "#FFFFFF", color: "#1E1B2E", display: "flex", flexDirection: "column", textAlign: "center", boxShadow: g.shadow, position: "relative" }}>
                   <Artwork src={g.logo} alt={g.shop} style={{ width: "100%", height: "78px", boxSizing: "border-box", padding: "8px", objectFit: "contain", background: g.bg, display: "block" }} />
                   <span style={{ padding: "7px 6px 9px 6px", display: "flex", flexDirection: "column", gap: "1px" }}>
                     <span style={{ fontSize: "13.5px", fontWeight: "800", lineHeight: "1.2" }}>
@@ -117,12 +117,7 @@ export default function PaywallStory() {
                   <span style={{ position: "absolute", left: "6px", top: "6px", display: g.favDisp, background: "#1E1B2E", color: "#C0F402", fontSize: "10.5px", fontWeight: "800", borderRadius: "999px", padding: "3px 7px" }}>
                     {"You go here"}
                   </span>
-                  <span style={{ position: "absolute", right: "6px", top: "6px", width: "22px", height: "22px", borderRadius: "50%", background: "#6C3FFA", color: "#FFFFFF", display: g.tickDisp, alignItems: "center", justifyContent: "center", boxShadow: "0 0 0 2px #FFFFFF" }}>
-                    <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M5 12.5l4.5 4.5L19 7.5"></path>
-                    </svg>
-                  </span>
-                </button>
+                </span>
               </Fragment>
             ))}
           </div>
@@ -194,76 +189,300 @@ export default function PaywallStory() {
         ) : null}
         {v.s3 ? (
           <>
-          <div style={{ position: "absolute", left: "24px", right: "24px", top: "74px", textAlign: "center", zIndex: "3" }}>
-            <div className="hb-rise" style={{ fontSize: "31px", fontWeight: "900", letterSpacing: "-0.035em", lineHeight: "1.07" }}>
-              {"And "}
-              <span style={{ color: "#5630BB" }}>
-                {"points"}
-              </span>
-              {" every time you use Unipal"}
+          <div style={{ position: "absolute", left: "20px", right: "20px", top: "58px", height: "566px", zIndex: "3", display: "flex", flexDirection: "column", justifyContent: "center", gap: "18px" }}>
+            <div style={{ textAlign: "center", padding: "0 4px" }}>
+              <div className="hb-rise" style={{ fontSize: "31px", fontWeight: "900", letterSpacing: "-0.035em", lineHeight: "1.07" }}>
+                {"Get "}
+                <span style={{ color: "#5630BB" }}>
+                  {"free stuff"}
+                </span>
+                {" with points"}
+              </div>
+              <div className="hb-rise hb-d1" style={{ marginTop: "10px", fontSize: "16px", fontWeight: "600", color: "#514A65", lineHeight: "1.4" }}>
+                {"Use your points at all these shops."}
+              </div>
             </div>
-            <div className="hb-rise hb-d1" style={{ marginTop: "10px", fontSize: "16px", fontWeight: "600", color: "#514A65", lineHeight: "1.4" }}>
-              {"Use the same offers as now. Get points. Use points for free stuff."}
+            <div aria-hidden="true" className="hb-rise hb-d1" style={{ margin: "0 -20px", overflow: "hidden", WebkitMaskImage: "linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%)", maskImage: "linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%)" }}>
+              <div className="hb-marq" style={{ display: "flex", width: "max-content", padding: "4px 0 14px 0" }}>
+                <Artwork src="/haiba/brands/wingman.webp" alt="" style={{ width: "60px", height: "60px", borderRadius: "16px", objectFit: "cover", display: "block", flex: "none", background: "#F9F9F9", marginRight: "12px", boxShadow: "0 0 0 1px #ECE8F5, 0 8px 16px rgba(30,27,46,0.08)" }} />
+                <Artwork src="/haiba/brands/vox.webp" alt="" style={{ width: "60px", height: "60px", borderRadius: "16px", objectFit: "cover", display: "block", flex: "none", background: "#FFFFFF", marginRight: "12px", boxShadow: "0 0 0 1px #ECE8F5, 0 8px 16px rgba(30,27,46,0.08)" }} />
+                <Artwork src="/haiba/brands/coffee-bean.webp" alt="" style={{ width: "60px", height: "60px", borderRadius: "16px", objectFit: "cover", display: "block", flex: "none", background: "#FFFFFF", marginRight: "12px", boxShadow: "0 0 0 1px #ECE8F5, 0 8px 16px rgba(30,27,46,0.08)" }} />
+                <Artwork src="/haiba/brands/grip.webp" alt="" style={{ width: "60px", height: "60px", borderRadius: "16px", objectFit: "cover", display: "block", flex: "none", background: "#000000", marginRight: "12px", boxShadow: "0 0 0 1px #ECE8F5, 0 8px 16px rgba(30,27,46,0.08)" }} />
+                <Artwork src="/haiba/brands/albayan.webp" alt="" style={{ width: "60px", height: "60px", borderRadius: "16px", objectFit: "cover", display: "block", flex: "none", background: "#FFFFFF", marginRight: "12px", boxShadow: "0 0 0 1px #ECE8F5, 0 8px 16px rgba(30,27,46,0.08)" }} />
+                <Artwork src="/haiba/brands/alkuwaiti.webp" alt="" style={{ width: "60px", height: "60px", borderRadius: "16px", objectFit: "cover", display: "block", flex: "none", background: "#FFFFFF", marginRight: "12px", boxShadow: "0 0 0 1px #ECE8F5, 0 8px 16px rgba(30,27,46,0.08)" }} />
+                <Artwork src="/haiba/brands/wingman.webp" alt="" style={{ width: "60px", height: "60px", borderRadius: "16px", objectFit: "cover", display: "block", flex: "none", background: "#F9F9F9", marginRight: "12px", boxShadow: "0 0 0 1px #ECE8F5, 0 8px 16px rgba(30,27,46,0.08)" }} />
+                <Artwork src="/haiba/brands/vox.webp" alt="" style={{ width: "60px", height: "60px", borderRadius: "16px", objectFit: "cover", display: "block", flex: "none", background: "#FFFFFF", marginRight: "12px", boxShadow: "0 0 0 1px #ECE8F5, 0 8px 16px rgba(30,27,46,0.08)" }} />
+                <Artwork src="/haiba/brands/coffee-bean.webp" alt="" style={{ width: "60px", height: "60px", borderRadius: "16px", objectFit: "cover", display: "block", flex: "none", background: "#FFFFFF", marginRight: "12px", boxShadow: "0 0 0 1px #ECE8F5, 0 8px 16px rgba(30,27,46,0.08)" }} />
+                <Artwork src="/haiba/brands/grip.webp" alt="" style={{ width: "60px", height: "60px", borderRadius: "16px", objectFit: "cover", display: "block", flex: "none", background: "#000000", marginRight: "12px", boxShadow: "0 0 0 1px #ECE8F5, 0 8px 16px rgba(30,27,46,0.08)" }} />
+                <Artwork src="/haiba/brands/albayan.webp" alt="" style={{ width: "60px", height: "60px", borderRadius: "16px", objectFit: "cover", display: "block", flex: "none", background: "#FFFFFF", marginRight: "12px", boxShadow: "0 0 0 1px #ECE8F5, 0 8px 16px rgba(30,27,46,0.08)" }} />
+                <Artwork src="/haiba/brands/alkuwaiti.webp" alt="" style={{ width: "60px", height: "60px", borderRadius: "16px", objectFit: "cover", display: "block", flex: "none", background: "#FFFFFF", marginRight: "12px", boxShadow: "0 0 0 1px #ECE8F5, 0 8px 16px rgba(30,27,46,0.08)" }} />
+              </div>
+            </div>
+            <div className="hb-rise hb-d2" style={{ background: "#FFFFFF", borderRadius: "20px", padding: "14px 16px 12px 16px", boxShadow: "0 0 0 1px #ECE8F5, 0 12px 26px rgba(30,27,46,0.06)" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <Artwork src="/haiba/coins/coin-34.webp" alt="" style={{ width: "38px", height: "38px", display: "block", flex: "none" }} />
+                <span style={{ flex: "1", display: "flex", flexDirection: "column" }}>
+                  <span style={{ fontSize: "16px", fontWeight: "800", lineHeight: "1.3" }}>
+                    <span style={{ color: "#6C3FFA" }}>
+                      {"40 points"}
+                    </span>
+                    {" every time you use an offer"}
+                  </span>
+                  <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                    {"Plus 500 points when you join"}
+                  </span>
+                </span>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", margin: "12px 0 10px 0" }}>
+                <span style={{ flex: "1", height: "1px", background: "#F1EEF8" }}></span>
+                <span style={{ fontSize: "12px", fontWeight: "800", letterSpacing: "0.1em", textTransform: "uppercase", color: "#6C3FFA" }}>
+                  {"Bonus points"}
+                </span>
+                <span style={{ flex: "1", height: "1px", background: "#F1EEF8" }}></span>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <span style={{ flex: "1", minWidth: "0", display: "flex", alignItems: "flex-start", gap: "8px", fontSize: "14px", fontWeight: "800", lineHeight: "1.3" }}>
+                  <span style={{ width: "22px", height: "22px", flex: "none", borderRadius: "50%", background: "#6C3FFA", color: "#FFFFFF", fontSize: "12px", fontWeight: "900", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    {"1"}
+                  </span>
+                  {"First 2 visits at a new shop"}
+                </span>
+                <span style={{ display: "flex", gap: "4px", flex: "none" }}>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", boxSizing: "border-box", background: "#1E1B2E", color: "#FFFFFF", fontSize: "13px", fontWeight: "900", borderRadius: "999px", padding: "3px 8px", lineHeight: "16px" }}>
+                      {"+80"}
+                    </span>
+                    <span style={{ width: "46px", height: "46px", borderRadius: "50%", background: "#6C3FFA", color: "#FFFFFF", fontSize: "16px", fontWeight: "900", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      {"2x"}
+                    </span>
+                  </span>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", boxSizing: "border-box", background: "#1E1B2E", color: "#FFFFFF", fontSize: "13px", fontWeight: "900", borderRadius: "999px", padding: "3px 8px", lineHeight: "16px" }}>
+                      {"+80"}
+                    </span>
+                    <span style={{ width: "46px", height: "46px", borderRadius: "50%", background: "#6C3FFA", color: "#FFFFFF", fontSize: "16px", fontWeight: "900", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      {"2x"}
+                    </span>
+                  </span>
+                </span>
+              </div>
+              <div style={{ height: "1px", background: "#F1EEF8", margin: "10px 0 12px 0" }}></div>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "14px", fontWeight: "800", color: "#1E1B2E" }}>
+                <span style={{ width: "22px", height: "22px", borderRadius: "50%", background: "#C0F402", color: "#1F2600", fontSize: "12px", fontWeight: "900", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  {"2"}
+                </span>
+                {"Then every 5th visit, again and again"}
+              </div>
+              <div style={{ margin: "-4px -16px -14px -16px", overflow: "hidden", WebkitMaskImage: "linear-gradient(90deg, transparent 0, #000 8%, #000 88%, transparent 100%)", maskImage: "linear-gradient(90deg, transparent 0, #000 8%, #000 88%, transparent 100%)" }}>
+                <div className="hb-flow" style={{ display: "flex", width: "max-content", padding: "10px 0" }}>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", fontSize: "12.5px", fontWeight: "800", color: "#9C95B5", lineHeight: "22px" }}>
+                      {"+40"}
+                    </span>
+                    <span style={{ width: "46px", height: "46px", borderRadius: "50%", background: "#F1EDFC", color: "#B3A6E6", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                      </svg>
+                    </span>
+                  </span>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", fontSize: "12.5px", fontWeight: "800", color: "#9C95B5", lineHeight: "22px" }}>
+                      {"+40"}
+                    </span>
+                    <span style={{ width: "46px", height: "46px", borderRadius: "50%", background: "#F1EDFC", color: "#B3A6E6", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                      </svg>
+                    </span>
+                  </span>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", fontSize: "12.5px", fontWeight: "800", color: "#9C95B5", lineHeight: "22px" }}>
+                      {"+40"}
+                    </span>
+                    <span style={{ width: "46px", height: "46px", borderRadius: "50%", background: "#F1EDFC", color: "#B3A6E6", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                      </svg>
+                    </span>
+                  </span>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", fontSize: "12.5px", fontWeight: "800", color: "#9C95B5", lineHeight: "22px" }}>
+                      {"+40"}
+                    </span>
+                    <span style={{ width: "46px", height: "46px", borderRadius: "50%", background: "#F1EDFC", color: "#B3A6E6", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                      </svg>
+                    </span>
+                  </span>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", boxSizing: "border-box", background: "#C0F402", color: "#1F2600", fontSize: "13px", fontWeight: "900", borderRadius: "999px", padding: "3px 8px", lineHeight: "16px" }}>
+                      {"+200"}
+                    </span>
+                    <span style={{ position: "relative", width: "46px", height: "46px" }}>
+                      <span className="hb-ping" style={{ position: "absolute", inset: "0", borderRadius: "50%", background: "#C0F402" }}></span>
+                      <span className="hb-throb" style={{ position: "absolute", inset: "0", borderRadius: "50%", background: "#C0F402", color: "#1F2600", fontSize: "16px", fontWeight: "900", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 0 3px #1E1B2E inset" }}>
+                        {"5x"}
+                      </span>
+                    </span>
+                  </span>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", fontSize: "12.5px", fontWeight: "800", color: "#9C95B5", lineHeight: "22px" }}>
+                      {"+40"}
+                    </span>
+                    <span style={{ width: "46px", height: "46px", borderRadius: "50%", background: "#F1EDFC", color: "#B3A6E6", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                      </svg>
+                    </span>
+                  </span>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", fontSize: "12.5px", fontWeight: "800", color: "#9C95B5", lineHeight: "22px" }}>
+                      {"+40"}
+                    </span>
+                    <span style={{ width: "46px", height: "46px", borderRadius: "50%", background: "#F1EDFC", color: "#B3A6E6", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                      </svg>
+                    </span>
+                  </span>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", fontSize: "12.5px", fontWeight: "800", color: "#9C95B5", lineHeight: "22px" }}>
+                      {"+40"}
+                    </span>
+                    <span style={{ width: "46px", height: "46px", borderRadius: "50%", background: "#F1EDFC", color: "#B3A6E6", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                      </svg>
+                    </span>
+                  </span>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", fontSize: "12.5px", fontWeight: "800", color: "#9C95B5", lineHeight: "22px" }}>
+                      {"+40"}
+                    </span>
+                    <span style={{ width: "46px", height: "46px", borderRadius: "50%", background: "#F1EDFC", color: "#B3A6E6", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                      </svg>
+                    </span>
+                  </span>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", boxSizing: "border-box", background: "#C0F402", color: "#1F2600", fontSize: "13px", fontWeight: "900", borderRadius: "999px", padding: "3px 8px", lineHeight: "16px" }}>
+                      {"+200"}
+                    </span>
+                    <span style={{ position: "relative", width: "46px", height: "46px" }}>
+                      <span className="hb-ping" style={{ position: "absolute", inset: "0", borderRadius: "50%", background: "#C0F402" }}></span>
+                      <span className="hb-throb" style={{ position: "absolute", inset: "0", borderRadius: "50%", background: "#C0F402", color: "#1F2600", fontSize: "16px", fontWeight: "900", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 0 3px #1E1B2E inset" }}>
+                        {"5x"}
+                      </span>
+                    </span>
+                  </span>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", fontSize: "12.5px", fontWeight: "800", color: "#9C95B5", lineHeight: "22px" }}>
+                      {"+40"}
+                    </span>
+                    <span style={{ width: "46px", height: "46px", borderRadius: "50%", background: "#F1EDFC", color: "#B3A6E6", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                      </svg>
+                    </span>
+                  </span>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", fontSize: "12.5px", fontWeight: "800", color: "#9C95B5", lineHeight: "22px" }}>
+                      {"+40"}
+                    </span>
+                    <span style={{ width: "46px", height: "46px", borderRadius: "50%", background: "#F1EDFC", color: "#B3A6E6", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                      </svg>
+                    </span>
+                  </span>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", fontSize: "12.5px", fontWeight: "800", color: "#9C95B5", lineHeight: "22px" }}>
+                      {"+40"}
+                    </span>
+                    <span style={{ width: "46px", height: "46px", borderRadius: "50%", background: "#F1EDFC", color: "#B3A6E6", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                      </svg>
+                    </span>
+                  </span>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", fontSize: "12.5px", fontWeight: "800", color: "#9C95B5", lineHeight: "22px" }}>
+                      {"+40"}
+                    </span>
+                    <span style={{ width: "46px", height: "46px", borderRadius: "50%", background: "#F1EDFC", color: "#B3A6E6", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                      </svg>
+                    </span>
+                  </span>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", boxSizing: "border-box", background: "#C0F402", color: "#1F2600", fontSize: "13px", fontWeight: "900", borderRadius: "999px", padding: "3px 8px", lineHeight: "16px" }}>
+                      {"+200"}
+                    </span>
+                    <span style={{ position: "relative", width: "46px", height: "46px" }}>
+                      <span className="hb-ping" style={{ position: "absolute", inset: "0", borderRadius: "50%", background: "#C0F402" }}></span>
+                      <span className="hb-throb" style={{ position: "absolute", inset: "0", borderRadius: "50%", background: "#C0F402", color: "#1F2600", fontSize: "16px", fontWeight: "900", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 0 3px #1E1B2E inset" }}>
+                        {"5x"}
+                      </span>
+                    </span>
+                  </span>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", fontSize: "12.5px", fontWeight: "800", color: "#9C95B5", lineHeight: "22px" }}>
+                      {"+40"}
+                    </span>
+                    <span style={{ width: "46px", height: "46px", borderRadius: "50%", background: "#F1EDFC", color: "#B3A6E6", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                      </svg>
+                    </span>
+                  </span>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", fontSize: "12.5px", fontWeight: "800", color: "#9C95B5", lineHeight: "22px" }}>
+                      {"+40"}
+                    </span>
+                    <span style={{ width: "46px", height: "46px", borderRadius: "50%", background: "#F1EDFC", color: "#B3A6E6", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                      </svg>
+                    </span>
+                  </span>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", fontSize: "12.5px", fontWeight: "800", color: "#9C95B5", lineHeight: "22px" }}>
+                      {"+40"}
+                    </span>
+                    <span style={{ width: "46px", height: "46px", borderRadius: "50%", background: "#F1EDFC", color: "#B3A6E6", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                      </svg>
+                    </span>
+                  </span>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", fontSize: "12.5px", fontWeight: "800", color: "#9C95B5", lineHeight: "22px" }}>
+                      {"+40"}
+                    </span>
+                    <span style={{ width: "46px", height: "46px", borderRadius: "50%", background: "#F1EDFC", color: "#B3A6E6", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                      </svg>
+                    </span>
+                  </span>
+                  <span style={{ flex: "none", width: "58px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    <span style={{ height: "22px", boxSizing: "border-box", background: "#C0F402", color: "#1F2600", fontSize: "13px", fontWeight: "900", borderRadius: "999px", padding: "3px 8px", lineHeight: "16px" }}>
+                      {"+200"}
+                    </span>
+                    <span style={{ position: "relative", width: "46px", height: "46px" }}>
+                      <span className="hb-ping" style={{ position: "absolute", inset: "0", borderRadius: "50%", background: "#C0F402" }}></span>
+                      <span className="hb-throb" style={{ position: "absolute", inset: "0", borderRadius: "50%", background: "#C0F402", color: "#1F2600", fontSize: "16px", fontWeight: "900", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 0 3px #1E1B2E inset" }}>
+                        {"5x"}
+                      </span>
+                    </span>
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="hb-rise hb-d1" style={{ position: "absolute", left: "20px", right: "20px", top: "250px", background: "#FFFFFF", borderRadius: "20px", padding: "16px 14px 14px 14px", boxShadow: "0 0 0 1px #ECE8F5, 0 12px 26px rgba(30,27,46,0.06)", zIndex: "3" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "14.5px", fontWeight: "800" }}>
-              <span>
-                {v.shopLine}
-              </span>
-              <span style={{ color: "#6C3FFA" }}>
-                {"visit 3 of 5"}
-              </span>
-            </div>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginTop: "14px" }}>
-              <span className="hb-pop hb-d1" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
-                <span style={{ width: "52px", height: "52px", borderRadius: "50%", background: "#6C3FFA", color: "#FFFFFF", border: "2.5px solid #6C3FFA", boxSizing: "border-box", fontSize: "16px", fontWeight: "900", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  {"2x"}
-                </span>
-                <span style={{ fontSize: "13px", fontWeight: "800", color: "#4A4660" }}>
-                  {"+80"}
-                </span>
-              </span>
-              <span className="hb-pop hb-d2" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
-                <span style={{ width: "52px", height: "52px", borderRadius: "50%", background: "#6C3FFA", color: "#FFFFFF", border: "2.5px solid #6C3FFA", boxSizing: "border-box", fontSize: "16px", fontWeight: "900", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  {"2x"}
-                </span>
-                <span style={{ fontSize: "13px", fontWeight: "800", color: "#4A4660" }}>
-                  {"+80"}
-                </span>
-              </span>
-              <span className="hb-pop hb-d3" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
-                <span style={{ width: "52px", height: "52px", borderRadius: "50%", background: "#6C3FFA", color: "#FFFFFF", border: "2.5px solid #6C3FFA", boxSizing: "border-box", fontSize: "16px", fontWeight: "900", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  {"\u2713"}
-                </span>
-                <span style={{ fontSize: "13px", fontWeight: "800", color: "#4A4660" }}>
-                  {"+40"}
-                </span>
-              </span>
-              <span className="hb-pop hb-d4" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
-                <span style={{ width: "52px", height: "52px", borderRadius: "50%", background: "#FFFFFF", color: "#6C3FFA", border: "2.5px dashed #B9A7F5", boxSizing: "border-box", fontSize: "16px", fontWeight: "900", display: "flex", alignItems: "center", justifyContent: "center" }}></span>
-                <span style={{ fontSize: "13px", fontWeight: "800", color: "#4A4660" }}>
-                  {"+40"}
-                </span>
-              </span>
-              <span className="hb-pop hb-d5" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
-                <span style={{ width: "62px", height: "62px", borderRadius: "50%", background: "#C0F402", color: "#1F2600", border: "2.5px solid #1E1B2E", boxSizing: "border-box", fontSize: "20px", fontWeight: "900", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  {"5x"}
-                </span>
-                <span style={{ fontSize: "13px", fontWeight: "800", color: "#1E1B2E" }}>
-                  {"+200"}
-                </span>
-              </span>
-            </div>
-            <div style={{ marginTop: "14px", paddingTop: "12px", borderTop: "1px solid #F1EEF8", fontSize: "13.5px", fontWeight: "600", color: "#5B5770", lineHeight: "1.4" }}>
-              {"First 2 visits to a shop get 2x points. Every 5th visit gets 5x. You also get "}
-              <b style={{ color: "#1E1B2E" }}>
-                {"500 points"}
-              </b>
-              {" when you join."}
-            </div>
-          </div>
-          <Artwork className="hb-pop hb-d2" src="/haiba/birds/13-fist.png" alt="" style={{ position: "absolute", left: "132px", top: "488px", height: "128px", width: "auto", display: "block", zIndex: "2" }} />
           </>
         ) : null}
         {v.s4 ? (

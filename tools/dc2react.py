@@ -405,7 +405,7 @@ def main():
     for k, val in root.attrs:
         if k == "style":
             val = re.sub(r"width:\s*390px;", "width: 100%; max-width: 390px; margin: 0 auto;", val)
-            val = re.sub(r"(^|;\s*)height:\s*\d+px;", r"\1min-height: 100vh;", val)
+            val = re.sub(r"(^|;\s*)height:\s*\d+px;", r"\1min-height: 100svh;", val)
         new.append((k, val))
     root.attrs = new
     c = Conv(key)

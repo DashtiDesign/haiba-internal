@@ -156,6 +156,15 @@ def patch_screen(name):
         s = s.replace('padding: "36px 16px 20px 16px"', 'padding: "36px 16px calc(20px + env(safe-area-inset-bottom, 0px)) 16px"', 1)
         s = s.replace('position: "absolute", inset: "0", background: "rgba(20,16,40,0.5)", zIndex: "10"', 'position: "fixed", inset: "0", background: "rgba(20,16,40,0.5)", zIndex: "60"', 1)
         s = s.replace('padding: "0 20px 26px 20px", textAlign: "center"', 'padding: "0 20px calc(26px + env(safe-area-inset-bottom, 0px)) 20px", textAlign: "center", maxWidth: "430px", margin: "0 auto"', 1)
+    if name.startswith("Paywall") or name == "PlansConvert":
+        # Paywall test: CTA docks flush to the screen bottom and pads around the home bar (Lovable, 4 Nov)
+        s = s.replace('<div className="hb-fixed-bottom">', '<div className="hb-fixed-bottom hb-cta-dock">')
+        s = s.replace('padding: "30px 16px 16px 16px"', 'padding: "30px 16px calc(16px + env(safe-area-inset-bottom, 0px)) 16px"')
+        s = s.replace('padding: "18px 16px 16px 16px", zIndex: "5"', 'padding: "18px 16px calc(16px + env(safe-area-inset-bottom, 0px)) 16px", zIndex: "5"')
+        s = s.replace('bottom: "34px", display: "flex", justifyContent: "center"', 'bottom: "calc(34px + env(safe-area-inset-bottom, 0px))", display: "flex", justifyContent: "center"')
+    if name == "PaywallStory":
+        # The story is laid out for 844px; small phones scroll instead of cutting off the price screen
+        s = s.replace('minHeight: "100svh"', 'minHeight: v.s4 ? "max(100svh, 880px)" : "max(100svh, 840px)"', 1)
     if name in ("Rewards", "Earn"):
         # Shop sheet covers the screen in the app, above the bottom nav and panel tab
         s = s.replace('position: "absolute", inset: "0", background: "rgba(20,16,40,0.5)", zIndex: "10"', 'position: "fixed", inset: "0", background: "rgba(20,16,40,0.5)", zIndex: "70"', 1)
@@ -192,6 +201,18 @@ def patch_logic(key, name):
     open(p, "w").write(s)
 
 
+def add_style_import(key):
+    """Each screen's scoped styles (keyframes like hb-marq) load from src/styles.css."""
+    p = os.path.join(ROOT, "src", "styles.css")
+    s = open(p).read()
+    line = '@import "./haiba/styles/%s.css";' % key
+    if line not in s:
+        anchor = '@import "./haiba/styles/basket.css";'
+        assert anchor in s, "styles.css: import anchor missing"
+        s = s.replace(anchor, anchor + "\n" + line, 1)
+        open(p, "w").write(s)
+
+
 def main():
     src = sys.argv[1]
     names = sys.argv[2:] or list(BOARDS)
@@ -204,6 +225,7 @@ def main():
             os.replace(os.path.join(tmp, sub, fn), dst)
         patch_screen(name)
         patch_logic(key, name)
+        add_style_import(key)
         print("ported", board, "->", name)
 
 

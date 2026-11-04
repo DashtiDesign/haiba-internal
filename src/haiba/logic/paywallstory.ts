@@ -57,10 +57,9 @@ export function useVals() {
     var picked = gi >= 0 ? order[gi] : (fav || order[0]);
     var go = function (k) { return function () { setState({ step: k }); }; };
     var gifts = order.map(function (s, k) {
-      var sel = k === gi || (gi < 0 && s === picked && !!fav);
-      return Object.assign({}, s, { selStr: String(sel), tickDisp: sel ? 'flex' : 'none', favDisp: s === fav ? 'block' : 'none',
-        shadow: sel ? '0 0 0 3px #6C3FFA, 0 12px 22px rgba(30,27,46,0.16)' : '0 0 0 1px #ECE8F5, 0 8px 18px rgba(30,27,46,0.06)',
-        pick: function () { setState({ gift: k }); } });
+      var sel = s === fav;
+      return Object.assign({}, s, { favDisp: sel ? 'block' : 'none',
+        shadow: sel ? '0 0 0 3px #6C3FFA, 0 12px 22px rgba(30,27,46,0.16)' : '0 0 0 1px #ECE8F5, 0 8px 18px rgba(30,27,46,0.06)' });
     });
     // Running total: each screen adds its part
     var tallies = [0, WORTH.gifts, WORTH.gifts + WORTH.spotify + WORTH.chatgpt + WORTH.travel, worthN];
