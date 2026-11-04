@@ -27,9 +27,10 @@ export default function PlansConvert() {
             <span style={{ width: "44px" }}></span>
           </div>
           <div className="hb-rise" style={{ marginTop: "18px", background: "#FFFFFF", borderRadius: "20px", overflow: "hidden", boxShadow: "0 18px 40px rgba(76,52,140,0.16)" }}>
-            <div style={{ position: "relative", height: "284px", background: "linear-gradient(135deg, #6C3FFA 0%, #4F25D6 100%)", padding: "22px", boxSizing: "border-box", color: "#FFFFFF", overflow: "hidden" }}>
+            <div style={{ position: "relative", height: "216px", background: "linear-gradient(135deg, #6C3FFA 0%, #4F25D6 100%)", padding: "22px", boxSizing: "border-box", color: "#FFFFFF", overflow: "hidden" }}>
               <span aria-hidden="true" style={{ position: "absolute", left: "-60px", bottom: "-90px", width: "220px", height: "220px", borderRadius: "50%", border: "2px dashed rgba(192,244,2,0.35)" }}></span>
-              <Artwork priority src="/haiba/logo-lime.svg" alt="Haiba" style={{ position: "relative", display: "block", height: "36px", width: "auto" }} />
+              <Artwork priority className="hb-peek" src="/haiba/birds/17-coin-toss.webp" alt="The Haiba bird tossing a coin" style={{ position: "absolute", right: "8px", bottom: "4px", height: "196px", width: "auto", display: "block", filter: "drop-shadow(0 12px 14px rgba(20,8,60,0.35))" }} />
+              <Artwork src="/haiba/logo-lime.svg" alt="Haiba" style={{ position: "relative", display: "block", height: "36px", width: "auto" }} />
               <div className="hb-rise" style={{ position: "relative", fontSize: "22px", fontWeight: "900", letterSpacing: "-0.02em", marginTop: "18px" }}>
                 {"Get "}
                 <span style={{ color: "#C0F402" }}>
@@ -43,23 +44,6 @@ export default function PlansConvert() {
               <div style={{ position: "relative", fontSize: "22px", fontWeight: "900", letterSpacing: "-0.02em", marginTop: "2px" }}>
                 {"every year"}
               </div>
-              <div style={{ position: "relative", marginTop: "14px", display: "flex", alignItems: "baseline", gap: "6px" }}>
-                <span style={{ fontSize: "15px", fontWeight: "600", color: "#E4DBFF" }}>
-                  {"Only"}
-                </span>
-                <span style={{ fontSize: "26px", fontWeight: "900", letterSpacing: "-0.02em" }}>
-                  {v.perMonth}
-                </span>
-                <span style={{ fontSize: "14px", fontWeight: "600", color: "#E4DBFF" }}>
-                  {"a month"}
-                </span>
-              </div>
-              <div style={{ position: "relative", marginTop: "2px", fontSize: "13.5px", fontWeight: "600", color: "#E4DBFF" }}>
-                {"Paid once a year: "}{v.price}{" + VAT"}
-              </div>
-              <span className="hb-peek" style={{ position: "absolute", right: "-30px", bottom: "-64px", display: "block" }}>
-                <Artwork src="/haiba/birds/04-peek.png" alt="The Haiba bird giving a thumbs up" style={{ height: "210px", width: "auto", display: "block", filter: "drop-shadow(0 12px 14px rgba(20,8,60,0.35))" }} />
-              </span>
             </div>
             <div style={{ padding: "6px 20px 18px 20px" }}>
               <div style={{ fontSize: "13px", fontWeight: "700", letterSpacing: "0.12em", textTransform: "uppercase", color: "#6B6880", padding: "14px 0 2px 0" }}>
