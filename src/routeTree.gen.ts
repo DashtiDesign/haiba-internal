@@ -19,6 +19,11 @@ import { Route as HaibaRewardsRouteImport } from './routes/haiba/rewards'
 import { Route as HaibaTravelRouteImport } from './routes/haiba/travel'
 import { Route as HaibaWalletRouteImport } from './routes/haiba/wallet'
 import { Route as HaibaWelcomeRouteImport } from './routes/haiba/welcome'
+import { Route as HaibaPaywallBaseRouteImport } from './routes/haiba/paywall.base'
+import { Route as HaibaPaywallJoinRouteImport } from './routes/haiba/paywall.join'
+import { Route as HaibaPaywallStoryRouteImport } from './routes/haiba/paywall.story'
+import { Route as HaibaPaywallTableRouteImport } from './routes/haiba/paywall.table'
+import { Route as HaibaPaywallTimelineRouteImport } from './routes/haiba/paywall.timeline'
 import { Route as HaibaPromoCompareRouteImport } from './routes/haiba/promo.compare'
 import { Route as HaibaPromoDreamRouteImport } from './routes/haiba/promo.dream'
 import { Route as HaibaPromoGiftRouteImport } from './routes/haiba/promo.gift'
@@ -79,6 +84,31 @@ const HaibaWelcomeRoute = HaibaWelcomeRouteImport.update({
   path: '/haiba/welcome',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HaibaPaywallBaseRoute = HaibaPaywallBaseRouteImport.update({
+  id: '/haiba/paywall/base',
+  path: '/haiba/paywall/base',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaPaywallJoinRoute = HaibaPaywallJoinRouteImport.update({
+  id: '/haiba/paywall/join',
+  path: '/haiba/paywall/join',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaPaywallStoryRoute = HaibaPaywallStoryRouteImport.update({
+  id: '/haiba/paywall/story',
+  path: '/haiba/paywall/story',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaPaywallTableRoute = HaibaPaywallTableRouteImport.update({
+  id: '/haiba/paywall/table',
+  path: '/haiba/paywall/table',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaPaywallTimelineRoute = HaibaPaywallTimelineRouteImport.update({
+  id: '/haiba/paywall/timeline',
+  path: '/haiba/paywall/timeline',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HaibaPromoCompareRoute = HaibaPromoCompareRouteImport.update({
   id: '/haiba/promo/compare',
   path: '/haiba/promo/compare',
@@ -136,6 +166,11 @@ export interface FileRoutesByFullPath {
   '/haiba/wallet': typeof HaibaWalletRoute
   '/haiba/welcome': typeof HaibaWelcomeRoute
   '/haiba/': typeof HaibaIndexRoute
+  '/haiba/paywall/base': typeof HaibaPaywallBaseRoute
+  '/haiba/paywall/join': typeof HaibaPaywallJoinRoute
+  '/haiba/paywall/story': typeof HaibaPaywallStoryRoute
+  '/haiba/paywall/table': typeof HaibaPaywallTableRoute
+  '/haiba/paywall/timeline': typeof HaibaPaywallTimelineRoute
   '/haiba/promo/compare': typeof HaibaPromoCompareRoute
   '/haiba/promo/dream': typeof HaibaPromoDreamRoute
   '/haiba/promo/gift': typeof HaibaPromoGiftRoute
@@ -157,6 +192,11 @@ export interface FileRoutesByTo {
   '/haiba/wallet': typeof HaibaWalletRoute
   '/haiba/welcome': typeof HaibaWelcomeRoute
   '/haiba': typeof HaibaIndexRoute
+  '/haiba/paywall/base': typeof HaibaPaywallBaseRoute
+  '/haiba/paywall/join': typeof HaibaPaywallJoinRoute
+  '/haiba/paywall/story': typeof HaibaPaywallStoryRoute
+  '/haiba/paywall/table': typeof HaibaPaywallTableRoute
+  '/haiba/paywall/timeline': typeof HaibaPaywallTimelineRoute
   '/haiba/promo/compare': typeof HaibaPromoCompareRoute
   '/haiba/promo/dream': typeof HaibaPromoDreamRoute
   '/haiba/promo/gift': typeof HaibaPromoGiftRoute
@@ -179,6 +219,11 @@ export interface FileRoutesById {
   '/haiba/wallet': typeof HaibaWalletRoute
   '/haiba/welcome': typeof HaibaWelcomeRoute
   '/haiba/': typeof HaibaIndexRoute
+  '/haiba/paywall/base': typeof HaibaPaywallBaseRoute
+  '/haiba/paywall/join': typeof HaibaPaywallJoinRoute
+  '/haiba/paywall/story': typeof HaibaPaywallStoryRoute
+  '/haiba/paywall/table': typeof HaibaPaywallTableRoute
+  '/haiba/paywall/timeline': typeof HaibaPaywallTimelineRoute
   '/haiba/promo/compare': typeof HaibaPromoCompareRoute
   '/haiba/promo/dream': typeof HaibaPromoDreamRoute
   '/haiba/promo/gift': typeof HaibaPromoGiftRoute
@@ -202,6 +247,11 @@ export interface FileRouteTypes {
     | '/haiba/wallet'
     | '/haiba/welcome'
     | '/haiba/'
+    | '/haiba/paywall/base'
+    | '/haiba/paywall/join'
+    | '/haiba/paywall/story'
+    | '/haiba/paywall/table'
+    | '/haiba/paywall/timeline'
     | '/haiba/promo/compare'
     | '/haiba/promo/dream'
     | '/haiba/promo/gift'
@@ -223,6 +273,11 @@ export interface FileRouteTypes {
     | '/haiba/wallet'
     | '/haiba/welcome'
     | '/haiba'
+    | '/haiba/paywall/base'
+    | '/haiba/paywall/join'
+    | '/haiba/paywall/story'
+    | '/haiba/paywall/table'
+    | '/haiba/paywall/timeline'
     | '/haiba/promo/compare'
     | '/haiba/promo/dream'
     | '/haiba/promo/gift'
@@ -244,6 +299,11 @@ export interface FileRouteTypes {
     | '/haiba/wallet'
     | '/haiba/welcome'
     | '/haiba/'
+    | '/haiba/paywall/base'
+    | '/haiba/paywall/join'
+    | '/haiba/paywall/story'
+    | '/haiba/paywall/table'
+    | '/haiba/paywall/timeline'
     | '/haiba/promo/compare'
     | '/haiba/promo/dream'
     | '/haiba/promo/gift'
@@ -266,6 +326,11 @@ export interface RootRouteChildren {
   HaibaWalletRoute: typeof HaibaWalletRoute
   HaibaWelcomeRoute: typeof HaibaWelcomeRoute
   HaibaIndexRoute: typeof HaibaIndexRoute
+  HaibaPaywallBaseRoute: typeof HaibaPaywallBaseRoute
+  HaibaPaywallJoinRoute: typeof HaibaPaywallJoinRoute
+  HaibaPaywallStoryRoute: typeof HaibaPaywallStoryRoute
+  HaibaPaywallTableRoute: typeof HaibaPaywallTableRoute
+  HaibaPaywallTimelineRoute: typeof HaibaPaywallTimelineRoute
   HaibaPromoCompareRoute: typeof HaibaPromoCompareRoute
   HaibaPromoDreamRoute: typeof HaibaPromoDreamRoute
   HaibaPromoGiftRoute: typeof HaibaPromoGiftRoute
@@ -349,6 +414,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HaibaWelcomeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/haiba/paywall/base': {
+      id: '/haiba/paywall/base'
+      path: '/haiba/paywall/base'
+      fullPath: '/haiba/paywall/base'
+      preLoaderRoute: typeof HaibaPaywallBaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/paywall/join': {
+      id: '/haiba/paywall/join'
+      path: '/haiba/paywall/join'
+      fullPath: '/haiba/paywall/join'
+      preLoaderRoute: typeof HaibaPaywallJoinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/paywall/story': {
+      id: '/haiba/paywall/story'
+      path: '/haiba/paywall/story'
+      fullPath: '/haiba/paywall/story'
+      preLoaderRoute: typeof HaibaPaywallStoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/paywall/table': {
+      id: '/haiba/paywall/table'
+      path: '/haiba/paywall/table'
+      fullPath: '/haiba/paywall/table'
+      preLoaderRoute: typeof HaibaPaywallTableRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/paywall/timeline': {
+      id: '/haiba/paywall/timeline'
+      path: '/haiba/paywall/timeline'
+      fullPath: '/haiba/paywall/timeline'
+      preLoaderRoute: typeof HaibaPaywallTimelineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/haiba/promo/compare': {
       id: '/haiba/promo/compare'
       path: '/haiba/promo/compare'
@@ -426,6 +526,11 @@ const rootRouteChildren: RootRouteChildren = {
   HaibaWalletRoute: HaibaWalletRoute,
   HaibaWelcomeRoute: HaibaWelcomeRoute,
   HaibaIndexRoute: HaibaIndexRoute,
+  HaibaPaywallBaseRoute: HaibaPaywallBaseRoute,
+  HaibaPaywallJoinRoute: HaibaPaywallJoinRoute,
+  HaibaPaywallStoryRoute: HaibaPaywallStoryRoute,
+  HaibaPaywallTableRoute: HaibaPaywallTableRoute,
+  HaibaPaywallTimelineRoute: HaibaPaywallTimelineRoute,
   HaibaPromoCompareRoute: HaibaPromoCompareRoute,
   HaibaPromoDreamRoute: HaibaPromoDreamRoute,
   HaibaPromoGiftRoute: HaibaPromoGiftRoute,

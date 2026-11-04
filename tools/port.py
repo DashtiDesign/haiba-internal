@@ -34,6 +34,12 @@ BOARDS = {
     "PromoDream": ("promodream", "PromoDream"),
     "PromoWinback": ("promowinback", "PromoWinback"),
     "PromoGift": ("promogift", "PromoGift"),
+    # Paywall A/B test (4 Nov). Price, name, shop and state come from the URL, see dc.ts.
+    "PaywallBase": ("paywallbase", "PaywallBase"),
+    "PaywallTimeline": ("paywalltimeline", "PaywallTimeline"),
+    "PlansConvert": ("plansconvert", "PlansConvert"),
+    "PaywallStory": ("paywallstory", "PaywallStory"),
+    "PaywallTable": ("paywalltable", "PaywallTable"),
     # Free travel data perk (Airalo). Plan and home country come from the store, see dc.ts.
     "Travel": ("travel", "Travel"),
     # Webview only: Haiba pages that replace the Haiba parts of core Unipal pages (shop, redeem).

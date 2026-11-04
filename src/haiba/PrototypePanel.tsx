@@ -21,14 +21,26 @@ const SCREENS = [
   ["Basket and codes", "/haiba/basket"],
   ["Wallet", "/haiba/wallet"],
   ["Travel data", "/haiba/travel"],
-  ["Promo: Compare", "/haiba/promo/compare"],
-  ["Promo: Dream", "/haiba/promo/dream"],
-  ["Promo: Gift", "/haiba/promo/gift"],
-  ["Promo: Value", "/haiba/promo/value"],
-  ["Promo: Waitlist", "/haiba/promo/waitlist"],
-  ["Promo: Winback", "/haiba/promo/winback"],
-  ["Promo: Year", "/haiba/promo/year"],
 ];
+
+// Promo pages, grouped so they are easy to find. Paywall arms take the price chosen below.
+const PAYWALLS = [
+  ["A · Join copy", "/haiba/paywall/join"],
+  ["B · Story", "/haiba/paywall/story"],
+  ["C · Timeline", "/haiba/paywall/timeline"],
+  ["Baseline (backup)", "/haiba/paywall/base"],
+  ["Table (backup)", "/haiba/paywall/table"],
+];
+const OLD_PROMOS = [
+  ["Waitlist", "/haiba/promo/waitlist"],
+  ["Value tiles", "/haiba/promo/value"],
+  ["Compare", "/haiba/promo/compare"],
+  ["Your year", "/haiba/promo/year"],
+  ["12 picks", "/haiba/promo/dream"],
+  ["Gift first", "/haiba/promo/gift"],
+  ["Win back", "/haiba/promo/winback"],
+];
+const PRICES = ["20", "22", "24"];
 
 const MEMBERS: [Member, string][] = [
   ["none", "Not a member"],
@@ -48,9 +60,26 @@ const chip = (on: boolean) => ({
   color: on ? "#C0F402" : "#1E1B2E",
 });
 
+const sectionLabel = {
+  fontSize: 12,
+  fontWeight: 700,
+  letterSpacing: "0.1em",
+  textTransform: "uppercase" as const,
+  color: "#6B6880",
+  marginTop: 18,
+};
+
+const grid = {
+  display: "grid",
+  gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+  gap: 6,
+  marginTop: 8,
+};
+
 export default function PrototypePanel() {
   const hb = useHaiba();
   const [open, setOpen] = useState(false);
+  const [price, setPrice] = useState("20");
   const reduced = useReducedMotion();
   const s = hb.state;
   return (
@@ -235,6 +264,45 @@ export default function PrototypePanel() {
                 <button style={chip(false)} onClick={() => hb.reset()}>
                   Reset everything
                 </button>
+              </div>
+
+              <div style={sectionLabel}>Promo pages</div>
+              <div style={{ display: "flex", gap: 6, alignItems: "center", marginTop: 8 }}>
+                <span style={{ fontSize: 13, color: "#6B6880" }}>Price</span>
+                {PRICES.map((p) => (
+                  <button key={p} style={chip(price === p)} onClick={() => setPrice(p)}>
+                    BHD {p}
+                  </button>
+                ))}
+              </div>
+              <div style={{ fontSize: 13, fontWeight: 700, marginTop: 10 }}>Paywall test (4 Nov)</div>
+              <div style={grid}>
+                {PAYWALLS.map(([label, to]) => (
+                  <Link
+                    key={to}
+                    to={to}
+                    search={{ price: Number(price) }}
+                    onClick={() => setOpen(false)}
+                    style={{ ...chip(false), textDecoration: "none", textAlign: "center" }}
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
+              <div style={{ fontSize: 13, fontWeight: 700, marginTop: 12 }}>
+                Older promo tests (28 Oct)
+              </div>
+              <div style={grid}>
+                {OLD_PROMOS.map(([label, to]) => (
+                  <Link
+                    key={to}
+                    to={to}
+                    onClick={() => setOpen(false)}
+                    style={{ ...chip(false), textDecoration: "none", textAlign: "center" }}
+                  >
+                    {label}
+                  </Link>
+                ))}
               </div>
 
               <div

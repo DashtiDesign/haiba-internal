@@ -1,0 +1,30 @@
+@keyframes paywallbase-hb-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes paywallbase-hb-pop{0%{opacity:0;transform:scale(.6)}70%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}
+@keyframes paywallbase-hb-up{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes paywallbase-hb-fade{from{opacity:0}to{opacity:1}}
+@keyframes paywallbase-hb-peek{0%{opacity:0;transform:translateX(60px) rotate(8deg)}100%{opacity:1;transform:translateX(0) rotate(0)}}
+@keyframes paywallbase-hb-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes paywallbase-hb-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.pg-paywallbase .hb-rise{animation:paywallbase-hb-rise .5s cubic-bezier(.2,.8,.2,1) both}
+.pg-paywallbase .hb-pop{animation:paywallbase-hb-pop .5s cubic-bezier(.2,.8,.2,1) both}
+.pg-paywallbase .hb-up{animation:paywallbase-hb-up .4s cubic-bezier(.2,.8,.2,1) both}
+.pg-paywallbase .hb-fade{animation:paywallbase-hb-fade .25s ease both}
+.pg-paywallbase .hb-peek{animation:paywallbase-hb-peek .7s cubic-bezier(.2,.8,.2,1) .15s both}
+.pg-paywallbase .hb-spin{animation:paywallbase-hb-spin 90s linear infinite}
+.pg-paywallbase .hb-float{animation:paywallbase-hb-float 3.6s ease-in-out infinite}
+.pg-paywallbase .hb-stagger>*{animation:paywallbase-hb-rise .45s cubic-bezier(.2,.8,.2,1) both}
+.pg-paywallbase .hb-stagger>*:nth-child(2){animation-delay:.05s}
+.pg-paywallbase .hb-stagger>*:nth-child(3){animation-delay:.1s}
+.pg-paywallbase .hb-stagger>*:nth-child(4){animation-delay:.15s}
+.pg-paywallbase .hb-stagger>*:nth-child(5){animation-delay:.2s}
+.pg-paywallbase .hb-stagger>*:nth-child(6){animation-delay:.25s}
+.pg-paywallbase .hb-stagger>*:nth-child(7){animation-delay:.3s}
+.pg-paywallbase .hb-stagger>*:nth-child(8){animation-delay:.35s}
+.pg-paywallbase .hb-d1{animation-delay:.1s}
+.pg-paywallbase .hb-d2{animation-delay:.2s}
+.pg-paywallbase .hb-d3{animation-delay:.3s}
+.pg-paywallbase .hb-press{transition:transform .16s ease,box-shadow .2s ease,background .2s ease}
+.pg-paywallbase .hb-press:active{transform:scale(.97)}
+.pg-paywallbase .hb-ease{transition:all .3s cubic-bezier(.2,.8,.2,1)}
+@media (prefers-reduced-motion:reduce){.pg-paywallbase .hb-rise,.pg-paywallbase .hb-pop,.pg-paywallbase .hb-up,.pg-paywallbase .hb-fade,.pg-paywallbase .hb-peek,.pg-paywallbase .hb-spin,.pg-paywallbase .hb-float,.pg-paywallbase .hb-stagger>*{animation:none}
+.pg-paywallbase .hb-ease,.pg-paywallbase .hb-press{transition:none}}

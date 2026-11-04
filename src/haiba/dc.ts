@@ -60,6 +60,8 @@ export function useDC(initial) {
     price: q.price != null ? String(q.price) : undefined,
     name: q.name != null ? String(q.name) : undefined,
     visits: q.visits != null ? String(q.visits) : undefined,
+    shop: q.shop != null ? String(q.shop) : undefined,
+    state: q.state != null ? String(q.state) : undefined,
   };
 
   return { state, setState, props, nav };

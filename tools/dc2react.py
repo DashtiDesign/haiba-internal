@@ -64,6 +64,7 @@ BLOBS = {
     "5d48aef36235ae8fec275b6e002242fb": "/haiba/brands/spotify.webp",
     "8b3c887e681b9be68b9f81af3de4af22": "/haiba/brands/chatgpt.webp",
     "badc2628e905d2a79b03cb243d1a8c66": "/haiba/birds/17-coin-toss.webp",
+    "f1899123e4534d5b5d0a8161aa0ef50f": "/haiba/birds/17-coin-toss.webp",
     "9fe36060ebeb5decae4a3f854cbec118": "/haiba/coins/coin-front.webp",
     "9291b1502bc66437ec6d75fd7f955c77": "/haiba/coins/coin-34.webp",
     "84fd2f8fb8654cb616f9930c21d9459c": "/haiba/coins/coin-flip.webp",

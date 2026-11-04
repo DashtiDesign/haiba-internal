@@ -1,0 +1,35 @@
+@keyframes paywallstory-hb-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes paywallstory-hb-pop{0%{opacity:0;transform:scale(.6)}70%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}
+@keyframes paywallstory-hb-up{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes paywallstory-hb-fade{from{opacity:0}to{opacity:1}}
+@keyframes paywallstory-hb-peek{0%{opacity:0;transform:translateX(60px) rotate(8deg)}100%{opacity:1;transform:translateX(0) rotate(0)}}
+@keyframes paywallstory-hb-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes paywallstory-hb-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.pg-paywallstory .hb-rise{animation:paywallstory-hb-rise .5s cubic-bezier(.2,.8,.2,1) both}
+.pg-paywallstory .hb-pop{animation:paywallstory-hb-pop .5s cubic-bezier(.2,.8,.2,1) both}
+.pg-paywallstory .hb-up{animation:paywallstory-hb-up .4s cubic-bezier(.2,.8,.2,1) both}
+.pg-paywallstory .hb-fade{animation:paywallstory-hb-fade .25s ease both}
+.pg-paywallstory .hb-peek{animation:paywallstory-hb-peek .7s cubic-bezier(.2,.8,.2,1) .15s both}
+.pg-paywallstory .hb-spin{animation:paywallstory-hb-spin 90s linear infinite}
+.pg-paywallstory .hb-float{animation:paywallstory-hb-float 3.6s ease-in-out infinite}
+.pg-paywallstory .hb-stagger>*{animation:paywallstory-hb-rise .45s cubic-bezier(.2,.8,.2,1) both}
+.pg-paywallstory .hb-stagger>*:nth-child(2){animation-delay:.05s}
+.pg-paywallstory .hb-stagger>*:nth-child(3){animation-delay:.1s}
+.pg-paywallstory .hb-stagger>*:nth-child(4){animation-delay:.15s}
+.pg-paywallstory .hb-stagger>*:nth-child(5){animation-delay:.2s}
+.pg-paywallstory .hb-stagger>*:nth-child(6){animation-delay:.25s}
+.pg-paywallstory .hb-stagger>*:nth-child(7){animation-delay:.3s}
+.pg-paywallstory .hb-stagger>*:nth-child(8){animation-delay:.35s}
+.pg-paywallstory .hb-d1{animation-delay:.1s}
+.pg-paywallstory .hb-d2{animation-delay:.2s}
+.pg-paywallstory .hb-d3{animation-delay:.3s}
+.pg-paywallstory .hb-press{transition:transform .16s ease,box-shadow .2s ease,background .2s ease}
+.pg-paywallstory .hb-press:active{transform:scale(.97)}
+.pg-paywallstory .hb-ease{transition:all .3s cubic-bezier(.2,.8,.2,1)}
+@media (prefers-reduced-motion:reduce){.pg-paywallstory .hb-rise,.pg-paywallstory .hb-pop,.pg-paywallstory .hb-up,.pg-paywallstory .hb-fade,.pg-paywallstory .hb-peek,.pg-paywallstory .hb-spin,.pg-paywallstory .hb-float,.pg-paywallstory .hb-stagger>*{animation:none}
+.pg-paywallstory .hb-ease,.pg-paywallstory .hb-press{transition:none}}
+@keyframes paywallstory-hb-marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.pg-paywallstory .hb-marq{animation:paywallstory-hb-marq 26s linear infinite}
+@keyframes paywallstory-hb-grow{from{opacity:.5;transform:translateY(420px) scale(.92)}to{opacity:1;transform:none}}
+.pg-paywallstory .hb-grow{animation:paywallstory-hb-grow .6s cubic-bezier(.2,.8,.2,1) both;transform-origin:50% 100%}
+@media (prefers-reduced-motion:reduce){.pg-paywallstory .hb-grow,.pg-paywallstory .hb-marq{animation:none}}
