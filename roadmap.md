@@ -1,4 +1,5 @@
 # Mobile layouts
+- [x] Reduce welcome video downloads by 44% without resizing or changing 48fps, playback speeds, or replay behavior; verified autoplay and replay on all five steps at phone and desktop sizes.
 - [x] Highlight the welcome Haiba brand with its logo, remove timing copy and CTA chevrons, and lighten the bottom video fade; verified all five steps and phone/desktop layouts.
 - [x] Replace step 1 with intact-background video, normalize parrot sizes, limit fades to steps 2/5, and restore step 4 edge-to-edge travel.
 - [x] Clean video 1 artifacts, conceal source-cut edges, fix step 4 opening, restore shared lilac starburst, and add supplied step 3 video (source-cut details are softened, not reconstructed).
