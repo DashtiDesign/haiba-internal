@@ -51,6 +51,7 @@
 .hb-app {
   --hb-muted-ink: oklch(0.46 0.025 285);
   min-height: 100vh;
+  min-height: 100svh;
   background: #e9e7ef;
   -webkit-font-smoothing: antialiased;
 }

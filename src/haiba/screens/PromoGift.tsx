@@ -18,7 +18,7 @@ export default function PromoGift() {
           width: "100%",
           maxWidth: "390px",
           margin: "0 auto",
-          minHeight: "100vh",
+          minHeight: "100svh",
           boxSizing: "border-box",
           background: "#F3F0FA",
           fontFamily: "Figtree, system-ui, sans-serif",

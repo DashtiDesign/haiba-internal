@@ -17,7 +17,7 @@ export default function PromoDream() {
           width: "100%",
           maxWidth: "390px",
           margin: "0 auto",
-          minHeight: "100vh",
+          minHeight: "100svh",
           boxSizing: "border-box",
           background: "linear-gradient(180deg, #6C3FFA 0%, #4F25D6 50%, #3E1BB8 100%)",
           fontFamily: "Figtree, system-ui, sans-serif",

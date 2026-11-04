@@ -12,7 +12,7 @@ export default function PaywallTimeline() {
   const hb = useHaiba();
   return (
     <div className="pg-paywalltimeline">
-      <div style={{ width: "100%", maxWidth: "390px", margin: "0 auto", minHeight: "100vh", boxSizing: "border-box", background: "#1E1B2E", fontFamily: "Figtree, system-ui, sans-serif", color: "#FFFFFF", position: "relative", overflow: "hidden" }}>
+      <div style={{ width: "100%", maxWidth: "390px", margin: "0 auto", minHeight: "100svh", boxSizing: "border-box", background: "#1E1B2E", fontFamily: "Figtree, system-ui, sans-serif", color: "#FFFFFF", position: "relative", overflow: "hidden" }}>
         <span aria-hidden="true" style={{ position: "absolute", right: "-120px", top: "-80px", width: "340px", height: "340px", borderRadius: "50%", background: "radial-gradient(circle, rgba(108,63,250,0.55) 0%, rgba(108,63,250,0) 70%)" }}></span>
         <div style={{ position: "relative", padding: "14px 20px 0 20px" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -152,8 +152,8 @@ export default function PaywallTimeline() {
             {"Changed your mind? We give your BHD 1 back."}
           </div>
         </div>
-        <div className="hb-fixed-bottom"><div className="hb-fixed-inner">
-        <div style={{ position: "absolute", left: "0", right: "0", bottom: "0", background: "#FFFFFF", color: "#1E1B2E", borderRadius: "24px 24px 0 0", padding: "16px 16px 12px 16px", zIndex: "5" }}>
+        <div className="hb-fixed-bottom hb-cta-dock"><div className="hb-fixed-inner">
+        <div style={{ position: "absolute", left: "0", right: "0", bottom: "0", background: "#FFFFFF", color: "#1E1B2E", borderRadius: "24px 24px 0 0", padding: "16px 16px calc(12px + env(safe-area-inset-bottom, 0px)) 16px", zIndex: "5" }}>
           <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "6px" }}>
             <span style={{ fontSize: "22px", fontWeight: "900", letterSpacing: "-0.02em" }}>
               {v.price}{" a year"}

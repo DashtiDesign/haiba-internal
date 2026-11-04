@@ -12,7 +12,7 @@ export default function PaywallTable() {
   const hb = useHaiba();
   return (
     <div className="pg-paywalltable">
-      <div style={{ width: "100%", maxWidth: "390px", margin: "0 auto", minHeight: "100vh", boxSizing: "border-box", background: "#F3F0FA", fontFamily: "Figtree, system-ui, sans-serif", color: "#1E1B2E", position: "relative", overflow: "hidden" }}>
+      <div style={{ width: "100%", maxWidth: "390px", margin: "0 auto", minHeight: "100svh", boxSizing: "border-box", background: "#F3F0FA", fontFamily: "Figtree, system-ui, sans-serif", color: "#1E1B2E", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "relative", padding: "14px 16px 190px 16px" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <button onClick={v.openExit} aria-label="Close" className="hb-press" style={{ width: "44px", height: "44px", borderRadius: "50%", border: "0", background: "#FFFFFF", color: "#1E1B2E", display: "flex", alignItems: "center", justifyContent: "center", padding: "0", cursor: "pointer", boxShadow: "0 0 0 1px #ECE8F5" }}>
@@ -277,7 +277,7 @@ export default function PaywallTable() {
             </div>
           </div>
         </div>
-        <div className="hb-fixed-bottom"><div className="hb-fixed-inner">
+        <div className="hb-fixed-bottom hb-cta-dock"><div className="hb-fixed-inner">
         <div style={{ position: "absolute", left: "0", right: "0", bottom: "0", padding: "30px 16px 16px 16px", background: "linear-gradient(180deg, rgba(243,240,250,0) 0%, rgba(243,240,250,1) 30%)", display: "flex", flexDirection: "column", gap: "2px", zIndex: "5" }}>
           <button onClick={v.reserve} className="hb-press" style={{ font: "inherit", border: "0", cursor: "pointer", background: "#1E1B2E", borderRadius: "999px", padding: "13px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: "1px", boxShadow: "0 10px 24px rgba(30,27,46,0.24)" }}>
             <span style={{ display: "flex", alignItems: "center", gap: "6px", color: "#C0F402", fontSize: "17px", fontWeight: "800" }}>

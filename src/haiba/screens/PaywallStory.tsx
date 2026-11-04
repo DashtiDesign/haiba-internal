@@ -12,7 +12,7 @@ export default function PaywallStory() {
   const hb = useHaiba();
   return (
     <div className="pg-paywallstory">
-      <div style={{ width: "100%", maxWidth: "390px", margin: "0 auto", minHeight: "100vh", boxSizing: "border-box", background: "#F3F0FA", fontFamily: "Figtree, system-ui, sans-serif", color: "#242036", position: "relative", overflow: "hidden" }}>
+      <div style={{ width: "100%", maxWidth: "390px", margin: "0 auto", minHeight: "100svh", boxSizing: "border-box", background: "#F3F0FA", fontFamily: "Figtree, system-ui, sans-serif", color: "#242036", position: "relative", overflow: "hidden" }}>
         <div aria-hidden="true" style={{ position: "absolute", left: "-305px", top: "-40px", width: "1000px", height: "1000px", pointerEvents: "none", WebkitMaskImage: "radial-gradient(circle, #000 5%, transparent 62%)", maskImage: "radial-gradient(circle, #000 5%, transparent 62%)" }}>
           <div className="hb-spin" style={{ width: "100%", height: "100%", opacity: "0.7", background: "repeating-conic-gradient(from 0deg, #FFFFFF 0deg 7deg, transparent 7deg 20deg)" }}></div>
         </div>
@@ -426,8 +426,8 @@ export default function PaywallStory() {
               </div>
             </div>
           </div>
-          <div className="hb-fixed-bottom"><div className="hb-fixed-inner">
-          <div style={{ position: "absolute", left: "0", right: "0", bottom: "0", padding: "30px 16px 16px 16px", background: "linear-gradient(180deg, rgba(243,240,250,0) 0%, rgba(243,240,250,1) 30%)", display: "flex", flexDirection: "column", gap: "2px", zIndex: "5" }}>
+          <div className="hb-fixed-bottom hb-cta-dock"><div className="hb-fixed-inner">
+          <div style={{ position: "absolute", left: "0", right: "0", bottom: "0", padding: "30px 16px calc(16px + env(safe-area-inset-bottom, 0px)) 16px", background: "linear-gradient(180deg, rgba(243,240,250,0) 0%, rgba(243,240,250,1) 30%)", display: "flex", flexDirection: "column", gap: "2px", zIndex: "5" }}>
             <button onClick={v.reserve} className="hb-press" style={{ font: "inherit", border: "0", cursor: "pointer", background: "#1E1B2E", borderRadius: "999px", padding: "13px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: "1px", boxShadow: "0 10px 24px rgba(30,27,46,0.24)" }}>
               <span style={{ display: "flex", alignItems: "center", gap: "6px", color: "#C0F402", fontSize: "17px", fontWeight: "800" }}>
                 {"Reserve my spot for BHD 1"}
@@ -486,8 +486,8 @@ export default function PaywallStory() {
         ) : null}
         {v.notLast ? (
           <>
-          <div className="hb-fixed-bottom"><div className="hb-fixed-inner">
-          <div style={{ position: "absolute", left: "0", right: "0", bottom: "34px", display: "flex", justifyContent: "center", zIndex: "5" }}>
+          <div className="hb-fixed-bottom hb-cta-dock"><div className="hb-fixed-inner">
+          <div style={{ position: "absolute", left: "0", right: "0", bottom: "calc(34px + env(safe-area-inset-bottom, 0px))", display: "flex", justifyContent: "center", zIndex: "5" }}>
             <button onClick={v.next} className="hb-press" style={{ font: "inherit", fontSize: "17px", fontWeight: "800", border: "0", borderRadius: "999px", padding: "17px 30px", minWidth: "210px", cursor: "pointer", background: v.ctaBg, color: v.ctaInk, display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", boxShadow: "0 12px 26px rgba(30,27,46,0.24)" }}>
               {v.cta}
             </button>

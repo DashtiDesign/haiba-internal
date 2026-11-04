@@ -12,7 +12,7 @@ export default function PaywallBase() {
   const hb = useHaiba();
   return (
     <div className="pg-paywallbase">
-      <div style={{ width: "100%", maxWidth: "390px", margin: "0 auto", minHeight: "100vh", boxSizing: "border-box", background: "#FFFFFF", fontFamily: "Figtree, system-ui, sans-serif", color: "#1E1B2E", position: "relative", overflow: "hidden" }}>
+      <div style={{ width: "100%", maxWidth: "390px", margin: "0 auto", minHeight: "100svh", boxSizing: "border-box", background: "#FFFFFF", fontFamily: "Figtree, system-ui, sans-serif", color: "#1E1B2E", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "relative", background: "linear-gradient(165deg, #6C3FFA 0%, #3E1BB8 100%)", color: "#FFFFFF", padding: "14px 20px 0 20px", height: "336px", boxSizing: "border-box", overflow: "hidden" }}>
           <span aria-hidden="true" style={{ position: "absolute", right: "-110px", top: "60px", width: "320px", height: "320px", borderRadius: "50%", border: "2px dashed rgba(192,244,2,0.35)" }}></span>
           <Artwork priority className="hb-peek" src="/haiba/birds/17-coin-toss.webp" alt="The Haiba bird tossing a coin" style={{ position: "absolute", right: "-6px", bottom: "6px", height: "214px", width: "auto", display: "block", filter: "drop-shadow(0 12px 14px rgba(20,8,60,0.35))" }} />
@@ -224,8 +224,8 @@ export default function PaywallBase() {
             </div>
           </div>
         </div>
-        <div className="hb-fixed-bottom"><div className="hb-fixed-inner">
-        <div style={{ position: "absolute", left: "0", right: "0", bottom: "0", padding: "30px 16px 16px 16px", background: "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 30%)", display: "flex", flexDirection: "column", gap: "2px", zIndex: "5" }}>
+        <div className="hb-fixed-bottom hb-cta-dock"><div className="hb-fixed-inner">
+        <div style={{ position: "absolute", left: "0", right: "0", bottom: "0", padding: "30px 16px calc(16px + env(safe-area-inset-bottom, 0px)) 16px", background: "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 30%)", display: "flex", flexDirection: "column", gap: "2px", zIndex: "5" }}>
           <button onClick={v.reserve} className="hb-press" style={{ font: "inherit", border: "0", cursor: "pointer", background: "#1E1B2E", borderRadius: "999px", padding: "13px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: "1px", boxShadow: "0 10px 24px rgba(30,27,46,0.24)" }}>
             <span style={{ display: "flex", alignItems: "center", gap: "6px", color: "#C0F402", fontSize: "17px", fontWeight: "800" }}>
               {"Reserve my spot for BHD 1"}

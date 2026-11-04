@@ -17,7 +17,7 @@ export default function PromoWaitlist() {
           width: "100%",
           maxWidth: "390px",
           margin: "0 auto",
-          minHeight: "100vh",
+          minHeight: "100svh",
           boxSizing: "border-box",
           background: "#FFFFFF",
           fontFamily: "Figtree, system-ui, sans-serif",
