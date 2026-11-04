@@ -31,6 +31,7 @@ export function useVals() {
       dayOneSticker: dayOne >= p ? 'Pays for itself on day one' : 'BHD ' + dayOne + ' of it on day one',
       dayOneLine: dayOne >= p ? 'It pays for itself on day one. Then a new free gift every month.' : 'BHD ' + dayOne + ' of it lands on day one. Then a new free gift every month.',
       dayOneHead: dayOne >= p ? 'It pays for itself on day one.' : 'You get BHD ' + dayOne + ' of it on day one.',
+      dayOneChip: dayOne >= p ? 'Pays for itself on day one' : 'BHD ' + dayOne + ' back on day one',
       dayOneRest: 'Spotify, ChatGPT, data and your first gift come first. Then a new gift every month.',
       // Exit sheet: what they missed last month at their own shop (from promo F)
       missTitle: SHOPGIFT[shopName] ? 'Last month you went to ' + shopName : 'Every month without Haiba',
@@ -78,6 +79,9 @@ export function useVals() {
       notLast: st < N - 1,
       tallyOn: st >= 1 && st <= 3, tally: 'BHD ' + tallies[Math.min(st, 3)] + (st === 3 ? '+' : ''),
       got0: st >= 1 ? 'flex' : 'none', got1: st >= 2 ? 'flex' : 'none', got2: st >= 3 ? 'flex' : 'none',
+      dSpotify: 'BHD ' + WORTH.spotify.toFixed(2), dChatgpt: 'BHD ' + WORTH.chatgpt.toFixed(2), dTravel: 'BHD ' + WORTH.travel.toFixed(2), dayOneVal: 'BHD ' + dayOne.toFixed(2),
+      dayOpen: !!state.dayOpen, dayOpenStr: String(!!state.dayOpen), dayOneLink: state.dayOpen ? 'Hide' : 'How?',
+      toggleDay: function () { setState({ dayOpen: !state.dayOpen }); },
       barInk: st === 0 ? '#FFFFFF' : '#242036', ctaBg: st === 0 ? '#C0F402' : '#1E1B2E', ctaInk: st === 0 ? '#1F2600' : '#FFFFFF',
       tallyBump: st % 2 ? 'hb-pop' : 'hb-rise',
       giftSub: fav ? name + ', you go to ' + fav.shop + '. Start with ' + (SHOPGIFT[fav.shop] || 'a free gift') + ' there.' : 'Pick 1 every month from shops like these.',

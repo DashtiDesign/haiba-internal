@@ -31,6 +31,7 @@ export function useVals() {
       dayOneSticker: dayOne >= p ? 'Pays for itself on day one' : 'BHD ' + dayOne + ' of it on day one',
       dayOneLine: dayOne >= p ? 'It pays for itself on day one. Then a new free gift every month.' : 'BHD ' + dayOne + ' of it lands on day one. Then a new free gift every month.',
       dayOneHead: dayOne >= p ? 'It pays for itself on day one.' : 'You get BHD ' + dayOne + ' of it on day one.',
+      dayOneChip: dayOne >= p ? 'Pays for itself on day one' : 'BHD ' + dayOne + ' back on day one',
       dayOneRest: 'Spotify, ChatGPT, data and your first gift come first. Then a new gift every month.',
       // Exit sheet: what they missed last month at their own shop (from promo F)
       missTitle: SHOPGIFT[shopName] ? 'Last month you went to ' + shopName : 'Every month without Haiba',

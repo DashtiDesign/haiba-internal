@@ -252,7 +252,7 @@ export default function PlansConvert() {
         </div></div>
         {v.exitOpen ? (
           <>
-          <div className="hb-fade" style={{ position: "absolute", inset: "0", background: "rgba(20,16,40,0.55)", zIndex: "10", display: "flex", alignItems: "flex-end" }}>
+          <div className="hb-fade" style={{ position: "fixed", inset: "0", background: "rgba(20,16,40,0.55)", zIndex: "50", display: "flex", alignItems: "flex-end" }}>
             <div className="hb-up" role="dialog" aria-label="Hold your spot" style={{ position: "relative", width: "100%", boxSizing: "border-box", background: "#FFFFFF", borderRadius: "22px 22px 0 0", padding: "24px 20px 16px 20px" }}>
               <Artwork className="hb-peek" src="/haiba/birds/04-peek.png" alt="" style={{ position: "absolute", right: "0", top: "-104px", height: "150px", width: "auto", display: "block" }} />
               <div style={{ fontSize: "26px", fontWeight: "900", letterSpacing: "-0.03em", lineHeight: "1.1", maxWidth: "250px" }}>
@@ -288,7 +288,7 @@ export default function PlansConvert() {
         ) : null}
         {v.reservedOpen ? (
           <>
-          <div className="hb-fade" style={{ position: "absolute", inset: "0", background: "rgba(20,16,40,0.55)", zIndex: "11", display: "flex", alignItems: "flex-end" }}>
+          <div className="hb-fade" style={{ position: "fixed", inset: "0", background: "rgba(20,16,40,0.55)", zIndex: "51", display: "flex", alignItems: "flex-end" }}>
             <div className="hb-up" role="dialog" aria-label="You are in" style={{ position: "relative", width: "100%", boxSizing: "border-box", background: "#FFFFFF", borderRadius: "22px 22px 0 0", padding: "0 20px 18px 20px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
               <Artwork className="hb-pop" src="/haiba/birds/02-jump.png" alt="" style={{ height: "160px", width: "auto", display: "block", marginTop: "-70px" }} />
               <div style={{ fontSize: "27px", fontWeight: "900", letterSpacing: "-0.03em", lineHeight: "1.1", marginTop: "4px" }}>

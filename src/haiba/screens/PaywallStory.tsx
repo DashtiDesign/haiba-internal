@@ -192,14 +192,13 @@ export default function PaywallStory() {
           <div style={{ position: "absolute", left: "20px", right: "20px", top: "58px", height: "566px", zIndex: "3", display: "flex", flexDirection: "column", justifyContent: "center", gap: "18px" }}>
             <div style={{ textAlign: "center", padding: "0 4px" }}>
               <div className="hb-rise" style={{ fontSize: "31px", fontWeight: "900", letterSpacing: "-0.035em", lineHeight: "1.07" }}>
-                {"Get "}
                 <span style={{ color: "#5630BB" }}>
-                  {"free stuff"}
+                  {"Free stuff"}
                 </span>
                 {" with points"}
               </div>
               <div className="hb-rise hb-d1" style={{ marginTop: "10px", fontSize: "16px", fontWeight: "600", color: "#514A65", lineHeight: "1.4" }}>
-                {"Use your points at all these shops."}
+                {"Use points at 200+ shops."}
               </div>
             </div>
             <div aria-hidden="true" className="hb-rise hb-d1" style={{ margin: "0 -20px", overflow: "hidden", WebkitMaskImage: "linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%)", maskImage: "linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%)" }}>
@@ -228,12 +227,12 @@ export default function PaywallStory() {
                     </span>
                     {" every time you use an offer"}
                   </span>
-                  <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
-                    {"Plus 500 points when you join"}
+                  <span style={{ alignSelf: "flex-start", marginTop: "6px", background: "#C0F402", color: "#1F2600", fontSize: "13px", fontWeight: "900", borderRadius: "999px", padding: "4px 10px" }}>
+                    {"+500 points when you join"}
                   </span>
                 </span>
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: "10px", margin: "12px 0 10px 0" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", margin: "20px 0 16px 0" }}>
                 <span style={{ flex: "1", height: "1px", background: "#F1EEF8" }}></span>
                 <span style={{ fontSize: "12px", fontWeight: "800", letterSpacing: "0.1em", textTransform: "uppercase", color: "#6C3FFA" }}>
                   {"Bonus points"}
@@ -266,7 +265,7 @@ export default function PaywallStory() {
                   </span>
                 </span>
               </div>
-              <div style={{ height: "1px", background: "#F1EEF8", margin: "10px 0 12px 0" }}></div>
+              <div style={{ height: "1px", background: "#F1EEF8", margin: "16px 0 16px 0" }}></div>
               <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "14px", fontWeight: "800", color: "#1E1B2E" }}>
                 <span style={{ width: "22px", height: "22px", borderRadius: "50%", background: "#C0F402", color: "#1F2600", fontSize: "12px", fontWeight: "900", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   {"2"}
@@ -584,21 +583,19 @@ export default function PaywallStory() {
                 </span>
               </div>
             </div>
-            <div style={{ display: "flex", alignItems: "flex-start", gap: "12px", marginTop: "12px", padding: "0 4px" }}>
-              <span style={{ display: "flex", flex: "none", paddingTop: "2px" }}>
-                <span style={{ display: "flex", flex: "none" }}>
-                  <Artwork src="/haiba/brands/spotify.webp" alt="" style={{ width: "24px", height: "24px", borderRadius: "50%", objectFit: "cover", display: "block", background: "#000000", marginLeft: "0", boxShadow: "0 0 0 2px #1E1B2E" }} />
-                  <Artwork src="/haiba/brands/chatgpt.webp" alt="" style={{ width: "24px", height: "24px", borderRadius: "50%", objectFit: "cover", display: "block", background: "#FFFFFF", marginLeft: "-8px", boxShadow: "0 0 0 2px #1E1B2E" }} />
-                  <Artwork src="/haiba/brands/airalo-mark.svg" alt="" style={{ width: "24px", height: "24px", borderRadius: "30%", objectFit: "cover", display: "block", background: "#FFFFFF", marginLeft: "-8px", boxShadow: "0 0 0 2px #1E1B2E" }} />
-                </span>
+            <button onClick={v.toggleDay} className="hb-press" style={{ marginTop: "10px", width: "100%", minHeight: "48px", font: "inherit", border: "0", borderRadius: "14px", background: "#2A2540", padding: "10px 14px", cursor: "pointer", color: "#FFFFFF", display: "flex", alignItems: "center", gap: "10px" }}>
+              <span style={{ width: "22px", height: "22px", flex: "none", borderRadius: "50%", background: "#C0F402", color: "#1F2600", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                </svg>
               </span>
-              <span style={{ flex: "1", minWidth: "0", fontSize: "14px", fontWeight: "600", color: "#CFC9E0", lineHeight: "1.4" }}>
-                <b style={{ color: "#FFFFFF", fontWeight: "800" }}>
-                  {v.dayOneHead}
-                </b>
-                {" "}{v.dayOneRest}
+              <span style={{ flex: "1", textAlign: "left", fontSize: "14.5px", fontWeight: "800" }}>
+                {v.dayOneChip}
               </span>
-            </div>
+              <span style={{ fontSize: "13.5px", fontWeight: "800", color: "#C0F402" }}>
+                {"See how"}
+              </span>
+            </button>
           </div>
           <div className="hb-rise hb-d3" style={{ position: "absolute", left: "18px", right: "18px", top: "568px", zIndex: "3" }}>
             <div style={{ background: "#FFFFFF", borderRadius: "18px", padding: "14px 14px 12px 14px", boxShadow: "0 0 0 1.5px #D6CAF7, 0 12px 26px rgba(76,52,140,0.10)" }}>
@@ -716,7 +713,7 @@ export default function PaywallStory() {
         ) : null}
         {v.exitOpen ? (
           <>
-          <div className="hb-fade" style={{ position: "absolute", inset: "0", background: "rgba(20,16,40,0.55)", zIndex: "10", display: "flex", alignItems: "flex-end" }}>
+          <div className="hb-fade" style={{ position: "fixed", inset: "0", background: "rgba(20,16,40,0.55)", zIndex: "50", display: "flex", alignItems: "flex-end" }}>
             <div className="hb-up" role="dialog" aria-label="Hold your spot" style={{ position: "relative", width: "100%", boxSizing: "border-box", background: "#FFFFFF", borderRadius: "22px 22px 0 0", padding: "24px 20px 16px 20px" }}>
               <Artwork className="hb-peek" src="/haiba/birds/04-peek.png" alt="" style={{ position: "absolute", right: "0", top: "-104px", height: "150px", width: "auto", display: "block" }} />
               <div style={{ fontSize: "26px", fontWeight: "900", letterSpacing: "-0.03em", lineHeight: "1.1", maxWidth: "250px" }}>
@@ -752,7 +749,7 @@ export default function PaywallStory() {
         ) : null}
         {v.reservedOpen ? (
           <>
-          <div className="hb-fade" style={{ position: "absolute", inset: "0", background: "rgba(20,16,40,0.55)", zIndex: "11", display: "flex", alignItems: "flex-end" }}>
+          <div className="hb-fade" style={{ position: "fixed", inset: "0", background: "rgba(20,16,40,0.55)", zIndex: "51", display: "flex", alignItems: "flex-end" }}>
             <div className="hb-up" role="dialog" aria-label="You are in" style={{ position: "relative", width: "100%", boxSizing: "border-box", background: "#FFFFFF", borderRadius: "22px 22px 0 0", padding: "0 20px 18px 20px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
               <Artwork className="hb-pop" src="/haiba/birds/02-jump.png" alt="" style={{ height: "160px", width: "auto", display: "block", marginTop: "-70px" }} />
               <div style={{ fontSize: "27px", fontWeight: "900", letterSpacing: "-0.03em", lineHeight: "1.1", marginTop: "4px" }}>
@@ -788,6 +785,107 @@ export default function PaywallStory() {
               </div>
               <button onClick={v.closeReserved} className="hb-press" style={{ marginTop: "16px", width: "100%", font: "inherit", fontSize: "17px", fontWeight: "800", border: "0", borderRadius: "999px", padding: "16px", cursor: "pointer", background: "#1E1B2E", color: "#C0F402" }}>
                 {"Done"}
+              </button>
+            </div>
+          </div>
+          </>
+        ) : null}
+        {v.dayOpen ? (
+          <>
+          <div className="hb-fade" style={{ position: "fixed", inset: "0", background: "rgba(20,16,40,0.55)", zIndex: "52", display: "flex", alignItems: "flex-end" }}>
+            <div className="hb-up" role="dialog" aria-label="What you get on day one" style={{ position: "relative", width: "100%", boxSizing: "border-box", background: "#FFFFFF", borderRadius: "22px 22px 0 0", padding: "22px 20px 16px 20px" }}>
+              <div style={{ fontSize: "24px", fontWeight: "900", letterSpacing: "-0.03em", lineHeight: "1.1" }}>
+                {"On day one you get"}
+              </div>
+              <div style={{ marginTop: "12px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px", padding: "10px 0", borderTop: "0" }}>
+                  <Artwork src="/haiba/brands/spotify.webp" alt="" style={{ width: "36px", height: "36px", borderRadius: "50%", display: "block", flex: "none", background: "#000000", boxShadow: "0 0 0 1px #ECE8F5" }} />
+                  <span style={{ flex: "1", display: "flex", flexDirection: "column" }}>
+                    <span style={{ fontSize: "15px", fontWeight: "800" }}>
+                      {"Spotify Premium"}
+                    </span>
+                    <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                      {"3 months"}
+                    </span>
+                  </span>
+                  <span style={{ fontSize: "15px", fontWeight: "800" }}>
+                    {v.dSpotify}
+                  </span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px", padding: "10px 0", borderTop: "1px solid #F1EEF8" }}>
+                  <Artwork src="/haiba/brands/chatgpt.webp" alt="" style={{ width: "36px", height: "36px", borderRadius: "50%", display: "block", flex: "none", background: "#FFFFFF", boxShadow: "0 0 0 1px #ECE8F5" }} />
+                  <span style={{ flex: "1", display: "flex", flexDirection: "column" }}>
+                    <span style={{ fontSize: "15px", fontWeight: "800" }}>
+                      {"ChatGPT Go"}
+                    </span>
+                    <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                      {"3 months"}
+                    </span>
+                  </span>
+                  <span style={{ fontSize: "15px", fontWeight: "800" }}>
+                    {v.dChatgpt}
+                  </span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px", padding: "10px 0", borderTop: "1px solid #F1EEF8" }}>
+                  <Artwork src="/haiba/brands/airalo-mark.svg" alt="" style={{ width: "36px", height: "36px", borderRadius: "10px", display: "block", flex: "none", background: "#FFFFFF", boxShadow: "0 0 0 1px #ECE8F5" }} />
+                  <span style={{ flex: "1", display: "flex", flexDirection: "column" }}>
+                    <span style={{ fontSize: "15px", fontWeight: "800" }}>
+                      {"Travel data"}
+                    </span>
+                    <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                      {"5GB"}
+                    </span>
+                  </span>
+                  <span style={{ fontSize: "15px", fontWeight: "800" }}>
+                    {v.dTravel}
+                  </span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px", padding: "10px 0", borderTop: "1px solid #F1EEF8" }}>
+                  <span style={{ width: "36px", height: "36px", flex: "none", borderRadius: "12px", background: "#6C3FFA", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C0F402" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 12v9H4v-9M2 7h20v5H2zM12 7v14M12 7c-2-4-7-4-7-1s5 1 7 1zm0 0c2-4 7-4 7-1s-5 1-7 1z"></path>
+                    </svg>
+                  </span>
+                  <span style={{ flex: "1", display: "flex", flexDirection: "column" }}>
+                    <span style={{ fontSize: "15px", fontWeight: "800" }}>
+                      {"Your first gift"}
+                    </span>
+                    <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                      {"From the first month"}
+                    </span>
+                  </span>
+                  <span style={{ fontSize: "15px", fontWeight: "800" }}>
+                    {"BHD 2.50"}
+                  </span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px", padding: "10px 0", borderTop: "1px solid #F1EEF8" }}>
+                  <Artwork src="/haiba/coins/coin-34.webp" alt="" style={{ width: "36px", height: "36px", display: "block", flex: "none" }} />
+                  <span style={{ flex: "1", display: "flex", flexDirection: "column" }}>
+                    <span style={{ fontSize: "15px", fontWeight: "800" }}>
+                      {"500 welcome points"}
+                    </span>
+                    <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                      {"When you join"}
+                    </span>
+                  </span>
+                  <span style={{ fontSize: "15px", fontWeight: "800" }}>
+                    {"BHD 0.50"}
+                  </span>
+                </div>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "6px", padding: "14px 16px", borderRadius: "16px", background: "#1E1B2E", color: "#FFFFFF" }}>
+                <span style={{ fontSize: "15px", fontWeight: "700", color: "#CFC9E0" }}>
+                  {"Worth on day one"}
+                </span>
+                <span style={{ fontSize: "22px", fontWeight: "900", color: "#C0F402" }}>
+                  {v.dayOneVal}
+                </span>
+              </div>
+              <div style={{ textAlign: "center", fontSize: "14px", fontWeight: "700", color: "#4A4660", marginTop: "10px" }}>
+                {"You pay "}{v.price}{" a year. Then a new gift every month."}
+              </div>
+              <button onClick={v.toggleDay} className="hb-press" style={{ marginTop: "14px", width: "100%", font: "inherit", fontSize: "17px", fontWeight: "800", border: "0", borderRadius: "999px", padding: "16px", cursor: "pointer", background: "#1E1B2E", color: "#C0F402" }}>
+                {"Got it"}
               </button>
             </div>
           </div>

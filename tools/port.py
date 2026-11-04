@@ -162,6 +162,10 @@ def patch_screen(name):
         s = s.replace('padding: "30px 16px 16px 16px"', 'padding: "30px 16px calc(16px + env(safe-area-inset-bottom, 0px)) 16px"')
         s = s.replace('padding: "18px 16px 16px 16px", zIndex: "5"', 'padding: "18px 16px calc(16px + env(safe-area-inset-bottom, 0px)) 16px", zIndex: "5"')
         s = s.replace('bottom: "34px", display: "flex", justifyContent: "center"', 'bottom: "calc(34px + env(safe-area-inset-bottom, 0px))", display: "flex", justifyContent: "center"')
+        # Sheets (exit, reserved, day one) must cover the fixed CTA dock (z 40), so they are fixed and above it
+        for z in ("10", "11", "12"):
+            s = s.replace('position: "absolute", inset: "0", background: "rgba(20,16,40,0.55)", zIndex: "%s"' % z,
+                          'position: "fixed", inset: "0", background: "rgba(20,16,40,0.55)", zIndex: "5%s"' % z[-1])
     if name == "PaywallStory":
         # The story is laid out for 844px; small phones scroll instead of cutting off the price screen
         s = s.replace('minHeight: "100svh"', 'minHeight: v.s4 ? "max(100svh, 880px)" : "max(100svh, 840px)"', 1)
