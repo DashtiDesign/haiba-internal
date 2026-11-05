@@ -5,6 +5,8 @@ import { Link } from "./nav";
 import { useHaiba } from "./store";
 import { useSession } from "./journey/session";
 import { PRESETS, presetJourney, type Preset } from "./journey/states";
+import { pathFor, useJourneyActions } from "./journey/actions";
+import { useNavigate as useGo } from "./nav";
 import { CURRENCY, DEFAULT_SETTINGS, type Country } from "./journey/settings";
 
 /**
@@ -15,7 +17,7 @@ import { CURRENCY, DEFAULT_SETTINGS, type Country } from "./journey/settings";
  */
 const SCREENS = [
   ["Unipal home", "/"],
-  ["Plans", "/haiba/plans"],
+  ["Haiba page (reserve)", "/haiba/reserve"],
   ["How points work", "/haiba/points"],
   ["How it works", "/haiba/welcome"],
   ["Haiba hub", "/haiba"],
@@ -88,6 +90,8 @@ export default function PrototypePanel() {
   const hb = useHaiba();
   const ses = useSession();
   const navigate = useRouterNavigate();
+  const go = useGo();
+  const acts = useJourneyActions();
   const [open, setOpen] = useState(false);
   const [price, setPrice] = useState("20");
   const reduced = useReducedMotion();
@@ -107,6 +111,14 @@ export default function PrototypePanel() {
   const jump = (preset: Preset) => {
     const r = presetJourney(preset, st, c, ses.offerPrice);
     hb.set({ journey: r.journey, member: r.member, settings: { ...st, today: r.today } });
+    go(pathFor(r.journey.status)); // land on the screen for that state
+  };
+
+  // Stands in for Tap calling our backend.
+  const sendWebhook = (outcome: "success" | "failed", twice = false) => {
+    const to = acts.webhook(outcome, "declined");
+    if (twice) acts.webhook(outcome, "declined"); // the second one is ignored
+    if (to) go(to);
   };
 
   const setPrices = (text: string) => {
@@ -261,6 +273,27 @@ export default function PrototypePanel() {
                 {ses.locked ? " (locked)" : ""}. Today {ses.d(ses.today, { weekday: true })}
                 {st.today ? " (set)" : " (real)"}.
               </Hint>
+
+              {s.journey.payment && (
+                <>
+                  <div style={sectionLabel}>Tap webhook</div>
+                  <Hint>
+                    A {s.journey.payment.kind} payment is waiting for Tap (
+                    {s.journey.payment.outcome}).
+                  </Hint>
+                  <Chips>
+                    <button style={chip(false)} onClick={() => sendWebhook("success")}>
+                      Paid
+                    </button>
+                    <button style={chip(false)} onClick={() => sendWebhook("failed")}>
+                      Failed
+                    </button>
+                    <button style={chip(false)} onClick={() => sendWebhook("success", true)}>
+                      Paid, sent twice
+                    </button>
+                  </Chips>
+                </>
+              )}
 
               <div style={sectionLabel}>Prices and dates</div>
               <Field

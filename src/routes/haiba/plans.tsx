@@ -1,8 +1,7 @@
-import { imagePreload } from "@/haiba/artwork";
 import { createFileRoute } from "@tanstack/react-router";
-import Plans from "@/haiba/screens/Plans";
+import { Navigate } from "@/haiba/nav";
 
+// The old join page (monthly plan, BHD 18) is replaced by the reservation flow.
 export const Route = createFileRoute("/haiba/plans")({
-  head: () => ({ links: [imagePreload("/haiba/birds/04-peek.png")], meta: [{ title: "Haiba · Choose your plan" }, { name: "description", content: "Compare Unipal Free and Haiba membership plans." }, { property: "og:title", content: "Haiba · Choose your plan" }, { property: "og:description", content: "Compare Unipal Free and Haiba membership plans." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
-  component: Plans,
+  component: () => <Navigate to="/haiba/reserve" replace />,
 });

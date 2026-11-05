@@ -12,11 +12,17 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as HaibaIndexRouteImport } from './routes/haiba/index'
 import { Route as HaibaBasketRouteImport } from './routes/haiba/basket'
+import { Route as HaibaConfirmingRouteImport } from './routes/haiba/confirming'
 import { Route as HaibaEarnRouteImport } from './routes/haiba/earn'
+import { Route as HaibaFailedRouteImport } from './routes/haiba/failed'
 import { Route as HaibaPlansRouteImport } from './routes/haiba/plans'
 import { Route as HaibaPointsRouteImport } from './routes/haiba/points'
+import { Route as HaibaRefundRouteImport } from './routes/haiba/refund'
+import { Route as HaibaReserveRouteImport } from './routes/haiba/reserve'
+import { Route as HaibaReservedRouteImport } from './routes/haiba/reserved'
 import { Route as HaibaRewardsRouteImport } from './routes/haiba/rewards'
 import { Route as HaibaStatusRouteImport } from './routes/haiba/status'
+import { Route as HaibaTapRouteImport } from './routes/haiba/tap'
 import { Route as HaibaTravelRouteImport } from './routes/haiba/travel'
 import { Route as HaibaWalletRouteImport } from './routes/haiba/wallet'
 import { Route as HaibaWelcomeRouteImport } from './routes/haiba/welcome'
@@ -50,9 +56,19 @@ const HaibaBasketRoute = HaibaBasketRouteImport.update({
   path: '/haiba/basket',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HaibaConfirmingRoute = HaibaConfirmingRouteImport.update({
+  id: '/haiba/confirming',
+  path: '/haiba/confirming',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HaibaEarnRoute = HaibaEarnRouteImport.update({
   id: '/haiba/earn',
   path: '/haiba/earn',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaFailedRoute = HaibaFailedRouteImport.update({
+  id: '/haiba/failed',
+  path: '/haiba/failed',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HaibaPlansRoute = HaibaPlansRouteImport.update({
@@ -65,6 +81,21 @@ const HaibaPointsRoute = HaibaPointsRouteImport.update({
   path: '/haiba/points',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HaibaRefundRoute = HaibaRefundRouteImport.update({
+  id: '/haiba/refund',
+  path: '/haiba/refund',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaReserveRoute = HaibaReserveRouteImport.update({
+  id: '/haiba/reserve',
+  path: '/haiba/reserve',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaReservedRoute = HaibaReservedRouteImport.update({
+  id: '/haiba/reserved',
+  path: '/haiba/reserved',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HaibaRewardsRoute = HaibaRewardsRouteImport.update({
   id: '/haiba/rewards',
   path: '/haiba/rewards',
@@ -73,6 +104,11 @@ const HaibaRewardsRoute = HaibaRewardsRouteImport.update({
 const HaibaStatusRoute = HaibaStatusRouteImport.update({
   id: '/haiba/status',
   path: '/haiba/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaTapRoute = HaibaTapRouteImport.update({
+  id: '/haiba/tap',
+  path: '/haiba/tap',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HaibaTravelRoute = HaibaTravelRouteImport.update({
@@ -164,11 +200,17 @@ const ShopCoffeeBeanRedeemRoute = ShopCoffeeBeanRedeemRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/haiba/basket': typeof HaibaBasketRoute
+  '/haiba/confirming': typeof HaibaConfirmingRoute
   '/haiba/earn': typeof HaibaEarnRoute
+  '/haiba/failed': typeof HaibaFailedRoute
   '/haiba/plans': typeof HaibaPlansRoute
   '/haiba/points': typeof HaibaPointsRoute
+  '/haiba/refund': typeof HaibaRefundRoute
+  '/haiba/reserve': typeof HaibaReserveRoute
+  '/haiba/reserved': typeof HaibaReservedRoute
   '/haiba/rewards': typeof HaibaRewardsRoute
   '/haiba/status': typeof HaibaStatusRoute
+  '/haiba/tap': typeof HaibaTapRoute
   '/haiba/travel': typeof HaibaTravelRoute
   '/haiba/wallet': typeof HaibaWalletRoute
   '/haiba/welcome': typeof HaibaWelcomeRoute
@@ -191,11 +233,17 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/haiba/basket': typeof HaibaBasketRoute
+  '/haiba/confirming': typeof HaibaConfirmingRoute
   '/haiba/earn': typeof HaibaEarnRoute
+  '/haiba/failed': typeof HaibaFailedRoute
   '/haiba/plans': typeof HaibaPlansRoute
   '/haiba/points': typeof HaibaPointsRoute
+  '/haiba/refund': typeof HaibaRefundRoute
+  '/haiba/reserve': typeof HaibaReserveRoute
+  '/haiba/reserved': typeof HaibaReservedRoute
   '/haiba/rewards': typeof HaibaRewardsRoute
   '/haiba/status': typeof HaibaStatusRoute
+  '/haiba/tap': typeof HaibaTapRoute
   '/haiba/travel': typeof HaibaTravelRoute
   '/haiba/wallet': typeof HaibaWalletRoute
   '/haiba/welcome': typeof HaibaWelcomeRoute
@@ -219,11 +267,17 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/haiba/basket': typeof HaibaBasketRoute
+  '/haiba/confirming': typeof HaibaConfirmingRoute
   '/haiba/earn': typeof HaibaEarnRoute
+  '/haiba/failed': typeof HaibaFailedRoute
   '/haiba/plans': typeof HaibaPlansRoute
   '/haiba/points': typeof HaibaPointsRoute
+  '/haiba/refund': typeof HaibaRefundRoute
+  '/haiba/reserve': typeof HaibaReserveRoute
+  '/haiba/reserved': typeof HaibaReservedRoute
   '/haiba/rewards': typeof HaibaRewardsRoute
   '/haiba/status': typeof HaibaStatusRoute
+  '/haiba/tap': typeof HaibaTapRoute
   '/haiba/travel': typeof HaibaTravelRoute
   '/haiba/wallet': typeof HaibaWalletRoute
   '/haiba/welcome': typeof HaibaWelcomeRoute
@@ -248,11 +302,17 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/haiba/basket'
+    | '/haiba/confirming'
     | '/haiba/earn'
+    | '/haiba/failed'
     | '/haiba/plans'
     | '/haiba/points'
+    | '/haiba/refund'
+    | '/haiba/reserve'
+    | '/haiba/reserved'
     | '/haiba/rewards'
     | '/haiba/status'
+    | '/haiba/tap'
     | '/haiba/travel'
     | '/haiba/wallet'
     | '/haiba/welcome'
@@ -275,11 +335,17 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/haiba/basket'
+    | '/haiba/confirming'
     | '/haiba/earn'
+    | '/haiba/failed'
     | '/haiba/plans'
     | '/haiba/points'
+    | '/haiba/refund'
+    | '/haiba/reserve'
+    | '/haiba/reserved'
     | '/haiba/rewards'
     | '/haiba/status'
+    | '/haiba/tap'
     | '/haiba/travel'
     | '/haiba/wallet'
     | '/haiba/welcome'
@@ -302,11 +368,17 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/haiba/basket'
+    | '/haiba/confirming'
     | '/haiba/earn'
+    | '/haiba/failed'
     | '/haiba/plans'
     | '/haiba/points'
+    | '/haiba/refund'
+    | '/haiba/reserve'
+    | '/haiba/reserved'
     | '/haiba/rewards'
     | '/haiba/status'
+    | '/haiba/tap'
     | '/haiba/travel'
     | '/haiba/wallet'
     | '/haiba/welcome'
@@ -330,11 +402,17 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   HaibaBasketRoute: typeof HaibaBasketRoute
+  HaibaConfirmingRoute: typeof HaibaConfirmingRoute
   HaibaEarnRoute: typeof HaibaEarnRoute
+  HaibaFailedRoute: typeof HaibaFailedRoute
   HaibaPlansRoute: typeof HaibaPlansRoute
   HaibaPointsRoute: typeof HaibaPointsRoute
+  HaibaRefundRoute: typeof HaibaRefundRoute
+  HaibaReserveRoute: typeof HaibaReserveRoute
+  HaibaReservedRoute: typeof HaibaReservedRoute
   HaibaRewardsRoute: typeof HaibaRewardsRoute
   HaibaStatusRoute: typeof HaibaStatusRoute
+  HaibaTapRoute: typeof HaibaTapRoute
   HaibaTravelRoute: typeof HaibaTravelRoute
   HaibaWalletRoute: typeof HaibaWalletRoute
   HaibaWelcomeRoute: typeof HaibaWelcomeRoute
@@ -378,11 +456,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HaibaBasketRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/haiba/confirming': {
+      id: '/haiba/confirming'
+      path: '/haiba/confirming'
+      fullPath: '/haiba/confirming'
+      preLoaderRoute: typeof HaibaConfirmingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/haiba/earn': {
       id: '/haiba/earn'
       path: '/haiba/earn'
       fullPath: '/haiba/earn'
       preLoaderRoute: typeof HaibaEarnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/failed': {
+      id: '/haiba/failed'
+      path: '/haiba/failed'
+      fullPath: '/haiba/failed'
+      preLoaderRoute: typeof HaibaFailedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/haiba/plans': {
@@ -399,6 +491,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HaibaPointsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/haiba/refund': {
+      id: '/haiba/refund'
+      path: '/haiba/refund'
+      fullPath: '/haiba/refund'
+      preLoaderRoute: typeof HaibaRefundRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/reserve': {
+      id: '/haiba/reserve'
+      path: '/haiba/reserve'
+      fullPath: '/haiba/reserve'
+      preLoaderRoute: typeof HaibaReserveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/reserved': {
+      id: '/haiba/reserved'
+      path: '/haiba/reserved'
+      fullPath: '/haiba/reserved'
+      preLoaderRoute: typeof HaibaReservedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/haiba/rewards': {
       id: '/haiba/rewards'
       path: '/haiba/rewards'
@@ -411,6 +524,13 @@ declare module '@tanstack/react-router' {
       path: '/haiba/status'
       fullPath: '/haiba/status'
       preLoaderRoute: typeof HaibaStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/tap': {
+      id: '/haiba/tap'
+      path: '/haiba/tap'
+      fullPath: '/haiba/tap'
+      preLoaderRoute: typeof HaibaTapRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/haiba/travel': {
@@ -538,11 +658,17 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   HaibaBasketRoute: HaibaBasketRoute,
+  HaibaConfirmingRoute: HaibaConfirmingRoute,
   HaibaEarnRoute: HaibaEarnRoute,
+  HaibaFailedRoute: HaibaFailedRoute,
   HaibaPlansRoute: HaibaPlansRoute,
   HaibaPointsRoute: HaibaPointsRoute,
+  HaibaRefundRoute: HaibaRefundRoute,
+  HaibaReserveRoute: HaibaReserveRoute,
+  HaibaReservedRoute: HaibaReservedRoute,
   HaibaRewardsRoute: HaibaRewardsRoute,
   HaibaStatusRoute: HaibaStatusRoute,
+  HaibaTapRoute: HaibaTapRoute,
   HaibaTravelRoute: HaibaTravelRoute,
   HaibaWalletRoute: HaibaWalletRoute,
   HaibaWelcomeRoute: HaibaWelcomeRoute,

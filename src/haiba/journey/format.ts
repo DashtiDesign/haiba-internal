@@ -36,13 +36,13 @@ export const startOf = (s: string) => parse(s).getTime();
 
 export const round2 = (n: number) => Math.round(n * 100) / 100;
 
-/** BHD 20.00 in English, 20.00 د.ب in Arabic. Always 2 decimals, western digits. */
+/** BHD 20.00 in English, 20.00 د.ب or 200.00 ريال in Arabic. Always 2 decimals, western digits. */
 export function money(n: number, country: Country, lang: Lang) {
   const num = round2(n).toLocaleString("en-US", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
-  if (lang === "ar") return `${num}${NBSP}${country === "bh" ? "د.ب" : "ر.س"}`;
+  if (lang === "ar") return `${num}${NBSP}${country === "bh" ? "د.ب" : "ريال"}`;
   return `${CURRENCY[country]}${NBSP}${num}`;
 }
 

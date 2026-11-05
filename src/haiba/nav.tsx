@@ -14,6 +14,13 @@ export const Navigate = RouterNavigate;
 
 export function useNavigate() {
   const navigate = useRouterNavigate();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return (to: string) => navigate({ to: to as any });
+  // A path can carry its own query, for example go("/haiba/tap?for=deposit").
+  // lang, country and user_id stay in the URL on their own (see the root route).
+  return (to: string) => {
+    const [path, query] = to.split("?");
+    const search: Record<string, string> = {};
+    if (query) new URLSearchParams(query).forEach((v, k) => (search[k] = v));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    navigate({ to: path as any, search: search as any });
+  };
 }

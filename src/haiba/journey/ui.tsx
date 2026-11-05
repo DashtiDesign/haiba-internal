@@ -120,7 +120,7 @@ export function TopBar({
 }
 
 type BtnProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "primary" | "lime" | "soft" | "ghost" | "danger" | "outline";
+  variant?: "primary" | "lime" | "soft" | "ghost" | "danger" | "outline" | "good" | "bad" | "warn";
   icon?: ReactNode;
 };
 

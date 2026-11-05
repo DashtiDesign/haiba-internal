@@ -34,7 +34,7 @@ export type Payment = {
   outcome: PayOutcome; // what the Tap placeholder chose; the webhook later confirms it
   startedAt: number; // ms, for the confirming timeout
   amount: number;
-  reason?: FailReason;
+  reason?: FailReason | undefined;
 };
 
 export type Journey = {

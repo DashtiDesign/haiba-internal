@@ -13,8 +13,15 @@ A clickable prototype of Haiba, the Unipal membership, for the internal test. It
 | Screen                                            | Path                       |
 | ------------------------------------------------- | -------------------------- |
 | Unipal home (stand-in)                            | `/`                        |
+| Haiba tab: lands on the screen for the student's state (members see the hub) | `/haiba` |
+| Haiba page: price, VAT, deposit and refund rules  | `/haiba/reserve`           |
+| Tap checkout stand in (Success, Failed, Pending)  | `/haiba/tap`               |
+| Confirming your payment (waits for the Tap webhook) | `/haiba/confirming`      |
+| Payment did not go through                        | `/haiba/failed`            |
+| Reserved: countdown, what happens next, cancel    | `/haiba/reserved`          |
+| Refund in progress, refunded, refund failed       | `/haiba/refund`            |
 | Haiba tab: plans for non members, hub for members | `/haiba`                   |
-| Choose your plan (Free vs Haiba)                  | `/haiba/plans`             |
+| Old join page, now sends to the Haiba page        | `/haiba/plans`             |
 | How points work                                   | `/haiba/points`            |
 | How it works (after joining)                      | `/haiba/welcome`           |
 | Points wallet (out of the flow, kept for reference) | `/haiba/wallet`          |
@@ -23,7 +30,7 @@ A clickable prototype of Haiba, the Unipal membership, for the internal test. It
 | Shop page, The Coffee Bean                        | `/shop/coffee-bean`        |
 | Redeem an offer, earn points                      | `/shop/coffee-bean/redeem` |
 
-Join on the plans page makes you a new member with 500 points.
+Reserve on the Haiba page, pick Success on the Tap stand in, and the simulated webhook reserves your spot. A student becomes reserved only when the webhook arrives, never because they came back from Tap, and a webhook sent twice changes nothing. The panel can send the webhook by hand for a Pending payment.
 
 Rewards: on the shop page, tap Use on a reward, confirm, and the code shows right there. One code per item, no basket. Held codes also show on the hub under Ready to use; tap one to show it.
 
