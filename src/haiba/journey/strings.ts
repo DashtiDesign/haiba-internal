@@ -1,4 +1,5 @@
 import type { Lang } from "./format";
+import { memberEn } from "./strings.member";
 
 /**
  * Every word a student sees on the new Haiba screens lives here, in English and Arabic.
@@ -8,6 +9,7 @@ import type { Lang } from "./format";
  * Rules: simple English, short words, no dashes, money with 2 decimals.
  */
 const en = {
+  ...memberEn,
   // common
   back: "Back",
   close: "Close",
@@ -117,6 +119,10 @@ const en = {
   nextRemind: "We will remind you when it is time to pay the rest.",
   heldUntil: "Your price is held until {date}.",
   cardLabel: "{brand} ending {last4}",
+  keyHeldTitle: "Your price is held until {date}",
+  keyHeldBody: "Pay the rest by then to keep {price} a year plus VAT. We will remind you.",
+  keyCancelTitle: "Changed your mind?",
+  keyCancelBody: "Cancel before you pay the rest and we send your {deposit} deposit back.",
   cancelReservation: "Cancel my reservation",
   done: "Done",
   cancelTitle: "Cancel your reservation?",
@@ -143,11 +149,26 @@ const en = {
   refundFailedBody:
     "Your bank did not accept the refund. Our support team will send it to you by hand. Contact us if you have a question.",
   backToUnipal: "Back to Unipal",
+
+  // Reservations closed
+  closedTitle: "Reservations are closed",
+  closedSub: "Haiba opens on {date}. You can join then.",
+  closedOn: "Closed on {date}",
+  closedNextTitle: "What happens next",
+  closedStep1: "Reservations closed",
+  closedStep2: "Haiba opens",
+  closedStep3: "You join",
+  closedStep3Body: "{price} a year plus VAT. No deposit, pay once for 1 year.",
+  closedRemindNote: "We send you one message on opening day.",
+  closedWhat: "What you get when you join",
+  closedRemind: "Remind me when Haiba opens",
+  closedReminded: "We will remind you on {date}",
 };
 
 export type StringKey = keyof typeof en;
 
-const ar: Record<StringKey, string> = {
+// Arabic for the member screens comes later; missing words fall back to English.
+const ar: Partial<Record<StringKey, string>> = {
   back: "رجوع",
   close: "إغلاق",
   tryAgain: "حاول مرة ثانية",
@@ -249,6 +270,10 @@ const ar: Record<StringKey, string> = {
   nextRemind: "بنذكّرك لما يحين وقت دفع الباقي.",
   heldUntil: "سعرك محفوظ لك لين {date}.",
   cardLabel: "{brand} تنتهي بـ{last4}",
+  keyHeldTitle: "سعرك محفوظ لك لين {date}",
+  keyHeldBody: "ادفع الباقي قبلها عشان يبقى سعرك {price} في السنة بالإضافة للضريبة. بنذكّرك.",
+  keyCancelTitle: "غيّرت رأيك؟",
+  keyCancelBody: "ألغِ قبل ما تدفع الباقي ونرجّع لك العربون {deposit}.",
   cancelReservation: "ألغِ حجزي",
   done: "تم",
   cancelTitle: "تبي تلغي حجزك؟",
@@ -274,9 +299,22 @@ const ar: Record<StringKey, string> = {
   refundFailedBody:
     "البنك ما قبل الاسترجاع. فريق الدعم بيرجّعه لك يدوياً. تواصل معنا إذا عندك سؤال.",
   backToUnipal: "رجوع لـUnipal",
+
+  closedTitle: "انتهى الحجز",
+  closedSub: "هيبة تفتح في {date}. تقدر تنضم وقتها.",
+  closedOn: "انتهى في {date}",
+  closedNextTitle: "وش يصير بعدين",
+  closedStep1: "انتهى الحجز",
+  closedStep2: "تفتح هيبة",
+  closedStep3: "تنضم",
+  closedStep3Body: "{price} في السنة بالإضافة للضريبة. بدون عربون، تدفع مرة وحدة لسنة.",
+  closedRemindNote: "بنرسل لك رسالة وحدة يوم الافتتاح.",
+  closedWhat: "وش تاخذ لما تنضم",
+  closedRemind: "ذكّرني لما تفتح هيبة",
+  closedReminded: "بنذكّرك في {date}",
 };
 
-const STRINGS: Record<Lang, Record<StringKey, string>> = { en, ar };
+const STRINGS: Record<Lang, Partial<Record<StringKey, string>>> = { en, ar };
 
 export function translate(lang: Lang, key: StringKey, vars?: Record<string, string | number>) {
   let s = STRINGS[lang][key] ?? en[key];

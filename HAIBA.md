@@ -27,6 +27,17 @@ A clickable prototype of Haiba, the Unipal membership, for the internal test. It
 | Points wallet (out of the flow, kept for reference) | `/haiba/wallet`          |
 | System states preview (loading, empty, error, offline, safe error) | `/haiba/status?show=error` |
 | Basket and codes (out of the flow, kept for reference) | `/haiba/basket`       |
+| Reservations closed (after 30 Nov, before launch) | `/haiba/reserve`           |
+| Pay the rest at launch, price hold ended          | `/haiba/pay`, `/haiba/expired` |
+| Join after launch, payment done                   | `/haiba/join`, `/haiba/paid` |
+| Your points (earn and spend in one place)         | `/haiba/rewards`           |
+| Reward or gift code: active, expired, cancelled, used | `/haiba/code?kind=reward&state=used` |
+| Activity                                          | `/haiba/activity`          |
+| Unipass gifts: pick, used, month end, lost, last  | `/haiba/unipass?view=used` |
+| Member offers and offer code                      | `/haiba/subscriptions`, `/haiba/subscription?id=s1` |
+| Membership: active, cancelled, renewal, cancel sheet | `/haiba/membership?view=renewal` |
+| Receipts, year ended                              | `/haiba/receipts`, `/haiba/ended` |
+| You saved, Help                                   | `/haiba/saved`, `/haiba/help` |
 | Shop page, The Coffee Bean                        | `/shop/coffee-bean`        |
 | Redeem an offer, earn points                      | `/shop/coffee-bean/redeem` |
 
@@ -68,7 +79,8 @@ Students never see this panel.
 - `src/haiba/store.tsx`: the one shared state (member, codes, points, settings, and the student journey).
 - `src/haiba/journey/`: the new student screens' shared parts: settings, the student state machine (`states.ts`), app parameters and prices (`session.ts`), English and Arabic words (`strings.ts`), money and date formats (`format.ts`), and the building blocks (`ui.tsx`, styled by `src/haiba/styles/journey.css`).
 - `src/haiba/data/haiba-fake-data.json`: shops, rewards, Unipass and the points rules.
-- `public/haiba/`: the 16 bird poses and the two Haiba logos.
+- `public/haiba/`: the bird poses, the two Haiba logos, and the reward images in `emoji/` (Microsoft Fluent 3D emoji, MIT).
+- `src/haiba/journey/data.ts`: placeholder gifts, member offers, activity and brands for the member screens. Arabic for these screens is not written yet and falls back to English.
 - `public/fonts/`: Figtree, self hosted.
 - `tools/dc2react.py`: the converter used to port a canvas board into a screen.
 

@@ -1,12 +1,15 @@
+import type React from "react";
 import { useState } from "react";
-import { Clock, Coins, Gift, RotateCcw, Sparkles, X } from "lucide-react";
+import { Check } from "lucide-react";
+import { Clock, Coins, Gift, Lock, RotateCcw, Sparkles, X } from "lucide-react";
 import { Navigate, useNavigate } from "../../nav";
 import { Button, Screen, Sheet, useOnline } from "../ui";
-import { Note, Rows, Section, Steps } from "../parts";
+import { Countdown, Note, Rows, Section, Steps } from "../parts";
+import Artwork from "../../Artwork";
 import { useSession } from "../session";
 import { pathFor, useJourneyActions } from "../actions";
 import { daysText } from "../strings";
-import { pct } from "../format";
+import { pct, startOf } from "../format";
 
 /**
  * The Haiba page before launch: the student's price, VAT, the deposit and the two refund rules.
@@ -26,6 +29,9 @@ export default function Reserve() {
 
   const deposit = s.m(s.deposit);
   const reserve = () => a.startPayment("deposit");
+
+  // The reservation test has ended and Haiba has not opened yet.
+  if (s.today > s.settings.reserveEnd && !s.launched) return <ReserveClosed />;
 
   return (
     <Screen
@@ -139,5 +145,101 @@ export default function Reserve() {
         </Button>
       </Sheet>
     </Screen>
+  );
+}
+
+const BENEFITS: [
+  React.ReactNode,
+  "benefitGifts" | "benefitPoints" | "benefitWelcome",
+  "benefitGiftsSub" | "benefitPointsSub" | "benefitWelcomeSub",
+][] = [
+  [<Gift key="g" size={18} />, "benefitGifts", "benefitGiftsSub"],
+  [<Coins key="c" size={18} />, "benefitPoints", "benefitPointsSub"],
+  [<Sparkles key="s" size={18} />, "benefitWelcome", "benefitWelcomeSub"],
+];
+
+/** After the reservation test ends and before Haiba opens: clearly closed, what happens next, a reminder. */
+function ReserveClosed() {
+  const s = useSession();
+  const go = useNavigate();
+  const [reminded, setReminded] = useState(false);
+  const date = s.d(s.launch, { weekday: true });
+  return (
+    <Screen
+      dock={
+        <>
+          {reminded ? (
+            <Button variant="soft" icon={<Check size={18} aria-hidden="true" />} disabled>
+              {s.t("closedReminded", { date })}
+            </Button>
+          ) : (
+            <Button variant="primary" onClick={() => setReminded(true)}>
+              {s.t("closedRemind")}
+            </Button>
+          )}
+          <p className="jx-dock-note">{s.t("closedRemindNote")}</p>
+        </>
+      }
+    >
+      <header className="jx-dark-hero">
+        <TopBarClose onClose={() => go("/")} />
+        <Artwork src="/haiba/birds/14-sit.png" alt="" className="jx-hero-bird jx-hero-bird-sit" />
+        <div className="jx-hero-text">
+          <span className="jx-closed-line">
+            <Lock size={15} aria-hidden="true" />
+            {s.t("closedOn", { date: s.d(s.settings.reserveEnd) })}
+          </span>
+          <h1 className="jx-h1" style={{ marginTop: 8 }}>
+            {s.t("closedTitle")}
+          </h1>
+          <p className="jx-sub">{s.t("closedSub", { date })}</p>
+        </div>
+        <div className="jx-counter-label">{s.t("opensIn")}</div>
+        <Countdown to={startOf(s.launch)} />
+      </header>
+      <Section title={s.t("closedNextTitle")}>
+        <Steps
+          steps={[
+            {
+              title: s.t("closedStep1"),
+              body: s.d(s.settings.reserveEnd, { weekday: true }),
+              state: "done",
+            },
+            { title: s.t("closedStep2"), body: date, state: "now" },
+            {
+              title: s.t("closedStep3"),
+              body: s.t("closedStep3Body", { price: s.m(s.offerPrice) }),
+              state: "next",
+            },
+          ]}
+        />
+      </Section>
+      <Section title={s.t("closedWhat")}>
+        <div className="jx-benefits">
+          {BENEFITS.map(([icon, title, sub]) => (
+            <div className="jx-row" key={title}>
+              <span className="jx-row-icon">{icon}</span>
+              <span className="jx-row-main">
+                <span className="jx-row-title">{s.t(title)}</span>
+                <span className="jx-row-sub">{s.t(sub)}</span>
+              </span>
+            </div>
+          ))}
+        </div>
+      </Section>
+    </Screen>
+  );
+}
+
+function TopBarClose({ onClose }: { onClose: () => void }) {
+  const s = useSession();
+  return (
+    <div className="jx-top jx-top-dark">
+      <span className="jx-icon-spacer" />
+      <span className="jx-top-title" />
+      <button className="jx-icon-btn" onClick={onClose} aria-label={s.t("close")}>
+        <X size={22} aria-hidden="true" />
+      </button>
+    </div>
   );
 }

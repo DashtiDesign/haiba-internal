@@ -6,7 +6,22 @@ import { pathFor } from "@/haiba/journey/actions";
 import { Screen } from "@/haiba/journey/ui";
 
 export const Route = createFileRoute("/haiba/")({
-  head: () => ({ meta: [{ title: "Haiba · Member hub" }, { name: "description", content: "Your Haiba points, rewards, gifts and savings in one place." }, { property: "og:title", content: "Haiba · Member hub" }, { property: "og:description", content: "Your Haiba points, rewards, gifts and savings in one place." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
+  head: () => ({
+    meta: [
+      { title: "Haiba · Member hub" },
+      {
+        name: "description",
+        content: "Your Haiba points, rewards, gifts and savings in one place.",
+      },
+      { property: "og:title", content: "Haiba · Member hub" },
+      {
+        property: "og:description",
+        content: "Your Haiba points, rewards, gifts and savings in one place.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: HaibaTab,
 });
 

@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { Bell, Lock, RotateCcw } from "lucide-react";
-import { useRouterState } from "@tanstack/react-router";
+import { Lock, RotateCcw } from "lucide-react";
 import Artwork from "../../Artwork";
 import { Navigate, useNavigate } from "../../nav";
 import { Button, LinkOut, Screen, Sheet, TopBar, supportHref } from "../ui";
-import { Countdown, Note, Pill, Rows, Section, Steps } from "../parts";
+import { Countdown, Rows, Section, Steps } from "../parts";
 import { useSession } from "../session";
 import { pathFor, useJourneyActions } from "../actions";
 import { pct, startOf } from "../format";
@@ -18,8 +17,6 @@ export default function Reserved() {
   const a = useJourneyActions();
   const go = useNavigate();
   const [cancel, setCancel] = useState(false);
-  const search = useRouterState({ select: (r) => r.location.search }) as Record<string, unknown>;
-  const just = search["just"] === 1 || search["just"] === "1";
   const j = s.journey;
   const ok = ["reserved", "pay_rest_open", "hold_expired"].includes(j.status);
 
@@ -40,28 +37,44 @@ export default function Reserved() {
     >
       <header className="jx-dark-hero">
         <TopBar back="/" onDark />
-        <div className="jx-hero-row">
-          <div>
-            <Pill tone="lime" icon={<Lock size={13} aria-hidden="true" />}>
-              {s.t("reservedPill")}
-            </Pill>
-            <h1 className="jx-h1" style={{ marginTop: 12 }}>
-              {s.t("reservedTitle")}
-            </h1>
-            <p className="jx-sub">{s.t("reservedSub", { price: s.m(s.price) })}</p>
-          </div>
-          <Artwork
-            src={just ? "/haiba/birds/13-fist.png" : "/haiba/birds/01-cheer.png"}
-            alt=""
-            className="jx-hero-bird"
-          />
+        <Artwork src="/haiba/birds/02-jump.png" alt="" className="jx-hero-bird" />
+        <div className="jx-hero-text">
+          <h1 className="jx-h1">{s.t("reservedTitle")}</h1>
+          <p className="jx-sub">{s.t("reservedSub", { price: s.m(s.price) })}</p>
         </div>
-        <div className="jx-counter-label">{s.t("opensIn")}</div>
-        <Countdown to={startOf(s.launch)} />
-        <div className="jx-counter-date">
+        <div className="jx-counter-label">
           {s.t("opensOn", { date: s.d(s.launch, { weekday: true }) })}
         </div>
+        <Countdown to={startOf(s.launch)} />
       </header>
+
+      <Section>
+        <div className="jx-keys">
+          <div className="jx-key">
+            <span className="jx-key-icon">
+              <Lock size={20} aria-hidden="true" />
+            </span>
+            <span className="jx-key-text">
+              <span className="jx-key-title">
+                {s.t("keyHeldTitle", { date: s.d(s.holdEnds, { weekday: true }) })}
+              </span>
+              <span className="jx-key-body">{s.t("keyHeldBody", { price: s.m(s.price) })}</span>
+            </span>
+          </div>
+          <div className="jx-key">
+            <span className="jx-key-icon">
+              <RotateCcw size={20} aria-hidden="true" />
+            </span>
+            <span className="jx-key-text">
+              <span className="jx-key-title">{s.t("keyCancelTitle")}</span>
+              <span className="jx-key-body">{s.t("keyCancelBody", { deposit })}</span>
+              <button className="jx-key-link" onClick={() => setCancel(true)}>
+                {s.t("cancelReservation")}
+              </button>
+            </span>
+          </div>
+        </div>
+      </Section>
 
       <Section>
         <Rows
@@ -86,18 +99,9 @@ export default function Reserved() {
             },
           ]}
         />
-        <div className="jx-stack" style={{ marginTop: 16 }}>
-          <Note icon={<Bell size={18} aria-hidden="true" />}>
-            {s.t("heldUntil", { date: s.d(s.holdEnds, { weekday: true }) })} {s.t("nextRemind")}
-          </Note>
-          <Note icon={<RotateCcw size={18} aria-hidden="true" />}>{s.t("ruleCancel")}</Note>
-        </div>
       </Section>
 
       <div className="jx-actions">
-        <Button variant="danger" onClick={() => setCancel(true)}>
-          {s.t("cancelReservation")}
-        </Button>
         <LinkOut href={supportHref(s, "reservation")} variant="ghost">
           {s.t("contactSupport")}
         </LinkOut>

@@ -12,6 +12,7 @@ export type Settings = {
   deposit: Record<Country, number>; // reserves the spot and locks the price
   holdDays: number; // days after launch to pay the rest before the price hold ends
   launchDate: string; // YYYY-MM-DD, the day Haiba opens and the rest can be paid
+  reserveEnd: string; // YYYY-MM-DD, last day of the reservation test. After it, new students wait for launch
   today: string | null; // prototype clock, YYYY-MM-DD. null means the real date
 };
 
@@ -22,6 +23,7 @@ export const DEFAULT_SETTINGS: Settings = {
   deposit: { bh: 1, sa: 10 },
   holdDays: 7,
   launchDate: "2026-12-01",
+  reserveEnd: "2026-11-30",
   today: null,
 };
 

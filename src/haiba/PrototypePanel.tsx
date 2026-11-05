@@ -28,6 +28,22 @@ const SCREENS = [
   ["Basket and codes", "/haiba/basket"],
   ["Wallet", "/haiba/wallet"],
   ["Travel data", "/haiba/travel"],
+  ["Pay the rest", "/haiba/pay"],
+  ["Join after launch", "/haiba/join"],
+  ["Reward code", "/haiba/code?kind=reward"],
+  ["Reward used", "/haiba/code?kind=reward&state=used"],
+  ["Activity", "/haiba/activity"],
+  ["Unipass gifts", "/haiba/unipass"],
+  ["Unipass gift used", "/haiba/unipass?view=used"],
+  ["Unipass month end", "/haiba/unipass?view=monthend"],
+  ["Gift code", "/haiba/code?kind=gift"],
+  ["Member offers", "/haiba/subscriptions"],
+  ["Membership", "/haiba/membership"],
+  ["Membership renewal", "/haiba/membership?view=renewal"],
+  ["Receipts", "/haiba/receipts"],
+  ["You saved", "/haiba/saved"],
+  ["Help", "/haiba/help"],
+  ["Year ended", "/haiba/ended"],
 ];
 
 // Promo pages, grouped so they are easy to find. Paywall arms take the price chosen below.
@@ -482,14 +498,16 @@ export default function PrototypePanel() {
               <div style={sectionLabel}>Go to screen</div>
               <div style={grid}>
                 {SCREENS.map(([label, to]) => (
-                  <Link
+                  <button
                     key={to}
-                    to={to}
-                    onClick={() => setOpen(false)}
-                    style={{ ...chip(false), textDecoration: "none", textAlign: "center" }}
+                    onClick={() => {
+                      setOpen(false);
+                      go(to!);
+                    }}
+                    style={{ ...chip(false), textAlign: "center" }}
                   >
                     {label}
-                  </Link>
+                  </button>
                 ))}
               </div>
             </motion.div>
