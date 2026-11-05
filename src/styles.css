@@ -27,6 +27,7 @@
 @import "./haiba/styles/paywalltable.css";
 @import "./haiba/styles/paywalltimeline.css";
 @import "./haiba/styles/plansconvert.css";
+@import "./haiba/styles/journey.css";
 
 @custom-variant dark (&:is(.dark *));
 

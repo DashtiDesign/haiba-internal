@@ -6,12 +6,15 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  retainSearchParams,
+  useRouterState,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { HaibaProvider } from "../haiba/store";
+import { HaibaProvider, useHaiba } from "../haiba/store";
+import { parseCountry } from "../haiba/journey/settings";
 import PrototypePanel from "../haiba/PrototypePanel";
 import MotionExperience from "../haiba/MotionExperience";
 import { MotionConfig } from "motion/react";
@@ -77,7 +80,12 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
   );
 }
 
+/** The app opens every Haiba page with these. They stay in the URL as the student moves between pages. */
+type AppSearch = { lang?: string; country?: string; user_id?: string | number; [key: string]: unknown };
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  validateSearch: (search: Record<string, unknown>): AppSearch => search as AppSearch,
+  search: { middlewares: [retainSearchParams<AppSearch>(["lang", "country", "user_id"])] },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -127,6 +135,17 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+/** Keeps the store's home country in step with the country the app passed. */
+function ParamsSync() {
+  const hb = useHaiba();
+  const country = useRouterState({ select: (r) => (r.location.search as AppSearch).country });
+  const c = parseCountry(country);
+  useEffect(() => {
+    if (hb.ready && c && hb.state.market !== c) hb.set({ market: c });
+  }, [hb.ready, c, hb.state.market]);
+  return null;
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
@@ -138,6 +157,7 @@ function RootComponent() {
           <MotionExperience>
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
+          <ParamsSync />
           <PrototypePanel />
           </MotionExperience>
           </MotionConfig>

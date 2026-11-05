@@ -48,14 +48,8 @@ export function useDC(initial) {
     codeIds: hb.liveCodeIds,
     savedRewards: hb.savedRewards,
     market: hb.state.market === "sa" ? "Saudi" : "Bahrain",
-    plan:
-      hb.state.plan === "yearly"
-        ? "Yearly"
-        : "Monthly, " +
-          hb.state.monthsPaid +
-          (hb.state.monthsPaid === 1 ? " month" : " months") +
-          " paid",
-    travelStatus: hb.travelLocked ? "Locked, monthly" : TRAVEL_LABEL[hb.state.travel],
+    plan: "Yearly", // one yearly plan only
+    travelStatus: TRAVEL_LABEL[hb.state.travel],
     savedTravel: hb.savedTravel,
     price: q.price != null ? String(q.price) : undefined,
     name: q.name != null ? String(q.name) : undefined,

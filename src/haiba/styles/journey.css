@@ -1,0 +1,493 @@
+/*
+ * Shared styles for the new student screens (prefix jx).
+ * Start and end only, never left and right, so Arabic mirrors on its own.
+ * Figtree for Latin. Figtree has no Arabic letters, so Arabic falls back to the phone's Arabic font.
+ */
+.jx {
+  --jx-ink: #1e1b2e;
+  --jx-muted: #6b6880;
+  --jx-faint: #9a96ab;
+  --jx-purple: #6c3ffa;
+  --jx-purple-ink: #4f25d6;
+  --jx-lime: #c0f402;
+  --jx-soft: #f6f4fb;
+  --jx-line: #ece8f5;
+  --jx-good: #1e7a34;
+  --jx-good-bg: #e6f4ea;
+  --jx-warn: #7a5300;
+  --jx-warn-bg: #fff4d6;
+  --jx-bad: #b3261e;
+  --jx-bad-bg: #fdebe9;
+  font-family: Figtree, "SF Arabic", "Geeza Pro", "Noto Sans Arabic", system-ui, sans-serif;
+  color: var(--jx-ink);
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+.jx *,
+.jx *::before,
+.jx *::after {
+  box-sizing: border-box;
+}
+.jx:not(.jx-sheet) {
+  position: relative;
+  max-width: 390px;
+  margin: 0 auto;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-bottom: 32px;
+  overflow-x: hidden;
+}
+.jx[data-dock] {
+  padding-bottom: calc(132px + env(safe-area-inset-bottom));
+}
+.jx-tone-white {
+  background: #ffffff;
+}
+.jx-tone-soft {
+  background: var(--jx-soft);
+}
+.jx-tone-lilac {
+  background: #ebe4ff;
+}
+.jx-tone-dark {
+  background: var(--jx-ink);
+  color: #ffffff;
+}
+.jx-tone-dark .jx-sub,
+.jx-tone-dark .jx-muted {
+  color: #cfc9e0;
+}
+
+.jx-flip {
+  display: inline-block;
+}
+[dir="rtl"] .jx-flip {
+  transform: scaleX(-1);
+}
+.jx-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Type */
+.jx-h1 {
+  font-size: 30px;
+  line-height: 1.12;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.jx-h2 {
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.jx-h3 {
+  font-size: 17px;
+  line-height: 1.3;
+  font-weight: 800;
+  margin: 0;
+}
+.jx-sub {
+  font-size: 15.5px;
+  line-height: 1.45;
+  font-weight: 500;
+  color: var(--jx-muted);
+  margin: 6px 0 0;
+}
+.jx-small {
+  font-size: 13.5px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--jx-muted);
+}
+.jx-label {
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--jx-muted);
+}
+[lang="ar"] .jx-label {
+  letter-spacing: 0;
+}
+.jx-accent {
+  color: var(--jx-purple);
+}
+.jx-num {
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: isolate;
+}
+.jx-pad {
+  padding-inline: 20px;
+}
+.jx-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Top bar */
+.jx-top {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  padding-top: calc(8px + env(safe-area-inset-top));
+  background: inherit;
+}
+.jx-top-title {
+  flex: 1;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.jx-top-end {
+  display: flex;
+  justify-content: flex-end;
+  min-width: 44px;
+}
+.jx-icon-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: inherit;
+}
+.jx-icon-btn:active {
+  background: rgba(30, 27, 46, 0.06);
+}
+.jx-top-dark .jx-icon-btn:active {
+  background: rgba(255, 255, 255, 0.1);
+}
+.jx-icon-spacer {
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+}
+
+/* Buttons */
+.jx-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 54px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 800;
+  text-decoration: none;
+  text-align: center;
+  transition:
+    transform 0.12s ease,
+    background-color 0.15s ease;
+}
+.jx-btn:active {
+  transform: scale(0.98);
+}
+.jx-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+  transform: none;
+}
+.jx-btn-primary {
+  background: var(--jx-ink);
+  color: #ffffff;
+}
+.jx-btn-lime {
+  background: var(--jx-lime);
+  color: var(--jx-ink);
+}
+.jx-btn-soft {
+  background: var(--jx-soft);
+  color: var(--jx-ink);
+}
+.jx-btn-outline {
+  background: transparent;
+  color: inherit;
+  box-shadow: inset 0 0 0 1.5px var(--jx-line);
+}
+.jx-btn-ghost {
+  background: transparent;
+  color: var(--jx-purple);
+  min-height: 48px;
+}
+.jx-tone-dark .jx-btn-ghost {
+  color: var(--jx-lime);
+}
+.jx-btn-danger {
+  background: var(--jx-bad-bg);
+  color: var(--jx-bad);
+}
+
+/* Bottom dock for the main button */
+.jx-dock {
+  position: fixed;
+  bottom: 0;
+  z-index: 40;
+  inset-inline: 0;
+  margin: 0 auto;
+  max-width: 390px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 20px calc(14px + env(safe-area-inset-bottom));
+  background: linear-gradient(to top, #ffffff 78%, rgba(255, 255, 255, 0));
+}
+.jx-tone-soft .jx-dock {
+  background: linear-gradient(to top, var(--jx-soft) 78%, rgba(246, 244, 251, 0));
+}
+.jx-tone-lilac .jx-dock {
+  background: linear-gradient(to top, #ebe4ff 78%, rgba(235, 228, 255, 0));
+}
+.jx-tone-dark .jx-dock {
+  background: linear-gradient(to top, var(--jx-ink) 78%, rgba(30, 27, 46, 0));
+}
+
+/* Lists: compact rows with a hairline, Monzo style */
+.jx-list {
+  display: flex;
+  flex-direction: column;
+}
+.jx-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--jx-line);
+  text-align: start;
+  width: 100%;
+  background: none;
+  border-inline: 0;
+  border-top: 0;
+  font: inherit;
+  color: inherit;
+}
+.jx-row:last-child {
+  border-bottom: 0;
+}
+button.jx-row {
+  cursor: pointer;
+}
+.jx-row-icon {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--jx-soft);
+  color: var(--jx-purple);
+}
+.jx-row-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.jx-row-title {
+  font-size: 15.5px;
+  font-weight: 700;
+}
+.jx-row-sub {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--jx-muted);
+  line-height: 1.35;
+}
+.jx-row-end {
+  font-size: 15.5px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* Pills and tags */
+.jx-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.jx-pill-good {
+  background: var(--jx-good-bg);
+  color: var(--jx-good);
+}
+.jx-pill-warn {
+  background: var(--jx-warn-bg);
+  color: var(--jx-warn);
+}
+.jx-pill-bad {
+  background: var(--jx-bad-bg);
+  color: var(--jx-bad);
+}
+.jx-pill-purple {
+  background: #ede4ff;
+  color: var(--jx-purple-ink);
+}
+.jx-pill-lime {
+  background: var(--jx-lime);
+  color: var(--jx-ink);
+}
+
+/* Sheet */
+.jx-sheet-back {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  background: rgba(20, 16, 36, 0.45);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.jx-sheet {
+  position: relative;
+  width: 100%;
+  max-width: 390px;
+  max-height: 88vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 24px 24px 0 0;
+  padding: 10px 20px calc(20px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.jx-grabber {
+  align-self: center;
+  width: 40px;
+  height: 5px;
+  border-radius: 999px;
+  background: #dcd7e8;
+  margin-bottom: 6px;
+}
+
+/* Offline bar */
+.jx-offline {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  padding-top: calc(10px + env(safe-area-inset-top));
+  background: var(--jx-ink);
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+/* System states */
+.jx-status {
+  min-height: 80svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 28px;
+  gap: 8px;
+}
+.jx-status-compact {
+  min-height: 0;
+  padding: 28px 20px;
+}
+.jx-status-art {
+  width: auto;
+  height: 170px;
+  margin-bottom: 8px;
+}
+.jx-status-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  margin-top: 18px;
+}
+.jx-skel {
+  width: 100%;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #f1eef8 25%, #e7e3f1 37%, #f1eef8 63%);
+  background-size: 400% 100%;
+  animation: jx-shimmer 1.4s ease infinite;
+}
+.jx-skel-hero {
+  height: 180px;
+  border-radius: 22px;
+  margin-bottom: 10px;
+}
+.jx-skel-line {
+  height: 16px;
+}
+@keyframes jx-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .jx-skel {
+    animation: none;
+  }
+}
+
+/* Notes: small rule lines with an icon */
+.jx-note {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--jx-muted);
+}
+.jx-note svg {
+  flex: none;
+  margin-top: 1px;
+  color: var(--jx-purple);
+}
+.jx-tone-dark .jx-note {
+  color: #cfc9e0;
+}
+.jx-tone-dark .jx-note svg {
+  color: var(--jx-lime);
+}
+
+.jx-divider {
+  height: 1px;
+  background: var(--jx-line);
+  border: 0;
+  margin: 0;
+}

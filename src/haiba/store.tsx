@@ -1,5 +1,7 @@
 import type React from "react";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { DEFAULT_SETTINGS, type Settings } from "./journey/settings";
+import { EMPTY_JOURNEY, type Journey } from "./journey/states";
 
 /**
  * One shared state for the whole Haiba prototype.
@@ -9,7 +11,6 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
  */
 
 export type Member = "none" | "new" | "active";
-export type Plan = "yearly" | "monthly";
 export type Market = "bh" | "sa";
 export type Travel = "available" | "revealed" | "redeemed";
 
@@ -21,10 +22,10 @@ export type HaibaState = {
   codesQty: number[] | null; // the basket that made the current codes
   cancelled: string[]; // code ids cancelled, points back
   accepted: string[]; // code ids the shop accepted
-  plan: Plan; // monthly is Bahrain only
-  monthsPaid: number; // monthly plan only, travel data unlocks at 3
-  market: Market; // the member's home country, hidden from travel destinations
+  market: Market; // the member's home country, follows the country parameter from the app
   travel: Travel; // free Airalo plan: available, code revealed, or used at Airalo
+  settings: Settings; // prices, VAT, deposit, hold days, launch date. Screens never hardcode these.
+  journey: Journey; // where the student is: reservation, payment, membership
 };
 
 // Value of the free Airalo plan once it is used, added to "You saved".
@@ -44,30 +45,38 @@ const INITIAL: HaibaState = {
   codesQty: null,
   cancelled: [],
   accepted: [],
-  plan: "yearly",
-  monthsPaid: 1,
   market: "bh",
   travel: "available",
+  settings: DEFAULT_SETTINGS,
+  journey: EMPTY_JOURNEY,
 };
 
-const KEY = "haiba-prototype-v1";
+const KEY = "haiba-prototype-v2";
 
 function load(): HaibaState {
   try {
     const raw = localStorage.getItem(KEY);
-    if (raw) return { ...INITIAL, ...JSON.parse(raw) };
+    if (raw) {
+      const saved = JSON.parse(raw);
+      return {
+        ...INITIAL,
+        ...saved,
+        settings: { ...DEFAULT_SETTINGS, ...(saved.settings || {}) },
+        journey: { ...EMPTY_JOURNEY, ...(saved.journey || {}) },
+      };
+    }
   } catch (e) {
     /* storage blocked, start fresh */
   }
   return INITIAL;
 }
 
-// Prototype setup that survives a member switch: visit, plan and home country.
+// Prototype setup that survives a member switch: visit, home country, settings and journey.
 const keep = (p: HaibaState) => ({
   visit: p.visit,
-  plan: p.plan,
-  monthsPaid: p.monthsPaid,
   market: p.market,
+  settings: p.settings,
+  journey: p.journey,
 });
 
 type Api = {
@@ -78,11 +87,13 @@ type Api = {
   liveCodes: number; // codes held and not yet accepted by the shop
   liveCodeIds: string[]; // ids of those codes, item-index plus count, for example 0-1
   savedRewards: number; // BHD value of rewards the shop accepted
-  travelLocked: boolean; // monthly members get travel data after 3 paid months
   savedTravel: number; // BHD 5.64 once the Airalo code is used
   set: (patch: Partial<HaibaState>) => void;
   join: () => void;
   setMember: (m: Member) => void;
+  setJourney: (patch: Partial<Journey>) => void;
+  setSettings: (patch: Partial<Settings>) => void;
+  resetStudent: () => void;
   acceptAll: () => void;
   redeemTravel: () => void;
   reset: () => void;
@@ -127,8 +138,6 @@ export function HaibaProvider({ children }: { children: ReactNode }) {
     });
   }
 
-  const travelLocked = s.plan === "monthly" && s.monthsPaid < 3 && s.travel === "available";
-
   const api: Api = {
     ready,
     state: s,
@@ -137,14 +146,11 @@ export function HaibaProvider({ children }: { children: ReactNode }) {
     liveCodes: liveIds.length,
     liveCodeIds: liveIds,
     savedRewards: acceptedPoints / 1000,
-    travelLocked,
     savedTravel: s.travel === "redeemed" ? TRAVEL_SAVED : 0,
-    set: (patch) =>
-      setS((p) => {
-        const n = { ...p, ...patch };
-        if (n.market === "sa") n.plan = "yearly"; // monthly is Bahrain only
-        return n;
-      }),
+    set: (patch) => setS((p) => ({ ...p, ...patch })),
+    setJourney: (patch) => setS((p) => ({ ...p, journey: { ...p.journey, ...patch } })),
+    setSettings: (patch) => setS((p) => ({ ...p, settings: { ...p.settings, ...patch } })),
+    resetStudent: () => setS((p) => ({ ...INITIAL, visit: p.visit, market: p.market, settings: p.settings })),
     join: () => setS((p) => ({ ...INITIAL, ...keep(p), member: "new" })),
     setMember: (m) => setS((p) => ({ ...INITIAL, ...keep(p), member: m })),
     acceptAll: () =>
