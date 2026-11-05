@@ -12,7 +12,7 @@ export function useVals() {
     var WORTH = { gifts: 30, spotify: 3, chatgpt: 9, travel: 5, points: 1 };
     var worthN = WORTH.gifts + WORTH.spotify + WORTH.chatgpt + WORTH.travel + WORTH.points;
     var p = Number(props.price ?? '20');
-    var name = props.name ?? 'Sara';
+    var name = props.name ?? 'Yusuf';
     var bhd = function (x) { return 'BHD ' + x.toFixed(2); };
     var view = state.view || (props.state === 'Exit sheet' ? 'exit' : props.state === 'Reserved' ? 'reserved' : 'page');
     // Value builds up month by month: when does the year pay for itself? (from promo D)

@@ -35,7 +35,7 @@ export function useDC(initial) {
     if (Object.keys(own).length) setLocal((l) => ({ ...l, ...own }));
   };
 
-  // Promo page tests read their setup from the URL: ?price=18&name=Sara&visits=4
+  // Promo page tests read their setup from the URL: ?price=18&name=Yusuf&visits=4
   // Read through the router so the server render and the first client render agree (no price flash).
   const q = useRouterState({ select: (r) => r.location.search }) || {};
 

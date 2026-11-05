@@ -100,7 +100,7 @@ export function useVals() {
       ? "Pays for itself by month " + now.payback + ". Everything after is free."
       : "Use it more and it pays for itself.",
   };
-  var name = props.name ?? "Sara";
+  var name = props.name ?? "Yusuf";
   return Object.assign(common, dyn, {
     hello: "Hi " + name + ", here is your year.",
     ptsSub: "At " + V + " " + (V === 1 ? "visit" : "visits") + " a month. Go more, get more.",

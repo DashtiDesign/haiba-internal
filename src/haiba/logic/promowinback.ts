@@ -53,7 +53,7 @@ export function useVals() {
     return { pts: pts, payback: payback, worth: 47.0 + pts / 1000 };
   };
   var V = Math.max(1, Math.min(12, Number(props.visits ?? "4")));
-  var name = props.name ?? "Sara";
+  var name = props.name ?? "Yusuf";
   var whole = function (x) {
     return "BHD " + Math.floor(x) + "+";
   };

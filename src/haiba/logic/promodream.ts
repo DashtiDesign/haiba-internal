@@ -53,7 +53,7 @@ export function useVals() {
     return { pts: pts, payback: payback, worth: 47.0 + pts / 1000 };
   };
   var W = typeof window !== "undefined" ? window : {};
-  var name = props.name ?? "Sara";
+  var name = props.name ?? "Yusuf";
   var G = [
     {
       brand: "Wingman",
