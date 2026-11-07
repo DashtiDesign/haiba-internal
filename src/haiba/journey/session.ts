@@ -64,6 +64,26 @@ export function useSession() {
   // Prototype clock: a fixed date runs at 10:00 that day, the real date runs live.
   const now = settings.today ? startOf(settings.today) + 10 * 3600000 : Date.now();
 
+  // Reservation spots are capped per country.
+  const spotsLeft = Math.max(0, settings.spotsCap[c] - settings.spotsTaken[c]);
+  const full = spotsLeft === 0;
+  // Haiba lives in the country the student reserved or joined in. Benefits do not carry across countries for now (7 Nov).
+  const BOUND = [
+    "reserved",
+    "refund_requested",
+    "refund_failed",
+    "pay_rest_open",
+    "member",
+    "renewal_due",
+    "cancelled",
+  ];
+  const home = journey.lockedCountry;
+  const elsewhere =
+    home != null && country != null && home !== country && BOUND.includes(journey.status);
+  const student = settings.student;
+  // Renewal is charged at the price on offer then, not the locked price (7 Nov).
+  const renewTotal = round2(offerPrice + round2(offerPrice * vatRate));
+
   const t = (key: StringKey, vars?: Record<string, string | number>) => translate(lang, key, vars);
   const m = (n: number) => money(n, c, lang);
   const d = (s: string, o?: { weekday?: boolean; year?: boolean }) => date(s, lang, o);
@@ -93,6 +113,12 @@ export function useSession() {
     launch,
     holdEnds,
     launched,
+    spotsLeft,
+    full,
+    home,
+    elsewhere,
+    student,
+    renewTotal,
     t,
     m,
     d,

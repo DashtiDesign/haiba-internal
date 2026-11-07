@@ -14,6 +14,9 @@ export type Settings = {
   launchDate: string; // YYYY-MM-DD, the day Haiba opens and the rest can be paid
   reserveEnd: string; // YYYY-MM-DD, last day of the reservation test. After it, new students wait for launch
   today: string | null; // prototype clock, YYYY-MM-DD. null means the real date
+  spotsCap: Record<Country, number>; // reservation spots per country (decided 7 Nov: 400 each)
+  spotsTaken: Record<Country, number>; // prototype: spots already reserved in each country
+  student: "verified" | "unverified" | "expired"; // prototype: the student's Unipal student status
 };
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -25,6 +28,9 @@ export const DEFAULT_SETTINGS: Settings = {
   launchDate: "2026-12-01",
   reserveEnd: "2026-11-30",
   today: null,
+  spotsCap: { bh: 400, sa: 400 },
+  spotsTaken: { bh: 312, sa: 188 },
+  student: "verified",
 };
 
 export const CURRENCY: Record<Country, string> = { bh: "BHD", sa: "SAR" };

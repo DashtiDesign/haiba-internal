@@ -8,6 +8,9 @@ export function useVals() {
 
     
     var isNew = (props.member ?? 'Active member') === 'New member';
+    var td = props.today ? new Date(props.today + 'T10:00:00') : new Date();
+    var giftMonth = td.toLocaleDateString('en-GB', { month: 'long' });
+    var giftDaysLeft = new Date(td.getFullYear(), td.getMonth() + 1, 0).getDate() - td.getDate() + 1;
     var t = useMotionProgress();
     var target = props.available;
     var shown = Math.round(target * t);
@@ -128,22 +131,23 @@ export function useVals() {
       sinceLine: isNew ? 'Since 21 Oct' : 'Since 18 Aug',
       actGroups: actGroups,
       memberLine: isNew ? 'Member since today' : 'Member since August',
-      giftLeft: '10 days left',
+      giftLeft: giftDaysLeft === 1 ? 'Last day' : giftDaysLeft + ' days left',
+      giftTitle: 'Pick your ' + giftMonth + ' gift',
       giftMarks: giftMarks,
       ready: ready,
       hasActive: ready.length > 0,
       readyCount: ready.length ? ready.length + ' to use' : '',
       noActive: ready.length === 0,
       spend: [
-        { brand: 'The Coffee Bean', name: 'Free upsize', pts: 300, logo: '/haiba/brands/coffee-bean.webp', bg: '#FCF4E9', href: '/haiba/rewards' },
-        { brand: 'Grip', name: 'Protein shake', pts: 500, logo: '/haiba/brands/grip.webp', bg: '#000000' },
-        { brand: 'VOX Cinemas', name: 'Popcorn', pts: 600, logo: '/haiba/brands/vox.webp', bg: '#FFFFFF' },
-        { brand: 'Wingman', name: '6 wings', pts: 900, logo: '/haiba/brands/wingman.webp', bg: '#F9F9F9' },
-        { brand: 'Alkuwaiti', name: 'Interior clean', pts: 1500, logo: '/haiba/brands/alkuwaiti.webp', bg: '#FFFFFF' },
-        { brand: 'Albayan', name: 'Travel perfume', pts: 2000, logo: '/haiba/brands/albayan.webp', bg: '#FFFFFF' }
+        { brand: 'The Coffee Bean', name: 'Free upsize', pts: 300, logo: '/haiba/brands/coffee-bean.webp', bg: '#FFFFFF', img: '/haiba/emoji/drink.png', tint: '#FFEFD9', href: '/haiba/rewards' },
+        { brand: 'Grip', name: 'Protein shake', pts: 500, logo: '/haiba/brands/grip.webp', bg: '#000000', img: '/haiba/emoji/shake.png', tint: '#FCE4F0' },
+        { brand: 'VOX Cinemas', name: 'Popcorn', pts: 600, logo: '/haiba/brands/vox.webp', bg: '#FFFFFF', img: '/haiba/emoji/popcorn.png', tint: '#EDE4FF' },
+        { brand: 'Wingman', name: '6 wings', pts: 900, logo: '/haiba/brands/wingman.webp', bg: '#FFFFFF', img: '/haiba/emoji/wings.png', tint: '#FFEFD9' },
+        { brand: 'Alkuwaiti', name: 'Interior clean', pts: 1500, logo: '/haiba/brands/alkuwaiti.webp', bg: '#FFFFFF', img: '/haiba/emoji/car.png', tint: '#DDF1FF' },
+        { brand: 'Albayan', name: 'Travel perfume', pts: 2000, logo: '/haiba/brands/albayan.webp', bg: '#FFFFFF', img: '/haiba/emoji/perfume.png', tint: '#FCE4F0' }
       ].map(function (d) {
         var can = d.pts <= target;
-        return Object.assign({}, d, { pts: d.pts.toLocaleString('en-US'), pillBg: can ? '#F0ECFF' : '#F1F1F4', pillInk: can ? '#4F25D6' : '#6B6880', dotOp: can ? '1' : '0.35' });
+        return Object.assign({}, d, { hasLogo: !!d.logo, noLogo: !d.logo, mark: d.brand.charAt(0), pts: d.pts.toLocaleString('en-US'), pillBg: can ? '#F0ECFF' : '#F1F1F4', pillInk: can ? '#4F25D6' : '#6B6880', dotOp: can ? '1' : '0.35' });
       }),
       savedTotal: 'BHD ' + savedSum.toFixed(2),
       savedBar: savedBar,
@@ -162,7 +166,7 @@ export function useVals() {
       navTipOpenStr: String(state.navTipOpen),
       dotDisp: state.navTipOpen ? 'none' : 'block',
       toggleNavTip: function () { setState({ navTipOpen: !state.navTipOpen }); },
-      navTip: isNew ? 'Pick your October Unipass gift. You have 10 days left, and it is free.' : 'Your next visit at Jasmi’s is your 5th. It earns 200 points, not 40.',
+      navTip: isNew ? 'Pick your ' + giftMonth + ' Unipass gift. You have ' + (giftDaysLeft === 1 ? '1 day' : giftDaysLeft + ' days') + ' left, and it is free.' : 'Your next visit at Jasmi’s is your 5th. It earns 200 points, not 40.',
       navTipHref: isNew ? '' : '/haiba/earn',
       navTipCta: isNew ? 'Pick my gift' : 'See my bonus',
       earnSub: isNew ? 'Your first visit at every shop earns 2x points' : 'Your next visit at Jasmi’s earns +200 points',

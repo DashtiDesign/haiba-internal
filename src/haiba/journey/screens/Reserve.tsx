@@ -9,6 +9,7 @@ import Artwork from "../../Artwork";
 import { useSession } from "../session";
 import { pathFor, useJourneyActions } from "../actions";
 import { daysText } from "../strings";
+import { Elsewhere, NotStudent, SpotsFull, countryName } from "./Edge";
 import { pct, startOf } from "../format";
 
 /**
@@ -23,6 +24,7 @@ export default function Reserve() {
   const go = useNavigate();
   const status = s.journey.status;
 
+  if (s.elsewhere) return <Elsewhere />;
   if (s.hb.ready && s.valid && status !== "not_reserved" && status !== "ended") {
     return <Navigate to={pathFor(status)} replace />;
   }
@@ -32,6 +34,9 @@ export default function Reserve() {
 
   // The reservation test has ended and Haiba has not opened yet.
   if (s.today > s.settings.reserveEnd && !s.launched) return <ReserveClosed />;
+  // Haiba is for students only, and reservations are capped per country.
+  if (s.student !== "verified") return <NotStudent action="reserve" />;
+  if (s.full && !s.launched) return <SpotsFull />;
 
   return (
     <Screen
@@ -53,6 +58,11 @@ export default function Reserve() {
         </div>
         <img src="/haiba/birds/17-coin-toss.webp" alt="" className="jx-hero-art" />
         <div className="jx-hero-body">
+          {s.spotsLeft <= 100 && (
+            <span className="jx-tag jx-tag-dark jx-spots-tag">
+              {s.t("spotsLeft", { n: s.spotsLeft, country: countryName(s, s.c) })}
+            </span>
+          )}
           <h1 className="jx-h1">{s.t("reserveTitle")}</h1>
           <p className="jx-sub" style={{ color: "#4a4560" }}>
             {s.t("reserveSub")}

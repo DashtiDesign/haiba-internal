@@ -56,6 +56,7 @@ export function useDC(initial) {
     visits: q.visits != null ? String(q.visits) : undefined,
     shop: q.shop != null ? String(q.shop) : undefined,
     state: q.state != null ? String(q.state) : undefined,
+    today: hb.state.settings.today ?? undefined, // prototype clock; the canvas falls back to the real date
   };
 
   return { state, setState, props, nav };

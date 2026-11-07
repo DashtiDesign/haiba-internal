@@ -38,6 +38,8 @@ A clickable prototype of Haiba, the Unipal membership, for the internal test. It
 | Membership: active, cancelled, renewal, cancel sheet | `/haiba/membership?view=renewal` |
 | Receipts, year ended                              | `/haiba/receipts`, `/haiba/ended` |
 | You saved, Help                                   | `/haiba/saved`, `/haiba/help` |
+| Student status (not verified, expired)            | `/haiba/student?for=reserve` (also shown at reserve, join, renewal) |
+| Loading skeletons                                 | add `?loading=1` to `/haiba`, `/haiba/rewards`, `/haiba/unipass`, `/haiba/membership` |
 | Shop page, The Coffee Bean                        | `/shop/coffee-bean`        |
 | Redeem an offer, earn points                      | `/shop/coffee-bean/redeem` |
 
@@ -91,3 +93,15 @@ Students never see this panel.
 - "You saved" counts a reward only when the shop accepts the code.
 - Copy is simple English, no dashes.
 - Font: Figtree for everything, text, numbers and headlines. Never Syne.
+
+
+## Rules added 7 Nov
+
+- Reservation spots are capped per country (400 each). Cap and spots taken are in the prototype panel. When full, new students see "All spots taken". The price page shows the count once 100 or fewer remain.
+- Haiba stays in the country the student reserved or joined in. Opening Haiba with another country shows "Your Haiba is in Bahrain", never a new price.
+- Haiba is for verified students. The panel switches student status between verified, not verified and expired.
+- Renewal is charged at the price on offer then, not the locked price.
+- Member offers with no codes left show "All claimed" (`claimed` in `journey/data.ts`).
+- The hub gift card takes its month and days left from the date (the prototype clock when set).
+- Supply kit: shops, rewards, gifts and partner offers use one set of parts (brand mark, shop row, item tile, item row, offer card, tags and price lines). See the Supply kit board on the canvas and `claude/haiba-supply-kit.md` in the project.
+- Mascot loops for later use are in `public/haiba/motion/` (wave, waiting, gift, bye). They are not placed on screens yet.

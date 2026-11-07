@@ -7,6 +7,7 @@ import { Countdown, Rows, Section, Steps } from "../parts";
 import { useSession } from "../session";
 import { pathFor, useJourneyActions } from "../actions";
 import { pct, startOf } from "../format";
+import { Elsewhere } from "./Edge";
 
 /**
  * Reserved: price locked, deposit paid, countdown to opening, what happens next, the refund rule,
@@ -20,6 +21,7 @@ export default function Reserved() {
   const j = s.journey;
   const ok = ["reserved", "pay_rest_open", "hold_expired"].includes(j.status);
 
+  if (s.elsewhere) return <Elsewhere />;
   if (s.hb.ready && s.valid && !ok) return <Navigate to={pathFor(j.status)} replace />;
 
   const deposit = s.m(s.deposit);

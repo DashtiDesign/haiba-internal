@@ -33,6 +33,7 @@ import { Route as HaibaReservedRouteImport } from './routes/haiba/reserved'
 import { Route as HaibaRewardsRouteImport } from './routes/haiba/rewards'
 import { Route as HaibaSavedRouteImport } from './routes/haiba/saved'
 import { Route as HaibaStatusRouteImport } from './routes/haiba/status'
+import { Route as HaibaStudentRouteImport } from './routes/haiba/student'
 import { Route as HaibaSubscriptionRouteImport } from './routes/haiba/subscription'
 import { Route as HaibaSubscriptionsRouteImport } from './routes/haiba/subscriptions'
 import { Route as HaibaTapRouteImport } from './routes/haiba/tap'
@@ -175,6 +176,11 @@ const HaibaStatusRoute = HaibaStatusRouteImport.update({
   path: '/haiba/status',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HaibaStudentRoute = HaibaStudentRouteImport.update({
+  id: '/haiba/student',
+  path: '/haiba/student',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HaibaSubscriptionRoute = HaibaSubscriptionRouteImport.update({
   id: '/haiba/subscription',
   path: '/haiba/subscription',
@@ -305,6 +311,7 @@ export interface FileRoutesByFullPath {
   '/haiba/rewards': typeof HaibaRewardsRoute
   '/haiba/saved': typeof HaibaSavedRoute
   '/haiba/status': typeof HaibaStatusRoute
+  '/haiba/student': typeof HaibaStudentRoute
   '/haiba/subscription': typeof HaibaSubscriptionRoute
   '/haiba/subscriptions': typeof HaibaSubscriptionsRoute
   '/haiba/tap': typeof HaibaTapRoute
@@ -352,6 +359,7 @@ export interface FileRoutesByTo {
   '/haiba/rewards': typeof HaibaRewardsRoute
   '/haiba/saved': typeof HaibaSavedRoute
   '/haiba/status': typeof HaibaStatusRoute
+  '/haiba/student': typeof HaibaStudentRoute
   '/haiba/subscription': typeof HaibaSubscriptionRoute
   '/haiba/subscriptions': typeof HaibaSubscriptionsRoute
   '/haiba/tap': typeof HaibaTapRoute
@@ -400,6 +408,7 @@ export interface FileRoutesById {
   '/haiba/rewards': typeof HaibaRewardsRoute
   '/haiba/saved': typeof HaibaSavedRoute
   '/haiba/status': typeof HaibaStatusRoute
+  '/haiba/student': typeof HaibaStudentRoute
   '/haiba/subscription': typeof HaibaSubscriptionRoute
   '/haiba/subscriptions': typeof HaibaSubscriptionsRoute
   '/haiba/tap': typeof HaibaTapRoute
@@ -449,6 +458,7 @@ export interface FileRouteTypes {
     | '/haiba/rewards'
     | '/haiba/saved'
     | '/haiba/status'
+    | '/haiba/student'
     | '/haiba/subscription'
     | '/haiba/subscriptions'
     | '/haiba/tap'
@@ -496,6 +506,7 @@ export interface FileRouteTypes {
     | '/haiba/rewards'
     | '/haiba/saved'
     | '/haiba/status'
+    | '/haiba/student'
     | '/haiba/subscription'
     | '/haiba/subscriptions'
     | '/haiba/tap'
@@ -543,6 +554,7 @@ export interface FileRouteTypes {
     | '/haiba/rewards'
     | '/haiba/saved'
     | '/haiba/status'
+    | '/haiba/student'
     | '/haiba/subscription'
     | '/haiba/subscriptions'
     | '/haiba/tap'
@@ -591,6 +603,7 @@ export interface RootRouteChildren {
   HaibaRewardsRoute: typeof HaibaRewardsRoute
   HaibaSavedRoute: typeof HaibaSavedRoute
   HaibaStatusRoute: typeof HaibaStatusRoute
+  HaibaStudentRoute: typeof HaibaStudentRoute
   HaibaSubscriptionRoute: typeof HaibaSubscriptionRoute
   HaibaSubscriptionsRoute: typeof HaibaSubscriptionsRoute
   HaibaTapRoute: typeof HaibaTapRoute
@@ -785,6 +798,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HaibaStatusRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/haiba/student': {
+      id: '/haiba/student'
+      path: '/haiba/student'
+      fullPath: '/haiba/student'
+      preLoaderRoute: typeof HaibaStudentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/haiba/subscription': {
       id: '/haiba/subscription'
       path: '/haiba/subscription'
@@ -959,6 +979,7 @@ const rootRouteChildren: RootRouteChildren = {
   HaibaRewardsRoute: HaibaRewardsRoute,
   HaibaSavedRoute: HaibaSavedRoute,
   HaibaStatusRoute: HaibaStatusRoute,
+  HaibaStudentRoute: HaibaStudentRoute,
   HaibaSubscriptionRoute: HaibaSubscriptionRoute,
   HaibaSubscriptionsRoute: HaibaSubscriptionsRoute,
   HaibaTapRoute: HaibaTapRoute,

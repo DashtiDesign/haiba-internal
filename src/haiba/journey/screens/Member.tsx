@@ -1,3 +1,4 @@
+import { Elsewhere, NotStudent } from "./Edge";
 import { useState, type ReactNode } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import {
@@ -52,20 +53,45 @@ function useQuery() {
   return (useRouterState({ select: (r) => r.location.search }) || {}) as Record<string, unknown>;
 }
 
-function Logo({ brand, size = 40 }: { brand: Brand; size?: number }) {
+/**
+ * Brand mark, the one way a shop or partner is shown everywhere in Haiba.
+ * Rounded square, corner radius 30% of the size. Logo on the brand colour, or the brand's letters when there is no logo.
+ * Sizes in use: 56 (shop rail), 40 to 44 (rows), 28 (badge on a tile), 22 (inline).
+ */
+export function BrandMark({ brand, size = 40 }: { brand: Brand; size?: number }) {
+  const style = {
+    width: size,
+    height: size,
+    background: brand.bg,
+    borderRadius: Math.round(size * 0.3),
+  };
   return brand.logo ? (
-    <img
-      src={brand.logo}
-      alt=""
-      className="jx-logo"
-      style={{ width: size, height: size, background: brand.bg }}
-    />
+    <img src={brand.logo} alt="" className="jx-logo" style={style} />
   ) : (
     <span
       className="jx-logo jx-logo-mark"
-      style={{ width: size, height: size, background: brand.bg, color: brand.ink }}
+      style={{ ...style, color: brand.ink ?? "#FFFFFF", fontSize: Math.round(size * 0.38) }}
     >
       {brand.mark}
+    </span>
+  );
+}
+const Logo = BrandMark;
+
+/** Price line on any item: points to spend (purple) or the value of something free (lime). */
+export function PriceTag({
+  kind,
+  children,
+  off,
+}: {
+  kind: "points" | "worth";
+  children: ReactNode;
+  off?: boolean;
+}) {
+  return (
+    <span className={`jx-price jx-price-${kind} ${off ? "jx-price-off" : ""}`}>
+      {kind === "points" && <img src="/haiba/coins/coin-front.webp" alt="" />}
+      {children}
     </span>
   );
 }
@@ -272,6 +298,8 @@ export function Join() {
   const s = useSession();
   const a = useJourneyActions();
   const go = useNavigate();
+  if (s.student !== "verified") return <NotStudent action="join" />;
+  if (s.elsewhere) return <Elsewhere />;
   return (
     <Screen
       dock={
@@ -375,11 +403,11 @@ export function Paid() {
 
 /* ---------- shared bits for the member screens ---------- */
 
-const BIRD = (n: string) => `/haiba/birds/${n}.png`;
+export const BIRD = (n: string) => `/haiba/birds/${n}.png`;
 const POINTS = 1240;
 
 /** Coloured top panel with the bird, then a white body that overlaps it. Used for every result state. */
-function Result({
+export function Result({
   tone,
   bird,
   back,
@@ -434,7 +462,7 @@ function ItemLine({
   );
 }
 
-function Tag({
+export function Tag({
   tone = "soft",
   icon,
   children,
@@ -452,7 +480,7 @@ function Tag({
 }
 
 /** Group of tappable rows on a white card, Monzo and talabat style. */
-function Group({
+export function Group({
   title,
   end,
   children,
@@ -474,7 +502,7 @@ function Group({
   );
 }
 
-function LinkRow({
+export function LinkRow({
   icon,
   title,
   sub,
@@ -874,7 +902,7 @@ function GiftCard({
       <div className="jx-gc-body">
         <span className="jx-gc-brand">{b.name}</span>
         <span className="jx-gc-item">{g.item}</span>
-        <span className="jx-gc-worth jx-num">{s.t("upWorth", { amount: s.m(g.value) })}</span>
+        <PriceTag kind="worth">{s.t("upWorth", { amount: s.m(g.value) })}</PriceTag>
         {g.limit && <span className="jx-gc-limit">{g.limit}</span>}
       </div>
       {!paused && onPick && (
@@ -1083,8 +1111,8 @@ export function Unipass() {
               <h2 className="jx-h2" style={{ marginTop: 2 }}>
                 {sheet.item}
               </h2>
-              <span className="jx-gc-worth jx-num" style={{ marginTop: 4, display: "block" }}>
-                {s.t("upWorth", { amount: s.m(sheet.value) })}
+              <span style={{ marginTop: 8, display: "flex" }}>
+                <PriceTag kind="worth">{s.t("upWorth", { amount: s.m(sheet.value) })}</PriceTag>
               </span>
             </div>
             <ul className="jx-facts">
@@ -1123,20 +1151,7 @@ export function Unipass() {
 /* ---------- 6 · member offers (subscriptions) ---------- */
 
 function SubMark({ p, size = 40 }: { p: Sub; size?: number }) {
-  return (
-    <span
-      className="jx-logo jx-logo-mark"
-      style={{
-        width: size,
-        height: size,
-        background: p.markBg,
-        color: "#fff",
-        fontSize: size * 0.45,
-      }}
-    >
-      {p.mark}
-    </span>
-  );
+  return <BrandMark brand={{ key: p.id, name: p.name, mark: p.mark, bg: p.markBg }} size={size} />;
 }
 
 export function Subscriptions() {
@@ -1154,7 +1169,7 @@ export function Subscriptions() {
           {SUBS.map((p) => (
             <button
               key={p.id}
-              className="jx-oc"
+              className={`jx-oc ${p.claimed ? "jx-oc-off" : ""}`}
               onClick={() => go("/haiba/subscription?id=" + p.id)}
             >
               <span className="jx-oc-art" style={{ background: p.bg }}>
@@ -1170,9 +1185,13 @@ export function Subscriptions() {
                   <span className="jx-oc-offer">{p.offer}</span>
                   <span className="jx-row-sub">{p.who}</span>
                 </span>
-                <span className="jx-oc-go">
-                  <ArrowRight size={18} className="jx-flip" aria-hidden="true" />
-                </span>
+                {p.claimed ? (
+                  <Tag tone="soft">{s.t("subClaimed")}</Tag>
+                ) : (
+                  <span className="jx-oc-go">
+                    <ArrowRight size={18} className="jx-flip" aria-hidden="true" />
+                  </span>
+                )}
               </span>
             </button>
           ))}
@@ -1191,7 +1210,11 @@ export function Subscription() {
     <Screen
       tone="soft"
       dock={
-        shown ? (
+        p.claimed && !shown ? (
+          <Button variant="primary" disabled>
+            {s.t("subClaimed")}
+          </Button>
+        ) : shown ? (
           <Button variant="primary" icon={<ExternalLink size={18} aria-hidden="true" />}>
             {s.t("subOpen", { name: p.name })}
           </Button>
@@ -1228,6 +1251,11 @@ export function Subscription() {
             <span className="jx-code-toast">
               <Check size={14} strokeWidth={3} aria-hidden="true" /> {s.t("subCopied")}
             </span>
+          </div>
+        ) : p.claimed ? (
+          <div className="jx-code-box jx-code-box-off">
+            <span className="jx-tag jx-tag-soft">{s.t("subClaimed")}</span>
+            <span>{s.t("subClaimedBody")}</span>
           </div>
         ) : (
           <div className="jx-code-box">
@@ -1362,10 +1390,24 @@ export function Membership() {
               {s.t("memRenewTitle", { date: s.d(y.to, { year: true }) })}
             </span>
             <span className="jx-panel-big">{s.t("memRenewSaved", { amount: s.m(27.4) })}</span>
-            <Button variant="lime">{s.t("memRenewCta", { amount: s.m(s.total) })}</Button>
-            <span className="jx-small jx-center-text" style={{ color: "#CFC9E0" }}>
-              {s.t("memRenewCard", { card: cardText(s) })}
-            </span>
+            {s.student === "verified" ? (
+              <>
+                <Button variant="lime">{s.t("memRenewCta", { amount: s.m(s.renewTotal) })}</Button>
+                <span className="jx-small jx-center-text" style={{ color: "#CFC9E0" }}>
+                  {s.t("memRenewPrice")}
+                </span>
+              </>
+            ) : (
+              <div className="jx-panel-warn-in">
+                <span className="jx-row-title">{s.t("stuRenewPanel")}</span>
+                <span className="jx-row-sub">
+                  {s.t("stuRenewPanelSub", { date: s.d(y.to, { year: true }) })}
+                </span>
+                <Button variant="lime" onClick={() => go("/haiba/student?for=renew")}>
+                  {s.t(s.student === "expired" ? "stuCtaExpired" : "stuCtaUnverified")}
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       )}

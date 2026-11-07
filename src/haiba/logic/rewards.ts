@@ -12,45 +12,45 @@ export function useVals() {
     var isNew = (props.member ?? 'Active member') === 'New member';
     var SHOPS = [
       { key: 'cb', name: 'The Coffee Bean', cat: 'Cafes', tags: ['Coffee', 'Dessert'], dist: 780, photo: '#EAD9C6', logo: '/haiba/brands/coffee-bean.webp', bg: '#FFFFFF', visits: 1, live: true, rewards: [
-        { name: 'Free upsize', sub: 'Any drink, one size up', pts: 300, value: 0.3, ph: 'DRINK', img: '/_blob/cfdeab93c544baa3ae4e63b0a0685ee8', phBg: '#EDE4FF', phInk: '#4F25D6', code: '8K3Q' },
-        { name: 'Cookie', sub: 'Chocolate chip or oat', pts: 700, value: 0.7, ph: 'COOKIE', img: '/_blob/efe4891cba0770192685e50c7727c1ab', phBg: '#F6E7D2', phInk: '#7A4E2D', code: '5TR2' },
-        { name: 'Regular drink', sub: 'Hot or iced, regular size', pts: 1900, value: 1.9, ph: 'DRINK', img: '/_blob/cfdeab93c544baa3ae4e63b0a0685ee8', phBg: '#E3DCD6', phInk: '#3B2A22', code: '9MX7' }
+        { name: 'Free upsize', sub: 'Any drink, one size up', pts: 300, value: 0.3, ph: 'DRINK', img: '/haiba/emoji/drink.png', phBg: '#EDE4FF', phInk: '#4F25D6', code: '8K3Q' },
+        { name: 'Cookie', sub: 'Chocolate chip or oat', pts: 700, value: 0.7, ph: 'COOKIE', img: '/haiba/emoji/cookie.png', phBg: '#F6E7D2', phInk: '#7A4E2D', code: '5TR2' },
+        { name: 'Regular drink', sub: 'Hot or iced, regular size', pts: 1900, value: 1.9, ph: 'DRINK', img: '/haiba/emoji/drink.png', phBg: '#E3DCD6', phInk: '#3B2A22', code: '9MX7' }
       ] },
       { key: 'caribou', name: 'Caribou Coffee', cat: 'Cafes', tags: ['Coffee'], dist: 1200, photo: '#D8E8F2', mark: 'C', bg: '#3B2A22', visits: 2, rewards: [
-        { name: 'Free upgrade', sub: 'Any drink, one size up', pts: 200, ph: 'DRINK', img: '/_blob/cfdeab93c544baa3ae4e63b0a0685ee8', phBg: '#EFE6DE', phInk: '#3B2A22' },
-        { name: 'Pastry', sub: 'Croissant or muffin', pts: 900, ph: 'PASTRY', img: '/_blob/249f05272d9c279a06cce209b7e78579', phBg: '#F6E7D2', phInk: '#7A4E2D' }
+        { name: 'Free upgrade', sub: 'Any drink, one size up', pts: 200, ph: 'DRINK', img: '/haiba/emoji/drink.png', phBg: '#EFE6DE', phInk: '#3B2A22' },
+        { name: 'Pastry', sub: 'Croissant or muffin', pts: 900, ph: 'PASTRY', img: '/haiba/emoji/pastry.png', phBg: '#F6E7D2', phInk: '#7A4E2D' }
       ] },
       { key: 'barns', name: 'Barn’s', cat: 'Cafes', tags: ['Coffee', 'Dessert'], dist: 650, photo: '#E6EFD9', mark: 'B', bg: '#2F6B3A', visits: 3, rewards: [
-        { name: 'Cookie', sub: 'Any cookie', pts: 500, ph: 'COOKIE', img: '/_blob/efe4891cba0770192685e50c7727c1ab', phBg: '#F6E7D2', phInk: '#7A4E2D' }
+        { name: 'Cookie', sub: 'Any cookie', pts: 500, ph: 'COOKIE', img: '/haiba/emoji/cookie.png', phBg: '#F6E7D2', phInk: '#7A4E2D' }
       ] },
       { key: 'teatime', name: 'Tea Time', cat: 'Cafes', tags: ['Tea'], dist: 780, photo: '#F3D9D6', mark: 'T', bg: '#B11D1D', visits: 0, rewards: [
-        { name: 'Karak', sub: 'Regular cup', pts: 250, ph: 'KARAK', img: '/_blob/970d79b8d5a81a41c76c59044162a24c', phBg: '#FFF1D6', phInk: '#8A5A00' }
+        { name: 'Karak', sub: 'Regular cup', pts: 250, ph: 'KARAK', img: '/haiba/emoji/tea.png', phBg: '#FFF1D6', phInk: '#8A5A00' }
       ] },
       { key: 'crepele', name: 'Crepele', cat: 'Cafes', tags: ['Dessert'], dist: 900, photo: '#F6E1E1', mark: 'Cr', bg: '#C2185B', visits: 0, rewards: [
-        { name: 'Black coffee', sub: 'Hot or iced', pts: 300, ph: 'COFFEE', img: '/_blob/cfdeab93c544baa3ae4e63b0a0685ee8', phBg: '#E3DCD6', phInk: '#3B2A22' },
-        { name: 'Mini crepe', sub: 'Nutella or strawberry', pts: 800, ph: 'CREPE', img: '/_blob/110f04e1f78509f33375007653c36170', phBg: '#FDE4E4', phInk: '#B11D1D' }
+        { name: 'Black coffee', sub: 'Hot or iced', pts: 300, ph: 'COFFEE', img: '/haiba/emoji/drink.png', phBg: '#E3DCD6', phInk: '#3B2A22' },
+        { name: 'Mini crepe', sub: 'Nutella or strawberry', pts: 800, ph: 'CREPE', img: '/haiba/emoji/crepe.png', phBg: '#FDE4E4', phInk: '#B11D1D' }
       ] },
       { key: 'jasmis', name: 'Jasmi’s', cat: 'Restaurants', tags: ['Fast food', 'Burgers'], dist: 1500, photo: '#FBE0D6', mark: 'J', bg: '#D62828', visits: 4, rewards: [
-        { name: 'Soft drink', sub: 'Any can or bottle', pts: 350, ph: 'DRINK', img: '/_blob/c8e70b460b3f9f7794cdca22ce6e8d8c', phBg: '#FDE4E4', phInk: '#B11D1D' },
-        { name: 'Fries', sub: 'Regular size', pts: 600, ph: 'FRIES', img: '/_blob/8a1aceef084613d7f84dc2a86c4be8fb', phBg: '#FFF1D6', phInk: '#8A5A00' }
+        { name: 'Soft drink', sub: 'Any can or bottle', pts: 350, ph: 'DRINK', img: '/haiba/emoji/iced.png', phBg: '#FDE4E4', phInk: '#B11D1D' },
+        { name: 'Fries', sub: 'Regular size', pts: 600, ph: 'FRIES', img: '/haiba/emoji/fries.png', phBg: '#FFF1D6', phInk: '#8A5A00' }
       ] },
       { key: 'saffron', name: 'Saffron Kitchen', cat: 'Restaurants', tags: ['Indian'], dist: 2100, photo: '#FCE7C8', mark: 'S', bg: '#E07A1F', visits: 1, rewards: [
-        { name: 'Samosa', sub: '2 pieces', pts: 400, ph: 'SAMOSA', img: '/_blob/7966dbe5a66af347ddac1fc8f64b3428', phBg: '#FFF1D6', phInk: '#8A5A00' }
+        { name: 'Samosa', sub: '2 pieces', pts: 400, ph: 'SAMOSA', img: '/haiba/emoji/samosa.png', phBg: '#FFF1D6', phInk: '#8A5A00' }
       ] },
       { key: 'wingman', name: 'Wingman', cat: 'Restaurants', tags: ['Fast food', 'Wings'], dist: 1100, photo: '#FDE9DA', logo: '/haiba/brands/wingman.webp', bg: '#F9F9F9', visits: 0, rewards: [
-        { name: '6 wings', sub: 'Any sauce', pts: 900, ph: 'WINGS', img: '/_blob/9ccd22feb952f171794172a117d49029', phBg: '#FDE9DA', phInk: '#9A4A12' }
+        { name: '6 wings', sub: 'Any sauce', pts: 900, ph: 'WINGS', img: '/haiba/emoji/wings.png', phBg: '#FDE9DA', phInk: '#9A4A12' }
       ] },
       { key: 'grip', name: 'Grip', cat: 'Fitness', tags: ['Gym'], dist: 2600, photo: '#E2E2E2', logo: '/haiba/brands/grip.webp', bg: '#000000', visits: 0, rewards: [
-        { name: 'Protein shake', sub: 'After your workout', pts: 500, ph: 'SHAKE', img: '/_blob/88e03b3a3060701a521e92ab3fc0169d', phBg: '#E6F4EA', phInk: '#1E5E2E' }
+        { name: 'Protein shake', sub: 'After your workout', pts: 500, ph: 'SHAKE', img: '/haiba/emoji/shake.png', phBg: '#E6F4EA', phInk: '#1E5E2E' }
       ] },
       { key: 'albayan', name: 'Albayan', cat: 'Self care', tags: ['Perfume'], dist: 3100, photo: '#ECE6F7', logo: '/haiba/brands/albayan.webp', bg: '#FFFFFF', visits: 0, rewards: [
-        { name: 'Travel perfume', sub: '10ml', pts: 2000, ph: 'PERFUME', img: '/_blob/09310fbc521bbf3a9e4a3123b5dd572c', phBg: '#F3EEFF', phInk: '#4F25D6' }
+        { name: 'Travel perfume', sub: '10ml', pts: 2000, ph: 'PERFUME', img: '/haiba/emoji/perfume.png', phBg: '#F3EEFF', phInk: '#4F25D6' }
       ] },
       { key: 'vox', name: 'VOX Cinemas', cat: 'Entertainment', tags: ['Cinema'], dist: 4200, photo: '#FFF4CC', logo: '/haiba/brands/vox.webp', bg: '#FFFFFF', visits: 0, rewards: [
-        { name: 'Popcorn', sub: 'Regular, salted or sweet', pts: 600, ph: 'POPCORN', img: '/_blob/62ada640f1840ceac1e5d1e8785a4bd0', phBg: '#FFF4CC', phInk: '#8A6A00' }
+        { name: 'Popcorn', sub: 'Regular, salted or sweet', pts: 600, ph: 'POPCORN', img: '/haiba/emoji/popcorn.png', phBg: '#FFF4CC', phInk: '#8A6A00' }
       ] },
       { key: 'alkuwaiti', name: 'Alkuwaiti', cat: 'Car care', tags: ['Car wash'], dist: 5300, photo: '#E9F1FB', logo: '/haiba/brands/alkuwaiti.webp', bg: '#FFFFFF', visits: 0, rewards: [
-        { name: 'Interior clean', sub: 'Any car size', pts: 1500, ph: 'CAR', img: '/_blob/9dadbc27e7c59cba16bf71739c3f4590', phBg: '#E9F1FB', phInk: '#1D4E89' }
+        { name: 'Interior clean', sub: 'Any car size', pts: 1500, ph: 'CAR', img: '/haiba/emoji/car.png', phBg: '#E9F1FB', phInk: '#1D4E89' }
       ] }
     ];
     if (isNew) SHOPS.forEach(function (s) { s.visits = 0; });
@@ -181,8 +181,10 @@ export function useVals() {
       return { name: c, img: CATIMG[c], sub: cardSub(inC), subInk: cardInk(inC), aria: c + ', ' + inC.length + ' shops', open: openCat(c) };
     });
     var mineShops = SHOPS.filter(function (s) { return s.visits > 0; });
+    // Item tiles take their colour from the shop category, the same as Unipass gifts.
+    var TINT = { Cafes: '#FFEFD9', Restaurants: '#FFEFD9', 'Fast food': '#FFEFD9', Desserts: '#FFEFD9', Fitness: '#FCE4F0', 'Self care': '#FCE4F0', Entertainment: '#EDE4FF', 'Car care': '#DDF1FF' };
     var canGet = [];
-    SHOPS.forEach(function (s) { s.rewards.forEach(function (d) { if (d.pts <= left) canGet.push({ shop: s.name, name: d.name, img: d.img, ph: d.ph, phBg: d.phBg, phInk: d.phInk, pts: d.pts.toLocaleString('en-US'), p: d.pts, open: openShop(s.key) }); }); });
+    SHOPS.forEach(function (s) { s.rewards.forEach(function (d) { if (d.pts <= left) canGet.push({ shop: s.name, name: d.name, img: d.img, tint: TINT[s.cat] || '#F3F0FA', logo: s.logo || '', hasLogo: !!s.logo, noLogo: !s.logo, mark: s.mark || s.name.charAt(0), bg: s.bg, ph: d.ph, phBg: d.phBg, phInk: d.phInk, pts: d.pts.toLocaleString('en-US'), p: d.pts, open: openShop(s.key) }); }); });
     canGet.sort(function (a, b) { return b.p - a.p; });
     return Object.assign(sheetFlat, {
       balance: left.toLocaleString('en-US'),

@@ -183,8 +183,20 @@ export default function Rewards() {
                 {(v.canGet || []).map((g: any, idx0: number) => (
                   <Fragment key={idx0}>
                     <button onClick={g.open} className="hb-press" style={{ font: "inherit", flex: "none", width: "140px", border: "0", padding: "0", cursor: "pointer", textAlign: "left", background: "#FFFFFF", color: "#1E1B2E", borderRadius: "16px", overflow: "hidden", boxShadow: "0 0 0 1px #ECE8F5" }}>
-                      <span style={{ height: "84px", background: g.phBg, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <Artwork src={g.img} alt="" style={{ height: "64px", width: "64px", objectFit: "contain", display: "block" }} />
+                      <span style={{ position: "relative", height: "84px", background: g.tint, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <Artwork src={g.img} alt="" style={{ height: "60px", width: "60px", objectFit: "contain", display: "block" }} />
+                        <span style={{ position: "absolute", top: "8px", left: "8px", width: "24px", height: "24px", borderRadius: "7px", overflow: "hidden", background: g.bg, color: "#FFFFFF", fontSize: "10px", fontWeight: "800", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 0 2px #FFFFFF" }}>
+                          {g.hasLogo ? (
+                            <>
+                            <Artwork src={g.logo} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                            </>
+                          ) : null}
+                          {g.noLogo ? (
+                            <>
+                            {g.mark}
+                            </>
+                          ) : null}
+                        </span>
                       </span>
                       <span style={{ display: "flex", flexDirection: "column", gap: "3px", padding: "9px 10px 10px 10px" }}>
                         <span style={{ fontSize: "12px", fontWeight: "700", color: "#6B6880", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>

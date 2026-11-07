@@ -131,6 +131,7 @@ export type Sub = {
   markBg: string;
   who: string;
   terms: string[];
+  claimed?: boolean; // every code in the partner's pool is taken
 };
 
 export const SUBS: Sub[] = [
@@ -176,6 +177,7 @@ export const SUBS: Sub[] = [
     mark: "C",
     markBg: "#D62828",
     who: "New CinePass accounts",
+    claimed: true,
     terms: ["New CinePass accounts only.", "One code per member."],
   },
 ];

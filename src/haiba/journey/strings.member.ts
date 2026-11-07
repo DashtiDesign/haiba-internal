@@ -234,10 +234,58 @@ export const memberEn = {
   helpSub: "Quick answers about Haiba",
   helpChat: "Chat with us",
   helpChatSub: "We usually reply within 1 hour",
+  // edge states, 7 Nov
+  countryBh: "Bahrain",
+  countrySa: "Saudi Arabia",
+  stuTagUnverified: "Students only",
+  stuTagExpired: "Student status expired",
+  stuTitleUnverified: "Verify you're a student first",
+  stuTitleExpired: "Your student status has expired",
+  stuBodyUnverified:
+    "Haiba is for students. Verify your student status in Unipal, then come back to {action}.",
+  stuBodyExpired: "Renew your student status in Unipal, then come back to {action}.",
+  stuActReserve: "reserve your spot",
+  stuActJoin: "join Haiba",
+  stuActRenew: "renew Haiba",
+  stuStep1: "Open your profile in Unipal",
+  stuStep2: "Add your student email or student ID",
+  stuStep3: "We check it and tell you when it is done",
+  stuCtaUnverified: "Verify in Unipal",
+  stuCtaExpired: "Renew my student status",
+  stuNotNow: "Not now",
+  stuRenewPanel: "Renew your student status first",
+  stuRenewPanelSub:
+    "Your Haiba year carries on until {date}. To renew Haiba, your student status needs to be active.",
+  fullTag: "All {cap} spots taken",
+  fullTitle: "All spots in {country} are taken",
+  fullBody: "We capped reservations at {cap} in {country}. Haiba opens to every student on {date}.",
+  fullRemind: "Remind me when Haiba opens",
+  fullReminded: "Done. We will remind you on {date}.",
+  fullNote: "No payment now. You join at the price on the day.",
+  spotsLeft: "Only {n} spots left in {country}",
+  elseTitle: "Your Haiba is in {country}",
+  elseBodyReserved:
+    "You reserved Haiba in {country}. For now, Haiba works in the country you reserved in.",
+  elseBodyMember:
+    "You joined Haiba in {country}. For now, Haiba works in the country you joined in.",
+  elseHow: "Switch your country in Unipal to {country} to see your Haiba.",
+  elseKeep: "Nothing has changed with your {what}.",
+  elseWhatReserved: "reservation or your locked price",
+  elseWhatMember: "membership, points or gifts",
+  elseCta: "Got it",
+  subClaimed: "All claimed",
+  subClaimedBody:
+    "All codes for this offer have been claimed. If more come in, it shows here again.",
+  memRenewPrice: "Price for your next year, VAT included. Prices can change from year to year.",
+  loading: "Loading",
 };
 export type MemberKey = keyof typeof memberEn;
 
 export const FAQ: { q: string; a: string }[] = [
+  {
+    q: "When do I get my first gift?",
+    a: "The month you join, even if you join late in the month. You pay for 12 months, so you get 12 gifts.",
+  },
   {
     q: "What is the deposit?",
     a: "A small payment that reserves your spot and locks your price. It is part of your yearly price, not extra.",

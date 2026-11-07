@@ -166,13 +166,13 @@ export default function Hub() {
               </span>
             </span>
             <span style={{ position: "relative", fontFamily: "Figtree, system-ui, sans-serif", fontSize: "25px", fontWeight: "800", letterSpacing: "-0.02em", lineHeight: "1.1", maxWidth: "200px", marginTop: "4px" }}>
-              {"Pick your October gift"}
+              {v.giftTitle}
             </span>
             <span style={{ position: "relative", display: "flex", alignItems: "center", gap: "12px", marginTop: "12px" }}>
               <span style={{ display: "flex", paddingLeft: "8px" }}>
                 {(v.giftMarks || []).map((g: any, idx0: number) => (
                   <Fragment key={idx0}>
-                    <span style={{ width: "34px", height: "34px", marginLeft: "-8px", borderRadius: "50%", overflow: "hidden", background: "#FFFFFF", color: "#1F2600", border: "2px solid #C0F402", fontFamily: "Figtree, system-ui, sans-serif", fontSize: "12px", fontWeight: "800", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <span style={{ width: "34px", height: "34px", marginLeft: "-8px", borderRadius: "10px", overflow: "hidden", background: "#FFFFFF", color: "#1F2600", border: "2px solid #C0F402", fontFamily: "Figtree, system-ui, sans-serif", fontSize: "12px", fontWeight: "800", display: "flex", alignItems: "center", justifyContent: "center" }}>
                       {g.hasLogo ? (
                         <>
                         <Artwork src={g.logo} alt={g.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
@@ -249,12 +249,29 @@ export default function Hub() {
             {(v.spend || []).map((u: any, idx0: number) => (
               <Fragment key={idx0}>
                 <Link className="hb-press" style={{ textDecoration: "none", color: "#1E1B2E", background: "#FFFFFF", border: "1px solid #E9E5F4", borderRadius: "16px", overflow: "hidden", display: "flex", flexDirection: "column", boxShadow: "0 6px 16px rgba(76,52,140,0.06)" }} to="/haiba/rewards">
-                  <span style={{ height: "76px", background: u.bg, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <Artwork src={u.logo} alt={u.brand} style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }} />
+                  <span style={{ position: "relative", height: "76px", background: u.tint, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <Artwork src={u.img} alt="" style={{ width: "52px", height: "52px", objectFit: "contain", display: "block" }} />
+                    <span style={{ position: "absolute", top: "7px", left: "7px", width: "22px", height: "22px", borderRadius: "7px", overflow: "hidden", background: u.bg, color: "#FFFFFF", fontSize: "10px", fontWeight: "800", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 0 2px #FFFFFF" }}>
+                      {u.hasLogo ? (
+                        <>
+                        <Artwork src={u.logo} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                        </>
+                      ) : null}
+                      {u.noLogo ? (
+                        <>
+                        {u.mark}
+                        </>
+                      ) : null}
+                    </span>
                   </span>
                   <span style={{ display: "flex", flexDirection: "column", gap: "6px", padding: "9px 10px 10px 10px", borderTop: "1px solid #F1EFF7" }}>
-                    <span style={{ fontSize: "13.5px", fontWeight: "700", lineHeight: "1.2", height: "2.4em", display: "-webkit-box", WebkitLineClamp: "2", WebkitBoxOrient: "vertical", overflow: "hidden", overflowWrap: "anywhere" }}>
-                      {u.name}
+                    <span style={{ display: "flex", flexDirection: "column", gap: "1px", minWidth: "0" }}>
+                      <span style={{ fontSize: "11.5px", fontWeight: "700", color: "#6B6880", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                        {u.brand}
+                      </span>
+                      <span style={{ fontSize: "13.5px", fontWeight: "800", lineHeight: "1.2", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                        {u.name}
+                      </span>
                     </span>
                     <span style={{ alignSelf: "flex-start", display: "flex", alignItems: "center", gap: "4px", fontSize: "12px", fontWeight: "800", borderRadius: "999px", padding: "3px 8px 3px 4px", background: u.pillBg, color: u.pillInk }}>
                       <Artwork src="/haiba/coins/coin-front.webp" alt="" style={{ width: "14px", height: "14px", objectFit: "contain", display: "block", flex: "none", opacity: u.dotOp }} />
@@ -289,7 +306,7 @@ export default function Hub() {
                     <Fragment key={idx1}>
                       <div style={{ display: "flex", alignItems: "center", gap: "12px", padding: "10px 0" }}>
                         <span style={{ position: "relative", width: "42px", height: "42px", flex: "none" }}>
-                          <span style={{ width: "42px", height: "42px", borderRadius: "50%", background: t.bg, color: t.ink, fontSize: "13.5px", fontWeight: "800", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          <span style={{ width: "42px", height: "42px", borderRadius: "13px", background: t.bg, color: t.ink, fontSize: "13.5px", fontWeight: "800", display: "flex", alignItems: "center", justifyContent: "center" }}>
                             {t.mark}
                           </span>
                           <span style={{ position: "absolute", right: "-3px", bottom: "-3px", width: "19px", height: "19px", boxSizing: "border-box", borderRadius: "50%", background: t.badgeBg, color: t.badgeInk, border: "2px solid #FFFFFF", fontSize: "9px", fontWeight: "800", display: "flex", alignItems: "center", justifyContent: "center" }}>

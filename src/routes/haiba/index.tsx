@@ -4,6 +4,8 @@ import { Navigate } from "@/haiba/nav";
 import { useSession } from "@/haiba/journey/session";
 import { pathFor } from "@/haiba/journey/actions";
 import { Screen } from "@/haiba/journey/ui";
+import { Elsewhere } from "@/haiba/journey/screens/Edge";
+import { Skeleton, useQuery } from "@/haiba/journey/Skeleton";
 
 export const Route = createFileRoute("/haiba/")({
   head: () => ({
@@ -28,7 +30,10 @@ export const Route = createFileRoute("/haiba/")({
 /** The Haiba tab: every student lands on the screen for their state. Members see the hub. */
 function HaibaTab() {
   const s = useSession();
+  const q = useQuery();
   if (!s.hb.ready || !s.valid) return <Screen>{null}</Screen>; // loading, or the safe error page
+  if (s.elsewhere) return <Elsewhere />;
+  if (q["loading"] != null) return <Skeleton kind="hub" />;
   const to = pathFor(s.journey.status);
   if (to !== "/haiba") return <Navigate to={to} replace />;
   return <Hub />;

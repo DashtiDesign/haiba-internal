@@ -375,6 +375,36 @@ export default function PrototypePanel() {
                     style={input}
                   />
                 </Field>
+                <Field label={`Spots cap, ${CURRENCY[c] === "BHD" ? "Bahrain" : "Saudi"}`}>
+                  <input
+                    type="number"
+                    value={st.spotsCap[c]}
+                    onChange={(e) =>
+                      hb.setSettings({
+                        spotsCap: {
+                          ...st.spotsCap,
+                          [c]: Math.max(0, Math.round(Number(e.target.value))),
+                        },
+                      })
+                    }
+                    style={input}
+                  />
+                </Field>
+                <Field label="Spots taken">
+                  <input
+                    type="number"
+                    value={st.spotsTaken[c]}
+                    onChange={(e) =>
+                      hb.setSettings({
+                        spotsTaken: {
+                          ...st.spotsTaken,
+                          [c]: Math.max(0, Math.round(Number(e.target.value))),
+                        },
+                      })
+                    }
+                    style={input}
+                  />
+                </Field>
                 <Field label="Hold days after launch">
                   <input
                     type="number"
@@ -412,6 +442,21 @@ export default function PrototypePanel() {
                   </button>
                 </div>
               </div>
+              <Chips>
+                {(["verified", "unverified", "expired"] as const).map((v) => (
+                  <button
+                    key={v}
+                    style={chip(st.student === v)}
+                    onClick={() => hb.setSettings({ student: v })}
+                  >
+                    {v === "verified"
+                      ? "Student verified"
+                      : v === "unverified"
+                        ? "Not verified"
+                        : "Student status expired"}
+                  </button>
+                ))}
+              </Chips>
               <Chips>
                 <button style={chip(false)} onClick={() => hb.set({ settings: DEFAULT_SETTINGS })}>
                   Reset prices and dates
