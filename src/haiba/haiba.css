@@ -517,3 +517,17 @@ html.hb-tray-open body {
 .pp-fields .pp-field { margin-top: 0; }
 .pp-field input { width: 100%; height: 44px; border: 1px solid #e2dcf2; border-radius: 10px; padding: 0 10px; font: 500 16px Figtree, system-ui, sans-serif; color: #1e1b2e; background: #fff; }
 .pp-card > .pp-hint:first-of-type { margin-top: 0; }
+
+/* 8 Nov: edge to edge Haiba banner on the Unipal home. Sizes follow the banner's own width (cqw),
+   so it reads the same on a 360 or 430 phone and in the phone frame on a laptop.
+   Type: a small lime wordmark as the eyebrow, one tight two line headline, a compact lime button.
+   The block sits in the calm top left and ends above the skyline. */
+.hb-home-banner { position: relative; display: block; width: 100%; aspect-ratio: 1768 / 993; overflow: hidden; container-type: inline-size;
+  background-color: #5a2fe8; background-size: cover; background-position: center; color: #fff; text-decoration: none; }
+.hb-home-banner picture, .hb-home-banner picture img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; }
+.hb-home-banner-text { position: absolute; inset-inline-start: 6cqw; top: 7.4cqw; width: 46cqw; display: flex; flex-direction: column; align-items: flex-start; font-family: Figtree, system-ui, sans-serif; }
+.hb-home-banner-logo { height: 4.4cqw; width: auto; display: block; margin-inline-start: -0.3cqw; }
+.hb-home-banner-title { margin-top: 2.4cqw; font-size: 6.9cqw; font-weight: 800; line-height: 1; letter-spacing: -0.028em; text-wrap: balance; text-shadow: 0 0.4cqw 3cqw rgba(30, 10, 120, 0.3); }
+.hb-home-banner-cta { margin-top: 3.4cqw; display: inline-flex; align-items: center; gap: 1cqw; padding: 1.7cqw 2.9cqw 1.7cqw 3.4cqw; border-radius: 999px; background: #c0f402; color: #1e1b2e;
+  font-size: 3.15cqw; font-weight: 800; letter-spacing: 0.005em; line-height: 1.2; box-shadow: 0 0.6cqw 2cqw rgba(30, 10, 120, 0.28); }
+.hb-home-banner-cta svg { width: 2.6cqw; height: 2.6cqw; }

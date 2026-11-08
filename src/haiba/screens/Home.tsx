@@ -1,7 +1,6 @@
-import Artwork from "../Artwork";
-import haibaLogo from "@/assets/haiba/logo-purple.svg.asset.json";
 import { Link } from "../nav";
 import { useHaiba } from "../store";
+import { useSession } from "../journey/session";
 
 /**
  * A stand-in for the Unipal home screen, styled like the live app.
@@ -9,6 +8,15 @@ import { useHaiba } from "../store";
  */
 
 const BLUE = "#001A9C";
+
+/** Home banner art, three widths per format. The browser picks the smallest that fills the screen. */
+const bannerSet = (r: "bh" | "sa", ext: "avif" | "webp") =>
+  [640, 960, 1290].map((w) => `/haiba/banners/home-${r}-${w}.${ext} ${w}w`).join(", ");
+// 24 x 14 blurred previews (about 250 bytes each), shown until the real image arrives.
+const HOME_BANNER_LQIP = {
+  bh: "data:image/webp;base64,UklGRvAAAABXRUJQVlA4IOQAAADQBQCdASoYAA4APrVWoUsnJSMhsAgA4BaJbACdMoMlsn/skv9iiAGOgAHASo1pE4YBQBK+qxQAAN+4vGtC4uJWPkIpguJuWMj8wcC3RygV7k3SINSMUSjXMgI4H/8bx9wQZbPss/xHZS2v7mTKmVEAiCsL/1q2/dx86e+jRHT0CjMS44MZjPrKBx1McNlX7P1GCCC2HT6SC1Ps+HXMTLM4RC8/BMzPnczdXqVH8BdlPudUnDMQwWyAPn9P+n/T/8f9b5zMB+4dOO0ApIzYAdIe2bxqDP936DL9lft0WBVz2JAAAAA=",
+  sa: "data:image/webp;base64,UklGRuwAAABXRUJQVlA4IOAAAABQBQCdASoYAA4APrVQoUqnJSMhsAgA4BaJbACdMoFWAbyaV4HtsvT+mN/Jj6d3pqKGZkAA9Gp/VYN6m8otl+yYYtd98A2DLeu+7ENQidcTfkbsxMaFoVkA4C6qpIaZESVt3btzOqxQD6kHbz5gXcLMrE7p+l7//ttBv/8WGEnwf/N/XBYf//BYeCoovu1eb13P+QXIJYkkD2ZvXrE7RdLFs2FAzQ2vIOPEGbLu00cyiJ14LOeggmJlz2vHGDxfWACxjme4chMR5OaSXhMA4/+Gyrj9WSV2gQplBbU4eF5wAA==",
+} as const;
 
 const cats = [
   { label: "Cafes", bg: "#F1E7DC" },
@@ -50,6 +58,8 @@ function NavIcon({ d, fill }: { d: string; fill?: boolean | undefined }) {
 export default function Home() {
   const { state } = useHaiba();
   const member = state.member !== "none";
+  // The country comes straight from the app's link, so the right banner loads first time.
+  const region = useSession().c;
   return (
     <div
       className="pg-home"
@@ -160,84 +170,49 @@ export default function Home() {
         ))}
       </div>
 
+      {/* 8 Nov: edge to edge Haiba banner. The art is the Haiba card for the student's country (Bahrain
+          waterfront or Riyadh) with the mascot bursting out; the words stay live text so they can change
+          language and show a member line. Loads fast: AVIF (16 to 53 KB) or WebP by screen width, a 250 byte
+          blurred preview shows instantly, and the box keeps its size so nothing jumps. */}
       <Link
         to="/haiba"
-        style={{
-          display: "block",
-          textDecoration: "none",
-          color: "#1E1B2E",
-          margin: "26px 0 0 0",
-          position: "relative",
-        }}
+        className="hb-home-banner"
+        style={{ backgroundImage: `url(${HOME_BANNER_LQIP[region]})`, marginTop: 26 }}
       >
-        <div
-          style={{
-            background: "#ECE6FF",
-            padding: "30px 16px 30px 16px",
-            position: "relative",
-            overflow: "hidden",
-            minHeight: 150,
-          }}
-        >
+        <picture>
+          <source type="image/avif" srcSet={bannerSet(region, "avif")} sizes="100vw" />
+          <source type="image/webp" srcSet={bannerSet(region, "webp")} sizes="100vw" />
           <img
-            src={haibaLogo.url}
-            alt="Haiba"
-            style={{ height: 30, width: "auto", display: "block" }}
+            src={`/haiba/banners/home-${region}-960.webp`}
+            width={1768}
+            height={993}
+            alt=""
+            fetchPriority="high"
+            decoding="async"
           />
-          <div
-            style={{
-              fontFamily: "Figtree, system-ui, sans-serif",
-              fontSize: 24,
-              fontWeight: 800,
-              letterSpacing: "-0.02em",
-              marginTop: 12,
-              maxWidth: 220,
-              lineHeight: 1.15,
-            }}
-          >
-            {member ? "Your points are waiting" : "Points on every offer you use"}
-          </div>
-          <div
-            style={{ fontSize: 15, fontWeight: 600, color: "#6C3FFA", marginTop: 6, maxWidth: 220 }}
-          >
-            {member ? "Open Haiba" : "Plus a free gift every month"}
-          </div>
-          <span
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              marginTop: 14,
-              background: "#6C3FFA",
-              color: "#FFFFFF",
-              fontSize: 16,
-              fontWeight: 700,
-              borderRadius: 999,
-              padding: "10px 20px",
-            }}
-          >
-            {member ? "Open" : "See Haiba"}
+        </picture>
+        <span className="hb-home-banner-text">
+          <img src="/haiba/logo-lime.svg" alt="Haiba" className="hb-home-banner-logo" />
+          <span className="hb-home-banner-title">
+            {member ? "Your points are waiting" : "Free stuff, every month"}
+          </span>
+          <span className="hb-home-banner-cta">
+            {member ? "Open Haiba" : "See Haiba"}
             <svg
               aria-hidden="true"
-              width="14"
-              height="14"
+              width="12"
+              height="12"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="3"
+              strokeWidth="3.2"
               strokeLinecap="round"
               strokeLinejoin="round"
             >
               <path d="M9 6l6 6-6 6" />
             </svg>
           </span>
-          <Artwork
-            priority
-            src="/haiba/birds/04-peek.png"
-            alt=""
-            style={{ position: "absolute", right: 0, bottom: -60, height: 230, width: "auto" }}
-          />
-        </div>
+        </span>
       </Link>
 
       <div style={{ padding: "26px 16px 0 16px", fontSize: 22, fontWeight: 700 }}>
