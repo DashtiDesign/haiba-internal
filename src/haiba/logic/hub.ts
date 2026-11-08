@@ -439,7 +439,7 @@ export function useVals() {
     birdClass: "", // no code motion on the mascot; tapping swaps to the jump pose only
     birdSrc: state.jump ? "/haiba/birds/02-jump.png" : "/haiba/birds/01-cheer.png",
     poke: function () {
-      setState({ jump: true, tipOpen: !state.tipOpen });
+      setState({ jump: true });
       setTimeout(function () {
         setState({ jump: false });
       }, 720);

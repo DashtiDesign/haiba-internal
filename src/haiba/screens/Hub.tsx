@@ -156,30 +156,6 @@ export default function Hub() {
           </span>
           {"How it works"}
         </Link>
-        {v.tipOpen ? (
-          <>
-            <div
-              className="hb-pop"
-              style={{
-                position: "absolute",
-                left: "16px",
-                top: "60px",
-                width: "118px",
-                zIndex: "3",
-                background: "#FFFFFF",
-                borderRadius: "12px 12px 12px 4px",
-                padding: "12px 14px",
-                fontSize: "13.5px",
-                fontWeight: "600",
-                lineHeight: "1.35",
-                boxShadow: "0 14px 30px rgba(30,27,46,0.16)",
-                transformOrigin: "bottom left",
-              }}
-            >
-              {v.tip}
-            </div>
-          </>
-        ) : null}
         <div
           style={{
             position: "relative",

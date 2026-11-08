@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from "react";
 
 /**
  * The hub mascot (8 Nov). Real animated loops made with Seedance 2.0 from the mascot reference sheet.
- * When the hub opens he plays one reveal, picked at random (shades on, or the coin trick), then settles into the idle
- * loop (hair, breathing, a small head move), which repeats until the next tap. Each tap plays the other reveal, then idle again.
+ * When the hub opens he plays one reveal, picked at random (shades on, or the coin trick). Then he holds still for a few
+ * seconds, plays the short idle (hair, breathing, a blink), holds still again, and so on until the next tap.
+ * Each tap plays the other reveal, then the same rest and idle rhythm.
  * Every loop starts and ends on the still frame, so the swaps never jump.
  * When the phone asks for less motion he stays on the still pose.
  */
@@ -15,8 +16,11 @@ const LOOPS = [
 ];
 const BOX = [-27, -45, 220, 300] as const;
 const STILL = "/haiba/motion/hub-still.webp";
-// Loops forever, 4 s. Starts and ends on the still frame, the same as the reveals.
+// Plays once, 3.9 s (hair, breathing, a blink). Starts and ends on the still frame, the same as the reveals.
 const IDLE = "/haiba/motion/hub-idle.webp";
+const IDLE_MS = 3900;
+// He holds the still pose this long (random in the range) before each idle.
+const REST_MS = [5000, 8000] as const;
 
 export default function HubBird({ onTap }: { onTap?: () => void }) {
   // The image now showing. Each play gets a fresh object URL, so the animation always starts from frame one.
@@ -39,10 +43,18 @@ export default function HubBird({ onTap }: { onTap?: () => void }) {
     timer.current = window.setTimeout(settle, LOOPS[i]!.ms);
   };
 
-  // After a reveal he settles into the idle loop (or the still pose if it has not loaded yet).
+  // After a reveal or an idle he holds the still pose for a few seconds, then plays the idle once.
   const settle = () => {
-    if (idle.current) show(URL.createObjectURL(idle.current), true);
-    else show(STILL, false);
+    show(STILL, false);
+    window.clearTimeout(timer.current);
+    const rest = REST_MS[0] + Math.random() * (REST_MS[1] - REST_MS[0]);
+    timer.current = window.setTimeout(playIdle, rest);
+  };
+
+  const playIdle = () => {
+    if (!idle.current) return settle();
+    show(URL.createObjectURL(idle.current), true);
+    timer.current = window.setTimeout(settle, IDLE_MS);
   };
 
   const show = (u: string, isObject: boolean) => {
