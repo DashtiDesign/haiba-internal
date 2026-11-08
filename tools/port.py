@@ -68,6 +68,11 @@ LINKS = {
 
 # Extra text patches on the screen (TSX) and logic (TS) files.
 SCREEN = {
+    # 8 Nov: the hub bird is the HubBird loop player (real animated loops), not a still.
+    "Hub": [
+        ('import Artwork from "../Artwork";', 'import Artwork from "../Artwork";\nimport HubBird from "../HubBird";'),
+        (re.compile(r'<button\s+aria-label="Say hi to the Unipal bird".*?</button>', re.S), '<HubBird onTap={v.poke} />'),
+    ],
     # Lovable: the shop back button returns to the previous screen; hook class for small phones.
     "Shop": [
         ('import { useHaiba } from "../store";', 'import { useHaiba } from "../store";\nimport { useRouter } from "@tanstack/react-router";\nimport { Button } from "@/components/ui/button";'),

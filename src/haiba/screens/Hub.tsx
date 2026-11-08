@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import { Link, useNavigate } from "../nav";
 import { useHaiba } from "../store";
 import Artwork from "../Artwork";
+import HubBird from "../HubBird";
 import haibaLogo from "@/assets/haiba/logo-purple.svg.asset.json";
 import { useVals } from "../logic/hub";
 
@@ -100,30 +101,7 @@ export default function Hub() {
             pointerEvents: "none",
           }}
         >
-          <button
-            aria-label="Say hi to the Unipal bird"
-            onClick={v.poke}
-            className={v.birdClass}
-            style={{
-              border: "0",
-              background: "transparent",
-              padding: "0",
-              cursor: "pointer",
-              pointerEvents: "auto",
-            }}
-          >
-            <Artwork
-              priority
-              src={v.birdSrc}
-              alt=""
-              style={{
-                height: "238px",
-                width: "auto",
-                display: "block",
-                filter: "drop-shadow(0 10px 10px rgba(30,27,46,0.12))",
-              }}
-            />
-          </button>
+          <HubBird onTap={v.poke} />
         </div>
         <Link
           aria-label="How points work"

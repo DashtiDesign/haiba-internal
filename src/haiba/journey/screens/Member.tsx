@@ -1,6 +1,7 @@
 import { Elsewhere, NotStudent } from "./Edge";
 import { MainPromo } from "./Reserve";
 import { useState, type ReactNode } from "react";
+import type React from "react";
 import { useRouterState } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -1367,44 +1368,113 @@ export function Subscription() {
 
 /* ---------- 7 · membership ---------- */
 
+/**
+ * The Haiba member card (8 Nov): a card shape with the feel of the earlier pass, but no bank card cues
+ * (no number, chip or expiry). Brushed purple metal, lime wordmark, a turning guilloche rosette holding the
+ * membership year, the name, and a holographic foil edge. It tilts with your finger and a light sweep crosses it.
+ * It tilts with your finger, a slow light sweep crosses it, the rosette turns slowly, and the year fills in below.
+ */
+/** The country engraving along the bottom of the member card (Bahrain waterfront or Riyadh), drawn like a banknote. */
+function CardArt({ c }: { c: "bh" | "sa" }) {
+  return <img src={`/haiba/cards/${c}.webp`} alt="" className="jx-mx-land" />;
+}
+
 function MemberCard({ s, status }: { s: Session; status: "active" | "cancelled" | "renewal" }) {
   const y = year(s);
   const m = Math.min(
     12,
     Math.max(1, Math.round((startOf(s.today) - startOf(y.from)) / (86400000 * 30.4)) + 1),
   );
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const move = (e: React.PointerEvent<HTMLDivElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width - 0.5;
+    const py = (e.clientY - r.top) / r.height - 0.5;
+    setTilt({ x: -py * 12, y: px * 16 });
+  };
+  const tag =
+    status === "cancelled"
+      ? s.t("memEnds", { date: s.d(y.to) })
+      : status === "renewal"
+        ? s.t("memRenewSoon")
+        : s.t("memActive");
+  const since = new Date(y.from).toLocaleDateString(s.lang === "ar" ? "ar" : "en-GB", {
+    month: "short",
+    year: "numeric",
+  });
+  const months = Array.from({ length: 12 }, (_, i) => {
+    const d = new Date(y.from);
+    d.setMonth(d.getMonth() + i);
+    return d.toLocaleDateString(s.lang === "ar" ? "ar" : "en-GB", { month: "narrow" });
+  });
   return (
-    <div className={`jx-mc ${status === "cancelled" ? "jx-mc-off" : ""}`}>
-      <Artwork src={BIRD("03-wink")} alt="" className="jx-mc-bird" />
-      <div className="jx-mc-top">
-        <span className="jx-mc-brand">Haiba</span>
-        {status === "active" && <Tag tone="lime">{s.t("memActive")}</Tag>}
-        {status === "cancelled" && <Tag tone="warn">{s.t("memEnds", { date: s.d(y.to) })}</Tag>}
-        {status === "renewal" && (
-          <Tag tone="lime">
-            {s.t("memRenewIn", {
-              days: daysText(
-                s.lang,
-                Math.max(1, Math.round((startOf(y.to) - startOf(s.today)) / 86400000)),
-              ),
-            })}
-          </Tag>
-        )}
+    <div className={`jx-mx jx-mx-${status}`}>
+      <span className="jx-mx-sparks" aria-hidden="true">
+        {Array.from({ length: 14 }).map((_, i) => (
+          <i key={i} />
+        ))}
+      </span>
+      <div
+        className="jx-mx-scene"
+        onPointerMove={move}
+        onPointerLeave={() => setTilt({ x: 0, y: 0 })}
+      >
+        <div
+          className="jx-mx-card"
+          style={
+            {
+              "--rx": `${tilt.x}deg`,
+              "--ry": `${tilt.y}deg`,
+              "--gx": `${50 + tilt.y * 2.8}%`,
+              "--gy": `${40 - tilt.x * 3.2}%`,
+            } as React.CSSProperties
+          }
+        >
+          <span className="jx-mx-glare" aria-hidden="true" />
+          <span className="jx-mx-sweep" aria-hidden="true" />
+          <div className="jx-mx-head">
+            <img src="/haiba/logo-lime.svg" alt="Haiba" className="jx-mx-logo" />
+          </div>
+          <span className="jx-mx-status">
+            <i aria-hidden="true" />
+            {tag}
+          </span>
+          <CardArt c={s.c === "sa" ? "sa" : "bh"} />
+          <span className="jx-mx-mono" aria-hidden="true" />
+          <span className="jx-mx-mono jx-mx-mono-glint" aria-hidden="true" />
+          <div className="jx-mx-foot">
+            <span className="jx-mx-name">{s.t("memCardName")}</span>
+            <span className="jx-mx-since">{s.t("memSince", { date: since })}</span>
+          </div>
+          <span className="jx-mx-year1">
+            <small>{s.t("memPassYear")}</small>1
+          </span>
+          <span className="jx-mx-foil" aria-hidden="true" />
+        </div>
+        <span className="jx-mx-shadow" aria-hidden="true" />
       </div>
-      <div className="jx-mc-mid">
-        <span className="jx-mc-label">{s.t("memMember")}</span>
-        <span className="jx-mc-since">
-          {s.t("memSince", { date: s.d(y.from, { year: true }) })}
-        </span>
-      </div>
-      <div className="jx-mc-foot">
-        <span className="jx-mc-row">
+
+      <div className="jx-mx-year">
+        <div className="jx-mx-yearhead">
           <span>{s.t("memMonth", { n: m })}</span>
           <span>{s.t("memUntil", { date: s.d(y.to, { year: true }) })}</span>
-        </span>
-        <span className="jx-bar jx-bar-on-dark">
-          <span style={{ width: `${(m / 12) * 100}%` }} />
-        </span>
+        </div>
+        <div className="jx-mx-ticks">
+          {months.map((l, i) => (
+            <span
+              key={i}
+              className={
+                (i < m - 1 ? "on" : i === m - 1 ? "now" : "") +
+                // A cancelled year still runs to the end: only the last month is marked as where it stops.
+                (status === "cancelled" && i === months.length - 1 ? " end" : "")
+              }
+              style={{ animationDelay: `${0.35 + i * 0.05}s` }}
+            >
+              <i />
+              <small>{l}</small>
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -1419,9 +1489,9 @@ export function Membership() {
   const y = year(s);
   const gifts = view === "renewal" ? 12 : 2;
   return (
-    <Screen tone="soft">
-      <TopBar back="/haiba" title={s.t("memTitle")} />
-      <div className="jx-pad">
+    <Screen tone="soft" className="jx-mem-page">
+      <div className="jx-mx-stage">
+        <TopBar back="/haiba" title={s.t("memTitle")} onDark />
         <MemberCard s={s} status={view} />
       </div>
 

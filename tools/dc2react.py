@@ -92,13 +92,16 @@ BLOBS = {
     "84fd2f8fb8654cb616f9930c21d9459c": "/haiba/coins/coin-flip.webp",
     "0d9e8a337892ba1efe85bd1f2977f6cb": "/haiba/coins/coin-stack.webp",
     "0fa51e8e02bf88165020c9ea064d42fb": "/haiba/icons/unipass.webp",
-    "2272559694f0c8a89cf0eb54df196ab5": "/haiba/birds/18-joined.webp",
+    "04457c14b2e45ec071989f35db4b0ca8": "/haiba/birds/18-joined.webp",
+    "413483a80b085a72e185af89d489bed5": "/haiba/motion/hub-shades.webp",
+    "46c8e5aa381bb35a0f4c84743e87a87d": "/haiba/motion/hub-coin.webp",
+    "6dc8f1d17323a7e9b0b8e9d50368a752": "/haiba/motion/hub-still.webp",
     "3790ebcba1e76f32fc239671d0b58df1": "/haiba/birds/19-hourglass.webp",
     "200592c8713b1c9cf0122135f51f3502": "/haiba/birds/20-code-expired.webp",
     "60b8b163002a266128dec43c5a4f8379": "/haiba/birds/21-student-id.webp",
     "b26e8037e044d905bcb9f3f346f9cc17": "/haiba/birds/22-rope.webp",
     "ca15ceac418929def4be2aecc493953b": "/haiba/birds/23-map.webp",
-    "328b0c83bcf4dcc33e8cfd7fdda35eca": "/haiba/birds/24-hug.webp",
+    "df2214a10b7bce9f68be702197332d22": "/haiba/birds/24-hug.webp",
     "b756321a0a61390fcd596b777c61b4d6": "/haiba/birds/25-empty-box.webp",
 }
 ATTR_CASE = {
