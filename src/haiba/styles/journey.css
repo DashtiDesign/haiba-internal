@@ -39,6 +39,7 @@
 }
 .jx[data-dock] {
   padding-bottom: calc(132px + env(safe-area-inset-bottom));
+  padding-bottom: var(--jx-dock-h, calc(132px + env(safe-area-inset-bottom)));
 }
 .jx-tone-white {
   background: #ffffff;
@@ -374,6 +375,7 @@ button.jx-row {
   width: 100%;
   max-width: 390px;
   max-height: 88vh;
+  max-height: 88dvh;
   overflow-y: auto;
   background: #ffffff;
   border-radius: 16px 16px 0 0;
@@ -1276,21 +1278,19 @@ button.jx-row {
 .jx-pts-tag { flex: none; width: 44px; height: 44px; border-radius: 12px; background: #f0ecff; color: #4f25d6; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; }
 .jx-pts-tag img { width: 26px; height: 26px; object-fit: contain; }
 
-/* 8 Nov: Unipass year bar, same pattern as the membership card year bar.
+/* 8 Nov: Unipass year, one round mark per gift month with its letter inside.
+   Filled = gift used, purple = this month, outline = to come, dashed and crossed = missed.
    Colours come from the hero it sits on, so every page keeps good contrast. */
-.jx-yt { --yt-off: rgba(255, 255, 255, 0.72); --yt-on: var(--jx-ink); --yt-now: var(--jx-purple); --yt-txt: rgba(30, 27, 46, 0.72); --yt-now-txt: var(--jx-ink); --yt-miss: rgba(30, 27, 46, 0.45);
+.jx-yt { --yt-used: var(--jx-ink); --yt-used-txt: #fff; --yt-now: var(--jx-purple); --yt-now-txt: #fff;
+  --yt-line: rgba(30, 27, 46, 0.22); --yt-txt: rgba(30, 27, 46, 0.62); --yt-fill: rgba(255, 255, 255, 0.55);
   display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; margin-top: 20px; }
-.jx-yt > span { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.jx-yt i { width: 100%; height: 6px; border-radius: 3px; background: var(--yt-off); }
-.jx-yt small { font-size: 11px; font-weight: 700; color: var(--yt-txt); }
-.jx-yt .on i { background: var(--yt-on); }
-.jx-yt .now i { background: var(--yt-now); }
-.jx-yt .now small { color: var(--yt-now-txt); font-weight: 800; }
-.jx-yt .missed i { background: transparent; box-shadow: inset 0 0 0 1.5px var(--yt-miss); }
-.jx-yt .missed small { text-decoration: line-through; }
-.jx-up-hero-soft .jx-yt { --yt-off: #e6e1f2; --yt-on: var(--jx-purple); --yt-txt: #8f89a8; --yt-miss: #b9b3cc; }
-.jx-up-hero-dark .jx-yt { --yt-off: rgba(255, 255, 255, 0.22); --yt-on: var(--jx-lime); --yt-now: #fff; --yt-txt: rgba(255, 255, 255, 0.7); --yt-now-txt: #fff; --yt-miss: rgba(255, 255, 255, 0.5); }
-.jx-up-hero-warn .jx-yt { --yt-off: rgba(255, 255, 255, 0.75); }
+.jx-yt > span { aspect-ratio: 1; max-width: 28px; width: 100%; justify-self: center; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 11.5px; font-weight: 800; color: var(--yt-txt); background: var(--yt-fill); box-shadow: inset 0 0 0 1.5px var(--yt-line); }
+.jx-yt > span.on { background: var(--yt-used); color: var(--yt-used-txt); box-shadow: none; }
+.jx-yt > span.now { background: var(--yt-now); color: var(--yt-now-txt); box-shadow: 0 0 0 3px rgba(108, 63, 250, 0.22); }
+.jx-yt > span.missed { background: transparent; box-shadow: inset 0 0 0 1.5px var(--yt-line); text-decoration: line-through; opacity: 0.8; }
+.jx-up-hero-soft .jx-yt { --yt-used: var(--jx-purple); --yt-line: #ded8ef; --yt-txt: #8f89a8; --yt-fill: #fff; }
+.jx-up-hero-dark .jx-yt { --yt-used: var(--jx-lime); --yt-used-txt: #1f2600; --yt-now: #fff; --yt-now-txt: var(--jx-ink); --yt-line: rgba(255, 255, 255, 0.3); --yt-txt: rgba(255, 255, 255, 0.75); --yt-fill: rgba(255, 255, 255, 0.06); }
 
 /* 8 Nov: Savings and activity, one page */
 .jx-ledger { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
@@ -1370,3 +1370,99 @@ button.jx-row {
 .jx-up-done-art img { width: 40px; height: 40px; object-fit: contain; }
 .jx-up-done-save { color: #1e7a34; font-weight: 800; }
 .jx-up-hero-used .jx-yt { margin-top: 22px; }
+
+/* 8 Nov: 5.6 gift used, v2. Lime hero like picking a gift, the used gift as a receipt, then next month as a light row */
+.jx-up-hero-got .jx-up-text { padding-inline-end: 130px; }
+.jx-up-bird-got { height: 150px !important; top: 46px; }
+.jx-up-nextpill { margin-top: 12px; display: inline-flex; align-items: center; gap: 6px; background: var(--jx-ink); color: var(--jx-lime); font-size: 13.5px; font-weight: 800; border-radius: 999px; padding: 7px 12px; }
+.jx-up-hero-got .jx-up-done { margin-top: 18px; background: rgba(255, 255, 255, 0.92); box-shadow: none; }
+.jx-up-hero-got .jx-up-done-save { flex: none; display: inline-flex; align-items: center; gap: 4px; font-size: 14px; font-weight: 800; color: #1e7a34; background: #e3f5e8; border-radius: 999px; padding: 6px 10px; }
+.jx-coming { margin-top: 26px; }
+.jx-coming-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.jx-coming-row { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; padding: 12px 16px 4px; }
+.jx-coming-card { flex: none; width: 132px; display: flex; flex-direction: column; gap: 2px; }
+.jx-coming-art { position: relative; height: 104px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; }
+.jx-coming-art > img { width: 64px; height: 64px; object-fit: contain; }
+.jx-coming-logo { position: absolute; top: 8px; inset-inline-start: 8px; border-radius: 7px; overflow: hidden; display: flex; box-shadow: 0 0 0 2px #fff; }
+.jx-coming-brand { font-size: 12.5px; font-weight: 700; color: #6b6880; }
+.jx-coming-item { font-size: 14.5px; font-weight: 800; }
+.jx-coming-worth { font-size: 12.5px; font-weight: 700; color: #3d5000; }
+
+/* 8 Nov: the last month of the year (cancelled or due to renew). The card goes grey so it reads as ending;
+   only the pill keeps its colour: "Ends 2 Dec" (cancelled) or lime "Renew soon". */
+.jx-mx-ending .jx-mx-card { background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 3px),
+    linear-gradient(160deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.12) 46%, rgba(255, 255, 255, 0) 60%),
+    radial-gradient(130% 90% at 0% 0%, #8e8a9e 0%, #6f6b80 34%, #575366 68%, #423f4f 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 30px 44px -18px rgba(30, 27, 46, 0.45), 0 12px 20px -10px rgba(30, 27, 46, 0.25); }
+.jx-mx-ending .jx-mx-card > :not(.jx-mx-status) { filter: grayscale(1); }
+.jx-mx-ending .jx-mx-logo, .jx-mx-ending .jx-mx-year1 { opacity: 0.8; }
+.jx-mx-ending .jx-mx-year1 { color: #e4e2ea; }
+.jx-mx-ending .jx-mx-sweep, .jx-mx-ending .jx-mx-mono-glint { display: none; }
+.jx-mx-ending .jx-mx-shadow { background: rgba(30, 27, 46, 0.3); }
+.jx-mx-ending .jx-mx-sparks { display: none; }
+.jx-mem-keep { min-height: 48px; padding: 0 16px; border: 0; background: none; font: inherit; font-size: 16px; font-weight: 800; color: var(--jx-purple); cursor: pointer; }
+
+/* 8 Nov: the one month tracker for all of Haiba (Unipass heroes and the membership card).
+   Bar per month, letter under it. Colours follow the background: ink on lime and yellow (never purple on lime),
+   purple on white and lilac, lime on dark. */
+.jx-mt { --mt-bar: rgba(30, 27, 46, 0.16); --mt-on: var(--jx-ink); --mt-txt: rgba(30, 27, 46, 0.6); --mt-now-txt: var(--jx-ink); --mt-end: rgba(30, 27, 46, 0.4);
+  display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; margin-top: 18px; }
+.jx-mt > span { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.jx-mt i { display: block; width: 100%; height: 6px; border-radius: 3px; background: var(--mt-bar); }
+.jx-mt .on i { background: var(--mt-on); transform-origin: left; animation: jx-mt-fill 0.4s ease-out both; animation-delay: inherit; }
+[dir="rtl"] .jx-mt .on i { transform-origin: right; }
+.jx-mt .now i { background: linear-gradient(90deg, var(--mt-on) 50%, var(--mt-bar) 50%); }
+[dir="rtl"] .jx-mt .now i { background: linear-gradient(270deg, var(--mt-on) 50%, var(--mt-bar) 50%); }
+.jx-mt .on.now i { background: var(--mt-on); }
+.jx-mt .missed i { background: repeating-linear-gradient(135deg, var(--mt-bar) 0 3px, transparent 3px 6px); box-shadow: inset 0 0 0 1px var(--mt-bar); }
+.jx-mt .end i { background: var(--mt-end); }
+.jx-mt small { font-size: 11px; font-weight: 700; line-height: 1; color: var(--mt-txt); }
+.jx-mt .now small, .jx-mt .end small { color: var(--mt-now-txt); font-weight: 800; }
+.jx-mt .missed small { text-decoration: line-through; }
+@keyframes jx-mt-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) { .jx-mt i { animation: none !important; } }
+/* white, soft and lilac backgrounds: purple */
+.jx-up-hero-soft .jx-mt, .jx-mx-year .jx-mt { --mt-bar: rgba(79, 37, 214, 0.16); --mt-on: var(--jx-purple); --mt-txt: rgba(30, 27, 46, 0.6); --mt-now-txt: var(--jx-purple-ink); }
+/* dark backgrounds: lime */
+.jx-up-hero-dark .jx-mt { --mt-bar: rgba(255, 255, 255, 0.2); --mt-on: var(--jx-lime); --mt-txt: rgba(255, 255, 255, 0.68); --mt-now-txt: var(--jx-lime); --mt-end: rgba(255, 255, 255, 0.45); }
+/* lime and yellow heroes keep the ink default */
+.jx-up-hero-got .jx-mt, .jx-up-hero-warn .jx-mt { --mt-bar: rgba(30, 27, 46, 0.16); --mt-on: var(--jx-ink); --mt-txt: rgba(30, 27, 46, 0.62); --mt-now-txt: var(--jx-ink); }
+.jx-mx-year .jx-mt { margin-top: 10px; }
+
+/* 8 Nov: the gift used bird sits fully inside the hero (it was cut off at the screen edge) */
+.jx-up-hero-got .jx-up-bird-got { inset-inline-end: 12px; height: 140px !important; top: 52px; }
+.jx-up-hero-got .jx-up-text { padding-inline-end: 140px; }
+/* 8 Nov: no mascot is cut off by the screen edge on any Unipass hero */
+.jx-up-hero .jx-up-bird { inset-inline-end: 8px; }
+.jx-up-hero-warn .jx-up-bird { inset-inline-end: 6px; height: 120px; }
+.jx-up-hero-warn .jx-up-bird { height: 112px; top: 96px; inset-inline-end: 4px; }
+.jx-up-hero-warn .jx-up-text .jx-h1, .jx-up-hero-warn .jx-sub { max-width: 214px; }
+.jx-up-hero-warn .jx-up-text .jx-h1, .jx-up-hero-warn .jx-up-text .jx-sub { max-width: 220px !important; }
+.jx-up-hero-warn .jx-up-bird { height: 104px; top: 118px; }
+.jx-up-hero-warn .jx-up-bird { height: 108px; top: 104px; inset-inline-end: 6px; }
+.jx-up-hero-warn .jx-up-bird { height: 96px; top: 104px; inset-inline-end: 8px; }
+.jx-up-hero-warn .jx-up-bird.jx-up-bird { height: 92px !important; top: 108px; }
+.jx-up-hero-warn .jx-up-bird.jx-up-bird { height: 120px !important; top: 104px; inset-inline-end: 6px; }
+
+/* 8 Nov: reserve, pay and refund states look different at a glance.
+   Reserved = dark, Pay the rest = lime, Hold expired = yellow, refund = lilac / lime / rose, plus the stage strip. */
+.jx-hero-lime { background: linear-gradient(160deg, #e3fb7a 0%, #c0f402 100%); color: var(--jx-ink); }
+.jx-hero-lime .jx-sub { color: rgba(30, 27, 46, 0.72); }
+.jx-hero-lime .jx-counter-label { color: var(--jx-ink); }
+.jx-hero-lime .jx-count-cell { background: rgba(255, 255, 255, 0.62); }
+.jx-hero-lime .jx-count-label { color: rgba(30, 27, 46, 0.62); }
+.jx-res-bad { background: radial-gradient(120% 90% at 50% 100%, #ffc4bc 0%, #ffece9 70%); }
+.jx-stage { list-style: none; margin: 18px 0 4px; padding: 0; width: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.jx-stage li { position: relative; display: flex; flex-direction: column; align-items: center; gap: 3px; text-align: center; }
+.jx-stage li + li::before { content: ""; position: absolute; top: 7px; inset-inline-start: -50%; inset-inline-end: 50%; height: 2px; background: #e4def4; }
+.jx-stage li.done::before, .jx-stage li.now::before { background: var(--jx-purple); }
+.jx-stage-dot { position: relative; z-index: 1; width: 16px; height: 16px; border-radius: 50%; background: #fff; border: 2px solid #d6cfe8; }
+.jx-stage .done .jx-stage-dot { background: var(--jx-purple); border-color: var(--jx-purple); }
+.jx-stage .now .jx-stage-dot { background: var(--jx-lime); border-color: var(--jx-ink); box-shadow: 0 0 0 4px rgba(192, 244, 2, 0.4); }
+.jx-stage .off .jx-stage-dot { background: #ffece9; border-color: #c4382f; }
+.jx-stage-label { margin-top: 4px; font-size: 13px; font-weight: 800; color: var(--jx-ink); }
+.jx-stage .next .jx-stage-label { color: var(--jx-muted); }
+.jx-stage-sub { font-size: 12px; font-weight: 600; color: var(--jx-muted); }
+.jx-stage .now .jx-stage-sub { color: var(--jx-ink); font-weight: 800; }
+.jx-stage .off .jx-stage-sub { color: #b3261e; }

@@ -1,4 +1,4 @@
-import { useEffect, useState, type ButtonHTMLAttributes, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ButtonHTMLAttributes, type ReactNode } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowLeft, WifiOff } from "lucide-react";
 import Artwork from "../Artwork";
@@ -58,8 +58,21 @@ export function Screen({
   const s = useSession();
   const online = useOnline();
   const blocked = guard && s.hb.ready && !s.valid;
+  // The page keeps exactly the dock's height free at the bottom (8 Nov). A fixed 132px made short pages
+  // scroll for no reason when the dock only holds one button.
+  const root = useRef<HTMLDivElement>(null);
+  const hasDock = !!dock && !blocked && s.hb.ready;
+  useEffect(() => {
+    const el = root.current;
+    const d = el?.querySelector<HTMLElement>(":scope > .jx-dock");
+    if (!el || !d || typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver(() => el.style.setProperty("--jx-dock-h", `${d.offsetHeight}px`));
+    ro.observe(d);
+    return () => ro.disconnect();
+  }, [hasDock]);
   return (
     <div
+      ref={root}
       dir={s.dir}
       lang={s.lang}
       className={`jx jx-tone-${tone} ${className}`}
@@ -170,6 +183,7 @@ export function Sheet({
         <motion.div
           key="sheet"
           className="jx-sheet-back"
+          data-tray-backdrop=""
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

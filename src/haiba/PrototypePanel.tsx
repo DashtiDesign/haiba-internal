@@ -1,60 +1,240 @@
-import { useState, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useNavigate as useRouterNavigate } from "@tanstack/react-router";
-import { Link } from "./nav";
+import { ArrowRight, ChevronRight, RotateCcw, Search, X } from "lucide-react";
 import { useHaiba } from "./store";
 import { useSession } from "./journey/session";
-import { PRESETS, presetJourney, type Preset } from "./journey/states";
+import { presetJourney, type Preset } from "./journey/states";
 import { pathFor, useJourneyActions } from "./journey/actions";
 import { useNavigate as useGo } from "./nav";
 import { CURRENCY, DEFAULT_SETTINGS, type Country } from "./journey/settings";
+import { addMonths, startOf } from "./journey/format";
 
 /**
- * Prototype controls for the internal test. Not part of the product.
- * Sets what the app would pass (country, language, student id), jumps to any student state,
- * edits the prices, VAT, deposit, hold days and launch date every screen reads,
- * stands in for the shop accepting codes, and jumps to any screen.
+ * Prototype panel (8 Nov rebuild). For the internal test only, students never see it.
+ * Four tabs:
+ * - Journey: where the student is, what can happen next, and every state on one map. Tap a state to jump.
+ * - Screens: every screen, grouped and searchable. Screens that need a state set it first.
+ * - Setup: what the app passes (country, language, id), student status, prices, dates and spots.
+ * - Tests: the paywall test arms, older promo pages, shop side events and reset.
  */
-const SCREENS = [
-  ["Unipal home", "/"],
-  ["Haiba page (reserve)", "/haiba/reserve"],
-  ["How points work", "/haiba/points"],
-  ["How it works", "/haiba/welcome"],
-  ["Haiba hub", "/haiba"],
-  ["Spend points", "/haiba/rewards"],
-  ["Earn points", "/haiba/earn"],
-  ["Shop page (core)", "/shop/coffee-bean"],
-  ["Redeem offer (core)", "/shop/coffee-bean/redeem"],
-  ["Basket and codes", "/haiba/basket"],
-  ["Wallet", "/haiba/wallet"],
-  ["Travel data", "/haiba/travel"],
-  ["Pay the rest", "/haiba/pay"],
-  ["Join after launch", "/haiba/join"],
-  ["Reward code", "/haiba/code?kind=reward"],
-  ["Reward used", "/haiba/code?kind=reward&state=used"],
-  ["Activity", "/haiba/activity"],
-  ["Unipass gifts", "/haiba/unipass"],
-  ["Unipass gift used", "/haiba/unipass?view=used"],
-  ["Unipass month end", "/haiba/unipass?view=monthend"],
-  ["Gift code", "/haiba/code?kind=gift"],
-  ["Subscriptions", "/haiba/subscriptions"],
-  ["Subscription all claimed", "/haiba/subscription?id=chatgpt&claimed=1"],
-  ["Membership", "/haiba/membership"],
-  ["Membership renewal", "/haiba/membership?view=renewal"],
-  ["Receipts", "/haiba/receipts"],
-  ["You saved", "/haiba/saved"],
-  ["Help", "/haiba/help"],
-  ["Year ended", "/haiba/ended"],
+
+type Tab = "journey" | "screens" | "setup" | "tests";
+const TABS: [Tab, string][] = [
+  ["journey", "Journey"],
+  ["screens", "Screens"],
+  ["setup", "Setup"],
+  ["tests", "Tests"],
 ];
 
-// Promo pages, grouped so they are easy to find. Paywall arms take the price chosen below.
+type Step = { id: Preset; label: string; note: string; side?: boolean };
+const FLOW: { phase: string; when: string; steps: Step[] }[] = [
+  {
+    phase: "Before launch",
+    when: "Reserve for a small deposit",
+    steps: [
+      { id: "not_reserved", label: "Not reserved", note: "Sees the Haiba page and can reserve" },
+      { id: "payment_pending", label: "Paying the deposit", note: "Waiting for Tap to confirm" },
+      { id: "reserved", label: "Reserved", note: "Price locked, counting down to launch" },
+      {
+        id: "refund_requested",
+        label: "Cancelled, refund on the way",
+        note: "Deposit going back",
+        side: true,
+      },
+      { id: "refunded", label: "Refunded", note: "Can reserve again", side: true },
+      { id: "refund_failed", label: "Refund failed", note: "Support sends it by hand", side: true },
+    ],
+  },
+  {
+    phase: "Launch day",
+    when: "Haiba opens, pay the rest",
+    steps: [
+      { id: "pay_rest_open", label: "Pay the rest", note: "Price held for a few days" },
+      {
+        id: "hold_expired",
+        label: "Hold expired",
+        note: "Did not pay in time, deposit sent back",
+        side: true,
+      },
+      {
+        id: "not_reserved_after_launch",
+        label: "Never reserved",
+        note: "Joins at full price",
+        side: true,
+      },
+    ],
+  },
+  {
+    phase: "Member",
+    when: "One year of Haiba",
+    steps: [
+      { id: "member_new", label: "Just joined", note: "Day one, first gift to pick" },
+      { id: "member_active", label: "Active member", note: "A month in" },
+      {
+        id: "cancelled",
+        label: "Cancelled, year runs on",
+        note: "Keeps Haiba to the end",
+        side: true,
+      },
+      { id: "renewal_due", label: "Last month, renew soon", note: "Card greys out, renew" },
+      {
+        id: "cancelled_last_month",
+        label: "Last month, cancelled",
+        note: "Same page, pill says Ends",
+        side: true,
+      },
+      { id: "ended", label: "Year ended", note: "Points kept 30 days, come back" },
+    ],
+  },
+];
+const ALL_STEPS = FLOW.flatMap((f) => f.steps);
+const stepLabel = (id: Preset) => ALL_STEPS.find((x) => x.id === id)?.label ?? id;
+
+// Where a jump lands. Member side states open the membership page, where they show.
+const LAND: Partial<Record<Preset, string>> = {
+  renewal_due: "/haiba/membership",
+  cancelled: "/haiba/membership",
+  cancelled_last_month: "/haiba/membership",
+  member_new: "/haiba/paid",
+};
+
+// What can happen next from each state. Payments are made in the app; these are the outside events.
+const NEXT: Partial<
+  Record<Preset, { label: string; to?: Preset; open?: string; hint?: string }[]>
+> = {
+  not_reserved: [
+    { label: "Open the Haiba page", open: "/haiba/reserve", hint: "Tap Reserve there to pay." },
+  ],
+  reserved: [
+    { label: "Launch day comes", to: "pay_rest_open" },
+    { label: "Student cancels", to: "refund_requested" },
+  ],
+  refund_requested: [
+    { label: "Bank confirms the refund", to: "refunded" },
+    { label: "Refund fails", to: "refund_failed" },
+  ],
+  refunded: [{ label: "Start again", to: "not_reserved" }],
+  refund_failed: [{ label: "Start again", to: "not_reserved" }],
+  pay_rest_open: [
+    { label: "Open Pay the rest", open: "/haiba/pay", hint: "Tap Pay there to join." },
+    { label: "The hold runs out", to: "hold_expired" },
+  ],
+  hold_expired: [{ label: "Open the join page", open: "/haiba/join" }],
+  not_reserved_after_launch: [{ label: "Open the join page", open: "/haiba/join" }],
+  member_new: [
+    { label: "A month later", to: "member_active" },
+    { label: "Last month of the year", to: "renewal_due" },
+  ],
+  member_active: [
+    { label: "Student cancels", to: "cancelled" },
+    { label: "Last month of the year", to: "renewal_due" },
+  ],
+  cancelled: [
+    { label: "Last month of the year", to: "cancelled_last_month" },
+    { label: "The year ends", to: "ended" },
+  ],
+  renewal_due: [
+    { label: "Open membership", open: "/haiba/membership", hint: "Tap Renew there." },
+    { label: "The year ends", to: "ended" },
+  ],
+  cancelled_last_month: [{ label: "The year ends", to: "ended" }],
+  ended: [{ label: "Start over", to: "not_reserved" }],
+};
+
+// Screens, grouped. need = the state a screen needs; jumping there sets it first.
+type Screen = { label: string; to: string; need?: Preset };
+const SCREENS: { group: string; items: Screen[] }[] = [
+  {
+    group: "Reserve and pay",
+    items: [
+      { label: "Haiba page (reserve)", to: "/haiba/reserve", need: "not_reserved" },
+      { label: "Reserved", to: "/haiba/reserved", need: "reserved" },
+      { label: "Refund in progress", to: "/haiba/refund", need: "refund_requested" },
+      { label: "Pay the rest", to: "/haiba/pay", need: "pay_rest_open" },
+      { label: "Hold expired", to: "/haiba/expired", need: "hold_expired" },
+      { label: "Join after launch", to: "/haiba/join", need: "not_reserved_after_launch" },
+      { label: "Payment done", to: "/haiba/paid", need: "member_new" },
+      { label: "How it works", to: "/haiba/welcome" },
+    ],
+  },
+  {
+    group: "Haiba hub and points",
+    items: [
+      { label: "Haiba hub", to: "/haiba", need: "member_active" },
+      { label: "Spend points", to: "/haiba/rewards" },
+      { label: "Earn points", to: "/haiba/earn" },
+      { label: "How points work", to: "/haiba/points" },
+      { label: "Basket and codes", to: "/haiba/basket" },
+      { label: "Wallet", to: "/haiba/wallet" },
+      { label: "Travel data", to: "/haiba/travel" },
+      { label: "Reward code", to: "/haiba/code?kind=reward" },
+      { label: "Reward used", to: "/haiba/code?kind=reward&state=used" },
+    ],
+  },
+  {
+    group: "Unipass gifts",
+    items: [
+      { label: "Pick a gift", to: "/haiba/unipass" },
+      { label: "Gift used", to: "/haiba/unipass?view=used" },
+      { label: "Month end, 3 days left", to: "/haiba/unipass?view=monthend" },
+      { label: "Gift lost", to: "/haiba/unipass?view=lost" },
+      { label: "Last gift of the year", to: "/haiba/unipass?view=last" },
+      { label: "Gift code", to: "/haiba/code?kind=gift" },
+    ],
+  },
+  {
+    group: "Membership",
+    items: [
+      { label: "Membership", to: "/haiba/membership", need: "member_active" },
+      { label: "Cancelled, year runs on", to: "/haiba/membership", need: "cancelled" },
+      { label: "Last month, renew soon", to: "/haiba/membership", need: "renewal_due" },
+      {
+        label: "Last month, cancelled",
+        to: "/haiba/membership",
+        need: "cancelled_last_month",
+      },
+      { label: "Year ended", to: "/haiba/ended", need: "ended" },
+      { label: "Receipts", to: "/haiba/receipts" },
+      { label: "Subscriptions", to: "/haiba/subscriptions" },
+      { label: "Subscription, all claimed", to: "/haiba/subscription?id=chatgpt&claimed=1" },
+    ],
+  },
+  {
+    group: "Savings and help",
+    items: [
+      { label: "Savings and activity", to: "/haiba/saved" },
+      { label: "Help", to: "/haiba/help" },
+    ],
+  },
+  {
+    group: "Unipal app (core)",
+    items: [
+      { label: "Unipal home", to: "/" },
+      { label: "Shop page", to: "/shop/coffee-bean" },
+      { label: "Redeem offer", to: "/shop/coffee-bean/redeem" },
+    ],
+  },
+  {
+    group: "System states",
+    items: [
+      { label: "Loading", to: "/haiba/status?show=loading" },
+      { label: "Empty", to: "/haiba/status?show=empty" },
+      { label: "Error", to: "/haiba/status?show=error" },
+      { label: "Offline", to: "/haiba/status?show=offline" },
+      { label: "Bad user id", to: "/haiba/status?show=denied" },
+      { label: "Unknown country", to: "/haiba/status?show=country" },
+    ],
+  },
+];
+
 const PAYWALLS = [
   ["A · Join copy", "/haiba/paywall/join"],
   ["B · Story", "/haiba/paywall/story"],
   ["C · Timeline", "/haiba/paywall/timeline"],
   ["Baseline (backup)", "/haiba/paywall/base"],
   ["Table (backup)", "/haiba/paywall/table"],
-];
+] as const;
 const OLD_PROMOS = [
   ["Waitlist", "/haiba/promo/waitlist"],
   ["Value tiles", "/haiba/promo/value"],
@@ -63,44 +243,23 @@ const OLD_PROMOS = [
   ["12 picks", "/haiba/promo/dream"],
   ["Gift first", "/haiba/promo/gift"],
   ["Win back", "/haiba/promo/winback"],
-];
-const PRICES = ["20", "22", "24"];
-
-const STATUS_PREVIEWS = ["loading", "empty", "error", "offline", "denied", "country"];
-
+] as const;
+const PROMO_PRICES = ["20", "22", "24"];
 const IDS: [string, string | number | undefined][] = [
-  ["Student 100245", 100245],
-  ["Student 100377", 100377],
-  ["Missing id", undefined],
-  ["Edited id", "100245abc"],
+  ["100245", 100245],
+  ["100377", 100377],
+  ["Missing", undefined],
+  ["Edited", "100245abc"],
 ];
 
-const chip = (on: boolean) => ({
-  font: "inherit",
-  fontSize: 13,
-  fontWeight: 700,
-  border: 0,
-  borderRadius: 999,
-  padding: "8px 12px",
-  cursor: "pointer",
-  background: on ? "#1E1B2E" : "#F0EEF6",
-  color: on ? "#C0F402" : "#1E1B2E",
-});
-
-const sectionLabel = {
-  fontSize: 12,
-  fontWeight: 700,
-  letterSpacing: "0.1em",
-  textTransform: "uppercase" as const,
-  color: "#6B6880",
-  marginTop: 18,
-};
-
-const grid = {
-  display: "grid",
-  gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-  gap: 6,
-  marginTop: 8,
+const TAB_KEY = "haiba-panel-tab";
+const readTab = (): Tab => {
+  try {
+    const t = localStorage.getItem(TAB_KEY) as Tab | null;
+    return t && TABS.some(([k]) => k === t) ? t : "journey";
+  } catch {
+    return "journey";
+  }
 };
 
 export default function PrototypePanel() {
@@ -109,12 +268,36 @@ export default function PrototypePanel() {
   const navigate = useRouterNavigate();
   const go = useGo();
   const acts = useJourneyActions();
-  const [open, setOpen] = useState(false);
-  const [price, setPrice] = useState("20");
   const reduced = useReducedMotion();
+  const [open, setOpen] = useState(false);
+  const [tab, setTab] = useState<Tab>("journey");
+  const [find, setFind] = useState("");
+  const [promoPrice, setPromoPrice] = useState("20");
   const s = hb.state;
   const st = s.settings;
   const c: Country = ses.c;
+  const cur = CURRENCY[c];
+
+  useEffect(() => setTab(readTab()), []);
+  const pickTab = (t: Tab) => {
+    setTab(t);
+    try {
+      localStorage.setItem(TAB_KEY, t);
+    } catch {
+      // per viewer convenience only
+    }
+  };
+
+  // Which journey state the student is in now.
+  const now: Preset = useMemo(() => {
+    const j = s.journey;
+    const lastMonth =
+      j.renewsOn != null && startOf(ses.today) >= startOf(addMonths(j.renewsOn, -1));
+    if (j.status === "member") return s.member === "new" ? "member_new" : "member_active";
+    if (j.status === "cancelled") return lastMonth ? "cancelled_last_month" : "cancelled";
+    if (j.status === "not_reserved" && ses.launched) return "not_reserved_after_launch";
+    return j.status;
+  }, [s.journey, s.member, ses.today, ses.launched]);
 
   // Change what the app passes, keep everything else in the URL.
   const param = (patch: Record<string, string | number | undefined>) =>
@@ -125,19 +308,26 @@ export default function PrototypePanel() {
       replace: true,
     });
 
-  const jump = (preset: Preset) => {
-    const r = presetJourney(preset, st, c, ses.offerPrice);
+  const setPreset = (p: Preset) => {
+    const r = presetJourney(p, st, c, ses.offerPrice);
     hb.set({ journey: r.journey, member: r.member, settings: { ...st, today: r.today } });
-    go(pathFor(r.journey.status)); // land on the screen for that state
   };
-
-  // Stands in for Tap calling our backend.
-  const sendWebhook = (outcome: "success" | "failed", twice = false) => {
+  const jump = (p: Preset) => {
+    setPreset(p);
+    setOpen(false);
+    go(LAND[p] ?? pathFor(presetJourney(p, st, c, ses.offerPrice).journey.status));
+  };
+  const openScreen = (x: Screen) => {
+    if (x.need && x.need !== now) setPreset(x.need);
+    setOpen(false);
+    go(x.to);
+  };
+  const webhook = (outcome: "success" | "failed", twice = false) => {
     const to = acts.webhook(outcome, "declined");
     if (twice) acts.webhook(outcome, "declined"); // the second one is ignored
+    setOpen(false);
     if (to) go(to);
   };
-
   const setPrices = (text: string) => {
     const list = text
       .split(/[ ,]+/)
@@ -150,53 +340,35 @@ export default function PrototypePanel() {
       });
   };
 
-  const cur = CURRENCY[c];
+  const q = find.trim().toLowerCase();
+  const groups = SCREENS.map((g) => ({
+    ...g,
+    items: g.items.filter(
+      (x) => !q || x.label.toLowerCase().includes(q) || x.to.toLowerCase().includes(q),
+    ),
+  })).filter((g) => g.items.length);
   const idNow = ses.userId ?? undefined;
+  const pay = s.journey.payment;
 
   return (
     <>
-      <button
-        onClick={() => setOpen(true)}
-        aria-label="Open prototype panel"
-        style={{
-          position: "fixed",
-          right: 0,
-          top: "42%",
-          zIndex: 60,
-          border: 0,
-          cursor: "pointer",
-          background: "#1E1B2E",
-          color: "#C0F402",
-          font: "700 11px Figtree, system-ui, sans-serif",
-          letterSpacing: "0.12em",
-          textTransform: "uppercase",
-          padding: "12px 6px",
-          borderRadius: "8px 0 0 10px",
-          writingMode: "vertical-rl",
-        }}
-      >
+      <button className="pp-open" onClick={() => setOpen(true)} aria-label="Open prototype panel">
         Prototype
       </button>
       <AnimatePresence>
         {open && (
           <motion.div
-            key="prototype-backdrop"
+            key="pp-back"
+            className="pp-back"
+            data-tray-backdrop=""
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: reduced ? 0 : 0.18 }}
             onClick={() => setOpen(false)}
-            style={{
-              position: "fixed",
-              inset: 0,
-              zIndex: 70,
-              background: "rgba(20,16,36,0.45)",
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "center",
-            }}
           >
             <motion.div
+              className="pp"
               role="dialog"
               aria-modal="true"
               aria-label="Prototype panel"
@@ -206,377 +378,422 @@ export default function PrototypePanel() {
               exit={{ y: reduced ? 0 : "100%" }}
               transition={{ type: "spring", stiffness: 380, damping: 38 }}
               onClick={(e) => e.stopPropagation()}
-              style={{
-                width: "100%",
-                maxWidth: 390,
-                background: "#FFFFFF",
-                borderRadius: "16px 16px 0 0",
-                padding: "18px 18px 28px 18px",
-                fontFamily: "Figtree, system-ui, sans-serif",
-                color: "#1E1B2E",
-                boxSizing: "border-box",
-                maxHeight: "86vh",
-                overflowY: "auto",
-              }}
             >
-              <div
-                style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
-              >
-                <span style={{ fontWeight: 800, fontSize: 17 }}>Prototype panel</span>
-                <button
-                  onClick={() => setOpen(false)}
-                  style={{ ...chip(false), padding: "6px 12px" }}
-                >
-                  Close
-                </button>
-              </div>
-              <div style={{ fontSize: 13, color: "#6B6880", marginTop: 4 }}>
-                For the internal test only. Students never see this.
-              </div>
-
-              <div style={sectionLabel}>What the app passes</div>
-              <Chips>
-                <button
-                  style={chip(ses.country === "bh")}
-                  onClick={() => param({ country: "bahrain" })}
-                >
-                  Bahrain
-                </button>
-                <button
-                  style={chip(ses.country === "sa")}
-                  onClick={() => param({ country: "saudi" })}
-                >
-                  Saudi
-                </button>
-                <button style={chip(ses.lang === "en")} onClick={() => param({ lang: "en" })}>
-                  English
-                </button>
-                <button style={chip(ses.lang === "ar")} onClick={() => param({ lang: "ar" })}>
-                  Arabic
-                </button>
-              </Chips>
-              <Chips>
-                {IDS.map(([label, id]) => (
-                  <button
-                    key={label}
-                    style={chip(idNow === (id == null ? undefined : String(id)))}
-                    onClick={() => param({ user_id: id })}
-                  >
-                    {label}
+              <div className="pp-head">
+                <span className="pp-grab" aria-hidden="true" />
+                <div className="pp-title">
+                  <div>
+                    <b>Prototype</b>
+                    <span>For the internal test. Students never see this.</span>
+                  </div>
+                  <button className="pp-x" aria-label="Close" onClick={() => setOpen(false)}>
+                    <X size={18} aria-hidden="true" />
                   </button>
-                ))}
-              </Chips>
-              <Hint>A missing or edited id shows the safe error page on new screens.</Hint>
+                </div>
+                <div className="pp-now">
+                  <span className="pp-now-dot" aria-hidden="true" />
+                  <b>{stepLabel(now)}</b>
+                  <span>
+                    {c === "bh" ? "Bahrain" : "Saudi"} · {ses.lang === "ar" ? "Arabic" : "English"}{" "}
+                    · {ses.d(ses.today)}
+                  </span>
+                </div>
+                <div className="pp-tabs" role="tablist">
+                  {TABS.map(([k, label]) => (
+                    <button
+                      key={k}
+                      role="tab"
+                      aria-selected={tab === k}
+                      className={tab === k ? "on" : ""}
+                      onClick={() => pickTab(k)}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
 
-              <div style={sectionLabel}>Student state</div>
-              {["Before launch", "At launch", "Member"].map((g) => (
-                <div key={g}>
-                  <div style={{ fontSize: 13, fontWeight: 700, marginTop: 10 }}>{g}</div>
-                  <Chips>
-                    {PRESETS.filter((p) => p.group === g).map((p) => (
-                      <button
-                        key={p.id}
-                        style={chip(isPreset(p.id, s.journey.status, s.member))}
-                        onClick={() => jump(p.id)}
-                      >
-                        {p.label}
-                      </button>
+              <div className="pp-body">
+                {tab === "journey" && (
+                  <>
+                    {pay && (
+                      <Card title="Tap is waiting">
+                        <p className="pp-hint">
+                          A {pay.kind === "rest" ? "pay the rest" : pay.kind} payment of{" "}
+                          {ses.m(pay.amount)} is waiting for the Tap webhook.
+                        </p>
+                        <div className="pp-row-btns">
+                          <button className="pp-btn pp-btn-dark" onClick={() => webhook("success")}>
+                            Paid
+                          </button>
+                          <button className="pp-btn" onClick={() => webhook("failed")}>
+                            Failed
+                          </button>
+                          <button className="pp-btn" onClick={() => webhook("success", true)}>
+                            Paid, sent twice
+                          </button>
+                        </div>
+                      </Card>
+                    )}
+
+                    <Card title="What can happen next">
+                      <div className="pp-next">
+                        {(NEXT[now] ?? []).map((n) => (
+                          <button
+                            key={n.label}
+                            className="pp-next-btn"
+                            onClick={() => {
+                              if (n.to) jump(n.to);
+                              else if (n.open) {
+                                setOpen(false);
+                                go(n.open);
+                              }
+                            }}
+                          >
+                            <span>
+                              <b>{n.label}</b>
+                              <small>
+                                {n.to
+                                  ? "Goes to " + stepLabel(n.to)
+                                  : (n.hint ?? "Opens the screen")}
+                              </small>
+                            </span>
+                            <ArrowRight size={18} aria-hidden="true" />
+                          </button>
+                        ))}
+                      </div>
+                    </Card>
+
+                    {FLOW.map((f, fi) => (
+                      <div className="pp-phase" key={f.phase}>
+                        <div className="pp-phase-head">
+                          <span className="pp-phase-no">{fi + 1}</span>
+                          <b>{f.phase}</b>
+                          <span>{f.when}</span>
+                        </div>
+                        <ol className="pp-steps">
+                          {f.steps.map((x) => (
+                            <li
+                              key={x.id}
+                              className={(x.side ? "side " : "") + (x.id === now ? "now" : "")}
+                            >
+                              <button onClick={() => jump(x.id)}>
+                                <span className="pp-step-dot" aria-hidden="true" />
+                                <span className="pp-step-text">
+                                  <b>{x.label}</b>
+                                  <small>{x.note}</small>
+                                </span>
+                                {x.id === now ? (
+                                  <span className="pp-here">Here</span>
+                                ) : (
+                                  <ChevronRight size={16} aria-hidden="true" />
+                                )}
+                              </button>
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
                     ))}
-                  </Chips>
-                </div>
-              ))}
-              <Hint>
-                Now: {s.journey.status.replace(/_/g, " ")}. Price {ses.m(ses.price)}
-                {ses.locked ? " (locked)" : ""}. Today {ses.d(ses.today, { weekday: true })}
-                {st.today ? " (set)" : " (real)"}.
-              </Hint>
+                    <p className="pp-hint">
+                      Side paths are indented. Tapping a state sets the student and the prototype
+                      clock, then opens that screen.
+                    </p>
+                  </>
+                )}
 
-              {s.journey.payment && (
-                <>
-                  <div style={sectionLabel}>Tap webhook</div>
-                  <Hint>
-                    A {s.journey.payment.kind} payment is waiting for Tap (
-                    {s.journey.payment.outcome}).
-                  </Hint>
-                  <Chips>
-                    <button style={chip(false)} onClick={() => sendWebhook("success")}>
-                      Paid
-                    </button>
-                    <button style={chip(false)} onClick={() => sendWebhook("failed")}>
-                      Failed
-                    </button>
-                    <button style={chip(false)} onClick={() => sendWebhook("success", true)}>
-                      Paid, sent twice
-                    </button>
-                  </Chips>
-                </>
-              )}
+                {tab === "screens" && (
+                  <>
+                    <label className="pp-search">
+                      <Search size={16} aria-hidden="true" />
+                      <input
+                        value={find}
+                        onChange={(e) => setFind(e.target.value)}
+                        placeholder="Find a screen"
+                        aria-label="Find a screen"
+                      />
+                    </label>
+                    {groups.map((g) => (
+                      <Card title={g.group} key={g.group} flush>
+                        {g.items.map((x) => (
+                          <button key={x.label} className="pp-li" onClick={() => openScreen(x)}>
+                            <span className="pp-li-text">
+                              <b>{x.label}</b>
+                              {x.need && x.need !== now && <small>Sets: {stepLabel(x.need)}</small>}
+                            </span>
+                            <ChevronRight size={16} aria-hidden="true" />
+                          </button>
+                        ))}
+                      </Card>
+                    ))}
+                    {!groups.length && <p className="pp-hint">No screen matches “{find}”.</p>}
+                  </>
+                )}
 
-              <div style={sectionLabel}>Prices and dates</div>
-              <Field
-                label={
-                  "Prices on offer in " +
-                  (c === "bh" ? "Bahrain" : "Saudi") +
-                  ", " +
-                  cur +
-                  " a year before VAT"
-                }
-              >
-                <input
-                  key={c + st.prices[c].join(",")}
-                  defaultValue={st.prices[c].join(", ")}
-                  onBlur={(e) => setPrices(e.target.value)}
-                  style={input}
-                />
-              </Field>
-              <div style={{ fontSize: 13, fontWeight: 700, marginTop: 10 }}>
-                Price this student sees
-              </div>
-              <Chips>
-                <button
-                  style={chip(st.forcePrice[c] == null)}
-                  onClick={() => hb.setSettings({ forcePrice: { ...st.forcePrice, [c]: null } })}
-                >
-                  Random
-                </button>
-                {st.prices[c].map((p, i) => (
-                  <button
-                    key={i}
-                    style={chip(st.forcePrice[c] === i)}
-                    onClick={() => hb.setSettings({ forcePrice: { ...st.forcePrice, [c]: i } })}
-                  >
-                    {cur} {p}
-                  </button>
-                ))}
-              </Chips>
-              <div
-                style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 4 }}
-              >
-                <Field label="VAT %">
-                  <input
-                    type="number"
-                    value={Math.round(st.vat[c] * 1000) / 10}
-                    onChange={(e) =>
-                      hb.setSettings({
-                        vat: { ...st.vat, [c]: Math.max(0, Number(e.target.value)) / 100 },
-                      })
-                    }
-                    style={input}
-                  />
-                </Field>
-                <Field label={"Deposit, " + cur}>
-                  <input
-                    type="number"
-                    value={st.deposit[c]}
-                    onChange={(e) =>
-                      hb.setSettings({
-                        deposit: { ...st.deposit, [c]: Math.max(0, Number(e.target.value)) },
-                      })
-                    }
-                    style={input}
-                  />
-                </Field>
-                <Field label={`Spots cap, ${CURRENCY[c] === "BHD" ? "Bahrain" : "Saudi"}`}>
-                  <input
-                    type="number"
-                    value={st.spotsCap[c]}
-                    onChange={(e) =>
-                      hb.setSettings({
-                        spotsCap: {
-                          ...st.spotsCap,
-                          [c]: Math.max(0, Math.round(Number(e.target.value))),
-                        },
-                      })
-                    }
-                    style={input}
-                  />
-                </Field>
-                <Field label="Spots taken">
-                  <input
-                    type="number"
-                    value={st.spotsTaken[c]}
-                    onChange={(e) =>
-                      hb.setSettings({
-                        spotsTaken: {
-                          ...st.spotsTaken,
-                          [c]: Math.max(0, Math.round(Number(e.target.value))),
-                        },
-                      })
-                    }
-                    style={input}
-                  />
-                </Field>
-                <Field label="Hold days after launch">
-                  <input
-                    type="number"
-                    value={st.holdDays}
-                    onChange={(e) =>
-                      hb.setSettings({ holdDays: Math.max(0, Math.round(Number(e.target.value))) })
-                    }
-                    style={input}
-                  />
-                </Field>
-                <Field label="Launch date">
-                  <input
-                    type="date"
-                    value={st.launchDate}
-                    onChange={(e) =>
-                      e.target.value && hb.setSettings({ launchDate: e.target.value })
-                    }
-                    style={input}
-                  />
-                </Field>
-                <Field label="Today (prototype clock)">
-                  <input
-                    type="date"
-                    value={st.today ?? ""}
-                    onChange={(e) => hb.setSettings({ today: e.target.value || null })}
-                    style={input}
-                  />
-                </Field>
-                <div style={{ display: "flex", alignItems: "flex-end" }}>
-                  <button
-                    style={{ ...chip(st.today == null), width: "100%" }}
-                    onClick={() => hb.setSettings({ today: null })}
-                  >
-                    Use real date
-                  </button>
-                </div>
-              </div>
-              <div style={{ fontSize: 12, fontWeight: 700, color: "#6B6880", margin: "4px 0 6px" }}>
-                Main promo page
-              </div>
-              <Chips>
-                {(
-                  [
-                    ["join", "A Join copy"],
-                    ["story", "B Story"],
-                    ["timeline", "C Timeline"],
-                    ["base", "Baseline"],
-                    ["table", "Table"],
-                  ] as const
-                ).map(([v, label]) => (
-                  <button
-                    key={v}
-                    style={chip(st.mainPromo === v)}
-                    onClick={() => hb.setSettings({ mainPromo: v })}
-                  >
-                    {label}
-                  </button>
-                ))}
-              </Chips>
-              <Chips>
-                {(["verified", "unverified", "expired"] as const).map((v) => (
-                  <button
-                    key={v}
-                    style={chip(st.student === v)}
-                    onClick={() => hb.setSettings({ student: v })}
-                  >
-                    {v === "verified"
-                      ? "Student verified"
-                      : v === "unverified"
-                        ? "Not verified"
-                        : "Student status expired"}
-                  </button>
-                ))}
-              </Chips>
-              <Chips>
-                <button style={chip(false)} onClick={() => hb.set({ settings: DEFAULT_SETTINGS })}>
-                  Reset prices and dates
-                </button>
-              </Chips>
+                {tab === "setup" && (
+                  <>
+                    <Card title="What the app passes">
+                      <Seg
+                        label="Country"
+                        value={ses.country === "sa" ? "saudi" : "bahrain"}
+                        options={[
+                          ["bahrain", "Bahrain"],
+                          ["saudi", "Saudi"],
+                        ]}
+                        onPick={(v) => param({ country: v })}
+                      />
+                      <Seg
+                        label="Language"
+                        value={ses.lang}
+                        options={[
+                          ["en", "English"],
+                          ["ar", "Arabic"],
+                        ]}
+                        onPick={(v) => param({ lang: v })}
+                      />
+                      <Seg
+                        label="Student id"
+                        value={
+                          IDS.find(
+                            ([, id]) => (id == null ? undefined : String(id)) === idNow,
+                          )?.[0] ?? ""
+                        }
+                        options={IDS.map(([l]) => [l, l] as [string, string])}
+                        onPick={(v) => param({ user_id: IDS.find(([l]) => l === v)?.[1] })}
+                      />
+                      <p className="pp-hint">A missing or edited id shows the safe error page.</p>
+                    </Card>
 
-              <div style={sectionLabel}>Shop side</div>
-              <Chips>
-                <button style={chip(false)} onClick={() => hb.acceptAll()}>
-                  Shop accepts all held codes
-                </button>
-                <button
-                  style={chip(false)}
-                  disabled={s.travel !== "revealed"}
-                  onClick={() => hb.redeemTravel()}
-                >
-                  Airalo accepts the travel code
-                </button>
-                <button style={chip(false)} onClick={() => hb.resetStudent()}>
-                  Reset student
-                </button>
-              </Chips>
+                    <Card title="Student">
+                      <Seg
+                        label="Unipal student status"
+                        value={st.student}
+                        options={[
+                          ["verified", "Verified"],
+                          ["unverified", "Not verified"],
+                          ["expired", "Expired"],
+                        ]}
+                        onPick={(v) => hb.setSettings({ student: v as typeof st.student })}
+                      />
+                      <Seg
+                        label="Page before reserving"
+                        value={st.mainPromo}
+                        options={[
+                          ["join", "A Join"],
+                          ["story", "B Story"],
+                          ["timeline", "C Timeline"],
+                          ["base", "Base"],
+                          ["table", "Table"],
+                        ]}
+                        onPick={(v) => hb.setSettings({ mainPromo: v as typeof st.mainPromo })}
+                      />
+                    </Card>
 
-              <div style={sectionLabel}>System states</div>
-              <div style={grid}>
-                {STATUS_PREVIEWS.map((k) => (
-                  <Link
-                    key={k}
-                    to="/haiba/status"
-                    search={(prev: Record<string, unknown>) => ({ ...prev, show: k })}
-                    onClick={() => setOpen(false)}
-                    style={{ ...chip(false), textDecoration: "none", textAlign: "center" }}
-                  >
-                    {k === "denied"
-                      ? "Bad user id"
-                      : k === "country"
-                        ? "Unknown country"
-                        : k.charAt(0).toUpperCase() + k.slice(1)}
-                  </Link>
-                ))}
-              </div>
+                    <Card title={"Price in " + (c === "bh" ? "Bahrain" : "Saudi")}>
+                      <Field label={`Prices on offer, ${cur} a year before VAT`}>
+                        <input
+                          key={c + st.prices[c].join(",")}
+                          defaultValue={st.prices[c].join(", ")}
+                          onBlur={(e) => setPrices(e.target.value)}
+                        />
+                      </Field>
+                      <Seg
+                        label="Price this student sees"
+                        value={st.forcePrice[c] == null ? "r" : String(st.forcePrice[c])}
+                        options={[
+                          ["r", "Random"],
+                          ...st.prices[c].map(
+                            (p, i) => [String(i), `${cur} ${p}`] as [string, string],
+                          ),
+                        ]}
+                        onPick={(v) =>
+                          hb.setSettings({
+                            forcePrice: { ...st.forcePrice, [c]: v === "r" ? null : Number(v) },
+                          })
+                        }
+                      />
+                      <div className="pp-fields">
+                        <Field label="VAT %">
+                          <input
+                            type="number"
+                            value={Math.round(st.vat[c] * 1000) / 10}
+                            onChange={(e) =>
+                              hb.setSettings({
+                                vat: { ...st.vat, [c]: Math.max(0, Number(e.target.value)) / 100 },
+                              })
+                            }
+                          />
+                        </Field>
+                        <Field label={"Deposit, " + cur}>
+                          <input
+                            type="number"
+                            value={st.deposit[c]}
+                            onChange={(e) =>
+                              hb.setSettings({
+                                deposit: {
+                                  ...st.deposit,
+                                  [c]: Math.max(0, Number(e.target.value)),
+                                },
+                              })
+                            }
+                          />
+                        </Field>
+                        <Field label="Spots cap">
+                          <input
+                            type="number"
+                            value={st.spotsCap[c]}
+                            onChange={(e) =>
+                              hb.setSettings({
+                                spotsCap: {
+                                  ...st.spotsCap,
+                                  [c]: Math.max(0, Math.round(Number(e.target.value))),
+                                },
+                              })
+                            }
+                          />
+                        </Field>
+                        <Field label="Spots taken">
+                          <input
+                            type="number"
+                            value={st.spotsTaken[c]}
+                            onChange={(e) =>
+                              hb.setSettings({
+                                spotsTaken: {
+                                  ...st.spotsTaken,
+                                  [c]: Math.max(0, Math.round(Number(e.target.value))),
+                                },
+                              })
+                            }
+                          />
+                        </Field>
+                      </div>
+                    </Card>
 
-              <div style={sectionLabel}>Promo pages</div>
-              <div style={{ display: "flex", gap: 6, alignItems: "center", marginTop: 8 }}>
-                <span style={{ fontSize: 13, color: "#6B6880" }}>Price</span>
-                {PRICES.map((p) => (
-                  <button key={p} style={chip(price === p)} onClick={() => setPrice(p)}>
-                    BHD {p}
-                  </button>
-                ))}
-              </div>
-              <div style={{ fontSize: 13, fontWeight: 700, marginTop: 10 }}>
-                Paywall test (4 Nov)
-              </div>
-              <div style={grid}>
-                {PAYWALLS.map(([label, to]) => (
-                  <Link
-                    key={to}
-                    to={to}
-                    search={(prev: Record<string, unknown>) => ({ ...prev, price: Number(price) })}
-                    onClick={() => setOpen(false)}
-                    style={{ ...chip(false), textDecoration: "none", textAlign: "center" }}
-                  >
-                    {label}
-                  </Link>
-                ))}
-              </div>
-              <div style={{ fontSize: 13, fontWeight: 700, marginTop: 12 }}>
-                Older promo tests (28 Oct)
-              </div>
-              <div style={grid}>
-                {OLD_PROMOS.map(([label, to]) => (
-                  <Link
-                    key={to}
-                    to={to}
-                    onClick={() => setOpen(false)}
-                    style={{ ...chip(false), textDecoration: "none", textAlign: "center" }}
-                  >
-                    {label}
-                  </Link>
-                ))}
-              </div>
+                    <Card title="Dates">
+                      <div className="pp-fields">
+                        <Field label="Launch date">
+                          <input
+                            type="date"
+                            value={st.launchDate}
+                            onChange={(e) =>
+                              e.target.value && hb.setSettings({ launchDate: e.target.value })
+                            }
+                          />
+                        </Field>
+                        <Field label="Reservations close">
+                          <input
+                            type="date"
+                            value={st.reserveEnd}
+                            onChange={(e) =>
+                              e.target.value && hb.setSettings({ reserveEnd: e.target.value })
+                            }
+                          />
+                        </Field>
+                        <Field label="Hold days after launch">
+                          <input
+                            type="number"
+                            value={st.holdDays}
+                            onChange={(e) =>
+                              hb.setSettings({
+                                holdDays: Math.max(0, Math.round(Number(e.target.value))),
+                              })
+                            }
+                          />
+                        </Field>
+                        <Field label="Today (prototype clock)">
+                          <input
+                            type="date"
+                            value={st.today ?? ""}
+                            onChange={(e) => hb.setSettings({ today: e.target.value || null })}
+                          />
+                        </Field>
+                      </div>
+                      <div className="pp-row-btns">
+                        <button
+                          className="pp-btn"
+                          disabled={st.today == null}
+                          onClick={() => hb.setSettings({ today: null })}
+                        >
+                          Use the real date
+                        </button>
+                        <button
+                          className="pp-btn"
+                          onClick={() => hb.set({ settings: DEFAULT_SETTINGS })}
+                        >
+                          <RotateCcw size={14} aria-hidden="true" /> Reset prices and dates
+                        </button>
+                      </div>
+                    </Card>
+                  </>
+                )}
 
-              <div style={sectionLabel}>Go to screen</div>
-              <div style={grid}>
-                {SCREENS.map(([label, to]) => (
-                  <button
-                    key={to}
-                    onClick={() => {
-                      setOpen(false);
-                      go(to!);
-                    }}
-                    style={{ ...chip(false), textAlign: "center" }}
-                  >
-                    {label}
-                  </button>
-                ))}
+                {tab === "tests" && (
+                  <>
+                    <Card title="Paywall test (4 Nov)">
+                      <Seg
+                        label="Price shown"
+                        value={promoPrice}
+                        options={PROMO_PRICES.map((p) => [p, "BHD " + p] as [string, string])}
+                        onPick={setPromoPrice}
+                      />
+                      {PAYWALLS.map(([label, to]) => (
+                        <button
+                          key={to}
+                          className="pp-li"
+                          onClick={() => {
+                            setOpen(false);
+                            go(`${to}?price=${promoPrice}`);
+                          }}
+                        >
+                          <span className="pp-li-text">
+                            <b>{label}</b>
+                          </span>
+                          <ChevronRight size={16} aria-hidden="true" />
+                        </button>
+                      ))}
+                    </Card>
+                    <Card title="Older promo tests (28 Oct)" flush>
+                      {OLD_PROMOS.map(([label, to]) => (
+                        <button
+                          key={to}
+                          className="pp-li"
+                          onClick={() => {
+                            setOpen(false);
+                            go(to);
+                          }}
+                        >
+                          <span className="pp-li-text">
+                            <b>{label}</b>
+                          </span>
+                          <ChevronRight size={16} aria-hidden="true" />
+                        </button>
+                      ))}
+                    </Card>
+                    <Card title="Shop side">
+                      <div className="pp-row-btns">
+                        <button className="pp-btn" onClick={() => hb.acceptAll()}>
+                          Shop accepts all held codes
+                        </button>
+                        <button
+                          className="pp-btn"
+                          disabled={s.travel !== "revealed"}
+                          onClick={() => hb.redeemTravel()}
+                        >
+                          Airalo accepts the travel code
+                        </button>
+                      </div>
+                    </Card>
+                    <Card title="Reset">
+                      <div className="pp-row-btns">
+                        <button className="pp-btn" onClick={() => hb.resetStudent()}>
+                          <RotateCcw size={14} aria-hidden="true" /> Reset points, codes and gifts
+                        </button>
+                        <button className="pp-btn" onClick={() => jump("not_reserved")}>
+                          <RotateCcw size={14} aria-hidden="true" /> Back to not reserved
+                        </button>
+                      </div>
+                    </Card>
+                  </>
+                )}
               </div>
             </motion.div>
           </motion.div>
@@ -586,52 +803,51 @@ export default function PrototypePanel() {
   );
 }
 
-const input: CSSProperties = {
-  font: "inherit",
-  fontSize: 14,
-  fontWeight: 600,
-  width: "100%",
-  boxSizing: "border-box",
-  border: "1px solid #E2DCF2",
-  borderRadius: 10,
-  padding: "8px 10px",
-  color: "#1E1B2E",
-  background: "#FFFFFF",
-};
-
-function Chips({ children }: { children: ReactNode }) {
-  return <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 8 }}>{children}</div>;
+function Card({ title, children, flush }: { title: string; children: ReactNode; flush?: boolean }) {
+  return (
+    <section className={"pp-card" + (flush ? " pp-card-flush" : "")}>
+      <h3>{title}</h3>
+      {children}
+    </section>
+  );
 }
 
-function Hint({ children }: { children: ReactNode }) {
+function Seg({
+  label,
+  value,
+  options,
+  onPick,
+}: {
+  label: string;
+  value: string;
+  options: [string, string][];
+  onPick: (v: string) => void;
+}) {
   return (
-    <div style={{ fontSize: 13, color: "#6B6880", marginTop: 6, lineHeight: 1.4 }}>{children}</div>
+    <div className="pp-seg-wrap">
+      <span className="pp-label">{label}</span>
+      <div className="pp-seg" role="radiogroup" aria-label={label}>
+        {options.map(([v, l]) => (
+          <button
+            key={v}
+            role="radio"
+            aria-checked={value === v}
+            className={value === v ? "on" : ""}
+            onClick={() => onPick(v)}
+          >
+            {l}
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }
 
 function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <label
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 4,
-        marginTop: 8,
-        fontSize: 12.5,
-        fontWeight: 700,
-        color: "#6B6880",
-      }}
-    >
-      {label}
+    <label className="pp-field">
+      <span className="pp-label">{label}</span>
       {children}
     </label>
   );
-}
-
-// Which preset chip is lit for the current state.
-function isPreset(p: Preset, status: string, member: string) {
-  if (p === "member_new") return status === "member" && member === "new";
-  if (p === "member_active") return status === "member" && member === "active";
-  if (p === "not_reserved_after_launch") return false;
-  return p === status;
 }

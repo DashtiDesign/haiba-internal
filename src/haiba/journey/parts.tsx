@@ -112,3 +112,43 @@ export function Section({ title, children }: { title?: string; children: ReactNo
     </section>
   );
 }
+
+/**
+ * 8 Nov: where the student is on the way to Haiba, the same three stages on every reserve and pay screen,
+ * so each state reads differently at a glance: Reserve, Pay the rest, Member.
+ */
+export type Stage = "reserved" | "pay" | "expired" | "refund" | "member";
+export function JourneyStage({ stage, payOn }: { stage: Stage; payOn?: string }) {
+  const s = useSession();
+  type St = "done" | "now" | "next" | "off";
+  const nodes: [string, St, string][] = [
+    [
+      s.t("stageReserve"),
+      stage === "refund" ? "off" : "done",
+      stage === "refund" ? s.t("stageCancelled") : s.t("stageDone"),
+    ],
+    [
+      s.t("stagePay"),
+      stage === "pay" ? "now" : stage === "member" ? "done" : stage === "expired" ? "off" : "next",
+      stage === "pay"
+        ? s.t("stageNow")
+        : stage === "member"
+          ? s.t("stageDone")
+          : stage === "expired"
+            ? s.t("stageMissed")
+            : (payOn ?? ""),
+    ],
+    [s.t("stageMember"), stage === "member" ? "done" : "next", ""],
+  ];
+  return (
+    <ol className="jx-stage" aria-label={nodes.map((n) => n[0] + " " + n[2]).join(", ")}>
+      {nodes.map(([label, st, sub]) => (
+        <li key={label} className={st}>
+          <span className="jx-stage-dot" aria-hidden="true" />
+          <span className="jx-stage-label">{label}</span>
+          {sub && <span className="jx-stage-sub">{sub}</span>}
+        </li>
+      ))}
+    </ol>
+  );
+}

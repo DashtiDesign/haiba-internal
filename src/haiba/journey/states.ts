@@ -68,7 +68,8 @@ export const EMPTY_JOURNEY: Journey = {
 };
 
 /** Every state the prototype panel can jump to. Some states have two set ups (before or after launch, new or active member). */
-export type Preset = Status | "not_reserved_after_launch" | "member_new" | "member_active";
+export type Preset =
+  Status | "not_reserved_after_launch" | "member_new" | "member_active" | "cancelled_last_month";
 
 export const PRESETS: { id: Preset; label: string; group: string }[] = [
   { id: "not_reserved", label: "Not reserved", group: "Before launch" },
@@ -195,6 +196,12 @@ export function presetJourney(
       return {
         journey: { ...member, status: "cancelled", cancelledOn: addDays(joined, 60) },
         today: addDays(joined, 61),
+        member: "active",
+      };
+    case "cancelled_last_month":
+      return {
+        journey: { ...member, status: "cancelled", cancelledOn: addDays(joined, 60) },
+        today: addDays(member.renewsOn!, -20),
         member: "active",
       };
     case "ended":

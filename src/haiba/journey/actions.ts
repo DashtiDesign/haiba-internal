@@ -8,6 +8,7 @@ import {
   type Status,
 } from "./states";
 import { useSession, type Session } from "./session";
+import { addMonths } from "./format";
 
 /**
  * Where each student state lands. Every Haiba link and deep link goes through this,
@@ -26,14 +27,15 @@ export function pathFor(status: Status): string {
     case "refund_failed":
       return "/haiba/refund";
     case "pay_rest_open":
+      return "/haiba/pay";
     case "hold_expired":
-      return "/haiba/reserved"; // pay the rest and hold expired screens come in flow 1b
+      return "/haiba/expired";
     case "member":
     case "renewal_due":
     case "cancelled":
       return "/haiba";
     case "ended":
-      return "/haiba/reserve";
+      return "/haiba/ended";
   }
 }
 
@@ -125,9 +127,42 @@ export function useJourneyActions() {
       set({ payment: null, card: { ...CARD[s.c], last4: "1881" } });
       return pathFor(j.status);
     }
-    // rest, join and renew are finished in flows 1b and 3
-    set({ payment: null });
-    return pathFor(j.status);
+    // 8 Nov: paying the rest, joining after launch or coming back makes them a member for one year from today.
+    if (p.kind === "rest" || p.kind === "join") {
+      set({
+        payment: null,
+        failure: null,
+        status: "member",
+        lockedPrice: p.kind === "join" ? s.price : j.lockedPrice,
+        lockedCountry: j.lockedCountry ?? s.c,
+        restPaidOn: s.today,
+        memberSince: s.today,
+        renewsOn: addMonths(s.today, 12),
+        cancelledOn: null,
+        card: j.card ?? CARD[s.c],
+      });
+      s.hb.set({ member: "new" });
+      return "/haiba/paid";
+    }
+    // Renew: one more year from the old end date.
+    set({
+      payment: null,
+      failure: null,
+      status: "member",
+      cancelledOn: null,
+      renewsOn: addMonths(j.renewsOn ?? s.today, 12),
+    });
+    return "/haiba/membership?renewed=1";
+  };
+
+  /** Membership: cancelling never ends the year early. Keeping it undoes the cancel. */
+  const cancelMembership = () => {
+    set({ status: "cancelled", cancelledOn: s.today });
+    go("/haiba/membership");
+  };
+  const keepMembership = () => {
+    set({ status: "member", cancelledOn: null });
+    go("/haiba/membership");
   };
 
   const cancelReservation = () => {
@@ -140,5 +175,14 @@ export function useJourneyActions() {
     go("/haiba/reserve");
   };
 
-  return { startPayment, tapResult, abandon, webhook, cancelReservation, reserveAgain };
+  return {
+    startPayment,
+    tapResult,
+    abandon,
+    webhook,
+    cancelReservation,
+    reserveAgain,
+    cancelMembership,
+    keepMembership,
+  };
 }

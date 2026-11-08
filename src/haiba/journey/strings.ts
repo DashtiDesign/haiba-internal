@@ -163,6 +163,14 @@ const en = {
   closedWhat: "What you get when you join",
   closedRemind: "Remind me when Haiba opens",
   closedReminded: "We will remind you on {date}",
+  // 8 Nov: the three stage strip on the reserve and pay screens
+  stageReserve: "Reserve",
+  stagePay: "Pay the rest",
+  stageMember: "Member",
+  stageDone: "Done",
+  stageNow: "Now",
+  stageMissed: "Missed",
+  stageCancelled: "Cancelled",
 };
 
 export type StringKey = keyof typeof en;
@@ -312,6 +320,13 @@ const ar: Partial<Record<StringKey, string>> = {
   closedWhat: "وش تاخذ لما تنضم",
   closedRemind: "ذكّرني لما تفتح هيبة",
   closedReminded: "بنذكّرك في {date}",
+  stageReserve: "احجز",
+  stagePay: "ادفع الباقي",
+  stageMember: "عضو",
+  stageDone: "تم",
+  stageNow: "الحين",
+  stageMissed: "فات",
+  stageCancelled: "ملغي",
 };
 
 const STRINGS: Record<Lang, Partial<Record<StringKey, string>>> = { en, ar };

@@ -15,6 +15,9 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { HaibaProvider, useHaiba } from "../haiba/store";
 import { parseCountry } from "../haiba/journey/settings";
+import TrayGestures from "@/haiba/TrayGestures";
+import PreloadScreens from "@/haiba/PreloadScreens";
+import HitAreas from "@/haiba/HitAreas";
 import PrototypePanel from "../haiba/PrototypePanel";
 import MotionExperience from "../haiba/MotionExperience";
 import { MotionConfig } from "motion/react";
@@ -81,7 +84,12 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 }
 
 /** The app opens every Haiba page with these. They stay in the URL as the student moves between pages. */
-type AppSearch = { lang?: string; country?: string; user_id?: string | number; [key: string]: unknown };
+type AppSearch = {
+  lang?: string;
+  country?: string;
+  user_id?: string | number;
+  [key: string]: unknown;
+};
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   validateSearch: (search: Record<string, unknown>): AppSearch => search as AppSearch,
@@ -100,7 +108,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "author", content: "Lovable" },
       { property: "og:title", content: "Haiba internal prototype" },
-      { property: "og:description", content: "Clickable prototype of Haiba, the Unipal membership. Internal test only." },
+      {
+        property: "og:description",
+        content: "Clickable prototype of Haiba, the Unipal membership. Internal test only.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -154,12 +165,15 @@ function RootComponent() {
       <HaibaProvider>
         <div className="hb-app">
           <MotionConfig reducedMotion="user">
-          <MotionExperience>
-          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-          <Outlet />
-          <ParamsSync />
-          <PrototypePanel />
-          </MotionExperience>
+            <MotionExperience>
+              {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+              <Outlet />
+              <ParamsSync />
+              <PrototypePanel />
+              <TrayGestures />
+              <PreloadScreens />
+              <HitAreas />
+            </MotionExperience>
           </MotionConfig>
         </div>
       </HaibaProvider>

@@ -37,7 +37,8 @@ export default function Reserve() {
   if (s.student !== "verified") return <NotStudent action="reserve" />;
   if (s.full && !s.launched) return <SpotsFull />;
 
-  return <MainPromo />;
+  // After launch the same promo page becomes the join page: full price with VAT, no deposit.
+  return <MainPromo mode={s.launched ? "Join" : "Reserve"} />;
 }
 
 /**

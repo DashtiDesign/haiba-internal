@@ -360,3 +360,160 @@
   .pg-story.hb-welcome-step-1 { --hb-welcome-scene: linear-gradient(to bottom, var(--hb-welcome-surface) 0%, var(--hb-welcome-surface) 210px, var(--hb-welcome-scene-floor) 600px); }
   .pg-story .hb-welcome-gifts { top: max(590px, calc(100svh - 215px)) !important; }
 }
+
+/*
+ * 8 Nov: responsiveness pass. The prototype must feel like the app, not a web page:
+ * no sideways scroll, no page that scrolls when it fits, instant taps.
+ */
+/* Nothing scrolls sideways. clip (not hidden) keeps position: sticky working. */
+html,
+body {
+  overflow-x: clip;
+  overscroll-behavior: none;
+}
+.hb-app {
+  overflow-x: clip;
+}
+/* Screens fill the phone height exactly. svh is the height with the browser bars showing,
+   so a screen that fits never scrolls. Screens padded for the notch take that padding off their height. */
+.hb-app [class^="pg-"]:not(.pg-home) > div:first-child,
+.hb-app .pg-home {
+  min-height: 100svh !important;
+}
+.hb-app :is(.pg-hub, .pg-plans, .pg-points, .pg-story, .pg-wallet, .pg-redeem, .pg-shop, .pg-basket) > div:first-child {
+  min-height: calc(100svh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)) !important;
+}
+/* Taps: no double tap zoom delay, no grey flash, no text selection on a long press, instant pressed state. */
+.hb-app :is(button, a, [role="button"], [role="tab"], label, summary) {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.hb-app :is(button, a, [role="button"], [role="tab"]):not(:disabled):active {
+  filter: brightness(0.93);
+}
+.hb-app img {
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+}
+/* iOS zooms into any field under 16px and then the page scrolls sideways. */
+.hb-app :is(input, select, textarea) {
+  font-size: max(16px, 1em) !important;
+}
+/* Small icon buttons (back, close, menu, 28px and up) get a 44px hit area without changing how they look. */
+.hb-app :is(button, a):is([aria-label="Back"], [aria-label="Close"], [aria-label="Menu"], [aria-label="Back to Haiba"], .jx-icon-btn):not([style*="position: absolute"]):not([style*="position: fixed"]) {
+  position: relative;
+}
+.hb-app :is(button, a):is([aria-label="Back"], [aria-label="Close"], [aria-label="Menu"], [aria-label="Back to Haiba"], .jx-icon-btn)::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+}
+/* The page behind an open tray stays still. */
+html.hb-tray-open,
+html.hb-tray-open body {
+  overflow: hidden;
+}
+
+/* Trays never run past the visible screen (vh is taller than the screen on iOS while the browser bars show),
+   and scrolling inside a tray never scrolls the page behind it. */
+[role="dialog"] {
+  max-height: 88dvh !important;
+  overscroll-behavior: contain;
+}
+/* On a phone the screen is the app: it fills the full width (393, 412, 430 wide phones had grey edges).
+   On a laptop the screens stay at phone width in the middle. */
+@media (max-width: 520px) {
+  .hb-app [class^="pg-"]:not(.pg-home) > div:first-child,
+  .hb-app .pg-home,
+  .hb-app [class^="pg-"] [role="dialog"],
+  .jx:not(.jx-sheet),
+  .jx-sheet,
+  .jx-dock,
+  .hb-fixed-inner {
+    max-width: none !important;
+  }
+}
+/* Hit areas added by HitAreas.tsx: anything under 44 x 44 grows an invisible area to 44. */
+.hb-hit-rel {
+  position: relative;
+}
+.hb-hit::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--hb-hit-y, 0px) * -1);
+  bottom: calc(var(--hb-hit-y, 0px) * -1);
+  left: calc(var(--hb-hit-x, 0px) * -1);
+  right: calc(var(--hb-hit-x, 0px) * -1);
+}
+
+/* 8 Nov: prototype panel (internal test only). Tabs: Journey, Screens, Setup, Tests. */
+.pp-open { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 60; border: 0; cursor: pointer; background: #1e1b2e; color: #c0f402; writing-mode: vertical-rl; font: 700 11px Figtree, system-ui, sans-serif; letter-spacing: 0.12em; text-transform: uppercase; padding: 12px 6px; border-radius: 8px 0 0 10px; }
+.pp-back { position: fixed; inset: 0; z-index: 70; background: rgba(20, 16, 36, 0.45); display: flex; align-items: flex-end; justify-content: center; }
+.pp { width: 100%; max-width: 430px; height: 88dvh; max-height: 88dvh; background: #fff; border-radius: 18px 18px 0 0; display: flex; flex-direction: column; overflow: hidden; font-family: Figtree, system-ui, sans-serif; color: #1e1b2e; box-sizing: border-box; }
+.pp *, .pp *::before, .pp *::after { box-sizing: border-box; }
+.pp button { font-family: inherit; cursor: pointer; }
+.pp-head { flex: none; padding: 8px 16px 0; background: #fff; border-bottom: 1px solid #ece8f5; }
+.pp-grab { display: block; width: 40px; height: 5px; border-radius: 99px; background: #d9d3ea; margin: 0 auto 8px; }
+.pp-title { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.pp-title b { display: block; font-size: 19px; font-weight: 800; }
+.pp-title span { display: block; font-size: 12.5px; font-weight: 500; color: #6b6880; margin-top: 2px; }
+.pp-x { flex: none; width: 36px; height: 36px; border-radius: 50%; border: 0; background: #f1eef7; color: #1e1b2e; display: flex; align-items: center; justify-content: center; }
+.pp-now { margin-top: 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 10px 12px; border-radius: 12px; background: #1e1b2e; color: #fff; }
+.pp-now b { font-size: 14.5px; font-weight: 800; color: #c0f402; }
+.pp-now span:last-child { font-size: 12.5px; font-weight: 600; color: rgba(255, 255, 255, 0.7); }
+.pp-now-dot { width: 8px; height: 8px; border-radius: 50%; background: #c0f402; box-shadow: 0 0 0 3px rgba(192, 244, 2, 0.25); }
+.pp-tabs { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 6px; }
+.pp-tabs button { height: 46px; border: 0; background: none; font-size: 14.5px; font-weight: 700; color: #6b6880; border-bottom: 2.5px solid transparent; }
+.pp-tabs button.on { color: #1e1b2e; border-bottom-color: #6c3ffa; }
+.pp-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 14px 14px calc(28px + env(safe-area-inset-bottom)); background: #f6f4fb; display: flex; flex-direction: column; gap: 12px; }
+.pp-card, .pp-phase { background: #fff; border-radius: 16px; padding: 14px; box-shadow: 0 1px 0 #ece8f5; }
+.pp-card h3 { margin: 0 0 10px; font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #6b6880; }
+.pp-card-flush { padding: 14px 0 2px; }
+.pp-card-flush h3 { padding: 0 14px; margin-bottom: 4px; }
+.pp-hint { margin: 6px 2px 0; font-size: 13px; line-height: 1.45; color: #6b6880; }
+.pp-row-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.pp-btn { min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid #e2dcf2; background: #fff; color: #1e1b2e; font-size: 13.5px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
+.pp-btn-dark { background: #1e1b2e; border-color: #1e1b2e; color: #c0f402; }
+.pp-btn:disabled { opacity: 0.45; cursor: default; }
+.pp-next { display: flex; flex-direction: column; gap: 8px; }
+.pp-next-btn { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 58px; padding: 10px 14px; border-radius: 12px; border: 0; background: #f1ecff; color: #1e1b2e; text-align: left; }
+.pp-next-btn b { display: block; font-size: 15px; font-weight: 800; }
+.pp-next-btn small { display: block; font-size: 12.5px; font-weight: 600; color: #6b6880; margin-top: 2px; }
+.pp-next-btn svg { flex: none; color: #6c3ffa; }
+.pp-phase { padding: 12px 10px 6px; }
+.pp-phase-head { display: flex; align-items: center; gap: 8px; padding: 0 4px; }
+.pp-phase-no { width: 22px; height: 22px; border-radius: 50%; background: #1e1b2e; color: #c0f402; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.pp-phase-head b { font-size: 15.5px; font-weight: 800; }
+.pp-phase-head > span:last-child { margin-left: auto; font-size: 12.5px; font-weight: 600; color: #6b6880; }
+.pp-steps { list-style: none; margin: 6px 0 0; padding: 0; }
+.pp-steps button { width: 100%; display: flex; align-items: center; gap: 12px; min-height: 54px; padding: 7px 8px; border: 0; background: none; text-align: left; color: #1e1b2e; border-radius: 10px; }
+.pp-steps li + li button { box-shadow: inset 0 1px 0 #f1eef7; }
+.pp-step-dot { flex: none; width: 14px; height: 14px; border-radius: 50%; border: 2px solid #c9c2de; background: #fff; }
+.pp-steps li.side button { padding-left: 30px; }
+.pp-steps li.side .pp-step-dot { width: 10px; height: 10px; border-style: dashed; }
+.pp-steps li.now button { background: #f2fbd0; box-shadow: none; }
+.pp-steps li.now .pp-step-dot { background: #c0f402; border-color: #1e1b2e; }
+.pp-step-text { flex: 1; min-width: 0; }
+.pp-step-text b { display: block; font-size: 14.5px; font-weight: 700; }
+.pp-step-text small { display: block; font-size: 12.5px; font-weight: 500; color: #6b6880; margin-top: 1px; }
+.pp-steps svg, .pp-li svg { flex: none; color: #9a96ab; }
+.pp-here { flex: none; font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; background: #1e1b2e; color: #c0f402; padding: 4px 8px; border-radius: 999px; }
+.pp-search { display: flex; align-items: center; gap: 8px; height: 48px; padding: 0 14px; border-radius: 12px; background: #fff; border: 1px solid #e2dcf2; color: #6b6880; }
+.pp-search input { flex: 1; min-width: 0; border: 0; outline: none; background: none; font: 500 16px Figtree, system-ui, sans-serif; color: #1e1b2e; }
+.pp-li { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; min-height: 50px; padding: 8px 14px; border: 0; background: none; text-align: left; color: #1e1b2e; box-shadow: inset 0 1px 0 #f1eef7; }
+.pp-card:not(.pp-card-flush) .pp-li { padding: 8px 2px; }
+.pp-li-text b { display: block; font-size: 15px; font-weight: 600; }
+.pp-li-text small { display: block; font-size: 12px; font-weight: 700; color: #4f25d6; margin-top: 2px; }
+.pp-seg-wrap + .pp-seg-wrap { margin-top: 12px; }
+.pp-label { display: block; font-size: 12.5px; font-weight: 700; color: #6b6880; margin-bottom: 6px; }
+.pp-seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.pp-seg button { min-height: 38px; padding: 0 13px; border-radius: 999px; border: 1px solid #e2dcf2; background: #fff; color: #1e1b2e; font-size: 13.5px; font-weight: 700; }
+.pp-seg button.on { background: #1e1b2e; border-color: #1e1b2e; color: #fff; }
+.pp-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
+.pp-field { display: block; margin-top: 10px; }
+.pp-fields .pp-field { margin-top: 0; }
+.pp-field input { width: 100%; height: 44px; border: 1px solid #e2dcf2; border-radius: 10px; padding: 0 10px; font: 500 16px Figtree, system-ui, sans-serif; color: #1e1b2e; background: #fff; }
+.pp-card > .pp-hint:first-of-type { margin-top: 0; }

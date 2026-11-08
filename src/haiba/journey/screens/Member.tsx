@@ -28,11 +28,11 @@ import {
   X,
 } from "lucide-react";
 import Artwork from "../../Artwork";
-import { useNavigate } from "../../nav";
+import { Navigate, useNavigate } from "../../nav";
 import { Button, LinkOut, Screen, Sheet, TopBar, supportHref } from "../ui";
-import { Countdown, Pill, Rows, Section, Steps } from "../parts";
+import { Countdown, JourneyStage, Pill, Rows, Section, Steps } from "../parts";
 import { useSession, type Session } from "../session";
-import { useJourneyActions } from "../actions";
+import { pathFor, useJourneyActions } from "../actions";
 import { addDays, addMonths, pct, startOf } from "../format";
 import { daysText } from "../strings";
 import {
@@ -210,11 +210,20 @@ function cardText(s: Session) {
 
 /* ---------- 2 · at launch ---------- */
 
+/** Sends a student who is not in this state to the screen for their own state (8 Nov). */
+function useGuard(...ok: string[]) {
+  const s = useSession();
+  if (!s.hb.ready || !s.valid || ok.includes(s.journey.status)) return null;
+  return <Navigate to={pathFor(s.journey.status)} replace />;
+}
+
 export function PayRest() {
   const s = useSession();
   const a = useJourneyActions();
   const [cancel, setCancel] = useState(false);
   const holdEndsMs = startOf(s.holdEnds) + 24 * 3600000;
+  const away = useGuard("pay_rest_open");
+  if (away) return away;
   return (
     <Screen
       dock={
@@ -226,9 +235,10 @@ export function PayRest() {
         </>
       }
     >
-      <header className="jx-dark-hero">
-        <TopBar back="/" onDark />
-        <Artwork src="/haiba/birds/02-jump.png" alt="" className="jx-hero-bird" />
+      {/* 8 Nov: lime, the coin bird and "Haiba is open", so it never looks like Reserved (dark). */}
+      <header className="jx-dark-hero jx-hero-lime">
+        <TopBar back="/" />
+        <Artwork src={BIRD("27-coin")} alt="" className="jx-hero-bird" />
         <div className="jx-hero-text">
           <h1 className="jx-h1">{s.t("payTitle")}</h1>
           <p className="jx-sub">{s.t("paySub", { price: s.m(s.price) })}</p>
@@ -236,6 +246,9 @@ export function PayRest() {
         <div className="jx-counter-label">{s.t("payHeld")}</div>
         <Countdown to={holdEndsMs} />
       </header>
+      <div className="jx-pad">
+        <JourneyStage stage="pay" />
+      </div>
       <Section>
         <Rows
           strongLast
@@ -280,7 +293,13 @@ export function PayRest() {
         <p className="jx-sub" style={{ marginTop: 0 }}>
           {s.t("cancelBody", { deposit: s.m(s.deposit) })}
         </p>
-        <Button variant="danger" onClick={() => setCancel(false)}>
+        <Button
+          variant="danger"
+          onClick={() => {
+            setCancel(false);
+            a.cancelReservation();
+          }}
+        >
           {s.t("cancelYes")}
         </Button>
         <Button variant="primary" onClick={() => setCancel(false)}>
@@ -294,6 +313,8 @@ export function PayRest() {
 export function HoldExpired() {
   const s = useSession();
   const go = useNavigate();
+  const away = useGuard("hold_expired");
+  if (away) return away;
   const old = s.journey.lockedPrice;
   const changed = old != null && old !== s.price;
   return (
@@ -310,6 +331,7 @@ export function HoldExpired() {
       <Result tone="warn" bird="19-hourglass" back="/">
         <h1 className="jx-h1 jx-res-title">{s.t("expiredTitle")}</h1>
         <p className="jx-sub">{s.t("holdSub", { date: s.d(s.holdEnds, { weekday: true }) })}</p>
+        <JourneyStage stage="expired" />
 
         <ol className="jx-tl">
           <li className="done">
@@ -380,6 +402,8 @@ export function Join() {
 export function Paid() {
   const s = useSession();
   const go = useNavigate();
+  const away = useGuard("member", "renewal_due", "cancelled");
+  if (away) return away;
   const y = year(s);
   const hadDeposit = s.journey.depositPaidOn != null;
   return (
@@ -926,16 +950,15 @@ export function Unipass() {
   const usedGift = GIFTS[0]!;
   const nextMonth = monthName(next, s.lang);
 
-  // 8 Nov: the same year bar as the membership card. One mark per gift month, with its letter under it,
-  // so it reads as "gift months this year": filled = gift used, purple = this month, empty = to come.
-  const yFrom = new Date(year(s).from);
+  // The one month tracker used across Haiba (same as the membership card): filled = gift used,
+  // half filled = this month, empty = to come, hatched = missed.
   const dots = (
-    <div className="jx-yt" role="img" aria-label={s.t("upYear", { n: giftN })}>
-      {Array.from({ length: 12 }).map((_, i) => {
-        const d = new Date(yFrom);
-        d.setMonth(d.getMonth() + i);
-        const missed = view === "lost" && i === giftN - 2;
-        const st = missed
+    <MonthTrack
+      from={year(s).from}
+      lang={s.lang}
+      label={s.t("upYear", { n: giftN })}
+      state={(i) =>
+        view === "lost" && i === giftN - 2
           ? "missed"
           : i < giftN - 1
             ? "on"
@@ -943,62 +966,46 @@ export function Unipass() {
               ? used
                 ? "on now"
                 : "now"
-              : "";
-        return (
-          <span key={i} className={st}>
-            <i />
-            <small>
-              {d.toLocaleDateString(s.lang === "ar" ? "ar" : "en-GB", { month: "narrow" })}
-            </small>
-          </span>
-        );
-      })}
-    </div>
+              : ""
+      }
+    />
   );
 
   let hero: ReactNode;
   if (used) {
-    // 8 Nov: gift used this month. The countdown to next month's gift is the hero (MacroFactor, Sweatcoin pattern),
-    // this month's gift sits under it as a small receipt, then the year bar.
-    const td = new Date(startOf(s.today));
-    const daysIn = new Date(td.getFullYear(), td.getMonth() + 1, 0).getDate();
-    const gone = Math.max(0, Math.min(1, 1 - daysLeft / daysIn));
+    // 8 Nov: gift used this month. Same lime hero as picking a gift, so the month reads as one story:
+    // what you got (a small receipt), when the next one opens, then the year.
     hero = (
-      <header className="jx-up-hero jx-up-hero-soft jx-up-hero-used">
+      <header className="jx-up-hero jx-up-hero-got">
         <TopBar back="/haiba" />
+        <Artwork src={BIRD("13-fist")} alt="" className="jx-up-bird jx-up-bird-got" />
+        <div className="jx-pad jx-up-text">
+          <span className="jx-label" style={{ color: "var(--jx-ink)" }}>
+            {s.t("upYear", { n: giftN })}
+          </span>
+          <h1 className="jx-h1" style={{ marginTop: 6 }}>
+            {s.t("upGotTitle", { month })}
+          </h1>
+          <span className="jx-up-nextpill">
+            <Clock size={15} aria-hidden="true" />
+            {s.t("upNextIn", { days: daysText(s.lang, daysLeft) })}
+          </span>
+        </div>
         <div className="jx-pad">
-          <div
-            className="jx-cd"
-            style={{ ["--cd" as string]: `${Math.round(gone * 360)}deg` }}
-            role="img"
-            aria-label={s.t("upNextIn", { days: daysText(s.lang, daysLeft) })}
-          >
-            <div className="jx-cd-in">
-              <img src={ICON.unipass} alt="" />
-              <b className="jx-num">{daysLeft}</b>
-              <span>{s.t("upDaysTo", { month: nextMonth })}</span>
-            </div>
-          </div>
-          <p className="jx-cd-date">{s.t("upOpensOn", { date: s.d(next, { weekday: true }) })}</p>
-
           <div className="jx-up-done">
             <span className="jx-up-done-art" style={{ background: CAT_BG[usedGift.cat] }}>
               <img src={usedGift.img} alt="" />
             </span>
             <span className="jx-row-main">
-              <span className="jx-row-sub">{s.t("upUsedTitle", { month })}</span>
-              <span className="jx-row-title">
-                {usedGift.item} · {BRANDS[usedGift.brand]!.name}
-              </span>
+              <span className="jx-row-title">{usedGift.item}</span>
               <span className="jx-row-sub">
-                {s.t("upUsedOn", { date: s.d(addDays(s.today, -2)) })} ·{" "}
-                <b className="jx-up-done-save">
-                  {s.t("actSavedAmt", { amount: s.m(usedGift.value) })}
-                </b>
+                {BRANDS[usedGift.brand]!.name} ·{" "}
+                {s.t("upUsedOn", { date: s.d(addDays(s.today, -2)) })}
               </span>
             </span>
-            <span className="jx-up-check">
-              <Check size={16} strokeWidth={3} aria-hidden="true" />
+            <span className="jx-up-done-save">
+              <Check size={14} strokeWidth={3} aria-hidden="true" />
+              {s.m(usedGift.value)}
             </span>
           </div>
           {dots}
@@ -1086,9 +1093,27 @@ export function Unipass() {
       )}
 
       {used && (
-        <div className="jx-pad" style={{ marginTop: 22 }}>
-          <h2 className="jx-h3">{s.t("upComing", { month: nextMonth })}</h2>
-        </div>
+        <section className="jx-coming">
+          <div className="jx-pad jx-coming-head">
+            <h2 className="jx-h3">{s.t("upComing", { month: nextMonth })}</h2>
+            <span className="jx-row-sub">{s.t("upOpensOn", { date: s.d(next) })}</span>
+          </div>
+          <div className="jx-coming-row">
+            {GIFTS.map((g) => (
+              <div className="jx-coming-card" key={g.id}>
+                <span className="jx-coming-art" style={{ background: CAT_BG[g.cat] }}>
+                  <img src={g.img} alt="" />
+                  <span className="jx-coming-logo">
+                    <Logo brand={BRANDS[g.brand]!} size={24} />
+                  </span>
+                </span>
+                <span className="jx-coming-brand">{BRANDS[g.brand]!.name}</span>
+                <span className="jx-coming-item">{g.item}</span>
+                <span className="jx-coming-worth">{s.t("upWorth", { amount: s.m(g.value) })}</span>
+              </div>
+            ))}
+          </div>
+        </section>
       )}
 
       {!used && (
@@ -1105,20 +1130,15 @@ export function Unipass() {
         </div>
       )}
 
-      <div className="jx-pad">
-        <div className="jx-gc-grid">
-          {list.map((g) => (
-            <GiftCard
-              key={g.id}
-              g={g}
-              s={s}
-              next={next}
-              onPick={used ? undefined : () => setSheet(g)}
-              preview={used ? s.t("upOpensOn", { date: s.d(next) }) : undefined}
-            />
-          ))}
+      {!used && (
+        <div className="jx-pad">
+          <div className="jx-gc-grid">
+            {list.map((g) => (
+              <GiftCard key={g.id} g={g} s={s} next={next} onPick={() => setSheet(g)} />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       <Sheet open={!!sheet} onClose={() => setSheet(null)} label={s.t("upConfirmTitle", { month })}>
         {sheet && (
@@ -1334,12 +1354,58 @@ function CardArt({ c }: { c: "bh" | "sa" }) {
   return <img src={`/haiba/cards/${c}.webp`} alt="" className="jx-mx-land" />;
 }
 
-function MemberCard({ s, status }: { s: Session; status: "active" | "cancelled" | "renewal" }) {
-  const y = year(s);
-  const m = Math.min(
-    12,
-    Math.max(1, Math.round((startOf(s.today) - startOf(y.from)) / (86400000 * 30.4)) + 1),
+/**
+ * 8 Nov: the one month tracker for all of Haiba (Unipass and the membership card).
+ * A bar per month with its letter under it. on = done, now = this month (half filled), on now = done this month,
+ * missed = a gift month that passed unused, end = where a cancelled year stops.
+ * Colours come from the background it sits on (see .jx-mt in journey.css): ink on lime and yellow,
+ * purple on white and lilac, lime on dark. Purple is never used on lime.
+ */
+function MonthTrack({
+  from,
+  lang,
+  label,
+  state,
+}: {
+  from: string;
+  lang: string;
+  label: string;
+  state: (i: number) => string;
+}) {
+  return (
+    <div className="jx-mt" role="img" aria-label={label}>
+      {Array.from({ length: 12 }).map((_, i) => {
+        const d = new Date(from);
+        d.setMonth(d.getMonth() + i);
+        return (
+          <span key={i} className={state(i)} style={{ animationDelay: `${0.25 + i * 0.04}s` }}>
+            <i />
+            <small>
+              {d.toLocaleDateString(lang === "ar" ? "ar" : "en-GB", { month: "narrow" })}
+            </small>
+          </span>
+        );
+      })}
+    </div>
   );
+}
+
+/**
+ * active: a normal month. ends: cancelled earlier in the year, it still runs to the end (only the pill changes).
+ * cancelled and renewal: the last month of the year. Both look the same (card greyed out), only the pill differs:
+ * "Ends 2 Dec" when you cancelled, "Renew soon" when you did not.
+ */
+type MemView = "active" | "ends" | "cancelled" | "renewal";
+
+function MemberCard({ s, status }: { s: Session; status: MemView }) {
+  const y = year(s);
+  const ending = status === "cancelled" || status === "renewal";
+  const m = ending
+    ? 12
+    : Math.min(
+        12,
+        Math.max(1, Math.round((startOf(s.today) - startOf(y.from)) / (86400000 * 30.4)) + 1),
+      );
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const move = (e: React.PointerEvent<HTMLDivElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
@@ -1348,7 +1414,7 @@ function MemberCard({ s, status }: { s: Session; status: "active" | "cancelled" 
     setTilt({ x: -py * 12, y: px * 16 });
   };
   const tag =
-    status === "cancelled"
+    status === "cancelled" || status === "ends"
       ? s.t("memEnds", { date: s.d(y.to) })
       : status === "renewal"
         ? s.t("memRenewSoon")
@@ -1357,13 +1423,10 @@ function MemberCard({ s, status }: { s: Session; status: "active" | "cancelled" 
     month: "short",
     year: "numeric",
   });
-  const months = Array.from({ length: 12 }, (_, i) => {
-    const d = new Date(y.from);
-    d.setMonth(d.getMonth() + i);
-    return d.toLocaleDateString(s.lang === "ar" ? "ar" : "en-GB", { month: "narrow" });
-  });
   return (
-    <div className={`jx-mx jx-mx-${status}`}>
+    <div
+      className={`jx-mx jx-mx-${status === "ends" ? "cancelled" : status}${ending ? " jx-mx-ending" : ""}`}
+    >
       <span className="jx-mx-sparks" aria-hidden="true">
         {Array.from({ length: 14 }).map((_, i) => (
           <i key={i} />
@@ -1414,22 +1477,16 @@ function MemberCard({ s, status }: { s: Session; status: "active" | "cancelled" 
           <span>{s.t("memMonth", { n: m })}</span>
           <span>{s.t("memUntil", { date: s.d(y.to, { year: true }) })}</span>
         </div>
-        <div className="jx-mx-ticks">
-          {months.map((l, i) => (
-            <span
-              key={i}
-              className={
-                (i < m - 1 ? "on" : i === m - 1 ? "now" : "") +
-                // A cancelled year still runs to the end: only the last month is marked as where it stops.
-                (status === "cancelled" && i === months.length - 1 ? " end" : "")
-              }
-              style={{ animationDelay: `${0.35 + i * 0.05}s` }}
-            >
-              <i />
-              <small>{l}</small>
-            </span>
-          ))}
-        </div>
+        <MonthTrack
+          from={y.from}
+          lang={s.lang}
+          label={s.t("memMonth", { n: m })}
+          state={(i) =>
+            (i < m - 1 ? "on" : i === m - 1 ? "now" : "") +
+            // A cancelled year still runs to the end: only the last month is marked as where it stops.
+            ((status === "cancelled" || status === "ends") && i === 11 ? " end" : "")
+          }
+        />
       </div>
     </div>
   );
@@ -1439,10 +1496,25 @@ export function Membership() {
   const s = useSession();
   const go = useNavigate();
   const q = useQuery();
-  const view = String(q["view"] ?? "active") as "active" | "cancelled" | "renewal";
+  const a = useJourneyActions();
+  // The page follows the student's state (8 Nov); ?view= still previews a state on the canvas.
+  const yr = year(s);
+  const lastMonth = startOf(s.today) >= startOf(addMonths(yr.to, -1));
+  const st = s.journey.status;
+  const auto: MemView =
+    st === "cancelled"
+      ? lastMonth
+        ? "cancelled"
+        : "ends"
+      : st === "renewal_due" || lastMonth
+        ? "renewal"
+        : "active";
+  const view = (q["view"] != null ? String(q["view"]) : auto) as MemView;
+  const ending = view === "cancelled" || view === "renewal";
+  const cancelled = view === "cancelled" || view === "ends";
   const [sheet, setSheet] = useState(q["sheet"] === "cancel");
   const y = year(s);
-  const gifts = view === "renewal" ? 12 : 2;
+  const gifts = ending ? 12 : 2;
   return (
     <Screen tone="soft" className="jx-mem-page">
       <div className="jx-mx-stage">
@@ -1450,28 +1522,24 @@ export function Membership() {
         <MemberCard s={s} status={view} />
       </div>
 
-      {view === "cancelled" && (
-        <div className="jx-pad" style={{ marginTop: 14 }}>
-          <div className="jx-panel jx-panel-warn">
-            <span className="jx-row-title">
-              {s.t("memCancelledTitle", { date: s.d(y.to, { year: true }) })}
-            </span>
-            <span className="jx-row-sub">{s.t("memCancelledSub")}</span>
-            <Button variant="primary">{s.t("memUndo")}</Button>
-          </div>
-        </div>
-      )}
-
-      {view === "renewal" && (
+      {/* 8 Nov: the last month looks the same whether you cancelled or not: your year is ending, renew to keep it. */}
+      {ending && (
         <div className="jx-pad" style={{ marginTop: 14 }}>
           <div className="jx-panel jx-panel-dark">
             <span className="jx-small" style={{ color: "#CFC9E0" }}>
-              {s.t("memRenewTitle", { date: s.d(y.to, { year: true }) })}
+              {s.t("memEndingLabel")}
             </span>
             <span className="jx-panel-big">{s.t("memRenewSaved", { amount: s.m(27.4) })}</span>
+            <span className="jx-small" style={{ color: "#CFC9E0" }}>
+              {s.t(view === "cancelled" ? "memEndingSubCancelled" : "memEndingSub", {
+                date: s.d(y.to, { year: true }),
+              })}
+            </span>
             {s.student === "verified" ? (
               <>
-                <Button variant="lime">{s.t("memRenewCta", { amount: s.m(s.renewTotal) })}</Button>
+                <Button variant="lime" onClick={() => a.startPayment("renew")}>
+                  {s.t("memRenewCta", { amount: s.m(s.renewTotal) })}
+                </Button>
                 <span className="jx-small jx-center-text" style={{ color: "#CFC9E0" }}>
                   {s.t("memRenewPrice")}
                 </span>
@@ -1526,9 +1594,7 @@ export function Membership() {
           <b>{s.d(y.from, { year: true })}</b>
         </div>
         <div className="jx-kv">
-          <span>
-            {view === "cancelled" ? s.t("memEnds", { date: "" }).trim() : s.t("memRenews")}
-          </span>
+          <span>{cancelled ? s.t("memEnds", { date: "" }).trim() : s.t("memRenews")}</span>
           <b>{s.d(y.to, { year: true })}</b>
         </div>
       </Group>
@@ -1561,12 +1627,24 @@ export function Membership() {
         </div>
       </Group>
 
-      {view !== "cancelled" && (
-        <div className="jx-pad" style={{ marginTop: 18 }}>
-          <button className="jx-text-danger" onClick={() => setSheet(true)}>
-            {s.t("memCancel")}
+      {/* Cancelling never ends the year early. Once cancelled, the same spot lets you take it back. */}
+      {view === "ends" ? (
+        <div className="jx-pad jx-center-text" style={{ marginTop: 18 }}>
+          <p className="jx-small" style={{ margin: "0 0 6px" }}>
+            {s.t("memEndsNote", { date: s.d(y.to, { year: true }) })}
+          </p>
+          <button className="jx-mem-keep" onClick={a.keepMembership}>
+            {s.t("memUndo")}
           </button>
         </div>
+      ) : (
+        view !== "cancelled" && (
+          <div className="jx-pad" style={{ marginTop: 18 }}>
+            <button className="jx-text-danger" onClick={() => setSheet(true)}>
+              {s.t("memCancel")}
+            </button>
+          </div>
+        )
       )}
 
       <Sheet open={sheet} onClose={() => setSheet(false)} label={s.t("memCancelTitle")}>
@@ -1595,7 +1673,13 @@ export function Membership() {
         <Button variant="primary" onClick={() => setSheet(false)}>
           {s.t("memCancelKeep")}
         </Button>
-        <button className="jx-text-danger" onClick={() => go("/haiba/membership?view=cancelled")}>
+        <button
+          className="jx-text-danger"
+          onClick={() => {
+            setSheet(false);
+            a.cancelMembership();
+          }}
+        >
           {s.t("memCancelYes")}
         </button>
       </Sheet>
@@ -1642,13 +1726,16 @@ export function Receipts() {
 
 export function Ended() {
   const s = useSession();
+  const a = useJourneyActions();
+  const away = useGuard("ended");
+  if (away) return away;
   const y = year(s);
   const until = addDays(y.to, 30);
   const daysKept = Math.max(1, Math.round((startOf(until) - startOf(s.today)) / 86400000));
   return (
     <Screen
       dock={
-        <Button variant="primary" onClick={() => undefined}>
+        <Button variant="primary" onClick={() => a.startPayment("join")}>
           {s.t("endedCta", { amount: s.m(s.total) })}
         </Button>
       }

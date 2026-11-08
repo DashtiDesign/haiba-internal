@@ -3,7 +3,7 @@ import { Lock, RotateCcw } from "lucide-react";
 import Artwork from "../../Artwork";
 import { Navigate, useNavigate } from "../../nav";
 import { Button, LinkOut, Screen, Sheet, TopBar, supportHref } from "../ui";
-import { Countdown, Rows, Section, Steps } from "../parts";
+import { Countdown, JourneyStage, Rows, Section, Steps } from "../parts";
 import { useSession } from "../session";
 import { pathFor, useJourneyActions } from "../actions";
 import { pct, startOf } from "../format";
@@ -19,7 +19,7 @@ export default function Reserved() {
   const go = useNavigate();
   const [cancel, setCancel] = useState(false);
   const j = s.journey;
-  const ok = ["reserved", "pay_rest_open", "hold_expired"].includes(j.status);
+  const ok = j.status === "reserved";
 
   if (s.elsewhere) return <Elsewhere />;
   if (s.hb.ready && s.valid && !ok) return <Navigate to={pathFor(j.status)} replace />;
@@ -49,6 +49,9 @@ export default function Reserved() {
         </div>
         <Countdown to={startOf(s.launch)} />
       </header>
+      <div className="jx-pad">
+        <JourneyStage stage="reserved" payOn={s.d(s.launch)} />
+      </div>
 
       <Section>
         <div className="jx-keys">

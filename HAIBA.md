@@ -61,14 +61,12 @@ Prices on offer, the price a student sees, VAT, deposit, hold days, launch date 
 
 ## Prototype panel
 
-The dark "Prototype" tab on the right edge opens it. Testers can:
+The dark "Prototype" tab on the right edge opens it (rebuilt 8 Nov). A dark bar at the top shows where the student is (state, country, language, date). Four tabs, the last one used is remembered:
 
-- set what the app passes: country, language, and a good, missing or edited student id
-- jump to any student state (not reserved, payment pending, reserved, refunds, pay the rest, hold expired, member, renewal, cancelled, ended)
-- change prices, force one price, and set VAT, deposit, hold days, launch date and today's date
-- make the shop accept all held codes, make Airalo accept the travel code, reset the student
-- preview loading, empty, error, offline and the safe error pages
-- open the promo pages and jump to any screen
+- Journey: what can happen next from here (Launch day comes, Student cancels, The hold runs out, A month later, The year ends...), then every state on one map in three phases (Before launch, Launch day, Member). Tap a state to jump; it sets the state and the clock and opens its screen. A waiting Tap payment shows Paid, Failed and Paid sent twice here.
+- Screens: every screen, grouped and searchable. A screen that needs a state sets that state first.
+- Setup: what the app passes (country, language, student id), student status, the page before reserving, prices, VAT, deposit, spots, hold days, launch date and the prototype clock.
+- Tests: the paywall test arms with their price, the older promo pages, shop side events (accept codes, Airalo) and reset.
 
 Students never see this panel.
 
@@ -118,13 +116,19 @@ Students never see this panel.
 - The hub's Unipass gift card and the new member tip open `/haiba/unipass`; Activity "See all" opens `/haiba/activity`.
 - Hub bird (`src/haiba/HubBird.tsx`): real Seedance loops in `public/haiba/motion/` (`hub-shades`, `hub-coin`, `hub-still`), all cut with the same crop so they line up. On open he plays one reveal at random, each tap plays the other. After a reveal he holds the still pose for 4 to 6 seconds, then plays `hub-idle.webp` once (3.9 s: hair, breathing, a blink), then rests again, until the next tap. Tapping him shows no speech bubble. No timer plays them on its own.
 - Membership card: vertical Haiba purple card on a light lilac stage, lime wordmark, status pill, light HAIBA monogram, the country engraving (`public/haiba/cards/bh.webp`, `sa.webp`), name, member since and Year 1. Tilt, light sweep and foil edge.
-- A cancelled membership still runs to the end of the year: the card keeps its colour and the year bar looks the same as active, only the last month is marked grey as the end.
+- Cancelling never ends the year early. After cancelling the card pill says "Ends 2 Dec" and "Keep my membership" sits at the bottom. In the last month of the year the card goes grey and one panel says your Haiba year is ending, with Renew, whether they cancelled (pill "Ends 2 Dec") or not (pill "Renew soon"). The page follows the student's state; `?view=` still previews a state.
 - Payment done and the cancel sheet poses (`18-joined`, `24-hug`) hold the Haiba card.
 - Hub (8 Nov): the top right button is a menu (Savings and activity, Membership, Subscriptions, Help). Groups in order: Ready for you (Unipass gift, codes), Your points, Savings and activity (one card: saved plus recent visits), Member perks (travel data, subscriptions).
 - Help only holds help: how points work, how Haiba works, questions, chat.
 - Savings and activity is one page (/haiba/saved and /haiba/activity). Every line shows money saved and points together. The hub card uses the same numbers.
 - Your points (4.1): coin balance card, search, your shops, category chips that filter one rewards grid. Use on a reward asks once, then opens the full code screen (/haiba/code with the shop and reward in the link). Show code on the hub opens the same screen. The code screen has a prototype box for "staff enters the code" and "12 hours pass".
 - Result screens have no status pill above the title. Used codes show a receipt (saved, points used, saved so far).
-- Unipass year bar: one mark per gift month with its letter. Colours come from the hero it sits on (CSS variables on .jx-yt).
+- One month tracker for all of Haiba (`MonthTrack` in `Member.tsx`, `.jx-mt` in `journey.css`), on Unipass and the membership card: a bar per month with its letter under it. Colours follow the background: ink on lime and yellow (never purple on lime), lime on dark, purple on white and lilac.
 - Subscription pages: one left aligned "Good to know" list.
 - Props in poses match the standard graphics: `26-gift` holds the purple Unipass box (hub Unipass card, Unipass page), `27-coin` flips the Haiba coin with the star (Haiba savings). The old `10-gift` and `06-coin` are no longer used on screens.
+- Student states (8 Nov): each state has its own screen and look. Reserved is dark, Pay the rest is lime with the coin bird, Hold expired is yellow, refunds are lilac (on the way), lime (back) or rose (failed). A Reserve, Pay the rest, Member strip (`JourneyStage` in `parts.tsx`) shows where they are. No status pills above titles.
+- `pathFor` sends pay the rest to `/haiba/pay`, hold expired to `/haiba/expired`, ended to `/haiba/ended`. Screens tied to a state send other students to their own screen.
+- Paying the rest, joining after launch or coming back after the year ended makes the student a member for one year from today and lands on "You are a member". Renewing adds a year and lands on the membership page. Cancel my reservation on Pay the rest starts the refund.
+- Responsiveness (8 Nov): screens fill the phone (full width on phones, phone width on a laptop) and the visible height (`svh`), so a page that fits never scrolls. Nothing scrolls sideways. Fields are 16px so iOS does not zoom. The bottom button bar reserves exactly its own height.
+- Trays (`TrayGestures.tsx`): every tray closes by tapping outside, dragging it down, or Escape, and the page behind stays still.
+- Taps: no double tap delay or grey flash, an instant pressed state, and anything under 44 x 44 gets an invisible 44px hit area (`HitAreas.tsx`). Screen code preloads in the background after the first screen (`PreloadScreens.tsx`).

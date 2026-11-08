@@ -22,6 +22,9 @@ export default function Confirming() {
   const [round, setRound] = useState(0);
   const latest = useRef(a);
   latest.current = a;
+  // What was being paid for, so the page lands on the right screen once the webhook clears the payment.
+  const kind = useRef(p?.kind);
+  if (p) kind.current = p.kind;
 
   // A success or failure chosen on the Tap page arrives as a webhook shortly after.
   useEffect(() => {
@@ -48,6 +51,10 @@ export default function Confirming() {
     if (s.journey.status === "reserved")
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return <Navigate to="/haiba/reserved" search={{ just: 1 } as any} replace />;
+    // 8 Nov: paying the rest or joining lands on "You are a member", renewing on the membership page.
+    if ((kind.current === "rest" || kind.current === "join") && s.journey.status === "member")
+      return <Navigate to="/haiba/paid" replace />;
+    if (kind.current === "renew") return <Navigate to="/haiba/membership" replace />;
     return <Navigate to={pathFor(s.journey.status)} replace />;
   }
 

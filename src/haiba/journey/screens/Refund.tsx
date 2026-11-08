@@ -1,8 +1,7 @@
-import { AlertCircle, Check, Clock } from "lucide-react";
 import Artwork from "../../Artwork";
 import { Navigate, useNavigate } from "../../nav";
 import { Button, LinkOut, Screen, TopBar, supportHref } from "../ui";
-import { Pill, Section, Steps } from "../parts";
+import { JourneyStage, Section, Steps } from "../parts";
 import { useSession } from "../session";
 import { pathFor, useJourneyActions } from "../actions";
 import { addDays } from "../format";
@@ -49,8 +48,12 @@ export default function Refund() {
         )
       }
     >
-      <TopBar back="/" />
-      <div className="jx-center">
+      {/* 8 Nov: each refund state has its own colour so they never look alike:
+          lilac while it is on the way, lime when it is back, rose when it failed. */}
+      <header
+        className={`jx-res jx-res-${status === "refund_failed" ? "bad" : status === "refunded" ? "lime" : "lilac"}`}
+      >
+        <TopBar back="/" />
         <Artwork
           src={
             status === "refund_failed"
@@ -60,41 +63,29 @@ export default function Refund() {
                 : "/haiba/birds/14-sit.png"
           }
           alt=""
-          className="jx-center-art"
+          className="jx-res-bird"
         />
+      </header>
+      <div className="jx-res-body">
         {status === "refund_requested" && (
           <>
-            <Pill tone="warn" icon={<Clock size={14} aria-hidden="true" />}>
-              {s.t("refundPill")}
-            </Pill>
-            <h1 className="jx-h2" style={{ marginTop: 6 }}>
-              {s.t("refundTitle")}
-            </h1>
+            <h1 className="jx-h1 jx-res-title">{s.t("refundTitle")}</h1>
             <p className="jx-sub">{s.t("refundBody", { deposit, card })}</p>
           </>
         )}
         {status === "refunded" && (
           <>
-            <Pill tone="good" icon={<Check size={14} aria-hidden="true" />}>
-              {s.t("refundedPill")}
-            </Pill>
-            <h1 className="jx-h2" style={{ marginTop: 6 }}>
-              {s.t("refundedTitle")}
-            </h1>
+            <h1 className="jx-h1 jx-res-title">{s.t("refundedTitle")}</h1>
             <p className="jx-sub">{s.t("refundedBody", { deposit })}</p>
           </>
         )}
         {status === "refund_failed" && (
           <>
-            <Pill tone="bad" icon={<AlertCircle size={14} aria-hidden="true" />}>
-              {s.t("refundFailedPill")}
-            </Pill>
-            <h1 className="jx-h2" style={{ marginTop: 6 }}>
-              {s.t("refundFailedTitle")}
-            </h1>
+            <h1 className="jx-h1 jx-res-title">{s.t("refundFailedTitle")}</h1>
             <p className="jx-sub">{s.t("refundFailedBody")}</p>
           </>
         )}
+        <JourneyStage stage="refund" />
       </div>
 
       {status !== "refund_failed" && (

@@ -69,41 +69,48 @@ export default function MotionExperience({ children }: { children: ReactNode }) 
       { threshold: 0.06 },
     );
 
-    const scan = () => {
-      root
-        .querySelectorAll<HTMLElement>(
-          `${entranceSelector}, ${ambientSelector}, .hb-press, .hb-lift, .hb-ease`,
-        )
-        .forEach((element) => {
-          if (seen.has(element)) return;
-          seen.add(element);
-          element.dataset["hbMotion"] = "true";
-          element.style.setProperty("--hb-base-transform", element.style.transform || "none");
-          if (element.matches(entranceSelector)) observer.observe(element);
-          if (!reduced && element.matches(ambientSelector)) {
-            const decorative = element.matches(".hb-spin, .hb-shade, .hb-pulse");
-            const baseOpacity = Number(getComputedStyle(element).opacity);
-            const welcomeRays = element.matches(".hb-welcome-rays > .hb-spin");
-            track(
-              animate(
-                element,
-                welcomeRays
-                  ? { rotate: [0, 360] }
-                  : decorative && !element.matches(".hb-pulse")
-                    ? { opacity: [baseOpacity, baseOpacity * 0.8, baseOpacity] }
-                    : { translate: ["0 0", "0 -4px", "0 0"] },
-                {
-                  duration: welcomeRays ? 90 : element.matches(".hb-run") ? 1.2 : 3.6,
-                  ease: welcomeRays ? "linear" : "easeInOut",
-                  repeat: element.matches(".hb-jump") ? 0 : Infinity,
-                },
-              ),
-            );
-          }
-        });
+    const all = `${entranceSelector}, ${ambientSelector}, .hb-press, .hb-lift, .hb-ease`;
+    // 8 Nov: only new nodes are scanned on a change (not the whole page), so typing, timers and
+    // state updates stay cheap.
+    const scan = (from: ParentNode = root) => {
+      const found: HTMLElement[] = [];
+      if (from instanceof HTMLElement && from.matches(all)) found.push(from);
+      from.querySelectorAll<HTMLElement>(all).forEach((element) => found.push(element));
+      found.forEach((element) => {
+        if (seen.has(element)) return;
+        seen.add(element);
+        element.dataset["hbMotion"] = "true";
+        element.style.setProperty("--hb-base-transform", element.style.transform || "none");
+        if (element.matches(entranceSelector)) observer.observe(element);
+        if (!reduced && element.matches(ambientSelector)) {
+          const decorative = element.matches(".hb-spin, .hb-shade, .hb-pulse");
+          const baseOpacity = Number(getComputedStyle(element).opacity);
+          const welcomeRays = element.matches(".hb-welcome-rays > .hb-spin");
+          track(
+            animate(
+              element,
+              welcomeRays
+                ? { rotate: [0, 360] }
+                : decorative && !element.matches(".hb-pulse")
+                  ? { opacity: [baseOpacity, baseOpacity * 0.8, baseOpacity] }
+                  : { translate: ["0 0", "0 -4px", "0 0"] },
+              {
+                duration: welcomeRays ? 90 : element.matches(".hb-run") ? 1.2 : 3.6,
+                ease: welcomeRays ? "linear" : "easeInOut",
+                repeat: element.matches(".hb-jump") ? 0 : Infinity,
+              },
+            ),
+          );
+        }
+      });
     };
     scan();
-    const mutations = new MutationObserver(scan);
+    const mutations = new MutationObserver((records) => {
+      for (const r of records)
+        r.addedNodes.forEach((n) => {
+          if (n instanceof HTMLElement) scan(n);
+        });
+    });
     mutations.observe(root, { childList: true, subtree: true });
 
     let pressed: HTMLElement | null = null;
@@ -118,13 +125,13 @@ export default function MotionExperience({ children }: { children: ReactNode }) 
     };
     const release = () => {
       if (pressed?.isConnected && !reduced)
-        track(animate(pressed, { scale: 1 }, { duration: 0.24, ease }));
+        track(animate(pressed, { scale: 1 }, { duration: 0.18, ease }));
       pressed = null;
     };
     const down = (event: PointerEvent) => {
       release();
       pressed = interactive(event.target);
-      if (pressed && !reduced) track(animate(pressed, { scale: 0.97 }, { duration: 0.09 }));
+      if (pressed && !reduced) track(animate(pressed, { scale: 0.97 }, { duration: 0.06 }));
     };
     const hover = (event: PointerEvent) => {
       if (event.pointerType !== "mouse" || reduced || !(event.target instanceof Element)) return;

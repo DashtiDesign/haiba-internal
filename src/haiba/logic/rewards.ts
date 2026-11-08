@@ -874,9 +874,7 @@ export function useVals() {
     grid: grid,
     gcats: gcats,
     gridNote: nCan + " you can get now",
-    heroLine: canGet.length
-      ? "Enough for " + canGet.length + " rewards today"
-      : "Every Unipal offer earns points",
+    heroLine: "Every Unipal offer earns more",
     canNote: canGet.length + " rewards",
     earnOrder: "0",
   });
