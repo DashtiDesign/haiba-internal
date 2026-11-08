@@ -20,7 +20,7 @@ const STILL = "/haiba/motion/hub-still.webp";
 const IDLE = "/haiba/motion/hub-idle.webp";
 const IDLE_MS = 3900;
 // He holds the still pose this long (random in the range) before each idle.
-const REST_MS = [5000, 8000] as const;
+const REST_MS = [4000, 6000] as const;
 
 export default function HubBird({ onTap }: { onTap?: () => void }) {
   // The image now showing. Each play gets a fresh object URL, so the animation always starts from frame one.

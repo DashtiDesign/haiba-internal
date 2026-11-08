@@ -1076,7 +1076,7 @@ export function Unipass() {
     hero = (
       <header className="jx-up-hero">
         <TopBar back="/haiba" />
-        <Artwork src={BIRD("10-gift")} alt="" className="jx-up-bird" />
+        <Artwork src={BIRD("26-gift")} alt="" className="jx-up-bird" />
         <div className="jx-pad jx-up-text">
           <span className="jx-label" style={{ color: "var(--jx-ink)" }}>
             {s.t("upYear", { n: giftN })}
@@ -1770,7 +1770,7 @@ export function Saved() {
     <Screen tone="soft">
       <header className="jx-sv-hero">
         <TopBar back="/haiba" />
-        <Artwork src={BIRD("06-coin")} alt="" className="jx-sv-bird" />
+        <Artwork src={BIRD("27-coin")} alt="" className="jx-sv-bird" />
         <div className="jx-pad jx-up-text">
           <span className="jx-label" style={{ color: "var(--jx-ink)" }}>
             {s.t("savedTitle")}

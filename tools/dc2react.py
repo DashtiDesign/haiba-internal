@@ -96,6 +96,8 @@ BLOBS = {
     "413483a80b085a72e185af89d489bed5": "/haiba/motion/hub-shades.webp",
     "46c8e5aa381bb35a0f4c84743e87a87d": "/haiba/motion/hub-coin.webp",
     "6dc8f1d17323a7e9b0b8e9d50368a752": "/haiba/motion/hub-still.webp",
+    "ff3c167255aa34baeeb95157156a51a9": "/haiba/birds/26-gift.webp",
+    "13b432061e8e721b86b394f8f645d382": "/haiba/birds/27-coin.webp",
     "232f6e4b206d3bd4b7d69ae96c2c74a6": "/haiba/motion/hub-idle.webp",
     "3790ebcba1e76f32fc239671d0b58df1": "/haiba/birds/19-hourglass.webp",
     "200592c8713b1c9cf0122135f51f3502": "/haiba/birds/20-code-expired.webp",

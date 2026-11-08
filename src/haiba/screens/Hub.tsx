@@ -566,7 +566,7 @@ export default function Hub() {
               }}
             ></span>
             <Artwork
-              src="/haiba/birds/10-gift.png"
+              src="/haiba/birds/26-gift.webp"
               alt=""
               style={{
                 position: "absolute",
