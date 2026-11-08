@@ -120,4 +120,11 @@ Students never see this panel.
 - Membership card: vertical Haiba purple card on a light lilac stage, lime wordmark, status pill, light HAIBA monogram, the country engraving (`public/haiba/cards/bh.webp`, `sa.webp`), name, member since and Year 1. Tilt, light sweep and foil edge.
 - A cancelled membership still runs to the end of the year: the card keeps its colour and the year bar looks the same as active, only the last month is marked grey as the end.
 - Payment done and the cancel sheet poses (`18-joined`, `24-hug`) hold the Haiba card.
+- Hub (8 Nov): the top right button is a menu (Savings and activity, Membership, Subscriptions, Help). Groups in order: Ready for you (Unipass gift, codes), Your points, Savings and activity (one card: saved plus recent visits), Member perks (travel data, subscriptions).
+- Help only holds help: how points work, how Haiba works, questions, chat.
+- Savings and activity is one page (/haiba/saved and /haiba/activity). Every line shows money saved and points together. The hub card uses the same numbers.
+- Your points (4.1): coin balance card, search, your shops, category chips that filter one rewards grid. Use on a reward asks once, then opens the full code screen (/haiba/code with the shop and reward in the link). Show code on the hub opens the same screen. The code screen has a prototype box for "staff enters the code" and "12 hours pass".
+- Result screens have no status pill above the title. Used codes show a receipt (saved, points used, saved so far).
+- Unipass year bar: one mark per gift month with its letter. Colours come from the hero it sits on (CSS variables on .jx-yt).
+- Subscription pages: one left aligned "Good to know" list.
 - Props in poses match the standard graphics: `26-gift` holds the purple Unipass box (hub Unipass card, Unipass page), `27-coin` flips the Haiba coin with the star (Haiba savings). The old `10-gift` and `06-coin` are no longer used on screens.

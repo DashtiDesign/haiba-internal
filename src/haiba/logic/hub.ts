@@ -6,10 +6,11 @@ import { useDC } from "../dc";
 export function useVals() {
   const { state, setState, props, nav } = useDC({
     t: 0,
-    jump: false,
+    bird: "/haiba/motion/hub-still.webp",
     tipOpen: false,
     navTipOpen: false,
     openCode: "",
+    menuOpen: false,
   });
 
   var isNew = (props.member ?? "Active member") === "New member";
@@ -99,6 +100,30 @@ export function useVals() {
       r.tap = function () {
         setState({ openCode: open ? "" : r.key });
       };
+      // The app opens the full code screen (4.6) with this reward.
+      var isCb = r.brand === "The Coffee Bean";
+      var hit = isCb
+        ? rw.filter(function (x) {
+            return x.name === r.item;
+          })[0]
+        : null;
+      var q = {
+        kind: "reward",
+        shop: r.brand,
+        item: r.item,
+        pts: hit ? hit.pts : 200,
+        img: hit && hit.name === "Cookie" ? "/haiba/emoji/cookie.webp" : "/haiba/emoji/drink.webp",
+        logo: isCb ? "/haiba/brands/coffee-bean.webp" : "",
+        mark: r.mark,
+        bg: r.bg,
+      };
+      r.href =
+        "/haiba/code?" +
+        Object.keys(q)
+          .map(function (k) {
+            return k + "=" + encodeURIComponent(q[k]);
+          })
+          .join("&");
     }
   });
   ready.forEach(function (r, k) {
@@ -177,12 +202,12 @@ export function useVals() {
           amt: savedExtra,
           color: "#9CC400",
         },
-        { title: "Member promos", sub: "Spotify, 3 months free", amt: 0, color: "#B9A5FF" },
+        { title: "Subscriptions", sub: "Spotify, 3 months free", amt: 0, color: "#B9A5FF" },
       ]
     : [
         { title: "Unipass gifts", sub: "1 gift, Wingman", amt: 2.85, color: "#6C3FFA" },
         { title: "Rewards", sub: "Accepted at the shop", amt: 2.45 + savedExtra, color: "#9CC400" },
-        { title: "Member promos", sub: "Spotify, month 1", amt: 2.4, color: "#B9A5FF" },
+        { title: "Subscriptions", sub: "Spotify, month 1", amt: 2.4, color: "#B9A5FF" },
       ];
   if (tUsed)
     savedDefs.push({
@@ -195,6 +220,20 @@ export function useVals() {
   savedDefs.forEach(function (s) {
     savedSum += s.amt;
   });
+  // 8 Nov: an active member's card is the top of the Savings and activity page: Unipal offers plus Haiba on top.
+  var haibaSum = savedSum;
+  if (!isNew) {
+    savedDefs = [
+      { title: "Unipal offers", sub: "Every Unipal offer you used", amt: 19.7, color: "#1E1B2E" },
+      {
+        title: "Haiba on top",
+        sub: "Rewards, Unipass gifts and subscriptions",
+        amt: haibaSum,
+        color: "#6C3FFA",
+      },
+    ];
+    savedSum = 19.7 + haibaSum;
+  }
   var savedRows = savedDefs.map(function (s, k) {
     return {
       title: s.title,
@@ -226,6 +265,7 @@ export function useVals() {
         },
       ]
     : [
+        // 8 Nov: the same story as the Savings and activity page, each line with points and money saved.
         {
           day: "Today",
           kind: "points",
@@ -233,46 +273,46 @@ export function useVals() {
           bg: "#4B2E83",
           ink: "#FFFFFF",
           name: "The Coffee Bean",
-          sub: "Upsize your drinks",
+          sub: "Offer used, 2x points",
           amt: "+80",
           amtInk: green,
-          note: "2x bonus",
+          note: "BHD 1.20 saved",
         },
         {
-          day: "Monday 19 Oct",
+          day: "Today",
           kind: "points",
-          mark: "C",
-          bg: "#3B2A22",
+          mark: "CB",
+          bg: "#4B2E83",
           ink: "#FFFFFF",
-          name: "Caribou Coffee",
-          sub: "Reward, free upgrade",
-          amt: "−200",
+          name: "Free upsize",
+          sub: "Reward at The Coffee Bean",
+          amt: "−300",
           amtInk: plum,
-          note: "Held in a code",
+          note: "BHD 0.30 saved",
         },
         {
-          day: "Sunday 18 Oct",
-          kind: "saved",
-          mark: "S",
-          bg: "#E3F5E8",
-          ink: "#1B6B36",
-          name: "Spotify Premium",
-          sub: "Member promo, month 2",
-          amt: "BHD 2.40",
-          amtInk: green,
-          note: "Saved",
-        },
-        {
-          day: "Thursday 15 Oct",
+          day: "Yesterday",
           kind: "points",
           mark: "J",
           bg: "#D62828",
           ink: "#FFFFFF",
           name: "Jasmi’s",
-          sub: "BD 2 per meal",
+          sub: "Offer used, 4th visit",
           amt: "+40",
           amtInk: green,
-          note: "4 of 5 visits",
+          note: "BHD 2.00 saved",
+        },
+        {
+          day: "Yesterday",
+          kind: "saved",
+          mark: "U",
+          bg: "#C0F402",
+          ink: "#1F2600",
+          name: "January gift",
+          sub: "Regular drink at The Coffee Bean",
+          amt: "BHD 1.90",
+          amtInk: green,
+          note: "Unipass gift",
         },
       ];
   if (tUsed)
@@ -323,13 +363,7 @@ export function useVals() {
     else g.bhd += parseFloat(r.amt.replace("BHD ", ""));
   });
   actGroups.forEach(function (g) {
-    g.total = g.bhd
-      ? "BHD " + g.bhd.toFixed(2) + " saved"
-      : g.pts > 0
-        ? "+" + g.pts + " points"
-        : g.pts < 0
-          ? g.pts.toLocaleString("en-US").replace("-", "−") + " points"
-          : "";
+    g.total = "";
   });
   var groups = [];
   all.slice(0, 3).forEach(function (r) {
@@ -353,13 +387,69 @@ export function useVals() {
   });
   return Object.assign(travelVals, {
     points: shown.toLocaleString("en-US"),
-    sinceLine: isNew ? "Since 21 Oct" : "Since 18 Aug",
+    sinceLine: isNew ? "Since today" : "Since 2 Dec",
     actGroups: actGroups,
-    memberLine: isNew ? "Member since today" : "Member since August",
+    memberLine: isNew ? "Member since today" : "Member since December",
     giftLeft: giftDaysLeft === 1 ? "Last day" : giftDaysLeft + " days left",
     giftTitle: "Pick your " + giftMonth + " gift",
     giftMarks: giftMarks,
     ready: ready,
+    // 8 Nov: the menu (top right) holds the pages about you: savings and activity, membership, subscriptions, help.
+    menuOpen: state.menuOpen,
+    menuOpenStr: String(state.menuOpen),
+    toggleMenu: function () {
+      setState({ menuOpen: !state.menuOpen });
+    },
+    menuRows: [
+      {
+        href: "Sav01Saved.dc.html",
+        route: "/haiba/saved",
+        title: "Savings and activity",
+        sub: "What you saved, your points and visits",
+        icon: "/haiba/coins/coin-front.webp",
+        iw: "28px",
+        bg: "#F0ECFF",
+        hasIcon: true,
+        isHelp: false,
+      },
+      {
+        href: "Mem01Membership.dc.html",
+        route: "/haiba/membership",
+        title: "Membership",
+        sub: "Your Haiba card, plan and receipts",
+        icon: "/haiba/logo-lime.svg",
+        iw: "32px",
+        bg: "#6C3FFA",
+        hasIcon: true,
+        isHelp: false,
+      },
+      {
+        href: "Sub01Offers.dc.html",
+        route: "/haiba/subscriptions",
+        title: "Subscriptions",
+        sub: "Spotify and ChatGPT codes",
+        icon: "/haiba/brands/spotify.webp",
+        iw: "44px",
+        bg: "#000000",
+        hasIcon: true,
+        isHelp: false,
+      },
+      {
+        href: "Hlp01Help.dc.html",
+        route: "/haiba/help",
+        title: "Help and questions",
+        sub: "How Haiba and points work, chat with us",
+        icon: "",
+        iw: "0",
+        bg: "#F0ECFF",
+        hasIcon: false,
+        isHelp: true,
+      },
+    ].map(function (m, k) {
+      return Object.assign(m, { rule: k === 0 ? "none" : "1px solid #F1EFF7" });
+    }),
+    subsPill: isNew ? "2 to claim" : "1 to claim",
+    subsRule: ready.length ? "1px solid #F1EFF7" : "none",
     hasActive: ready.length > 0,
     readyCount: ready.length ? ready.length + " to use" : "",
     noActive: ready.length === 0,
@@ -370,7 +460,7 @@ export function useVals() {
         pts: 300,
         logo: "/haiba/brands/coffee-bean.webp",
         bg: "#FFFFFF",
-        img: "/haiba/emoji/drink.png",
+        img: "/haiba/emoji/drink.webp",
         tint: "#FFEFD9",
         href: "/haiba/rewards",
       },
@@ -380,7 +470,7 @@ export function useVals() {
         pts: 500,
         logo: "/haiba/brands/grip.webp",
         bg: "#000000",
-        img: "/haiba/emoji/shake.png",
+        img: "/haiba/emoji/shake.webp",
         tint: "#FCE4F0",
       },
       {
@@ -389,7 +479,7 @@ export function useVals() {
         pts: 600,
         logo: "/haiba/brands/vox.webp",
         bg: "#FFFFFF",
-        img: "/haiba/emoji/popcorn.png",
+        img: "/haiba/emoji/popcorn.webp",
         tint: "#EDE4FF",
       },
       {
@@ -398,7 +488,7 @@ export function useVals() {
         pts: 900,
         logo: "/haiba/brands/wingman.webp",
         bg: "#FFFFFF",
-        img: "/haiba/emoji/wings.png",
+        img: "/haiba/emoji/wings.webp",
         tint: "#FFEFD9",
       },
       {
@@ -407,7 +497,7 @@ export function useVals() {
         pts: 1500,
         logo: "/haiba/brands/alkuwaiti.webp",
         bg: "#FFFFFF",
-        img: "/haiba/emoji/car.png",
+        img: "/haiba/emoji/car.webp",
         tint: "#DDF1FF",
       },
       {
@@ -416,7 +506,7 @@ export function useVals() {
         pts: 2000,
         logo: "/haiba/brands/albayan.webp",
         bg: "#FFFFFF",
-        img: "/haiba/emoji/perfume.png",
+        img: "/haiba/emoji/perfume.webp",
         tint: "#FCE4F0",
       },
     ].map(function (d) {
@@ -432,18 +522,18 @@ export function useVals() {
       });
     }),
     savedTotal: "BHD " + savedSum.toFixed(2),
+    savedNote: isNew
+      ? "A reward counts when the shop accepts your code."
+      : "Since 2 Dec · Haiba has paid back " +
+        Math.round((haibaSum / 24.2) * 100) +
+        "% of its price",
     savedBar: savedBar,
     savedRows: savedRows,
     groups: groups,
     acts: acts,
-    birdClass: "", // no code motion on the mascot; tapping swaps to the jump pose only
-    birdSrc: state.jump ? "/haiba/birds/02-jump.png" : "/haiba/birds/01-cheer.png",
-    poke: function () {
-      setState({ jump: true });
-      setTimeout(function () {
-        setState({ jump: false });
-      }, 720);
-    },
+    birdClass: "", // no code motion on the mascot, only the real loops
+    birdSrc: state.bird,
+    poke: function () {},
     tipOpen: state.tipOpen,
     tip: isNew
       ? "Hi! Your 500 points are ready to use today."

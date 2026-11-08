@@ -5,6 +5,7 @@ import { useDC } from "../dc";
 
 export function useVals() {
   const { state, setState, props, nav } = useDC({
+    gcat: "All",
     q: "",
     bonus: false,
     cat: "",
@@ -41,7 +42,7 @@ export function useVals() {
           pts: 300,
           value: 0.3,
           ph: "DRINK",
-          img: "/haiba/emoji/drink.png",
+          img: "/haiba/emoji/drink.webp",
           phBg: "#EDE4FF",
           phInk: "#4F25D6",
           code: "8K3Q",
@@ -52,7 +53,7 @@ export function useVals() {
           pts: 700,
           value: 0.7,
           ph: "COOKIE",
-          img: "/haiba/emoji/cookie.png",
+          img: "/haiba/emoji/cookie.webp",
           phBg: "#F6E7D2",
           phInk: "#7A4E2D",
           code: "5TR2",
@@ -63,7 +64,7 @@ export function useVals() {
           pts: 1900,
           value: 1.9,
           ph: "DRINK",
-          img: "/haiba/emoji/drink.png",
+          img: "/haiba/emoji/drink.webp",
           phBg: "#E3DCD6",
           phInk: "#3B2A22",
           code: "9MX7",
@@ -86,7 +87,7 @@ export function useVals() {
           sub: "Any drink, one size up",
           pts: 200,
           ph: "DRINK",
-          img: "/haiba/emoji/drink.png",
+          img: "/haiba/emoji/drink.webp",
           phBg: "#EFE6DE",
           phInk: "#3B2A22",
         },
@@ -95,7 +96,7 @@ export function useVals() {
           sub: "Croissant or muffin",
           pts: 900,
           ph: "PASTRY",
-          img: "/haiba/emoji/pastry.png",
+          img: "/haiba/emoji/pastry.webp",
           phBg: "#F6E7D2",
           phInk: "#7A4E2D",
         },
@@ -117,7 +118,7 @@ export function useVals() {
           sub: "Any cookie",
           pts: 500,
           ph: "COOKIE",
-          img: "/haiba/emoji/cookie.png",
+          img: "/haiba/emoji/cookie.webp",
           phBg: "#F6E7D2",
           phInk: "#7A4E2D",
         },
@@ -139,7 +140,7 @@ export function useVals() {
           sub: "Regular cup",
           pts: 250,
           ph: "KARAK",
-          img: "/haiba/emoji/tea.png",
+          img: "/haiba/emoji/tea.webp",
           phBg: "#FFF1D6",
           phInk: "#8A5A00",
         },
@@ -161,7 +162,7 @@ export function useVals() {
           sub: "Hot or iced",
           pts: 300,
           ph: "COFFEE",
-          img: "/haiba/emoji/drink.png",
+          img: "/haiba/emoji/drink.webp",
           phBg: "#E3DCD6",
           phInk: "#3B2A22",
         },
@@ -170,7 +171,7 @@ export function useVals() {
           sub: "Nutella or strawberry",
           pts: 800,
           ph: "CREPE",
-          img: "/haiba/emoji/crepe.png",
+          img: "/haiba/emoji/crepe.webp",
           phBg: "#FDE4E4",
           phInk: "#B11D1D",
         },
@@ -192,7 +193,7 @@ export function useVals() {
           sub: "Any can or bottle",
           pts: 350,
           ph: "DRINK",
-          img: "/haiba/emoji/iced.png",
+          img: "/haiba/emoji/iced.webp",
           phBg: "#FDE4E4",
           phInk: "#B11D1D",
         },
@@ -201,7 +202,7 @@ export function useVals() {
           sub: "Regular size",
           pts: 600,
           ph: "FRIES",
-          img: "/haiba/emoji/fries.png",
+          img: "/haiba/emoji/fries.webp",
           phBg: "#FFF1D6",
           phInk: "#8A5A00",
         },
@@ -223,7 +224,7 @@ export function useVals() {
           sub: "2 pieces",
           pts: 400,
           ph: "SAMOSA",
-          img: "/haiba/emoji/samosa.png",
+          img: "/haiba/emoji/samosa.webp",
           phBg: "#FFF1D6",
           phInk: "#8A5A00",
         },
@@ -245,7 +246,7 @@ export function useVals() {
           sub: "Any sauce",
           pts: 900,
           ph: "WINGS",
-          img: "/haiba/emoji/wings.png",
+          img: "/haiba/emoji/wings.webp",
           phBg: "#FDE9DA",
           phInk: "#9A4A12",
         },
@@ -267,7 +268,7 @@ export function useVals() {
           sub: "After your workout",
           pts: 500,
           ph: "SHAKE",
-          img: "/haiba/emoji/shake.png",
+          img: "/haiba/emoji/shake.webp",
           phBg: "#E6F4EA",
           phInk: "#1E5E2E",
         },
@@ -289,7 +290,7 @@ export function useVals() {
           sub: "10ml",
           pts: 2000,
           ph: "PERFUME",
-          img: "/haiba/emoji/perfume.png",
+          img: "/haiba/emoji/perfume.webp",
           phBg: "#F3EEFF",
           phInk: "#4F25D6",
         },
@@ -311,7 +312,7 @@ export function useVals() {
           sub: "Regular, salted or sweet",
           pts: 600,
           ph: "POPCORN",
-          img: "/haiba/emoji/popcorn.png",
+          img: "/haiba/emoji/popcorn.webp",
           phBg: "#FFF4CC",
           phInk: "#8A6A00",
         },
@@ -333,7 +334,7 @@ export function useVals() {
           sub: "Any car size",
           pts: 1500,
           ph: "CAR",
-          img: "/haiba/emoji/car.png",
+          img: "/haiba/emoji/car.webp",
           phBg: "#E9F1FB",
           phInk: "#1D4E89",
         },
@@ -384,6 +385,28 @@ export function useVals() {
   var left = balance - committed;
   var q = (state.q || "").toLowerCase();
   var chip = state.chip || "All";
+  // Opens the full reward code screen (4.6). On the canvas it stays on the sheet; the app opens /haiba/code.
+  var goCode = function (sh, d) {
+    var p = {
+      kind: "reward",
+      shop: sh.name,
+      item: d.name,
+      pts: d.pts,
+      img: d.img,
+      logo: sh.logo || "",
+      mark: sh.mark || sh.name.charAt(0),
+      bg: sh.bg || "#FFFFFF",
+      value: d.value || 0,
+    };
+    nav(
+      "/haiba/code?" +
+        Object.keys(p)
+          .map(function (k) {
+            return k + "=" + encodeURIComponent(p[k]);
+          })
+          .join("&"),
+    );
+  };
   var openShop = function (key) {
     return function () {
       setState({ sheet: key, ask: "", demo: "" });
@@ -404,7 +427,7 @@ export function useVals() {
           : nextTag(sh.visits) === "2x"
             ? "Your next visit here earns 2x points."
             : "Every visit here earns points.",
-      useLabel: "Use an offer at " + sh.name,
+      useLabel: "Use an offer here",
       earnPts: "+" + np + " points",
       stamps: stamps(sh.visits % 5),
       rewards: sh.rewards.map(function (d, i) {
@@ -424,11 +447,7 @@ export function useVals() {
           btnInk: can ? "#C0F402" : "#8A8A96",
           useLabel: "Use " + d.pts + " points for " + d.name,
           askLine:
-            "Use " +
-            d.pts.toLocaleString("en-US") +
-            " points for a " +
-            d.name.toLowerCase() +
-            "? Your code shows here.",
+            "Use " + d.pts.toLocaleString("en-US") + " points for " + d.name.toLowerCase() + "?",
           rule: i === 0 ? "none" : "1px solid #F1EFF7",
           held: false,
           isUsed: false,
@@ -446,55 +465,23 @@ export function useVals() {
           accept: function () {},
           again: function () {},
         };
-        if (sh.live) {
-          var lastK = -1;
-          for (var k = cq[i] - 1; k >= 0; k--) {
-            if (cancelled.indexOf(i + "-" + k) < 0) {
-              lastK = k;
-              break;
-            }
-          }
-          var id = i + "-" + lastK;
-          var held = lastK >= 0 && accepted.indexOf(id) < 0;
-          var used = lastK >= 0 && !held;
-          var asking = state.ask === key && !held;
-          var usedCount = 0;
-          for (var k3 = 0; k3 < cq[i]; k3++) {
-            if (accepted.indexOf(i + "-" + k3) >= 0) usedCount++;
-          }
-          if (held || used) {
-            r.sub = d.sub;
-            r.ptsBg = "#F0ECFF";
-            r.ptsInk = "#4F25D6";
-          }
-          r.held = held;
-          r.isUsed = used && !asking;
-          r.asking = asking;
-          r.showUse = !held && !used && !asking;
-          r.code = "HB-" + d.code + "-" + (lastK + 1);
-          r.savedLine = "You saved BHD " + (d.value * usedCount).toFixed(2);
-          r.againOp = can ? "1" : "0.4";
-          r.ask = function () {
-            if (can) setState({ ask: key });
-          };
-          r.again = r.ask;
-          r.confirm = function () {
+        // 8 Nov: every reward works the same way. Use asks once, then opens the full code screen (4.6).
+        r.short = !can;
+        r.asking = state.ask === key;
+        r.showUse = !r.asking;
+        r.ask = function () {
+          if (can) setState({ ask: key });
+        };
+        r.confirm = function () {
+          if (sh.live) {
             var n = cq.slice();
             n[i] = n[i] + 1;
             setState({ ask: "", codesQty: n, done: true });
-          };
-          r.cancel = function () {
-            setState({ cancelled: cancelled.concat([id]) });
-          };
-          r.accept = function () {
-            setState({ accepted: accepted.concat([id]) });
-          };
-        } else {
-          r.demo = state.demo === key;
-          r.ask = function () {
-            if (can) setState({ demo: key });
-          };
-        }
+          } else {
+            setState({ ask: "" });
+          }
+          goCode(sh, d);
+        };
         return r;
       }),
     });
@@ -528,12 +515,12 @@ export function useVals() {
   };
   var CATS = ["Cafes", "Restaurants", "Fitness", "Self care", "Entertainment", "Car care"];
   var CATIMG = {
-    Cafes: "/haiba/categories/cafes.png",
-    Restaurants: "/haiba/categories/restaurants.png",
-    Fitness: "/haiba/categories/fitness.png",
-    "Self care": "/haiba/categories/self-care.png",
-    Entertainment: "/haiba/categories/entertainment.png",
-    "Car care": "/haiba/categories/car-care.png",
+    Cafes: "/haiba/categories/cafes.webp",
+    Restaurants: "/haiba/categories/restaurants.webp",
+    Fitness: "/haiba/categories/fitness.webp",
+    "Self care": "/haiba/categories/self-care.webp",
+    Entertainment: "/haiba/categories/entertainment.webp",
+    "Car care": "/haiba/categories/car-care.webp",
   };
   var has = function (s, t) {
     return (
@@ -768,6 +755,59 @@ export function useVals() {
   canGet.sort(function (a, b) {
     return b.p - a.p;
   });
+  // 8 Nov: the catalogue. Category chips filter one grid; rewards you can get now come first.
+  var gcat = state.gcat || "All";
+  var grid = [];
+  SHOPS.forEach(function (s) {
+    if (gcat !== "All" && s.cat !== gcat) return;
+    s.rewards.forEach(function (d) {
+      var can = d.pts <= left;
+      grid.push({
+        shop: s.name,
+        name: d.name,
+        img: d.img,
+        tint: TINT[s.cat] || "#F3F0FA",
+        logo: s.logo || "",
+        hasLogo: !!s.logo,
+        noLogo: !s.logo,
+        mark: s.mark || s.name.charAt(0),
+        bg: s.bg,
+        p: d.pts,
+        can: can,
+        pts: d.pts.toLocaleString("en-US"),
+        ptsBg: can ? "#F0ECFF" : "#F1F1F4",
+        ptsInk: can ? "#4F25D6" : "#8A8A96",
+        op: can ? "1" : "0.55",
+        need: can ? "" : (d.pts - left).toLocaleString("en-US") + " more",
+        open: openShop(s.key),
+      });
+    });
+  });
+  grid.sort(function (a, b) {
+    return a.can === b.can ? a.p - b.p : a.can ? -1 : 1;
+  });
+  var nCan = grid.filter(function (g) {
+    return g.can;
+  }).length;
+  var gcats = [{ label: "All", img: "/haiba/coins/coin-front.webp" }]
+    .concat(
+      CATS.map(function (c) {
+        return { label: c, img: CATIMG[c] };
+      }),
+    )
+    .map(function (c) {
+      var on = c.label === gcat;
+      return Object.assign(c, {
+        on: String(on),
+        bg: on ? "#1E1B2E" : "#FFFFFF",
+        ink: on ? "#FFFFFF" : "#1E1B2E",
+        ring: on ? "none" : "0 0 0 1px #ECE8F5",
+        dot: on ? "rgba(255,255,255,0.14)" : "#F3F0FA",
+        pick: function () {
+          setState({ gcat: c.label });
+        },
+      });
+    });
   return Object.assign(sheetFlat, {
     balance: left.toLocaleString("en-US"),
     q: state.q || "",
@@ -831,6 +871,12 @@ export function useVals() {
       });
     }),
     canGet: canGet.slice(0, 8),
+    grid: grid,
+    gcats: gcats,
+    gridNote: nCan + " you can get now",
+    heroLine: canGet.length
+      ? "Enough for " + canGet.length + " rewards today"
+      : "Every Unipal offer earns points",
     canNote: canGet.length + " rewards",
     earnOrder: "0",
   });

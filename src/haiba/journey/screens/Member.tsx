@@ -1,6 +1,6 @@
 import { Elsewhere, NotStudent } from "./Edge";
 import { MainPromo } from "./Reserve";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import type React from "react";
 import { useRouterState } from "@tanstack/react-router";
 import {
@@ -44,7 +44,6 @@ import {
   ICON,
   SUBS,
   subsFor,
-  TOP_SAVED,
   type Brand,
   type Gift,
   type Sub,
@@ -309,9 +308,6 @@ export function HoldExpired() {
       }
     >
       <Result tone="warn" bird="19-hourglass" back="/">
-        <Tag tone="warn" icon={<Clock size={14} aria-hidden="true" />}>
-          {s.t("holdTag")}
-        </Tag>
         <h1 className="jx-h1 jx-res-title">{s.t("expiredTitle")}</h1>
         <p className="jx-sub">{s.t("holdSub", { date: s.d(s.holdEnds, { weekday: true }) })}</p>
 
@@ -388,10 +384,10 @@ export function Paid() {
   const hadDeposit = s.journey.depositPaidOn != null;
   return (
     <Screen
-      tone="dark"
+      tone="soft"
       dock={
         <>
-          <Button variant="lime" onClick={() => go("/haiba/welcome")}>
+          <Button variant="primary" onClick={() => go("/haiba/welcome")}>
             {s.t("paidCta")}
           </Button>
           <Button variant="ghost" onClick={() => go("/haiba/unipass")}>
@@ -406,10 +402,10 @@ export function Paid() {
             <i key={i} />
           ))}
         </span>
-        <TopBar back="/" onDark />
+        <TopBar back="/" />
         <Artwork src={BIRD("18-joined")} alt="" className="jx-paid-bird" />
         <div className="jx-paid-text">
-          <Tag tone="lime">{s.t("memMember")}</Tag>
+          <Tag tone="dark">{s.t("memMember")}</Tag>
           <h1 className="jx-h1">{s.t("paidTitle")}</h1>
           <p className="jx-sub">
             {s.t("paidRangeLine", { from: s.d(y.from), to: s.d(y.to, { year: true }) })}
@@ -619,8 +615,34 @@ export function Code() {
   const q = useQuery();
   const kind: CodeKind = q["kind"] === "gift" ? "gift" : "reward";
   const state = String(q["state"] ?? "active");
-  const it = CODE_ITEMS[kind];
-  const brand = BRANDS[it.brand]!;
+  // A reward picked on Your points (4.1) arrives with its shop and item in the link; otherwise the sample one shows.
+  const picked = kind === "reward" && q["shop"] ? q : null;
+  const it = picked
+    ? {
+        ...CODE_ITEMS.reward,
+        item: String(picked["item"] ?? CODE_ITEMS.reward.item),
+        pts: Number(picked["pts"] ?? CODE_ITEMS.reward.pts),
+        value: Number(picked["value"] ?? 0) || CODE_ITEMS.reward.value,
+        img: String(picked["img"] || CODE_ITEMS.reward.img),
+      }
+    : CODE_ITEMS[kind];
+  const brand: Brand = picked
+    ? {
+        key: "picked",
+        name: String(picked["shop"]),
+        ...(picked["logo"] ? { logo: String(picked["logo"]) } : {}),
+        mark: String(picked["mark"] ?? ""),
+        bg: String(picked["bg"] ?? "#FFFFFF"),
+        ink: "#FFFFFF",
+      }
+    : BRANDS[it.brand]!;
+  // The same link with another state, so cancel, expire and use keep the same reward on screen.
+  const withState = (st: string) => {
+    const p = new URLSearchParams();
+    Object.entries(q).forEach(([k, v]) => k !== "state" && p.set(k, String(v)));
+    p.set("state", st);
+    return "/haiba/code?" + p.toString();
+  };
   const month = monthName(s.today, s.lang);
   const monthEnd = addDays(firstOfNext(s.today), -1);
   const back = kind === "gift" ? "/haiba/unipass" : "/haiba/rewards";
@@ -654,14 +676,6 @@ export function Code() {
           bird={expired ? "20-code-expired" : "16-torn"}
           back={back}
         >
-          <Tag
-            tone={expired ? "warn" : "purple"}
-            icon={
-              expired ? <Clock size={14} aria-hidden="true" /> : <X size={14} aria-hidden="true" />
-            }
-          >
-            {expired ? s.t("resExpiredTag") : s.t("resCancelledTag")}
-          </Tag>
           <h1 className="jx-h1 jx-res-title">
             {s.t(expired ? "codeExpiredTitle" : "codeCancelledTitle")}
           </h1>
@@ -709,46 +723,59 @@ export function Code() {
   }
 
   if (state === "used") {
+    // 8 Nov: a calm receipt. The item is the hero, then what you saved and what it cost, then your total.
+    const bg = kind === "gift" ? CAT_BG["Food and drink"] : "#F0ECFF";
     return (
       <Screen
+        tone="soft"
         dock={
           <Button variant="primary" onClick={() => go("/haiba")}>
             {s.t("codeDone")}
           </Button>
         }
       >
-        <Result tone="lime" bird="01-cheer" back="/haiba">
-          <Tag tone="good" icon={<Check size={14} strokeWidth={3} aria-hidden="true" />}>
-            {s.t("resUsedTag")}
-          </Tag>
-          <h1 className="jx-h1 jx-res-title">
+        <TopBar back="/haiba" />
+        <div className="jx-used">
+          <span className="jx-used-art" style={{ background: bg }}>
+            <img src={it.img} alt="" />
+            <span className="jx-used-logo">
+              <Logo brand={brand} size={34} />
+            </span>
+            <span className="jx-used-check" aria-hidden="true">
+              <Check size={18} strokeWidth={3.2} />
+            </span>
+          </span>
+          <h1 className="jx-h1 jx-used-title">
             {s.t("codeUsedTitle", { item: it.item.toLowerCase() })}
           </h1>
-          <div className="jx-saved-big">
-            <span className="jx-small">{s.t("codeUsedSavedLabel")}</span>
-            <span className="jx-saved-num jx-num">{s.m(it.value)}</span>
-          </div>
-          <ItemLine
-            brand={brand}
-            item={it.item}
-            img={it.img}
-            end={<Check size={22} color="#1E7A34" strokeWidth={3} aria-hidden="true" />}
-          />
-          <p className="jx-small jx-res-meta">
+          <p className="jx-sub jx-used-sub">
             {s.t("usedAt", { brand: brand.name + ", Seef", time: "4:12 pm" })}
           </p>
-          <button className="jx-li jx-li-card" onClick={() => go("/haiba/saved")}>
-            <span className="jx-li-icon">
-              <Sparkles size={18} aria-hidden="true" />
-            </span>
-            <span className="jx-row-main">
-              <span className="jx-row-sub">{s.t("usedTotal")}</span>
-              <span className="jx-row-title jx-num">{s.m(7.7 + it.value)}</span>
-            </span>
-            <span className="jx-li-link">{s.t("seeAll")}</span>
-          </button>
-          {kind === "reward" && <p className="jx-small jx-res-meta">{s.t("codeRewardNote")}</p>}
-        </Result>
+
+          <div className="jx-receipt">
+            <div className="jx-receipt-row jx-receipt-main">
+              <span>{s.t("codeUsedSavedLabel")}</span>
+              <b className="jx-num">{s.m(it.value)}</b>
+            </div>
+            <div className="jx-receipt-row">
+              <span>{kind === "gift" ? s.t("usedGiftLabel") : s.t("usedPtsLabel")}</span>
+              <b className="jx-num">
+                {kind === "gift"
+                  ? s.t("usedGiftValue", { month: monthName(s.today, s.lang) })
+                  : s.t("usedPtsValue", { pts: (it.pts ?? 0).toLocaleString("en-US") })}
+              </b>
+            </div>
+            <button
+              className="jx-receipt-row jx-receipt-link"
+              onClick={() => go("/haiba/activity")}
+            >
+              <span>{s.t("usedTotalAll")}</span>
+              <b className="jx-num">{s.m(27.4 + it.value)}</b>
+              <ChevronRight size={18} className="jx-flip" aria-hidden="true" />
+            </button>
+          </div>
+          {kind === "reward" && <p className="jx-small jx-used-note">{s.t("codeRewardNote")}</p>}
+        </div>
       </Screen>
     );
   }
@@ -813,111 +840,24 @@ export function Code() {
         )}
       </div>
       <div className="jx-actions">
-        <Button variant="ghost" onClick={() => go(back + "?")}>
+        <Button variant="ghost" onClick={() => go(withState("cancelled"))}>
           {kind === "gift" ? s.t("codeCancelGift") : s.t("codeCancelReward")}
         </Button>
+      </div>
+      <div className="jx-tap-sim jx-proto-dark" dir="ltr" lang="en">
+        <div className="jx-tap-sim-title">Prototype: what happens next</div>
+        <div className="jx-proto-btns">
+          <button onClick={() => go(withState("used"))}>Staff enters the code</button>
+          <button onClick={() => go(withState("expired"))}>12 hours pass</button>
+        </div>
       </div>
     </Screen>
   );
 }
 
-const ACT_KIND = (it: { pts?: number; money?: number }) =>
-  it.money != null ? "gift" : (it.pts ?? 0) < 0 ? "reward" : "points";
-
+/** 8 Nov: Activity and You saved are one page. /haiba/activity opens it at the list. */
 export function ActivityPage() {
-  const s = useSession();
-  const [f, setF] = useState<"all" | "points" | "reward" | "gift">("all");
-  const filters: [typeof f, string][] = [
-    ["all", s.t("actAll")],
-    ["points", s.t("actPoints")],
-    ["reward", s.t("actRewards")],
-    ["gift", s.t("actGifts")],
-  ];
-  return (
-    <Screen tone="soft">
-      <TopBar back="/haiba" />
-      <div className="jx-pad">
-        <h1 className="jx-h1">{s.t("activityTitle")}</h1>
-      </div>
-      <div className="jx-pad" style={{ marginTop: 16 }}>
-        <div className="jx-act-sum">
-          <span className="jx-row-sub">{s.t("actBalance")}</span>
-          <span className="jx-act-bal jx-num">
-            {POINTS.toLocaleString("en-US")} <small>{s.t("ptsShort")}</small>
-          </span>
-          <span className="jx-act-split">
-            <span>
-              <span className="jx-dot jx-dot-good" />
-              <b className="jx-num">+620</b> {s.t("actEarned")}
-            </span>
-            <span>
-              <span className="jx-dot" />
-              <b className="jx-num">−300</b> {s.t("actSpent")}
-            </span>
-            <span className="jx-faint">{s.t("actMonth")}</span>
-          </span>
-        </div>
-      </div>
-      <div className="jx-chips jx-pad" style={{ marginTop: 16 }}>
-        {filters.map(([k, label]) => (
-          <button key={k} className={`jx-chip ${k === f ? "on" : ""}`} onClick={() => setF(k)}>
-            {label}
-          </button>
-        ))}
-      </div>
-      {ACTIVITY.map((g) => {
-        const items = g.items.filter((it) => f === "all" || ACT_KIND(it) === f);
-        if (!items.length) return null;
-        return (
-          <Group key={g.day} title={g.day}>
-            {items.map((it, i) => {
-              const k = ACT_KIND(it);
-              const isLogo = it.img && !it.img.includes("emoji");
-              return (
-                <div className="jx-act" key={i}>
-                  <span className="jx-act-av">
-                    {it.img ? (
-                      <img
-                        src={it.img}
-                        alt=""
-                        className={isLogo ? "jx-act-logo" : "jx-act-emoji"}
-                      />
-                    ) : (
-                      <span className="jx-act-mark">{it.title.charAt(0)}</span>
-                    )}
-                    <span className={`jx-act-badge jx-act-badge-${k}`}>
-                      {k === "gift" ? (
-                        <GiftIcon size={11} strokeWidth={2.6} />
-                      ) : k === "reward" ? (
-                        <Sparkles size={11} strokeWidth={2.6} />
-                      ) : (
-                        <Coins size={11} strokeWidth={2.6} />
-                      )}
-                    </span>
-                  </span>
-                  <span className="jx-row-main">
-                    <span className="jx-row-title">{it.title}</span>
-                    <span className="jx-row-sub">{it.sub}</span>
-                  </span>
-                  <span className="jx-act-end">
-                    {it.pts != null && (
-                      <span className={`jx-act-amt jx-num ${it.pts > 0 ? "jx-act-plus" : ""}`}>
-                        {(it.pts > 0 ? "+" : "−") + Math.abs(it.pts).toLocaleString("en-US")}
-                      </span>
-                    )}
-                    {it.money != null && <span className="jx-act-amt jx-num">{s.m(it.money)}</span>}
-                    <span className="jx-act-unit">
-                      {it.money != null ? s.t("actSaved") : s.t("ptsShort")}
-                    </span>
-                  </span>
-                </div>
-              );
-            })}
-          </Group>
-        );
-      })}
-    </Screen>
-  );
+  return <Saved focus="activity" />;
 }
 
 /* ---------- 5 · Unipass ---------- */
@@ -986,47 +926,79 @@ export function Unipass() {
   const usedGift = GIFTS[0]!;
   const nextMonth = monthName(next, s.lang);
 
+  // 8 Nov: the same year bar as the membership card. One mark per gift month, with its letter under it,
+  // so it reads as "gift months this year": filled = gift used, purple = this month, empty = to come.
+  const yFrom = new Date(year(s).from);
   const dots = (
-    <div className="jx-months" aria-label={s.t("upYear", { n: giftN })}>
-      {Array.from({ length: 12 }).map((_, i) => (
-        <span
-          key={i}
-          className={i < giftN - 1 ? "on" : i === giftN - 1 ? (used ? "on" : "now") : ""}
-        />
-      ))}
+    <div className="jx-yt" role="img" aria-label={s.t("upYear", { n: giftN })}>
+      {Array.from({ length: 12 }).map((_, i) => {
+        const d = new Date(yFrom);
+        d.setMonth(d.getMonth() + i);
+        const missed = view === "lost" && i === giftN - 2;
+        const st = missed
+          ? "missed"
+          : i < giftN - 1
+            ? "on"
+            : i === giftN - 1
+              ? used
+                ? "on now"
+                : "now"
+              : "";
+        return (
+          <span key={i} className={st}>
+            <i />
+            <small>
+              {d.toLocaleDateString(s.lang === "ar" ? "ar" : "en-GB", { month: "narrow" })}
+            </small>
+          </span>
+        );
+      })}
     </div>
   );
 
   let hero: ReactNode;
   if (used) {
+    // 8 Nov: gift used this month. The countdown to next month's gift is the hero (MacroFactor, Sweatcoin pattern),
+    // this month's gift sits under it as a small receipt, then the year bar.
+    const td = new Date(startOf(s.today));
+    const daysIn = new Date(td.getFullYear(), td.getMonth() + 1, 0).getDate();
+    const gone = Math.max(0, Math.min(1, 1 - daysLeft / daysIn));
     hero = (
-      <header className="jx-up-hero jx-up-hero-soft">
+      <header className="jx-up-hero jx-up-hero-soft jx-up-hero-used">
         <TopBar back="/haiba" />
         <div className="jx-pad">
-          <span className="jx-label">{s.t("upYear", { n: giftN })}</span>
-          <h1 className="jx-h1" style={{ marginTop: 6 }}>
-            {s.t("upUsedTitle", { month })}
-          </h1>
-          <div className="jx-up-used">
-            <span className="jx-gc-art jx-up-used-art" style={{ background: CAT_BG[usedGift.cat] }}>
+          <div
+            className="jx-cd"
+            style={{ ["--cd" as string]: `${Math.round(gone * 360)}deg` }}
+            role="img"
+            aria-label={s.t("upNextIn", { days: daysText(s.lang, daysLeft) })}
+          >
+            <div className="jx-cd-in">
+              <img src={ICON.unipass} alt="" />
+              <b className="jx-num">{daysLeft}</b>
+              <span>{s.t("upDaysTo", { month: nextMonth })}</span>
+            </div>
+          </div>
+          <p className="jx-cd-date">{s.t("upOpensOn", { date: s.d(next, { weekday: true }) })}</p>
+
+          <div className="jx-up-done">
+            <span className="jx-up-done-art" style={{ background: CAT_BG[usedGift.cat] }}>
               <img src={usedGift.img} alt="" />
             </span>
             <span className="jx-row-main">
-              <span className="jx-row-sub">{BRANDS[usedGift.brand]!.name}</span>
-              <span className="jx-row-title">{usedGift.item}</span>
+              <span className="jx-row-sub">{s.t("upUsedTitle", { month })}</span>
+              <span className="jx-row-title">
+                {usedGift.item} · {BRANDS[usedGift.brand]!.name}
+              </span>
               <span className="jx-row-sub">
-                {s.t("upUsedOn", { date: s.d(addDays(s.today, -2)) })}
+                {s.t("upUsedOn", { date: s.d(addDays(s.today, -2)) })} ·{" "}
+                <b className="jx-up-done-save">
+                  {s.t("actSavedAmt", { amount: s.m(usedGift.value) })}
+                </b>
               </span>
             </span>
             <span className="jx-up-check">
-              <Check size={18} strokeWidth={3} aria-hidden="true" />
-            </span>
-          </div>
-          <div className="jx-up-next">
-            <CalendarDays size={18} aria-hidden="true" />
-            <span>
-              <b>{s.t("upNextIn", { days: daysText(s.lang, daysLeft) })}</b> ·{" "}
-              {s.t("upOpensOn", { date: s.d(next) })}
+              <Check size={16} strokeWidth={3} aria-hidden="true" />
             </span>
           </div>
           {dots}
@@ -1151,7 +1123,7 @@ export function Unipass() {
       <Sheet open={!!sheet} onClose={() => setSheet(null)} label={s.t("upConfirmTitle", { month })}>
         {sheet && (
           <>
-            <div className="jx-sh-art" style={{ background: CAT_BG[sheet.cat] }}>
+            <div className="jx-sh-art jx-sh-art-sm" style={{ background: CAT_BG[sheet.cat] }}>
               <img src={sheet.img} alt="" />
               <span className="jx-gc-logo">
                 <Logo brand={BRANDS[sheet.brand]!} size={34} />
@@ -1166,7 +1138,7 @@ export function Unipass() {
                 <PriceTag kind="worth">{s.t("upWorth", { amount: s.m(sheet.value) })}</PriceTag>
               </span>
             </div>
-            <ul className="jx-facts">
+            <ul className="jx-facts jx-facts-quiet">
               <li>
                 <MapPin size={18} aria-hidden="true" />
                 <span>{sheet.where}</span>
@@ -1177,15 +1149,9 @@ export function Unipass() {
                   <span>{sheet.limit}</span>
                 </li>
               )}
-              <li>
-                <Lock size={18} aria-hidden="true" />
-                <span>{s.t("upRuleOne")}</span>
-              </li>
-              <li>
-                <RotateCcw size={18} aria-hidden="true" />
-                <span>{s.t("upRuleCode")}</span>
-              </li>
             </ul>
+            {/* 8 Nov: one rule only. How long the code lasts is on the code screen. */}
+            <p className="jx-small jx-sh-rule">{s.t("upRuleOne")}</p>
             <Button variant="primary" onClick={() => go("/haiba/code?kind=gift")}>
               {s.t("upConfirmCta")}
             </Button>
@@ -1340,25 +1306,14 @@ export function Subscription() {
         </ol>
       </Group>
 
-      <Group title={s.t("subDetails")}>
-        <div className="jx-kv">
-          <span>{s.t("subWho")}</span>
-          <b>{p.who}</b>
-        </div>
-        <div className="jx-kv">
-          <span>{s.t("subUses")}</span>
-          <b>{s.t("subOne")}</b>
-        </div>
-        <div className="jx-kv">
-          <span>{s.t("subPays")}</span>
-          <b>{s.t("subPaysWho", { name: p.name })}</b>
-        </div>
-      </Group>
-
-      <Group title={s.t("subTerms")}>
-        <ul className="jx-terms jx-terms-card">
-          {p.terms.map((t) => (
-            <li key={t}>{t}</li>
+      {/* 8 Nov: one plain list, read top to bottom. Replaces the two column details and the repeated terms. */}
+      <Group title={s.t("subGood")}>
+        <ul className="jx-facts jx-facts-card">
+          {[...p.terms, s.t("subPaysLine", { name: p.name })].map((t) => (
+            <li key={t}>
+              <Check size={18} strokeWidth={2.6} aria-hidden="true" />
+              <span>{t}</span>
+            </li>
           ))}
         </ul>
       </Group>
@@ -1739,37 +1694,47 @@ export function Ended() {
 
 /* ---------- 8 · savings ---------- */
 
-export function Saved() {
+/**
+ * 8 Nov: one page for everything money and points (opens from the hub's You saved card, Activity See all and Help).
+ * Top: what you saved (Unipal offers plus Haiba on top) and how much of the price Haiba has paid back.
+ * Then your points, then one list of every visit, reward, gift and code with the money saved and points together.
+ */
+export function Saved({ focus }: { focus?: "activity" } = {}) {
   const s = useSession();
+  const [f, setF] = useState<"all" | "saved" | "earned" | "spent">("all");
+  useEffect(() => {
+    if (focus !== "activity") return;
+    const t = window.setTimeout(
+      () => document.getElementById("activity")?.scrollIntoView({ block: "start" }),
+      120,
+    );
+    return () => window.clearTimeout(t);
+  }, [focus]);
   const y = year(s);
   const unipal = 19.7;
-  const rows: [string, number, ReactNode, string][] = [
-    [
-      s.t("savedRewards"),
-      3.2,
-      <img key="p" src={ICON.points} alt="" className="jx-act-emoji" />,
-      s.t("savedN_rewards", { n: 4 }),
-    ],
-    [
-      s.t("savedGifts"),
-      2.85,
-      <img key="u" src={ICON.unipass} alt="" className="jx-act-emoji" />,
-      s.t("savedN_gifts", { n: 2 }),
-    ],
-    [
-      s.t("savedSubs"),
-      1.65,
-      <img key="s" src={SUBS[0]!.logo} alt="" className="jx-act-emoji jx-act-logo" />,
-      s.t("savedN_offers", { n: 1 }),
-    ],
+  const parts: [string, number][] = [
+    [s.t("savedRewards"), 2.45],
+    [s.t("savedGifts"), 2.85],
+    [s.t("savedSubs"), 2.4],
   ];
-  const haiba = rows.reduce((t, r) => t + r[1], 0);
+  const haiba = parts.reduce((t, r) => t + r[1], 0);
   const total = unipal + haiba;
   const back = Math.min(1, haiba / s.total);
+  const filters: [typeof f, string][] = [
+    ["all", s.t("actAll")],
+    ["saved", s.t("actFilterSaved")],
+    ["earned", s.t("actFilterEarned")],
+    ["spent", s.t("actFilterSpent")],
+  ];
+  const keep = (it: (typeof ACTIVITY)[number]["items"][number]) =>
+    f === "all" ||
+    (f === "saved" && (it.money ?? 0) > 0) ||
+    (f === "earned" && (it.pts ?? 0) > 0) ||
+    (f === "spent" && (it.pts ?? 0) < 0);
   return (
     <Screen tone="soft">
       <header className="jx-sv-hero">
-        <TopBar back="/haiba" />
+        <TopBar back="/haiba" title={s.t("moneyTitle")} />
         <Artwork src={BIRD("27-coin")} alt="" className="jx-sv-bird" />
         <div className="jx-pad jx-up-text">
           <span className="jx-label" style={{ color: "var(--jx-ink)" }}>
@@ -1783,18 +1748,23 @@ export function Saved() {
             <span style={{ width: `${(unipal / total) * 100}%` }} />
             <span style={{ width: `${(haiba / total) * 100}%` }} />
           </span>
-          <span className="jx-split-key">
-            <span>
-              <i className="k1" /> {s.t("savedSplitUnipal")} <b className="jx-num">{s.m(unipal)}</b>
-            </span>
-            <span>
-              <i className="k2" /> {s.t("savedSplitHaiba")} <b className="jx-num">{s.m(haiba)}</b>
-            </span>
-          </span>
+          <div className="jx-ledger">
+            <div>
+              <i className="k1" />
+              <span>{s.t("savedSplitUnipal")}</span>
+              <b className="jx-num">{s.m(unipal)}</b>
+            </div>
+            <div>
+              <i className="k2" />
+              <span>{s.t("savedSplitHaiba")}</span>
+              <b className="jx-num">{s.m(haiba)}</b>
+            </div>
+            <p className="jx-ledger-parts">{parts.map(([l, v]) => `${l} ${s.m(v)}`).join(" · ")}</p>
+          </div>
         </div>
       </header>
 
-      <div className="jx-pad" style={{ marginTop: 16 }}>
+      <div className="jx-pad jx-money-cards">
         <div className="jx-payback">
           <span className="jx-tk-time-row">
             <span className="jx-row-title">{s.t("savedPayback")}</span>
@@ -1806,42 +1776,92 @@ export function Saved() {
           <span className="jx-row-sub">
             {s.t("savedPaybackSub", { amount: s.m(haiba), price: s.m(s.total) })}
           </span>
-          <span className="jx-row-sub">
-            {s.t("savedToGo", { amount: s.m(Math.max(0, s.total - haiba)) })}
-          </span>
+        </div>
+        <div className="jx-pts-sum">
+          <div>
+            <span className="jx-row-sub">{s.t("actBalance")}</span>
+            <b className="jx-num">{POINTS.toLocaleString("en-US")}</b>
+          </div>
+          <div>
+            <span className="jx-row-sub">{s.t("actEarnedLabel")}</span>
+            <b className="jx-num jx-plus">+700</b>
+          </div>
+          <div>
+            <span className="jx-row-sub">{s.t("actSpentLabel")}</span>
+            <b className="jx-num">−300</b>
+          </div>
         </div>
       </div>
 
-      <Group title={s.t("savedHaiba")}>
-        {rows.map(([label, v, art, sub]) => (
-          <div className="jx-act" key={label}>
-            <span className="jx-act-av">{art}</span>
-            <span className="jx-row-main">
-              <span className="jx-row-title">{label}</span>
-              <span className="jx-row-sub">{sub}</span>
-            </span>
-            <span className="jx-act-amt jx-num">{s.m(v)}</span>
+      <section id="activity" className="jx-act-section">
+        <div className="jx-pad">
+          <h2 className="jx-h2">{s.t("activityTitle")}</h2>
+          <div className="jx-seg" role="tablist" aria-label={s.t("activityTitle")}>
+            {filters.map(([k, label]) => (
+              <button
+                key={k}
+                role="tab"
+                aria-selected={k === f}
+                className={k === f ? "on" : ""}
+                onClick={() => setF(k)}
+              >
+                {label}
+              </button>
+            ))}
           </div>
-        ))}
-      </Group>
-
-      <Group title={s.t("savedTop")}>
-        {TOP_SAVED.map((t) => {
-          const b = BRANDS[t.brand]!;
+        </div>
+        {ACTIVITY.map((g) => {
+          const items = g.items.filter(keep);
+          if (!items.length) return null;
           return (
-            <div className="jx-act" key={t.brand}>
-              <span className="jx-act-av jx-act-av-plain">
-                <Logo brand={b} size={44} />
-              </span>
-              <span className="jx-row-main">
-                <span className="jx-row-title">{b.name}</span>
-                <span className="jx-row-sub">{s.t("savedVisits", { n: t.visits })}</span>
-              </span>
-              <span className="jx-act-amt jx-num">{s.m(t.amount)}</span>
-            </div>
+            <Group key={g.day} title={g.day}>
+              {items.map((it, i) => {
+                const isLogo =
+                  it.img &&
+                  !it.img.includes("emoji") &&
+                  !it.img.includes("/icons/") &&
+                  !it.img.includes("/coins/");
+                return (
+                  <div className="jx-act" key={i}>
+                    <span className="jx-act-av">
+                      {it.img ? (
+                        <img
+                          src={it.img}
+                          alt=""
+                          className={isLogo ? "jx-act-logo" : "jx-act-emoji"}
+                        />
+                      ) : (
+                        <span className="jx-act-mark">{it.title.charAt(0)}</span>
+                      )}
+                    </span>
+                    <span className="jx-row-main">
+                      <span className="jx-row-title">{it.title}</span>
+                      <span className="jx-row-sub">{it.sub}</span>
+                    </span>
+                    <span className="jx-act-end">
+                      {it.money != null && (
+                        <span className="jx-act-amt jx-num jx-act-saved">
+                          {s.t("actSavedAmt", { amount: s.m(it.money) })}
+                        </span>
+                      )}
+                      {it.pts != null && (
+                        <span
+                          className={`jx-act-pts jx-num ${it.pts > 0 ? "jx-act-plus" : ""} ${it.money == null ? "jx-act-only" : ""}`}
+                        >
+                          {(it.pts > 0 ? "+" : "−") +
+                            Math.abs(it.pts).toLocaleString("en-US") +
+                            " " +
+                            s.t("ptsShort")}
+                        </span>
+                      )}
+                    </span>
+                  </div>
+                );
+              })}
+            </Group>
           );
         })}
-      </Group>
+      </section>
     </Screen>
   );
 }
@@ -1852,6 +1872,7 @@ const HOW_IMG = ["", ICON.unipass, ICON.points, E("drink"), ""];
 
 export function Help() {
   const s = useSession();
+  const go = useNavigate();
   const q = useQuery();
   const [open, setOpen] = useState<number>(q["open"] != null ? Number(q["open"]) : -1);
   return (
@@ -1864,6 +1885,32 @@ export function Help() {
           <p className="jx-sub">{s.t("helpSub")}</p>
         </div>
       </header>
+
+      {/* 8 Nov: Help is only help: how points and Haiba work, questions, chat. Your pages live in the hub menu. */}
+      <Group title={s.t("helpPtsTitle")}>
+        <ul className="jx-pts-rules">
+          {(
+            [
+              ["500", "helpPts1", "helpPts1Sub"],
+              ["40", "helpPts2", "helpPts2Sub"],
+              ["2x", "helpPts3", "helpPts3Sub"],
+              ["5x", "helpPts4", "helpPts4Sub"],
+              ["coin", "helpPts5", "helpPts5Sub"],
+              ["6m", "helpPts6", "helpPts6Sub"],
+            ] as const
+          ).map(([tag, t, sub]) => (
+            <li key={t}>
+              <span className="jx-pts-tag">
+                {tag === "coin" ? <img src={ICON.points} alt="" /> : tag}
+              </span>
+              <span className="jx-row-main">
+                <span className="jx-row-title">{s.t(t)}</span>
+                <span className="jx-row-sub">{s.t(sub)}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </Group>
 
       <Group title={s.t("helpHowTitle")}>
         <ol className="jx-how5">

@@ -38,9 +38,6 @@ export function NotStudent({ action }: { action: StudentAction }) {
       }
     >
       <Result tone={expired ? "warn" : "lilac"} bird="21-student-id" back={back}>
-        <Tag tone={expired ? "warn" : "purple"} icon={<ShieldCheck size={14} aria-hidden="true" />}>
-          {s.t(expired ? "stuTagExpired" : "stuTagUnverified")}
-        </Tag>
         <h1 className="jx-h1 jx-res-title">
           {s.t(expired ? "stuTitleExpired" : "stuTitleUnverified")}
         </h1>
@@ -87,9 +84,6 @@ export function SpotsFull() {
       }
     >
       <Result tone="dark" bird="22-rope" back="/">
-        <Tag tone="lime" icon={<Users size={14} aria-hidden="true" />}>
-          {s.t("fullTag", { cap })}
-        </Tag>
         <h1 className="jx-h1 jx-res-title">{s.t("fullTitle", { country })}</h1>
         <p className="jx-sub">{s.t("fullBody", { cap, country, date })}</p>
         <div className="jx-spots">
@@ -125,9 +119,6 @@ export function Elsewhere() {
       }
     >
       <Result tone="lilac" bird="23-map" back="/">
-        <Tag tone="purple" icon={<MapPin size={14} aria-hidden="true" />}>
-          {country}
-        </Tag>
         <h1 className="jx-h1 jx-res-title">{s.t("elseTitle", { country })}</h1>
         <p className="jx-sub">{s.t(member ? "elseBodyMember" : "elseBodyReserved", { country })}</p>
         <div className="jx-back-card">
