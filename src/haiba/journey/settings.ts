@@ -17,6 +17,7 @@ export type Settings = {
   spotsCap: Record<Country, number>; // reservation spots per country (decided 7 Nov: 400 each)
   spotsTaken: Record<Country, number>; // prototype: spots already reserved in each country
   student: "verified" | "unverified" | "expired"; // prototype: the student's Unipal student status
+  mainPromo: "join" | "story" | "timeline" | "base" | "table"; // the promo page students see before they reserve
 };
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -29,8 +30,9 @@ export const DEFAULT_SETTINGS: Settings = {
   reserveEnd: "2026-11-30",
   today: null,
   spotsCap: { bh: 400, sa: 400 },
-  spotsTaken: { bh: 312, sa: 188 },
+  spotsTaken: { bh: 212, sa: 188 },
   student: "verified",
+  mainPromo: "join",
 };
 
 export const CURRENCY: Record<Country, string> = { bh: "BHD", sa: "SAR" };

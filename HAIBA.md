@@ -14,7 +14,7 @@ A clickable prototype of Haiba, the Unipal membership, for the internal test. It
 | ------------------------------------------------- | -------------------------- |
 | Unipal home (stand-in)                            | `/`                        |
 | Haiba tab: lands on the screen for the student's state (members see the hub) | `/haiba` |
-| Haiba page: price, VAT, deposit and refund rules  | `/haiba/reserve`           |
+| Main promo page (one of the paywall arms, picked in the panel): price, VAT, deposit, refund rules | `/haiba/reserve`           |
 | Tap checkout stand in (Success, Failed, Pending)  | `/haiba/tap`               |
 | Confirming your payment (waits for the Tap webhook) | `/haiba/confirming`      |
 | Payment did not go through                        | `/haiba/failed`            |
@@ -29,12 +29,12 @@ A clickable prototype of Haiba, the Unipal membership, for the internal test. It
 | Basket and codes (out of the flow, kept for reference) | `/haiba/basket`       |
 | Reservations closed (after 30 Nov, before launch) | `/haiba/reserve`           |
 | Pay the rest at launch, price hold ended          | `/haiba/pay`, `/haiba/expired` |
-| Join after launch, payment done                   | `/haiba/join`, `/haiba/paid` |
+| Join after launch (main promo page in join mode), payment done | `/haiba/join`, `/haiba/paid` |
 | Your points (earn and spend in one place)         | `/haiba/rewards`           |
 | Reward or gift code: active, expired, cancelled, used | `/haiba/code?kind=reward&state=used` |
 | Activity                                          | `/haiba/activity`          |
 | Unipass gifts: pick, used, month end, lost, last  | `/haiba/unipass?view=used` |
-| Member offers and offer code                      | `/haiba/subscriptions`, `/haiba/subscription?id=s1` |
+| Subscriptions (Spotify, ChatGPT), code, all claimed | `/haiba/subscriptions`, `/haiba/subscription?id=spotify`, `?id=chatgpt&claimed=1` |
 | Membership: active, cancelled, renewal, cancel sheet | `/haiba/membership?view=renewal` |
 | Receipts, year ended                              | `/haiba/receipts`, `/haiba/ended` |
 | You saved, Help                                   | `/haiba/saved`, `/haiba/help` |
@@ -82,7 +82,7 @@ Students never see this panel.
 - `src/haiba/journey/`: the new student screens' shared parts: settings, the student state machine (`states.ts`), app parameters and prices (`session.ts`), English and Arabic words (`strings.ts`), money and date formats (`format.ts`), and the building blocks (`ui.tsx`, styled by `src/haiba/styles/journey.css`).
 - `src/haiba/data/haiba-fake-data.json`: shops, rewards, Unipass and the points rules.
 - `public/haiba/`: the bird poses, the two Haiba logos, and the reward images in `emoji/` (Microsoft Fluent 3D emoji, MIT).
-- `src/haiba/journey/data.ts`: placeholder gifts, member offers, activity and brands for the member screens. Arabic for these screens is not written yet and falls back to English.
+- `src/haiba/journey/data.ts`: placeholder gifts, subscriptions, activity, brands and the asset kit (`ICON`) for the member screens. Arabic for these screens is not written yet and falls back to English.
 - `public/fonts/`: Figtree, self hosted.
 - `tools/dc2react.py`: the converter used to port a canvas board into a screen.
 
@@ -104,4 +104,15 @@ Students never see this panel.
 - Member offers with no codes left show "All claimed" (`claimed` in `journey/data.ts`).
 - The hub gift card takes its month and days left from the date (the prototype clock when set).
 - Supply kit: shops, rewards, gifts and partner offers use one set of parts (brand mark, shop row, item tile, item row, offer card, tags and price lines). See the Supply kit board on the canvas and `claude/haiba-supply-kit.md` in the project.
-- Mascot loops for later use are in `public/haiba/motion/` (wave, waiting, gift, bye). They are not placed on screens yet.
+- Mascot loops are in `public/haiba/motion/` (wave, waiting, gift, bye). Ended uses the bye loop.
+
+## Rules added 8 Nov
+
+- No separate price page. The page before reserving is the main promo page, picked in the panel ("Main promo page": Join copy, Story, Timeline, Baseline, Table). The same page in join mode is Join after launch (full price with VAT, no deposit). A "few spots left" bar sits on top once 100 or fewer remain.
+- After the hold ends or a refund, the locked price no longer applies; joining uses today's price.
+- One graphic per idea (`ICON` in `journey/data.ts`): points = the Haiba coin, Unipass gift = the purple gift box (`public/haiba/icons/unipass.webp`, white outline so it works on lime), Haiba membership = the lime Haiba logo on a purple tile (`HaibaMark`), subscriptions = the service's own logo (`SubLogos`). Emoji only show the actual item a shop gives.
+- Each screen gets its own mascot pose. New poses 18 to 25 are WebP in `public/haiba/birds/` (`BIRD()` picks the format).
+- The mascot is never moved with code (no hop, float, peek, wiggle, shake, bounce, pop in). `Artwork` tags bird stills with `hb-mascot` and one rule in `journey.css` stops their animation. Only real frame loops move.
+- Corners: cards and surfaces use smaller radii (about a third less: 16 to 12, 20 to 14, 28 to 18). Buttons, pills and circles keep theirs.
+- Images are kept light: PNGs are quantised, new art is WebP sized for 2x screens.
+- The hub's Unipass gift card and the new member tip open `/haiba/unipass`; Activity "See all" opens `/haiba/activity`.

@@ -114,7 +114,7 @@ export default function PromoYear() {
             style={{
               marginTop: "20px",
               background: "#2B2740",
-              borderRadius: "16px",
+              borderRadius: "12px",
               padding: "16px 18px 14px 18px",
               boxShadow: "none",
             }}
@@ -172,7 +172,7 @@ export default function PromoYear() {
               position: "relative",
               marginTop: "24px",
               background: "#2B2740",
-              borderRadius: "16px",
+              borderRadius: "12px",
               padding: "20px 20px 4px 20px",
             }}
           >
@@ -241,7 +241,7 @@ export default function PromoYear() {
                   style={{
                     width: "44px",
                     height: "44px",
-                    borderRadius: "14px",
+                    borderRadius: "10px",
                     background: "#6C3FFA",
                     color: "#FFFFFF",
                     fontSize: "13px",
@@ -295,7 +295,7 @@ export default function PromoYear() {
                   style={{
                     width: "44px",
                     height: "44px",
-                    borderRadius: "14px",
+                    borderRadius: "10px",
                     overflow: "hidden",
                     display: "block",
                     boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
@@ -349,7 +349,7 @@ export default function PromoYear() {
                   style={{
                     width: "44px",
                     height: "44px",
-                    borderRadius: "14px",
+                    borderRadius: "10px",
                     overflow: "hidden",
                     display: "block",
                     boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
@@ -405,7 +405,7 @@ export default function PromoYear() {
                     height: "44px",
                     flex: "none",
                     boxSizing: "border-box",
-                    borderRadius: "14px",
+                    borderRadius: "10px",
                     background: "#3A3550",
                     display: "grid",
                     gridTemplateColumns: "repeat(2, 17px)",
@@ -502,7 +502,7 @@ export default function PromoYear() {
               marginTop: "14px",
               border: "1.5px dashed rgba(192,244,2,0.55)",
               background: "rgba(192,244,2,0.06)",
-              borderRadius: "16px",
+              borderRadius: "12px",
               padding: "14px 16px",
               display: "flex",
               alignItems: "center",
@@ -595,7 +595,7 @@ export default function PromoYear() {
             style={{
               marginTop: "14px",
               background: "#2B2740",
-              borderRadius: "16px",
+              borderRadius: "12px",
               padding: "18px 20px",
             }}
           >
@@ -731,7 +731,7 @@ export default function PromoYear() {
                   width: "100%",
                   boxSizing: "border-box",
                   background: "#FFFFFF",
-                  borderRadius: "16px 16px 0 0",
+                  borderRadius: "12px 12px 0 0",
                   padding: "0 20px calc(26px + env(safe-area-inset-bottom, 0px)) 20px",
                   textAlign: "center",
                   maxWidth: "430px",

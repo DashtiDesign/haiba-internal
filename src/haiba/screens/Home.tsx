@@ -154,7 +154,7 @@ export default function Home() {
               width: 82,
             }}
           >
-            <span style={{ width: 76, height: 76, borderRadius: 18, background: c.bg }} />
+            <span style={{ width: 76, height: 76, borderRadius: 12, background: c.bg }} />
             <span style={{ fontSize: 14, fontWeight: 600 }}>{c.label}</span>
           </div>
         ))}
@@ -258,7 +258,7 @@ export default function Home() {
                   boxSizing: "border-box",
                   width: 170,
                   height: 170,
-                  borderRadius: 18,
+                  borderRadius: 12,
                   background: p.bg,
                   color: "#FFFFFF",
                   fontSize: 11,

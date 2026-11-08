@@ -78,7 +78,7 @@ export default function Redeem() {
             style={{
               background: "#FFFFFF",
               border: "1px solid #E4E4EA",
-              borderRadius: "16px",
+              borderRadius: "12px",
               padding: "22px 20px",
               display: "flex",
               flexDirection: "column",
@@ -92,7 +92,7 @@ export default function Redeem() {
                   width: "36px",
                   height: "36px",
                   flex: "none",
-                  borderRadius: "10px",
+                  borderRadius: "8px",
                   background: "#0B1FB3",
                   color: "#FFFFFF",
                   display: "flex",
@@ -122,7 +122,7 @@ export default function Redeem() {
                   width: "36px",
                   height: "36px",
                   flex: "none",
-                  borderRadius: "10px",
+                  borderRadius: "8px",
                   background: "#0B1FB3",
                   color: "#FFFFFF",
                   display: "flex",
@@ -154,7 +154,7 @@ export default function Redeem() {
                   width: "36px",
                   height: "36px",
                   flex: "none",
-                  borderRadius: "10px",
+                  borderRadius: "8px",
                   background: "#0B1FB3",
                   color: "#FFFFFF",
                   display: "flex",
@@ -195,7 +195,7 @@ export default function Redeem() {
             style={{
               background: "#FFFFFF",
               border: "1px solid #E4E4EA",
-              borderRadius: "16px",
+              borderRadius: "12px",
               padding: "22px 20px",
               display: "flex",
               flexDirection: "column",
@@ -287,7 +287,7 @@ export default function Redeem() {
             style={{
               background: "#FFFFFF",
               border: "1px solid #E4E4EA",
-              borderRadius: "16px",
+              borderRadius: "12px",
               overflow: "hidden",
             }}
           >
@@ -323,7 +323,7 @@ export default function Redeem() {
                       height: "72px",
                       boxSizing: "border-box",
                       border: "2.5px solid #0B1FB3",
-                      borderRadius: "14px",
+                      borderRadius: "10px",
                       background: "#E9ECFA",
                       display: "flex",
                       alignItems: "center",
@@ -337,7 +337,7 @@ export default function Redeem() {
                       style={{
                         width: "100px",
                         height: "100%",
-                        borderRadius: "10px",
+                        borderRadius: "8px",
                         background: "#0B1FB3",
                         color: "#FFFFFF",
                         display: "flex",
@@ -391,7 +391,7 @@ export default function Redeem() {
                     className="hb-pop"
                     style={{
                       border: "2.5px solid #0B1FB3",
-                      borderRadius: "14px",
+                      borderRadius: "10px",
                       background: "#FFFFFF",
                       padding: "18px",
                       display: "flex",

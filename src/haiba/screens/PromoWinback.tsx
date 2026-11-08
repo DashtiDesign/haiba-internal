@@ -108,7 +108,7 @@ export default function PromoWinback() {
             style={{
               marginTop: "22px",
               background: "#2B2740",
-              borderRadius: "16px",
+              borderRadius: "12px",
               padding: "18px 20px",
             }}
           >
@@ -164,7 +164,7 @@ export default function PromoWinback() {
                     </span>
                     <span
                       className="hb-ease"
-                      style={{ height: m.h, borderRadius: "10px 10px 4px 4px", background: m.bg }}
+                      style={{ height: m.h, borderRadius: "8px 8px 4px 4px", background: m.bg }}
                     ></span>
                     <span
                       style={{
@@ -200,7 +200,7 @@ export default function PromoWinback() {
               position: "relative",
               marginTop: "16px",
               background: "#2B2740",
-              borderRadius: "16px",
+              borderRadius: "12px",
               padding: "20px",
             }}
           >
@@ -270,7 +270,7 @@ export default function PromoWinback() {
                   height: "40px",
                   flex: "none",
                   boxSizing: "border-box",
-                  borderRadius: "12px",
+                  borderRadius: "10px",
                   background: "#3A3550",
                   display: "grid",
                   gridTemplateColumns: "repeat(2, 15px)",
@@ -357,7 +357,7 @@ export default function PromoWinback() {
               marginTop: "14px",
               border: "1.5px dashed rgba(192,244,2,0.55)",
               background: "rgba(192,244,2,0.06)",
-              borderRadius: "16px",
+              borderRadius: "12px",
               padding: "14px 16px",
               display: "flex",
               alignItems: "center",
@@ -529,7 +529,7 @@ export default function PromoWinback() {
                   width: "100%",
                   boxSizing: "border-box",
                   background: "#FFFFFF",
-                  borderRadius: "16px 16px 0 0",
+                  borderRadius: "12px 12px 0 0",
                   padding: "0 20px calc(26px + env(safe-area-inset-bottom, 0px)) 20px",
                   textAlign: "center",
                   maxWidth: "430px",

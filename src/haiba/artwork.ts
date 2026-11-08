@@ -36,5 +36,11 @@ export const artwork = {
 } as const;
 
 export function imagePreload(path: keyof typeof artwork) {
-  return { rel: "preload", as: "image", href: artwork[path].src, type: "image/webp", fetchPriority: "high" } as const;
+  return {
+    rel: "preload",
+    as: "image",
+    href: artwork[path].src,
+    type: "image/webp",
+    fetchPriority: "high",
+  } as const;
 }

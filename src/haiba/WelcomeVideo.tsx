@@ -24,7 +24,9 @@ export default function WelcomeVideo({ step }: { step: VideoStep }) {
     // Only the latest attempt may unlock; stale aborted plays (e.g. remounts) are ignored.
     void video.play().catch(() => {
       if (id !== attempt.current) return;
-      locked.current = false; setPlaying(false); setHasFrame(false);
+      locked.current = false;
+      setPlaying(false);
+      setHasFrame(false);
     });
   }, [asset.rate]);
 
@@ -56,12 +58,46 @@ export default function WelcomeVideo({ step }: { step: VideoStep }) {
     };
   }, [replay, step]);
 
-  const finish = () => { locked.current = false; setPlaying(false); setHasFrame(false); };
+  const finish = () => {
+    locked.current = false;
+    setPlaying(false);
+    setHasFrame(false);
+  };
   return (
-    <Button variant="ghost" className="hb-welcome-video-stage" aria-label={`Replay welcome animation ${step}`} aria-disabled={playing} onClick={replay}>
-      <img src={asset.poster} width={720} height={720} alt="" className={hasFrame ? "hb-welcome-still hb-welcome-still-hidden" : "hb-welcome-still"} fetchPriority={step === 1 ? "high" : "auto"} />
-      <canvas ref={canvasRef} width={720} height={720} className="hb-welcome-video-canvas" aria-hidden="true" />
-      <video ref={videoRef} src={asset.src} crossOrigin="anonymous" muted playsInline preload="auto" onEnded={finish} onError={finish} aria-hidden="true" className="hb-welcome-video-source" />
+    <Button
+      variant="ghost"
+      className="hb-welcome-video-stage"
+      aria-label={`Replay welcome animation ${step}`}
+      aria-disabled={playing}
+      onClick={replay}
+    >
+      <img
+        src={asset.poster}
+        width={720}
+        height={720}
+        alt=""
+        className={hasFrame ? "hb-welcome-still hb-welcome-still-hidden" : "hb-welcome-still"}
+        fetchPriority={step === 1 ? "high" : "auto"}
+      />
+      <canvas
+        ref={canvasRef}
+        width={720}
+        height={720}
+        className="hb-welcome-video-canvas"
+        aria-hidden="true"
+      />
+      <video
+        ref={videoRef}
+        src={asset.src}
+        crossOrigin="anonymous"
+        muted
+        playsInline
+        preload="auto"
+        onEnded={finish}
+        onError={finish}
+        aria-hidden="true"
+        className="hb-welcome-video-source"
+      />
     </Button>
   );
 }

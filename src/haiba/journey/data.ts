@@ -29,6 +29,18 @@ export const BRANDS: Record<string, Brand> = {
 
 export const E = (name: string) => `/haiba/emoji/${name}.png`;
 
+/**
+ * Haiba asset kit. One graphic per idea, used on every screen:
+ * points = the Haiba coin, Unipass gift = the purple gift box, Haiba membership = the Haiba logo,
+ * subscriptions = the service's own logo. Emoji are only for the actual item a shop gives (a drink, fries).
+ */
+export const ICON = {
+  points: "/haiba/coins/coin-front.webp",
+  pointsStack: "/haiba/coins/coin-stack.webp",
+  unipass: "/haiba/icons/unipass.webp",
+  member: "/haiba/logo-lime.svg", // shown on a purple tile, see HaibaMark
+} as const;
+
 export type Gift = {
   id: string;
   brand: string;
@@ -125,10 +137,9 @@ export type Sub = {
   name: string;
   what: string;
   offer: string;
-  img: string;
+  logo: string; // the service's own logo, used for every mention of this subscription
   bg: string;
-  mark: string;
-  markBg: string;
+  code: string;
   who: string;
   terms: string[];
   claimed?: boolean; // every code in the partner's pool is taken
@@ -136,51 +147,40 @@ export type Sub = {
 
 export const SUBS: Sub[] = [
   {
-    id: "s1",
-    name: "TuneBox",
-    what: "Music streaming",
+    id: "spotify",
+    name: "Spotify",
+    what: "Premium Student",
     offer: "3 months free",
-    img: E("music"),
-    bg: "#EDE4FF",
-    mark: "T",
-    markBg: "#6C3FFA",
-    who: "New TuneBox accounts",
+    logo: "/haiba/brands/spotify.webp",
+    bg: "#DDF7E5",
+    code: "HAIBA SP 7Q2X",
+    who: "New Spotify Premium accounts",
     terms: [
-      "New TuneBox accounts only.",
-      "After 3 months you pay TuneBox the normal price. Cancel any time with them.",
+      "New Spotify Premium accounts only.",
+      "After 3 months you pay Spotify the normal price. Cancel any time with them.",
       "One code per member.",
     ],
   },
   {
-    id: "s2",
-    name: "StudyPal",
-    what: "Notes and study help",
-    offer: "50% off for 6 months",
-    img: E("sparkles"),
-    bg: "#EEF8C8",
-    mark: "S",
-    markBg: "#1E7A34",
-    who: "New and current StudyPal accounts",
+    id: "chatgpt",
+    name: "ChatGPT",
+    what: "ChatGPT Plus",
+    offer: "3 months free",
+    logo: "/haiba/brands/chatgpt.webp",
+    bg: "#ECEDF1",
+    code: "HAIBA GP 4K9M",
+    who: "New ChatGPT Plus accounts",
     terms: [
-      "Works on the yearly or monthly StudyPal plan.",
-      "You pay StudyPal directly, not Unipal.",
+      "New ChatGPT Plus accounts only.",
+      "After 3 months you pay OpenAI the normal price. Cancel any time with them.",
       "One code per member.",
     ],
-  },
-  {
-    id: "s3",
-    name: "CinePass",
-    what: "Movie streaming",
-    offer: "1 month free",
-    img: E("ticket"),
-    bg: "#FFE4E1",
-    mark: "C",
-    markBg: "#D62828",
-    who: "New CinePass accounts",
-    claimed: true,
-    terms: ["New CinePass accounts only.", "One code per member."],
   },
 ];
+
+/** Prototype: ?claimed=1 shows ChatGPT with every code taken ("All claimed"). */
+export const subsFor = (claimed: boolean): Sub[] =>
+  SUBS.map((x) => (claimed && x.id === "chatgpt" ? { ...x, claimed: true } : x));
 
 export type Activity = {
   day: string;
@@ -208,7 +208,7 @@ export const ACTIVITY: Activity[] = [
         title: "January gift",
         sub: "Regular drink at The Coffee Bean",
         money: 1.9,
-        img: E("gift"),
+        img: ICON.unipass,
       },
     ],
   },
@@ -221,7 +221,7 @@ export const ACTIVITY: Activity[] = [
         pts: 80,
         img: "/haiba/brands/wingman.webp",
       },
-      { title: "Welcome to Haiba", sub: "Welcome points", pts: 500, img: E("party") },
+      { title: "Welcome to Haiba", sub: "Welcome points", pts: 500, img: ICON.points },
     ],
   },
 ];

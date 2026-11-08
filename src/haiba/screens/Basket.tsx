@@ -82,7 +82,7 @@ export default function Basket() {
                   gap: "12px",
                   background: "#FFFFFF",
                   border: "1px solid #E4E4EA",
-                  borderRadius: "16px",
+                  borderRadius: "12px",
                   padding: "12px 14px",
                 }}
               >
@@ -91,7 +91,7 @@ export default function Basket() {
                     width: "40px",
                     height: "40px",
                     flex: "none",
-                    borderRadius: "12px",
+                    borderRadius: "10px",
                     background: "#4B2E83",
                     color: "#FFFFFF",
                     fontFamily: "Figtree, system-ui, sans-serif",
@@ -131,7 +131,7 @@ export default function Basket() {
                 style={{
                   background: "#FFFFFF",
                   border: "1px solid #E4E4EA",
-                  borderRadius: "16px",
+                  borderRadius: "12px",
                   padding: "4px 16px",
                 }}
               >
@@ -151,7 +151,7 @@ export default function Basket() {
                           width: "56px",
                           height: "56px",
                           flex: "none",
-                          borderRadius: "14px",
+                          borderRadius: "10px",
                           background: it.bg,
                           color: it.ink,
                           fontSize: "10px",
@@ -307,7 +307,7 @@ export default function Basket() {
                 style={{
                   background: "#FFFFFF",
                   border: "1px solid #E4E4EA",
-                  borderRadius: "16px",
+                  borderRadius: "12px",
                   padding: "18px 18px 16px 18px",
                 }}
               >
@@ -424,7 +424,7 @@ export default function Basket() {
                 style={{
                   background: "#FFFFFF",
                   border: "1px solid #E4E4EA",
-                  borderRadius: "16px",
+                  borderRadius: "12px",
                   padding: "18px",
                   display: "flex",
                   flexDirection: "column",
@@ -532,7 +532,7 @@ export default function Basket() {
                   gap: "12px",
                   background: "#FFFFFF",
                   border: "1px solid #E4E4EA",
-                  borderRadius: "16px",
+                  borderRadius: "12px",
                   padding: "12px 14px",
                 }}
               >
@@ -787,7 +787,7 @@ export default function Basket() {
                       style={{
                         background: c.bg,
                         color: c.ink,
-                        borderRadius: "16px",
+                        borderRadius: "12px",
                         padding: "18px",
                         display: "flex",
                         flexDirection: "column",
@@ -854,7 +854,7 @@ export default function Basket() {
                             width: "48px",
                             height: "48px",
                             flex: "none",
-                            borderRadius: "14px",
+                            borderRadius: "10px",
                             background: c.phBg,
                             color: c.phInk,
                             fontSize: "9px",
@@ -900,7 +900,7 @@ export default function Basket() {
                               position: "relative",
                               background: "#FFFFFF",
                               color: "#1E1B2E",
-                              borderRadius: "14px",
+                              borderRadius: "10px",
                               padding: "12px",
                               textAlign: "center",
                               fontFamily: "Figtree, system-ui, sans-serif",
@@ -974,7 +974,7 @@ export default function Basket() {
                               border: "1.5px dashed rgba(255,255,255,0.45)",
                               background: "transparent",
                               color: "#FFFFFF",
-                              borderRadius: "12px",
+                              borderRadius: "10px",
                               padding: "10px",
                               cursor: "pointer",
                             }}
@@ -1092,7 +1092,7 @@ export default function Basket() {
                   gap: "12px",
                   background: "#FFFFFF",
                   border: "1px solid #E4E4EA",
-                  borderRadius: "16px",
+                  borderRadius: "12px",
                   padding: "12px 14px",
                 }}
               >

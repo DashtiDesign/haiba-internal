@@ -146,7 +146,7 @@ export default function PromoGift() {
                     cursor: "pointer",
                     textAlign: "left",
                     background: "#FFFFFF",
-                    borderRadius: "16px",
+                    borderRadius: "12px",
                     overflow: "hidden",
                     boxShadow: g.shadow,
                     color: "#1E1B2E",
@@ -228,7 +228,7 @@ export default function PromoGift() {
             style={{
               marginTop: "24px",
               background: "#FFFFFF",
-              borderRadius: "16px",
+              borderRadius: "12px",
               padding: "18px 18px 6px 18px",
               boxShadow: "0 10px 26px rgba(76,52,140,0.08)",
             }}
@@ -374,7 +374,7 @@ export default function PromoGift() {
                       height: "36px",
                       flex: "none",
                       boxSizing: "border-box",
-                      borderRadius: "18px",
+                      borderRadius: "12px",
                       background: "#F0ECFF",
                       display: "grid",
                       gridTemplateColumns: "repeat(2, 13px)",
@@ -656,7 +656,7 @@ export default function PromoGift() {
               marginTop: "16px",
               background: "#1E1B2E",
               color: "#FFFFFF",
-              borderRadius: "16px",
+              borderRadius: "12px",
               padding: "20px",
             }}
           >
@@ -795,7 +795,7 @@ export default function PromoGift() {
                   width: "100%",
                   boxSizing: "border-box",
                   background: "#FFFFFF",
-                  borderRadius: "16px 16px 0 0",
+                  borderRadius: "12px 12px 0 0",
                   padding: "0 20px calc(26px + env(safe-area-inset-bottom, 0px)) 20px",
                   textAlign: "center",
                   maxWidth: "430px",

@@ -104,7 +104,7 @@ export default function Plans() {
                 style={{
                   marginTop: "18px",
                   background: "#FFFFFF",
-                  borderRadius: "16px",
+                  borderRadius: "12px",
                   overflow: "hidden",
                   boxShadow: "0 18px 40px rgba(76,52,140,0.16)",
                 }}
@@ -288,7 +288,7 @@ export default function Plans() {
                       textDecoration: "none",
                       background: "#F0ECFF",
                       color: "#4F25D6",
-                      borderRadius: "14px",
+                      borderRadius: "10px",
                       padding: "12px 14px",
                       display: "flex",
                       alignItems: "center",
@@ -413,7 +413,7 @@ export default function Plans() {
                 style={{
                   marginTop: "14px",
                   background: "#FFFFFF",
-                  borderRadius: "16px",
+                  borderRadius: "12px",
                   padding: "18px 16px 20px 16px",
                   boxShadow: "0 10px 26px rgba(76,52,140,0.08)",
                 }}
@@ -526,7 +526,7 @@ export default function Plans() {
                             position: "relative",
                             width: "68px",
                             height: "68px",
-                            borderRadius: "16px",
+                            borderRadius: "12px",
                             background: "#FFFFFF",
                             display: "flex",
                             alignItems: "center",
@@ -540,7 +540,7 @@ export default function Plans() {
                             style={{
                               width: "68px",
                               height: "68px",
-                              borderRadius: "16px",
+                              borderRadius: "12px",
                               objectFit: "cover",
                               display: "block",
                             }}
@@ -617,7 +617,7 @@ export default function Plans() {
                   marginTop: "14px",
                   background: "#FFFFFF",
                   border: "1px solid #E2DCF2",
-                  borderRadius: "16px",
+                  borderRadius: "12px",
                   overflow: "hidden",
                   boxShadow: "0 10px 26px rgba(76,52,140,0.08)",
                 }}
@@ -729,7 +729,7 @@ export default function Plans() {
                   marginTop: "14px",
                   background: "#1E1B2E",
                   color: "#FFFFFF",
-                  borderRadius: "16px",
+                  borderRadius: "12px",
                   padding: "22px 20px 20px 20px",
                   position: "relative",
                 }}
@@ -917,7 +917,7 @@ export default function Plans() {
                       style={{
                         width: "44px",
                         height: "44px",
-                        borderRadius: "14px",
+                        borderRadius: "10px",
                         background: "#C0F402",
                         color: "#1F2600",
                         display: "flex",
@@ -978,7 +978,7 @@ export default function Plans() {
                       style={{
                         width: "44px",
                         height: "44px",
-                        borderRadius: "14px",
+                        borderRadius: "10px",
                         background: "#6C3FFA",
                         display: "flex",
                         alignItems: "center",

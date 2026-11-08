@@ -152,7 +152,7 @@ export default function PromoWaitlist() {
             position: "relative",
             marginTop: "-26px",
             background: "#FFFFFF",
-            borderRadius: "16px 16px 0 0",
+            borderRadius: "12px 12px 0 0",
             padding: "24px 20px 200px 20px",
           }}
         >
@@ -184,7 +184,7 @@ export default function PromoWaitlist() {
                 gap: "10px",
                 textAlign: "center",
                 background: "#FFFFFF",
-                borderRadius: "16px",
+                borderRadius: "12px",
                 padding: "16px 8px",
                 boxShadow: "0 0 0 1px #ECE8F5",
               }}
@@ -194,7 +194,7 @@ export default function PromoWaitlist() {
                   style={{
                     width: "44px",
                     height: "44px",
-                    borderRadius: "14px",
+                    borderRadius: "10px",
                     background: "#6C3FFA",
                     color: "#FFFFFF",
                     fontSize: "13px",
@@ -219,7 +219,7 @@ export default function PromoWaitlist() {
                 gap: "10px",
                 textAlign: "center",
                 background: "#FFFFFF",
-                borderRadius: "16px",
+                borderRadius: "12px",
                 padding: "16px 8px",
                 boxShadow: "0 0 0 1px #ECE8F5",
               }}
@@ -262,7 +262,7 @@ export default function PromoWaitlist() {
                 gap: "10px",
                 textAlign: "center",
                 background: "#FFFFFF",
-                borderRadius: "16px",
+                borderRadius: "12px",
                 padding: "16px 8px",
                 boxShadow: "0 0 0 1px #ECE8F5",
               }}
@@ -274,7 +274,7 @@ export default function PromoWaitlist() {
                     height: "44px",
                     flex: "none",
                     boxSizing: "border-box",
-                    borderRadius: "14px",
+                    borderRadius: "10px",
                     background: "#F0ECFF",
                     display: "grid",
                     gridTemplateColumns: "repeat(2, 17px)",
@@ -349,7 +349,7 @@ export default function PromoWaitlist() {
                 gap: "10px",
                 textAlign: "center",
                 background: "#FFFFFF",
-                borderRadius: "16px",
+                borderRadius: "12px",
                 padding: "16px 8px",
                 boxShadow: "0 0 0 1px #ECE8F5",
               }}
@@ -370,7 +370,7 @@ export default function PromoWaitlist() {
             style={{
               marginTop: "22px",
               background: "#F3F0FA",
-              borderRadius: "16px",
+              borderRadius: "12px",
               padding: "18px 18px 16px 18px",
             }}
           >
@@ -455,7 +455,7 @@ export default function PromoWaitlist() {
                 style={{
                   width: "52px",
                   height: "52px",
-                  borderRadius: "16px",
+                  borderRadius: "12px",
                   overflow: "hidden",
                   flex: "none",
                   boxShadow: "0 0 0 1px #ECE8F5, 0 6px 14px rgba(30,27,46,0.08)",
@@ -472,7 +472,7 @@ export default function PromoWaitlist() {
                 style={{
                   width: "52px",
                   height: "52px",
-                  borderRadius: "16px",
+                  borderRadius: "12px",
                   overflow: "hidden",
                   flex: "none",
                   boxShadow: "0 0 0 1px #ECE8F5, 0 6px 14px rgba(30,27,46,0.08)",
@@ -489,7 +489,7 @@ export default function PromoWaitlist() {
                 style={{
                   width: "52px",
                   height: "52px",
-                  borderRadius: "16px",
+                  borderRadius: "12px",
                   overflow: "hidden",
                   flex: "none",
                   boxShadow: "0 0 0 1px #ECE8F5, 0 6px 14px rgba(30,27,46,0.08)",
@@ -506,7 +506,7 @@ export default function PromoWaitlist() {
                 style={{
                   width: "52px",
                   height: "52px",
-                  borderRadius: "16px",
+                  borderRadius: "12px",
                   overflow: "hidden",
                   flex: "none",
                   boxShadow: "0 0 0 1px #ECE8F5, 0 6px 14px rgba(30,27,46,0.08)",
@@ -523,7 +523,7 @@ export default function PromoWaitlist() {
                 style={{
                   width: "52px",
                   height: "52px",
-                  borderRadius: "16px",
+                  borderRadius: "12px",
                   overflow: "hidden",
                   flex: "none",
                   boxShadow: "0 0 0 1px #ECE8F5, 0 6px 14px rgba(30,27,46,0.08)",
@@ -540,7 +540,7 @@ export default function PromoWaitlist() {
                 style={{
                   width: "52px",
                   height: "52px",
-                  borderRadius: "16px",
+                  borderRadius: "12px",
                   overflow: "hidden",
                   flex: "none",
                   boxShadow: "0 0 0 1px #ECE8F5, 0 6px 14px rgba(30,27,46,0.08)",
@@ -626,7 +626,7 @@ export default function PromoWaitlist() {
                   width: "100%",
                   boxSizing: "border-box",
                   background: "#FFFFFF",
-                  borderRadius: "16px 16px 0 0",
+                  borderRadius: "12px 12px 0 0",
                   padding: "0 20px calc(26px + env(safe-area-inset-bottom, 0px)) 20px",
                   textAlign: "center",
                   maxWidth: "430px",

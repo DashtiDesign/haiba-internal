@@ -97,7 +97,7 @@ export default function PromoDream() {
             style={{
               marginTop: "14px",
               background: "#1E1B2E",
-              borderRadius: "16px",
+              borderRadius: "12px",
               padding: "14px 16px 16px 16px",
             }}
           >
@@ -213,7 +213,7 @@ export default function PromoDream() {
                     height: "70px",
                     boxSizing: "border-box",
                     padding: "6px 2px",
-                    borderRadius: "12px",
+                    borderRadius: "10px",
                     background: m.bg,
                     border: m.border,
                     color: "#FFFFFF",
@@ -317,7 +317,7 @@ export default function PromoDream() {
                     textAlign: "left",
                     background: "#FFFFFF",
                     color: "#1E1B2E",
-                    borderRadius: "12px",
+                    borderRadius: "10px",
                     display: "flex",
                     alignItems: "center",
                     gap: "8px",
@@ -389,7 +389,7 @@ export default function PromoDream() {
                 minHeight: "176px",
                 boxSizing: "border-box",
                 padding: "16px",
-                borderRadius: "16px",
+                borderRadius: "12px",
                 background: "#000000",
                 color: "#FFFFFF",
               }}
@@ -407,7 +407,7 @@ export default function PromoDream() {
                   style={{
                     width: "52px",
                     height: "52px",
-                    borderRadius: "14px",
+                    borderRadius: "10px",
                     objectFit: "cover",
                     display: "block",
                     boxShadow: "0 0 0 1px rgba(255,255,255,0.15)",
@@ -455,7 +455,7 @@ export default function PromoDream() {
                 minHeight: "176px",
                 boxSizing: "border-box",
                 padding: "16px",
-                borderRadius: "16px",
+                borderRadius: "12px",
                 background: "#FFFFFF",
                 color: "#1E1B2E",
               }}
@@ -473,7 +473,7 @@ export default function PromoDream() {
                   style={{
                     width: "52px",
                     height: "52px",
-                    borderRadius: "14px",
+                    borderRadius: "10px",
                     objectFit: "cover",
                     display: "block",
                     boxShadow: "0 0 0 1px rgba(255,255,255,0.15)",
@@ -520,7 +520,7 @@ export default function PromoDream() {
               marginTop: "10px",
               background: "#1E1B2E",
               color: "#FFFFFF",
-              borderRadius: "16px",
+              borderRadius: "12px",
               padding: "14px 16px",
               overflow: "hidden",
             }}
@@ -640,7 +640,7 @@ export default function PromoDream() {
               gap: "14px",
               border: "1.5px dashed rgba(192,244,2,0.7)",
               background: "rgba(30,27,46,0.30)",
-              borderRadius: "16px",
+              borderRadius: "12px",
               padding: "14px 16px",
             }}
           >
@@ -773,7 +773,7 @@ export default function PromoDream() {
                   width: "100%",
                   boxSizing: "border-box",
                   background: "#FFFFFF",
-                  borderRadius: "16px 16px 0 0",
+                  borderRadius: "12px 12px 0 0",
                   padding: "0 20px calc(26px + env(safe-area-inset-bottom, 0px)) 20px",
                   textAlign: "center",
                   maxWidth: "430px",

@@ -60,7 +60,7 @@ export default function Shop() {
               textTransform: "uppercase",
               color: "rgba(255,255,255,0.85)",
               border: "1.5px dashed rgba(255,255,255,0.7)",
-              borderRadius: "12px",
+              borderRadius: "10px",
               padding: "10px 14px",
             }}
           >
@@ -226,7 +226,7 @@ export default function Shop() {
                 width: "60px",
                 height: "60px",
                 flex: "none",
-                borderRadius: "16px",
+                borderRadius: "12px",
                 background: "#4B2E83",
                 color: "#FFFFFF",
                 fontFamily: "Figtree, system-ui, sans-serif",
@@ -312,7 +312,7 @@ export default function Shop() {
             style={{
               marginTop: "14px",
               height: "80px",
-              borderRadius: "16px",
+              borderRadius: "12px",
               background: "linear-gradient(90deg, #DDEFF8 0%, #E9F1E4 100%)",
               display: "flex",
               alignItems: "center",
@@ -350,7 +350,7 @@ export default function Shop() {
               marginTop: "14px",
               background: "#FFFFFF",
               border: "1px solid #E4E4EA",
-              borderRadius: "16px",
+              borderRadius: "12px",
               overflow: "hidden",
             }}
           >

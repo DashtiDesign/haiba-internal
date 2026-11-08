@@ -47,7 +47,11 @@ export function useSession() {
       ? forced
       : hash((userId ?? "") + ":" + c) % prices.length;
   const offerPrice = prices[index] ?? prices[0] ?? 0;
-  const locked = journey.lockedPrice != null && journey.lockedCountry === c;
+  // The locked price only counts while the reservation is alive. After the hold ends or a refund, today's price applies.
+  const locked =
+    journey.lockedPrice != null &&
+    journey.lockedCountry === c &&
+    !["hold_expired", "refunded", "not_reserved", "ended"].includes(journey.status);
   const price = locked ? journey.lockedPrice! : offerPrice;
 
   const vatRate = settings.vat[c];

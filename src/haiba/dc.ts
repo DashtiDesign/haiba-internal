@@ -1,8 +1,11 @@
 // @ts-nocheck
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import { useNavigate } from "./nav";
 import { useHaiba } from "./store";
+import { useSession } from "./journey/session";
+import { useJourneyActions } from "./journey/actions";
+import { PromoModeContext } from "./journey/promoMode";
 
 // Keys that are shared across screens. Everything else is local to a screen.
 const SHARED = ["qty", "done", "codesQty", "cancelled", "accepted", "travel"];
@@ -18,6 +21,9 @@ const TRAVEL_LABEL = { available: "Available", revealed: "Code shown", redeemed:
 export function useDC(initial) {
   const hb = useHaiba();
   const nav = useNavigate();
+  const s = useSession();
+  const a = useJourneyActions();
+  const mode = useContext(PromoModeContext);
   const [local, setLocal] = useState(initial);
 
   const state = { ...local };
@@ -51,7 +57,16 @@ export function useDC(initial) {
     plan: "Yearly", // one yearly plan only
     travelStatus: TRAVEL_LABEL[hb.state.travel],
     savedTravel: hb.savedTravel,
-    price: q.price != null ? String(q.price) : undefined,
+    // Promo pages: the student's own price, money, deposit and launch come from the prototype settings.
+    // ?price= in the URL still overrides the price for previews.
+    price: q.price != null ? String(q.price) : String(s.price),
+    currency: s.c === "sa" ? "SAR" : "BHD",
+    deposit: String(s.deposit),
+    launch: s.d(s.launch),
+    onReserve: () => a.startPayment("deposit"),
+    mode, // "Join" after launch: the same promo page, full price with VAT, no deposit
+    total: String(s.total),
+    onJoin: () => a.startPayment("join"),
     name: q.name != null ? String(q.name) : undefined,
     visits: q.visits != null ? String(q.visits) : undefined,
     shop: q.shop != null ? String(q.shop) : undefined,

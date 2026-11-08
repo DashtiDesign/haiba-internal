@@ -3,8 +3,10 @@ import { useLocation } from "@tanstack/react-router";
 import { animate } from "motion/mini";
 import { useReducedMotion } from "motion/react";
 
-const entranceSelector = ".hb-rise, .hb-pop, .hb-peek, .hb-in-r, .hb-in-l, .hb-stamp, .hb-flip, .hb-drop, .hb-up, .hb-stagger > *, .hb-pops > *, .hb-flips > *, .hb-stamps > *, .hb-home-carousel > *";
-const ambientSelector = ".hb-float, .hb-wobble, .hb-run, .hb-nudge, .hb-coin, .hb-spin, .hb-shade, .hb-pulse, .hb-jump";
+const entranceSelector =
+  ".hb-rise, .hb-pop, .hb-peek, .hb-in-r, .hb-in-l, .hb-stamp, .hb-flip, .hb-drop, .hb-up, .hb-stagger > *, .hb-pops > *, .hb-flips > *, .hb-stamps > *, .hb-home-carousel > *";
+const ambientSelector =
+  ".hb-float, .hb-wobble, .hb-run, .hb-nudge, .hb-coin, .hb-spin, .hb-shade, .hb-pulse, .hb-jump";
 const ease = [0.22, 1, 0.36, 1] as const;
 
 /** Motion owns the existing canvas animation hooks without changing their layout. */
@@ -22,43 +24,83 @@ export default function MotionExperience({ children }: { children: ReactNode }) 
       animations.add(animation);
       void animation.finished.then(() => animations.delete(animation));
     };
-    const observer = new IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting || !(entry.target instanceof HTMLElement)) continue;
-        const element = entry.target;
-        observer.unobserve(element);
-        if (reduced) continue;
-        const popping = element.matches(".hb-pop, .hb-stamp, .hb-flip, .hb-pops > *, .hb-flips > *, .hb-stamps > *");
-        const index = element.parentElement?.matches(".hb-stagger, .hb-pops, .hb-flips, .hb-stamps, .hb-home-carousel")
-          ? Array.from(element.parentElement.children).indexOf(element) : 0;
-        // Individual CSS transforms preserve canvas rotation and fixed positioning.
-        const fixedAncestor = element.querySelector(".hb-fixed-bottom") || getComputedStyle(element).position === "fixed";
-        track(animate(element, {
-          ...(!fixedAncestor ? {
-            translate: [element.matches(".hb-in-r") ? "14px 0" : element.matches(".hb-in-l") ? "-14px 0" : "0 10px", "0 0"],
-            ...(popping ? { scale: [0.94, 1] } : {}),
-          } : {}),
-        }, { duration: 0.38, delay: Math.min(index * 0.045, 0.18), ease }));
-      }
-    }, { threshold: 0.06 });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting || !(entry.target instanceof HTMLElement)) continue;
+          const element = entry.target;
+          observer.unobserve(element);
+          if (reduced) continue;
+          const popping = element.matches(
+            ".hb-pop, .hb-stamp, .hb-flip, .hb-pops > *, .hb-flips > *, .hb-stamps > *",
+          );
+          const index = element.parentElement?.matches(
+            ".hb-stagger, .hb-pops, .hb-flips, .hb-stamps, .hb-home-carousel",
+          )
+            ? Array.from(element.parentElement.children).indexOf(element)
+            : 0;
+          // Individual CSS transforms preserve canvas rotation and fixed positioning.
+          const fixedAncestor =
+            element.querySelector(".hb-fixed-bottom") ||
+            getComputedStyle(element).position === "fixed";
+          track(
+            animate(
+              element,
+              {
+                ...(!fixedAncestor
+                  ? {
+                      translate: [
+                        element.matches(".hb-in-r")
+                          ? "14px 0"
+                          : element.matches(".hb-in-l")
+                            ? "-14px 0"
+                            : "0 10px",
+                        "0 0",
+                      ],
+                      ...(popping ? { scale: [0.94, 1] } : {}),
+                    }
+                  : {}),
+              },
+              { duration: 0.38, delay: Math.min(index * 0.045, 0.18), ease },
+            ),
+          );
+        }
+      },
+      { threshold: 0.06 },
+    );
 
     const scan = () => {
-      root.querySelectorAll<HTMLElement>(`${entranceSelector}, ${ambientSelector}, .hb-press, .hb-lift, .hb-ease`).forEach((element) => {
-        if (seen.has(element)) return;
-        seen.add(element);
-        element.dataset['hbMotion'] = "true";
-        element.style.setProperty("--hb-base-transform", element.style.transform || "none");
-        if (element.matches(entranceSelector)) observer.observe(element);
-        if (!reduced && element.matches(ambientSelector)) {
-          const decorative = element.matches(".hb-spin, .hb-shade, .hb-pulse");
-          const baseOpacity = Number(getComputedStyle(element).opacity);
-          const welcomeRays = element.matches(".hb-welcome-rays > .hb-spin");
-          track(animate(element, welcomeRays ? { rotate: [0, 360] } : decorative && !element.matches(".hb-pulse") ? { opacity: [baseOpacity, baseOpacity * 0.8, baseOpacity] } : { translate: ["0 0", "0 -4px", "0 0"] }, {
-            duration: welcomeRays ? 90 : element.matches(".hb-run") ? 1.2 : 3.6,
-            ease: welcomeRays ? "linear" : "easeInOut", repeat: element.matches(".hb-jump") ? 0 : Infinity,
-          }));
-        }
-      });
+      root
+        .querySelectorAll<HTMLElement>(
+          `${entranceSelector}, ${ambientSelector}, .hb-press, .hb-lift, .hb-ease`,
+        )
+        .forEach((element) => {
+          if (seen.has(element)) return;
+          seen.add(element);
+          element.dataset["hbMotion"] = "true";
+          element.style.setProperty("--hb-base-transform", element.style.transform || "none");
+          if (element.matches(entranceSelector)) observer.observe(element);
+          if (!reduced && element.matches(ambientSelector)) {
+            const decorative = element.matches(".hb-spin, .hb-shade, .hb-pulse");
+            const baseOpacity = Number(getComputedStyle(element).opacity);
+            const welcomeRays = element.matches(".hb-welcome-rays > .hb-spin");
+            track(
+              animate(
+                element,
+                welcomeRays
+                  ? { rotate: [0, 360] }
+                  : decorative && !element.matches(".hb-pulse")
+                    ? { opacity: [baseOpacity, baseOpacity * 0.8, baseOpacity] }
+                    : { translate: ["0 0", "0 -4px", "0 0"] },
+                {
+                  duration: welcomeRays ? 90 : element.matches(".hb-run") ? 1.2 : 3.6,
+                  ease: welcomeRays ? "linear" : "easeInOut",
+                  repeat: element.matches(".hb-jump") ? 0 : Infinity,
+                },
+              ),
+            );
+          }
+        });
     };
     scan();
     const mutations = new MutationObserver(scan);
@@ -68,10 +110,15 @@ export default function MotionExperience({ children }: { children: ReactNode }) 
     const interactive = (target: EventTarget | null) => {
       if (!(target instanceof Element)) return null;
       const element = target.closest<HTMLElement>("button, a, [role='button']");
-      return element && root.contains(element) && !element.matches(":disabled, [aria-disabled='true']") ? element : null;
+      return element &&
+        root.contains(element) &&
+        !element.matches(":disabled, [aria-disabled='true']")
+        ? element
+        : null;
     };
     const release = () => {
-      if (pressed?.isConnected && !reduced) track(animate(pressed, { scale: 1 }, { duration: 0.24, ease }));
+      if (pressed?.isConnected && !reduced)
+        track(animate(pressed, { scale: 1 }, { duration: 0.24, ease }));
       pressed = null;
     };
     const down = (event: PointerEvent) => {
@@ -83,7 +130,13 @@ export default function MotionExperience({ children }: { children: ReactNode }) 
       if (event.pointerType !== "mouse" || reduced || !(event.target instanceof Element)) return;
       const element = event.target.closest<HTMLElement>(".hb-lift");
       if (element && !element.contains(event.relatedTarget as Node | null)) {
-        track(animate(element, { translate: event.type === "pointerover" ? "0 -3px" : "0 0" }, { duration: 0.2, ease }));
+        track(
+          animate(
+            element,
+            { translate: event.type === "pointerover" ? "0 -3px" : "0 0" },
+            { duration: 0.2, ease },
+          ),
+        );
       }
     };
     root.addEventListener("pointerdown", down);
@@ -105,5 +158,9 @@ export default function MotionExperience({ children }: { children: ReactNode }) 
     };
   }, [pathname, reduced]);
 
-  return <div ref={ref} className="hb-motion-experience">{children}</div>;
+  return (
+    <div ref={ref} className="hb-motion-experience">
+      {children}
+    </div>
+  );
 }

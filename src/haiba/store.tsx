@@ -150,7 +150,8 @@ export function HaibaProvider({ children }: { children: ReactNode }) {
     set: (patch) => setS((p) => ({ ...p, ...patch })),
     setJourney: (patch) => setS((p) => ({ ...p, journey: { ...p.journey, ...patch } })),
     setSettings: (patch) => setS((p) => ({ ...p, settings: { ...p.settings, ...patch } })),
-    resetStudent: () => setS((p) => ({ ...INITIAL, visit: p.visit, market: p.market, settings: p.settings })),
+    resetStudent: () =>
+      setS((p) => ({ ...INITIAL, visit: p.visit, market: p.market, settings: p.settings })),
     join: () => setS((p) => ({ ...INITIAL, ...keep(p), member: "new" })),
     setMember: (m) => setS((p) => ({ ...INITIAL, ...keep(p), member: m })),
     acceptAll: () =>

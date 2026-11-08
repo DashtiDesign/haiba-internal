@@ -37,11 +37,7 @@ export function NotStudent({ action }: { action: StudentAction }) {
         </>
       }
     >
-      <Result
-        tone={expired ? "warn" : "lilac"}
-        bird={expired ? "05-shrug" : "07-phone"}
-        back={back}
-      >
+      <Result tone={expired ? "warn" : "lilac"} bird="21-student-id" back={back}>
         <Tag tone={expired ? "warn" : "purple"} icon={<ShieldCheck size={14} aria-hidden="true" />}>
           {s.t(expired ? "stuTagExpired" : "stuTagUnverified")}
         </Tag>
@@ -90,7 +86,7 @@ export function SpotsFull() {
         </>
       }
     >
-      <Result tone="dark" bird="14-sit" back="/">
+      <Result tone="dark" bird="22-rope" back="/">
         <Tag tone="lime" icon={<Users size={14} aria-hidden="true" />}>
           {s.t("fullTag", { cap })}
         </Tag>
@@ -128,7 +124,7 @@ export function Elsewhere() {
         </Button>
       }
     >
-      <Result tone="lilac" bird="04-peek" back="/">
+      <Result tone="lilac" bird="23-map" back="/">
         <Tag tone="purple" icon={<MapPin size={14} aria-hidden="true" />}>
           {country}
         </Tag>

@@ -37,7 +37,8 @@ const SCREENS = [
   ["Unipass gift used", "/haiba/unipass?view=used"],
   ["Unipass month end", "/haiba/unipass?view=monthend"],
   ["Gift code", "/haiba/code?kind=gift"],
-  ["Member offers", "/haiba/subscriptions"],
+  ["Subscriptions", "/haiba/subscriptions"],
+  ["Subscription all claimed", "/haiba/subscription?id=chatgpt&claimed=1"],
   ["Membership", "/haiba/membership"],
   ["Membership renewal", "/haiba/membership?view=renewal"],
   ["Receipts", "/haiba/receipts"],
@@ -170,7 +171,7 @@ export default function PrototypePanel() {
           letterSpacing: "0.12em",
           textTransform: "uppercase",
           padding: "12px 6px",
-          borderRadius: "10px 0 0 10px",
+          borderRadius: "8px 0 0 10px",
           writingMode: "vertical-rl",
         }}
       >
@@ -209,7 +210,7 @@ export default function PrototypePanel() {
                 width: "100%",
                 maxWidth: 390,
                 background: "#FFFFFF",
-                borderRadius: "24px 24px 0 0",
+                borderRadius: "16px 16px 0 0",
                 padding: "18px 18px 28px 18px",
                 fontFamily: "Figtree, system-ui, sans-serif",
                 color: "#1E1B2E",
@@ -442,6 +443,28 @@ export default function PrototypePanel() {
                   </button>
                 </div>
               </div>
+              <div style={{ fontSize: 12, fontWeight: 700, color: "#6B6880", margin: "4px 0 6px" }}>
+                Main promo page
+              </div>
+              <Chips>
+                {(
+                  [
+                    ["join", "A Join copy"],
+                    ["story", "B Story"],
+                    ["timeline", "C Timeline"],
+                    ["base", "Baseline"],
+                    ["table", "Table"],
+                  ] as const
+                ).map(([v, label]) => (
+                  <button
+                    key={v}
+                    style={chip(st.mainPromo === v)}
+                    onClick={() => hb.setSettings({ mainPromo: v })}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </Chips>
               <Chips>
                 {(["verified", "unverified", "expired"] as const).map((v) => (
                   <button

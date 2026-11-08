@@ -1,4 +1,5 @@
 import { Elsewhere, NotStudent } from "./Edge";
+import { MainPromo } from "./Reserve";
 import { useState, type ReactNode } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import {
@@ -39,7 +40,9 @@ import {
   CAT_BG,
   E,
   GIFTS,
+  ICON,
   SUBS,
+  subsFor,
   TOP_SAVED,
   type Brand,
   type Gift,
@@ -63,7 +66,7 @@ export function BrandMark({ brand, size = 40 }: { brand: Brand; size?: number })
     width: size,
     height: size,
     background: brand.bg,
-    borderRadius: Math.round(size * 0.3),
+    borderRadius: Math.round(size * 0.24),
   };
   return brand.logo ? (
     <img src={brand.logo} alt="" className="jx-logo" style={style} />
@@ -92,6 +95,35 @@ export function PriceTag({
     <span className={`jx-price jx-price-${kind} ${off ? "jx-price-off" : ""}`}>
       {kind === "points" && <img src="/haiba/coins/coin-front.webp" alt="" />}
       {children}
+    </span>
+  );
+}
+
+/** Every subscription shows its own logo. For "subscriptions" in general, the logos sit side by side. */
+export function SubLogos({ size = 30, subs = SUBS }: { size?: number; subs?: Sub[] }) {
+  return (
+    <span className="jx-sublogos" aria-hidden="true">
+      {subs.map((p) => (
+        <img
+          key={p.id}
+          src={p.logo}
+          alt=""
+          style={{ width: size, height: size, borderRadius: Math.round(size * 0.24) }}
+        />
+      ))}
+    </span>
+  );
+}
+
+/** Haiba membership itself: the lime Haiba logo on a purple tile. */
+export function HaibaMark({ size = 44 }: { size?: number }) {
+  return (
+    <span
+      className="jx-hmark"
+      style={{ width: size, height: size, borderRadius: Math.round(size * 0.24) }}
+      aria-hidden="true"
+    >
+      <img src={ICON.member} alt="" />
     </span>
   );
 }
@@ -262,24 +294,70 @@ export function PayRest() {
 export function HoldExpired() {
   const s = useSession();
   const go = useNavigate();
+  const old = s.journey.lockedPrice;
+  const changed = old != null && old !== s.price;
   return (
     <Screen
       dock={
-        <Button variant="primary" onClick={() => go("/haiba/join")}>
-          {s.t("joinCta", { amount: s.m(s.total) })}
-        </Button>
+        <>
+          <Button variant="primary" onClick={() => go("/haiba/join")}>
+            {s.t("joinCta", { amount: s.m(s.total) })}
+          </Button>
+          <p className="jx-dock-note">{s.t("holdDockNote")}</p>
+        </>
       }
     >
-      <TopBar back="/" />
-      <Center
-        art={<Emoji src={E("hourglass")} size={130} />}
-        title={s.t("expiredTitle")}
-        body={s.t("expiredBody", { date: s.d(s.holdEnds), deposit: s.m(s.deposit) })}
-      >
-        <p className="jx-small" style={{ marginTop: 10 }}>
-          {s.t("expiredJoin")}
-        </p>
-      </Center>
+      <Result tone="warn" bird="19-hourglass" back="/">
+        <Tag tone="warn" icon={<Clock size={14} aria-hidden="true" />}>
+          {s.t("holdTag")}
+        </Tag>
+        <h1 className="jx-h1 jx-res-title">{s.t("expiredTitle")}</h1>
+        <p className="jx-sub">{s.t("holdSub", { date: s.d(s.holdEnds, { weekday: true }) })}</p>
+
+        <ol className="jx-tl">
+          <li className="done">
+            <span className="jx-tl-dot">
+              <Check size={14} strokeWidth={3} aria-hidden="true" />
+            </span>
+            <span className="jx-row-main">
+              <span className="jx-row-sub">{s.d(s.launch, { weekday: true })}</span>
+              <span className="jx-row-title">{s.t("holdStep1")}</span>
+            </span>
+          </li>
+          <li className="off">
+            <span className="jx-tl-dot">
+              <X size={14} strokeWidth={3} aria-hidden="true" />
+            </span>
+            <span className="jx-row-main">
+              <span className="jx-row-sub">{s.d(s.holdEnds, { weekday: true })}</span>
+              <span className="jx-row-title">{s.t("holdStep2")}</span>
+            </span>
+            {old != null && <span className="jx-strike jx-num">{s.m(old)}</span>}
+          </li>
+          <li className="now">
+            <span className="jx-tl-dot">
+              <RotateCcw size={14} strokeWidth={3} aria-hidden="true" />
+            </span>
+            <span className="jx-row-main">
+              <span className="jx-tl-now">{s.t("holdOnWay")}</span>
+              <span className="jx-row-title">{s.t("holdStep3", { deposit: s.m(s.deposit) })}</span>
+              <span className="jx-row-sub">{s.t("holdStep3Sub", { card: cardText(s) })}</span>
+            </span>
+          </li>
+        </ol>
+
+        <div className="jx-join-card">
+          <span className="jx-row-main">
+            <span className="jx-row-title">{s.t("holdStillTitle")}</span>
+            <span className="jx-row-sub">
+              {changed
+                ? s.t("holdStillChanged", { price: s.m(s.price) })
+                : s.t("holdStillSame", { price: s.m(s.price) })}
+            </span>
+          </span>
+          <HaibaMark size={54} />
+        </div>
+      </Result>
     </Screen>
   );
 }
@@ -296,117 +374,89 @@ const BENEFITS: [
 
 export function Join() {
   const s = useSession();
-  const a = useJourneyActions();
-  const go = useNavigate();
   if (s.student !== "verified") return <NotStudent action="join" />;
   if (s.elsewhere) return <Elsewhere />;
-  return (
-    <Screen
-      dock={
-        <>
-          <Button variant="primary" onClick={() => a.startPayment("join")}>
-            {s.t("joinCta", { amount: s.m(s.total) })}
-          </Button>
-          <p className="jx-dock-note">{s.t("payNoRefund")}</p>
-        </>
-      }
-    >
-      <header className="jx-hero">
-        <div className="jx-hero-bar">
-          <img src="/haiba/logo-purple.svg" alt={s.t("haiba")} className="jx-hero-logo" />
-          <button className="jx-icon-btn" onClick={() => go("/")} aria-label={s.t("close")}>
-            <X size={22} aria-hidden="true" />
-          </button>
-        </div>
-        <img src="/haiba/birds/17-coin-toss.webp" alt="" className="jx-hero-art" />
-        <div className="jx-hero-body">
-          <h1 className="jx-h1">{s.t("joinTitle")}</h1>
-          <p className="jx-sub" style={{ color: "#4a4560" }}>
-            {s.t("joinSub")}
-          </p>
-        </div>
-      </header>
-      <Section>
-        <div className="jx-benefits">
-          {BENEFITS.map(([icon, title, sub]) => (
-            <div className="jx-row" key={title}>
-              <span className="jx-row-icon">{icon}</span>
-              <span className="jx-row-main">
-                <span className="jx-row-title">{s.t(title)}</span>
-                <span className="jx-row-sub">{s.t(sub)}</span>
-              </span>
-            </div>
-          ))}
-        </div>
-      </Section>
-      <Section>
-        <div className="jx-price">
-          <span className="jx-label">{s.t("yourPrice")}</span>
-          <div className="jx-price-big">
-            <span className="jx-price-amount jx-num">{s.m(s.offerPrice)}</span>
-            <span className="jx-price-per">{s.t("perYearPlusVat")}</span>
-          </div>
-          <Rows
-            strongLast
-            rows={[
-              [s.t("priceRow"), s.m(s.offerPrice)],
-              [s.t("vatRow", { rate: pct(s.vatRate) }), s.m(s.vat)],
-              [s.t("totalRow"), s.m(s.total)],
-            ]}
-          />
-        </div>
-      </Section>
-    </Screen>
-  );
+  // After launch the main promo page becomes the join page: full price with VAT, no deposit.
+  return <MainPromo mode="Join" />;
 }
-
-/* ---------- 3 · welcome ---------- */
 
 export function Paid() {
   const s = useSession();
   const go = useNavigate();
   const y = year(s);
+  const hadDeposit = s.journey.depositPaidOn != null;
   return (
     <Screen
-      tone="lilac"
+      tone="dark"
       dock={
-        <Button variant="primary" onClick={() => go("/haiba/welcome")}>
-          {s.t("paidCta")}
-        </Button>
+        <>
+          <Button variant="lime" onClick={() => go("/haiba/welcome")}>
+            {s.t("paidCta")}
+          </Button>
+          <Button variant="ghost" onClick={() => go("/haiba/unipass")}>
+            {s.t("paidPick")}
+          </Button>
+        </>
       }
     >
-      <TopBar back="/" />
-      <Center
-        art={<Emoji src={E("party")} size={140} />}
-        title={s.t("paidTitle")}
-        body={s.t("paidSub")}
-      >
-        <div className="jx-card" style={{ background: "#FFFFFF", marginTop: 18 }}>
-          <Rows
-            rows={[
-              [s.t("paidAmount"), s.m(s.rest)],
-              [
-                s.t("paidStarts"),
-                s.t("paidRange", { from: s.d(y.from), to: s.d(y.to, { year: true }) }),
-              ],
-              [s.t("memCard"), cardText(s)],
-            ]}
-          />
+      <div className="jx-paid">
+        <span className="jx-confetti" aria-hidden="true">
+          {Array.from({ length: 18 }).map((_, i) => (
+            <i key={i} />
+          ))}
+        </span>
+        <TopBar back="/" onDark />
+        <Artwork src={BIRD("18-joined")} alt="" className="jx-paid-bird" />
+        <div className="jx-paid-text">
+          <Tag tone="lime">{s.t("memMember")}</Tag>
+          <h1 className="jx-h1">{s.t("paidTitle")}</h1>
+          <p className="jx-sub">
+            {s.t("paidRangeLine", { from: s.d(y.from), to: s.d(y.to, { year: true }) })}
+          </p>
         </div>
-        <p className="jx-small" style={{ marginTop: 10 }}>
-          {s.t("paidReceipt")}
-        </p>
-      </Center>
+        <div className="jx-paid-receipt">
+          <span className="jx-li-icon">
+            <Receipt size={18} aria-hidden="true" />
+          </span>
+          <span className="jx-row-main">
+            <span className="jx-row-title jx-num">
+              {s.t("paidLine", { amount: s.m(hadDeposit ? s.rest : s.total) })}
+            </span>
+            <span className="jx-row-sub">
+              {cardText(s)} · {s.t("paidEmailed")}
+            </span>
+          </span>
+        </div>
+        <span className="jx-label jx-paid-label">{s.t("paidReady")}</span>
+        <div className="jx-paid-grid">
+          {(
+            [
+              [<img key="u" src={ICON.unipass} alt="" />, "paidR1", "paidR1Sub"],
+              [<SubLogos key="s" size={30} />, "paidR2", "paidR2Sub"],
+              [<img key="p" src={ICON.points} alt="" />, "paidR3", "paidR3Sub"],
+            ] as const
+          ).map(([art, t, sub]) => (
+            <div className="jx-paid-tile" key={t}>
+              <span className="jx-paid-art">{art}</span>
+              <span className="jx-row-title">{s.t(t)}</span>
+              <span className="jx-row-sub">{s.t(sub)}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </Screen>
   );
 }
 
-/* ---------- shared bits for the member screens ---------- */
-
-export const BIRD = (n: string) => `/haiba/birds/${n}.png`;
+/** Mascot art. Stills are png; "motion/<name>" is an animated loop. */
+export const BIRD = (n: string) =>
+  n.startsWith("motion/")
+    ? `/haiba/${n}.webp`
+    : Number(n.slice(0, 2)) >= 17
+      ? `/haiba/birds/${n}.webp`
+      : `/haiba/birds/${n}.png`;
 const POINTS = 1240;
 
-/** Coloured top panel with the bird, then a white body that overlaps it. Used for every result state. */
 export function Result({
   tone,
   bird,
@@ -600,7 +650,7 @@ export function Code() {
       >
         <Result
           tone={expired ? "warn" : "lilac"}
-          bird={expired ? "05-shrug" : "16-torn"}
+          bird={expired ? "20-code-expired" : "16-torn"}
           back={back}
         >
           <Tag
@@ -1051,7 +1101,7 @@ export function Unipass() {
       {view === "lost" && (
         <div className="jx-pad" style={{ marginTop: 16 }}>
           <div className="jx-notice">
-            <Artwork src={BIRD("05-shrug")} alt="" className="jx-notice-bird" />
+            <Artwork src={BIRD("25-empty-box")} alt="" className="jx-notice-bird" />
             <span className="jx-row-main">
               <span className="jx-row-title">
                 {s.t("upLostTitle", { month: monthName(addDays(s.today, -31), s.lang) })}
@@ -1151,12 +1201,14 @@ export function Unipass() {
 /* ---------- 6 · member offers (subscriptions) ---------- */
 
 function SubMark({ p, size = 40 }: { p: Sub; size?: number }) {
-  return <BrandMark brand={{ key: p.id, name: p.name, mark: p.mark, bg: p.markBg }} size={size} />;
+  return <BrandMark brand={{ key: p.id, name: p.name, logo: p.logo, bg: "#FFFFFF" }} size={size} />;
 }
 
 export function Subscriptions() {
   const s = useSession();
   const go = useNavigate();
+  const q = useQuery();
+  const claimed = q["claimed"] === 1 || q["claimed"] === "1";
   return (
     <Screen tone="soft">
       <TopBar back="/haiba" />
@@ -1166,18 +1218,18 @@ export function Subscriptions() {
       </div>
       <div className="jx-pad" style={{ marginTop: 20 }}>
         <div className="jx-stack" style={{ gap: 14 }}>
-          {SUBS.map((p) => (
+          {subsFor(claimed).map((p) => (
             <button
               key={p.id}
               className={`jx-oc ${p.claimed ? "jx-oc-off" : ""}`}
-              onClick={() => go("/haiba/subscription?id=" + p.id)}
+              onClick={() => go("/haiba/subscription?id=" + p.id + (p.claimed ? "&claimed=1" : ""))}
             >
               <span className="jx-oc-art" style={{ background: p.bg }}>
                 <span className="jx-oc-brand">
                   <SubMark p={p} size={26} />
                   {p.name}
                 </span>
-                <img src={p.img} alt="" />
+                <img src={p.logo} alt="" className="jx-oc-logo" />
               </span>
               <span className="jx-oc-body">
                 <span className="jx-row-main">
@@ -1204,7 +1256,9 @@ export function Subscriptions() {
 export function Subscription() {
   const s = useSession();
   const q = useQuery();
-  const p = SUBS.find((x) => x.id === q["id"]) ?? SUBS[0]!;
+  const claimed = q["claimed"] === 1 || q["claimed"] === "1";
+  const list = subsFor(claimed);
+  const p = list.find((x) => x.id === q["id"]) ?? list[0]!;
   const [shown, setShown] = useState(q["code"] === 1 || q["code"] === "1");
   return (
     <Screen
@@ -1227,7 +1281,7 @@ export function Subscription() {
     >
       <header className="jx-od-hero" style={{ background: p.bg }}>
         <TopBar back="/haiba/subscriptions" />
-        <img src={p.img} alt="" className="jx-od-art" />
+        <img src={p.logo} alt="" className="jx-od-art jx-od-logo" />
       </header>
       <div className="jx-pad" style={{ marginTop: 18 }}>
         <span className="jx-oc-brand jx-oc-brand-plain">
@@ -1243,7 +1297,7 @@ export function Subscription() {
         {shown ? (
           <div className="jx-code-box jx-code-box-on">
             <span className="jx-code-val jx-num" dir="ltr">
-              HAIBA TB 7Q2X
+              {p.code}
             </span>
             <span className="jx-code-copy">
               <Copy size={18} aria-hidden="true" />
@@ -1418,19 +1472,19 @@ export function Membership() {
         </div>
         <div className="jx-ben-rail">
           <button className="jx-ben" onClick={() => go("/haiba/unipass")}>
-            <img src={E("gift")} alt="" />
+            <img src={ICON.unipass} alt="" />
             <span className="jx-ben-title">{s.t("memBGift")}</span>
             <span className="jx-row-sub">{s.t("memBGiftSub", { n: gifts })}</span>
           </button>
           <button className="jx-ben" onClick={() => go("/haiba/rewards")}>
-            <img src={E("sparkles")} alt="" />
+            <img src={ICON.points} alt="" />
             <span className="jx-ben-title">{s.t("memBPoints")}</span>
             <span className="jx-row-sub jx-num">
               {s.t("memBPointsSub", { n: POINTS.toLocaleString("en-US") })}
             </span>
           </button>
           <button className="jx-ben" onClick={() => go("/haiba/subscriptions")}>
-            <img src={E("ticket")} alt="" />
+            <SubLogos size={30} />
             <span className="jx-ben-title">{s.t("memBOffers")}</span>
             <span className="jx-row-sub">{s.t("memBOffersSub", { n: SUBS.length })}</span>
           </button>
@@ -1491,7 +1545,7 @@ export function Membership() {
       )}
 
       <Sheet open={sheet} onClose={() => setSheet(false)} label={s.t("memCancelTitle")}>
-        <Artwork src={BIRD("05-shrug")} alt="" className="jx-sh-bird" />
+        <Artwork src={BIRD("24-hug")} alt="" className="jx-sh-bird" />
         <h2 className="jx-h2" style={{ textAlign: "center" }}>
           {s.t("memCancelTitle")}
         </h2>
@@ -1500,12 +1554,12 @@ export function Membership() {
         </p>
         <div className="jx-lose">
           <div>
-            <img src={E("gift")} alt="" />
+            <img src={ICON.unipass} alt="" />
             <b className="jx-num">10</b>
             <span>{s.t("memLoseGifts")}</span>
           </div>
           <div>
-            <img src={E("sparkles")} alt="" />
+            <img src={ICON.points} alt="" />
             <b className="jx-num">{POINTS.toLocaleString("en-US")}</b>
             <span>{s.t("memLosePts")}</span>
           </div>
@@ -1574,7 +1628,7 @@ export function Ended() {
         </Button>
       }
     >
-      <Result tone="lilac" bird="05-shrug" back="/">
+      <Result tone="lilac" bird="motion/bye" back="/">
         <h1 className="jx-h1 jx-res-title">{s.t("endedTitle")}</h1>
         <p className="jx-sub">{s.t("endedSubShort", { date: s.d(y.to, { year: true }) })}</p>
         <div className="jx-back-card">
@@ -1596,15 +1650,15 @@ export function Ended() {
         </span>
         <ul className="jx-facts" style={{ marginTop: 10 }}>
           <li>
-            <img src={E("gift")} alt="" />
+            <img src={ICON.unipass} alt="" />
             <span>{s.t("benefitGifts")}</span>
           </li>
           <li>
-            <img src={E("sparkles")} alt="" />
+            <img src={ICON.points} alt="" />
             <span>{s.t("benefitPoints")}</span>
           </li>
           <li>
-            <img src={E("ticket")} alt="" />
+            <SubLogos size={22} />
             <span>{s.t("memBOffers")}</span>
           </li>
         </ul>
@@ -1619,10 +1673,25 @@ export function Saved() {
   const s = useSession();
   const y = year(s);
   const unipal = 19.7;
-  const rows: [string, number, string, string][] = [
-    [s.t("savedRewards"), 3.2, E("sparkles"), s.t("savedN_rewards", { n: 4 })],
-    [s.t("savedGifts"), 2.85, E("gift"), s.t("savedN_gifts", { n: 2 })],
-    [s.t("savedSubs"), 1.65, E("ticket"), s.t("savedN_offers", { n: 1 })],
+  const rows: [string, number, ReactNode, string][] = [
+    [
+      s.t("savedRewards"),
+      3.2,
+      <img key="p" src={ICON.points} alt="" className="jx-act-emoji" />,
+      s.t("savedN_rewards", { n: 4 }),
+    ],
+    [
+      s.t("savedGifts"),
+      2.85,
+      <img key="u" src={ICON.unipass} alt="" className="jx-act-emoji" />,
+      s.t("savedN_gifts", { n: 2 }),
+    ],
+    [
+      s.t("savedSubs"),
+      1.65,
+      <img key="s" src={SUBS[0]!.logo} alt="" className="jx-act-emoji jx-act-logo" />,
+      s.t("savedN_offers", { n: 1 }),
+    ],
   ];
   const haiba = rows.reduce((t, r) => t + r[1], 0);
   const total = unipal + haiba;
@@ -1674,11 +1743,9 @@ export function Saved() {
       </div>
 
       <Group title={s.t("savedHaiba")}>
-        {rows.map(([label, v, img, sub]) => (
+        {rows.map(([label, v, art, sub]) => (
           <div className="jx-act" key={label}>
-            <span className="jx-act-av">
-              <img src={img} alt="" className="jx-act-emoji" />
-            </span>
+            <span className="jx-act-av">{art}</span>
             <span className="jx-row-main">
               <span className="jx-row-title">{label}</span>
               <span className="jx-row-sub">{sub}</span>
@@ -1711,7 +1778,7 @@ export function Saved() {
 
 /* ---------- 9 · help ---------- */
 
-const HOW_IMG = ["card", "gift", "sparkles", "drink", "ticket"];
+const HOW_IMG = ["", ICON.unipass, ICON.points, E("drink"), ""];
 
 export function Help() {
   const s = useSession();
@@ -1733,7 +1800,15 @@ export function Help() {
           {(["helpHow1", "helpHow2", "helpHow3", "helpHow4", "helpHow5"] as const).map((k, i) => (
             <li key={k}>
               <span className="jx-how5-art">
-                <img src={E(HOW_IMG[i]!)} alt="" />
+                {i === 0 ? (
+                  <HaibaMark size={30} />
+                ) : HOW_IMG[i] ? (
+                  <img src={HOW_IMG[i]} alt="" />
+                ) : (
+                  <span className="jx-how5-code" aria-hidden="true">
+                    HB
+                  </span>
+                )}
                 <span className="jx-how5-n">{i + 1}</span>
               </span>
               <span className="jx-row-title">{s.t(k)}</span>

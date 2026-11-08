@@ -30,7 +30,9 @@ export default function Welcome() {
           overflow: "hidden",
         }}
       >
-        <div className="hb-welcome-rays" aria-hidden="true"><div className="hb-spin" /></div>
+        <div className="hb-welcome-rays" aria-hidden="true">
+          <div className="hb-spin" />
+        </div>
         <div
           style={{
             position: "absolute",
@@ -147,7 +149,9 @@ export default function Welcome() {
                 {"You're in!"}
                 <br />
                 {"Welcome to "}
-                <span className="hb-welcome-brand"><img src={haibaLogo.url} alt="Haiba" width={223} height={92} /></span>
+                <span className="hb-welcome-brand">
+                  <img src={haibaLogo.url} alt="Haiba" width={223} height={92} />
+                </span>
               </div>
             </>
           ) : null}

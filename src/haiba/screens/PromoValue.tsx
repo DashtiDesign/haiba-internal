@@ -127,7 +127,7 @@ export default function PromoValue() {
                 boxSizing: "border-box",
                 background: "#6C3FFA",
                 color: "#FFFFFF",
-                borderRadius: "16px",
+                borderRadius: "12px",
                 padding: "16px",
               }}
             >
@@ -153,7 +153,7 @@ export default function PromoValue() {
                   style={{
                     width: "32px",
                     height: "32px",
-                    borderRadius: "10px",
+                    borderRadius: "8px",
                     objectFit: "cover",
                     display: "block",
                     marginLeft: "0px",
@@ -166,7 +166,7 @@ export default function PromoValue() {
                   style={{
                     width: "32px",
                     height: "32px",
-                    borderRadius: "10px",
+                    borderRadius: "8px",
                     objectFit: "cover",
                     display: "block",
                     marginLeft: "-10px",
@@ -179,7 +179,7 @@ export default function PromoValue() {
                   style={{
                     width: "32px",
                     height: "32px",
-                    borderRadius: "10px",
+                    borderRadius: "8px",
                     objectFit: "cover",
                     display: "block",
                     marginLeft: "-10px",
@@ -207,7 +207,7 @@ export default function PromoValue() {
                 boxSizing: "border-box",
                 background: "#000000",
                 color: "#FFFFFF",
-                borderRadius: "16px",
+                borderRadius: "12px",
                 padding: "16px",
               }}
             >
@@ -260,7 +260,7 @@ export default function PromoValue() {
                 boxSizing: "border-box",
                 background: "#FFFFFF",
                 color: "#1E1B2E",
-                borderRadius: "16px",
+                borderRadius: "12px",
                 padding: "16px",
                 boxShadow: "0 0 0 1px #ECE8F5",
               }}
@@ -314,7 +314,7 @@ export default function PromoValue() {
                 boxSizing: "border-box",
                 background: "#C0F402",
                 color: "#1F2600",
-                borderRadius: "16px",
+                borderRadius: "12px",
                 padding: "16px",
               }}
             >
@@ -357,7 +357,7 @@ export default function PromoValue() {
                 marginTop: "0",
                 background: "#1E1B2E",
                 color: "#FFFFFF",
-                borderRadius: "16px",
+                borderRadius: "12px",
                 padding: "14px 16px",
                 overflow: "hidden",
               }}
@@ -553,7 +553,7 @@ export default function PromoValue() {
               marginTop: "26px",
               background: "#1E1B2E",
               color: "#FFFFFF",
-              borderRadius: "16px",
+              borderRadius: "12px",
               padding: "30px 20px 18px 20px",
             }}
           >
@@ -707,7 +707,7 @@ export default function PromoValue() {
                   width: "100%",
                   boxSizing: "border-box",
                   background: "#FFFFFF",
-                  borderRadius: "16px 16px 0 0",
+                  borderRadius: "12px 12px 0 0",
                   padding: "0 20px calc(26px + env(safe-area-inset-bottom, 0px)) 20px",
                   textAlign: "center",
                   maxWidth: "430px",

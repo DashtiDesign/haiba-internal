@@ -99,7 +99,7 @@ export default function PromoCompare() {
             style={{
               marginTop: "20px",
               border: "1px solid #E2DCF2",
-              borderRadius: "16px",
+              borderRadius: "12px",
               overflow: "hidden",
             }}
           >
@@ -208,7 +208,7 @@ export default function PromoCompare() {
               position: "relative",
               marginTop: "18px",
               border: "2px solid #6C3FFA",
-              borderRadius: "16px",
+              borderRadius: "12px",
               padding: "16px 18px",
               background: "#FAF8FF",
             }}
@@ -349,7 +349,7 @@ export default function PromoCompare() {
                   width: "100%",
                   boxSizing: "border-box",
                   background: "#FFFFFF",
-                  borderRadius: "16px 16px 0 0",
+                  borderRadius: "12px 12px 0 0",
                   padding: "0 20px calc(26px + env(safe-area-inset-bottom, 0px)) 20px",
                   textAlign: "center",
                   maxWidth: "430px",

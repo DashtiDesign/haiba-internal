@@ -91,6 +91,15 @@ BLOBS = {
     "9291b1502bc66437ec6d75fd7f955c77": "/haiba/coins/coin-34.webp",
     "84fd2f8fb8654cb616f9930c21d9459c": "/haiba/coins/coin-flip.webp",
     "0d9e8a337892ba1efe85bd1f2977f6cb": "/haiba/coins/coin-stack.webp",
+    "0fa51e8e02bf88165020c9ea064d42fb": "/haiba/icons/unipass.webp",
+    "2272559694f0c8a89cf0eb54df196ab5": "/haiba/birds/18-joined.webp",
+    "3790ebcba1e76f32fc239671d0b58df1": "/haiba/birds/19-hourglass.webp",
+    "200592c8713b1c9cf0122135f51f3502": "/haiba/birds/20-code-expired.webp",
+    "60b8b163002a266128dec43c5a4f8379": "/haiba/birds/21-student-id.webp",
+    "b26e8037e044d905bcb9f3f346f9cc17": "/haiba/birds/22-rope.webp",
+    "ca15ceac418929def4be2aecc493953b": "/haiba/birds/23-map.webp",
+    "328b0c83bcf4dcc33e8cfd7fdda35eca": "/haiba/birds/24-hug.webp",
+    "b756321a0a61390fcd596b777c61b4d6": "/haiba/birds/25-empty-box.webp",
 }
 ATTR_CASE = {
     "viewbox": "viewBox", "preserveaspectratio": "preserveAspectRatio", "onclick": "onClick", "oninput": "onInput", "onchange": "onChange", "ondragstart": "onDragStart", "ondragover": "onDragOver", "ondrop": "onDrop", "ondragend": "onDragEnd",

@@ -10,7 +10,13 @@ import { useSession } from "../session";
 import { pathFor, useJourneyActions } from "../actions";
 import { daysText } from "../strings";
 import { Elsewhere, NotStudent, SpotsFull, countryName } from "./Edge";
-import { pct, startOf } from "../format";
+import { startOf } from "../format";
+import PlansConvert from "../../screens/PlansConvert";
+import { PromoModeContext, type PromoMode } from "../promoMode";
+import PaywallStory from "../../screens/PaywallStory";
+import PaywallTimeline from "../../screens/PaywallTimeline";
+import PaywallBase from "../../screens/PaywallBase";
+import PaywallTable from "../../screens/PaywallTable";
 
 /**
  * The Haiba page before launch: the student's price, VAT, the deposit and the two refund rules.
@@ -18,10 +24,6 @@ import { pct, startOf } from "../format";
  */
 export default function Reserve() {
   const s = useSession();
-  const a = useJourneyActions();
-  const online = useOnline();
-  const [exit, setExit] = useState(false);
-  const go = useNavigate();
   const status = s.journey.status;
 
   if (s.elsewhere) return <Elsewhere />;
@@ -29,132 +31,41 @@ export default function Reserve() {
     return <Navigate to={pathFor(status)} replace />;
   }
 
-  const deposit = s.m(s.deposit);
-  const reserve = () => a.startPayment("deposit");
-
   // The reservation test has ended and Haiba has not opened yet.
   if (s.today > s.settings.reserveEnd && !s.launched) return <ReserveClosed />;
   // Haiba is for students only, and reservations are capped per country.
   if (s.student !== "verified") return <NotStudent action="reserve" />;
   if (s.full && !s.launched) return <SpotsFull />;
 
+  return <MainPromo />;
+}
+
+/**
+ * The page a student sees before they reserve is one of the promo pages (paywall test arms).
+ * Which one is set in the prototype panel ("Main promo page"). Each reads its price, money, deposit and
+ * launch date from the settings, and its reserve button starts the real deposit payment.
+ */
+export const PROMOS = {
+  join: PlansConvert,
+  story: PaywallStory,
+  timeline: PaywallTimeline,
+  base: PaywallBase,
+  table: PaywallTable,
+} as const;
+export type PromoKey = keyof typeof PROMOS;
+
+export function MainPromo({ mode = "Reserve" }: { mode?: PromoMode }) {
+  const s = useSession();
+  const Page = PROMOS[s.settings.mainPromo] ?? PlansConvert;
   return (
-    <Screen
-      dock={
-        <>
-          <Button variant="primary" onClick={reserve} disabled={!online}>
-            {online ? s.t("reserveCta", { deposit }) : s.t("offlineCta")}
-          </Button>
-          <p className="jx-dock-note">{s.t("reserveCtaNote")}</p>
-        </>
-      }
-    >
-      <header className="jx-hero">
-        <div className="jx-hero-bar">
-          <img src="/haiba/logo-purple.svg" alt={s.t("haiba")} className="jx-hero-logo" />
-          <button className="jx-icon-btn" onClick={() => setExit(true)} aria-label={s.t("close")}>
-            <X size={22} aria-hidden="true" />
-          </button>
+    <PromoModeContext.Provider value={mode}>
+      {mode === "Reserve" && s.spotsLeft <= 100 && (
+        <div className="jx-spots-banner" role="status">
+          {s.t("spotsLeft", { n: s.spotsLeft, country: countryName(s, s.c) })}
         </div>
-        <img src="/haiba/birds/17-coin-toss.webp" alt="" className="jx-hero-art" />
-        <div className="jx-hero-body">
-          {s.spotsLeft <= 100 && (
-            <span className="jx-tag jx-tag-dark jx-spots-tag">
-              {s.t("spotsLeft", { n: s.spotsLeft, country: countryName(s, s.c) })}
-            </span>
-          )}
-          <h1 className="jx-h1">{s.t("reserveTitle")}</h1>
-          <p className="jx-sub" style={{ color: "#4a4560" }}>
-            {s.t("reserveSub")}
-          </p>
-        </div>
-      </header>
-
-      <Section>
-        <div className="jx-benefits">
-          {[
-            [<Gift key="g" size={18} />, "benefitGifts", "benefitGiftsSub"],
-            [<Coins key="c" size={18} />, "benefitPoints", "benefitPointsSub"],
-            [<Sparkles key="s" size={18} />, "benefitWelcome", "benefitWelcomeSub"],
-          ].map(([icon, title, sub]) => (
-            <div className="jx-row" key={title as string}>
-              <span className="jx-row-icon">{icon}</span>
-              <span className="jx-row-main">
-                <span className="jx-row-title">{s.t(title as "benefitGifts")}</span>
-                <span className="jx-row-sub">{s.t(sub as "benefitGiftsSub")}</span>
-              </span>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      <Section>
-        <div className="jx-price">
-          <span className="jx-label">{s.t("yourPrice")}</span>
-          <div className="jx-price-big">
-            <span className="jx-price-amount jx-num">{s.m(s.price)}</span>
-            <span className="jx-price-per">{s.t("perYearPlusVat")}</span>
-          </div>
-          <Rows
-            strongLast
-            rows={[
-              [s.t("priceRow"), s.m(s.price)],
-              [s.t("vatRow", { rate: pct(s.vatRate) }), s.m(s.vat)],
-              [s.t("totalRow"), s.m(s.total)],
-            ]}
-          />
-        </div>
-        <p className="jx-small" style={{ margin: "8px 4px 0" }}>
-          {s.t("priceBeforeVat")}
-        </p>
-      </Section>
-
-      <Section title={s.t("howTitle")}>
-        <Steps
-          steps={[
-            { title: s.t("stepToday"), body: s.t("stepTodayBody", { deposit }), state: "now" },
-            {
-              title: s.d(s.launch, { weekday: true }),
-              body: s.t("stepOpenBody", { rest: s.m(s.rest) }),
-              state: "next",
-            },
-          ]}
-        />
-      </Section>
-
-      <Section>
-        <div className="jx-stack">
-          <Note icon={<RotateCcw size={18} aria-hidden="true" />}>{s.t("ruleCancel")}</Note>
-          <Note icon={<Clock size={18} aria-hidden="true" />}>
-            {s.t("ruleHold", {
-              days: daysText(s.lang, s.settings.holdDays),
-              date: s.d(s.holdEnds),
-            })}
-          </Note>
-        </div>
-      </Section>
-
-      <Sheet open={exit} onClose={() => setExit(false)} label={s.t("exitTitle")}>
-        <span className="jx-label">{s.t("exitSmall")}</span>
-        <h2 className="jx-h2">{s.t("exitTitle")}</h2>
-        <p className="jx-sub" style={{ marginTop: 0 }}>
-          {s.t("exitBody", { deposit, price: s.m(s.price) })}
-        </p>
-        <Button
-          variant="primary"
-          disabled={!online}
-          onClick={() => {
-            setExit(false);
-            reserve();
-          }}
-        >
-          {s.t("exitYes", { deposit })}
-        </Button>
-        <Button variant="ghost" onClick={() => go("/")}>
-          {s.t("exitNo")}
-        </Button>
-      </Sheet>
-    </Screen>
+      )}
+      <Page />
+    </PromoModeContext.Provider>
   );
 }
 
