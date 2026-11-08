@@ -61,7 +61,8 @@ GO_VAR = 'href="#" onClick={(e: any) => { e.preventDefault(); if (v.navTipHref) 
 
 # Placeholder links (href="#") in the order they appear in each screen. None = stays a placeholder.
 LINKS = {
-    "Hub": [go("/haiba/unipass"), go("/haiba/activity"), GO_VAR, go("/"), None, None, None],
+    # 8 Nov: the hub is grouped (Ready for you, Your points, Savings and activity); its Activity link is now a board link.
+    "Hub": [go("/haiba/unipass"), GO_VAR, go("/"), None, None, None],
     "Plans": [None, go("/")],
     "Wallet": [go_item("a"), go("/haiba/earn"), None, None, go("/haiba/rewards"), go("/haiba/rewards")],
 }
@@ -72,6 +73,13 @@ SCREEN = {
     "Hub": [
         ('import Artwork from "../Artwork";', 'import Artwork from "../Artwork";\nimport HubBird from "../HubBird";'),
         (re.compile(r'<button\s+aria-label="Say hi to the Unipal bird".*?</button>', re.S), '<HubBird onTap={v.poke} />'),
+        # 8 Nov: a reward code row opens the full code screen (4.6) with that reward; menu rows open their pages.
+        (re.compile(r'<Link (className="hb-row" style=\{\{[^}]*\}\}) to="/haiba/code\?kind=reward">(.*?)</Link>', re.S),
+         r'<a \1 href="#" onClick={(e: any) => { e.preventDefault(); go(r.href); }}>\2</a>'),
+        ('href="{{m.href}}"', 'href="#" onClick={(e: any) => { e.preventDefault(); go(m.route); }}'),
+        # The menu sheet covers the screen in the app, above the bottom nav and panel tab
+        ('position: "absolute", inset: "0", background: "rgba(20,16,40,0.5)", zIndex: "30"', 'position: "fixed", inset: "0", background: "rgba(20,16,40,0.5)", zIndex: "70"'),
+        ('role="dialog" aria-label="Haiba menu" style={{ position: "relative", width: "100%"', 'role="dialog" aria-label="Haiba menu" style={{ position: "relative", width: "100%", maxWidth: "430px", margin: "0 auto"'),
     ],
     # Lovable: the shop back button returns to the previous screen; hook class for small phones.
     "Shop": [
@@ -95,11 +103,23 @@ SCREEN = {
     ],
 }
 LOGIC = {
-    "Rewards": [("var balance = 1240;", "var balance = props.base;")],
+    "Rewards": [
+        ("var balance = 1240;", "var balance = props.base;"),
+        # 8 Nov: Use on a reward opens the full code screen (4.6) with that shop and reward.
+        (
+            "    var goCode = function (sh, d) {};",
+            "    var goCode = function (sh, d) {\n"
+            "      var p = { kind: 'reward', shop: sh.name, item: d.name, pts: d.pts, img: d.img, logo: sh.logo || '', mark: sh.mark || sh.name.charAt(0), bg: sh.bg || '#FFFFFF', value: d.value || 0 };\n"
+            "      nav('/haiba/code?' + Object.keys(p).map(function (k) { return k + '=' + encodeURIComponent(p[k]); }).join('&'));\n"
+            "    };",
+        ),
+    ],
     "Earn": [("var balance = 1240;", "var balance = props.base;")],
     "Hub": [
         ("var target = isNew ? 500 : 1240;", "var target = props.available;"),
         ("      navTipCta:", "      navTipHref: isNew ? '/haiba/unipass' : '/haiba/earn',\n      navTipCta:"),
+        # 8 Nov: the hub bird is HubBird in the app; the canvas loop player is not ported.
+        ("        if (!self._reduce) self.playBird((self._last + 1) % BIRD_LOOPS.length);\n", ""),
     ],
     "Wallet": [
         ("points: n(isNew ? 500 : 1240),", "points: n(props.available),"),

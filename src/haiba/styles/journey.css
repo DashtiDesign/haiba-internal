@@ -1254,3 +1254,119 @@ button.jx-row {
 .jx-mx-year1 { position: absolute; inset-inline-end: 22px; bottom: 22px; display: flex; flex-direction: column; align-items: flex-end; font-size: 30px; font-weight: 800; line-height: 1; color: var(--jx-lime); font-variant-numeric: tabular-nums; }
 .jx-mx-year1 small { font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); margin-bottom: 4px; }
 .jx-mx-cancelled .jx-mx-year1 { color: rgba(255, 255, 255, 0.75); }
+
+/* 8 Nov: prototype controls on the dark code screen (4.6) */
+.jx-proto-dark { background: rgba(255, 255, 255, 0.04); border-color: rgba(255, 255, 255, 0.22); margin-bottom: 28px; }
+.jx-proto-dark .jx-tap-sim-title { color: rgba(236, 230, 255, 0.6); }
+.jx-proto-btns { display: flex; gap: 8px; }
+.jx-proto-btns button { flex: 1; font: inherit; font-size: 13.5px; font-weight: 800; color: #fff; background: transparent; border: 1.5px dashed rgba(255, 255, 255, 0.4); border-radius: 999px; padding: 10px 8px; cursor: pointer; }
+
+/* 8 Nov: calmer Unipass pick sheet (5.2) */
+.jx-sh-art-sm { height: 132px; }
+.jx-sh-art-sm > img { width: 84px; height: 84px; }
+.jx-facts-quiet { gap: 8px; }
+.jx-facts-quiet li { font-size: 14px; color: #6b6880; }
+.jx-sh-rule { text-align: center; margin: 6px 0 -2px; }
+
+/* 8 Nov: Help holds membership, subscriptions, savings and how points work */
+.jx-help-coin { width: 26px; height: 26px; object-fit: contain; }
+.jx-pts-rules { list-style: none; margin: 0; padding: 0; }
+.jx-pts-rules li { display: flex; align-items: center; gap: 14px; padding: 12px 0; }
+.jx-pts-rules li + li { border-top: 1px solid #f1eff7; }
+.jx-pts-tag { flex: none; width: 44px; height: 44px; border-radius: 12px; background: #f0ecff; color: #4f25d6; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+.jx-pts-tag img { width: 26px; height: 26px; object-fit: contain; }
+
+/* 8 Nov: Unipass year bar, same pattern as the membership card year bar.
+   Colours come from the hero it sits on, so every page keeps good contrast. */
+.jx-yt { --yt-off: rgba(255, 255, 255, 0.72); --yt-on: var(--jx-ink); --yt-now: var(--jx-purple); --yt-txt: rgba(30, 27, 46, 0.72); --yt-now-txt: var(--jx-ink); --yt-miss: rgba(30, 27, 46, 0.45);
+  display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; margin-top: 20px; }
+.jx-yt > span { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.jx-yt i { width: 100%; height: 6px; border-radius: 3px; background: var(--yt-off); }
+.jx-yt small { font-size: 11px; font-weight: 700; color: var(--yt-txt); }
+.jx-yt .on i { background: var(--yt-on); }
+.jx-yt .now i { background: var(--yt-now); }
+.jx-yt .now small { color: var(--yt-now-txt); font-weight: 800; }
+.jx-yt .missed i { background: transparent; box-shadow: inset 0 0 0 1.5px var(--yt-miss); }
+.jx-yt .missed small { text-decoration: line-through; }
+.jx-up-hero-soft .jx-yt { --yt-off: #e6e1f2; --yt-on: var(--jx-purple); --yt-txt: #8f89a8; --yt-miss: #b9b3cc; }
+.jx-up-hero-dark .jx-yt { --yt-off: rgba(255, 255, 255, 0.22); --yt-on: var(--jx-lime); --yt-now: #fff; --yt-txt: rgba(255, 255, 255, 0.7); --yt-now-txt: #fff; --yt-miss: rgba(255, 255, 255, 0.5); }
+.jx-up-hero-warn .jx-yt { --yt-off: rgba(255, 255, 255, 0.75); }
+
+/* 8 Nov: Savings and activity, one page */
+.jx-ledger { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+.jx-ledger > div { display: flex; align-items: center; gap: 8px; font-size: 14.5px; font-weight: 700; }
+.jx-ledger > div span { flex: 1; }
+.jx-ledger i { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+.jx-ledger i.k1 { background: var(--jx-ink); }
+.jx-ledger i.k2 { background: var(--jx-purple); }
+.jx-ledger-parts { margin: 0 0 0 18px; font-size: 12.5px; font-weight: 600; color: #3b3650; }
+.jx-money-cards { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+.jx-pts-sum { display: grid; grid-template-columns: repeat(3, 1fr); background: #fff; border-radius: 14px; box-shadow: 0 0 0 1px #ece8f5; padding: 14px 4px; }
+.jx-pts-sum > div { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.jx-pts-sum > div + div { border-inline-start: 1px solid #f1eff7; }
+.jx-pts-sum b { font-size: 20px; font-weight: 800; }
+.jx-pts-sum .jx-plus { color: var(--jx-purple); }
+.jx-act-section { margin-top: 28px; scroll-margin-top: 12px; }
+.jx-seg { margin-top: 12px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; background: #e9e4f6; border-radius: 12px; padding: 4px; }
+.jx-seg button { font: inherit; font-size: 13.5px; font-weight: 800; border: 0; border-radius: 9px; padding: 8px 4px; background: transparent; color: #6b6880; cursor: pointer; }
+.jx-seg button.on { background: #fff; color: var(--jx-ink); box-shadow: 0 2px 6px rgba(30, 27, 46, 0.1); }
+.jx-act-end { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex: none; }
+.jx-act-saved { color: #1e7a34; font-size: 14.5px; }
+.jx-act-pts { font-size: 13px; font-weight: 800; color: #6b6880; }
+.jx-act-pts.jx-act-plus { color: var(--jx-purple); }
+.jx-act-pts.jx-act-only { font-size: 15px; }
+
+/* 8 Nov: used state, a calm receipt (Rakuten, Cash App pattern) */
+.jx-used { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 12px 20px 24px; }
+.jx-used-art { position: relative; width: 132px; height: 132px; border-radius: 28px; display: flex; align-items: center; justify-content: center; margin-top: 8px; }
+.jx-used-art > img { width: 88px; height: 88px; object-fit: contain; filter: drop-shadow(0 8px 10px rgba(30, 27, 46, 0.14)); }
+.jx-used-logo { position: absolute; inset-inline-start: -8px; bottom: -8px; border-radius: 10px; box-shadow: 0 0 0 3px #f3f0fa; overflow: hidden; display: flex; }
+.jx-used-check { position: absolute; inset-inline-end: -10px; top: -10px; width: 36px; height: 36px; border-radius: 50%; background: #1e7a34; color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 4px #f3f0fa; }
+.jx-used-title { margin-top: 28px; max-width: 300px; }
+.jx-used-sub { margin-top: 6px; }
+.jx-receipt { width: 100%; margin-top: 28px; background: #fff; border-radius: 16px; box-shadow: 0 0 0 1px #ece8f5; padding: 4px 18px; text-align: start; }
+.jx-receipt-row { display: flex; align-items: center; gap: 10px; padding: 14px 0; font-size: 15px; font-weight: 600; color: #6b6880; width: 100%; font-family: inherit; background: none; border: 0; }
+.jx-receipt-row + .jx-receipt-row { border-top: 1px solid #f1eff7; }
+.jx-receipt-row > span { flex: 1; text-align: start; }
+.jx-receipt-row b { color: var(--jx-ink); font-weight: 800; }
+.jx-receipt-main b { font-size: 24px; color: #1e7a34; }
+.jx-receipt-main span { color: var(--jx-ink); font-weight: 800; }
+.jx-receipt-link { cursor: pointer; }
+.jx-receipt-link svg { color: var(--jx-purple); }
+.jx-used-note { margin-top: 12px; }
+
+/* 8 Nov: subscription details as one left aligned list */
+.jx-facts-card { padding: 4px 0; gap: 12px; }
+.jx-facts-card li { font-size: 14.5px; }
+.jx-up-hero .jx-up-bird:not(.jx-up-bird-ledge) { height: 172px; }
+
+/* 8 Nov: Payment done on Haiba lime, so the blue bird and the purple card stand out */
+.jx-paid { background: linear-gradient(180deg, #d6f93f 0%, #e9fb9e 46%, #f3f0fa 78%); color: var(--jx-ink); }
+.jx-paid-bird { filter: drop-shadow(0 18px 24px rgba(60, 80, 0, 0.28)); }
+.jx-paid-text .jx-h1 { color: var(--jx-ink); }
+.jx-paid-text .jx-sub { color: #3b3650; }
+.jx-paid-receipt { background: #fff; box-shadow: 0 0 0 1px #ece8f5, 0 8px 18px rgba(30, 27, 46, 0.06); }
+.jx-paid-receipt .jx-li-icon { background: var(--jx-ink); color: var(--jx-lime); }
+.jx-paid-receipt .jx-row-title { color: var(--jx-ink); }
+.jx-paid-receipt .jx-row-sub { color: #6b6880; }
+.jx-paid-label { color: #6b6880; }
+.jx-paid-tile { box-shadow: 0 0 0 1px #ece8f5; }
+.jx-paid .jx-confetti > i { background: var(--jx-purple); }
+.jx-paid .jx-confetti > i:nth-child(3n) { background: #ff8fc8; }
+.jx-paid .jx-confetti > i:nth-child(3n + 1) { background: #1e1b2e; }
+.jx-paid .jx-confetti > i:nth-child(4n) { background: #fff; }
+
+/* 8 Nov: 5.6 gift used this month: countdown ring, then this month's gift as a small receipt */
+.jx-up-hero-used { background: linear-gradient(180deg, #efe9ff 0%, #f7f4ff 60%, #fff 100%); }
+.jx-cd { --cd: 0deg; width: 196px; height: 196px; margin: 4px auto 0; border-radius: 50%; padding: 12px; box-sizing: border-box;
+  background: conic-gradient(var(--jx-purple) var(--cd), #ded6fb var(--cd)); display: flex; }
+.jx-cd-in { flex: 1; border-radius: 50%; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 10px 24px rgba(79, 37, 214, 0.12); }
+.jx-cd-in img { width: 40px; height: 40px; object-fit: contain; margin-bottom: 2px; }
+.jx-cd-in b { font-size: 46px; font-weight: 800; line-height: 1; letter-spacing: -0.03em; color: var(--jx-ink); }
+.jx-cd-in span { font-size: 13px; font-weight: 700; color: #6b6880; text-align: center; max-width: 120px; line-height: 1.25; }
+.jx-cd-date { text-align: center; margin: 12px 0 0; font-size: 14.5px; font-weight: 700; color: var(--jx-ink); }
+.jx-up-done { margin-top: 20px; display: flex; align-items: center; gap: 14px; padding: 14px; border-radius: 16px; background: #fff; box-shadow: 0 0 0 1px #ece8f5; }
+.jx-up-done-art { width: 56px; height: 56px; flex: none; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+.jx-up-done-art img { width: 40px; height: 40px; object-fit: contain; }
+.jx-up-done-save { color: #1e7a34; font-weight: 800; }
+.jx-up-hero-used .jx-yt { margin-top: 22px; }

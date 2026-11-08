@@ -182,29 +182,50 @@ export const SUBS: Sub[] = [
 export const subsFor = (claimed: boolean): Sub[] =>
   SUBS.map((x) => (claimed && x.id === "chatgpt" ? { ...x, claimed: true } : x));
 
-export type Activity = {
-  day: string;
-  items: { title: string; sub: string; pts?: number; money?: number; img?: string }[];
+/**
+ * One list for everything that happened with Haiba (8 Nov): offers used at shops, rewards, Unipass gifts,
+ * subscription codes and bonus points. Each line can carry money saved and points together, like a receipt.
+ * kind: offer = a Unipal offer (saved money, earned points), reward = points spent on a free item,
+ * gift = the monthly Unipass gift, sub = a subscription code, bonus = points only.
+ */
+export type ActivityItem = {
+  kind: "offer" | "reward" | "gift" | "sub" | "bonus";
+  title: string;
+  sub: string;
+  pts?: number;
+  money?: number; // BHD saved
+  img?: string;
 };
+export type Activity = { day: string; items: ActivityItem[] };
 
 export const ACTIVITY: Activity[] = [
   {
     day: "Today",
     items: [
       {
+        kind: "offer",
         title: "The Coffee Bean",
         sub: "Offer used · 2nd visit, 2x points",
+        money: 1.2,
         pts: 80,
         img: "/haiba/brands/coffee-bean.webp",
       },
-      { title: "Free upsize", sub: "Reward used at The Coffee Bean", pts: -300, img: E("drink") },
+      {
+        kind: "reward",
+        title: "Free upsize",
+        sub: "Reward at The Coffee Bean",
+        money: 0.3,
+        pts: -300,
+        img: E("drink"),
+      },
     ],
   },
   {
     day: "Yesterday",
     items: [
-      { title: "Jasmi’s", sub: "Offer used · 4th visit", pts: 40 },
+      { kind: "offer", title: "Jasmi’s", sub: "Offer used · 4th visit", money: 2, pts: 40 },
       {
+        kind: "gift",
         title: "January gift",
         sub: "Regular drink at The Coffee Bean",
         money: 1.9,
@@ -213,15 +234,35 @@ export const ACTIVITY: Activity[] = [
     ],
   },
   {
+    day: "Sun, 15 Dec",
+    items: [
+      {
+        kind: "sub",
+        title: "Spotify Premium",
+        sub: "Subscription code · month 1 free",
+        money: 2.4,
+        img: "/haiba/brands/spotify.webp",
+      },
+    ],
+  },
+  {
     day: "Tue, 3 Dec",
     items: [
       {
+        kind: "offer",
         title: "Wingman",
         sub: "Offer used · 1st visit, 2x points",
+        money: 1.5,
         pts: 80,
         img: "/haiba/brands/wingman.webp",
       },
-      { title: "Welcome to Haiba", sub: "Welcome points", pts: 500, img: ICON.points },
+      {
+        kind: "bonus",
+        title: "Welcome to Haiba",
+        sub: "Welcome points",
+        pts: 500,
+        img: ICON.points,
+      },
     ],
   },
 ];
