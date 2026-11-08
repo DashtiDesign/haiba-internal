@@ -237,7 +237,7 @@ export default function Hub() {
               to="/haiba/rewards"
             >
               <Artwork
-                src="/haiba/coins/coin-stack-3d.png"
+                src="/haiba/coins/coin-stack-3d.webp"
                 alt=""
                 style={{
                   width: "44px",

@@ -370,7 +370,7 @@ export function useVals() {
         pts: 300,
         logo: "/haiba/brands/coffee-bean.webp",
         bg: "#FFFFFF",
-        img: "/haiba/emoji/drink.png",
+        img: "/haiba/emoji/drink.webp",
         tint: "#FFEFD9",
         href: "/haiba/rewards",
       },
@@ -380,7 +380,7 @@ export function useVals() {
         pts: 500,
         logo: "/haiba/brands/grip.webp",
         bg: "#000000",
-        img: "/haiba/emoji/shake.png",
+        img: "/haiba/emoji/shake.webp",
         tint: "#FCE4F0",
       },
       {
@@ -389,7 +389,7 @@ export function useVals() {
         pts: 600,
         logo: "/haiba/brands/vox.webp",
         bg: "#FFFFFF",
-        img: "/haiba/emoji/popcorn.png",
+        img: "/haiba/emoji/popcorn.webp",
         tint: "#EDE4FF",
       },
       {
@@ -398,7 +398,7 @@ export function useVals() {
         pts: 900,
         logo: "/haiba/brands/wingman.webp",
         bg: "#FFFFFF",
-        img: "/haiba/emoji/wings.png",
+        img: "/haiba/emoji/wings.webp",
         tint: "#FFEFD9",
       },
       {
@@ -407,7 +407,7 @@ export function useVals() {
         pts: 1500,
         logo: "/haiba/brands/alkuwaiti.webp",
         bg: "#FFFFFF",
-        img: "/haiba/emoji/car.png",
+        img: "/haiba/emoji/car.webp",
         tint: "#DDF1FF",
       },
       {
@@ -416,7 +416,7 @@ export function useVals() {
         pts: 2000,
         logo: "/haiba/brands/albayan.webp",
         bg: "#FFFFFF",
-        img: "/haiba/emoji/perfume.png",
+        img: "/haiba/emoji/perfume.webp",
         tint: "#FCE4F0",
       },
     ].map(function (d) {

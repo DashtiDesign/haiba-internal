@@ -133,7 +133,7 @@ export default function Rewards() {
                       <span style={{ color: "#6C3FFA" }}>{"your points."}</span>
                     </h1>
                     <Artwork
-                      src="/haiba/coins/coin-stack-3d.png"
+                      src="/haiba/coins/coin-stack-3d.webp"
                       alt=""
                       style={{
                         width: "56px",

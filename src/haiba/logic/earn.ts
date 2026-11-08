@@ -509,12 +509,12 @@ export function useVals() {
   };
   var CATS = ["Cafes", "Restaurants", "Fitness", "Self care", "Entertainment", "Car care"];
   var CATIMG = {
-    Cafes: "/haiba/categories/cafes.png",
-    Restaurants: "/haiba/categories/restaurants.png",
-    Fitness: "/haiba/categories/fitness.png",
-    "Self care": "/haiba/categories/self-care.png",
-    Entertainment: "/haiba/categories/entertainment.png",
-    "Car care": "/haiba/categories/car-care.png",
+    Cafes: "/haiba/categories/cafes.webp",
+    Restaurants: "/haiba/categories/restaurants.webp",
+    Fitness: "/haiba/categories/fitness.webp",
+    "Self care": "/haiba/categories/self-care.webp",
+    Entertainment: "/haiba/categories/entertainment.webp",
+    "Car care": "/haiba/categories/car-care.webp",
   };
   var has = function (s, t) {
     return (

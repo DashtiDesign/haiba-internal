@@ -27,7 +27,7 @@ export const BRANDS: Record<string, Brand> = {
   crepele: { key: "crepele", name: "Crepele", mark: "Cr", bg: "#C2185B", ink: "#FFFFFF" },
 };
 
-export const E = (name: string) => `/haiba/emoji/${name}.png`;
+export const E = (name: string) => `/haiba/emoji/${name}.webp`;
 
 /**
  * Haiba asset kit. One graphic per idea, used on every screen:
