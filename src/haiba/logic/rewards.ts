@@ -25,24 +25,10 @@ export function useVals() {
     // 9 Nov: once the points card and search scroll away, the search sticks to the top and the points slide in beside it.
     var frame = 0;
     var last = false;
-    // 9 Nov (v2): the points box follows the scroll, like a collapsing large title (iOS) or a balance that tucks into the top bar
-    // (Revolut, Starling). Once the search sticks, the next 64px of scroll grow the box in and shrink the search; scrolling
-    // back undoes it at the same pace. Nothing runs on a timer, so it never jumps or gets stuck halfway.
-    var RANGE = 64;
-    var lastP = -1;
     var check = function () {
       frame = 0;
       var mark = document.querySelector("[data-hb-pin-mark]");
-      var bar = document.querySelector("[data-hb-pinbar]");
-      if (!mark) return;
-      var top = mark.getBoundingClientRect().top;
-      var on = top < 1;
-      var x = Math.min(1, Math.max(0, -top / RANGE));
-      var p = x * x * (3 - 2 * x);
-      if (bar && Math.abs(p - lastP) > 0.001) {
-        lastP = p;
-        bar.style.setProperty("--pinp", p.toFixed(3));
-      }
+      var on = !!mark && mark.getBoundingClientRect().top < 1;
       if (on !== last) {
         last = on;
         setState({ pinned: on });
@@ -422,8 +408,7 @@ export function useVals() {
     }
   });
   var left = balance - committed;
-  var forcePin = props.searchBar === "Pinned (scrolled)";
-  var pin = !!state.pinned || forcePin;
+  var pin = !!state.pinned || props.searchBar === "Pinned (scrolled)";
   // 9 Nov: reward codes that are showing sit on top, the same rows as the hub (journey/codes.ts in the app).
   var codeList = (
     props.activeCodes ??
@@ -891,14 +876,10 @@ export function useVals() {
     // The pinned search bar (9 Nov)
     pinBg: pin ? "#F3F0FA" : "rgba(243,240,250,0)",
     pinShadow: pin ? "0 -60px 0 0 #F3F0FA, 0 8px 18px rgba(76,52,140,0.10)" : "none",
-    // Forced pinned (canvas option) shows the end state; otherwise the scroll drives --pinp from 0 to 1.
-    pinMl: forcePin ? "8px" : "calc(var(--pinp, 0) * 8px)",
-    pinChipW: forcePin ? "150px" : "calc(var(--pinp, 0) * 150px)",
-    pinChipOp: forcePin ? "1" : "clamp(0, calc(var(--pinp, 0) * 1.6 - 0.3), 1)",
-    pinChipX: forcePin ? "0px" : "calc((1 - var(--pinp, 0)) * 18px)",
-    pinCoin: forcePin
-      ? "none"
-      : "scale(calc(1.35 - var(--pinp, 0) * 0.35)) rotate(calc((1 - var(--pinp, 0)) * -40deg))",
+    pinMl: pin ? "8px" : "0px",
+    pinChipW: pin ? "150px" : "0px",
+    pinChipOp: pin ? "1" : "0",
+    pinChipX: pin ? "0px" : "16px",
     pinHidden: pin ? "false" : "true",
     q: state.q || "",
     onSearch: function (e) {
