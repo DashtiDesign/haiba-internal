@@ -689,45 +689,23 @@ export function Code() {
   const monthEnd = addDays(firstOfNext(s.today), -1);
   const back = kind === "gift" ? "/haiba/unipass" : "/haiba/rewards";
 
-  // A gift code that runs out just goes away; they pick again on Unipass. No expired screen for gifts.
-  if (kind === "gift" && state === "expired") return <Navigate to="/haiba/unipass" replace />;
+  // 9 Nov: a code that runs out just goes away (its points come back). No expired screen:
+  // a gift goes back to Unipass to pick again, a reward back to Your points.
+  if (state === "expired") return <Navigate to={back} replace />;
 
-  if (state === "expired" || state === "cancelled") {
-    const expired = state === "expired";
+  if (state === "cancelled") {
     return (
       <Screen
         dock={
-          <>
-            <Button
-              variant="primary"
-              onClick={() => go(kind === "gift" && !expired ? "/haiba/unipass" : back)}
-            >
-              {expired
-                ? s.t("codeNew")
-                : kind === "gift"
-                  ? s.t("codePickAgain")
-                  : s.t("codeBackRewards")}
-            </Button>
-            {kind === "reward" && expired && (
-              <Button variant="ghost" onClick={() => go("/haiba/rewards")}>
-                {s.t("codeBackPoints")}
-              </Button>
-            )}
-          </>
+          <Button variant="primary" onClick={() => go(back)}>
+            {kind === "gift" ? s.t("codePickAgain") : s.t("codeBackRewards")}
+          </Button>
         }
       >
-        <Result
-          tone={expired ? "warn" : "lilac"}
-          bird={expired ? "20-code-expired" : "16-torn"}
-          back={back}
-        >
-          <h1 className="jx-h1 jx-res-title">
-            {s.t(expired ? "codeExpiredTitle" : "codeCancelledTitle")}
-          </h1>
+        <Result tone="lilac" bird="16-torn" back={back}>
+          <h1 className="jx-h1 jx-res-title">{s.t("codeCancelledTitle")}</h1>
           <p className="jx-sub">
-            {kind === "reward"
-              ? s.t(expired ? "codeExpiredReward" : "codeCancelledReward")
-              : s.t(expired ? "codeExpiredGift" : "codeCancelledGift")}
+            {kind === "reward" ? s.t("codeCancelledReward") : s.t("codeCancelledGift")}
           </p>
 
           {kind === "reward" ? (
@@ -915,7 +893,7 @@ export function Code() {
                 go("/haiba/unipass");
               } else {
                 rc.drop();
-                go(withState("expired"));
+                go("/haiba/rewards");
               }
             }}
           >
@@ -2037,11 +2015,19 @@ export function CodeList({ rows }: { rows: CodeRow[] }) {
   return (
     <div className="jx-codes">
       {rows.map((r) => (
-        <button key={r.key} className="jx-code-row" onClick={() => go(r.href)}>
-          <span className="jx-code-tile" style={{ background: r.bg, color: r.ink }}>
-            {r.hasLogo ? <img src={r.logo} alt="" /> : r.mark}
+        <button
+          key={r.key}
+          className={"jx-code-row" + (r.kind === "gift" ? " jx-code-gift" : "")}
+          onClick={() => go(r.href)}
+        >
+          <span className="jx-code-art">
+            <span className="jx-code-tile" style={{ background: r.bg, color: r.ink }}>
+              {r.hasLogo ? <img src={r.logo} alt="" /> : r.mark}
+            </span>
+            {r.kind === "gift" && <img className="jx-code-badge" src={ICON.unipass} alt="" />}
           </span>
           <span className="jx-row-main">
+            {r.kind === "gift" && <span className="jx-code-label">Unipass gift</span>}
             <span className="jx-code-item">{r.item}</span>
             <span className="jx-code-sub">{r.sub}</span>
           </span>

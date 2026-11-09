@@ -151,3 +151,6 @@ Students never see this panel.
 - Active codes are one pattern everywhere (`journey/codes.ts`, `CodeList` and `.jx-code-row`): item, then shop and kind (Unipass gift, or points), then Show code. The hub lists every code that is showing; Unipass shows its gift code on top; Your points shows its reward codes on top. Reward codes made on Your points are kept in the store (`rewardCodes`), hold their points, and count as saved once used; one that runs out or is cancelled goes away and its points come back.
 - Your points: the pinned points chip is white with the coin, and slides in smoothly.
 - Travel data: the covered countries and Good to know are back, kept short.
+- No expired screen for any code: a gift code that runs out goes back to Unipass, a points code goes back to Your points with its points returned. Cancelled still has its screen.
+- New gift signal: for the first 3 days of a month (students who used a gift before), the small hub card says "Your [month] gift is here" with a NEW tag, and the bird tip opens once with "Pick my gift". Closing the tip keeps it closed that month.
+- The Unipass gift code row stands out from points codes: pale lime row, gift badge on the logo, "Unipass gift" label, dark pill, and on the hub a "See all Unipass gifts" link (the way into Unipass while a code shows).

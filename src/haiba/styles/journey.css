@@ -5450,3 +5450,32 @@ button.jx-row {
   background: #6c3ffa;
   color: #fff;
 }
+
+/* 9 Nov: the Unipass gift code stands out from points codes: lime row, gift badge, label, dark pill */
+.jx-code-gift {
+  background: #f6ffde;
+}
+.jx-code-art {
+  position: relative;
+  flex: none;
+}
+.jx-code-badge {
+  position: absolute;
+  right: -9px;
+  bottom: -8px;
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 3px rgba(31, 38, 0, 0.25));
+}
+.jx-code-label {
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4f6b00;
+}
+.jx-code-gift .jx-code-pill {
+  background: #1f2600;
+  color: #c0f402;
+}

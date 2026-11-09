@@ -8,7 +8,7 @@ export function useVals() {
     t: 0,
     bird: "/haiba/motion/hub-still.webp",
     tipOpen: false,
-    navTipOpen: false,
+    navTipOpen: null,
     openCode: "",
     menuOpen: false,
   });
@@ -27,6 +27,15 @@ export function useVals() {
   var gNextDays = giftDaysLeft;
   var gFirst =
     props.giftFirst ?? (props.giftBefore ? props.giftBefore === "Never used a gift" : isNew);
+  // 9 Nov: the first 3 days of a month, a new gift is waiting: the small card says so with a New tag,
+  // and the tip opens on its own once (closing it remembers that month).
+  var gNew = !gFirst && (gs === "Pick, new month" || (gs === "Pick" && td.getDate() <= 3));
+  var tipKey = "haiba-gift-tip-" + td.getFullYear() + "-" + (td.getMonth() + 1);
+  var tipSeen = false;
+  try {
+    tipSeen = window.localStorage.getItem(tipKey) === "1";
+  } catch (e) {}
+  var tipOpen = state.navTipOpen === null ? gNew && !tipSeen : !!state.navTipOpen;
   var t = useMotionProgress();
   var target = props.available;
   var shown = Math.round(target * t);
@@ -57,7 +66,7 @@ export function useVals() {
       key: "gift",
       kind: "gift",
       item: gItem,
-      sub: gBrand + " · Unipass gift",
+      sub: gBrand,
       logo: props.giftLogo ?? "/haiba/brands/coffee-bean.webp",
       hasLogo: true,
       mark: "",
@@ -93,8 +102,21 @@ export function useVals() {
       ink: "#FFFFFF",
       href: "/haiba/code?kind=reward",
     });
+  // 9 Nov: the Unipass gift code stands out (lime row, gift badge, label) and links to Unipass, since it is the way in while a code shows.
   var ready = (props.activeCodes ?? sample).map(function (r) {
-    return Object.assign({}, r, { isCode: true, noLogo: !r.hasLogo, pill: "Show code" }, purple);
+    var gift = r.kind === "gift";
+    return Object.assign({}, r, {
+      isCode: true,
+      noLogo: !r.hasLogo,
+      pill: "Show code",
+      isGift: gift,
+      rowBg: gift ? "#F6FFDE" : "transparent",
+      pillBg: gift ? "#1F2600" : purple.pillBg,
+      pillInk: gift ? "#C0F402" : purple.pillInk,
+      openUnipass: function () {
+        if (typeof nav === "function") nav("/haiba/unipass");
+      },
+    });
   });
   ready.forEach(function (r, k) {
     r.rule = k === 0 ? "none" : "1px solid #F1EFF7";
@@ -408,7 +430,12 @@ export function useVals() {
       ? "0 0 0 1px #E9E5F4, 0 6px 18px rgba(76,52,140,0.06)"
       : "0 10px 22px rgba(110,140,0,0.18)",
     gsTileBg: gUsed ? "#F0EBFF" : "rgba(255,255,255,0.55)",
-    gsTitle: gUsed ? giftMonth + " gift used" : "Pick your " + giftMonth + " gift",
+    gsTitle: gUsed
+      ? giftMonth + " gift used"
+      : gNew
+        ? "Your " + giftMonth + " gift is here"
+        : "Pick your " + giftMonth + " gift",
+    gsNew: gNew,
     gsSub: gUsed
       ? "Next gift in " + (gNextDays === 1 ? "1 day" : gNextDays + " days")
       : giftDaysLeft === 1
@@ -596,14 +623,20 @@ export function useVals() {
     tip: isNew
       ? "Hi! Your 500 points are ready to use today."
       : "Hi! One more visit at Jasmi’s and you earn 5x.",
-    navTipOpen: state.navTipOpen,
-    navTipOpenStr: String(state.navTipOpen),
-    dotDisp: state.navTipOpen ? "none" : "block",
+    navTipOpen: tipOpen,
+    navTipOpenStr: String(tipOpen),
+    dotDisp: tipOpen ? "none" : "block",
     toggleNavTip: function () {
-      setState({ navTipOpen: !state.navTipOpen });
+      if (tipOpen && gNew) {
+        try {
+          window.localStorage.setItem(tipKey, "1");
+        } catch (e) {}
+      }
+      setState({ navTipOpen: !tipOpen });
     },
-    navTip:
-      isNew && (gUsed || gReady)
+    navTip: gNew
+      ? "Your " + giftMonth + " gift is here. Pick it any day this month."
+      : isNew && (gUsed || gReady)
         ? "Every Unipal offer you use earns points. Spend them on free food, coffee and more."
         : isNew
           ? "Pick your " +
@@ -613,8 +646,13 @@ export function useVals() {
             " left, and it is free."
           : "Your next visit at Jasmi’s is your 5th. It earns 200 points, not 40.",
     navTipHref: isNew && !(gUsed || gReady) ? "/haiba/unipass" : "/haiba/earn",
-    navTipCta:
-      isNew && (gUsed || gReady) ? "How points work" : isNew ? "Pick my gift" : "See my bonus",
+    navTipCta: gNew
+      ? "Pick my gift"
+      : isNew && (gUsed || gReady)
+        ? "How points work"
+        : isNew
+          ? "Pick my gift"
+          : "See my bonus",
     earnSub: isNew
       ? "Your first visit at every shop earns 2x points"
       : "Your next visit at Jasmi’s earns +200 points",

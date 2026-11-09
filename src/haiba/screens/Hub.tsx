@@ -514,8 +514,28 @@ export default function Hub() {
                   <span style={{ fontSize: "15.5px", fontWeight: "800", lineHeight: "1.25" }}>
                     {v.gsTitle}
                   </span>
-                  <span style={{ fontSize: "13.5px", fontWeight: "600", color: v.gsSubInk }}>
-                    {v.gsSub}
+                  <span style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                    {v.gsNew ? (
+                      <>
+                        <span
+                          style={{
+                            fontSize: "11px",
+                            fontWeight: "800",
+                            letterSpacing: "0.05em",
+                            textTransform: "uppercase",
+                            background: "#1F2600",
+                            color: "#C0F402",
+                            borderRadius: "999px",
+                            padding: "2px 7px",
+                          }}
+                        >
+                          {"New"}
+                        </span>
+                      </>
+                    ) : null}
+                    <span style={{ fontSize: "13.5px", fontWeight: "600", color: v.gsSubInk }}>
+                      {v.gsSub}
+                    </span>
                   </span>
                 </span>
                 <span
@@ -550,7 +570,7 @@ export default function Hub() {
               >
                 {(v.ready || []).map((r: any, idx0: number) => (
                   <Fragment key={idx0}>
-                    <div style={{ borderTop: r.rule }}>
+                    <div style={{ borderTop: r.rule, background: r.rowBg }}>
                       {r.isCode ? (
                         <>
                           <a
@@ -577,37 +597,63 @@ export default function Hub() {
                           >
                             <span
                               style={{
+                                position: "relative",
                                 width: "44px",
                                 height: "44px",
                                 flex: "none",
-                                borderRadius: "10px",
-                                overflow: "hidden",
-                                background: r.bg,
-                                color: r.ink,
-                                boxShadow: "0 0 0 1px #ECE8F5",
-                                fontFamily: "Figtree, system-ui, sans-serif",
-                                fontSize: "15px",
-                                fontWeight: "800",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
                               }}
                             >
-                              {r.hasLogo ? (
+                              <span
+                                style={{
+                                  width: "44px",
+                                  height: "44px",
+                                  borderRadius: "10px",
+                                  overflow: "hidden",
+                                  background: r.bg,
+                                  color: r.ink,
+                                  boxShadow: "0 0 0 1px #ECE8F5",
+                                  fontFamily: "Figtree, system-ui, sans-serif",
+                                  fontSize: "15px",
+                                  fontWeight: "800",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                }}
+                              >
+                                {r.hasLogo ? (
+                                  <>
+                                    <Artwork
+                                      src={r.logo}
+                                      alt=""
+                                      style={{
+                                        width: "100%",
+                                        height: "100%",
+                                        objectFit: "contain",
+                                        display: "block",
+                                      }}
+                                    />
+                                  </>
+                                ) : null}
+                                {r.noLogo ? <>{r.mark}</> : null}
+                              </span>
+                              {r.isGift ? (
                                 <>
                                   <Artwork
-                                    src={r.logo}
+                                    src="/haiba/icons/unipass.webp"
                                     alt=""
                                     style={{
-                                      width: "100%",
-                                      height: "100%",
+                                      position: "absolute",
+                                      right: "-9px",
+                                      bottom: "-8px",
+                                      width: "26px",
+                                      height: "26px",
                                       objectFit: "contain",
                                       display: "block",
+                                      filter: "drop-shadow(0 2px 3px rgba(31,38,0,0.25))",
                                     }}
                                   />
                                 </>
                               ) : null}
-                              {r.noLogo ? <>{r.mark}</> : null}
                             </span>
                             <span
                               style={{
@@ -618,6 +664,21 @@ export default function Hub() {
                                 minWidth: "0",
                               }}
                             >
+                              {r.isGift ? (
+                                <>
+                                  <span
+                                    style={{
+                                      fontSize: "11.5px",
+                                      fontWeight: "800",
+                                      letterSpacing: "0.08em",
+                                      textTransform: "uppercase",
+                                      color: "#4F6B00",
+                                    }}
+                                  >
+                                    {"Unipass gift"}
+                                  </span>
+                                </>
+                              ) : null}
                               <span
                                 style={{
                                   fontSize: "15.5px",
@@ -636,6 +697,7 @@ export default function Hub() {
                             <span
                               style={{
                                 flex: "none",
+                                whiteSpace: "nowrap",
                                 fontSize: "13px",
                                 fontWeight: "800",
                                 borderRadius: "999px",
@@ -647,6 +709,43 @@ export default function Hub() {
                               {r.pill}
                             </span>
                           </a>
+                          {r.isGift ? (
+                            <>
+                              <button
+                                onClick={r.openUnipass}
+                                className="hb-press"
+                                style={{
+                                  font: "inherit",
+                                  border: "0",
+                                  background: "transparent",
+                                  cursor: "pointer",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: "4px",
+                                  margin: "-6px 0 0 0",
+                                  padding: "4px 16px 14px 74px",
+                                  color: "#3D5000",
+                                  fontSize: "13.5px",
+                                  fontWeight: "800",
+                                }}
+                              >
+                                {"See all Unipass gifts"}
+                                <svg
+                                  aria-hidden="true"
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="3"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                >
+                                  <path d="M9 6l6 6-6 6"></path>
+                                </svg>
+                              </button>
+                            </>
+                          ) : null}
                         </>
                       ) : null}
                     </div>

@@ -91,7 +91,7 @@ export function activeCodes(hb: Hb, today: string): CodeRow[] {
       kind: "gift",
       item: gn.gift.item,
       brand: gn.brand.name,
-      sub: gn.brand.name + " · Unipass gift",
+      sub: gn.brand.name, // the row says "Unipass gift" above the item
       logo: gn.brand.logo ?? "",
       hasLogo: !!gn.brand.logo,
       mark: gn.brand.name.charAt(0),
