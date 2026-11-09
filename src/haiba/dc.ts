@@ -6,6 +6,7 @@ import { useHaiba } from "./store";
 import { useSession } from "./journey/session";
 import { useJourneyActions } from "./journey/actions";
 import { PromoModeContext } from "./journey/promoMode";
+import { giftNow } from "./journey/gift";
 
 // Keys that are shared across screens. Everything else is local to a screen.
 const SHARED = ["qty", "done", "codesQty", "cancelled", "accepted", "travel"];
@@ -45,6 +46,9 @@ export function useDC(initial) {
   // Read through the router so the server render and the first client render agree (no price flash).
   const q = useRouterState({ select: (r) => r.location.search }) || {};
 
+  // 9 Nov: this month's Unipass gift, for the hub card and its savings.
+  const gn = giftNow(hb.state.gift, s.today);
+
   const props = {
     member: hb.state.member === "new" ? "New member" : "Active member",
     visit: VISIT_LABEL[hb.state.visit],
@@ -57,6 +61,12 @@ export function useDC(initial) {
     plan: "Yearly", // one yearly plan only
     travelStatus: TRAVEL_LABEL[hb.state.travel],
     savedTravel: hb.savedTravel,
+    giftStatus: gn.status === "active" ? "Code ready" : gn.status === "used" ? "Used" : "Pick",
+    giftItem: gn.gift?.item,
+    giftBrand: gn.brand?.name,
+    giftValue: gn.gift?.value,
+    giftLogo: gn.brand?.logo,
+    giftLogoBg: gn.brand?.bg,
     // Promo pages: the student's own price, money, deposit and launch come from the prototype settings.
     // ?price= in the URL still overrides the price for previews.
     price: q.price != null ? String(q.price) : String(s.price),

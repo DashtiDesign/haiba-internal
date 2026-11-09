@@ -44,11 +44,14 @@ import {
   ICON,
   SUBS,
   subsFor,
+  type Activity,
+  type ActivityItem,
   type Brand,
   type Gift,
   type Sub,
 } from "../data";
 import { FAQ } from "../strings.member";
+import { useGift } from "../gift";
 
 /* ---------- small shared bits ---------- */
 
@@ -635,7 +638,9 @@ export function Code() {
   const go = useNavigate();
   const q = useQuery();
   const kind: CodeKind = q["kind"] === "gift" ? "gift" : "reward";
-  const state = String(q["state"] ?? "active");
+  // 9 Nov: a Unipass gift code is this month's real pick (journey/gift.ts), so the hub, Unipass and savings follow it.
+  const gp = useGift(s.today);
+  const state = String(q["state"] ?? (kind === "gift" && gp.status === "used" ? "used" : "active"));
   // A reward picked on Your points (4.1) arrives with its shop and item in the link; otherwise the sample one shows.
   const picked = kind === "reward" && q["shop"] ? q : null;
   const it = picked
@@ -646,7 +651,15 @@ export function Code() {
         value: Number(picked["value"] ?? 0) || CODE_ITEMS.reward.value,
         img: String(picked["img"] || CODE_ITEMS.reward.img),
       }
-    : CODE_ITEMS[kind];
+    : kind === "gift" && gp.gift
+      ? {
+          ...CODE_ITEMS.gift,
+          brand: gp.gift.brand,
+          item: gp.gift.item,
+          value: gp.gift.value,
+          img: gp.gift.img,
+        }
+      : CODE_ITEMS[kind];
   const brand: Brand = picked
     ? {
         key: "picked",
@@ -667,6 +680,9 @@ export function Code() {
   const month = monthName(s.today, s.lang);
   const monthEnd = addDays(firstOfNext(s.today), -1);
   const back = kind === "gift" ? "/haiba/unipass" : "/haiba/rewards";
+
+  // A gift code that runs out just goes away; they pick again on Unipass. No expired screen for gifts.
+  if (kind === "gift" && state === "expired") return <Navigate to="/haiba/unipass" replace />;
 
   if (state === "expired" || state === "cancelled") {
     const expired = state === "expired";
@@ -861,15 +877,37 @@ export function Code() {
         )}
       </div>
       <div className="jx-actions">
-        <Button variant="ghost" onClick={() => go(withState("cancelled"))}>
+        <Button
+          variant="ghost"
+          onClick={() => {
+            if (kind === "gift") gp.drop();
+            go(withState("cancelled"));
+          }}
+        >
           {kind === "gift" ? s.t("codeCancelGift") : s.t("codeCancelReward")}
         </Button>
       </div>
       <div className="jx-tap-sim jx-proto-dark" dir="ltr" lang="en">
         <div className="jx-tap-sim-title">Prototype: what happens next</div>
         <div className="jx-proto-btns">
-          <button onClick={() => go(withState("used"))}>Staff enters the code</button>
-          <button onClick={() => go(withState("expired"))}>12 hours pass</button>
+          <button
+            onClick={() => {
+              if (kind === "gift") gp.use();
+              go(withState("used"));
+            }}
+          >
+            Staff enters the code
+          </button>
+          <button
+            onClick={() => {
+              if (kind === "gift") {
+                gp.drop();
+                go("/haiba/unipass");
+              } else go(withState("expired"));
+            }}
+          >
+            12 hours pass
+          </button>
         </div>
       </div>
     </Screen>
@@ -931,7 +969,9 @@ export function Unipass() {
   const s = useSession();
   const go = useNavigate();
   const q = useQuery();
-  const view = String(q["view"] ?? "pick");
+  const gp = useGift(s.today);
+  // 9 Nov: the page follows this month's gift; ?view= still previews a state from the panel.
+  const view = String(q["view"] ?? (gp.status === "used" ? "used" : "pick"));
   const [cat, setCat] = useState("All");
   const [sheet, setSheet] = useState<Gift | null>(
     q["sheet"] ? (GIFTS.find((g) => g.id === q["sheet"]) ?? null) : null,
@@ -944,7 +984,8 @@ export function Unipass() {
   const cats = ["All", "Food and drink", "Fun", "Self care", "Car care"];
   const list = GIFTS.filter((g) => cat === "All" || g.cat === cat);
   const used = view === "used";
-  const usedGift = GIFTS[0]!;
+  const usedGift = gp.status === "used" && gp.gift ? gp.gift : GIFTS[0]!;
+  const ready = !used && gp.status === "active" && gp.gift ? gp.gift : null;
   const nextMonth = monthName(next, s.lang);
 
   // The one month tracker used across Haiba (same as the membership card): filled = gift used,
@@ -997,7 +1038,7 @@ export function Unipass() {
               <span className="jx-row-title">{usedGift.item}</span>
               <span className="jx-row-sub">
                 {BRANDS[usedGift.brand]!.name} ·{" "}
-                {s.t("upUsedOn", { date: s.d(addDays(s.today, -2)) })}
+                {s.t("upUsedOn", { date: s.d(gp.usedOn ?? addDays(s.today, -2)) })}
               </span>
             </span>
             <span className="jx-up-done-save">
@@ -1058,13 +1099,15 @@ export function Unipass() {
             {s.t("upYear", { n: giftN })}
           </span>
           <h1 className="jx-h1" style={{ marginTop: 6 }}>
-            {s.t("upTitle", { month })}
+            {ready ? s.t("upReadyHero", { month }) : s.t("upTitle", { month })}
           </h1>
-          <div style={{ marginTop: 12 }}>
-            <Tag tone="dark" icon={<Clock size={14} aria-hidden="true" />}>
-              {s.t("upChooseIn", { days: daysText(s.lang, daysLeft) })}
-            </Tag>
-          </div>
+          {!ready && (
+            <div style={{ marginTop: 12 }}>
+              <Tag tone="dark" icon={<Clock size={14} aria-hidden="true" />}>
+                {s.t("upChooseIn", { days: daysText(s.lang, daysLeft) })}
+              </Tag>
+            </div>
+          )}
           {dots}
         </div>
       </header>
@@ -1113,6 +1156,23 @@ export function Unipass() {
         </section>
       )}
 
+      {ready && (
+        <div className="jx-pad" style={{ marginTop: 16 }}>
+          <button className="jx-up-ready" onClick={() => go("/haiba/code?kind=gift")}>
+            <span className="jx-up-done-art" style={{ background: CAT_BG[ready.cat] }}>
+              <img src={ready.img} alt="" />
+            </span>
+            <span className="jx-row-main">
+              <span className="jx-row-title">{s.t("upReadyTitle", { item: ready.item })}</span>
+              <span className="jx-row-sub">
+                {s.t("upReadySub", { brand: BRANDS[ready.brand]!.name })}
+              </span>
+            </span>
+            <span className="jx-up-ready-cta">{s.t("upShowCode")}</span>
+          </button>
+        </div>
+      )}
+
       {!used && (
         <div className="jx-chips jx-pad" style={{ marginTop: 18 }}>
           {cats.map((c) => (
@@ -1131,7 +1191,13 @@ export function Unipass() {
         <div className="jx-pad">
           <div className="jx-gc-grid">
             {list.map((g) => (
-              <GiftCard key={g.id} g={g} s={s} next={next} onPick={() => setSheet(g)} />
+              <GiftCard
+                key={g.id}
+                g={g}
+                s={s}
+                next={next}
+                onPick={ready ? undefined : () => setSheet(g)}
+              />
             ))}
           </div>
         </div>
@@ -1169,7 +1235,13 @@ export function Unipass() {
             </ul>
             {/* 8 Nov: one rule only. How long the code lasts is on the code screen. */}
             <p className="jx-small jx-sh-rule">{s.t("upRuleOne")}</p>
-            <Button variant="primary" onClick={() => go("/haiba/code?kind=gift")}>
+            <Button
+              variant="primary"
+              onClick={() => {
+                gp.pick(sheet.id);
+                go("/haiba/code?kind=gift");
+              }}
+            >
               {s.t("upConfirmCta")}
             </Button>
             <Button variant="ghost" onClick={() => setSheet(null)}>
@@ -1795,10 +1867,11 @@ export function Saved({ focus }: { focus?: "activity" } = {}) {
     return () => window.clearTimeout(t);
   }, [focus]);
   const y = year(s);
+  const gp = useGift(s.today);
   const unipal = 19.7;
   const parts: [string, number][] = [
     [s.t("savedRewards"), 2.45],
-    [s.t("savedGifts"), 2.85],
+    [s.t("savedGifts"), 2.85 + gp.saved],
     [s.t("savedSubs"), 2.4],
   ];
   const haiba = parts.reduce((t, r) => t + r[1], 0);
@@ -1894,7 +1967,7 @@ export function Saved({ focus }: { focus?: "activity" } = {}) {
             ))}
           </div>
         </div>
-        {ACTIVITY.map((g) => {
+        {activityWithGift(ACTIVITY, gp, s).map((g) => {
           const items = g.items.filter(keep);
           if (!items.length) return null;
           return (
@@ -1948,6 +2021,23 @@ export function Saved({ focus }: { focus?: "activity" } = {}) {
       </section>
     </Screen>
   );
+}
+
+/** 9 Nov: this month's gift, once the shop uses it, is the first line of Today. */
+function activityWithGift(
+  list: Activity[],
+  gp: ReturnType<typeof useGift>,
+  s: Session,
+): Activity[] {
+  if (gp.status !== "used" || !gp.gift || !list[0]) return list;
+  const line: ActivityItem = {
+    kind: "gift",
+    title: s.t("actGiftTitle", { month: monthName(s.today, s.lang) }),
+    sub: s.t("actGiftSub", { item: gp.gift.item, brand: BRANDS[gp.gift.brand]!.name }),
+    money: gp.gift.value,
+    img: gp.gift.img,
+  };
+  return [{ ...list[0], items: [line, ...list[0].items] }, ...list.slice(1)];
 }
 
 /* ---------- 9 · help ---------- */

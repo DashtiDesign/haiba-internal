@@ -25,6 +25,11 @@ export function useVals() {
     FL.filter(function (c) {
       return c.key === market;
     })[0] || FL[0];
+  var awayNames = FL.filter(function (c) {
+    return c.key !== home.key;
+  }).map(function (c) {
+    return c.name;
+  });
   var route = [home]
     .concat(
       FL.filter(function (c) {
@@ -87,11 +92,12 @@ export function useVals() {
       setState({ copied: true });
     },
     steps: [
-      { n: "1", text: "Get the Airalo app" },
-      { n: "2", text: "Pick the 5GB, 7 day plan" },
-      { n: "3", text: "Enter your code when you pay" },
+      { n: "1", text: "Download the Airalo app" },
+      { n: "2", text: "Sign up with your email" },
+      { n: "3", text: "Pick the 5GB, 7 day plan" },
+      { n: "4", text: "Enter your code when you pay" },
     ],
-    usedLine: t === "redeemed" ? "You saved BHD 5.64" : "One code per member",
+    usedLine: t === "redeemed" ? "Used on Airalo. You saved BHD 5.64" : "One code per member",
     canAccept: t === "revealed",
     accept: function () {
       setState({ travel: "redeemed" });
@@ -100,14 +106,14 @@ export function useVals() {
     route: route,
     rules: [
       { text: "Every member gets it from day one.", rule: "1px solid #F1EFF7" },
-      { text: "Once you see the code, the plan is yours and shows as used.", rule: "0" },
+      { text: "Your code counts as used once you see it.", rule: "0" },
     ],
     ctaTitle: locked ? "Unlocks after 3 months" : revealed ? "Copy my code" : "Get my free data",
     ctaSub: locked
       ? 3 - paid + (3 - paid === 1 ? " month" : " months") + " to go"
       : revealed
         ? "Use by 27 Nov 2026"
-        : "Ready when you land",
+        : "Worth BHD 5+. Ready when you land.",
     // 9 Nov: the button only shows when there is something to do. Once the code shows, its card has the Copy button.
     showCta: !locked && !revealed,
     dockBg:
@@ -115,9 +121,13 @@ export function useVals() {
         ? "linear-gradient(180deg, rgba(243,240,250,0) 0%, #F3F0FA 32%)"
         : "transparent",
     dockPe: !locked && !revealed ? "auto" : "none",
-    bodyPad: !locked && !revealed ? "140px" : "28px",
-    showNote: !locked && !revealed,
-    note: "Your code counts as used once you see it.",
+    bodyPad: !locked && !revealed ? "150px" : "32px",
+    awayLine:
+      "Free data in " +
+      awayNames.slice(0, -1).join(", ") +
+      " and " +
+      awayNames[awayNames.length - 1] +
+      ". One plan works in all of them.",
     ctaBg: locked ? "#E4DBFF" : "#1E1B2E",
     ctaInk: locked ? "#4A4660" : "#C0F402",
     ctaOp: "1",

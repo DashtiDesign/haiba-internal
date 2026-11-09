@@ -143,7 +143,7 @@ const NEXT: Partial<
 };
 
 // Screens, grouped. need = the state a screen needs; jumping there sets it first.
-type Screen = { label: string; to: string; need?: Preset };
+type Screen = { label: string; to: string; need?: Preset; freshGift?: boolean };
 const SCREENS: { group: string; items: Screen[] }[] = [
   {
     group: "Reserve and pay",
@@ -175,7 +175,7 @@ const SCREENS: { group: string; items: Screen[] }[] = [
   {
     group: "Unipass gifts",
     items: [
-      { label: "Pick a gift", to: "/haiba/unipass" },
+      { label: "Pick a gift (new month)", to: "/haiba/unipass", freshGift: true },
       { label: "Gift used", to: "/haiba/unipass?view=used" },
       { label: "Month end, 3 days left", to: "/haiba/unipass?view=monthend" },
       { label: "Gift lost", to: "/haiba/unipass?view=lost" },
@@ -319,6 +319,7 @@ export default function PrototypePanel() {
   };
   const openScreen = (x: Screen) => {
     if (x.need && x.need !== now) setPreset(x.need);
+    if (x.freshGift) hb.set({ gift: null }); // 9 Nov: start the month again, no gift picked yet
     setOpen(false);
     go(x.to);
   };

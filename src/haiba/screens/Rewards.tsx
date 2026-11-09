@@ -164,10 +164,9 @@ export default function Rewards() {
                   padding: "8px 16px",
                   background: v.pinBg,
                   boxShadow: v.pinShadow,
-                  transition: "background-color 0.22s ease, box-shadow 0.22s ease",
+                  transition: "background-color 0.3s ease, box-shadow 0.3s ease",
                   display: "flex",
                   alignItems: "center",
-                  gap: v.pinGap,
                 }}
               >
                 <div style={{ position: "relative", flex: "1", minWidth: "0" }}>
@@ -215,32 +214,41 @@ export default function Rewards() {
                     boxSizing: "border-box",
                     height: "44px",
                     maxWidth: v.pinChipW,
+                    marginLeft: v.pinMl,
                     opacity: v.pinChipOp,
-                    transform: `translateY(${v.pinChipY})`,
                     overflow: "hidden",
-                    whiteSpace: "nowrap",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                    padding: `0 ${v.pinChipPad}`,
                     borderRadius: "10px",
-                    background: "linear-gradient(135deg, #6C3FFA 0%, #4F25D6 100%)",
-                    color: "#FFFFFF",
-                    fontSize: "15px",
-                    fontWeight: "800",
-                    letterSpacing: "-0.01em",
+                    background: "#FFFFFF",
+                    boxShadow: "0 0 0 1px #ECE8F5",
                     transition:
-                      "max-width 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), padding 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease, transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1)",
+                      "max-width 0.42s cubic-bezier(0.22, 1, 0.36, 1), margin-left 0.42s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease",
                   }}
                 >
-                  <Artwork
-                    src="/haiba/coins/coin-front.webp"
-                    alt=""
-                    style={{ width: "20px", height: "20px", flex: "none", display: "block" }}
-                  />
-                  {v.balance}
-                  <span style={{ fontSize: "12.5px", fontWeight: "700", color: "#E4DBFF" }}>
-                    {"pts"}
+                  <span
+                    style={{
+                      height: "44px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "6px",
+                      padding: "0 12px 0 9px",
+                      whiteSpace: "nowrap",
+                      color: "#1E1B2E",
+                      fontSize: "15px",
+                      fontWeight: "800",
+                      letterSpacing: "-0.01em",
+                      transform: `translateX(${v.pinChipX})`,
+                      transition: "transform 0.42s cubic-bezier(0.22, 1, 0.36, 1)",
+                    }}
+                  >
+                    <Artwork
+                      src="/haiba/coins/coin-front.webp"
+                      alt=""
+                      style={{ width: "24px", height: "24px", flex: "none", display: "block" }}
+                    />
+                    {v.balance}
+                    <span style={{ fontSize: "12.5px", fontWeight: "700", color: "#6B6880" }}>
+                      {"pts"}
+                    </span>
                   </span>
                 </span>
               </div>

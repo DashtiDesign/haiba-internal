@@ -13,6 +13,8 @@ import { EMPTY_JOURNEY, type Journey } from "./journey/states";
 export type Member = "none" | "new" | "active";
 export type Market = "bh" | "sa";
 export type Travel = "available" | "revealed" | "redeemed";
+/** This month's Unipass gift (9 Nov): picked (code showing) or used at the shop. A new month starts empty. */
+export type GiftPick = { id: string; status: "active" | "used"; month: string; on: string };
 
 export type HaibaState = {
   member: Member;
@@ -26,6 +28,7 @@ export type HaibaState = {
   travel: Travel; // free Airalo plan: available, code revealed, or used at Airalo
   settings: Settings; // prices, VAT, deposit, hold days, launch date. Screens never hardcode these.
   journey: Journey; // where the student is: reservation, payment, membership
+  gift: GiftPick | null; // this month's Unipass gift, see journey/gift.ts
 };
 
 // Value of the free Airalo plan once it is used, added to "You saved".
@@ -49,6 +52,7 @@ const INITIAL: HaibaState = {
   travel: "available",
   settings: DEFAULT_SETTINGS,
   journey: EMPTY_JOURNEY,
+  gift: null,
 };
 
 const KEY = "haiba-prototype-v2";

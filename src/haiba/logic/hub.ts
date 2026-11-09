@@ -17,6 +17,14 @@ export function useVals() {
   var td = props.today ? new Date(props.today + "T10:00:00") : new Date();
   var giftMonth = td.toLocaleDateString("en-GB", { month: "long" });
   var giftDaysLeft = new Date(td.getFullYear(), td.getMonth() + 1, 0).getDate() - td.getDate() + 1;
+  // 9 Nov: this month's Unipass gift follows the student: pick it, the code shows, the shop uses it.
+  var gs = props.giftStatus ?? "Pick";
+  var gReady = gs === "Code ready",
+    gUsed = gs === "Used";
+  var gItem = props.giftItem ?? "Regular drink";
+  var gBrand = props.giftBrand ?? "The Coffee Bean";
+  var gValue = Number(props.giftValue ?? 1.9);
+  var gNextDays = giftDaysLeft;
   var t = useMotionProgress();
   var target = props.available;
   var shown = Math.round(target * t);
@@ -205,7 +213,12 @@ export function useVals() {
   };
   var savedDefs = isNew
     ? [
-        { title: "Unipass gifts", sub: "1 free item a month", amt: 0, color: "#6C3FFA" },
+        {
+          title: "Unipass gifts",
+          sub: gUsed ? gItem + " at " + gBrand : "1 free item a month",
+          amt: gUsed ? gValue : 0,
+          color: "#6C3FFA",
+        },
         {
           title: "Rewards",
           sub: savedExtra > 0 ? "Accepted at the shop" : "Free items for your points",
@@ -215,7 +228,12 @@ export function useVals() {
         { title: "Subscriptions", sub: "Spotify, 3 months free", amt: 0, color: "#B9A5FF" },
       ]
     : [
-        { title: "Unipass gifts", sub: "1 gift, Wingman", amt: 2.85, color: "#6C3FFA" },
+        {
+          title: "Unipass gifts",
+          sub: gUsed ? "2 gifts, Wingman and " + gBrand : "1 gift, Wingman",
+          amt: 2.85 + (gUsed ? gValue : 0),
+          color: "#6C3FFA",
+        },
         { title: "Rewards", sub: "Accepted at the shop", amt: 2.45 + savedExtra, color: "#9CC400" },
         { title: "Subscriptions", sub: "Spotify, month 1", amt: 2.4, color: "#B9A5FF" },
       ];
@@ -325,6 +343,19 @@ export function useVals() {
           note: "Unipass gift",
         },
       ];
+  if (gUsed)
+    all.unshift({
+      day: "Today",
+      kind: "saved",
+      mark: "U",
+      bg: "#C0F402",
+      ink: "#1F2600",
+      name: giftMonth + " gift",
+      sub: gItem + " at " + gBrand,
+      amt: "BHD " + gValue.toFixed(2),
+      amtInk: green,
+      note: "Unipass gift",
+    });
   if (tUsed)
     all.unshift({
       day: "Today",
@@ -401,7 +432,43 @@ export function useVals() {
     actGroups: actGroups,
     memberLine: isNew ? "Member since today" : "Member since December",
     giftLeft: giftDaysLeft === 1 ? "Last day" : giftDaysLeft + " days left",
-    giftTitle: "Pick your " + giftMonth + " gift",
+    giftTitle: gUsed
+      ? "You got your " + giftMonth + " gift"
+      : gReady
+        ? gItem + " at " + gBrand
+        : "Pick your " + giftMonth + " gift",
+    gcBg: gUsed ? "#FFFFFF" : "#C0F402",
+    gcInk: gUsed ? "#1E1B2E" : "#1F2600",
+    gcShadow: gUsed
+      ? "0 0 0 1px #E9E5F4, 0 6px 18px rgba(76,52,140,0.06)"
+      : "0 14px 28px rgba(110,140,0,0.22)",
+    gcPill: gUsed
+      ? "✓ Used"
+      : gReady
+        ? "Code ready"
+        : giftDaysLeft === 1
+          ? "Last day"
+          : giftDaysLeft + " days left",
+    gcPillBg: gUsed ? "#E8F5E3" : "#1F2600",
+    gcPillInk: gUsed ? "#2F7D32" : "#C0F402",
+    gcHasSub: gUsed || gReady,
+    gcSub: gUsed
+      ? gItem + " at " + gBrand + ". You saved BHD " + gValue.toFixed(2) + "."
+      : "Show the code at the counter.",
+    gcSubInk: gUsed ? "#6B6880" : "#3D5000",
+    gcPicking: !gUsed && !gReady,
+    gcHasLogo: gReady,
+    gcLogo: props.giftLogo ?? "/haiba/brands/coffee-bean.webp",
+    gcLogoBg: props.giftLogoBg ?? "#FFFFFF",
+    gcBrand: gBrand,
+    gcCta: gUsed
+      ? "Next gift in " + (gNextDays === 1 ? "1 day" : gNextDays + " days")
+      : gReady
+        ? "Show my code"
+        : "Pick my gift",
+    gcCtaBg: gUsed ? "#F0EBFF" : "#1F2600",
+    gcCtaInk: gUsed ? "#4F25D6" : "#C0F402",
+    giftHref: gReady ? "/haiba/code?kind=gift" : "/haiba/unipass",
     giftMarks: giftMarks,
     ready: ready,
     // 8 Nov: the menu (top right) holds the pages about you: savings and activity, membership, subscriptions, help.
@@ -554,15 +621,19 @@ export function useVals() {
     toggleNavTip: function () {
       setState({ navTipOpen: !state.navTipOpen });
     },
-    navTip: isNew
-      ? "Pick your " +
-        giftMonth +
-        " Unipass gift. You have " +
-        (giftDaysLeft === 1 ? "1 day" : giftDaysLeft + " days") +
-        " left, and it is free."
-      : "Your next visit at Jasmi’s is your 5th. It earns 200 points, not 40.",
-    navTipHref: isNew ? "/haiba/unipass" : "/haiba/earn",
-    navTipCta: isNew ? "Pick my gift" : "See my bonus",
+    navTip:
+      isNew && (gUsed || gReady)
+        ? "Every Unipal offer you use earns points. Spend them on free food, coffee and more."
+        : isNew
+          ? "Pick your " +
+            giftMonth +
+            " Unipass gift. You have " +
+            (giftDaysLeft === 1 ? "1 day" : giftDaysLeft + " days") +
+            " left, and it is free."
+          : "Your next visit at Jasmi’s is your 5th. It earns 200 points, not 40.",
+    navTipHref: isNew && !(gUsed || gReady) ? "/haiba/unipass" : "/haiba/earn",
+    navTipCta:
+      isNew && (gUsed || gReady) ? "How points work" : isNew ? "Pick my gift" : "See my bonus",
     earnSub: isNew
       ? "Your first visit at every shop earns 2x points"
       : "Your next visit at Jasmi’s earns +200 points",

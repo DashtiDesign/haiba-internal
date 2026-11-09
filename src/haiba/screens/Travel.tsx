@@ -111,8 +111,8 @@ export default function Travel() {
               lineHeight: "1.08",
             }}
           >
-            {"Travel data, "}
-            <span style={{ color: "#C0F402" }}>{"on us."}</span>
+            {"Travelling? "}
+            <span style={{ color: "#C0F402" }}>{"We\u2019ve got you."}</span>
           </h1>
           <div
             className="hb-rise hb-d1"
@@ -125,7 +125,7 @@ export default function Travel() {
               lineHeight: "1.4",
             }}
           >
-            {"One plan for all Unipal countries."}
+            {v.awayLine}
           </div>
           <div className="hb-rise hb-d2" style={{ position: "relative" }}>
             <div
@@ -192,7 +192,7 @@ export default function Travel() {
               color: "#E4DBFF",
             }}
           >
-            {"Powered by "}
+            {"Free data from Haiba, powered by "}
             <Artwork
               src="/haiba/brands/airalo-white.svg"
               alt="Airalo"
@@ -277,6 +277,17 @@ export default function Travel() {
                 }}
               >
                 {"Worth BHD 5+"}
+              </span>
+              <span
+                style={{
+                  background: "rgba(255,255,255,0.10)",
+                  borderRadius: "999px",
+                  padding: "6px 11px",
+                  fontSize: "13px",
+                  fontWeight: "700",
+                }}
+              >
+                {"No country to pick"}
               </span>
             </div>
           </div>
@@ -529,21 +540,138 @@ export default function Travel() {
               </div>
             </>
           ) : null}
-          {v.showNote ? (
-            <>
-              <div
-                style={{
-                  fontSize: "13.5px",
-                  fontWeight: "600",
-                  color: "#6B6880",
-                  margin: "14px 4px 0 4px",
-                  lineHeight: "1.45",
-                }}
-              >
-                {v.note}
-              </div>
-            </>
-          ) : null}
+          <div
+            style={{
+              fontSize: "19px",
+              fontWeight: "800",
+              letterSpacing: "-0.02em",
+              margin: "22px 4px 8px 4px",
+            }}
+          >
+            {"Where you are covered"}
+          </div>
+          <div
+            style={{
+              background: "#FFFFFF",
+              borderRadius: "12px",
+              padding: "4px 16px",
+              boxShadow: "0 0 0 1px #ECE8F5",
+            }}
+          >
+            {(v.places || []).map((c: any, idx0: number) => (
+              <Fragment key={idx0}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "12px",
+                    padding: "10px 0",
+                    borderBottom: c.rule,
+                  }}
+                >
+                  <Artwork
+                    src={c.src}
+                    alt=""
+                    style={{
+                      width: "34px",
+                      height: "34px",
+                      flex: "none",
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                      objectPosition: c.pos,
+                      display: "block",
+                      boxShadow: "0 0 0 1px rgba(30,27,46,0.10)",
+                      opacity: c.op,
+                    }}
+                  />
+                  <span style={{ display: "flex", flexDirection: "column", gap: "1px", flex: "1" }}>
+                    <span style={{ fontSize: "16px", fontWeight: "800", color: c.nameInk }}>
+                      {c.name}
+                    </span>
+                    <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                      {c.sub}
+                    </span>
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "12.5px",
+                      fontWeight: "800",
+                      borderRadius: "999px",
+                      padding: "5px 10px",
+                      background: c.pillBg,
+                      color: c.pillInk,
+                    }}
+                  >
+                    {c.pill}
+                  </span>
+                </div>
+              </Fragment>
+            ))}
+          </div>
+          <div
+            style={{
+              fontSize: "19px",
+              fontWeight: "800",
+              letterSpacing: "-0.02em",
+              margin: "22px 4px 8px 4px",
+            }}
+          >
+            {"Good to know"}
+          </div>
+          <div
+            style={{
+              background: "#FFFFFF",
+              borderRadius: "12px",
+              padding: "6px 16px",
+              boxShadow: "0 0 0 1px #ECE8F5",
+            }}
+          >
+            {(v.rules || []).map((r: any, idx0: number) => (
+              <Fragment key={idx0}>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "12px",
+                    alignItems: "flex-start",
+                    padding: "10px 0",
+                    borderBottom: r.rule,
+                  }}
+                >
+                  <span
+                    style={{
+                      width: "24px",
+                      height: "24px",
+                      flex: "none",
+                      borderRadius: "50%",
+                      background: "#1E1B2E",
+                      color: "#C0F402",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginTop: "1px",
+                    }}
+                  >
+                    <svg
+                      aria-hidden="true"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                    </svg>
+                  </span>
+                  <span style={{ fontSize: "15px", fontWeight: "600", lineHeight: "1.4" }}>
+                    {r.text}
+                  </span>
+                </div>
+              </Fragment>
+            ))}
+          </div>
         </div>
         <div className="hb-fixed-bottom hb-cta-dock">
           <div className="hb-fixed-inner">

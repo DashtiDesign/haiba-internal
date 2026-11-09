@@ -236,8 +236,8 @@ export default function Hub() {
             className="hb-press hb-rise hb-d2"
             style={{
               textDecoration: "none",
-              color: "#1F2600",
-              background: "#C0F402",
+              color: v.gcInk,
+              background: v.gcBg,
               borderRadius: "12px",
               marginTop: "12px",
               padding: "20px 18px 18px 18px",
@@ -246,12 +246,12 @@ export default function Hub() {
               display: "flex",
               flexDirection: "column",
               gap: "6px",
-              boxShadow: "0 14px 28px rgba(110,140,0,0.22)",
+              boxShadow: v.gcShadow,
             }}
             href="#"
             onClick={(e: any) => {
               e.preventDefault();
-              go("/haiba/unipass");
+              go(v.giftHref || "/haiba/unipass");
             }}
           >
             <span
@@ -307,13 +307,14 @@ export default function Hub() {
                 style={{
                   fontSize: "12px",
                   fontWeight: "800",
-                  background: "#1F2600",
-                  color: "#C0F402",
+                  whiteSpace: "nowrap",
+                  background: v.gcPillBg,
+                  color: v.gcPillInk,
                   borderRadius: "999px",
                   padding: "4px 9px",
                 }}
               >
-                {v.giftLeft}
+                {v.gcPill}
               </span>
             </span>
             <span
@@ -330,6 +331,22 @@ export default function Hub() {
             >
               {v.giftTitle}
             </span>
+            {v.gcHasSub ? (
+              <>
+                <span
+                  style={{
+                    position: "relative",
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    color: v.gcSubInk,
+                    lineHeight: "1.35",
+                    maxWidth: "200px",
+                  }}
+                >
+                  {v.gcSub}
+                </span>
+              </>
+            ) : null}
             <span
               style={{
                 position: "relative",
@@ -339,52 +356,74 @@ export default function Hub() {
                 marginTop: "12px",
               }}
             >
-              <span style={{ display: "flex", paddingLeft: "8px" }}>
-                {(v.giftMarks || []).map((g: any, idx0: number) => (
-                  <Fragment key={idx0}>
-                    <span
-                      style={{
-                        width: "34px",
-                        height: "34px",
-                        marginLeft: "-8px",
-                        borderRadius: "8px",
-                        overflow: "hidden",
-                        background: "#FFFFFF",
-                        color: "#1F2600",
-                        border: "2px solid #C0F402",
-                        fontFamily: "Figtree, system-ui, sans-serif",
-                        fontSize: "12px",
-                        fontWeight: "800",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {g.hasLogo ? (
-                        <>
-                          <Artwork
-                            src={g.logo}
-                            alt={g.name}
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              objectFit: "cover",
-                              display: "block",
-                            }}
-                          />
-                        </>
-                      ) : null}
-                      {g.mark}
-                    </span>
-                  </Fragment>
-                ))}
-              </span>
+              {v.gcPicking ? (
+                <>
+                  <span style={{ display: "flex", paddingLeft: "8px" }}>
+                    {(v.giftMarks || []).map((g: any, idx0: number) => (
+                      <Fragment key={idx0}>
+                        <span
+                          style={{
+                            width: "34px",
+                            height: "34px",
+                            marginLeft: "-8px",
+                            borderRadius: "8px",
+                            overflow: "hidden",
+                            background: "#FFFFFF",
+                            color: "#1F2600",
+                            border: "2px solid #C0F402",
+                            fontFamily: "Figtree, system-ui, sans-serif",
+                            fontSize: "12px",
+                            fontWeight: "800",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          {g.hasLogo ? (
+                            <>
+                              <Artwork
+                                src={g.logo}
+                                alt={g.name}
+                                style={{
+                                  width: "100%",
+                                  height: "100%",
+                                  objectFit: "cover",
+                                  display: "block",
+                                }}
+                              />
+                            </>
+                          ) : null}
+                          {g.mark}
+                        </span>
+                      </Fragment>
+                    ))}
+                  </span>
+                </>
+              ) : null}
+              {v.gcHasLogo ? (
+                <>
+                  <Artwork
+                    src={v.gcLogo}
+                    alt={v.gcBrand}
+                    style={{
+                      width: "38px",
+                      height: "38px",
+                      borderRadius: "10px",
+                      objectFit: "contain",
+                      display: "block",
+                      background: v.gcLogoBg,
+                      boxShadow: "0 0 0 2px #FFFFFF",
+                    }}
+                  />
+                </>
+              ) : null}
               <span
                 style={{
                   fontSize: "14px",
                   fontWeight: "800",
-                  background: "#1F2600",
-                  color: "#C0F402",
+                  whiteSpace: "nowrap",
+                  background: v.gcCtaBg,
+                  color: v.gcCtaInk,
                   borderRadius: "999px",
                   padding: "10px 14px",
                   display: "flex",
@@ -392,7 +431,7 @@ export default function Hub() {
                   gap: "6px",
                 }}
               >
-                {"Pick my gift"}
+                {v.gcCta}
                 <svg
                   aria-hidden="true"
                   width="14"

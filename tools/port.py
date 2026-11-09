@@ -58,11 +58,13 @@ def go_item(var):
 
 
 GO_VAR = 'href="#" onClick={(e: any) => { e.preventDefault(); if (v.navTipHref) go(v.navTipHref); }}'
+# 9 Nov: the hub's Unipass card opens Unipass, or the gift code once one is showing.
+GO_GIFT = 'href="#" onClick={(e: any) => { e.preventDefault(); go(v.giftHref || "/haiba/unipass"); }}'
 
 # Placeholder links (href="#") in the order they appear in each screen. None = stays a placeholder.
 LINKS = {
     # 8 Nov: the hub is grouped (Ready for you, Your points, Savings and activity); its Activity link is now a board link.
-    "Hub": [go("/haiba/unipass"), GO_VAR, go("/"), None, None, None],
+    "Hub": [GO_GIFT, GO_VAR, go("/"), None, None, None],
     "Plans": [None, go("/")],
     "Wallet": [go_item("a"), go("/haiba/earn"), None, None, go("/haiba/rewards"), go("/haiba/rewards")],
 }
@@ -117,7 +119,7 @@ LOGIC = {
     "Earn": [("var balance = 1240;", "var balance = props.base;")],
     "Hub": [
         ("var target = isNew ? 500 : 1240;", "var target = props.available;"),
-        ("      navTipCta:", "      navTipHref: isNew ? '/haiba/unipass' : '/haiba/earn',\n      navTipCta:"),
+        ("      navTipCta:", "      navTipHref: isNew && !(gUsed || gReady) ? '/haiba/unipass' : '/haiba/earn',\n      navTipCta:"),
         # 8 Nov: the hub bird is HubBird in the app; the canvas loop player is not ported.
         ("        if (!self._reduce) self.playBird((self._last + 1) % BIRD_LOOPS.length);\n", ""),
     ],

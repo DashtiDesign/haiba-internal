@@ -146,3 +146,6 @@ Students never see this panel.
 - Your points: when the points card scrolls away, the search sticks to the top with the points beside it, and goes back on scroll up.
 - Travel data: shorter copy, no country list. The button only shows before the code is revealed; then the code card's Copy button is the action. The page no longer has a fixed height, so it scrolls.
 - Refund pages have no Reserve, Pay the rest, Member strip. Payment failed has one red title (the reason) and one line, no pill.
+- Unipass gift of the month is real state (`gift` in the store, `journey/gift.ts`): pick a gift and its code shows; "Staff enters the code" marks it used. The hub card follows it (Pick, Code ready with Show my code, Used with what you saved and the next gift date), Unipass shows the code on top and turns off Pick, and the savings and activity add the gift. A gift code that runs out has no screen: it goes away and the student can pick again. Panel: "Pick a gift (new month)" clears it.
+- Your points: the pinned points chip is white with the coin, and slides in smoothly.
+- Travel data: the covered countries and Good to know are back, kept short.

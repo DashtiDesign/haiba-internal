@@ -5387,3 +5387,36 @@ button.jx-row {
   margin-top: 4px;
   text-wrap: balance;
 }
+
+/* 9 Nov: Unipass with a gift code showing. One row on top opens the code; the gift cards lose their Pick button. */
+.jx-up-ready {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 12px 12px 12px;
+  border: 0;
+  border-radius: 16px;
+  background: #1e1b2e;
+  color: #fff;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(30, 27, 46, 0.18);
+}
+.jx-up-ready .jx-row-title {
+  color: #fff;
+}
+.jx-up-ready .jx-row-sub {
+  color: #b9b3cc;
+}
+.jx-up-ready-cta {
+  flex: none;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 800;
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: #c0f402;
+  color: #1f2600;
+}

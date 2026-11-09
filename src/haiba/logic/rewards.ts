@@ -837,13 +837,12 @@ export function useVals() {
   return Object.assign(sheetFlat, {
     balance: left.toLocaleString("en-US"),
     // The pinned search bar (9 Nov)
-    pinBg: pin ? "rgba(243,240,250,0.96)" : "rgba(243,240,250,0)",
+    pinBg: pin ? "#F3F0FA" : "rgba(243,240,250,0)",
     pinShadow: pin ? "0 -60px 0 0 #F3F0FA, 0 8px 18px rgba(76,52,140,0.10)" : "none",
-    pinGap: pin ? "8px" : "0px",
-    pinChipW: pin ? "140px" : "0px",
-    pinChipPad: pin ? "12px" : "0px",
+    pinMl: pin ? "8px" : "0px",
+    pinChipW: pin ? "150px" : "0px",
     pinChipOp: pin ? "1" : "0",
-    pinChipY: pin ? "0px" : "6px",
+    pinChipX: pin ? "0px" : "16px",
     pinHidden: pin ? "false" : "true",
     q: state.q || "",
     onSearch: function (e) {
