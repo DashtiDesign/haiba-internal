@@ -47,7 +47,7 @@ export function useDC(initial) {
   // Read through the router so the server render and the first client render agree (no price flash).
   const q = useRouterState({ select: (r) => r.location.search }) || {};
 
-  // 9 Nov: this month's Unipass gift, for the hub card and its savings.
+  // 9 Nov: this month's Hadiya, for the hub card and its savings.
   const gn = giftNow(hb.state.gift, s.today);
 
   const props = {

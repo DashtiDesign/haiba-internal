@@ -7,7 +7,7 @@ import { useSession, type Session } from "./session";
 import { COUNTRY_PARAM } from "./settings";
 
 /**
- * Shared building blocks for the new student screens (reservation, membership, Unipass and so on).
+ * Shared building blocks for the new student screens (reservation, membership, Hadiya and so on).
  * Built for English and Arabic: layout uses start and end, never left and right, so it mirrors on its own.
  */
 

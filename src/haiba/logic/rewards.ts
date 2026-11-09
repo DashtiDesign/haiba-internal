@@ -778,7 +778,7 @@ export function useVals() {
   var mineShops = SHOPS.filter(function (s) {
     return s.visits > 0;
   });
-  // Item tiles take their colour from the shop category, the same as Unipass gifts.
+  // Item tiles take their colour from the shop category, the same as Hadiya.
   var TINT = {
     Cafes: "#FFEFD9",
     Restaurants: "#FFEFD9",

@@ -1,4 +1,4 @@
-/** English words for the member screens (launch, membership, Unipass, codes, subscriptions, savings, help). Arabic comes later. */
+/** English words for the member screens (launch, membership, Hadiya, codes, subscriptions, savings, help). Arabic comes later. */
 export const memberEn = {
   // pay the rest
   payTitle: "Haiba is open. Pay the rest",
@@ -33,7 +33,7 @@ export const memberEn = {
   paidEmailed: "Receipt sent to your email",
   paidReady: "Ready for you now",
   paidR1: "This month's gift",
-  paidR1Sub: "Pick it in Unipass",
+  paidR1Sub: "Pick it in Hadiya",
   paidR2: "Spotify and ChatGPT",
   paidR2Sub: "Codes are in",
   paidR3: "500 points",
@@ -76,7 +76,7 @@ export const memberEn = {
   // activity
   activityTitle: "Activity",
   activityPoints: "{n} points",
-  // unipass
+  // hadiya
   upTitle: "Pick your {month} gift",
   upSub: "Pick 1 free gift this month. {days} left.",
   upYear: "Gift {n} of 12",
@@ -172,7 +172,7 @@ export const memberEn = {
   savedUnipalSub: "The same total as your Unipal home",
   savedHaiba: "With Haiba",
   savedRewards: "Rewards",
-  savedGifts: "Unipass gifts",
+  savedGifts: "Hadiya",
   savedSubs: "Subscriptions",
   savedTotal: "Total",
   savedVsPrice: "Haiba cost you {price}. You got {amount} back so far.",
@@ -223,7 +223,7 @@ export const memberEn = {
   usedAt: "Used at {brand} · {time}",
   usedTotal: "Your Haiba savings",
   usedTotalAll: "Saved so far",
-  usedGiftLabel: "Unipass gift",
+  usedGiftLabel: "Hadiya",
   usedGiftValue: "{month} gift",
   usedPtsLabel: "Points used",
   usedPtsValue: "{pts} pts",
@@ -274,7 +274,7 @@ export const memberEn = {
   memUntil: "Valid until {date}",
   memMonth: "Month {n} of 12",
   memBenefits: "Your benefits",
-  memBGift: "Unipass gift",
+  memBGift: "Hadiya",
   memBGiftSub: "{n} of 12 used",
   memBPoints: "Points",
   memBPointsSub: "{n} points",

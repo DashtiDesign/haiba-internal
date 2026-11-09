@@ -454,7 +454,7 @@ export function Paid() {
         <div className="jx-paid-grid">
           {(
             [
-              [<img key="u" src={ICON.unipass} alt="" />, "paidR1", "paidR1Sub"],
+              [<img key="u" src={ICON.hadiya} alt="" />, "paidR1", "paidR1Sub"],
               [<SubLogos key="s" size={30} />, "paidR2", "paidR2Sub"],
               [<img key="p" src={ICON.points} alt="" />, "paidR3", "paidR3Sub"],
             ] as const
@@ -631,16 +631,16 @@ const CODE_ITEMS: Record<
     img: E("drink"),
     code: "HB 8K3Q 21",
   },
-  gift: { brand: "cb", item: "Regular drink", value: 1.9, img: E("drink"), code: "UP 4M7T 90" },
+  gift: { brand: "cb", item: "Regular drink", value: 1.9, img: E("drink"), code: "HD 4M7T 90" },
 };
 
-/** One code screen for rewards and Unipass gifts: active (12 hours), expired, cancelled, used. */
+/** One code screen for rewards and Hadiya: active (12 hours), expired, cancelled, used. */
 export function Code() {
   const s = useSession();
   const go = useNavigate();
   const q = useQuery();
   const kind: CodeKind = q["kind"] === "gift" ? "gift" : "reward";
-  // 9 Nov: a Unipass gift code is this month's real pick (journey/gift.ts), so the hub, Unipass and savings follow it.
+  // 9 Nov: a Hadiya code is this month's real pick (journey/gift.ts), so the hub, Hadiya and savings follow it.
   const gp = useGift(s.today);
   // 9 Nov: reward codes are real too (journey/codes.ts), so they show in the active codes on the hub and Your points.
   const rc = useRewardCode(q, s.today);
@@ -687,10 +687,10 @@ export function Code() {
   };
   const month = monthName(s.today, s.lang);
   const monthEnd = addDays(firstOfNext(s.today), -1);
-  const back = kind === "gift" ? "/haiba/unipass" : "/haiba/rewards";
+  const back = kind === "gift" ? "/haiba/hadiya" : "/haiba/rewards";
 
   // 9 Nov: a code that runs out just goes away (its points come back). No expired screen:
-  // a gift goes back to Unipass to pick again, a reward back to Your points.
+  // a gift goes back to Hadiya to pick again, a reward back to Your points.
   if (state === "expired") return <Navigate to={back} replace />;
 
   if (state === "cancelled") {
@@ -890,7 +890,7 @@ export function Code() {
             onClick={() => {
               if (kind === "gift") {
                 gp.drop();
-                go("/haiba/unipass");
+                go("/haiba/hadiya");
               } else {
                 rc.drop();
                 go("/haiba/rewards");
@@ -910,7 +910,7 @@ export function ActivityPage() {
   return <Saved focus="activity" />;
 }
 
-/* ---------- 5 · Unipass ---------- */
+/* ---------- 5 · Hadiya ---------- */
 
 function GiftCard({
   g,
@@ -956,7 +956,7 @@ function GiftCard({
   );
 }
 
-export function Unipass() {
+export function Hadiya() {
   const s = useSession();
   const go = useNavigate();
   const q = useQuery();
@@ -1406,7 +1406,7 @@ function CardArt({ c }: { c: "bh" | "sa" }) {
 }
 
 /**
- * 8 Nov: the one month tracker for all of Haiba (Unipass and the membership card).
+ * 8 Nov: the one month tracker for all of Haiba (Hadiya and the membership card).
  * A bar per month with its letter under it. on = done, now = this month (half filled), on now = done this month,
  * missed = a gift month that passed unused, end = where a cancelled year stops.
  * Colours come from the background it sits on (see .jx-mt in journey.css): ink on lime and yellow,
@@ -1615,8 +1615,8 @@ export function Membership() {
           <span>{s.t("memBenefits")}</span>
         </div>
         <div className="jx-ben-rail">
-          <button className="jx-ben" onClick={() => go("/haiba/unipass")}>
-            <img src={ICON.unipass} alt="" />
+          <button className="jx-ben" onClick={() => go("/haiba/hadiya")}>
+            <img src={ICON.hadiya} alt="" />
             <span className="jx-ben-title">{s.t("memBGift")}</span>
             <span className="jx-row-sub">{s.t("memBGiftSub", { n: gifts })}</span>
           </button>
@@ -1708,7 +1708,7 @@ export function Membership() {
         </p>
         <div className="jx-lose">
           <div>
-            <img src={ICON.unipass} alt="" />
+            <img src={ICON.hadiya} alt="" />
             <b className="jx-num">10</b>
             <span>{s.t("memLoseGifts")}</span>
           </div>
@@ -1813,7 +1813,7 @@ export function Ended() {
         </span>
         <ul className="jx-facts" style={{ marginTop: 10 }}>
           <li>
-            <img src={ICON.unipass} alt="" />
+            <img src={ICON.hadiya} alt="" />
             <span>{s.t("benefitGifts")}</span>
           </li>
           <li>
@@ -2006,7 +2006,7 @@ export function Saved({ focus }: { focus?: "activity" } = {}) {
 }
 
 /**
- * 9 Nov: the one active code row, the same on the hub, Your points and Unipass:
+ * 9 Nov: the one active code row, the same on the hub, Your points and Hadiya:
  * the item, the shop and the kind of code, then Show code.
  */
 export function CodeList({ rows }: { rows: CodeRow[] }) {
@@ -2024,10 +2024,10 @@ export function CodeList({ rows }: { rows: CodeRow[] }) {
             <span className="jx-code-tile" style={{ background: r.bg, color: r.ink }}>
               {r.hasLogo ? <img src={r.logo} alt="" /> : r.mark}
             </span>
-            {r.kind === "gift" && <img className="jx-code-badge" src={ICON.unipass} alt="" />}
+            {r.kind === "gift" && <img className="jx-code-badge" src={ICON.hadiya} alt="" />}
           </span>
           <span className="jx-row-main">
-            {r.kind === "gift" && <span className="jx-code-label">Unipass gift</span>}
+            {r.kind === "gift" && <span className="jx-code-label">Hadiya</span>}
             <span className="jx-code-item">{r.item}</span>
             <span className="jx-code-sub">{r.sub}</span>
           </span>
@@ -2057,7 +2057,7 @@ function activityWithGift(
 
 /* ---------- 9 · help ---------- */
 
-const HOW_IMG = ["", ICON.unipass, ICON.points, E("drink"), ""];
+const HOW_IMG = ["", ICON.hadiya, ICON.points, E("drink"), ""];
 
 export function Help() {
   const s = useSession();

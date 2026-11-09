@@ -3,13 +3,13 @@
     "name": "Haiba prototype fake data v4",
     "prototypeToday": "2026-10-19",
     "version": 4,
-    "note": "No student accounts in this version: the tester starts as a new student and builds history by clicking. Shops, offer titles and offer savings come from real Unipal transactions (Jul to Oct 2026). Bahrain cinemas (VOX, Cineco, Epix) are partners but do not appear in the transaction data, so their offers are placeholders. Reward items, reward prices, Unipass items, limits and subscription member prices are placeholders to confirm with partners. Rewards depend on what each brand offers; not every shop has one at 500 points or less.",
+    "note": "No student accounts in this version: the tester starts as a new student and builds history by clicking. Shops, offer titles and offer savings come from real Unipal transactions (Jul to Oct 2026). Bahrain cinemas (VOX, Cineco, Epix) are partners but do not appear in the transaction data, so their offers are placeholders. Reward items, reward prices, Hadiya items, limits and subscription member prices are placeholders to confirm with partners. Rewards depend on what each brand offers; not every shop has one at 500 points or less.",
     "displayRules": "BHD for Bahrain and SAR for Saudi, always 2 decimals. Points with a thousands comma. Every shop earns points. codeEntry says how the shop will check codes in the real build; in the prototype every shop uses the same shop dashboard screen.",
     "startState": {
       "status": "not a member",
       "points": 0,
       "codes": [],
-      "unipassPicks": {},
+      "hadiyaPicks": {},
       "subscriptionsUsed": []
     }
   },
@@ -64,7 +64,7 @@
     "pointsExpiry": "6 months with no transaction or redemption",
     "membershipEndGraceDays": 30,
     "whoEarns": "Haiba members only",
-    "unipassCanChangePickUntilUsed": true
+    "hadiyaCanChangePickUntilUsed": true
   },
   "shops": [
     {
@@ -1058,7 +1058,7 @@
       "rewardsAvailable": true
     }
   ],
-  "unipassCatalog": [
+  "hadiyaCatalog": [
     {
       "id": "up-wingman",
       "brand": "Wingman",

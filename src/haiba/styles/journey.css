@@ -1823,7 +1823,7 @@ button.jx-row {
   color: var(--jx-faint);
 }
 
-/* Unipass hero and gift grid (Google Pay choose your reward, Swiggy partner cards) */
+/* Hadiya hero and gift grid (Google Pay choose your reward, Swiggy partner cards) */
 .jx-up-hero {
   position: relative;
   padding-bottom: 22px;
@@ -3314,7 +3314,7 @@ button.jx-row {
   margin-bottom: 2px;
 }
 
-/* 8 Nov: Haiba asset kit (coin = points, gift box = Unipass, Haiba logo = membership, app logos = subscriptions) */
+/* 8 Nov: Haiba asset kit (coin = points, gift box = Hadiya, Haiba logo = membership, app logos = subscriptions) */
 .jx-hmark {
   display: inline-flex;
   align-items: center;
@@ -4487,7 +4487,7 @@ button.jx-row {
   cursor: pointer;
 }
 
-/* 8 Nov: calmer Unipass pick sheet (5.2) */
+/* 8 Nov: calmer Hadiya pick sheet (5.2) */
 .jx-sh-art-sm {
   height: 132px;
 }
@@ -4546,7 +4546,7 @@ button.jx-row {
   object-fit: contain;
 }
 
-/* 8 Nov: Unipass year, one round mark per gift month with its letter inside.
+/* 8 Nov: Hadiya year, one round mark per gift month with its letter inside.
    Filled = gift used, purple = this month, outline = to come, dashed and crossed = missed.
    Colours come from the hero it sits on, so every page keeps good contrast. */
 .jx-yt {
@@ -5126,7 +5126,7 @@ button.jx-row {
   cursor: pointer;
 }
 
-/* 8 Nov: the one month tracker for all of Haiba (Unipass heroes and the membership card).
+/* 8 Nov: the one month tracker for all of Haiba (Hadiya heroes and the membership card).
    Bar per month, letter under it. Colours follow the background: ink on lime and yellow (never purple on lime),
    purple on white and lilac, lime on dark. */
 .jx-mt {
@@ -5242,7 +5242,7 @@ button.jx-row {
 .jx-up-hero-got .jx-up-text {
   padding-inline-end: 140px;
 }
-/* 8 Nov: no mascot is cut off by the screen edge on any Unipass hero */
+/* 8 Nov: no mascot is cut off by the screen edge on any Hadiya hero */
 .jx-up-hero .jx-up-bird {
   inset-inline-end: 8px;
 }
@@ -5388,7 +5388,7 @@ button.jx-row {
   text-wrap: balance;
 }
 
-/* 9 Nov: active codes. One row, the same on the hub, Your points and Unipass (the hub and Your points draw it on the canvas with the same sizes). */
+/* 9 Nov: active codes. One row, the same on the hub, Your points and Hadiya (the hub and Your points draw it on the canvas with the same sizes). */
 .jx-codes {
   background: #fff;
   border: 1px solid #e9e5f4;
@@ -5451,7 +5451,7 @@ button.jx-row {
   color: #fff;
 }
 
-/* 9 Nov: the Unipass gift code stands out from points codes: lime row, gift badge, label, dark pill */
+/* 9 Nov: the Hadiya code stands out from points codes: lime row, gift badge, label, dark pill */
 .jx-code-gift {
   background: #f6ffde;
 }

@@ -26,7 +26,7 @@ export function useVals() {
     "They land on their own. Nothing to scan.",
     "Counted per shop, like a stamp card.",
     "Pick a reward. Show the code at the shop.",
-    g >= 0 ? giftDefs[g].item + " picked. Nice choice." : "Your Unipass gift. Tap one to try.",
+    g >= 0 ? giftDefs[g].item + " picked. Nice choice." : "Your Hadiya. Tap one to try.",
   ];
   // stamps sit on an arc above the bird
   var arc = [205, 237.5, 270, 302.5, 335];

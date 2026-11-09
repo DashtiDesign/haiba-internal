@@ -95,8 +95,10 @@ export function useVals() {
       { mark: "+", label: "Earn", href: "/haiba/earn" },
       { mark: "★", label: "Rewards", href: "/haiba/rewards" },
       { mark: "#", label: "My codes", href: "/haiba/basket" },
-      { mark: "U", label: "Unipass" },
-    ],
+      { mark: "", icon: "/haiba/icons/hadiya.webp", label: "Hadiya" },
+    ].map(function (a) {
+      return Object.assign({}, a, { icon: a.icon || "", hasIcon: !!a.icon, noIcon: !a.icon });
+    }),
     bannerTitle: isNew
       ? "Your first 2 visits at every shop earn 2x"
       : "Your next visit at Jasmi’s earns 5x",

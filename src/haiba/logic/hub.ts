@@ -17,7 +17,7 @@ export function useVals() {
   var td = props.today ? new Date(props.today + "T10:00:00") : new Date();
   var giftMonth = td.toLocaleDateString("en-GB", { month: "long" });
   var giftDaysLeft = new Date(td.getFullYear(), td.getMonth() + 1, 0).getDate() - td.getDate() + 1;
-  // 9 Nov: this month's Unipass gift follows the student: pick it, the code shows, the shop uses it.
+  // 9 Nov: this month's Hadiya follows the student: pick it, the code shows, the shop uses it.
   var gs = props.giftStatus ?? "Pick";
   var gReady = gs === "Code ready",
     gUsed = gs === "Used";
@@ -102,7 +102,7 @@ export function useVals() {
       ink: "#FFFFFF",
       href: "/haiba/code?kind=reward",
     });
-  // 9 Nov: the Unipass gift code stands out (lime row, gift badge, label) and links to Unipass, since it is the way in while a code shows.
+  // 9 Nov: the Hadiya code stands out (lime row, gift badge, label) and links to Hadiya, since it is the way in while a code shows.
   var ready = (props.activeCodes ?? sample).map(function (r) {
     var gift = r.kind === "gift";
     return Object.assign({}, r, {
@@ -113,8 +113,8 @@ export function useVals() {
       rowBg: gift ? "#F6FFDE" : "transparent",
       pillBg: gift ? "#1F2600" : purple.pillBg,
       pillInk: gift ? "#C0F402" : purple.pillInk,
-      openUnipass: function () {
-        if (typeof nav === "function") nav("/haiba/unipass");
+      openHadiya: function () {
+        if (typeof nav === "function") nav("/haiba/hadiya");
       },
     });
   });
@@ -198,7 +198,7 @@ export function useVals() {
   var savedDefs = isNew
     ? [
         {
-          title: "Unipass gifts",
+          title: "Hadiya",
           sub: gUsed ? gItem + " at " + gBrand : "1 free item a month",
           amt: gUsed ? gValue : 0,
           color: "#6C3FFA",
@@ -213,7 +213,7 @@ export function useVals() {
       ]
     : [
         {
-          title: "Unipass gifts",
+          title: "Hadiya",
           sub: gUsed ? "2 gifts, Wingman and " + gBrand : "1 gift, Wingman",
           amt: 2.85 + (gUsed ? gValue : 0),
           color: "#6C3FFA",
@@ -239,7 +239,7 @@ export function useVals() {
       { title: "Unipal offers", sub: "Every Unipal offer you used", amt: 19.7, color: "#1E1B2E" },
       {
         title: "Haiba on top",
-        sub: "Rewards, Unipass gifts and subscriptions",
+        sub: "Rewards, Hadiya and subscriptions",
         amt: haibaSum,
         color: "#6C3FFA",
       },
@@ -317,28 +317,30 @@ export function useVals() {
         {
           day: "Yesterday",
           kind: "saved",
-          mark: "U",
+          mark: "",
+          icon: "/haiba/icons/hadiya.webp",
           bg: "#C0F402",
           ink: "#1F2600",
           name: "January gift",
           sub: "Regular drink at The Coffee Bean",
           amt: "BHD 1.90",
           amtInk: green,
-          note: "Unipass gift",
+          note: "Hadiya",
         },
       ];
   if (gUsed)
     all.unshift({
       day: "Today",
       kind: "saved",
-      mark: "U",
+      mark: "",
+      icon: "/haiba/icons/hadiya.webp",
       bg: "#C0F402",
       ink: "#1F2600",
       name: giftMonth + " gift",
       sub: gItem + " at " + gBrand,
       amt: "BHD " + gValue.toFixed(2),
       amtInk: green,
-      note: "Unipass gift",
+      note: "Hadiya",
     });
   if (tUsed)
     all.unshift({
@@ -358,6 +360,9 @@ export function useVals() {
     var num = money ? r.amt.replace("BHD ", "") : r.amt;
     return {
       mark: r.mark,
+      icon: r.icon || "",
+      hasIcon: !!r.icon,
+      noIcon: !r.icon,
       bg: r.bg,
       ink: r.ink,
       name: r.name,
@@ -476,7 +481,7 @@ export function useVals() {
         : "Pick my gift",
     gcCtaBg: gUsed ? "#F0EBFF" : "#1F2600",
     gcCtaInk: gUsed ? "#4F25D6" : "#C0F402",
-    giftHref: gReady ? "/haiba/code?kind=gift" : "/haiba/unipass",
+    giftHref: gReady ? "/haiba/code?kind=gift" : "/haiba/hadiya",
     giftMarks: giftMarks,
     ready: ready,
     // 8 Nov: the menu (top right) holds the pages about you: savings and activity, membership, subscriptions, help.
@@ -641,11 +646,11 @@ export function useVals() {
         : isNew
           ? "Pick your " +
             giftMonth +
-            " Unipass gift. You have " +
+            " Hadiya. You have " +
             (giftDaysLeft === 1 ? "1 day" : giftDaysLeft + " days") +
             " left, and it is free."
           : "Your next visit at Jasmi’s is your 5th. It earns 200 points, not 40.",
-    navTipHref: isNew && !(gUsed || gReady) ? "/haiba/unipass" : "/haiba/earn",
+    navTipHref: isNew && !(gUsed || gReady) ? "/haiba/hadiya" : "/haiba/earn",
     navTipCta: gNew
       ? "Pick my gift"
       : isNew && (gUsed || gReady)

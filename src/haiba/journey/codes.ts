@@ -3,7 +3,7 @@ import { giftNow } from "./gift";
 
 /**
  * Active codes (9 Nov). One list, one look, everywhere: the hub shows every code that is showing
- * (the Unipass gift and reward codes), Your points shows its reward codes on top, Unipass shows the gift code on top.
+ * (the Hadiya and reward codes), Your points shows its reward codes on top, Hadiya shows the gift code on top.
  * A row is the item, the shop and what kind of code it is, then "Show code".
  */
 export type CodeRow = {
@@ -91,7 +91,7 @@ export function activeCodes(hb: Hb, today: string): CodeRow[] {
       kind: "gift",
       item: gn.gift.item,
       brand: gn.brand.name,
-      sub: gn.brand.name, // the row says "Unipass gift" above the item
+      sub: gn.brand.name, // the row says "Hadiya" above the item
       logo: gn.brand.logo ?? "",
       hasLogo: !!gn.brand.logo,
       mark: gn.brand.name.charAt(0),

@@ -2,9 +2,9 @@ import { useHaiba, type GiftPick } from "../store";
 import { BRANDS, GIFTS, type Gift } from "./data";
 
 /**
- * This month's Unipass gift (9 Nov). One gift a month: pick it (the code shows), then the shop uses it.
+ * This month's Hadiya (9 Nov). One gift a month: pick it (the code shows), then the shop uses it.
  * A code that runs out simply goes away and the student can pick again. No expired screen.
- * The hub, the Unipass page, the code screen and the savings all read this one value.
+ * The hub, the Hadiya page, the code screen and the savings all read this one value.
  */
 export type GiftStatus = "none" | "active" | "used";
 

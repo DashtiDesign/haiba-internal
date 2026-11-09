@@ -1,5 +1,5 @@
 /**
- * Fake data for the member screens: Unipass gifts, subscriptions, activity and receipts.
+ * Fake data for the member screens: Hadiya, subscriptions, activity and receipts.
  * Brands, items, values and limits are placeholders until partners sign.
  */
 export type Brand = {
@@ -31,13 +31,13 @@ export const E = (name: string) => `/haiba/emoji/${name}.webp`;
 
 /**
  * Haiba asset kit. One graphic per idea, used on every screen:
- * points = the Haiba coin, Unipass gift = the purple gift box, Haiba membership = the Haiba logo,
+ * points = the Haiba coin, Hadiya = the purple gift box, Haiba membership = the Haiba logo,
  * subscriptions = the service's own logo. Emoji are only for the actual item a shop gives (a drink, fries).
  */
 export const ICON = {
   points: "/haiba/coins/coin-front.webp",
   pointsStack: "/haiba/coins/coin-stack.webp",
-  unipass: "/haiba/icons/unipass.webp",
+  hadiya: "/haiba/icons/hadiya.webp",
   member: "/haiba/logo-lime.svg", // shown on a purple tile, see HaibaMark
 } as const;
 
@@ -183,10 +183,10 @@ export const subsFor = (claimed: boolean): Sub[] =>
   SUBS.map((x) => (claimed && x.id === "chatgpt" ? { ...x, claimed: true } : x));
 
 /**
- * One list for everything that happened with Haiba (8 Nov): offers used at shops, rewards, Unipass gifts,
+ * One list for everything that happened with Haiba (8 Nov): offers used at shops, rewards, Hadiya,
  * subscription codes and bonus points. Each line can carry money saved and points together, like a receipt.
  * kind: offer = a Unipal offer (saved money, earned points), reward = points spent on a free item,
- * gift = the monthly Unipass gift, sub = a subscription code, bonus = points only.
+ * gift = the monthly Hadiya, sub = a subscription code, bonus = points only.
  */
 export type ActivityItem = {
   kind: "offer" | "reward" | "gift" | "sub" | "bonus";
@@ -229,7 +229,7 @@ export const ACTIVITY: Activity[] = [
         title: "January gift",
         sub: "Regular drink at The Coffee Bean",
         money: 1.9,
-        img: ICON.unipass,
+        img: ICON.hadiya,
       },
     ],
   },

@@ -947,9 +947,7 @@ export default function Plans() {
                         minWidth: "0",
                       }}
                     >
-                      <span style={{ fontSize: "16px", fontWeight: "700" }}>
-                        {"12 Unipass gifts"}
-                      </span>
+                      <span style={{ fontSize: "16px", fontWeight: "700" }}>{"12 Hadiya"}</span>
                       <span style={{ fontSize: "13.5px", fontWeight: "500", color: "#B9B3CC" }}>
                         {"1 free item every month"}
                       </span>
@@ -1054,7 +1052,7 @@ export default function Plans() {
                   }}
                 >
                   {
-                    "Based on 1 new shop a month and the rest at your favourites. Unipass gifts are worth about BHD 2.50 each."
+                    "Based on 1 new shop a month and the rest at your favourites. Each Hadiya is worth about BHD 2.50."
                   }
                 </div>
               </div>

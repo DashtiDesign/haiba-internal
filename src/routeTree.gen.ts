@@ -19,6 +19,7 @@ import { Route as HaibaEarnRouteImport } from './routes/haiba/earn'
 import { Route as HaibaEndedRouteImport } from './routes/haiba/ended'
 import { Route as HaibaExpiredRouteImport } from './routes/haiba/expired'
 import { Route as HaibaFailedRouteImport } from './routes/haiba/failed'
+import { Route as HaibaHadiyaRouteImport } from './routes/haiba/hadiya'
 import { Route as HaibaHelpRouteImport } from './routes/haiba/help'
 import { Route as HaibaJoinRouteImport } from './routes/haiba/join'
 import { Route as HaibaMembershipRouteImport } from './routes/haiba/membership'
@@ -38,7 +39,6 @@ import { Route as HaibaSubscriptionRouteImport } from './routes/haiba/subscripti
 import { Route as HaibaSubscriptionsRouteImport } from './routes/haiba/subscriptions'
 import { Route as HaibaTapRouteImport } from './routes/haiba/tap'
 import { Route as HaibaTravelRouteImport } from './routes/haiba/travel'
-import { Route as HaibaUnipassRouteImport } from './routes/haiba/unipass'
 import { Route as HaibaWalletRouteImport } from './routes/haiba/wallet'
 import { Route as HaibaWelcomeRouteImport } from './routes/haiba/welcome'
 import { Route as HaibaPaywallBaseRouteImport } from './routes/haiba/paywall.base'
@@ -104,6 +104,11 @@ const HaibaExpiredRoute = HaibaExpiredRouteImport.update({
 const HaibaFailedRoute = HaibaFailedRouteImport.update({
   id: '/haiba/failed',
   path: '/haiba/failed',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaHadiyaRoute = HaibaHadiyaRouteImport.update({
+  id: '/haiba/hadiya',
+  path: '/haiba/hadiya',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HaibaHelpRoute = HaibaHelpRouteImport.update({
@@ -201,11 +206,6 @@ const HaibaTravelRoute = HaibaTravelRouteImport.update({
   path: '/haiba/travel',
   getParentRoute: () => rootRouteImport,
 } as any)
-const HaibaUnipassRoute = HaibaUnipassRouteImport.update({
-  id: '/haiba/unipass',
-  path: '/haiba/unipass',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const HaibaWalletRoute = HaibaWalletRouteImport.update({
   id: '/haiba/wallet',
   path: '/haiba/wallet',
@@ -297,6 +297,7 @@ export interface FileRoutesByFullPath {
   '/haiba/ended': typeof HaibaEndedRoute
   '/haiba/expired': typeof HaibaExpiredRoute
   '/haiba/failed': typeof HaibaFailedRoute
+  '/haiba/hadiya': typeof HaibaHadiyaRoute
   '/haiba/help': typeof HaibaHelpRoute
   '/haiba/join': typeof HaibaJoinRoute
   '/haiba/membership': typeof HaibaMembershipRoute
@@ -316,7 +317,6 @@ export interface FileRoutesByFullPath {
   '/haiba/subscriptions': typeof HaibaSubscriptionsRoute
   '/haiba/tap': typeof HaibaTapRoute
   '/haiba/travel': typeof HaibaTravelRoute
-  '/haiba/unipass': typeof HaibaUnipassRoute
   '/haiba/wallet': typeof HaibaWalletRoute
   '/haiba/welcome': typeof HaibaWelcomeRoute
   '/haiba/': typeof HaibaIndexRoute
@@ -345,6 +345,7 @@ export interface FileRoutesByTo {
   '/haiba/ended': typeof HaibaEndedRoute
   '/haiba/expired': typeof HaibaExpiredRoute
   '/haiba/failed': typeof HaibaFailedRoute
+  '/haiba/hadiya': typeof HaibaHadiyaRoute
   '/haiba/help': typeof HaibaHelpRoute
   '/haiba/join': typeof HaibaJoinRoute
   '/haiba/membership': typeof HaibaMembershipRoute
@@ -364,7 +365,6 @@ export interface FileRoutesByTo {
   '/haiba/subscriptions': typeof HaibaSubscriptionsRoute
   '/haiba/tap': typeof HaibaTapRoute
   '/haiba/travel': typeof HaibaTravelRoute
-  '/haiba/unipass': typeof HaibaUnipassRoute
   '/haiba/wallet': typeof HaibaWalletRoute
   '/haiba/welcome': typeof HaibaWelcomeRoute
   '/haiba': typeof HaibaIndexRoute
@@ -394,6 +394,7 @@ export interface FileRoutesById {
   '/haiba/ended': typeof HaibaEndedRoute
   '/haiba/expired': typeof HaibaExpiredRoute
   '/haiba/failed': typeof HaibaFailedRoute
+  '/haiba/hadiya': typeof HaibaHadiyaRoute
   '/haiba/help': typeof HaibaHelpRoute
   '/haiba/join': typeof HaibaJoinRoute
   '/haiba/membership': typeof HaibaMembershipRoute
@@ -413,7 +414,6 @@ export interface FileRoutesById {
   '/haiba/subscriptions': typeof HaibaSubscriptionsRoute
   '/haiba/tap': typeof HaibaTapRoute
   '/haiba/travel': typeof HaibaTravelRoute
-  '/haiba/unipass': typeof HaibaUnipassRoute
   '/haiba/wallet': typeof HaibaWalletRoute
   '/haiba/welcome': typeof HaibaWelcomeRoute
   '/haiba/': typeof HaibaIndexRoute
@@ -444,6 +444,7 @@ export interface FileRouteTypes {
     | '/haiba/ended'
     | '/haiba/expired'
     | '/haiba/failed'
+    | '/haiba/hadiya'
     | '/haiba/help'
     | '/haiba/join'
     | '/haiba/membership'
@@ -463,7 +464,6 @@ export interface FileRouteTypes {
     | '/haiba/subscriptions'
     | '/haiba/tap'
     | '/haiba/travel'
-    | '/haiba/unipass'
     | '/haiba/wallet'
     | '/haiba/welcome'
     | '/haiba/'
@@ -492,6 +492,7 @@ export interface FileRouteTypes {
     | '/haiba/ended'
     | '/haiba/expired'
     | '/haiba/failed'
+    | '/haiba/hadiya'
     | '/haiba/help'
     | '/haiba/join'
     | '/haiba/membership'
@@ -511,7 +512,6 @@ export interface FileRouteTypes {
     | '/haiba/subscriptions'
     | '/haiba/tap'
     | '/haiba/travel'
-    | '/haiba/unipass'
     | '/haiba/wallet'
     | '/haiba/welcome'
     | '/haiba'
@@ -540,6 +540,7 @@ export interface FileRouteTypes {
     | '/haiba/ended'
     | '/haiba/expired'
     | '/haiba/failed'
+    | '/haiba/hadiya'
     | '/haiba/help'
     | '/haiba/join'
     | '/haiba/membership'
@@ -559,7 +560,6 @@ export interface FileRouteTypes {
     | '/haiba/subscriptions'
     | '/haiba/tap'
     | '/haiba/travel'
-    | '/haiba/unipass'
     | '/haiba/wallet'
     | '/haiba/welcome'
     | '/haiba/'
@@ -589,6 +589,7 @@ export interface RootRouteChildren {
   HaibaEndedRoute: typeof HaibaEndedRoute
   HaibaExpiredRoute: typeof HaibaExpiredRoute
   HaibaFailedRoute: typeof HaibaFailedRoute
+  HaibaHadiyaRoute: typeof HaibaHadiyaRoute
   HaibaHelpRoute: typeof HaibaHelpRoute
   HaibaJoinRoute: typeof HaibaJoinRoute
   HaibaMembershipRoute: typeof HaibaMembershipRoute
@@ -608,7 +609,6 @@ export interface RootRouteChildren {
   HaibaSubscriptionsRoute: typeof HaibaSubscriptionsRoute
   HaibaTapRoute: typeof HaibaTapRoute
   HaibaTravelRoute: typeof HaibaTravelRoute
-  HaibaUnipassRoute: typeof HaibaUnipassRoute
   HaibaWalletRoute: typeof HaibaWalletRoute
   HaibaWelcomeRoute: typeof HaibaWelcomeRoute
   HaibaIndexRoute: typeof HaibaIndexRoute
@@ -698,6 +698,13 @@ declare module '@tanstack/react-router' {
       path: '/haiba/failed'
       fullPath: '/haiba/failed'
       preLoaderRoute: typeof HaibaFailedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/hadiya': {
+      id: '/haiba/hadiya'
+      path: '/haiba/hadiya'
+      fullPath: '/haiba/hadiya'
+      preLoaderRoute: typeof HaibaHadiyaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/haiba/help': {
@@ -833,13 +840,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HaibaTravelRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/haiba/unipass': {
-      id: '/haiba/unipass'
-      path: '/haiba/unipass'
-      fullPath: '/haiba/unipass'
-      preLoaderRoute: typeof HaibaUnipassRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/haiba/wallet': {
       id: '/haiba/wallet'
       path: '/haiba/wallet'
@@ -965,6 +965,7 @@ const rootRouteChildren: RootRouteChildren = {
   HaibaEndedRoute: HaibaEndedRoute,
   HaibaExpiredRoute: HaibaExpiredRoute,
   HaibaFailedRoute: HaibaFailedRoute,
+  HaibaHadiyaRoute: HaibaHadiyaRoute,
   HaibaHelpRoute: HaibaHelpRoute,
   HaibaJoinRoute: HaibaJoinRoute,
   HaibaMembershipRoute: HaibaMembershipRoute,
@@ -984,7 +985,6 @@ const rootRouteChildren: RootRouteChildren = {
   HaibaSubscriptionsRoute: HaibaSubscriptionsRoute,
   HaibaTapRoute: HaibaTapRoute,
   HaibaTravelRoute: HaibaTravelRoute,
-  HaibaUnipassRoute: HaibaUnipassRoute,
   HaibaWalletRoute: HaibaWalletRoute,
   HaibaWelcomeRoute: HaibaWelcomeRoute,
   HaibaIndexRoute: HaibaIndexRoute,

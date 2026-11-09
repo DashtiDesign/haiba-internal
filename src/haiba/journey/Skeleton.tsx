@@ -8,7 +8,7 @@ export function useQuery() {
 }
 
 /** Grey shapes in the layout of the page that is loading, so nothing jumps when the data lands. */
-export type SkeletonKind = "hub" | "points" | "unipass" | "membership";
+export type SkeletonKind = "hub" | "points" | "hadiya" | "membership";
 
 function B({
   w = "100%",
@@ -79,7 +79,7 @@ export function Skeleton({ kind }: { kind: SkeletonKind }) {
             <Rows n={3} />
           </div>
         )}
-        {kind === "unipass" && (
+        {kind === "hadiya" && (
           <>
             <div className="jx-sk-hero jx-sk-hero-left">
               <B w={90} h={12} />

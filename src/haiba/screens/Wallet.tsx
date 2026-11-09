@@ -315,7 +315,21 @@ export default function Wallet() {
                       boxShadow: "0 8px 18px rgba(76,52,140,0.12)",
                     }}
                   >
-                    {a.mark}
+                    {a.hasIcon ? (
+                      <>
+                        <Artwork
+                          src={a.icon}
+                          alt=""
+                          style={{
+                            width: "34px",
+                            height: "34px",
+                            objectFit: "contain",
+                            display: "block",
+                          }}
+                        />
+                      </>
+                    ) : null}
+                    {a.noIcon ? <>{a.mark}</> : null}
                   </span>
                   <span style={{ fontSize: "14px", fontWeight: "600" }}>{a.label}</span>
                 </a>

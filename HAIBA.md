@@ -33,13 +33,13 @@ A clickable prototype of Haiba, the Unipal membership, for the internal test. It
 | Your points (earn and spend in one place)         | `/haiba/rewards`           |
 | Reward or gift code: active, expired, cancelled, used | `/haiba/code?kind=reward&state=used` |
 | Activity                                          | `/haiba/activity`          |
-| Unipass gifts: pick, used, month end, lost, last  | `/haiba/unipass?view=used` |
+| Hadiya: pick, used, month end, lost, last  | `/haiba/hadiya?view=used` |
 | Subscriptions (Spotify, ChatGPT), code, all claimed | `/haiba/subscriptions`, `/haiba/subscription?id=spotify`, `?id=chatgpt&claimed=1` |
 | Membership: active, cancelled, renewal, cancel sheet | `/haiba/membership?view=renewal` |
 | Receipts, year ended                              | `/haiba/receipts`, `/haiba/ended` |
 | You saved, Help                                   | `/haiba/saved`, `/haiba/help` |
 | Student status (not verified, expired)            | `/haiba/student?for=reserve` (also shown at reserve, join, renewal) |
-| Loading skeletons                                 | add `?loading=1` to `/haiba`, `/haiba/rewards`, `/haiba/unipass`, `/haiba/membership` |
+| Loading skeletons                                 | add `?loading=1` to `/haiba`, `/haiba/rewards`, `/haiba/hadiya`, `/haiba/membership` |
 | Shop page, The Coffee Bean                        | `/shop/coffee-bean`        |
 | Redeem an offer, earn points                      | `/shop/coffee-bean/redeem` |
 
@@ -78,7 +78,7 @@ Students never see this panel.
 - `src/haiba/styles/`: each screen's animations, scoped with `.pg-<screen>`.
 - `src/haiba/store.tsx`: the one shared state (member, codes, points, settings, and the student journey).
 - `src/haiba/journey/`: the new student screens' shared parts: settings, the student state machine (`states.ts`), app parameters and prices (`session.ts`), English and Arabic words (`strings.ts`), money and date formats (`format.ts`), and the building blocks (`ui.tsx`, styled by `src/haiba/styles/journey.css`).
-- `src/haiba/data/haiba-fake-data.json`: shops, rewards, Unipass and the points rules.
+- `src/haiba/data/haiba-fake-data.json`: shops, rewards, Hadiya and the points rules.
 - `public/haiba/`: the bird poses, the two Haiba logos, and the reward images in `emoji/` (Microsoft Fluent 3D emoji, MIT).
 - `src/haiba/journey/data.ts`: placeholder gifts, subscriptions, activity, brands and the asset kit (`ICON`) for the member screens. Arabic for these screens is not written yet and falls back to English.
 - `public/fonts/`: Figtree, self hosted.
@@ -108,24 +108,24 @@ Students never see this panel.
 
 - No separate price page. The page before reserving is the main promo page, picked in the panel ("Main promo page": Join copy, Story, Timeline, Baseline, Table). The same page in join mode is Join after launch (full price with VAT, no deposit). A "few spots left" bar sits on top once 100 or fewer remain.
 - After the hold ends or a refund, the locked price no longer applies; joining uses today's price.
-- One graphic per idea (`ICON` in `journey/data.ts`): points = the Haiba coin, Unipass gift = the purple gift box (`public/haiba/icons/unipass.webp`, white outline so it works on lime), Haiba membership = the lime Haiba logo on a purple tile (`HaibaMark`), subscriptions = the service's own logo (`SubLogos`). Emoji only show the actual item a shop gives.
+- One graphic per idea (`ICON` in `journey/data.ts`): points = the Haiba coin, Hadiya = the purple gift box (`public/haiba/icons/hadiya.webp`, white outline so it works on lime), Haiba membership = the lime Haiba logo on a purple tile (`HaibaMark`), subscriptions = the service's own logo (`SubLogos`). Emoji only show the actual item a shop gives.
 - Each screen gets its own mascot pose. New poses 18 to 25 are WebP in `public/haiba/birds/` (`BIRD()` picks the format).
 - The mascot is never moved with code (no hop, float, peek, wiggle, shake, bounce, pop in). `Artwork` tags bird stills with `hb-mascot` and one rule in `journey.css` stops their animation. Only real frame loops move.
 - Corners: cards and surfaces use smaller radii (about a third less: 16 to 12, 20 to 14, 28 to 18). Buttons, pills and circles keep theirs.
 - Images are kept light: PNGs are quantised, new art is WebP sized for 2x screens.
-- The hub's Unipass gift card and the new member tip open `/haiba/unipass`; Activity "See all" opens `/haiba/activity`.
+- The hub's Hadiya card and the new member tip open `/haiba/hadiya`; Activity "See all" opens `/haiba/activity`.
 - Hub bird (`src/haiba/HubBird.tsx`): real Seedance loops in `public/haiba/motion/` (`hub-shades`, `hub-coin`, `hub-still`), all cut with the same crop so they line up. On open he plays one reveal at random, each tap plays the other. After a reveal he holds the still pose for 4 to 6 seconds, then plays `hub-idle.webp` once (3.9 s: hair, breathing, a blink), then rests again, until the next tap. Tapping him shows no speech bubble. No timer plays them on its own. All four files are 412 x 560 so the loops match the still. The loops are animated AVIF (about 1 MB for all three) with WebP copies for Apple devices before iOS 16.4.1 / macOS 13.3.1 (their animated AVIF is broken) and any browser without AVIF; each phone downloads one format. Only the first reveal loads before he moves; the other reveal and the idle load after it.
 - Membership card: vertical Haiba purple card on a light lilac stage, lime wordmark, status pill, light HAIBA monogram, the country engraving (`public/haiba/cards/bh.webp`, `sa.webp`), name, member since and Year 1. Tilt, light sweep and foil edge.
 - Cancelling never ends the year early. After cancelling the card pill says "Ends 2 Dec" and "Keep my membership" sits at the bottom. In the last month of the year the card goes grey and one panel says your Haiba year is ending, with Renew, whether they cancelled (pill "Ends 2 Dec") or not (pill "Renew soon"). The page follows the student's state; `?view=` still previews a state.
 - Payment done and the cancel sheet poses (`18-joined`, `24-hug`) hold the Haiba card.
-- Hub (8 Nov): the top right button is a menu (Savings and activity, Membership, Subscriptions, Help). Groups in order: Ready for you (Unipass gift, codes), Your points, Savings and activity (one card: saved plus recent visits), Member perks (travel data, subscriptions).
+- Hub (8 Nov): the top right button is a menu (Savings and activity, Membership, Subscriptions, Help). Groups in order: Ready for you (Hadiya, codes), Your points, Savings and activity (one card: saved plus recent visits), Member perks (travel data, subscriptions).
 - Help only holds help: how points work, how Haiba works, questions, chat.
 - Savings and activity is one page (/haiba/saved and /haiba/activity). Every line shows money saved and points together. The hub card uses the same numbers.
 - Your points (4.1): coin balance card, search, your shops, category chips that filter one rewards grid. Use on a reward asks once, then opens the full code screen (/haiba/code with the shop and reward in the link). Show code on the hub opens the same screen. The code screen has a prototype box for "staff enters the code" and "12 hours pass".
 - Result screens have no status pill above the title. Used codes show a receipt (saved, points used, saved so far).
-- One month tracker for all of Haiba (`MonthTrack` in `Member.tsx`, `.jx-mt` in `journey.css`), on Unipass and the membership card: a bar per month with its letter under it. Colours follow the background: ink on lime and yellow (never purple on lime), lime on dark, purple on white and lilac.
+- One month tracker for all of Haiba (`MonthTrack` in `Member.tsx`, `.jx-mt` in `journey.css`), on Hadiya and the membership card: a bar per month with its letter under it. Colours follow the background: ink on lime and yellow (never purple on lime), lime on dark, purple on white and lilac.
 - Subscription pages: one left aligned "Good to know" list.
-- Props in poses match the standard graphics: `26-gift` holds the purple Unipass box (hub Unipass card, Unipass page), `27-coin` flips the Haiba coin with the star (Haiba savings). The old `10-gift` and `06-coin` are no longer used on screens.
+- Props in poses match the standard graphics: `26-gift` holds the purple Hadiya box (hub Hadiya card, Hadiya page), `27-coin` flips the Haiba coin with the star (Haiba savings). The old `10-gift` and `06-coin` are no longer used on screens.
 - Student states (8 Nov): each state has its own screen and look. Reserved is dark, Pay the rest is lime with the coin bird, Hold expired is yellow, refunds are lilac (on the way), lime (back) or rose (failed). A Reserve, Pay the rest, Member strip (`JourneyStage` in `parts.tsx`) shows where they are. No status pills above titles.
 - `pathFor` sends pay the rest to `/haiba/pay`, hold expired to `/haiba/expired`, ended to `/haiba/ended`. Screens tied to a state send other students to their own screen.
 - Paying the rest, joining after launch or coming back after the year ended makes the student a member for one year from today and lands on "You are a member". Renewing adds a year and lands on the membership page. Cancel my reservation on Pay the rest starts the refund.
@@ -146,11 +146,13 @@ Students never see this panel.
 - Your points: when the points card scrolls away, the search sticks to the top with the points beside it, and goes back on scroll up.
 - Travel data: shorter copy, no country list. The button only shows before the code is revealed; then the code card's Copy button is the action. The page no longer has a fixed height, so it scrolls.
 - Refund pages have no Reserve, Pay the rest, Member strip. Payment failed has one red title (the reason) and one line, no pill.
-- Unipass gift of the month is real state (`gift` in the store, `journey/gift.ts`): pick a gift and its code shows; "Staff enters the code" marks it used and counts it in savings and activity. A gift code that runs out has no screen: it goes away and the student can pick again. Panel: "Pick a gift (new month)" clears it.
+- Hadiya of the month is real state (`gift` in the store, `journey/gift.ts`): pick a gift and its code shows; "Staff enters the code" marks it used and counts it in savings and activity. A gift code that runs out has no screen: it goes away and the student can pick again. Panel: "Pick a gift (new month)" clears it.
 - Hub gift card: the big lime card only until the student uses their first gift (a new member). After that a small card: "Pick your [month] gift", or "[Month] gift used, next gift in N days". No gift card while a code is showing. On the 1st of a new month the small card asks them to pick again.
-- Active codes are one pattern everywhere (`journey/codes.ts`, `CodeList` and `.jx-code-row`): item, then shop and kind (Unipass gift, or points), then Show code. The hub lists every code that is showing; Unipass shows its gift code on top; Your points shows its reward codes on top. Reward codes made on Your points are kept in the store (`rewardCodes`), hold their points, and count as saved once used; one that runs out or is cancelled goes away and its points come back.
+- Active codes are one pattern everywhere (`journey/codes.ts`, `CodeList` and `.jx-code-row`): item, then shop and kind (Hadiya, or points), then Show code. The hub lists every code that is showing; Hadiya shows its gift code on top; Your points shows its reward codes on top. Reward codes made on Your points are kept in the store (`rewardCodes`), hold their points, and count as saved once used; one that runs out or is cancelled goes away and its points come back.
 - Your points: the pinned points chip is white with the coin, and slides in smoothly.
 - Travel data: the covered countries and Good to know are back, kept short.
-- No expired screen for any code: a gift code that runs out goes back to Unipass, a points code goes back to Your points with its points returned. Cancelled still has its screen.
+- No expired screen for any code: a gift code that runs out goes back to Hadiya, a points code goes back to Your points with its points returned. Cancelled still has its screen.
 - New gift signal: for the first 3 days of a month (students who used a gift before), the small hub card says "Your [month] gift is here" with a NEW tag, and the bird tip opens once with "Pick my gift". Closing the tip keeps it closed that month.
-- The Unipass gift code row stands out from points codes: pale lime row, gift badge on the logo, "Unipass gift" label, dark pill, and on the hub a "See all Unipass gifts" link (the way into Unipass while a code shows).
+- The Hadiya code row stands out from points codes: pale lime row, gift badge on the logo, "Hadiya" label, dark pill, and on the hub an "Open Hadiya" link (the way into Hadiya while a code shows).
+- Name: the free monthly gift is "Hadiya" (Arabic هدية), first called Unipass. Haiba is the subscription, Hadiya is the gift. Never write "Hadiya gift": Hadiya already means gift ("Pick your Hadiya", "Hadiya code", label HADIYA). The page is `/haiba/hadiya`, the icon `public/haiba/icons/hadiya.webp`, the canvas boards Hd01 to Hd09, and sample gift codes start with HD.
+- Hadiya rows in activity and the wallet show the Hadiya gift icon, not a letter.

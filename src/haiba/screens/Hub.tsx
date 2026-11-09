@@ -253,7 +253,7 @@ export default function Hub() {
                 href="#"
                 onClick={(e: any) => {
                   e.preventDefault();
-                  go(v.giftHref || "/haiba/unipass");
+                  go(v.giftHref || "/haiba/hadiya");
                 }}
               >
                 <span
@@ -290,7 +290,7 @@ export default function Hub() {
                   }}
                 >
                   <Artwork
-                    src="/haiba/icons/unipass.webp"
+                    src="/haiba/icons/hadiya.webp"
                     alt=""
                     style={{
                       width: "30px",
@@ -308,7 +308,7 @@ export default function Hub() {
                       textTransform: "uppercase",
                     }}
                   >
-                    {"Unipass gift"}
+                    {"Hadiya"}
                   </span>
                   <span
                     style={{
@@ -476,7 +476,7 @@ export default function Hub() {
                 href="#"
                 onClick={(e: any) => {
                   e.preventDefault();
-                  go(v.giftHref || "/haiba/unipass");
+                  go(v.giftHref || "/haiba/hadiya");
                 }}
               >
                 <span
@@ -492,7 +492,7 @@ export default function Hub() {
                   }}
                 >
                   <Artwork
-                    src="/haiba/icons/unipass.webp"
+                    src="/haiba/icons/hadiya.webp"
                     alt=""
                     style={{
                       width: "36px",
@@ -639,7 +639,7 @@ export default function Hub() {
                               {r.isGift ? (
                                 <>
                                   <Artwork
-                                    src="/haiba/icons/unipass.webp"
+                                    src="/haiba/icons/hadiya.webp"
                                     alt=""
                                     style={{
                                       position: "absolute",
@@ -675,7 +675,7 @@ export default function Hub() {
                                       color: "#4F6B00",
                                     }}
                                   >
-                                    {"Unipass gift"}
+                                    {"Hadiya"}
                                   </span>
                                 </>
                               ) : null}
@@ -712,7 +712,7 @@ export default function Hub() {
                           {r.isGift ? (
                             <>
                               <button
-                                onClick={r.openUnipass}
+                                onClick={r.openHadiya}
                                 className="hb-press"
                                 style={{
                                   font: "inherit",
@@ -729,7 +729,7 @@ export default function Hub() {
                                   fontWeight: "800",
                                 }}
                               >
-                                {"See all Unipass gifts"}
+                                {"Open Hadiya"}
                                 <svg
                                   aria-hidden="true"
                                   width="14"
@@ -1235,7 +1235,21 @@ export default function Hub() {
                                 justifyContent: "center",
                               }}
                             >
-                              {t.mark}
+                              {t.hasIcon ? (
+                                <>
+                                  <Artwork
+                                    src={t.icon}
+                                    alt=""
+                                    style={{
+                                      width: "30px",
+                                      height: "30px",
+                                      objectFit: "contain",
+                                      display: "block",
+                                    }}
+                                  />
+                                </>
+                              ) : null}
+                              {t.noIcon ? <>{t.mark}</> : null}
                             </span>
                             <span
                               style={{
