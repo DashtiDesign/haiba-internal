@@ -25,6 +25,8 @@ export function useVals() {
   var gBrand = props.giftBrand ?? "The Coffee Bean";
   var gValue = Number(props.giftValue ?? 1.9);
   var gNextDays = giftDaysLeft;
+  var gFirst =
+    props.giftFirst ?? (props.giftBefore ? props.giftBefore === "Never used a gift" : isNew);
   var t = useMotionProgress();
   var target = props.available;
   var shown = Math.round(target * t);
@@ -42,97 +44,57 @@ export function useVals() {
   var purple = { pillBg: "#6C3FFA", pillInk: "#FFFFFF" };
   var lime = { pillBg: "#F4FFD1", pillInk: "#3D5000" };
   var soft = { pillBg: "#E3F5E8", pillInk: "#1B6B36" };
-  var ready = isNew
-    ? []
-    : [
-        Object.assign(
-          {
-            isCode: true,
-            key: "caribou",
-            mark: "C",
-            bg: "#3B2A22",
-            ink: "#FFFFFF",
-            brand: "Caribou Coffee",
-            item: "Free upgrade",
-            pill: "Show code",
-            code: "HB-7K2Q-9X",
-            useBy: "Use by 12 Nov",
-          },
-          purple,
-        ),
-      ];
+  // 9 Nov: every code that is showing is one list with one look (the gift code and reward codes).
+  // The app passes the list in (journey/codes.ts); the canvas builds the same rows from its controls.
   var rw = [
-    {
-      name: "Free upsize",
-      ph: "DRINK PHOTO",
-      bg: "#EDE4FF",
-      ink: "#4F25D6",
-      code: "8K3Q",
-      pts: 300,
-    },
-    { name: "Cookie", ph: "COOKIE PHOTO", bg: "#F6E7D2", ink: "#7A4E2D", code: "5TR2", pts: 700 },
-    {
-      name: "Regular drink",
-      ph: "DRINK PHOTO",
-      bg: "#E3DCD6",
-      ink: "#3B2A22",
-      code: "9MX7",
-      pts: 1900,
-    },
+    { name: "Free upsize", code: "8K3Q", pts: 300 },
+    { name: "Cookie", code: "5TR2", pts: 700 },
+    { name: "Regular drink", code: "9MX7", pts: 1900 },
   ];
-  var codeRows = codeIds.map(function (id) {
-    var i = parseInt(id.split("-")[0], 10),
-      k = parseInt(id.split("-")[1], 10);
-    return Object.assign(
-      {
-        isCode: true,
-        key: id,
-        mark: "CB",
-        bg: "#4B2E83",
-        ink: "#FFFFFF",
-        brand: "The Coffee Bean",
-        item: rw[i].name,
-        pill: "Show code",
-        code: "HB-" + rw[i].code + "-" + (k + 1),
-        useBy: "Use by 20 Nov",
-      },
-      purple,
-    );
+  var sample = [];
+  if (gReady)
+    sample.push({
+      key: "gift",
+      kind: "gift",
+      item: gItem,
+      sub: gBrand + " · Unipass gift",
+      logo: props.giftLogo ?? "/haiba/brands/coffee-bean.webp",
+      hasLogo: true,
+      mark: "",
+      bg: "#FFFFFF",
+      ink: "#1E1B2E",
+      href: "/haiba/code?kind=gift",
+    });
+  codeIds.forEach(function (id) {
+    var i = parseInt(id.split("-")[0], 10);
+    sample.push({
+      key: id,
+      kind: "reward",
+      item: rw[i].name,
+      sub: "The Coffee Bean · " + rw[i].pts + " points",
+      logo: "/haiba/brands/coffee-bean.webp",
+      hasLogo: true,
+      mark: "CB",
+      bg: "#FFFFFF",
+      ink: "#1E1B2E",
+      href: "/haiba/code?kind=reward",
+    });
   });
-  ready = codeRows.concat(ready);
-  ready.forEach(function (r) {
-    if (r.isCode) {
-      var open = state.openCode === r.key;
-      r.open = open;
-      r.openStr = String(open);
-      r.tap = function () {
-        setState({ openCode: open ? "" : r.key });
-      };
-      // The app opens the full code screen (4.6) with this reward.
-      var isCb = r.brand === "The Coffee Bean";
-      var hit = isCb
-        ? rw.filter(function (x) {
-            return x.name === r.item;
-          })[0]
-        : null;
-      var q = {
-        kind: "reward",
-        shop: r.brand,
-        item: r.item,
-        pts: hit ? hit.pts : 200,
-        img: hit && hit.name === "Cookie" ? "/haiba/emoji/cookie.png" : "/haiba/emoji/drink.png",
-        logo: isCb ? "/haiba/brands/coffee-bean.webp" : "",
-        mark: r.mark,
-        bg: r.bg,
-      };
-      r.href =
-        "/haiba/code?" +
-        Object.keys(q)
-          .map(function (k) {
-            return k + "=" + encodeURIComponent(q[k]);
-          })
-          .join("&");
-    }
+  if (!isNew)
+    sample.push({
+      key: "caribou",
+      kind: "reward",
+      item: "Free upgrade",
+      sub: "Caribou Coffee · 200 points",
+      logo: "",
+      hasLogo: false,
+      mark: "C",
+      bg: "#3B2A22",
+      ink: "#FFFFFF",
+      href: "/haiba/code?kind=reward",
+    });
+  var ready = (props.activeCodes ?? sample).map(function (r) {
+    return Object.assign({}, r, { isCode: true, noLogo: !r.hasLogo, pill: "Show code" }, purple);
   });
   ready.forEach(function (r, k) {
     r.rule = k === 0 ? "none" : "1px solid #F1EFF7";
@@ -437,6 +399,25 @@ export function useVals() {
       : gReady
         ? gItem + " at " + gBrand
         : "Pick your " + giftMonth + " gift",
+    // 9 Nov: the big lime card only until the first gift is used. Then a small card, and none while a code shows.
+    gcBig: gFirst && !gReady && !gUsed,
+    gcSmall: !gFirst && !gReady,
+    gsBg: gUsed ? "#FFFFFF" : "#C0F402",
+    gsInk: gUsed ? "#1E1B2E" : "#1F2600",
+    gsShadow: gUsed
+      ? "0 0 0 1px #E9E5F4, 0 6px 18px rgba(76,52,140,0.06)"
+      : "0 10px 22px rgba(110,140,0,0.18)",
+    gsTileBg: gUsed ? "#F0EBFF" : "rgba(255,255,255,0.55)",
+    gsTitle: gUsed ? giftMonth + " gift used" : "Pick your " + giftMonth + " gift",
+    gsSub: gUsed
+      ? "Next gift in " + (gNextDays === 1 ? "1 day" : gNextDays + " days")
+      : giftDaysLeft === 1
+        ? "Last day to pick"
+        : giftDaysLeft + " days left",
+    gsSubInk: gUsed ? "#6B6880" : "#3D5000",
+    gsCta: gUsed ? "See gifts" : "Pick",
+    gsCtaBg: gUsed ? "#F0EBFF" : "#1F2600",
+    gsCtaInk: gUsed ? "#4F25D6" : "#C0F402",
     gcBg: gUsed ? "#FFFFFF" : "#C0F402",
     gcInk: gUsed ? "#1E1B2E" : "#1F2600",
     gcShadow: gUsed

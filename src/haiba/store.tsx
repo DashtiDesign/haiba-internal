@@ -15,6 +15,24 @@ export type Market = "bh" | "sa";
 export type Travel = "available" | "revealed" | "redeemed";
 /** This month's Unipass gift (9 Nov): picked (code showing) or used at the shop. A new month starts empty. */
 export type GiftPick = { id: string; status: "active" | "used"; month: string; on: string };
+/**
+ * A reward code made with points (9 Nov). Active while it shows, used once the shop takes it.
+ * A code that runs out or is cancelled is removed and its points come back.
+ * "gone" only marks the sample hub code as done, so it stops showing.
+ */
+export type RewardCode = {
+  id: string;
+  shop: string;
+  item: string;
+  pts: number;
+  value: number;
+  img: string;
+  logo: string;
+  mark: string;
+  bg: string;
+  status: "active" | "used" | "gone";
+  on: string;
+};
 
 export type HaibaState = {
   member: Member;
@@ -29,6 +47,8 @@ export type HaibaState = {
   settings: Settings; // prices, VAT, deposit, hold days, launch date. Screens never hardcode these.
   journey: Journey; // where the student is: reservation, payment, membership
   gift: GiftPick | null; // this month's Unipass gift, see journey/gift.ts
+  giftEver: boolean; // has used a Unipass gift before: the hub shows the small gift card from then on
+  rewardCodes: RewardCode[]; // reward codes made on Your points, see journey/codes.ts
 };
 
 // Value of the free Airalo plan once it is used, added to "You saved".
@@ -53,6 +73,8 @@ const INITIAL: HaibaState = {
   settings: DEFAULT_SETTINGS,
   journey: EMPTY_JOURNEY,
   gift: null,
+  giftEver: false,
+  rewardCodes: [],
 };
 
 const KEY = "haiba-prototype-v2";
@@ -92,6 +114,7 @@ type Api = {
   liveCodeIds: string[]; // ids of those codes, item-index plus count, for example 0-1
   savedRewards: number; // BHD value of rewards the shop accepted
   savedTravel: number; // BHD 5.64 once the Airalo code is used
+  heldPts: number; // points in reward codes (showing or used)
   set: (patch: Partial<HaibaState>) => void;
   join: () => void;
   setMember: (m: Member) => void;
@@ -142,14 +165,24 @@ export function HaibaProvider({ children }: { children: ReactNode }) {
     });
   }
 
+  // Reward codes made on Your points hold their points; used ones count as saved.
+  let heldPts = 0;
+  let codeSaved = 0;
+  (s.rewardCodes || []).forEach((c) => {
+    if (c.status === "gone") return;
+    heldPts += c.pts;
+    if (c.status === "used") codeSaved += c.value;
+  });
+
   const api: Api = {
     ready,
     state: s,
     base,
-    available: base - committed,
+    available: base - committed - heldPts,
+    heldPts,
     liveCodes: liveIds.length,
     liveCodeIds: liveIds,
-    savedRewards: acceptedPoints / 1000,
+    savedRewards: acceptedPoints / 1000 + codeSaved,
     savedTravel: s.travel === "redeemed" ? TRAVEL_SAVED : 0,
     set: (patch) => setS((p) => ({ ...p, ...patch })),
     setJourney: (patch) => setS((p) => ({ ...p, journey: { ...p.journey, ...patch } })),

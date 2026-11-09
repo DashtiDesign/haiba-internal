@@ -396,7 +396,7 @@ export function useVals() {
     return { hasLogo: !!s.logo, noLogo: !s.logo, logo: s.logo || "", mark: s.mark || "", bg: s.bg };
   };
   // points: the Coffee Bean codes are live and shared with the hub
-  var balance = props.base;
+  var balance = props.base - (props.heldPts || 0);
   var cq = (state.codesQty || [0, 0, 0]).slice();
   while (cq.length < 3) cq.push(0);
   var cancelled = state.cancelled || [];
@@ -409,12 +409,46 @@ export function useVals() {
   });
   var left = balance - committed;
   var pin = !!state.pinned || props.searchBar === "Pinned (scrolled)";
+  // 9 Nov: reward codes that are showing sit on top, the same rows as the hub (journey/codes.ts in the app).
+  var codeList = (
+    props.activeCodes ??
+    (isNew
+      ? []
+      : [
+          {
+            key: "caribou",
+            kind: "reward",
+            item: "Free upgrade",
+            sub: "Caribou Coffee · 200 points",
+            logo: "",
+            hasLogo: false,
+            mark: "C",
+            bg: "#3B2A22",
+            ink: "#FFFFFF",
+            href: "/haiba/code?kind=reward",
+          },
+        ])
+  )
+    .filter(function (r) {
+      return r.kind === "reward";
+    })
+    .map(function (r, k) {
+      return Object.assign({}, r, {
+        noLogo: !r.hasLogo,
+        rule: k === 0 ? "0" : "1px solid #F1EFF7",
+        open: function () {
+          if (typeof nav === "function") nav(r.href);
+        },
+      });
+    });
   var q = (state.q || "").toLowerCase();
   var chip = state.chip || "All";
   // Opens the full reward code screen (4.6). On the canvas it stays on the sheet; the app opens /haiba/code.
   var goCode = function (sh, d) {
     var p = {
       kind: "reward",
+      id: (sh.name + "-" + d.name).toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+      new: 1,
       shop: sh.name,
       item: d.name,
       pts: d.pts,
@@ -836,6 +870,9 @@ export function useVals() {
     });
   return Object.assign(sheetFlat, {
     balance: left.toLocaleString("en-US"),
+    hasCodes: codeList.length > 0,
+    myCodes: codeList,
+    codesCount: codeList.length === 1 ? "1 to use" : codeList.length + " to use",
     // The pinned search bar (9 Nov)
     pinBg: pin ? "#F3F0FA" : "rgba(243,240,250,0)",
     pinShadow: pin ? "0 -60px 0 0 #F3F0FA, 0 8px 18px rgba(76,52,140,0.10)" : "none",

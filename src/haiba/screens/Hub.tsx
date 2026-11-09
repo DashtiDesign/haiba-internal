@@ -232,222 +232,309 @@ export default function Hub() {
               {"Ready for you"}
             </span>
           </div>
-          <a
-            className="hb-press hb-rise hb-d2"
-            style={{
-              textDecoration: "none",
-              color: v.gcInk,
-              background: v.gcBg,
-              borderRadius: "12px",
-              marginTop: "12px",
-              padding: "20px 18px 18px 18px",
-              position: "relative",
-              overflow: "hidden",
-              display: "flex",
-              flexDirection: "column",
-              gap: "6px",
-              boxShadow: v.gcShadow,
-            }}
-            href="#"
-            onClick={(e: any) => {
-              e.preventDefault();
-              go(v.giftHref || "/haiba/unipass");
-            }}
-          >
-            <span
-              aria-hidden="true"
-              style={{
-                position: "absolute",
-                right: "-50px",
-                top: "-60px",
-                width: "200px",
-                height: "200px",
-                borderRadius: "50%",
-                background: "rgba(255,255,255,0.32)",
-              }}
-            ></span>
-            <Artwork
-              src="/haiba/birds/26-gift.webp"
-              alt=""
-              style={{
-                position: "absolute",
-                right: "-2px",
-                bottom: "0",
-                height: "156px",
-                width: "auto",
-                display: "block",
-                filter: "drop-shadow(0 8px 10px rgba(31,38,0,0.22))",
-              }}
-            />
-            <span
-              style={{ position: "relative", display: "flex", alignItems: "center", gap: "8px" }}
-            >
-              <Artwork
-                src="/haiba/icons/unipass.webp"
-                alt=""
+          {v.gcBig ? (
+            <>
+              <a
+                className="hb-press hb-rise hb-d2"
                 style={{
-                  width: "30px",
-                  height: "30px",
-                  objectFit: "contain",
-                  margin: "-6px -2px -6px -4px",
-                  display: "block",
+                  textDecoration: "none",
+                  color: v.gcInk,
+                  background: v.gcBg,
+                  borderRadius: "12px",
+                  marginTop: "12px",
+                  padding: "20px 18px 18px 18px",
+                  position: "relative",
+                  overflow: "hidden",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "6px",
+                  boxShadow: v.gcShadow,
                 }}
-              />
-              <span
-                style={{
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
+                href="#"
+                onClick={(e: any) => {
+                  e.preventDefault();
+                  go(v.giftHref || "/haiba/unipass");
                 }}
               >
-                {"Unipass gift"}
-              </span>
-              <span
-                style={{
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  whiteSpace: "nowrap",
-                  background: v.gcPillBg,
-                  color: v.gcPillInk,
-                  borderRadius: "999px",
-                  padding: "4px 9px",
-                }}
-              >
-                {v.gcPill}
-              </span>
-            </span>
-            <span
-              style={{
-                position: "relative",
-                fontFamily: "Figtree, system-ui, sans-serif",
-                fontSize: "25px",
-                fontWeight: "800",
-                letterSpacing: "-0.02em",
-                lineHeight: "1.1",
-                maxWidth: "200px",
-                marginTop: "4px",
-              }}
-            >
-              {v.giftTitle}
-            </span>
-            {v.gcHasSub ? (
-              <>
+                <span
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    right: "-50px",
+                    top: "-60px",
+                    width: "200px",
+                    height: "200px",
+                    borderRadius: "50%",
+                    background: "rgba(255,255,255,0.32)",
+                  }}
+                ></span>
+                <Artwork
+                  src="/haiba/birds/26-gift.webp"
+                  alt=""
+                  style={{
+                    position: "absolute",
+                    right: "-2px",
+                    bottom: "0",
+                    height: "156px",
+                    width: "auto",
+                    display: "block",
+                    filter: "drop-shadow(0 8px 10px rgba(31,38,0,0.22))",
+                  }}
+                />
                 <span
                   style={{
                     position: "relative",
-                    fontSize: "14px",
-                    fontWeight: "600",
-                    color: v.gcSubInk,
-                    lineHeight: "1.35",
-                    maxWidth: "200px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
                   }}
                 >
-                  {v.gcSub}
-                </span>
-              </>
-            ) : null}
-            <span
-              style={{
-                position: "relative",
-                display: "flex",
-                alignItems: "center",
-                gap: "12px",
-                marginTop: "12px",
-              }}
-            >
-              {v.gcPicking ? (
-                <>
-                  <span style={{ display: "flex", paddingLeft: "8px" }}>
-                    {(v.giftMarks || []).map((g: any, idx0: number) => (
-                      <Fragment key={idx0}>
-                        <span
-                          style={{
-                            width: "34px",
-                            height: "34px",
-                            marginLeft: "-8px",
-                            borderRadius: "8px",
-                            overflow: "hidden",
-                            background: "#FFFFFF",
-                            color: "#1F2600",
-                            border: "2px solid #C0F402",
-                            fontFamily: "Figtree, system-ui, sans-serif",
-                            fontSize: "12px",
-                            fontWeight: "800",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                          }}
-                        >
-                          {g.hasLogo ? (
-                            <>
-                              <Artwork
-                                src={g.logo}
-                                alt={g.name}
-                                style={{
-                                  width: "100%",
-                                  height: "100%",
-                                  objectFit: "cover",
-                                  display: "block",
-                                }}
-                              />
-                            </>
-                          ) : null}
-                          {g.mark}
-                        </span>
-                      </Fragment>
-                    ))}
-                  </span>
-                </>
-              ) : null}
-              {v.gcHasLogo ? (
-                <>
                   <Artwork
-                    src={v.gcLogo}
-                    alt={v.gcBrand}
+                    src="/haiba/icons/unipass.webp"
+                    alt=""
                     style={{
-                      width: "38px",
-                      height: "38px",
-                      borderRadius: "10px",
+                      width: "30px",
+                      height: "30px",
                       objectFit: "contain",
+                      margin: "-6px -2px -6px -4px",
                       display: "block",
-                      background: v.gcLogoBg,
-                      boxShadow: "0 0 0 2px #FFFFFF",
                     }}
                   />
-                </>
-              ) : null}
-              <span
+                  <span
+                    style={{
+                      fontSize: "12px",
+                      fontWeight: "800",
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {"Unipass gift"}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "12px",
+                      fontWeight: "800",
+                      whiteSpace: "nowrap",
+                      background: v.gcPillBg,
+                      color: v.gcPillInk,
+                      borderRadius: "999px",
+                      padding: "4px 9px",
+                    }}
+                  >
+                    {v.gcPill}
+                  </span>
+                </span>
+                <span
+                  style={{
+                    position: "relative",
+                    fontFamily: "Figtree, system-ui, sans-serif",
+                    fontSize: "25px",
+                    fontWeight: "800",
+                    letterSpacing: "-0.02em",
+                    lineHeight: "1.1",
+                    maxWidth: "200px",
+                    marginTop: "4px",
+                  }}
+                >
+                  {v.giftTitle}
+                </span>
+                {v.gcHasSub ? (
+                  <>
+                    <span
+                      style={{
+                        position: "relative",
+                        fontSize: "14px",
+                        fontWeight: "600",
+                        color: v.gcSubInk,
+                        lineHeight: "1.35",
+                        maxWidth: "200px",
+                      }}
+                    >
+                      {v.gcSub}
+                    </span>
+                  </>
+                ) : null}
+                <span
+                  style={{
+                    position: "relative",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "12px",
+                    marginTop: "12px",
+                  }}
+                >
+                  {v.gcPicking ? (
+                    <>
+                      <span style={{ display: "flex", paddingLeft: "8px" }}>
+                        {(v.giftMarks || []).map((g: any, idx0: number) => (
+                          <Fragment key={idx0}>
+                            <span
+                              style={{
+                                width: "34px",
+                                height: "34px",
+                                marginLeft: "-8px",
+                                borderRadius: "8px",
+                                overflow: "hidden",
+                                background: "#FFFFFF",
+                                color: "#1F2600",
+                                border: "2px solid #C0F402",
+                                fontFamily: "Figtree, system-ui, sans-serif",
+                                fontSize: "12px",
+                                fontWeight: "800",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                              }}
+                            >
+                              {g.hasLogo ? (
+                                <>
+                                  <Artwork
+                                    src={g.logo}
+                                    alt={g.name}
+                                    style={{
+                                      width: "100%",
+                                      height: "100%",
+                                      objectFit: "cover",
+                                      display: "block",
+                                    }}
+                                  />
+                                </>
+                              ) : null}
+                              {g.mark}
+                            </span>
+                          </Fragment>
+                        ))}
+                      </span>
+                    </>
+                  ) : null}
+                  {v.gcHasLogo ? (
+                    <>
+                      <Artwork
+                        src={v.gcLogo}
+                        alt={v.gcBrand}
+                        style={{
+                          width: "38px",
+                          height: "38px",
+                          borderRadius: "10px",
+                          objectFit: "contain",
+                          display: "block",
+                          background: v.gcLogoBg,
+                          boxShadow: "0 0 0 2px #FFFFFF",
+                        }}
+                      />
+                    </>
+                  ) : null}
+                  <span
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "800",
+                      whiteSpace: "nowrap",
+                      background: v.gcCtaBg,
+                      color: v.gcCtaInk,
+                      borderRadius: "999px",
+                      padding: "10px 14px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "6px",
+                    }}
+                  >
+                    {v.gcCta}
+                    <svg
+                      aria-hidden="true"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M9 6l6 6-6 6"></path>
+                    </svg>
+                  </span>
+                </span>
+              </a>
+            </>
+          ) : null}
+          {v.gcSmall ? (
+            <>
+              <a
+                className="hb-press hb-rise hb-d2"
                 style={{
-                  fontSize: "14px",
-                  fontWeight: "800",
-                  whiteSpace: "nowrap",
-                  background: v.gcCtaBg,
-                  color: v.gcCtaInk,
-                  borderRadius: "999px",
-                  padding: "10px 14px",
+                  marginTop: "12px",
+                  textDecoration: "none",
+                  color: v.gsInk,
+                  background: v.gsBg,
+                  borderRadius: "12px",
+                  padding: "12px 14px 12px 12px",
                   display: "flex",
                   alignItems: "center",
-                  gap: "6px",
+                  gap: "12px",
+                  boxShadow: v.gsShadow,
+                }}
+                href="#"
+                onClick={(e: any) => {
+                  e.preventDefault();
+                  go(v.giftHref || "/haiba/unipass");
                 }}
               >
-                {v.gcCta}
-                <svg
-                  aria-hidden="true"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                <span
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    flex: "none",
+                    borderRadius: "10px",
+                    background: v.gsTileBg,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
                 >
-                  <path d="M9 6l6 6-6 6"></path>
-                </svg>
-              </span>
-            </span>
-          </a>
+                  <Artwork
+                    src="/haiba/icons/unipass.webp"
+                    alt=""
+                    style={{
+                      width: "36px",
+                      height: "36px",
+                      objectFit: "contain",
+                      display: "block",
+                    }}
+                  />
+                </span>
+                <span
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "2px",
+                    flex: "1",
+                    minWidth: "0",
+                  }}
+                >
+                  <span style={{ fontSize: "15.5px", fontWeight: "800", lineHeight: "1.25" }}>
+                    {v.gsTitle}
+                  </span>
+                  <span style={{ fontSize: "13.5px", fontWeight: "600", color: v.gsSubInk }}>
+                    {v.gsSub}
+                  </span>
+                </span>
+                <span
+                  style={{
+                    flex: "none",
+                    whiteSpace: "nowrap",
+                    fontSize: "13px",
+                    fontWeight: "800",
+                    borderRadius: "999px",
+                    padding: "7px 12px",
+                    background: v.gsCtaBg,
+                    color: v.gsCtaInk,
+                  }}
+                >
+                  {v.gsCta}
+                </span>
+              </a>
+            </>
+          ) : null}
           {v.hasActive ? (
             <>
               <div
@@ -494,8 +581,10 @@ export default function Hub() {
                                 height: "44px",
                                 flex: "none",
                                 borderRadius: "10px",
+                                overflow: "hidden",
                                 background: r.bg,
                                 color: r.ink,
+                                boxShadow: "0 0 0 1px #ECE8F5",
                                 fontFamily: "Figtree, system-ui, sans-serif",
                                 fontSize: "15px",
                                 fontWeight: "800",
@@ -504,7 +593,21 @@ export default function Hub() {
                                 justifyContent: "center",
                               }}
                             >
-                              {r.mark}
+                              {r.hasLogo ? (
+                                <>
+                                  <Artwork
+                                    src={r.logo}
+                                    alt=""
+                                    style={{
+                                      width: "100%",
+                                      height: "100%",
+                                      objectFit: "contain",
+                                      display: "block",
+                                    }}
+                                  />
+                                </>
+                              ) : null}
+                              {r.noLogo ? <>{r.mark}</> : null}
                             </span>
                             <span
                               style={{
@@ -522,12 +625,12 @@ export default function Hub() {
                                   lineHeight: "1.25",
                                 }}
                               >
-                                {r.brand}
+                                {r.item}
                               </span>
                               <span
                                 style={{ fontSize: "13.5px", fontWeight: "600", color: "#6B6880" }}
                               >
-                                {r.item}
+                                {r.sub}
                               </span>
                             </span>
                             <span

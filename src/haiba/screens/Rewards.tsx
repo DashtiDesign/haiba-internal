@@ -153,6 +153,126 @@ export default function Rewards() {
                   }}
                 />
               </div>
+              {v.hasCodes ? (
+                <>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "baseline",
+                      margin: "22px 4px 10px 4px",
+                    }}
+                  >
+                    <span style={{ fontSize: "18px", fontWeight: "800", letterSpacing: "-0.02em" }}>
+                      {"Your codes"}
+                    </span>
+                    <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                      {v.codesCount}
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      background: "#FFFFFF",
+                      border: "1px solid #E9E5F4",
+                      borderRadius: "12px",
+                      overflow: "hidden",
+                      boxShadow: "0 6px 18px rgba(76,52,140,0.06)",
+                    }}
+                  >
+                    {(v.myCodes || []).map((r: any, idx0: number) => (
+                      <Fragment key={idx0}>
+                        <button
+                          onClick={r.open}
+                          className="hb-row"
+                          style={{
+                            font: "inherit",
+                            width: "100%",
+                            boxSizing: "border-box",
+                            textAlign: "left",
+                            border: "0",
+                            borderTop: r.rule,
+                            background: "transparent",
+                            color: "#1E1B2E",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "14px",
+                            padding: "14px 16px",
+                            cursor: "pointer",
+                          }}
+                        >
+                          <span
+                            style={{
+                              width: "44px",
+                              height: "44px",
+                              flex: "none",
+                              borderRadius: "10px",
+                              overflow: "hidden",
+                              background: r.bg,
+                              color: r.ink,
+                              boxShadow: "0 0 0 1px #ECE8F5",
+                              fontSize: "15px",
+                              fontWeight: "800",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                            }}
+                          >
+                            {r.hasLogo ? (
+                              <>
+                                <Artwork
+                                  src={r.logo}
+                                  alt=""
+                                  style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "contain",
+                                    display: "block",
+                                  }}
+                                />
+                              </>
+                            ) : null}
+                            {r.noLogo ? <>{r.mark}</> : null}
+                          </span>
+                          <span
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              gap: "3px",
+                              flex: "1",
+                              minWidth: "0",
+                            }}
+                          >
+                            <span
+                              style={{ fontSize: "15.5px", fontWeight: "800", lineHeight: "1.25" }}
+                            >
+                              {r.item}
+                            </span>
+                            <span
+                              style={{ fontSize: "13.5px", fontWeight: "600", color: "#6B6880" }}
+                            >
+                              {r.sub}
+                            </span>
+                          </span>
+                          <span
+                            style={{
+                              flex: "none",
+                              whiteSpace: "nowrap",
+                              fontSize: "13px",
+                              fontWeight: "800",
+                              borderRadius: "999px",
+                              padding: "7px 12px",
+                              background: "#6C3FFA",
+                              color: "#FFFFFF",
+                            }}
+                          >
+                            {"Show code"}
+                          </span>
+                        </button>
+                      </Fragment>
+                    ))}
+                  </div>
+                </>
+              ) : null}
               <div data-hb-pin-mark="" style={{ height: "0" }}></div>
               <div
                 className="hb-pinbar"

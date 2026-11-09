@@ -29,7 +29,9 @@ export function useGift(today: string) {
   return {
     ...now,
     pick: (id: string) => hb.set({ gift: { id, status: "active", month, on: today } }),
-    use: () => hb.state.gift && hb.set({ gift: { ...hb.state.gift, status: "used", on: today } }),
+    use: () =>
+      hb.state.gift &&
+      hb.set({ gift: { ...hb.state.gift, status: "used", on: today }, giftEver: true }),
     // cancelled or ran out: gone, they can pick again
     drop: () => hb.set({ gift: null }),
   };

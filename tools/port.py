@@ -64,7 +64,8 @@ GO_GIFT = 'href="#" onClick={(e: any) => { e.preventDefault(); go(v.giftHref || 
 # Placeholder links (href="#") in the order they appear in each screen. None = stays a placeholder.
 LINKS = {
     # 8 Nov: the hub is grouped (Ready for you, Your points, Savings and activity); its Activity link is now a board link.
-    "Hub": [GO_GIFT, GO_VAR, go("/"), None, None, None],
+    # 9 Nov: the big and the small Unipass card both open Unipass (or the gift code).
+    "Hub": [GO_GIFT, GO_GIFT, GO_VAR, go("/"), None, None, None],
     "Plans": [None, go("/")],
     "Wallet": [go_item("a"), go("/haiba/earn"), None, None, go("/haiba/rewards"), go("/haiba/rewards")],
 }
@@ -106,12 +107,13 @@ SCREEN = {
 }
 LOGIC = {
     "Rewards": [
-        ("var balance = 1240;", "var balance = props.base;"),
+        # 9 Nov: points held in reward codes are not spendable
+        ("var balance = 1240;", "var balance = props.base - (props.heldPts || 0);"),
         # 8 Nov: Use on a reward opens the full code screen (4.6) with that shop and reward.
         (
             "    var goCode = function (sh, d) {};",
             "    var goCode = function (sh, d) {\n"
-            "      var p = { kind: 'reward', shop: sh.name, item: d.name, pts: d.pts, img: d.img, logo: sh.logo || '', mark: sh.mark || sh.name.charAt(0), bg: sh.bg || '#FFFFFF', value: d.value || 0 };\n"
+            "      var p = { kind: 'reward', id: (sh.name + '-' + d.name).toLowerCase().replace(/[^a-z0-9]+/g, '-'), new: 1, shop: sh.name, item: d.name, pts: d.pts, img: d.img, logo: sh.logo || '', mark: sh.mark || sh.name.charAt(0), bg: sh.bg || '#FFFFFF', value: d.value || 0 };\n"
             "      nav('/haiba/code?' + Object.keys(p).map(function (k) { return k + '=' + encodeURIComponent(p[k]); }).join('&'));\n"
             "    };",
         ),

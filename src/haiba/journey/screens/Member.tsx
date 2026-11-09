@@ -52,6 +52,8 @@ import {
 } from "../data";
 import { FAQ } from "../strings.member";
 import { useGift } from "../gift";
+import { activeCodes, useRewardCode, type CodeRow } from "../codes";
+import { useHaiba } from "../../store";
 
 /* ---------- small shared bits ---------- */
 
@@ -640,7 +642,13 @@ export function Code() {
   const kind: CodeKind = q["kind"] === "gift" ? "gift" : "reward";
   // 9 Nov: a Unipass gift code is this month's real pick (journey/gift.ts), so the hub, Unipass and savings follow it.
   const gp = useGift(s.today);
+  // 9 Nov: reward codes are real too (journey/codes.ts), so they show in the active codes on the hub and Your points.
+  const rc = useRewardCode(q, s.today);
   const state = String(q["state"] ?? (kind === "gift" && gp.status === "used" ? "used" : "active"));
+  useEffect(() => {
+    if (kind === "reward" && state === "active") rc.register();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [kind, state]);
   // A reward picked on Your points (4.1) arrives with its shop and item in the link; otherwise the sample one shows.
   const picked = kind === "reward" && q["shop"] ? q : null;
   const it = picked
@@ -673,7 +681,7 @@ export function Code() {
   // The same link with another state, so cancel, expire and use keep the same reward on screen.
   const withState = (st: string) => {
     const p = new URLSearchParams();
-    Object.entries(q).forEach(([k, v]) => k !== "state" && p.set(k, String(v)));
+    Object.entries(q).forEach(([k, v]) => k !== "state" && k !== "new" && p.set(k, String(v)));
     p.set("state", st);
     return "/haiba/code?" + p.toString();
   };
@@ -881,6 +889,7 @@ export function Code() {
           variant="ghost"
           onClick={() => {
             if (kind === "gift") gp.drop();
+            else rc.drop();
             go(withState("cancelled"));
           }}
         >
@@ -893,6 +902,7 @@ export function Code() {
           <button
             onClick={() => {
               if (kind === "gift") gp.use();
+              else rc.use();
               go(withState("used"));
             }}
           >
@@ -903,7 +913,10 @@ export function Code() {
               if (kind === "gift") {
                 gp.drop();
                 go("/haiba/unipass");
-              } else go(withState("expired"));
+              } else {
+                rc.drop();
+                go(withState("expired"));
+              }
             }}
           >
             12 hours pass
@@ -986,6 +999,8 @@ export function Unipass() {
   const used = view === "used";
   const usedGift = gp.status === "used" && gp.gift ? gp.gift : GIFTS[0]!;
   const ready = !used && gp.status === "active" && gp.gift ? gp.gift : null;
+  const hb = useHaiba();
+  const codeRows = activeCodes(hb, s.today);
   const nextMonth = monthName(next, s.lang);
 
   // The one month tracker used across Haiba (same as the membership card): filled = gift used,
@@ -1158,18 +1173,7 @@ export function Unipass() {
 
       {ready && (
         <div className="jx-pad" style={{ marginTop: 16 }}>
-          <button className="jx-up-ready" onClick={() => go("/haiba/code?kind=gift")}>
-            <span className="jx-up-done-art" style={{ background: CAT_BG[ready.cat] }}>
-              <img src={ready.img} alt="" />
-            </span>
-            <span className="jx-row-main">
-              <span className="jx-row-title">{s.t("upReadyTitle", { item: ready.item })}</span>
-              <span className="jx-row-sub">
-                {s.t("upReadySub", { brand: BRANDS[ready.brand]!.name })}
-              </span>
-            </span>
-            <span className="jx-up-ready-cta">{s.t("upShowCode")}</span>
-          </button>
+          <CodeList rows={codeRows.filter((r) => r.kind === "gift")} />
         </div>
       )}
 
@@ -2020,6 +2024,31 @@ export function Saved({ focus }: { focus?: "activity" } = {}) {
         })}
       </section>
     </Screen>
+  );
+}
+
+/**
+ * 9 Nov: the one active code row, the same on the hub, Your points and Unipass:
+ * the item, the shop and the kind of code, then Show code.
+ */
+export function CodeList({ rows }: { rows: CodeRow[] }) {
+  const go = useNavigate();
+  if (!rows.length) return null;
+  return (
+    <div className="jx-codes">
+      {rows.map((r) => (
+        <button key={r.key} className="jx-code-row" onClick={() => go(r.href)}>
+          <span className="jx-code-tile" style={{ background: r.bg, color: r.ink }}>
+            {r.hasLogo ? <img src={r.logo} alt="" /> : r.mark}
+          </span>
+          <span className="jx-row-main">
+            <span className="jx-code-item">{r.item}</span>
+            <span className="jx-code-sub">{r.sub}</span>
+          </span>
+          <span className="jx-code-pill">Show code</span>
+        </button>
+      ))}
+    </div>
   );
 }
 

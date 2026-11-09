@@ -7,6 +7,7 @@ import { useSession } from "./journey/session";
 import { useJourneyActions } from "./journey/actions";
 import { PromoModeContext } from "./journey/promoMode";
 import { giftNow } from "./journey/gift";
+import { activeCodes } from "./journey/codes";
 
 // Keys that are shared across screens. Everything else is local to a screen.
 const SHARED = ["qty", "done", "codesQty", "cancelled", "accepted", "travel"];
@@ -67,6 +68,11 @@ export function useDC(initial) {
     giftValue: gn.gift?.value,
     giftLogo: gn.brand?.logo,
     giftLogoBg: gn.brand?.bg,
+    // the big gift card shows until the first gift is used; an active member has used gifts before
+    giftFirst: !(hb.state.member === "active" || hb.state.giftEver),
+    // 9 Nov: every code that is showing, one list for the hub and Your points (journey/codes.ts)
+    activeCodes: activeCodes(hb, s.today),
+    heldPts: hb.heldPts,
     // Promo pages: the student's own price, money, deposit and launch come from the prototype settings.
     // ?price= in the URL still overrides the price for previews.
     price: q.price != null ? String(q.price) : String(s.price),

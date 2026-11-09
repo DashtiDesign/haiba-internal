@@ -5388,35 +5388,65 @@ button.jx-row {
   text-wrap: balance;
 }
 
-/* 9 Nov: Unipass with a gift code showing. One row on top opens the code; the gift cards lose their Pick button. */
-.jx-up-ready {
+/* 9 Nov: active codes. One row, the same on the hub, Your points and Unipass (the hub and Your points draw it on the canvas with the same sizes). */
+.jx-codes {
+  background: #fff;
+  border: 1px solid #e9e5f4;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(76, 52, 140, 0.06);
+}
+.jx-code-row {
   width: 100%;
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 12px 12px 12px 12px;
+  padding: 14px 16px;
   border: 0;
-  border-radius: 16px;
-  background: #1e1b2e;
-  color: #fff;
+  background: transparent;
+  color: #1e1b2e;
   font: inherit;
   text-align: start;
   cursor: pointer;
-  box-shadow: 0 12px 24px rgba(30, 27, 46, 0.18);
 }
-.jx-up-ready .jx-row-title {
-  color: #fff;
+.jx-code-row + .jx-code-row {
+  border-top: 1px solid #f1eff7;
 }
-.jx-up-ready .jx-row-sub {
-  color: #b9b3cc;
+.jx-code-tile {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 800;
+  box-shadow: 0 0 0 1px #ece8f5;
 }
-.jx-up-ready-cta {
+.jx-code-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.jx-code-item {
+  font-size: 15.5px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+.jx-code-sub {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #6b6880;
+}
+.jx-code-pill {
   flex: none;
   white-space: nowrap;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 800;
   border-radius: 999px;
-  padding: 10px 14px;
-  background: #c0f402;
-  color: #1f2600;
+  padding: 7px 12px;
+  background: #6c3ffa;
+  color: #fff;
 }
