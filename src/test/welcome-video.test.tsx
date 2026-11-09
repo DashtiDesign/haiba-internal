@@ -3,14 +3,19 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import WelcomeVideo from "@/haiba/WelcomeVideo";
 import { welcomeVideos } from "@/haiba/welcomeVideos";
 
-vi.mock("@/haiba/transparentVideo", () => ({ createTransparentRenderer: () => ({ draw: () => true, dispose: () => {} }) }));
+vi.mock("@/haiba/transparentVideo", () => ({
+  createTransparentRenderer: () => ({ draw: () => true, dispose: () => {} }),
+}));
 let play = vi.fn<() => Promise<void>>();
 beforeEach(() => {
   play = vi.fn().mockResolvedValue(undefined);
   vi.spyOn(HTMLMediaElement.prototype, "play").mockImplementation(play);
   vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
 });
-afterEach(() => { cleanup(); vi.restoreAllMocks(); });
+afterEach(() => {
+  cleanup();
+  vi.restoreAllMocks();
+});
 
 describe("Welcome video interaction", () => {
   it("plays video 1 on arrival while its final-frame poster covers loading", () => {
@@ -46,7 +51,13 @@ describe("Welcome video interaction", () => {
   });
 });
 describe("Welcome video speed and step changes", () => {
-  it.each([[1, 2], [2, 2], [3, 2], [4, 1], [5, 1]] as const)("step %s plays at %sx", (step, rate) => {
+  it.each([
+    [1, 2],
+    [2, 2],
+    [3, 2],
+    [4, 1],
+    [5, 1],
+  ] as const)("step %s plays at %sx", (step, rate) => {
     const { container } = render(<WelcomeVideo step={step} />);
     expect(container.querySelector("video")?.playbackRate).toBe(rate);
   });
