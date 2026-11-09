@@ -18,6 +18,7 @@ import { parseCountry } from "../haiba/journey/settings";
 import TrayGestures from "@/haiba/TrayGestures";
 import PreloadScreens from "@/haiba/PreloadScreens";
 import HitAreas from "@/haiba/HitAreas";
+import PageBackdrop from "@/haiba/PageBackdrop";
 import PrototypePanel from "../haiba/PrototypePanel";
 import MotionExperience from "../haiba/MotionExperience";
 import { MotionConfig } from "motion/react";
@@ -173,6 +174,7 @@ function RootComponent() {
               <TrayGestures />
               <PreloadScreens />
               <HitAreas />
+              <PageBackdrop />
             </MotionExperience>
           </MotionConfig>
         </div>

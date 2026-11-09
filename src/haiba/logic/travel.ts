@@ -87,13 +87,11 @@ export function useVals() {
       setState({ copied: true });
     },
     steps: [
-      { n: "1", text: "Download the Airalo app" },
-      { n: "2", text: "Sign up with your email" },
-      { n: "3", text: "Choose the 5GB, 7 day plan" },
-      { n: "4", text: "Enter your code at checkout" },
+      { n: "1", text: "Get the Airalo app" },
+      { n: "2", text: "Pick the 5GB, 7 day plan" },
+      { n: "3", text: "Enter your code when you pay" },
     ],
-    usedLine:
-      t === "redeemed" ? "Used on Airalo. You saved BHD 5.64" : "Your free plan is now used",
+    usedLine: t === "redeemed" ? "You saved BHD 5.64" : "One code per member",
     canAccept: t === "revealed",
     accept: function () {
       setState({ travel: "redeemed" });
@@ -109,7 +107,17 @@ export function useVals() {
       ? 3 - paid + (3 - paid === 1 ? " month" : " months") + " to go"
       : revealed
         ? "Use by 27 Nov 2026"
-        : "Worth BHD 5+. Ready when you land.",
+        : "Ready when you land",
+    // 9 Nov: the button only shows when there is something to do. Once the code shows, its card has the Copy button.
+    showCta: !locked && !revealed,
+    dockBg:
+      !locked && !revealed
+        ? "linear-gradient(180deg, rgba(243,240,250,0) 0%, #F3F0FA 32%)"
+        : "transparent",
+    dockPe: !locked && !revealed ? "auto" : "none",
+    bodyPad: !locked && !revealed ? "140px" : "28px",
+    showNote: !locked && !revealed,
+    note: "Your code counts as used once you see it.",
     ctaBg: locked ? "#E4DBFF" : "#1E1B2E",
     ctaInk: locked ? "#4A4660" : "#C0F402",
     ctaOp: "1",

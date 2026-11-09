@@ -414,9 +414,6 @@ export function Paid() {
           <Button variant="primary" onClick={() => go("/haiba/welcome")}>
             {s.t("paidCta")}
           </Button>
-          <Button variant="ghost" onClick={() => go("/haiba/unipass")}>
-            {s.t("paidPick")}
-          </Button>
         </>
       }
     >

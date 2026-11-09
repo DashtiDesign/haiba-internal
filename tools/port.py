@@ -191,9 +191,7 @@ def patch_screen(name):
         for z in ("10", "11", "12"):
             s = s.replace('position: "absolute", inset: "0", background: "rgba(20,16,40,0.55)", zIndex: "%s"' % z,
                           'position: "fixed", inset: "0", background: "rgba(20,16,40,0.55)", zIndex: "5%s"' % z[-1])
-    if name == "PaywallStory":
-        # The story is laid out for 844px; small phones scroll instead of cutting off the price screen
-        s = s.replace('minHeight: "100svh"', 'minHeight: v.s4 ? "max(100svh, 880px)" : "max(100svh, 840px)"', 1)
+    # 9 Nov: the story flows (top bar, content, footer) and fits any screen height; no fixed 844px layout any more.
     if name in ("Rewards", "Earn"):
         # Shop sheet covers the screen in the app, above the bottom nav and panel tab
         s = s.replace('position: "absolute", inset: "0", background: "rgba(20,16,40,0.5)", zIndex: "10"', 'position: "fixed", inset: "0", background: "rgba(20,16,40,0.5)", zIndex: "70"', 1)

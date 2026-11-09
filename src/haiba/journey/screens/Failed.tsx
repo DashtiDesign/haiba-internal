@@ -1,8 +1,6 @@
-import { AlertCircle } from "lucide-react";
 import Artwork from "../../Artwork";
 import { Navigate, useNavigate } from "../../nav";
 import { Button, LinkOut, Screen, TopBar, supportHref } from "../ui";
-import { Pill } from "../parts";
 import { useSession } from "../session";
 import { pathFor, useJourneyActions } from "../actions";
 
@@ -27,13 +25,13 @@ export default function Failed() {
       <TopBar back={back} />
       <div className="jx-center">
         <Artwork src="/haiba/birds/16-torn.png" alt="" className="jx-center-art" />
-        <Pill tone="bad" icon={<AlertCircle size={14} aria-hidden="true" />}>
-          {f ? s.t(("reason_" + f.reason) as "reason_declined") : ""}
-        </Pill>
-        <h1 className="jx-h2" style={{ marginTop: 6 }}>
-          {s.t("failedTitle")}
+        {/* 9 Nov: one title, the reason in red. No separate pill. */}
+        <h1 className="jx-h2 jx-fail-title">
+          {f
+            ? s.t(("reason_" + f.reason) as "reason_declined").replace(/\.$/, "")
+            : s.t("failedTitle")}
         </h1>
-        <p className="jx-sub">{s.t("failedBody")}</p>
+        <p className="jx-sub">{s.t("failedBodyShort")}</p>
       </div>
       <div className="jx-actions">
         <Button variant="primary" onClick={() => f && a.startPayment(f.kind)}>

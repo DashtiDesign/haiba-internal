@@ -112,7 +112,7 @@ export function useVals() {
         shop: r.brand,
         item: r.item,
         pts: hit ? hit.pts : 200,
-        img: hit && hit.name === "Cookie" ? "/haiba/emoji/cookie.webp" : "/haiba/emoji/drink.webp",
+        img: hit && hit.name === "Cookie" ? "/haiba/emoji/cookie.png" : "/haiba/emoji/drink.png",
         logo: isCb ? "/haiba/brands/coffee-bean.webp" : "",
         mark: r.mark,
         bg: r.bg,
@@ -169,12 +169,22 @@ export function useVals() {
     travelRowSub: tLocked
       ? "Unlocks after 3 months on the monthly plan"
       : tUsed
-        ? "Used on Airalo. You saved BHD 5.64"
+        ? "You saved BHD 5.64"
         : tShown
           ? "Your Airalo code is ready"
           : travelTitle0 + " We’ve got you.",
-    travelHasPill: tLocked || tUsed || tShown,
-    travelPill: tLocked ? "Locked" : "Used",
+    // 9 Nov: a used perk turns into a light card with a green Used tick; only a locked perk shows a pill.
+    travelDark: !tUsed,
+    travelUsed: tUsed,
+    travelLocked: tLocked,
+    travelOpen: !tLocked,
+    travelBg: tUsed ? "#FFFFFF" : "#1E1B2E",
+    travelInk: tUsed ? "#1E1B2E" : "#FFFFFF",
+    travelHi: tUsed ? "#4F25D6" : "#C0F402",
+    travelSubInk: tUsed ? "#6B6880" : "#B9B3CC",
+    travelShadow: tUsed
+      ? "0 0 0 1px #E9E5F4, 0 6px 18px rgba(76,52,140,0.06)"
+      : "0 12px 24px rgba(30,27,46,0.18)",
     travelOp: tUsed ? "0.6" : "1",
     travelSub: tLocked
       ? "Unlocks after 3 months on the monthly plan."

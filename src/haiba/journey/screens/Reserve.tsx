@@ -60,12 +60,17 @@ export function MainPromo({ mode = "Reserve" }: { mode?: PromoMode }) {
   const Page = PROMOS[s.settings.mainPromo] ?? PlansConvert;
   return (
     <PromoModeContext.Provider value={mode}>
-      {mode === "Reserve" && s.spotsLeft <= 100 && (
-        <div className="jx-spots-banner" role="status">
-          {s.t("spotsLeft", { n: s.spotsLeft, country: countryName(s, s.c) })}
-        </div>
-      )}
-      <Page />
+      {/* 9 Nov: the spots line and the page share one screen height, so the page never scrolls by the
+          height of the spots line. The story fits the screen exactly; the other pages scroll only if they
+          are longer than the screen. */}
+      <div className={"jx-promo-shell" + (Page === PaywallStory ? " jx-promo-fit" : "")}>
+        {mode === "Reserve" && s.spotsLeft <= 100 && (
+          <div className="jx-spots-banner" role="status">
+            {s.t("spotsLeft", { n: s.spotsLeft, country: countryName(s, s.c) })}
+          </div>
+        )}
+        <Page />
+      </div>
     </PromoModeContext.Provider>
   );
 }

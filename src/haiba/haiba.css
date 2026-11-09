@@ -531,3 +531,25 @@ html.hb-tray-open body {
 .hb-home-banner-cta { margin-top: 3.4cqw; display: inline-flex; align-items: center; gap: 1cqw; padding: 1.7cqw 2.9cqw 1.7cqw 3.4cqw; border-radius: 999px; background: #c0f402; color: #1e1b2e;
   font-size: 3.15cqw; font-weight: 800; letter-spacing: 0.005em; line-height: 1.2; box-shadow: 0 0.6cqw 2cqw rgba(30, 10, 120, 0.28); }
 .hb-home-banner-cta svg { width: 2.6cqw; height: 2.6cqw; }
+
+/* 9 Nov: promo pages share one screen with the spots line above them (Reserve.tsx, MainPromo).
+   The shell is the screen; the page fills what is left, so nothing scrolls by the spots line's height. */
+.jx-promo-shell { display: flex; flex-direction: column; min-height: 100svh; min-height: 100dvh; }
+.jx-promo-shell > [class^="pg-"] { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+.hb-app .jx-promo-shell > [class^="pg-"] > div:first-child { flex: 1; min-height: 0 !important; }
+/* The story fits the screen exactly: top bar, content, footer. Long steps scroll inside, the page never moves. */
+.jx-promo-shell.jx-promo-fit { height: 100svh; height: 100dvh; overflow: hidden; }
+.hb-app [class^="pg-"].pg-paywallstory > div:first-child { height: 100svh; height: 100dvh; min-height: 0 !important; }
+.hb-app .jx-promo-fit [class^="pg-"].pg-paywallstory > div:first-child { height: auto; }
+.hb-story-body { scrollbar-width: none; overscroll-behavior: contain; }
+.hb-story-body::-webkit-scrollbar { display: none; }
+
+/* 9 Nov: the notch and home bar padding of these screens is painted in the screen's own colour, so no light
+   band shows above or below them. On a phone the app backdrop follows the page (PageBackdrop.tsx). */
+.hb-app :is(.pg-hub, .pg-plans, .pg-points, .pg-wallet) { background: #f3f0fa; }
+.hb-app :is(.pg-redeem, .pg-shop, .pg-basket) { background: #f8f8f8; }
+.hb-app .pg-story { background: var(--hb-welcome-surface); }
+.hb-app .pg-story.hb-welcome-step-1 { background: linear-gradient(var(--hb-welcome-surface) 50%, var(--hb-welcome-scene-floor) 50%); }
+@media (max-width: 520px) {
+  .hb-app { background: transparent !important; }
+}

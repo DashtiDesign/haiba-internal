@@ -24,6 +24,8 @@ export default function PaywallTimeline() {
           color: "#FFFFFF",
           position: "relative",
           overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         <span
@@ -38,7 +40,7 @@ export default function PaywallTimeline() {
             background: "radial-gradient(circle, rgba(108,63,250,0.55) 0%, rgba(108,63,250,0) 70%)",
           }}
         ></span>
-        <div style={{ position: "relative", padding: "14px 20px 250px 20px" }}>
+        <div style={{ position: "relative", padding: "14px 20px 0 20px" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <button
               onClick={v.openExit}
@@ -466,7 +468,7 @@ export default function PaywallTimeline() {
               display: "flex",
               alignItems: "center",
               gap: "8px",
-              marginTop: "18px",
+              margin: "18px 0 28px 0",
               fontSize: "13.5px",
               fontWeight: "700",
               color: "#DCD2FF",
@@ -491,122 +493,116 @@ export default function PaywallTimeline() {
             {v.refundLine}
           </div>
         </div>
-        <div className="hb-fixed-bottom hb-cta-dock">
-          <div className="hb-fixed-inner">
-            <div
-              style={{
-                position: "absolute",
-                left: "0",
-                right: "0",
-                bottom: "0",
-                background: "#FFFFFF",
-                color: "#1E1B2E",
-                borderRadius: "16px 16px 0 0",
-                padding: "18px 16px calc(16px + env(safe-area-inset-bottom, 0px)) 16px",
-                zIndex: "5",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "baseline",
-                  justifyContent: "center",
-                  gap: "6px",
-                }}
-              >
-                <span style={{ fontSize: "22px", fontWeight: "900", letterSpacing: "-0.02em" }}>
-                  {v.price}
-                  {" a year"}
-                </span>
-                <span style={{ fontSize: "14px", fontWeight: "700", color: "#6B6880" }}>
-                  {"+ VAT"}
-                </span>
-              </div>
-              <div
-                style={{
-                  textAlign: "center",
-                  fontSize: "14px",
-                  fontWeight: "700",
-                  color: "#6C3FFA",
-                  marginTop: "2px",
-                }}
-              >
-                {"Only "}
-                {v.perMonth}
-                {" a month"}
-              </div>
-              <button
-                onClick={v.reserve}
-                className="hb-press"
-                style={{
-                  marginTop: "10px",
-                  width: "100%",
-                  font: "inherit",
-                  border: "0",
-                  cursor: "pointer",
-                  background: "#C0F402",
-                  color: "#1F2600",
-                  borderRadius: "999px",
-                  padding: "15px 16px",
-                  fontSize: "18px",
-                  fontWeight: "900",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "6px",
-                  boxShadow: "0 10px 22px rgba(108,63,250,0.18)",
-                }}
-              >
-                {v.ctaShort}
-              </button>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "6px",
-                  marginTop: "8px",
-                  fontSize: "13.5px",
-                  fontWeight: "700",
-                  color: "#4A4660",
-                }}
-              >
-                <span style={{ color: "#2F7D32", display: "flex" }}>
-                  <svg
-                    aria-hidden="true"
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="3.4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M5 12.5l4.5 4.5L19 7.5"></path>
-                  </svg>
-                </span>
-                {v.ctaNote}
-              </div>
-              <button
-                onClick={v.openExit}
-                className="hb-press"
-                style={{
-                  width: "100%",
-                  font: "inherit",
-                  border: "0",
-                  background: "transparent",
-                  cursor: "pointer",
-                  color: "#6B6880",
-                  fontSize: "14.5px",
-                  fontWeight: "600",
-                  padding: "8px 16px 0 16px",
-                }}
-              >
-                {"Not now"}
-              </button>
-            </div>
+        <div
+          style={{
+            position: "relative",
+            marginTop: "auto",
+            background: "#FFFFFF",
+            color: "#1E1B2E",
+            borderRadius: "16px 16px 0 0",
+            padding: "20px 16px max(16px, env(safe-area-inset-bottom)) 16px",
+            zIndex: "5",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "baseline",
+              justifyContent: "center",
+              gap: "6px",
+            }}
+          >
+            <span style={{ fontSize: "22px", fontWeight: "900", letterSpacing: "-0.02em" }}>
+              {v.price}
+              {" a year"}
+            </span>
+            <span style={{ fontSize: "14px", fontWeight: "700", color: "#6B6880" }}>{"+ VAT"}</span>
           </div>
+          <div
+            style={{
+              textAlign: "center",
+              fontSize: "14px",
+              fontWeight: "700",
+              color: "#6C3FFA",
+              marginTop: "2px",
+            }}
+          >
+            {"Only "}
+            {v.perMonth}
+            {" a month"}
+          </div>
+          <button
+            onClick={v.reserve}
+            className="hb-press"
+            style={{
+              marginTop: "10px",
+              width: "100%",
+              font: "inherit",
+              border: "0",
+              cursor: "pointer",
+              background: "#C0F402",
+              color: "#1F2600",
+              borderRadius: "999px",
+              padding: "15px 16px",
+              fontSize: "18px",
+              fontWeight: "900",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "6px",
+              boxShadow: "0 10px 22px rgba(108,63,250,0.18)",
+            }}
+          >
+            {v.ctaShort}
+          </button>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "6px",
+              marginTop: "8px",
+              fontSize: "13.5px",
+              fontWeight: "700",
+              color: "#4A4660",
+            }}
+          >
+            <span style={{ color: "#2F7D32", display: "flex" }}>
+              <svg
+                aria-hidden="true"
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+              </svg>
+            </span>
+            {v.ctaNote}
+          </div>
+          <button
+            onClick={v.openExit}
+            className="hb-press"
+            style={{
+              width: "100%",
+              font: "inherit",
+              border: "0",
+              background: "transparent",
+              cursor: "pointer",
+              color: "#6B6880",
+              fontSize: "15px",
+              fontWeight: "600",
+              padding: "14px 32px",
+              minHeight: "48px",
+              marginTop: "4px",
+            }}
+          >
+            {"Not now"}
+          </button>
         </div>
         {v.exitOpen ? (
           <>
@@ -647,62 +643,79 @@ export default function PaywallTimeline() {
                     display: "block",
                   }}
                 />
+                <span
+                  style={{ position: "relative", width: "64px", height: "64px", display: "block" }}
+                >
+                  {v.exitHasLogo ? (
+                    <>
+                      <Artwork
+                        src={v.exitLogo}
+                        alt={v.exitShop}
+                        style={{
+                          width: "64px",
+                          height: "64px",
+                          boxSizing: "border-box",
+                          padding: v.exitLogoPad,
+                          borderRadius: "16px",
+                          objectFit: "contain",
+                          display: "block",
+                          background: v.exitLogoBg,
+                          boxShadow: "0 0 0 1px #ECE8F5, 0 10px 20px rgba(76,52,140,0.14)",
+                        }}
+                      />
+                    </>
+                  ) : null}
+                  {v.exitNoLogo ? (
+                    <>
+                      <span
+                        style={{
+                          width: "64px",
+                          height: "64px",
+                          borderRadius: "16px",
+                          display: "block",
+                          background: "#F0EBFF",
+                        }}
+                      ></span>
+                    </>
+                  ) : null}
+                  <Artwork
+                    src="/haiba/emoji/gift.webp"
+                    alt=""
+                    style={{
+                      position: "absolute",
+                      right: "-12px",
+                      bottom: "-10px",
+                      width: "38px",
+                      height: "38px",
+                      display: "block",
+                      filter: "drop-shadow(0 4px 6px rgba(76,52,140,0.25))",
+                    }}
+                  />
+                </span>
                 <div
                   style={{
-                    fontSize: "26px",
+                    fontSize: "24px",
                     fontWeight: "900",
                     letterSpacing: "-0.03em",
-                    lineHeight: "1.1",
+                    lineHeight: "1.12",
+                    marginTop: "18px",
                     maxWidth: "250px",
+                    color: "#1E1B2E",
                   }}
                 >
-                  {"Before you go"}
-                </div>
-                <div
-                  style={{
-                    marginTop: "14px",
-                    display: "flex",
-                    gap: "12px",
-                    alignItems: "center",
-                    background: "#1E1B2E",
-                    color: "#FFFFFF",
-                    borderRadius: "12px",
-                    padding: "14px",
-                  }}
-                >
-                  <Artwork
-                    src="/haiba/coins/coin-34.webp"
-                    alt=""
-                    style={{ width: "40px", height: "40px", display: "block", flex: "none" }}
-                  />
-                  <span style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-                    <span style={{ fontSize: "15.5px", fontWeight: "800", color: "#C0F402" }}>
-                      {v.missTitle}
-                    </span>
-                    <span
-                      style={{
-                        fontSize: "14px",
-                        fontWeight: "600",
-                        color: "#CFC9E0",
-                        lineHeight: "1.35",
-                      }}
-                    >
-                      {v.missBody}
-                    </span>
-                  </span>
+                  {v.exitA}
+                  <span style={{ color: "#6C3FFA" }}>{v.exitB}</span>
+                  {v.exitC}
                 </div>
                 <div
                   style={{
                     fontSize: "15px",
                     fontWeight: "600",
-                    color: "#4A4660",
-                    lineHeight: "1.45",
-                    marginTop: "12px",
+                    color: "#6B6880",
+                    marginTop: "6px",
                   }}
                 >
-                  {v.exitPre}
-                  <b style={{ color: "#1E1B2E" }}>{v.exitHi}</b>
-                  {v.exitPost}
+                  {"Every month, with Haiba."}
                 </div>
                 <button
                   onClick={v.reserve}
@@ -739,7 +752,8 @@ export default function PaywallTimeline() {
                     color: "#6B6880",
                     fontSize: "15px",
                     fontWeight: "600",
-                    padding: "12px 16px 2px 16px",
+                    padding: "14px 16px 4px 16px",
+                    minHeight: "48px",
                   }}
                 >
                   {"No thanks"}

@@ -532,17 +532,6 @@ export default function Hub() {
             >
               {"Your points"}
             </span>
-            <Link
-              style={{
-                fontSize: "14px",
-                fontWeight: "700",
-                textDecoration: "none",
-                color: "#6C3FFA",
-              }}
-              to="/haiba/rewards"
-            >
-              {"See all"}
-            </Link>
           </div>
           <div
             className="hb-rise hb-d2"
@@ -1123,29 +1112,33 @@ export default function Hub() {
               position: "relative",
               overflow: "hidden",
               textDecoration: "none",
-              color: "#FFFFFF",
-              background: "#1E1B2E",
+              color: v.travelInk,
+              background: v.travelBg,
               borderRadius: "12px",
               padding: "14px 16px",
               display: "flex",
               alignItems: "center",
               gap: "12px",
-              boxShadow: "0 12px 24px rgba(30,27,46,0.18)",
+              boxShadow: v.travelShadow,
             }}
             to="/haiba/travel"
           >
-            <span
-              aria-hidden="true"
-              style={{
-                position: "absolute",
-                right: "-50px",
-                top: "-70px",
-                width: "150px",
-                height: "150px",
-                borderRadius: "50%",
-                border: "2px dashed rgba(192,244,2,0.25)",
-              }}
-            ></span>
+            {v.travelDark ? (
+              <>
+                <span
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    right: "-50px",
+                    top: "-70px",
+                    width: "150px",
+                    height: "150px",
+                    borderRadius: "50%",
+                    border: "2px dashed rgba(192,244,2,0.25)",
+                  }}
+                ></span>
+              </>
+            ) : null}
             <span
               style={{
                 position: "relative",
@@ -1167,7 +1160,7 @@ export default function Hub() {
                       objectFit: "cover",
                       display: "block",
                       marginLeft: f.ml,
-                      boxShadow: "0 0 0 2px #1E1B2E",
+                      boxShadow: `0 0 0 2px ${v.travelBg}`,
                     }}
                   />
                 </Fragment>
@@ -1183,68 +1176,110 @@ export default function Hub() {
                 minWidth: "0",
               }}
             >
-              <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <span style={{ fontSize: "15.5px", fontWeight: "800" }}>
-                  <span style={{ color: "#C0F402" }}>{"5GB"}</span>
-                  {" free travel data"}
-                </span>
-                {v.travelHasPill ? (
-                  <>
-                    <span
-                      style={{
-                        fontSize: "11.5px",
-                        fontWeight: "800",
-                        background: "#3A3550",
-                        color: "#E4DBFF",
-                        borderRadius: "999px",
-                        padding: "2px 8px",
-                      }}
-                    >
-                      {v.travelPill}
-                    </span>
-                  </>
-                ) : null}
+              <span style={{ fontSize: "15.5px", fontWeight: "800", lineHeight: "1.25" }}>
+                <span style={{ color: v.travelHi }}>{"5GB"}</span>
+                {" free travel data"}
               </span>
               <span
                 style={{
                   fontSize: "13px",
                   fontWeight: "600",
-                  color: "#B9B3CC",
+                  color: v.travelSubInk,
                   lineHeight: "1.35",
                 }}
               >
                 {v.travelRowSub}
               </span>
             </span>
-            <span
-              style={{
-                position: "relative",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-end",
-                gap: "6px",
-                flex: "none",
-              }}
-            >
-              <Artwork
-                src="/haiba/brands/airalo-white.svg"
-                alt="Airalo"
-                style={{ height: "14px", width: "auto", display: "block" }}
-              />
-              <svg
-                aria-hidden="true"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#C0F402"
-                strokeWidth="2.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M9 6l6 6-6 6"></path>
-              </svg>
-            </span>
+            {v.travelDark ? (
+              <>
+                <span
+                  style={{
+                    position: "relative",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-end",
+                    gap: "6px",
+                    flex: "none",
+                  }}
+                >
+                  {v.travelLocked ? (
+                    <>
+                      <span
+                        style={{
+                          fontSize: "12px",
+                          fontWeight: "800",
+                          whiteSpace: "nowrap",
+                          background: "#3A3550",
+                          color: "#E4DBFF",
+                          borderRadius: "999px",
+                          padding: "4px 10px",
+                        }}
+                      >
+                        {"Locked"}
+                      </span>
+                    </>
+                  ) : null}
+                  {v.travelOpen ? (
+                    <>
+                      <Artwork
+                        src="/haiba/brands/airalo-white.svg"
+                        alt="Airalo"
+                        style={{ height: "14px", width: "auto", display: "block" }}
+                      />
+                    </>
+                  ) : null}
+                  <svg
+                    aria-hidden="true"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#C0F402"
+                    strokeWidth="2.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M9 6l6 6-6 6"></path>
+                  </svg>
+                </span>
+              </>
+            ) : null}
+            {v.travelUsed ? (
+              <>
+                <span
+                  style={{
+                    position: "relative",
+                    flex: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "5px",
+                    whiteSpace: "nowrap",
+                    fontSize: "13px",
+                    fontWeight: "800",
+                    borderRadius: "999px",
+                    padding: "7px 12px",
+                    background: "#E8F5E3",
+                    color: "#2F7D32",
+                  }}
+                >
+                  <svg
+                    aria-hidden="true"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                  </svg>
+                  {"Used"}
+                </span>
+              </>
+            ) : null}
           </Link>
           <div
             className="hb-rise hb-d3"

@@ -93,6 +93,7 @@ const en = {
   // Payment failed
   failedTitle: "Your payment did not go through",
   failedBody: "No money was taken. Try again or use another card.",
+  failedBodyShort: "Your payment did not go through. No money was taken.",
   reason_declined: "Your bank did not accept this card.",
   reason_funds: "There was not enough money on the card.",
   reason_expired: "This card has expired.",
@@ -253,6 +254,7 @@ const ar: Partial<Record<StringKey, string>> = {
 
   failedTitle: "ما تمت عملية الدفع",
   failedBody: "ما انخصم أي مبلغ. جرّب مرة ثانية أو استخدم بطاقة ثانية.",
+  failedBodyShort: "ما تمت عملية الدفع، وما انخصم منك أي مبلغ.",
   reason_declined: "البنك ما قبل البطاقة.",
   reason_funds: "ما فيه رصيد كافي في البطاقة.",
   reason_expired: "البطاقة منتهية.",

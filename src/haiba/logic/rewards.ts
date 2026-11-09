@@ -5,6 +5,7 @@ import { useDC } from "../dc";
 
 export function useVals() {
   const { state, setState, props, nav } = useDC({
+    pinned: false,
     gcat: "All",
     q: "",
     bonus: false,
@@ -20,7 +21,31 @@ export function useVals() {
     accepted: [],
     done: false,
   });
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // 9 Nov: once the points card and search scroll away, the search sticks to the top and the points slide in beside it.
+    var frame = 0;
+    var last = false;
+    var check = function () {
+      frame = 0;
+      var mark = document.querySelector("[data-hb-pin-mark]");
+      var on = !!mark && mark.getBoundingClientRect().top < 1;
+      if (on !== last) {
+        last = on;
+        setState({ pinned: on });
+      }
+    };
+    var later = function () {
+      if (!frame) frame = requestAnimationFrame(check);
+    };
+    window.addEventListener("scroll", later, { passive: true });
+    window.addEventListener("resize", later);
+    later();
+    return function () {
+      window.removeEventListener("scroll", later);
+      window.removeEventListener("resize", later);
+      cancelAnimationFrame(frame);
+    };
+  }, []);
 
   var isNew = (props.member ?? "Active member") === "New member";
   var SHOPS = [
@@ -383,6 +408,7 @@ export function useVals() {
     }
   });
   var left = balance - committed;
+  var pin = !!state.pinned || props.searchBar === "Pinned (scrolled)";
   var q = (state.q || "").toLowerCase();
   var chip = state.chip || "All";
   // Opens the full reward code screen (4.6). On the canvas it stays on the sheet; the app opens /haiba/code.
@@ -810,6 +836,15 @@ export function useVals() {
     });
   return Object.assign(sheetFlat, {
     balance: left.toLocaleString("en-US"),
+    // The pinned search bar (9 Nov)
+    pinBg: pin ? "rgba(243,240,250,0.96)" : "rgba(243,240,250,0)",
+    pinShadow: pin ? "0 -60px 0 0 #F3F0FA, 0 8px 18px rgba(76,52,140,0.10)" : "none",
+    pinGap: pin ? "8px" : "0px",
+    pinChipW: pin ? "140px" : "0px",
+    pinChipPad: pin ? "12px" : "0px",
+    pinChipOp: pin ? "1" : "0",
+    pinChipY: pin ? "0px" : "6px",
+    pinHidden: pin ? "false" : "true",
     q: state.q || "",
     onSearch: function (e) {
       setState({ q: e.target.value });

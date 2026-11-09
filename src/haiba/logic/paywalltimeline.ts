@@ -57,6 +57,11 @@ export function useVals() {
     Wingman: "a free student box",
     "VOX Cinemas": "a free cinema ticket",
   };
+  var EXITLOGO = {
+    "The Coffee Bean": ["/haiba/brands/coffee-bean.webp", "#FFFFFF"],
+    Wingman: ["/haiba/brands/wingman.webp", "#F9F9F9"],
+    "VOX Cinemas": ["/haiba/brands/vox.webp", "#FFFFFF"],
+  };
   var common = {
     stepsTitle: join ? "Join today" : "Reserve now, pay later",
     s1Title: join ? "Haiba starts today" : "Your price is locked",
@@ -126,6 +131,21 @@ export function useVals() {
     missBody: SHOPGIFT[shopName]
       ? "With Haiba, you would get " + SHOPGIFT[shopName] + " and 80 points there."
       : "Without Haiba, you miss a free gift and points every month.",
+    // 9 Nov: the exit sheet is one short title and one line, then the buttons.
+    // 9 Nov: the exit sheet is a picture (their shop and a gift), one short line, then the buttons.
+    exitTitle: "Before you go",
+    exitShop: shopName,
+    exitHasLogo: !!EXITLOGO[shopName],
+    exitNoLogo: !EXITLOGO[shopName],
+    exitLogo: EXITLOGO[shopName] ? EXITLOGO[shopName][0] : "",
+    exitLogoBg: EXITLOGO[shopName] ? EXITLOGO[shopName][1] : "#FFFFFF",
+    exitLogoPad: shopName === "The Coffee Bean" ? "0" : "8px",
+    exitA: SHOPGIFT[shopName] ? "Get " : "Get ",
+    exitB: SHOPGIFT[shopName] ? SHOPGIFT[shopName] : "a free gift",
+    exitC: SHOPGIFT[shopName] ? " at " + shopName : " every month",
+    missLine: SHOPGIFT[shopName]
+      ? "You went to " + shopName + " last month. With Haiba, that was " + SHOPGIFT[shopName] + "."
+      : "Every month without Haiba, you miss a free gift.",
     exitOpen: view === "exit",
     reservedOpen: view === "reserved",
     openExit: function () {

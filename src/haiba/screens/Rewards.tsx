@@ -23,7 +23,7 @@ export default function Rewards() {
           fontFamily: "Figtree, system-ui, sans-serif",
           color: "#1E1B2E",
           position: "relative",
-          overflow: "hidden",
+          overflow: "clip",
         }}
       >
         <div
@@ -153,43 +153,96 @@ export default function Rewards() {
                   }}
                 />
               </div>
-              <div style={{ position: "relative", marginTop: "14px" }}>
-                <svg
-                  aria-hidden="true"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#6B6880"
-                  strokeWidth="2.4"
-                  strokeLinecap="round"
-                  style={{ position: "absolute", left: "14px", top: "13px" }}
-                >
-                  <circle cx="11" cy="11" r="7"></circle>
-                  <path d="M20 20l-3.5-3.5"></path>
-                </svg>
-                <input
-                  type="search"
-                  value={v.q}
-                  onInput={v.onSearch}
-                  onChange={v.onSearch}
-                  placeholder="Search 200+ shops"
-                  aria-label="Search 200+ shops"
+              <div data-hb-pin-mark="" style={{ height: "0" }}></div>
+              <div
+                className="hb-pinbar"
+                style={{
+                  position: "sticky",
+                  top: "0",
+                  zIndex: "20",
+                  margin: "6px -16px 0 -16px",
+                  padding: "8px 16px",
+                  background: v.pinBg,
+                  boxShadow: v.pinShadow,
+                  transition: "background-color 0.22s ease, box-shadow 0.22s ease",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: v.pinGap,
+                }}
+              >
+                <div style={{ position: "relative", flex: "1", minWidth: "0" }}>
+                  <svg
+                    aria-hidden="true"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#6B6880"
+                    strokeWidth="2.4"
+                    strokeLinecap="round"
+                    style={{ position: "absolute", left: "14px", top: "13px" }}
+                  >
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <path d="M20 20l-3.5-3.5"></path>
+                  </svg>
+                  <input
+                    type="search"
+                    value={v.q}
+                    onInput={v.onSearch}
+                    onChange={v.onSearch}
+                    placeholder="Search 200+ shops"
+                    aria-label="Search 200+ shops"
+                    style={{
+                      width: "100%",
+                      boxSizing: "border-box",
+                      font: "inherit",
+                      fontSize: "15px",
+                      fontWeight: "600",
+                      color: "#1E1B2E",
+                      background: "#FFFFFF",
+                      border: "0",
+                      borderRadius: "10px",
+                      padding: "12px 14px 12px 40px",
+                      boxShadow: "0 0 0 1px #ECE8F5",
+                      outline: "none",
+                    }}
+                  />
+                </div>
+                <span
+                  aria-hidden={v.pinHidden}
                   style={{
-                    width: "100%",
+                    flex: "none",
                     boxSizing: "border-box",
-                    font: "inherit",
-                    fontSize: "15px",
-                    fontWeight: "600",
-                    color: "#1E1B2E",
-                    background: "#FFFFFF",
-                    border: "0",
+                    height: "44px",
+                    maxWidth: v.pinChipW,
+                    opacity: v.pinChipOp,
+                    transform: `translateY(${v.pinChipY})`,
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    padding: `0 ${v.pinChipPad}`,
                     borderRadius: "10px",
-                    padding: "12px 14px 12px 40px",
-                    boxShadow: "0 0 0 1px #ECE8F5",
-                    outline: "none",
+                    background: "linear-gradient(135deg, #6C3FFA 0%, #4F25D6 100%)",
+                    color: "#FFFFFF",
+                    fontSize: "15px",
+                    fontWeight: "800",
+                    letterSpacing: "-0.01em",
+                    transition:
+                      "max-width 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), padding 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease, transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1)",
                   }}
-                />
+                >
+                  <Artwork
+                    src="/haiba/coins/coin-front.webp"
+                    alt=""
+                    style={{ width: "20px", height: "20px", flex: "none", display: "block" }}
+                  />
+                  {v.balance}
+                  <span style={{ fontSize: "12.5px", fontWeight: "700", color: "#E4DBFF" }}>
+                    {"pts"}
+                  </span>
+                </span>
               </div>
               {v.showBrowse ? (
                 <>

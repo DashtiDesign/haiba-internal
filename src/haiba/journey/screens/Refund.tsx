@@ -1,7 +1,7 @@
 import Artwork from "../../Artwork";
 import { Navigate, useNavigate } from "../../nav";
 import { Button, LinkOut, Screen, TopBar, supportHref } from "../ui";
-import { JourneyStage, Section, Steps } from "../parts";
+import { Section, Steps } from "../parts";
 import { useSession } from "../session";
 import { pathFor, useJourneyActions } from "../actions";
 import { addDays } from "../format";
@@ -85,7 +85,6 @@ export default function Refund() {
             <p className="jx-sub">{s.t("refundFailedBody")}</p>
           </>
         )}
-        <JourneyStage stage="refund" />
       </div>
 
       {status !== "refund_failed" && (

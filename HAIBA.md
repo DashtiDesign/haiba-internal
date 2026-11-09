@@ -134,3 +134,15 @@ Students never see this panel.
 - Taps: no double tap delay or grey flash, an instant pressed state, and anything under 44 x 44 gets an invisible 44px hit area (`HitAreas.tsx`). Screen code preloads in the background after the first screen (`PreloadScreens.tsx`).
 - Home banner (8 Nov): edge to edge on the Unipal home (`Home.tsx`, `.hb-home-banner` in `haiba.css`). The art is the Haiba card for the student's country (Bahrain waterfront or Riyadh, from the app's `country`) with the mascot bursting out, made with GPT Image in Figma Weave. Words are live Figtree text (lime wordmark, two line headline, compact lime button; member and non member lines) sized to the banner's width. Loading: AVIF 640/960/1290 wide (16 to 53 KB) with WebP fallback via `srcset`, preloaded with the page, a 250 byte blurred preview inline, fixed aspect ratio so nothing jumps.
 - Web banner: `public/haiba/banners/web-bh` and `web-sa`, 1200 x 491 with the words in the image, as AVIF, WebP and JPG plus @2x.
+
+## Rules added 9 Nov
+
+- Promo pages fit the phone. `MainPromo` wraps the "few spots left" bar and the page in `.jx-promo-shell`, so the bar never makes a page scroll. The Story promo is a column (top bar, content, footer with the tally and button) and fits any height with no page scroll. Option C (Timeline) has no sticky button: the price panel and button sit at the end of the page.
+- Story promo: the gift tiles all use the same 44px logo square, nothing marks one tile as picked, and the subscription rows share one style, so nothing looks tappable. The lime circle and the bird are centred without `transform`, so the pop in animation cannot move them.
+- Exit sheet on every promo page: the student's shop logo with a gift, one title ("Get a free drink at The Coffee Bean", or "Get a free gift every month") and one line, then Reserve and No thanks. "Not now" and "No thanks" have a 48px tap area.
+- No light strip on overscroll: `PageBackdrop.tsx` paints the page background the colour at the bottom of the screen; screens padded for the notch paint that padding in their own colour.
+- "You are a member" has one button, See how Haiba works. The gift is picked on the last step of that walkthrough.
+- Hub: Your points has no See all (the Use your points card opens the page). The travel perk turns into a light card with a green Used tick once used; only Locked shows a pill.
+- Your points: when the points card scrolls away, the search sticks to the top with the points beside it, and goes back on scroll up.
+- Travel data: shorter copy, no country list. The button only shows before the code is revealed; then the code card's Copy button is the action. The page no longer has a fixed height, so it scrolls.
+- Refund pages have no Reserve, Pay the rest, Member strip. Payment failed has one red title (the reason) and one line, no pill.

@@ -1056,7 +1056,9 @@ export default function PaywallTable() {
                   color: "#6B6880",
                   fontSize: "15px",
                   fontWeight: "600",
-                  padding: "10px 16px",
+                  padding: "14px 32px",
+                  minHeight: "48px",
+                  alignSelf: "center",
                 }}
               >
                 {"Not now"}
@@ -1103,62 +1105,79 @@ export default function PaywallTable() {
                     display: "block",
                   }}
                 />
+                <span
+                  style={{ position: "relative", width: "64px", height: "64px", display: "block" }}
+                >
+                  {v.exitHasLogo ? (
+                    <>
+                      <Artwork
+                        src={v.exitLogo}
+                        alt={v.exitShop}
+                        style={{
+                          width: "64px",
+                          height: "64px",
+                          boxSizing: "border-box",
+                          padding: v.exitLogoPad,
+                          borderRadius: "16px",
+                          objectFit: "contain",
+                          display: "block",
+                          background: v.exitLogoBg,
+                          boxShadow: "0 0 0 1px #ECE8F5, 0 10px 20px rgba(76,52,140,0.14)",
+                        }}
+                      />
+                    </>
+                  ) : null}
+                  {v.exitNoLogo ? (
+                    <>
+                      <span
+                        style={{
+                          width: "64px",
+                          height: "64px",
+                          borderRadius: "16px",
+                          display: "block",
+                          background: "#F0EBFF",
+                        }}
+                      ></span>
+                    </>
+                  ) : null}
+                  <Artwork
+                    src="/haiba/emoji/gift.webp"
+                    alt=""
+                    style={{
+                      position: "absolute",
+                      right: "-12px",
+                      bottom: "-10px",
+                      width: "38px",
+                      height: "38px",
+                      display: "block",
+                      filter: "drop-shadow(0 4px 6px rgba(76,52,140,0.25))",
+                    }}
+                  />
+                </span>
                 <div
                   style={{
-                    fontSize: "26px",
+                    fontSize: "24px",
                     fontWeight: "900",
                     letterSpacing: "-0.03em",
-                    lineHeight: "1.1",
+                    lineHeight: "1.12",
+                    marginTop: "18px",
                     maxWidth: "250px",
+                    color: "#1E1B2E",
                   }}
                 >
-                  {"Before you go"}
-                </div>
-                <div
-                  style={{
-                    marginTop: "14px",
-                    display: "flex",
-                    gap: "12px",
-                    alignItems: "center",
-                    background: "#1E1B2E",
-                    color: "#FFFFFF",
-                    borderRadius: "12px",
-                    padding: "14px",
-                  }}
-                >
-                  <Artwork
-                    src="/haiba/coins/coin-34.webp"
-                    alt=""
-                    style={{ width: "40px", height: "40px", display: "block", flex: "none" }}
-                  />
-                  <span style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-                    <span style={{ fontSize: "15.5px", fontWeight: "800", color: "#C0F402" }}>
-                      {v.missTitle}
-                    </span>
-                    <span
-                      style={{
-                        fontSize: "14px",
-                        fontWeight: "600",
-                        color: "#CFC9E0",
-                        lineHeight: "1.35",
-                      }}
-                    >
-                      {v.missBody}
-                    </span>
-                  </span>
+                  {v.exitA}
+                  <span style={{ color: "#6C3FFA" }}>{v.exitB}</span>
+                  {v.exitC}
                 </div>
                 <div
                   style={{
                     fontSize: "15px",
                     fontWeight: "600",
-                    color: "#4A4660",
-                    lineHeight: "1.45",
-                    marginTop: "12px",
+                    color: "#6B6880",
+                    marginTop: "6px",
                   }}
                 >
-                  {v.exitPre}
-                  <b style={{ color: "#1E1B2E" }}>{v.exitHi}</b>
-                  {v.exitPost}
+                  {"Every month, with Haiba."}
                 </div>
                 <button
                   onClick={v.reserve}
@@ -1195,7 +1214,8 @@ export default function PaywallTable() {
                     color: "#6B6880",
                     fontSize: "15px",
                     fontWeight: "600",
-                    padding: "12px 16px 2px 16px",
+                    padding: "14px 16px 4px 16px",
+                    minHeight: "48px",
                   }}
                 >
                   {"No thanks"}
