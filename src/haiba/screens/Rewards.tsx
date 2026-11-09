@@ -83,7 +83,6 @@ export default function Rewards() {
                 <span style={{ width: "40px", height: "40px" }}></span>
               </div>
               <div
-                data-hb-hero=""
                 className="hb-rise"
                 style={{
                   marginTop: "16px",
@@ -277,6 +276,7 @@ export default function Rewards() {
               <div data-hb-pin-mark="" style={{ height: "0" }}></div>
               <div
                 className="hb-pinbar"
+                data-hb-pinbar=""
                 style={{
                   position: "sticky",
                   top: "0",
@@ -329,7 +329,6 @@ export default function Rewards() {
                   />
                 </div>
                 <span
-                  data-hb-chip=""
                   aria-hidden={v.pinHidden}
                   style={{
                     flex: "none",
@@ -342,8 +341,6 @@ export default function Rewards() {
                     borderRadius: "10px",
                     background: "#FFFFFF",
                     boxShadow: "0 0 0 1px #ECE8F5",
-                    transition:
-                      "max-width 0.48s cubic-bezier(0.4, 0, 0.2, 1), margin-left 0.48s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.12s ease",
                   }}
                 >
                   <span
@@ -364,7 +361,13 @@ export default function Rewards() {
                     <Artwork
                       src="/haiba/coins/coin-front.webp"
                       alt=""
-                      style={{ width: "24px", height: "24px", flex: "none", display: "block" }}
+                      style={{
+                        width: "24px",
+                        height: "24px",
+                        flex: "none",
+                        display: "block",
+                        transform: v.pinCoin,
+                      }}
                     />
                     {v.balance}
                     <span style={{ fontSize: "12.5px", fontWeight: "700", color: "#6B6880" }}>
