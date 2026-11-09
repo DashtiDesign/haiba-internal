@@ -20,18 +20,146 @@ export function useVals() {
     cancelled: [],
     accepted: [],
     done: false,
+    morph: false,
   });
   useEffect(() => {
     // 9 Nov: once the points card and search scroll away, the search sticks to the top and the points slide in beside it.
     var frame = 0;
     var last = false;
+    // 9 Nov: the points card morphs into the small points box (and back). A copy of the card flies from the card to the box,
+    // shrinking while the card fades into the box. The search shrinks at the same pace.
+    var ghost = null,
+      done = 0;
+    var EASE = "cubic-bezier(0.4, 0, 0.2, 1)",
+      MS = 480;
+    var morph = function (toPin) {
+      var hero = document.querySelector("[data-hb-hero]");
+      var chip = document.querySelector("[data-hb-chip]");
+      var bar = document.querySelector(".hb-pinbar");
+      var still =
+        window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!hero || !chip || !bar || still || !document.body.animate) return false;
+      var chipIn = chip.firstElementChild;
+      var hr = hero.getBoundingClientRect(),
+        br = bar.getBoundingClientRect();
+      // Measure the box at its full size with a hidden copy (the real one is still folded away).
+      var probe = chipIn.cloneNode(true);
+      probe.style.cssText +=
+        ";position:fixed;left:0;top:0;visibility:hidden;display:inline-flex;width:auto;transform:none;";
+      document.body.appendChild(probe);
+      var cw = Math.ceil(probe.getBoundingClientRect().width) || 120,
+        ch = 44;
+      probe.remove();
+      var small = {
+        left: br.right - 16 - cw,
+        top: Math.max(br.top, 0) + 8,
+        width: cw,
+        height: ch,
+        r: 10,
+      };
+      // Pinning: the card comes down from just above the screen. Unpinning: it flies back up to where the card really is.
+      var big = {
+        left: hr.left,
+        top: toPin ? Math.max(hr.top, -hr.height * 0.55) : hr.top,
+        width: hr.width,
+        height: hr.height,
+        r: 16,
+      };
+      var from = toPin ? big : small,
+        to = toPin ? small : big;
+      if (ghost) ghost.remove();
+      clearTimeout(done);
+      var g = document.createElement("div");
+      g.setAttribute("aria-hidden", "true");
+      g.style.cssText =
+        "position:fixed;z-index:60;pointer-events:none;overflow:hidden;box-sizing:border-box;background:#FFFFFF;margin:0;";
+      var bigL = hero.cloneNode(true);
+      bigL.removeAttribute("data-hb-hero");
+      bigL.className = "";
+      bigL.style.position = "absolute";
+      bigL.style.margin = "0";
+      bigL.style.right = "0";
+      bigL.style.top = "50%";
+      bigL.style.width = hr.width + "px";
+      bigL.style.height = hr.height + "px";
+      bigL.style.boxSizing = "border-box";
+      bigL.style.boxShadow = "none";
+      bigL.style.transformOrigin = "100% 50%";
+      var smallL = chipIn.cloneNode(true);
+      smallL.style.position = "absolute";
+      smallL.style.right = "0";
+      smallL.style.top = "50%";
+      smallL.style.transform = "none";
+      smallL.style.transformOrigin = "100% 50%";
+      g.appendChild(bigL);
+      g.appendChild(smallL);
+      document.body.appendChild(g);
+      ghost = g;
+      var k = hr.height / ch;
+      var box = function (b) {
+        return {
+          left: b.left + "px",
+          top: b.top + "px",
+          width: b.width + "px",
+          height: b.height + "px",
+          borderRadius: b.r + "px",
+        };
+      };
+      var shBig = "0 12px 24px rgba(79,37,214,0.22)",
+        shSmall = "0 0 0 1px #ECE8F5";
+      var a = box(from),
+        b = box(to);
+      a.boxShadow = toPin ? shBig : shSmall;
+      b.boxShadow = toPin ? shSmall : shBig;
+      // The purple of the card turns into the white of the box, so it reads as one thing changing shape.
+      a.backgroundColor = toPin ? "#5A30E8" : "#FFFFFF";
+      b.backgroundColor = toPin ? "#FFFFFF" : "#5A30E8";
+      g.animate([a, b], { duration: MS, easing: EASE, fill: "both" });
+      // The card shrinks to the box height and fades out early; the box grows from the card size and fades in late.
+      // The card's content shrinks exactly with the box and fades out by halfway; the box's content fades in after.
+      var bigFrames = [
+        { transform: "translateY(-50%) scale(1)", opacity: 1, offset: 0 },
+        { transform: "translateY(-50%) scale(" + (1 + 1 / k) / 2 + ")", opacity: 0, offset: 0.5 },
+        { transform: "translateY(-50%) scale(" + 1 / k + ")", opacity: 0, offset: 1 },
+      ];
+      var smallFrames = [
+        { transform: "translateY(-50%) scale(1.3)", opacity: 0, offset: 0 },
+        { transform: "translateY(-50%) scale(1.3)", opacity: 0, offset: 0.45 },
+        { transform: "translateY(-50%) scale(1)", opacity: 1, offset: 1 },
+      ];
+      if (!toPin) {
+        bigFrames = bigFrames
+          .slice()
+          .reverse()
+          .map(function (f) {
+            return Object.assign({}, f, { offset: 1 - f.offset });
+          });
+        smallFrames = smallFrames
+          .slice()
+          .reverse()
+          .map(function (f) {
+            return Object.assign({}, f, { offset: 1 - f.offset });
+          });
+      }
+      bigL.animate(bigFrames, { duration: MS, easing: EASE, fill: "both" });
+      smallL.animate(smallFrames, { duration: MS, easing: EASE, fill: "both" });
+      done = setTimeout(function () {
+        if (ghost === g) {
+          g.remove();
+          ghost = null;
+        }
+        setState({ morph: false });
+      }, MS + 20);
+      return true;
+    };
     var check = function () {
       frame = 0;
       var mark = document.querySelector("[data-hb-pin-mark]");
       var on = !!mark && mark.getBoundingClientRect().top < 1;
       if (on !== last) {
         last = on;
-        setState({ pinned: on });
+        var m = morph(on);
+        setState({ pinned: on, morph: m });
       }
     };
     var later = function () {
@@ -44,6 +172,8 @@ export function useVals() {
       window.removeEventListener("scroll", later);
       window.removeEventListener("resize", later);
       cancelAnimationFrame(frame);
+      clearTimeout(done);
+      if (ghost) ghost.remove();
     };
   }, []);
 
@@ -878,8 +1008,8 @@ export function useVals() {
     pinShadow: pin ? "0 -60px 0 0 #F3F0FA, 0 8px 18px rgba(76,52,140,0.10)" : "none",
     pinMl: pin ? "8px" : "0px",
     pinChipW: pin ? "150px" : "0px",
-    pinChipOp: pin ? "1" : "0",
-    pinChipX: pin ? "0px" : "16px",
+    pinChipOp: pin && !state.morph ? "1" : "0",
+    pinChipX: "0px",
     pinHidden: pin ? "false" : "true",
     q: state.q || "",
     onSearch: function (e) {

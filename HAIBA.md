@@ -156,3 +156,4 @@ Students never see this panel.
 - The Hadiya code row stands out from points codes: pale lime row, gift badge on the logo, "Hadiya" label, dark pill, and on the hub an "Open Hadiya" link (the way into Hadiya while a code shows).
 - Name: the free monthly gift is "Hadiya" (Arabic هدية), first called Unipass. Haiba is the subscription, Hadiya is the gift. Never write "Hadiya gift": Hadiya already means gift ("Pick your Hadiya", "Hadiya code", label HADIYA). The page is `/haiba/hadiya`, the icon `public/haiba/icons/hadiya.webp`, the canvas boards Hd01 to Hd09, and sample gift codes start with HD.
 - Hadiya rows in activity and the wallet show the Hadiya gift icon, not a letter.
+- Your points: when the search pins, the purple points card morphs into the small points box (a copy of the card shrinks into the box while purple turns white), and back when it unpins. The search shrinks at the same pace. Reduced motion skips it.

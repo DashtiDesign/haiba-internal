@@ -83,6 +83,7 @@ export default function Rewards() {
                 <span style={{ width: "40px", height: "40px" }}></span>
               </div>
               <div
+                data-hb-hero=""
                 className="hb-rise"
                 style={{
                   marginTop: "16px",
@@ -328,6 +329,7 @@ export default function Rewards() {
                   />
                 </div>
                 <span
+                  data-hb-chip=""
                   aria-hidden={v.pinHidden}
                   style={{
                     flex: "none",
@@ -341,7 +343,7 @@ export default function Rewards() {
                     background: "#FFFFFF",
                     boxShadow: "0 0 0 1px #ECE8F5",
                     transition:
-                      "max-width 0.42s cubic-bezier(0.22, 1, 0.36, 1), margin-left 0.42s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease",
+                      "max-width 0.48s cubic-bezier(0.4, 0, 0.2, 1), margin-left 0.48s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.12s ease",
                   }}
                 >
                   <span
@@ -357,7 +359,6 @@ export default function Rewards() {
                       fontWeight: "800",
                       letterSpacing: "-0.01em",
                       transform: `translateX(${v.pinChipX})`,
-                      transition: "transform 0.42s cubic-bezier(0.22, 1, 0.36, 1)",
                     }}
                   >
                     <Artwork
