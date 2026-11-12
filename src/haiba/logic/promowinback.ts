@@ -59,7 +59,7 @@ export function useVals() {
   };
   var at = sim(V);
   var worthN = at.worth;
-  // Last 3 months, month by month: gift + points that month, plus Spotify and ChatGPT in month 1.
+  // Last 3 months, month by month: gift + points that month, plus talabat pro and ChatGPT Go in month 1.
   var favs = V <= 3 ? 1 : V <= 5 ? 2 : V <= 9 ? 3 : 4,
     seen = {},
     vals = [],

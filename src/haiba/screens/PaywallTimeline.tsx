@@ -202,7 +202,7 @@ export default function PaywallTimeline() {
                   }}
                 >
                   <Artwork
-                    src="/haiba/brands/spotify.webp"
+                    src={v.p1Logo}
                     alt=""
                     style={{
                       width: "30px",
@@ -214,7 +214,7 @@ export default function PaywallTimeline() {
                     }}
                   />
                   <span style={{ display: "flex", flexDirection: "column" }}>
-                    <span style={{ fontSize: "14px", fontWeight: "800" }}>{"Spotify"}</span>
+                    <span style={{ fontSize: "14px", fontWeight: "800" }}>{v.p1Short}</span>
                     <span style={{ fontSize: "12px", fontWeight: "600", color: "#B9B3CC" }}>
                       {"3 months free"}
                     </span>
@@ -231,7 +231,7 @@ export default function PaywallTimeline() {
                   }}
                 >
                   <Artwork
-                    src="/haiba/brands/chatgpt.webp"
+                    src={v.p2Logo}
                     alt=""
                     style={{
                       width: "30px",
@@ -243,7 +243,7 @@ export default function PaywallTimeline() {
                     }}
                   />
                   <span style={{ display: "flex", flexDirection: "column" }}>
-                    <span style={{ fontSize: "14px", fontWeight: "800" }}>{"ChatGPT"}</span>
+                    <span style={{ fontSize: "14px", fontWeight: "800" }}>{v.p2Short}</span>
                     <span style={{ fontSize: "12px", fontWeight: "600", color: "#B9B3CC" }}>
                       {"3 months free"}
                     </span>

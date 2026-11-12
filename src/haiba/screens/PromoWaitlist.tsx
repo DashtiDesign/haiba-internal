@@ -226,8 +226,8 @@ export default function PromoWaitlist() {
             >
               <span style={{ height: "44px", display: "flex", alignItems: "center", gap: "4px" }}>
                 <Artwork
-                  src="/haiba/brands/spotify.webp"
-                  alt="Spotify"
+                  src="/haiba/brands/talabat.webp"
+                  alt="talabat pro"
                   style={{
                     width: "34px",
                     height: "34px",
@@ -239,7 +239,7 @@ export default function PromoWaitlist() {
                 />
                 <Artwork
                   src="/haiba/brands/chatgpt.webp"
-                  alt="ChatGPT"
+                  alt="ChatGPT Go"
                   style={{
                     width: "34px",
                     height: "34px",
@@ -251,7 +251,7 @@ export default function PromoWaitlist() {
                 />
               </span>
               <span style={{ fontSize: "14px", fontWeight: "700", lineHeight: "1.25" }}>
-                {"Spotify and ChatGPT free"}
+                {"talabat pro and ChatGPT Go free"}
               </span>
             </span>
             <span

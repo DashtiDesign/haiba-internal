@@ -21,6 +21,7 @@ BOARDS = {
     "Character": ("hub", "Hub"),
     "Plans": ("plans", "Plans"),
     "Points": ("points", "Points"),
+    # 12 Nov: bird looks, bought with points and worn on the hub
     "Story": ("story", "Welcome"),
     "Wallet": ("wallet", "Wallet"),
     "Offer": ("redeem", "Redeem"),
@@ -38,6 +39,10 @@ BOARDS = {
     "PaywallBase": ("paywallbase", "PaywallBase"),
     "PaywallTimeline": ("paywalltimeline", "PaywallTimeline"),
     "PlansConvert": ("plansconvert", "PlansConvert"),
+    # 11 Nov: a smaller Haiba, to learn which part makes students pay (same price, less inside)
+    "PaywallPoints": ("paywallpoints", "PaywallPoints"),
+    "PaywallPointsApps": ("paywallpointsapps", "PaywallPointsApps"),
+    "PaywallPointsGifts": ("paywallpointsgifts", "PaywallPointsGifts"),
     "PaywallStory": ("paywallstory", "PaywallStory"),
     "PaywallTable": ("paywalltable", "PaywallTable"),
     # Free travel data perk (Airalo). Plan and home country come from the store, see dc.ts.
@@ -198,8 +203,10 @@ def patch_screen(name):
     # 9 Nov: the story flows (top bar, content, footer) and fits any screen height; no fixed 844px layout any more.
     if name in ("Rewards", "Earn"):
         # Shop sheet covers the screen in the app, above the bottom nav and panel tab
-        s = s.replace('position: "absolute", inset: "0", background: "rgba(20,16,40,0.5)", zIndex: "10"', 'position: "fixed", inset: "0", background: "rgba(20,16,40,0.5)", zIndex: "70"', 1)
+        # (12 Nov: every sheet on the page, the shop sheet and the bird look preview)
+        s = s.replace('position: "absolute", inset: "0", background: "rgba(20,16,40,0.5)", zIndex: "10"', 'position: "fixed", inset: "0", background: "rgba(20,16,40,0.5)", zIndex: "70"')
         s = s.replace('maxHeight: "86%"', 'maxHeight: "86vh", maxWidth: "430px", margin: "0 auto"', 1)
+        s = s.replace('maxHeight: "92%"', 'maxHeight: "92vh", maxWidth: "430px", margin: "0 auto"', 1)
     plan = LINKS.get(name)
     if plan is not None:
         parts = s.split(PD)

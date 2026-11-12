@@ -302,8 +302,8 @@ export default function PromoYear() {
                   }}
                 >
                   <Artwork
-                    src="/haiba/brands/spotify.webp"
-                    alt="Spotify Premium Student"
+                    src="/haiba/brands/talabat.webp"
+                    alt="talabat pro"
                     style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
                   />
                 </span>
@@ -311,7 +311,7 @@ export default function PromoYear() {
                   style={{ display: "flex", flexDirection: "column", gap: "2px", minWidth: "0" }}
                 >
                   <span style={{ fontSize: "16px", fontWeight: "700", lineHeight: "1.3" }}>
-                    {"Spotify Premium Student"}
+                    {"talabat pro"}
                   </span>
                   <span
                     style={{

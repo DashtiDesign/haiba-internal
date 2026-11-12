@@ -255,8 +255,8 @@ export default function PromoGift() {
               >
                 <span style={{ flex: "none" }}>
                   <Artwork
-                    src="/haiba/brands/spotify.webp"
-                    alt="Spotify"
+                    src="/haiba/brands/talabat.webp"
+                    alt="talabat pro"
                     style={{
                       width: "36px",
                       height: "36px",
@@ -268,9 +268,7 @@ export default function PromoGift() {
                   />
                 </span>
                 <span style={{ display: "flex", flexDirection: "column", gap: "1px", flex: "1" }}>
-                  <span style={{ fontSize: "15.5px", fontWeight: "800" }}>
-                    {"Spotify Premium Student"}
-                  </span>
+                  <span style={{ fontSize: "15.5px", fontWeight: "800" }}>{"talabat pro"}</span>
                   <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
                     {"3 months free"}
                   </span>
@@ -314,7 +312,7 @@ export default function PromoGift() {
                 <span style={{ flex: "none" }}>
                   <Artwork
                     src="/haiba/brands/chatgpt.webp"
-                    alt="ChatGPT"
+                    alt="ChatGPT Go"
                     style={{
                       width: "36px",
                       height: "36px",

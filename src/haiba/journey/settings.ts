@@ -17,7 +17,8 @@ export type Settings = {
   spotsCap: Record<Country, number>; // reservation spots per country (decided 7 Nov: 400 each)
   spotsTaken: Record<Country, number>; // prototype: spots already reserved in each country
   student: "verified" | "unverified" | "expired"; // prototype: the student's Unipal student status
-  mainPromo: "join" | "story" | "timeline" | "base" | "table"; // the promo page students see before they reserve
+  mainPromo:
+    "join" | "story" | "timeline" | "base" | "table" | "points" | "pointsApps" | "pointsGifts"; // the promo page students see before they reserve
 };
 
 export const DEFAULT_SETTINGS: Settings = {

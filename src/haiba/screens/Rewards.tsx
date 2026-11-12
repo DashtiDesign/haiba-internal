@@ -517,6 +517,186 @@ export default function Rewards() {
                     }}
                   >
                     <span style={{ fontSize: "18px", fontWeight: "800", letterSpacing: "-0.02em" }}>
+                      {"Bird looks"}
+                    </span>
+                    <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
+                      {v.looksNote}
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "10px",
+                      margin: "-4px -16px 0 -16px",
+                      padding: "4px 16px 8px 16px",
+                      overflowX: "auto",
+                      scrollbarWidth: "none",
+                    }}
+                  >
+                    {(v.looks || []).map((k: any, idx0: number) => (
+                      <Fragment key={idx0}>
+                        <button
+                          onClick={k.open}
+                          aria-label={k.aria}
+                          className="hb-press"
+                          style={{
+                            font: "inherit",
+                            flex: "none",
+                            width: "116px",
+                            border: "0",
+                            padding: "4px",
+                            cursor: "pointer",
+                            textAlign: "left",
+                            background: "#FFFFFF",
+                            color: "#1E1B2E",
+                            borderRadius: "18px",
+                            boxShadow: k.ring,
+                          }}
+                        >
+                          <span
+                            style={{
+                              position: "relative",
+                              display: "block",
+                              height: "122px",
+                              borderRadius: "14px",
+                              background: k.bg,
+                              overflow: "hidden",
+                            }}
+                          >
+                            <span
+                              aria-hidden="true"
+                              style={{
+                                position: "absolute",
+                                left: "50%",
+                                bottom: "10px",
+                                width: "60px",
+                                height: "10px",
+                                marginLeft: "-30px",
+                                borderRadius: "50%",
+                                background: k.shadow,
+                                filter: "blur(3px)",
+                              }}
+                            ></span>
+                            <Artwork
+                              src={k.still}
+                              alt=""
+                              style={{
+                                position: "absolute",
+                                left: "50%",
+                                bottom: "6px",
+                                height: "112px",
+                                width: "auto",
+                                transform: "translateX(-50%)",
+                                display: "block",
+                              }}
+                            />
+                            {k.legend ? (
+                              <>
+                                <span className="hb-shine" aria-hidden="true"></span>
+                              </>
+                            ) : null}
+                            {k.wearing ? (
+                              <>
+                                <span
+                                  aria-hidden="true"
+                                  style={{
+                                    position: "absolute",
+                                    right: "6px",
+                                    top: "6px",
+                                    width: "22px",
+                                    height: "22px",
+                                    borderRadius: "50%",
+                                    background: "#C0F402",
+                                    color: "#1F2600",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    boxShadow: "0 2px 6px rgba(0,0,0,0.18)",
+                                  }}
+                                >
+                                  <svg
+                                    width="13"
+                                    height="13"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="3.4"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  >
+                                    <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+                                  </svg>
+                                </span>
+                              </>
+                            ) : null}
+                          </span>
+                          <span
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              gap: "5px",
+                              padding: "8px 6px 6px 6px",
+                            }}
+                          >
+                            <span
+                              style={{
+                                fontSize: "13.5px",
+                                fontWeight: "800",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                              }}
+                            >
+                              {k.name}
+                            </span>
+                            <span
+                              style={{
+                                alignSelf: "flex-start",
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "4px",
+                                fontSize: "12.5px",
+                                fontWeight: "800",
+                                color: k.ptsInk,
+                                background: k.ptsBg,
+                                borderRadius: "999px",
+                                padding: k.ptsPad,
+                              }}
+                            >
+                              {k.showCoin ? (
+                                <>
+                                  <Artwork
+                                    src="/haiba/coins/coin-front.webp"
+                                    alt=""
+                                    style={{
+                                      width: "16px",
+                                      height: "16px",
+                                      objectFit: "contain",
+                                      display: "block",
+                                    }}
+                                  />
+                                </>
+                              ) : null}
+                              {k.price}
+                            </span>
+                          </span>
+                        </button>
+                      </Fragment>
+                    ))}
+                  </div>
+                </>
+              ) : null}
+              {v.showBrowse ? (
+                <>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "baseline",
+                      margin: "32px 4px 12px 4px",
+                    }}
+                  >
+                    <span style={{ fontSize: "18px", fontWeight: "800", letterSpacing: "-0.02em" }}>
                       {"Rewards"}
                     </span>
                     <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
@@ -1728,6 +1908,329 @@ export default function Rewards() {
                     <path d="M9 6l6 6-6 6"></path>
                   </svg>
                 </Link>
+              </div>
+            </div>
+          </>
+        ) : null}
+        {v.lookOpen ? (
+          <>
+            <div
+              className="hb-fade"
+              style={{
+                position: "fixed",
+                inset: "0",
+                background: "rgba(20,16,40,0.5)",
+                zIndex: "70",
+                display: "flex",
+                alignItems: "flex-end",
+              }}
+            >
+              <button
+                onClick={v.closeLook}
+                aria-label="Close"
+                style={{
+                  position: "absolute",
+                  inset: "0",
+                  border: "0",
+                  background: "transparent",
+                  cursor: "default",
+                }}
+              ></button>
+              <div
+                className="hb-up"
+                role="dialog"
+                aria-label={v.lk_name}
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  maxHeight: "92vh",
+                  maxWidth: "430px",
+                  margin: "0 auto",
+                  overflowY: "auto",
+                  boxSizing: "border-box",
+                  background: "#FFFFFF",
+                  borderRadius: "14px 14px 0 0",
+                  padding: "10px 16px 28px 16px",
+                  textAlign: "center",
+                }}
+              >
+                <div
+                  style={{
+                    width: "40px",
+                    height: "5px",
+                    borderRadius: "999px",
+                    background: "#D9D3EA",
+                    margin: "0 auto 12px auto",
+                  }}
+                ></div>
+                <div
+                  style={{
+                    position: "relative",
+                    height: "300px",
+                    borderRadius: "16px",
+                    overflow: "hidden",
+                    background:
+                      "radial-gradient(circle at 50% 62%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 45%), linear-gradient(180deg, #D3C2FF 0%, #E2D7FF 70%, #EAE3FF 100%)",
+                    display: "flex",
+                    alignItems: "flex-end",
+                    justifyContent: "center",
+                  }}
+                >
+                  <span
+                    style={{
+                      position: "absolute",
+                      left: "12px",
+                      top: "12px",
+                      background: v.lk_tagBg,
+                      color: v.lk_tagInk,
+                      fontSize: "12px",
+                      fontWeight: "800",
+                      letterSpacing: "0.06em",
+                      textTransform: "uppercase",
+                      borderRadius: "999px",
+                      padding: "5px 10px",
+                    }}
+                  >
+                    {v.lk_tier}
+                  </span>
+                  <button
+                    onClick={v.closeLook}
+                    aria-label="Close"
+                    className="hb-press"
+                    style={{
+                      position: "absolute",
+                      right: "12px",
+                      top: "12px",
+                      width: "36px",
+                      height: "36px",
+                      border: "0",
+                      borderRadius: "50%",
+                      background: "#FFFFFF",
+                      color: "#1E1B2E",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <svg
+                      aria-hidden="true"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.6"
+                      strokeLinecap="round"
+                    >
+                      <path d="M6 6l12 12M18 6L6 18"></path>
+                    </svg>
+                  </button>
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      position: "absolute",
+                      left: "50%",
+                      bottom: "10px",
+                      width: "130px",
+                      height: "16px",
+                      marginLeft: "-65px",
+                      borderRadius: "50%",
+                      background: "#1E1B2E",
+                      opacity: "0.16",
+                      filter: "blur(6px)",
+                    }}
+                  ></span>
+                  <Artwork
+                    src={v.lk_src}
+                    alt={v.lk_alt}
+                    style={{
+                      position: "relative",
+                      height: "286px",
+                      width: "auto",
+                      display: "block",
+                      marginBottom: "-4px",
+                    }}
+                  />
+                  {v.lk_loading ? (
+                    <>
+                      <span
+                        className="hb-fade"
+                        style={{
+                          position: "absolute",
+                          left: "50%",
+                          bottom: "12px",
+                          transform: "translateX(-50%)",
+                          whiteSpace: "nowrap",
+                          background: "rgba(30,27,46,0.72)",
+                          color: "#FFFFFF",
+                          fontSize: "12.5px",
+                          fontWeight: "700",
+                          borderRadius: "999px",
+                          padding: "6px 12px",
+                        }}
+                      >
+                        {"Loading the animation"}
+                      </span>
+                    </>
+                  ) : null}
+                </div>
+                <div
+                  style={{
+                    fontSize: "24px",
+                    fontWeight: "900",
+                    letterSpacing: "-0.02em",
+                    marginTop: "14px",
+                  }}
+                >
+                  {v.lk_name}
+                </div>
+                <div
+                  style={{
+                    fontSize: "15px",
+                    fontWeight: "600",
+                    color: "#4A4660",
+                    marginTop: "4px",
+                    lineHeight: "1.4",
+                  }}
+                >
+                  {v.lk_desc}
+                </div>
+                {v.lk_asking ? (
+                  <>
+                    <div
+                      className="hb-pop"
+                      style={{
+                        marginTop: "16px",
+                        background: "#F4F1FD",
+                        borderRadius: "12px",
+                        padding: "16px",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "14px",
+                        textAlign: "left",
+                      }}
+                    >
+                      <span style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                        <span style={{ fontSize: "16px", fontWeight: "800", lineHeight: "1.3" }}>
+                          {v.lk_askLine}
+                        </span>
+                        <span style={{ fontSize: "13.5px", fontWeight: "600", color: "#6B6880" }}>
+                          {v.lk_askSub}
+                        </span>
+                      </span>
+                      <span style={{ display: "flex", gap: "8px" }}>
+                        <button
+                          onClick={v.lk_buy}
+                          className="hb-press"
+                          style={{
+                            font: "inherit",
+                            flex: "1",
+                            fontSize: "15px",
+                            fontWeight: "800",
+                            border: "0",
+                            borderRadius: "999px",
+                            padding: "13px",
+                            cursor: "pointer",
+                            background: "#1E1B2E",
+                            color: "#C0F402",
+                          }}
+                        >
+                          {"Get it"}
+                        </button>
+                        <button
+                          onClick={v.lk_notNow}
+                          className="hb-press"
+                          style={{
+                            font: "inherit",
+                            fontSize: "15px",
+                            fontWeight: "700",
+                            border: "0",
+                            borderRadius: "999px",
+                            padding: "13px 18px",
+                            cursor: "pointer",
+                            background: "#FFFFFF",
+                            color: "#1E1B2E",
+                          }}
+                        >
+                          {"Not now"}
+                        </button>
+                      </span>
+                    </div>
+                  </>
+                ) : null}
+                {v.lk_got ? (
+                  <>
+                    <div
+                      className="hb-pop"
+                      style={{
+                        marginTop: "14px",
+                        fontSize: "15px",
+                        fontWeight: "800",
+                        color: "#1B6B36",
+                      }}
+                    >
+                      {"It is yours. Wear it now or later in your profile."}
+                    </div>
+                  </>
+                ) : null}
+                {v.lk_showMain ? (
+                  <>
+                    <button
+                      onClick={v.lk_act}
+                      className="hb-press"
+                      style={{
+                        marginTop: "16px",
+                        width: "100%",
+                        font: "inherit",
+                        fontSize: "16px",
+                        fontWeight: "800",
+                        border: "0",
+                        borderRadius: "999px",
+                        padding: "15px",
+                        cursor: "pointer",
+                        background: v.lk_btnBg,
+                        color: v.lk_btnInk,
+                      }}
+                    >
+                      {v.lk_label}
+                    </button>
+                  </>
+                ) : null}
+                {v.lk_onHub ? (
+                  <>
+                    <Link
+                      className="hb-press"
+                      style={{
+                        marginTop: "10px",
+                        display: "inline-block",
+                        fontSize: "14.5px",
+                        fontWeight: "800",
+                        color: "#4F25D6",
+                        textDecoration: "none",
+                      }}
+                      to="/haiba"
+                    >
+                      {"See it on the hub"}
+                    </Link>
+                  </>
+                ) : null}
+                {v.lk_short ? (
+                  <>
+                    <Link
+                      style={{
+                        marginTop: "10px",
+                        display: "inline-block",
+                        fontSize: "14px",
+                        fontWeight: "700",
+                        color: "#4F25D6",
+                      }}
+                      to="/haiba/earn"
+                    >
+                      {"How to get more points"}
+                    </Link>
+                  </>
+                ) : null}
               </div>
             </div>
           </>

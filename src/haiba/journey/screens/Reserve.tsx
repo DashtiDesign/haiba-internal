@@ -15,6 +15,9 @@ import PlansConvert from "../../screens/PlansConvert";
 import { PromoModeContext, type PromoMode } from "../promoMode";
 import PaywallStory from "../../screens/PaywallStory";
 import PaywallTimeline from "../../screens/PaywallTimeline";
+import PaywallPoints from "../../screens/PaywallPoints";
+import PaywallPointsApps from "../../screens/PaywallPointsApps";
+import PaywallPointsGifts from "../../screens/PaywallPointsGifts";
 import PaywallBase from "../../screens/PaywallBase";
 import PaywallTable from "../../screens/PaywallTable";
 
@@ -52,6 +55,9 @@ export const PROMOS = {
   timeline: PaywallTimeline,
   base: PaywallBase,
   table: PaywallTable,
+  points: PaywallPoints,
+  pointsApps: PaywallPointsApps,
+  pointsGifts: PaywallPointsGifts,
 } as const;
 export type PromoKey = keyof typeof PROMOS;
 

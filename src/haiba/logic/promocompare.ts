@@ -66,7 +66,7 @@ export function useVals() {
   var rows = [
     ["Student offers", yes, yes, ""],
     ["Free gift every month", no, yes, ""],
-    ["Spotify Premium Student", no, "3 months", "/haiba/brands/spotify.webp"],
+    ["talabat pro", no, "3 months", "/haiba/brands/talabat.webp"],
     ["ChatGPT Go", no, "3 months", "/haiba/brands/chatgpt.webp"],
     ["Travel data in 4 countries", no, "5GB", "/haiba/brands/airalo-mark.svg"],
     ["Bonus points", no, "+ + +", ""],

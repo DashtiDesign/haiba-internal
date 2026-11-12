@@ -343,12 +343,12 @@ export default function PaywallBase() {
                     boxSizing: "border-box",
                     borderRadius: "12px",
                     padding: "12px",
-                    background: "#000000",
-                    color: "#FFFFFF",
+                    background: v.p1Bg,
+                    color: v.p1Ink,
                   }}
                 >
                   <Artwork
-                    src="/haiba/brands/spotify.webp"
+                    src={v.p1Logo}
                     alt=""
                     style={{
                       width: "40px",
@@ -367,8 +367,8 @@ export default function PaywallBase() {
                       marginTop: "auto",
                     }}
                   >
-                    <span style={{ fontSize: "14.5px", fontWeight: "800" }}>{"Spotify"}</span>
-                    <span style={{ fontSize: "12.5px", fontWeight: "600", color: "#B9B3CC" }}>
+                    <span style={{ fontSize: "14.5px", fontWeight: "800" }}>{v.p1Short}</span>
+                    <span style={{ fontSize: "12.5px", fontWeight: "600", color: v.p1Sub }}>
                       {"3 months"}
                     </span>
                   </span>
@@ -388,7 +388,7 @@ export default function PaywallBase() {
                   }}
                 >
                   <Artwork
-                    src="/haiba/brands/chatgpt.webp"
+                    src={v.p2Logo}
                     alt=""
                     style={{
                       width: "40px",
@@ -407,7 +407,7 @@ export default function PaywallBase() {
                       marginTop: "auto",
                     }}
                   >
-                    <span style={{ fontSize: "14.5px", fontWeight: "800" }}>{"ChatGPT"}</span>
+                    <span style={{ fontSize: "14.5px", fontWeight: "800" }}>{v.p2Short}</span>
                     <span style={{ fontSize: "12.5px", fontWeight: "600", color: "#6B6880" }}>
                       {"3 months"}
                     </span>
@@ -599,7 +599,7 @@ export default function PaywallBase() {
               <span style={{ display: "flex", flex: "none", paddingTop: "2px" }}>
                 <span style={{ display: "flex", flex: "none" }}>
                   <Artwork
-                    src="/haiba/brands/spotify.webp"
+                    src={v.p1Logo}
                     alt=""
                     style={{
                       width: "24px",
@@ -613,7 +613,7 @@ export default function PaywallBase() {
                     }}
                   />
                   <Artwork
-                    src="/haiba/brands/chatgpt.webp"
+                    src={v.p2Logo}
                     alt=""
                     style={{
                       width: "24px",

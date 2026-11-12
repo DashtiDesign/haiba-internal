@@ -2,6 +2,8 @@
  * Fake data for the member screens: Hadiya, subscriptions, activity and receipts.
  * Brands, items, values and limits are placeholders until partners sign.
  */
+import type { Country } from "./settings";
+
 export type Brand = {
   key: string;
   name: string;
@@ -145,42 +147,81 @@ export type Sub = {
   claimed?: boolean; // every code in the partner's pool is taken
 };
 
-export const SUBS: Sub[] = [
-  {
-    id: "spotify",
-    name: "Spotify",
-    what: "Premium Student",
-    offer: "3 months free",
-    logo: "/haiba/brands/spotify.webp",
-    bg: "#DDF7E5",
-    code: "HAIBA SP 7Q2X",
-    who: "New Spotify Premium accounts",
-    terms: [
-      "New Spotify Premium accounts only.",
-      "After 3 months you pay Spotify the normal price. Cancel any time with them.",
-      "One code per member.",
-    ],
-  },
-  {
-    id: "chatgpt",
-    name: "ChatGPT",
-    what: "ChatGPT Plus",
-    offer: "3 months free",
-    logo: "/haiba/brands/chatgpt.webp",
-    bg: "#ECEDF1",
-    code: "HAIBA GP 4K9M",
-    who: "New ChatGPT Plus accounts",
-    terms: [
-      "New ChatGPT Plus accounts only.",
-      "After 3 months you pay OpenAI the normal price. Cancel any time with them.",
-      "One code per member.",
-    ],
-  },
-];
+/** Subscription partners, picked per market (shortlist of 11 Nov). */
+const TALABAT: Sub = {
+  id: "talabat",
+  name: "talabat",
+  what: "talabat pro",
+  offer: "3 months free",
+  logo: "/haiba/brands/talabat.webp",
+  bg: "#FFE9DC",
+  code: "HAIBA TB 7Q2X",
+  who: "New talabat pro members",
+  terms: [
+    "New talabat pro members only.",
+    "After 3 months you pay talabat the normal price. Cancel any time with them.",
+    "One code per member.",
+  ],
+};
+const CHATGPT: Sub = {
+  id: "chatgpt",
+  name: "ChatGPT",
+  what: "ChatGPT Go",
+  offer: "3 months free",
+  logo: "/haiba/brands/chatgpt.webp",
+  bg: "#ECEDF1",
+  code: "HAIBA GP 4K9M",
+  who: "New ChatGPT Go accounts",
+  terms: [
+    "New ChatGPT Go accounts only.",
+    "After 3 months you pay OpenAI the normal price. Cancel any time with them.",
+    "One code per member.",
+  ],
+};
+const HUNGERSTATION: Sub = {
+  id: "hungerstation",
+  name: "HungerStation",
+  what: "HungerStation Plus",
+  offer: "3 months free",
+  logo: "/haiba/brands/hungerstation.webp",
+  bg: "#FFF8B8",
+  code: "HAIBA HS 2M8R",
+  who: "New HungerStation Plus members",
+  terms: [
+    "New HungerStation Plus members only.",
+    "After 3 months you pay HungerStation the normal price. Cancel any time with them.",
+    "One code per member.",
+  ],
+};
+const YOUTUBE: Sub = {
+  id: "youtube",
+  name: "YouTube",
+  what: "YouTube Premium Lite",
+  offer: "3 months free",
+  logo: "/haiba/brands/youtube.webp",
+  bg: "#FFE5EA",
+  code: "HAIBA YT 6P3W",
+  who: "New YouTube Premium Lite accounts",
+  terms: [
+    "New YouTube Premium Lite accounts only.",
+    "After 3 months you pay YouTube the normal price. Cancel any time with them.",
+    "One code per member.",
+  ],
+};
 
-/** Prototype: ?claimed=1 shows ChatGPT with every code taken ("All claimed"). */
-export const subsFor = (claimed: boolean): Sub[] =>
-  SUBS.map((x) => (claimed && x.id === "chatgpt" ? { ...x, claimed: true } : x));
+/** Bahrain: talabat pro and ChatGPT Go. Saudi: HungerStation Plus and YouTube Premium Lite. */
+export const subsOf = (c: Country): Sub[] =>
+  c === "sa" ? [HUNGERSTATION, YOUTUBE] : [TALABAT, CHATGPT];
+export const SUBS: Sub[] = subsOf("bh");
+/** "talabat pro and ChatGPT Go": the plan names, for lines about both. */
+export const subsText = (c: Country) =>
+  subsOf(c)
+    .map((x) => x.what)
+    .join(" and ");
+
+/** Prototype: ?claimed=1 shows the second subscription with every code taken ("All claimed"). */
+export const subsFor = (claimed: boolean, c: Country = "bh"): Sub[] =>
+  subsOf(c).map((x, i) => (claimed && i === 1 ? { ...x, claimed: true } : x));
 
 /**
  * One list for everything that happened with Haiba (8 Nov): offers used at shops, rewards, Hadiya,
@@ -238,10 +279,10 @@ export const ACTIVITY: Activity[] = [
     items: [
       {
         kind: "sub",
-        title: "Spotify Premium",
+        title: "talabat pro",
         sub: "Subscription code · month 1 free",
         money: 2.4,
-        img: "/haiba/brands/spotify.webp",
+        img: "/haiba/brands/talabat.webp",
       },
     ],
   },

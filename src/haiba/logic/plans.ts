@@ -113,7 +113,7 @@ export function useVals() {
         sub: "2x on your first 2 visits at a shop. 5x every 5th",
       },
       { title: "1 free Hadiya every month", sub: "Meals, coffee, cinema, gym and more" },
-      { title: "Member promos", sub: "Spotify Premium, 3 months free" },
+      { title: "Member promos", sub: "talabat pro, 3 months free" },
       { title: "Free travel data", sub: "5GB in Bahrain, Saudi, Qatar or Oman. We’ve got you." },
     ],
     giftHead: isHaiba ? "Your monthly gift, from all of these" : "Only available with Haiba",

@@ -320,7 +320,7 @@ export default function PaywallTable() {
                   }}
                 >
                   <Artwork
-                    src="/haiba/brands/spotify.webp"
+                    src={v.p1Logo}
                     alt=""
                     style={{
                       width: "30px",
@@ -330,7 +330,7 @@ export default function PaywallTable() {
                       flex: "none",
                     }}
                   />
-                  <span>{"Spotify Premium Student"}</span>
+                  <span>{v.p1Name}</span>
                 </span>
                 <span style={{ display: "flex", justifyContent: "center" }}>
                   <span
@@ -382,7 +382,7 @@ export default function PaywallTable() {
                   }}
                 >
                   <Artwork
-                    src="/haiba/brands/chatgpt.webp"
+                    src={v.p2Logo}
                     alt=""
                     style={{
                       width: "30px",
@@ -393,7 +393,7 @@ export default function PaywallTable() {
                       boxShadow: "0 0 0 1px #ECE8F5",
                     }}
                   />
-                  <span>{"ChatGPT Go"}</span>
+                  <span>{v.p2Name}</span>
                 </span>
                 <span style={{ display: "flex", justifyContent: "center" }}>
                   <span

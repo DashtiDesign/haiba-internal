@@ -21,6 +21,8 @@ import HitAreas from "@/haiba/HitAreas";
 import PageBackdrop from "@/haiba/PageBackdrop";
 import PrototypePanel from "../haiba/PrototypePanel";
 import MotionExperience from "../haiba/MotionExperience";
+// Bird looks: makes the on demand loader available to the ported points store board (window.__hbLooks).
+import "../haiba/looks";
 import { MotionConfig } from "motion/react";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 

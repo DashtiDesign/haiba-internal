@@ -196,7 +196,7 @@ export function useVals() {
     breakdown:
       "Gifts BHD " +
       giftsOf(slots).toFixed(2) +
-      " + Spotify, ChatGPT and travel data BHD " +
+      " + talabat pro, ChatGPT Go and travel data BHD " +
       subs.toFixed(2) +
       " + points",
     count: filled + " of 12 picked",

@@ -87,6 +87,7 @@ export function useDC(initial) {
     visits: q.visits != null ? String(q.visits) : undefined,
     shop: q.shop != null ? String(q.shop) : undefined,
     state: q.state != null ? String(q.state) : undefined,
+    welcome: q.welcome != null ? String(q.welcome) : undefined, // 11 Nov smaller Haiba pages: welcome points
     today: hb.state.settings.today ?? undefined, // prototype clock; the canvas falls back to the real date
   };
 

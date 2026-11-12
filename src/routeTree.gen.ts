@@ -43,6 +43,9 @@ import { Route as HaibaWalletRouteImport } from './routes/haiba/wallet'
 import { Route as HaibaWelcomeRouteImport } from './routes/haiba/welcome'
 import { Route as HaibaPaywallBaseRouteImport } from './routes/haiba/paywall.base'
 import { Route as HaibaPaywallJoinRouteImport } from './routes/haiba/paywall.join'
+import { Route as HaibaPaywallPointsRouteImport } from './routes/haiba/paywall.points'
+import { Route as HaibaPaywallPointsAppsRouteImport } from './routes/haiba/paywall.points-apps'
+import { Route as HaibaPaywallPointsGiftsRouteImport } from './routes/haiba/paywall.points-gifts'
 import { Route as HaibaPaywallStoryRouteImport } from './routes/haiba/paywall.story'
 import { Route as HaibaPaywallTableRouteImport } from './routes/haiba/paywall.table'
 import { Route as HaibaPaywallTimelineRouteImport } from './routes/haiba/paywall.timeline'
@@ -226,6 +229,21 @@ const HaibaPaywallJoinRoute = HaibaPaywallJoinRouteImport.update({
   path: '/haiba/paywall/join',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HaibaPaywallPointsRoute = HaibaPaywallPointsRouteImport.update({
+  id: '/haiba/paywall/points',
+  path: '/haiba/paywall/points',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaPaywallPointsAppsRoute = HaibaPaywallPointsAppsRouteImport.update({
+  id: '/haiba/paywall/points-apps',
+  path: '/haiba/paywall/points-apps',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaPaywallPointsGiftsRoute = HaibaPaywallPointsGiftsRouteImport.update({
+  id: '/haiba/paywall/points-gifts',
+  path: '/haiba/paywall/points-gifts',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HaibaPaywallStoryRoute = HaibaPaywallStoryRouteImport.update({
   id: '/haiba/paywall/story',
   path: '/haiba/paywall/story',
@@ -322,6 +340,9 @@ export interface FileRoutesByFullPath {
   '/haiba/': typeof HaibaIndexRoute
   '/haiba/paywall/base': typeof HaibaPaywallBaseRoute
   '/haiba/paywall/join': typeof HaibaPaywallJoinRoute
+  '/haiba/paywall/points': typeof HaibaPaywallPointsRoute
+  '/haiba/paywall/points-apps': typeof HaibaPaywallPointsAppsRoute
+  '/haiba/paywall/points-gifts': typeof HaibaPaywallPointsGiftsRoute
   '/haiba/paywall/story': typeof HaibaPaywallStoryRoute
   '/haiba/paywall/table': typeof HaibaPaywallTableRoute
   '/haiba/paywall/timeline': typeof HaibaPaywallTimelineRoute
@@ -370,6 +391,9 @@ export interface FileRoutesByTo {
   '/haiba': typeof HaibaIndexRoute
   '/haiba/paywall/base': typeof HaibaPaywallBaseRoute
   '/haiba/paywall/join': typeof HaibaPaywallJoinRoute
+  '/haiba/paywall/points': typeof HaibaPaywallPointsRoute
+  '/haiba/paywall/points-apps': typeof HaibaPaywallPointsAppsRoute
+  '/haiba/paywall/points-gifts': typeof HaibaPaywallPointsGiftsRoute
   '/haiba/paywall/story': typeof HaibaPaywallStoryRoute
   '/haiba/paywall/table': typeof HaibaPaywallTableRoute
   '/haiba/paywall/timeline': typeof HaibaPaywallTimelineRoute
@@ -419,6 +443,9 @@ export interface FileRoutesById {
   '/haiba/': typeof HaibaIndexRoute
   '/haiba/paywall/base': typeof HaibaPaywallBaseRoute
   '/haiba/paywall/join': typeof HaibaPaywallJoinRoute
+  '/haiba/paywall/points': typeof HaibaPaywallPointsRoute
+  '/haiba/paywall/points-apps': typeof HaibaPaywallPointsAppsRoute
+  '/haiba/paywall/points-gifts': typeof HaibaPaywallPointsGiftsRoute
   '/haiba/paywall/story': typeof HaibaPaywallStoryRoute
   '/haiba/paywall/table': typeof HaibaPaywallTableRoute
   '/haiba/paywall/timeline': typeof HaibaPaywallTimelineRoute
@@ -469,6 +496,9 @@ export interface FileRouteTypes {
     | '/haiba/'
     | '/haiba/paywall/base'
     | '/haiba/paywall/join'
+    | '/haiba/paywall/points'
+    | '/haiba/paywall/points-apps'
+    | '/haiba/paywall/points-gifts'
     | '/haiba/paywall/story'
     | '/haiba/paywall/table'
     | '/haiba/paywall/timeline'
@@ -517,6 +547,9 @@ export interface FileRouteTypes {
     | '/haiba'
     | '/haiba/paywall/base'
     | '/haiba/paywall/join'
+    | '/haiba/paywall/points'
+    | '/haiba/paywall/points-apps'
+    | '/haiba/paywall/points-gifts'
     | '/haiba/paywall/story'
     | '/haiba/paywall/table'
     | '/haiba/paywall/timeline'
@@ -565,6 +598,9 @@ export interface FileRouteTypes {
     | '/haiba/'
     | '/haiba/paywall/base'
     | '/haiba/paywall/join'
+    | '/haiba/paywall/points'
+    | '/haiba/paywall/points-apps'
+    | '/haiba/paywall/points-gifts'
     | '/haiba/paywall/story'
     | '/haiba/paywall/table'
     | '/haiba/paywall/timeline'
@@ -614,6 +650,9 @@ export interface RootRouteChildren {
   HaibaIndexRoute: typeof HaibaIndexRoute
   HaibaPaywallBaseRoute: typeof HaibaPaywallBaseRoute
   HaibaPaywallJoinRoute: typeof HaibaPaywallJoinRoute
+  HaibaPaywallPointsRoute: typeof HaibaPaywallPointsRoute
+  HaibaPaywallPointsAppsRoute: typeof HaibaPaywallPointsAppsRoute
+  HaibaPaywallPointsGiftsRoute: typeof HaibaPaywallPointsGiftsRoute
   HaibaPaywallStoryRoute: typeof HaibaPaywallStoryRoute
   HaibaPaywallTableRoute: typeof HaibaPaywallTableRoute
   HaibaPaywallTimelineRoute: typeof HaibaPaywallTimelineRoute
@@ -868,6 +907,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HaibaPaywallJoinRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/haiba/paywall/points': {
+      id: '/haiba/paywall/points'
+      path: '/haiba/paywall/points'
+      fullPath: '/haiba/paywall/points'
+      preLoaderRoute: typeof HaibaPaywallPointsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/paywall/points-apps': {
+      id: '/haiba/paywall/points-apps'
+      path: '/haiba/paywall/points-apps'
+      fullPath: '/haiba/paywall/points-apps'
+      preLoaderRoute: typeof HaibaPaywallPointsAppsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/paywall/points-gifts': {
+      id: '/haiba/paywall/points-gifts'
+      path: '/haiba/paywall/points-gifts'
+      fullPath: '/haiba/paywall/points-gifts'
+      preLoaderRoute: typeof HaibaPaywallPointsGiftsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/haiba/paywall/story': {
       id: '/haiba/paywall/story'
       path: '/haiba/paywall/story'
@@ -990,6 +1050,9 @@ const rootRouteChildren: RootRouteChildren = {
   HaibaIndexRoute: HaibaIndexRoute,
   HaibaPaywallBaseRoute: HaibaPaywallBaseRoute,
   HaibaPaywallJoinRoute: HaibaPaywallJoinRoute,
+  HaibaPaywallPointsRoute: HaibaPaywallPointsRoute,
+  HaibaPaywallPointsAppsRoute: HaibaPaywallPointsAppsRoute,
+  HaibaPaywallPointsGiftsRoute: HaibaPaywallPointsGiftsRoute,
   HaibaPaywallStoryRoute: HaibaPaywallStoryRoute,
   HaibaPaywallTableRoute: HaibaPaywallTableRoute,
   HaibaPaywallTimelineRoute: HaibaPaywallTimelineRoute,

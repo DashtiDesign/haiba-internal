@@ -103,6 +103,55 @@ export default function Hub() {
         >
           <HubBird onTap={v.poke} />
         </div>
+        <Link
+          aria-label="Change your bird's look"
+          className="hb-press"
+          style={{
+            position: "absolute",
+            left: "282px",
+            top: "222px",
+            zIndex: "3",
+            width: "40px",
+            height: "40px",
+            borderRadius: "50%",
+            background: "#FFFFFF",
+            color: "#6C3FFA",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            textDecoration: "none",
+            boxShadow: "0 6px 14px rgba(76,52,140,0.18)",
+          }}
+          to="/haiba/membership"
+          hash="bird"
+        >
+          <svg
+            aria-hidden="true"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M12 6.5a2 2 0 1 1 2-2"></path>
+            <path d="M12 6.5v1.2L3.6 14.4a1.6 1.6 0 0 0 1 2.9h14.8a1.6 1.6 0 0 0 1-2.9L12 7.7"></path>
+          </svg>
+          <span
+            style={{
+              position: "absolute",
+              right: "-2px",
+              top: "-2px",
+              width: "12px",
+              height: "12px",
+              borderRadius: "50%",
+              background: "#C0F402",
+              boxShadow: "0 0 0 2px #FFFFFF",
+            }}
+          ></span>
+        </Link>
         <button
           onClick={v.toggleMenu}
           aria-label="Menu"
@@ -1564,7 +1613,7 @@ export default function Hub() {
             >
               <span style={{ position: "relative", width: "44px", height: "44px", flex: "none" }}>
                 <Artwork
-                  src="/haiba/brands/spotify.webp"
+                  src="/haiba/brands/talabat.webp"
                   alt=""
                   style={{
                     position: "absolute",
@@ -1606,7 +1655,7 @@ export default function Hub() {
                   {"Subscriptions"}
                 </span>
                 <span style={{ fontSize: "13.5px", fontWeight: "600", color: "#6B6880" }}>
-                  {"Spotify and ChatGPT, 3 months free"}
+                  {"talabat pro and ChatGPT Go, 3 months free"}
                 </span>
               </span>
               <span

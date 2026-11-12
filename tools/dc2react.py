@@ -88,8 +88,11 @@ BLOBS = {
     "82364cb26b1195be0a503039925a2eb0": "/haiba/brands/grip.webp",
     "9163726a14d1e4869c71e417a3a87155": "/haiba/brands/albayan.webp",
     "c1e6f5f43bf6c8ea66f354b776557213": "/haiba/brands/wingman.webp",
-    "5d48aef36235ae8fec275b6e002242fb": "/haiba/brands/spotify.webp",
     "8b3c887e681b9be68b9f81af3de4af22": "/haiba/brands/chatgpt.webp",
+    # 11 Nov: subscription partners. Bahrain talabat pro and ChatGPT Go, Saudi HungerStation Plus and YouTube Premium Lite.
+    "f376a7a0fb72b7ae5fc57dd85a2b1b70": "/haiba/brands/talabat.webp",
+    "67c19a5c31e6b3403b41d2cb6520cd0f": "/haiba/brands/hungerstation.webp",
+    "6bfd0bd9fb669736cf937365ec7568f3": "/haiba/brands/youtube.webp",
     "badc2628e905d2a79b03cb243d1a8c66": "/haiba/birds/17-coin-toss.webp",
     "f1899123e4534d5b5d0a8161aa0ef50f": "/haiba/birds/17-coin-toss.webp",
     "9fe36060ebeb5decae4a3f854cbec118": "/haiba/coins/coin-front.webp",
@@ -101,6 +104,10 @@ BLOBS = {
     "413483a80b085a72e185af89d489bed5": "/haiba/motion/hub-shades.webp",
     "46c8e5aa381bb35a0f4c84743e87a87d": "/haiba/motion/hub-coin.webp",
     "6dc8f1d17323a7e9b0b8e9d50368a752": "/haiba/motion/hub-still.webp",
+    # 12 Nov: legend bird looks, their stills, from the bird-looks folder in Lovable Cloud (same files the hub plays).
+    "ae876cc4dea11ec8d00332e8c5a350fb": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/f1-still.webp",
+    "1c3d70a34d95c7399078e2bf8a089a6d": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/gold-still.webp",
+    "9e12c2bf06b222b245c164ccf11abb13": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/dragon-card.webp",
     "ff3c167255aa34baeeb95157156a51a9": "/haiba/birds/26-gift.webp",
     "13b432061e8e721b86b394f8f645d382": "/haiba/birds/27-coin.webp",
     "232f6e4b206d3bd4b7d69ae96c2c74a6": "/haiba/motion/hub-idle.webp",
@@ -299,9 +306,12 @@ class Conv:
         extra = []
         if tag == "a":
             href = a.get("href", "#")
-            if href.endswith(".dc.html"):
+            page, _, frag = href.partition("#")
+            if page.endswith(".dc.html"):
                 tag = "Link"
-                extra.append('to="%s"' % ROUTES.get(href.split("/")[-1], "/"))
+                extra.append('to="%s"' % ROUTES.get(page.split("/")[-1], "/"))
+                if frag:  # 12 Nov: a link can open a section, for example Mem01Membership.dc.html#bird
+                    extra.append('hash="%s"' % frag)
             else:
                 extra.append('href="%s"' % href)
                 if href == "#":

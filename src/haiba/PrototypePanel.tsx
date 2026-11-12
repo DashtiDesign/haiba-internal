@@ -234,6 +234,10 @@ const PAYWALLS = [
   ["C · Timeline", "/haiba/paywall/timeline"],
   ["Baseline (backup)", "/haiba/paywall/base"],
   ["Table (backup)", "/haiba/paywall/table"],
+  // 11 Nov: smaller Haiba, to learn which part makes students pay
+  ["Points only", "/haiba/paywall/points"],
+  ["Points and apps", "/haiba/paywall/points-apps"],
+  ["Points and gifts", "/haiba/paywall/points-gifts"],
 ] as const;
 const OLD_PROMOS = [
   ["Waitlist", "/haiba/promo/waitlist"],
@@ -584,6 +588,9 @@ export default function PrototypePanel() {
                           ["timeline", "C Timeline"],
                           ["base", "Base"],
                           ["table", "Table"],
+                          ["points", "Points"],
+                          ["pointsApps", "Points + apps"],
+                          ["pointsGifts", "Points + gifts"],
                         ]}
                         onPick={(v) => hb.setSettings({ mainPromo: v as typeof st.mainPromo })}
                       />

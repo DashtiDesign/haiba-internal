@@ -209,7 +209,7 @@ export function useVals() {
           amt: savedExtra,
           color: "#9CC400",
         },
-        { title: "Subscriptions", sub: "Spotify, 3 months free", amt: 0, color: "#B9A5FF" },
+        { title: "Subscriptions", sub: "talabat pro, 3 months free", amt: 0, color: "#B9A5FF" },
       ]
     : [
         {
@@ -219,7 +219,7 @@ export function useVals() {
           color: "#6C3FFA",
         },
         { title: "Rewards", sub: "Accepted at the shop", amt: 2.45 + savedExtra, color: "#9CC400" },
-        { title: "Subscriptions", sub: "Spotify, month 1", amt: 2.4, color: "#B9A5FF" },
+        { title: "Subscriptions", sub: "talabat pro, month 1", amt: 2.4, color: "#B9A5FF" },
       ];
   if (tUsed)
     savedDefs.push({
@@ -517,10 +517,10 @@ export function useVals() {
         href: "Sub01Offers.dc.html",
         route: "/haiba/subscriptions",
         title: "Subscriptions",
-        sub: "Spotify and ChatGPT codes",
-        icon: "/haiba/brands/spotify.webp",
+        sub: "talabat pro and ChatGPT Go codes",
+        icon: "/haiba/brands/talabat.webp",
         iw: "44px",
-        bg: "#000000",
+        bg: "#FF5A00",
         hasIcon: true,
         isHelp: false,
       },

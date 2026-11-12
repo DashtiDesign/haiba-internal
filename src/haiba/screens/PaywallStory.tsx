@@ -336,7 +336,7 @@ export default function PaywallStory() {
                     }}
                   />
                   <Artwork
-                    src="/haiba/brands/spotify.webp"
+                    src={v.p1Logo}
                     alt=""
                     style={{
                       width: "58px",
@@ -366,7 +366,7 @@ export default function PaywallStory() {
                     }}
                   />
                   <Artwork
-                    src="/haiba/brands/chatgpt.webp"
+                    src={v.p2Logo}
                     alt=""
                     style={{
                       width: "58px",
@@ -471,7 +471,7 @@ export default function PaywallStory() {
                     }}
                   />
                   <Artwork
-                    src="/haiba/brands/spotify.webp"
+                    src={v.p1Logo}
                     alt=""
                     style={{
                       width: "58px",
@@ -501,7 +501,7 @@ export default function PaywallStory() {
                     }}
                   />
                   <Artwork
-                    src="/haiba/brands/chatgpt.webp"
+                    src={v.p2Logo}
                     alt=""
                     style={{
                       width: "58px",
@@ -787,7 +787,7 @@ export default function PaywallStory() {
                   }}
                 >
                   <Artwork
-                    src="/haiba/brands/spotify.webp"
+                    src={v.p1Logo}
                     alt=""
                     style={{
                       width: "40px",
@@ -799,9 +799,7 @@ export default function PaywallStory() {
                     }}
                   />
                   <span style={{ flex: "1", display: "flex", flexDirection: "column" }}>
-                    <span style={{ fontSize: "16px", fontWeight: "800" }}>
-                      {"Spotify Premium Student"}
-                    </span>
+                    <span style={{ fontSize: "16px", fontWeight: "800" }}>{v.p1Name}</span>
                     <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
                       {"3 months free"}
                     </span>
@@ -816,7 +814,7 @@ export default function PaywallStory() {
                       padding: "5px 10px",
                     }}
                   >
-                    {v.wSpotify}
+                    {v.wP1}
                   </span>
                 </span>
                 <span
@@ -831,7 +829,7 @@ export default function PaywallStory() {
                   }}
                 >
                   <Artwork
-                    src="/haiba/brands/chatgpt.webp"
+                    src={v.p2Logo}
                     alt=""
                     style={{
                       width: "40px",
@@ -843,7 +841,7 @@ export default function PaywallStory() {
                     }}
                   />
                   <span style={{ flex: "1", display: "flex", flexDirection: "column" }}>
-                    <span style={{ fontSize: "16px", fontWeight: "800" }}>{"ChatGPT Go"}</span>
+                    <span style={{ fontSize: "16px", fontWeight: "800" }}>{v.p2Name}</span>
                     <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
                       {"3 months free"}
                     </span>
@@ -858,7 +856,7 @@ export default function PaywallStory() {
                       padding: "5px 10px",
                     }}
                   >
-                    {v.wChatgpt}
+                    {v.wP2}
                   </span>
                 </span>
                 <span
@@ -2473,7 +2471,7 @@ export default function PaywallStory() {
                 >
                   <span style={{ display: "flex", flex: "none" }}>
                     <Artwork
-                      src="/haiba/brands/spotify.webp"
+                      src={v.p1Logo}
                       alt=""
                       style={{
                         width: "22px",
@@ -2487,7 +2485,7 @@ export default function PaywallStory() {
                       }}
                     />
                     <Artwork
-                      src="/haiba/brands/chatgpt.webp"
+                      src={v.p2Logo}
                       alt=""
                       style={{
                         width: "22px",
@@ -2520,7 +2518,10 @@ export default function PaywallStory() {
                   >
                     <span style={{ fontSize: "15.5px", fontWeight: "800" }}>{"3 free extras"}</span>
                     <span style={{ fontSize: "13px", fontWeight: "600", color: "#B9B3CC" }}>
-                      {"Spotify, ChatGPT and 5GB data"}
+                      {v.p1Name}
+                      {", "}
+                      {v.p2Name}
+                      {" and 5GB data"}
                     </span>
                   </span>
                   <span style={{ fontSize: "15px", fontWeight: "800", color: "#C0F402" }}>
@@ -3022,7 +3023,7 @@ export default function PaywallStory() {
                   >
                     <span style={{ display: "flex", flex: "none" }}>
                       <Artwork
-                        src="/haiba/brands/spotify.webp"
+                        src={v.p1Logo}
                         alt=""
                         style={{
                           width: "20px",
@@ -3036,7 +3037,7 @@ export default function PaywallStory() {
                         }}
                       />
                       <Artwork
-                        src="/haiba/brands/chatgpt.webp"
+                        src={v.p2Logo}
                         alt=""
                         style={{
                           width: "20px",
@@ -3531,7 +3532,7 @@ export default function PaywallStory() {
                     }}
                   >
                     <Artwork
-                      src="/haiba/brands/spotify.webp"
+                      src={v.p1Logo}
                       alt=""
                       style={{
                         width: "36px",
@@ -3544,14 +3545,12 @@ export default function PaywallStory() {
                       }}
                     />
                     <span style={{ flex: "1", display: "flex", flexDirection: "column" }}>
-                      <span style={{ fontSize: "15px", fontWeight: "800" }}>
-                        {"Spotify Premium"}
-                      </span>
+                      <span style={{ fontSize: "15px", fontWeight: "800" }}>{v.p1Name}</span>
                       <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
                         {"3 months"}
                       </span>
                     </span>
-                    <span style={{ fontSize: "15px", fontWeight: "800" }}>{v.dSpotify}</span>
+                    <span style={{ fontSize: "15px", fontWeight: "800" }}>{v.dP1}</span>
                   </div>
                   <div
                     style={{
@@ -3563,7 +3562,7 @@ export default function PaywallStory() {
                     }}
                   >
                     <Artwork
-                      src="/haiba/brands/chatgpt.webp"
+                      src={v.p2Logo}
                       alt=""
                       style={{
                         width: "36px",
@@ -3576,12 +3575,12 @@ export default function PaywallStory() {
                       }}
                     />
                     <span style={{ flex: "1", display: "flex", flexDirection: "column" }}>
-                      <span style={{ fontSize: "15px", fontWeight: "800" }}>{"ChatGPT Go"}</span>
+                      <span style={{ fontSize: "15px", fontWeight: "800" }}>{v.p2Name}</span>
                       <span style={{ fontSize: "13px", fontWeight: "600", color: "#6B6880" }}>
                         {"3 months"}
                       </span>
                     </span>
-                    <span style={{ fontSize: "15px", fontWeight: "800" }}>{v.dChatgpt}</span>
+                    <span style={{ fontSize: "15px", fontWeight: "800" }}>{v.dP2}</span>
                   </div>
                   <div
                     style={{

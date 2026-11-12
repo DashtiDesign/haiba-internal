@@ -190,7 +190,7 @@ export default function PromoWinback() {
               }}
             >
               {
-                "Adds up month by month: your free gift, bonus points, and Spotify and ChatGPT from day one."
+                "Adds up month by month: your free gift, bonus points, plus talabat pro and ChatGPT Go from day one."
               }
             </div>
           </div>

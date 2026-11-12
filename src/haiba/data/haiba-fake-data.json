@@ -1304,85 +1304,68 @@
   ],
   "subscriptions": [
     {
-      "id": "sub-spotify",
-      "partner": "Spotify Premium",
-      "type": "Music",
-      "status": "not signed",
+      "id": "sub-talabat",
+      "partner": "talabat pro",
+      "market": "BH",
+      "type": "Food and grocery delivery",
+      "status": "shortlisted",
+      "offer": "3 months free",
       "prices": {
-        "SA": {
-          "normal": 23.99,
-          "member": 19.19
-        },
         "BH": {
-          "normal": 2.4,
-          "member": 1.92,
-          "note": "placeholder until checked in app"
+          "normal": null,
+          "note": "to check in the talabat app"
         }
       },
-      "memberDiscount": "20% (placeholder)",
       "per": "month",
-      "note": "Spotify Student already costs SAR 12.99 in Saudi"
+      "note": "Free delivery and member deals. Shortlisted 11 Nov"
     },
     {
-      "id": "sub-netflix",
-      "partner": "Netflix",
-      "type": "Series and films",
-      "status": "not signed",
+      "id": "sub-chatgpt",
+      "partner": "ChatGPT Go",
+      "market": "BH",
+      "type": "AI assistant",
+      "status": "shortlisted",
+      "offer": "3 months free",
       "prices": {
-        "SA": {
-          "normal": 32.0,
-          "member": 25.6
-        },
         "BH": {
-          "normal": 3.2,
-          "member": 2.56,
-          "note": "placeholder until checked in app"
+          "normal": 3.0,
+          "note": "about USD 8, to check in app"
         }
       },
-      "memberDiscount": "20% (placeholder)",
       "per": "month",
-      "note": "Basic plan, price from Aug 2025"
+      "note": "Shortlisted 11 Nov"
+    },
+    {
+      "id": "sub-hungerstation",
+      "partner": "HungerStation Plus",
+      "market": "SA",
+      "type": "Food and grocery delivery",
+      "status": "shortlisted",
+      "offer": "3 months free",
+      "prices": {
+        "SA": {
+          "normal": 19.99,
+          "note": "seen on a price tracker, to check in app"
+        }
+      },
+      "per": "month",
+      "note": "Free delivery and member deals. Shortlisted 11 Nov"
     },
     {
       "id": "sub-youtube",
-      "partner": "YouTube Premium",
-      "type": "Video and music",
-      "status": "not signed",
+      "partner": "YouTube Premium Lite",
+      "market": "SA",
+      "type": "Video, most videos without ads",
+      "status": "shortlisted",
+      "offer": "3 months free",
       "prices": {
         "SA": {
-          "normal": 25.0,
-          "member": 20.0,
-          "note": "placeholder until checked in app"
-        },
-        "BH": {
-          "normal": 2.5,
-          "member": 2.0,
-          "note": "placeholder until checked in app"
+          "normal": null,
+          "note": "to check in app"
         }
       },
-      "memberDiscount": "20% (placeholder)",
       "per": "month",
-      "note": "Has a student plan in Bahrain and Saudi. Price to check"
-    },
-    {
-      "id": "sub-shahid",
-      "partner": "Shahid VIP",
-      "type": "Arabic series, films and live TV",
-      "status": "not signed",
-      "prices": {
-        "SA": {
-          "normal": 29.0,
-          "member": 23.2
-        },
-        "BH": {
-          "normal": 2.9,
-          "member": 2.32,
-          "note": "placeholder until checked in app"
-        }
-      },
-      "memberDiscount": "20% (placeholder)",
-      "per": "month",
-      "note": "Biggest paid video service in MENA by subscribers"
+      "note": "Shortlisted 11 Nov"
     }
   ]
 }

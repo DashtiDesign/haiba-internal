@@ -42,8 +42,9 @@ import {
   E,
   GIFTS,
   ICON,
-  SUBS,
   subsFor,
+  subsOf,
+  subsText,
   type Activity,
   type ActivityItem,
   type Brand,
@@ -54,6 +55,7 @@ import { FAQ } from "../strings.member";
 import { useGift } from "../gift";
 import { activeCodes, useRewardCode, type CodeRow } from "../codes";
 import { useHaiba } from "../../store";
+import { BirdPicker } from "../BirdPicker";
 
 /* ---------- small shared bits ---------- */
 
@@ -105,10 +107,12 @@ export function PriceTag({
 }
 
 /** Every subscription shows its own logo. For "subscriptions" in general, the logos sit side by side. */
-export function SubLogos({ size = 30, subs = SUBS }: { size?: number; subs?: Sub[] }) {
+export function SubLogos({ size = 30, subs }: { size?: number; subs?: Sub[] }) {
+  const s = useSession();
+  const list = subs ?? subsOf(s.country ?? "bh");
   return (
     <span className="jx-sublogos" aria-hidden="true">
-      {subs.map((p) => (
+      {list.map((p) => (
         <img
           key={p.id}
           src={p.logo}
@@ -461,7 +465,7 @@ export function Paid() {
           ).map(([art, t, sub]) => (
             <div className="jx-paid-tile" key={t}>
               <span className="jx-paid-art">{art}</span>
-              <span className="jx-row-title">{s.t(t)}</span>
+              <span className="jx-row-title">{s.t(t, { subs: subsText(s.country ?? "bh") })}</span>
               <span className="jx-row-sub">{s.t(sub)}</span>
             </div>
           ))}
@@ -1256,7 +1260,7 @@ export function Subscriptions() {
       </div>
       <div className="jx-pad" style={{ marginTop: 20 }}>
         <div className="jx-stack" style={{ gap: 14 }}>
-          {subsFor(claimed).map((p) => (
+          {subsFor(claimed, s.country ?? "bh").map((p) => (
             <button
               key={p.id}
               className={`jx-oc ${p.claimed ? "jx-oc-off" : ""}`}
@@ -1295,7 +1299,7 @@ export function Subscription() {
   const s = useSession();
   const q = useQuery();
   const claimed = q["claimed"] === 1 || q["claimed"] === "1";
-  const list = subsFor(claimed);
+  const list = subsFor(claimed, s.country ?? "bh");
   const p = list.find((x) => x.id === q["id"]) ?? list[0]!;
   const [shown, setShown] = useState(q["code"] === 1 || q["code"] === "1");
   return (
@@ -1610,6 +1614,9 @@ export function Membership() {
         </div>
       )}
 
+      {/* 12 Nov: the bird look on the hub. The hanger button next to the hub bird opens this. */}
+      <BirdPicker s={s} />
+
       <section className="jx-group">
         <div className="jx-group-head">
           <span>{s.t("memBenefits")}</span>
@@ -1630,7 +1637,9 @@ export function Membership() {
           <button className="jx-ben" onClick={() => go("/haiba/subscriptions")}>
             <SubLogos size={30} />
             <span className="jx-ben-title">{s.t("memBOffers")}</span>
-            <span className="jx-row-sub">{s.t("memBOffersSub", { n: SUBS.length })}</span>
+            <span className="jx-row-sub">
+              {s.t("memBOffersSub", { n: subsOf(s.country ?? "bh").length })}
+            </span>
           </button>
         </div>
       </section>
@@ -2093,7 +2102,9 @@ export function Help() {
                 {tag === "coin" ? <img src={ICON.points} alt="" /> : tag}
               </span>
               <span className="jx-row-main">
-                <span className="jx-row-title">{s.t(t)}</span>
+                <span className="jx-row-title">
+                  {s.t(t, { subs: subsText(s.country ?? "bh") })}
+                </span>
                 <span className="jx-row-sub">{s.t(sub)}</span>
               </span>
             </li>

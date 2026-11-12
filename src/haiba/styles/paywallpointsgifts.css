@@ -1,0 +1,42 @@
+@keyframes paywallpointsgifts-hb-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes paywallpointsgifts-hb-pop{0%{opacity:0;transform:scale(.6)}70%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}
+@keyframes paywallpointsgifts-hb-up{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes paywallpointsgifts-hb-fade{from{opacity:0}to{opacity:1}}
+@keyframes paywallpointsgifts-hb-peek{0%{opacity:0;transform:translateX(60px) rotate(8deg)}100%{opacity:1;transform:translateX(0) rotate(0)}}
+@keyframes paywallpointsgifts-hb-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes paywallpointsgifts-hb-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.pg-paywallpointsgifts .hb-rise{animation:paywallpointsgifts-hb-rise .5s cubic-bezier(.2,.8,.2,1) both}
+.pg-paywallpointsgifts .hb-pop{animation:paywallpointsgifts-hb-pop .5s cubic-bezier(.2,.8,.2,1) both}
+.pg-paywallpointsgifts .hb-up{animation:paywallpointsgifts-hb-up .4s cubic-bezier(.2,.8,.2,1) both}
+.pg-paywallpointsgifts .hb-fade{animation:paywallpointsgifts-hb-fade .25s ease both}
+.pg-paywallpointsgifts .hb-peek{animation:paywallpointsgifts-hb-peek .7s cubic-bezier(.2,.8,.2,1) .15s both}
+.pg-paywallpointsgifts .hb-spin{animation:paywallpointsgifts-hb-spin 90s linear infinite}
+.pg-paywallpointsgifts .hb-float{animation:paywallpointsgifts-hb-float 3.6s ease-in-out infinite}
+.pg-paywallpointsgifts .hb-stagger>*{animation:paywallpointsgifts-hb-rise .45s cubic-bezier(.2,.8,.2,1) both}
+.pg-paywallpointsgifts .hb-stagger>*:nth-child(2){animation-delay:.05s}
+.pg-paywallpointsgifts .hb-stagger>*:nth-child(3){animation-delay:.1s}
+.pg-paywallpointsgifts .hb-stagger>*:nth-child(4){animation-delay:.15s}
+.pg-paywallpointsgifts .hb-stagger>*:nth-child(5){animation-delay:.2s}
+.pg-paywallpointsgifts .hb-stagger>*:nth-child(6){animation-delay:.25s}
+.pg-paywallpointsgifts .hb-stagger>*:nth-child(7){animation-delay:.3s}
+.pg-paywallpointsgifts .hb-stagger>*:nth-child(8){animation-delay:.35s}
+.pg-paywallpointsgifts .hb-d1{animation-delay:.1s}
+.pg-paywallpointsgifts .hb-d2{animation-delay:.2s}
+.pg-paywallpointsgifts .hb-d3{animation-delay:.3s}
+.pg-paywallpointsgifts .hb-press{transition:transform .16s ease,box-shadow .2s ease,background .2s ease}
+.pg-paywallpointsgifts .hb-press:active{transform:scale(.97)}
+.pg-paywallpointsgifts .hb-ease{transition:all .3s cubic-bezier(.2,.8,.2,1)}
+@media (prefers-reduced-motion:reduce){.pg-paywallpointsgifts .hb-rise,.pg-paywallpointsgifts .hb-pop,.pg-paywallpointsgifts .hb-up,.pg-paywallpointsgifts .hb-fade,.pg-paywallpointsgifts .hb-peek,.pg-paywallpointsgifts .hb-spin,.pg-paywallpointsgifts .hb-float,.pg-paywallpointsgifts .hb-stagger>*{animation:none}
+.pg-paywallpointsgifts .hb-ease,.pg-paywallpointsgifts .hb-press{transition:none}}
+.pg-paywallpointsgifts img[src="/_blob/e154a7d6a14c5881781f8dfe345cd94f"],.pg-paywallpointsgifts img[src="/_blob/b7b4d244b79b4cf61f7ceadfed4bc0f0"],.pg-paywallpointsgifts img[src="/_blob/af2d09322c5597090fa6cd876caa6379"],.pg-paywallpointsgifts img[src="/_blob/051ee61596c8a0a893f6b31eebf6be20"],.pg-paywallpointsgifts img[src="/_blob/6f7c6bd8956b97b8e369d6e7440ea8b1"],.pg-paywallpointsgifts img[src="/_blob/41315a46f759aff93b0a2ae419a1f516"],.pg-paywallpointsgifts img[src="/_blob/f89753a5902c9f4b4920af0bd411be06"],.pg-paywallpointsgifts img[src="/_blob/b31e280f2b4f6a505ba69e049258f788"],.pg-paywallpointsgifts img[src="/_blob/763d14b8c7f9dc30bebaded40b37de81"],.pg-paywallpointsgifts img[src="/_blob/75d130321ac949a1dc131f57a8a8d046"],.pg-paywallpointsgifts img[src="/_blob/3923955722f925a9729fdc7b4b68067f"],.pg-paywallpointsgifts img[src="/_blob/e483d75f4499733806d4c208090459ca"],.pg-paywallpointsgifts img[src="/_blob/757d3f02182442a8b9da690032dcc4b2"],.pg-paywallpointsgifts img[src="/_blob/9eab2ffacb4657a867fecb1645d4cbff"],.pg-paywallpointsgifts img[src="/_blob/b976d41864d816b6395e757d2480b750"],.pg-paywallpointsgifts img[src="/_blob/36a5914ac8036e7186a3395e9a9de81b"],.pg-paywallpointsgifts img[src="/_blob/badc2628e905d2a79b03cb243d1a8c66"],.pg-paywallpointsgifts img[src="/_blob/f1899123e4534d5b5d0a8161aa0ef50f"],.pg-paywallpointsgifts img[src="/_blob/2272559694f0c8a89cf0eb54df196ab5"],.pg-paywallpointsgifts img[src="/_blob/3790ebcba1e76f32fc239671d0b58df1"],.pg-paywallpointsgifts img[src="/_blob/200592c8713b1c9cf0122135f51f3502"],.pg-paywallpointsgifts img[src="/_blob/60b8b163002a266128dec43c5a4f8379"],.pg-paywallpointsgifts img[src="/_blob/b26e8037e044d905bcb9f3f346f9cc17"],.pg-paywallpointsgifts img[src="/_blob/ca15ceac418929def4be2aecc493953b"],.pg-paywallpointsgifts img[src="/_blob/328b0c83bcf4dcc33e8cfd7fdda35eca"],.pg-paywallpointsgifts img[src="/_blob/b756321a0a61390fcd596b777c61b4d6"],.pg-paywallpointsgifts :has(> :is(img[src="/_blob/e154a7d6a14c5881781f8dfe345cd94f"],.pg-paywallpointsgifts img[src="/_blob/b7b4d244b79b4cf61f7ceadfed4bc0f0"],.pg-paywallpointsgifts img[src="/_blob/af2d09322c5597090fa6cd876caa6379"],.pg-paywallpointsgifts img[src="/_blob/051ee61596c8a0a893f6b31eebf6be20"],.pg-paywallpointsgifts img[src="/_blob/6f7c6bd8956b97b8e369d6e7440ea8b1"],.pg-paywallpointsgifts img[src="/_blob/41315a46f759aff93b0a2ae419a1f516"],.pg-paywallpointsgifts img[src="/_blob/f89753a5902c9f4b4920af0bd411be06"],.pg-paywallpointsgifts img[src="/_blob/b31e280f2b4f6a505ba69e049258f788"],.pg-paywallpointsgifts img[src="/_blob/763d14b8c7f9dc30bebaded40b37de81"],.pg-paywallpointsgifts img[src="/_blob/75d130321ac949a1dc131f57a8a8d046"],.pg-paywallpointsgifts img[src="/_blob/3923955722f925a9729fdc7b4b68067f"],.pg-paywallpointsgifts img[src="/_blob/e483d75f4499733806d4c208090459ca"],.pg-paywallpointsgifts img[src="/_blob/757d3f02182442a8b9da690032dcc4b2"],.pg-paywallpointsgifts img[src="/_blob/9eab2ffacb4657a867fecb1645d4cbff"],.pg-paywallpointsgifts img[src="/_blob/b976d41864d816b6395e757d2480b750"],.pg-paywallpointsgifts img[src="/_blob/36a5914ac8036e7186a3395e9a9de81b"],.pg-paywallpointsgifts img[src="/_blob/badc2628e905d2a79b03cb243d1a8c66"],.pg-paywallpointsgifts img[src="/_blob/f1899123e4534d5b5d0a8161aa0ef50f"],.pg-paywallpointsgifts img[src="/_blob/2272559694f0c8a89cf0eb54df196ab5"],.pg-paywallpointsgifts img[src="/_blob/3790ebcba1e76f32fc239671d0b58df1"],.pg-paywallpointsgifts img[src="/_blob/200592c8713b1c9cf0122135f51f3502"],.pg-paywallpointsgifts img[src="/_blob/60b8b163002a266128dec43c5a4f8379"],.pg-paywallpointsgifts img[src="/_blob/b26e8037e044d905bcb9f3f346f9cc17"],.pg-paywallpointsgifts img[src="/_blob/ca15ceac418929def4be2aecc493953b"],.pg-paywallpointsgifts img[src="/_blob/328b0c83bcf4dcc33e8cfd7fdda35eca"],.pg-paywallpointsgifts img[src="/_blob/b756321a0a61390fcd596b777c61b4d6"]):only-child){animation:none!important}
+@keyframes paywallpointsgifts-hb-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes paywallpointsgifts-hb-coin{0%{opacity:0;transform:translateY(12px) scale(.5)}60%{opacity:1;transform:translateY(-4px) scale(1.1)}100%{opacity:1;transform:none}}
+@keyframes paywallpointsgifts-hb-glow{0%,100%{box-shadow:0 0 0 0 rgba(192,244,2,.75)}60%{box-shadow:0 0 0 9px rgba(192,244,2,0)}}
+@keyframes paywallpointsgifts-hb-nudge{0%,100%{transform:translateX(0);opacity:.55}50%{transform:translateX(4px);opacity:1}}
+@keyframes paywallpointsgifts-hb-tick{0%{opacity:0;transform:scale(.4)}100%{opacity:1;transform:scale(1)}}
+.pg-paywallpointsgifts .hb-bob{animation:paywallpointsgifts-hb-bob 3.2s ease-in-out infinite}
+.pg-paywallpointsgifts .hb-coin{animation:paywallpointsgifts-hb-coin .55s cubic-bezier(.2,.8,.2,1) both}
+.pg-paywallpointsgifts .hb-glow{animation:paywallpointsgifts-hb-glow 1.8s ease-out 1.6s infinite}
+.pg-paywallpointsgifts .hb-nudge{animation:paywallpointsgifts-hb-nudge 1.4s ease-in-out infinite}
+.pg-paywallpointsgifts .hb-tick{animation:paywallpointsgifts-hb-tick .4s cubic-bezier(.2,.8,.2,1) both}
+@media (prefers-reduced-motion:reduce){.pg-paywallpointsgifts .hb-bob,.pg-paywallpointsgifts .hb-coin,.pg-paywallpointsgifts .hb-glow,.pg-paywallpointsgifts .hb-nudge,.pg-paywallpointsgifts .hb-tick{animation:none}}

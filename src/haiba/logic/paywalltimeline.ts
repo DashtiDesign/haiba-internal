@@ -7,11 +7,34 @@ export function useVals() {
   const { state, setState, props, nav } = useDC({ view: "", seenExit: false, step: 0, gift: -1 });
   useEffect(() => {}, []);
 
-  var WORTH = { gifts: 30, spotify: 3, chatgpt: 9, travel: 5, points: 1 };
-  var worthN = WORTH.gifts + WORTH.spotify + WORTH.chatgpt + WORTH.travel + WORTH.points;
+  var WORTH = { gifts: 30, p1: 3, p2: 9, travel: 5, points: 1 };
+  var worthN = WORTH.gifts + WORTH.p1 + WORTH.p2 + WORTH.travel + WORTH.points;
   var p = Number(props.price ?? "20");
   // Money, deposit and launch date come from the prototype settings in the app. The canvas falls back to Bahrain.
   var cur = props.currency ?? "BHD";
+  // Subscription partners by market (11 Nov): Bahrain talabat pro and ChatGPT Go, Saudi HungerStation Plus and YouTube Premium Lite
+  var SA = cur === "SAR";
+  var P1 = SA
+    ? {
+        name: "HungerStation Plus",
+        short: "Hunger\u200bStation",
+        logo: "/haiba/brands/hungerstation.webp",
+        bg: "#FBEF00",
+        ink: "#5E2D20",
+        sub: "#7A4A3A",
+      }
+    : {
+        name: "talabat pro",
+        short: "talabat pro",
+        logo: "/haiba/brands/talabat.webp",
+        bg: "#FF5A00",
+        ink: "#FFFFFF",
+        sub: "#FFE7DA",
+      };
+  var P2 = SA
+    ? { name: "YouTube Premium Lite", short: "YouTube", logo: "/haiba/brands/youtube.webp" }
+    : { name: "ChatGPT Go", short: "ChatGPT Go", logo: "/haiba/brands/chatgpt.webp" };
+  var subsTxt = P1.name + " and " + P2.name;
   var fx = cur === "SAR" ? 10 : 1; // worth values below are kept in BHD; Saudi shows them in SAR
   var dep = Number(props.deposit ?? (cur === "SAR" ? "10" : "1"));
   var launch = props.launch ?? "8 Dec";
@@ -50,7 +73,7 @@ export function useVals() {
       break;
     }
   }
-  var dayOne = WORTH.spotify + WORTH.chatgpt + WORTH.travel + 2.5 + 0.5;
+  var dayOne = WORTH.p1 + WORTH.p2 + WORTH.travel + 2.5 + 0.5;
   var shopName = props.shop ?? "The Coffee Bean";
   var SHOPGIFT = {
     "The Coffee Bean": "a free drink",
@@ -63,13 +86,23 @@ export function useVals() {
     "VOX Cinemas": ["/haiba/brands/vox.webp", "#FFFFFF"],
   };
   var common = {
+    p1Name: P1.name,
+    p1Logo: P1.logo,
+    p1Bg: P1.bg,
+    p1Ink: P1.ink,
+    p1Sub: P1.sub,
+    p2Name: P2.name,
+    p2Logo: P2.logo,
+    p1Short: P1.short,
+    p2Short: P2.short,
+    subsTxt: subsTxt,
     stepsTitle: join ? "Join today" : "Reserve now, pay later",
     s1Title: join ? "Haiba starts today" : "Your price is locked",
     s1Amt: join ? totalTxt : cur + " " + dep,
     s2When: join ? "This month" : launch,
     s2Title: join ? "Pick your first gift" : "Haiba opens. Pay the rest.",
     s2Amt: join ? "Free" : M(p - dep / fx),
-    s2Sub: join ? "Spotify and ChatGPT too" : "+ VAT",
+    s2Sub: join ? subsTxt + " too" : "+ VAT",
     tS1Title: join ? "Pay " + totalTxt : "Pay " + cur + " " + dep,
     tS1Sub: join
       ? "VAT included. Haiba starts today."
@@ -77,7 +110,7 @@ export function useVals() {
     tS2When: join ? "Same day" : launch,
     tS2Title: join ? "Your first gift" : "Haiba opens",
     tS2Sub: join
-      ? "Pick it, then use Spotify, ChatGPT and travel data."
+      ? "Pick it, then use " + P1.name + ", " + P2.name + " and travel data."
       : "Pay the rest: " + M(p - dep / fx) + " + VAT.",
     refundLine: join
       ? "One payment a year. No auto renewal."
@@ -112,7 +145,7 @@ export function useVals() {
     worth: M(worthN) + "+",
     free: M(worthN - p) + "+ extra",
     paybackPct: Math.round((p / worthN) * 100) + "%",
-    // Spotify, ChatGPT, travel data, the first gift and welcome points all land on day one
+    // Both subscriptions, travel data, the first gift and welcome points all land on day one
     dayOneSticker: dayOne >= p ? "Pays for itself on day one" : M(dayOne) + " of it on day one",
     dayOneLine:
       dayOne >= p
@@ -123,7 +156,10 @@ export function useVals() {
         ? "It pays for itself on day one."
         : "You get " + M(dayOne) + " of it on day one.",
     dayOneRest:
-      "Spotify, ChatGPT, data and your first gift come first. Then a new gift every month.",
+      P1.name +
+      ", " +
+      P2.name +
+      ", data and your first gift come first. Then a new gift every month.",
     // Exit sheet: what they missed last month at their own shop (from promo F)
     missTitle: SHOPGIFT[shopName]
       ? "Last month you went to " + shopName
@@ -165,10 +201,10 @@ export function useVals() {
   };
   return Object.assign(common, {
     wGifts: M(WORTH.gifts),
-    wSpotify: M(WORTH.spotify),
-    wChatgpt: M(WORTH.chatgpt),
+    wP1: M(WORTH.p1),
+    wP2: M(WORTH.p2),
     wTravel: M(WORTH.travel),
-    wExtras: M(WORTH.spotify + WORTH.chatgpt + WORTH.travel),
+    wExtras: M(WORTH.p1 + WORTH.p2 + WORTH.travel),
     _x: 0,
   });
 }

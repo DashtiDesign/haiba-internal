@@ -402,8 +402,8 @@ export default function PromoDream() {
                 }}
               >
                 <Artwork
-                  src="/haiba/brands/spotify.webp"
-                  alt="Spotify Premium Student"
+                  src="/haiba/brands/talabat.webp"
+                  alt="talabat pro"
                   style={{
                     width: "52px",
                     height: "52px",
@@ -439,10 +439,10 @@ export default function PromoDream() {
                   {"3 months free"}
                 </span>
                 <span style={{ fontSize: "19px", fontWeight: "800", lineHeight: "1.15" }}>
-                  {"Spotify Premium Student"}
+                  {"talabat pro"}
                 </span>
                 <span style={{ fontSize: "13px", fontWeight: "600", color: "#B9B3CC" }}>
-                  {"Ad free music, offline"}
+                  {"Free delivery on food and groceries"}
                 </span>
               </span>
             </span>

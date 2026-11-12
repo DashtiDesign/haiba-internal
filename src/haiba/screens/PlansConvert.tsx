@@ -323,7 +323,8 @@ export default function PlansConvert() {
                         lineHeight: "1.35",
                       }}
                     >
-                      {"Spotify and ChatGPT for 3 months. 5GB data when you travel."}
+                      {v.subsTxt}
+                      {" for 3 months. 5GB data when you travel."}
                     </span>
                   </span>
                   <span

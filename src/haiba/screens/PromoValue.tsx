@@ -205,7 +205,7 @@ export default function PromoValue() {
                 gap: "14px",
                 minHeight: "168px",
                 boxSizing: "border-box",
-                background: "#000000",
+                background: "#FF5A00",
                 color: "#FFFFFF",
                 borderRadius: "12px",
                 padding: "16px",
@@ -228,8 +228,8 @@ export default function PromoValue() {
               </span>
               <span style={{ display: "flex", alignItems: "center" }}>
                 <Artwork
-                  src="/haiba/brands/spotify.webp"
-                  alt="Spotify"
+                  src="/haiba/brands/talabat.webp"
+                  alt="talabat pro"
                   style={{
                     width: "44px",
                     height: "44px",
@@ -242,9 +242,9 @@ export default function PromoValue() {
               </span>
               <span style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
                 <span style={{ fontSize: "17px", fontWeight: "800", lineHeight: "1.2" }}>
-                  {"Spotify Student"}
+                  {"talabat pro"}
                 </span>
-                <span style={{ fontSize: "13.5px", fontWeight: "600", color: "#B9B3CC" }}>
+                <span style={{ fontSize: "13.5px", fontWeight: "600", color: "#FFE7DA" }}>
                   {"3 months free"}
                 </span>
               </span>
@@ -283,7 +283,7 @@ export default function PromoValue() {
               <span style={{ display: "flex", alignItems: "center" }}>
                 <Artwork
                   src="/haiba/brands/chatgpt.webp"
-                  alt="ChatGPT"
+                  alt="ChatGPT Go"
                   style={{
                     width: "44px",
                     height: "44px",
