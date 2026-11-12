@@ -15,6 +15,7 @@ ap.add_argument("--pad", help="L,R extra px for a wide look, to match its other 
 ap.add_argument("--wide", action="store_true", help="keep the full video width (for looks that move past the classic box); prints the extra px left and right")
 ap.add_argument("--trim", action="store_true", help="with --wide: keep only the room the look uses")
 ap.add_argument("--padt",type=int, help="extra px on top for a wide look (default: all the room the video has above him)")
+ap.add_argument("--padb", type=int, default=0, help="13 Nov: extra px below the classic box, for a look that reaches below his feet (the puppy running in front); with --trim only what is used is kept")
 ap.add_argument("--box",help="top,bottom,cx in source px, to reuse the placement of another file of the same look")
 a = ap.parse_args()
 
@@ -69,9 +70,9 @@ if a.wide:
         PADL, PADR = map(int, a.pad.split(","))
     # 12 Nov: room on top too, for looks that fly or throw above his head (the falcon, the dragon's fire).
     PADT = max(0, round(T * s)) if a.padt is None else a.padt
-    box = (L - PADL / s, T - PADT / s, L + W / s + PADR / s, T + H / s)
+    box = (L - PADL / s, T - PADT / s, L + W / s + PADR / s, T + H / s + a.padb / s)
     W = W + PADL + PADR
-    H = H + PADT
+    H = H + PADT + a.padb
     print("wide: extra px left", PADL, "right", PADR, "top", PADT, "width", W, "height", H)
 print("source", first.shape, "box top,bottom,cx =", f"{top},{bot},{cx}", "scale", round(s, 4))
 
@@ -98,10 +99,14 @@ if a.wide and not a.pad and a.padt is None and a.trim:
     cl = max(0, min(PADL, xs.min() - 28))
     cr = min(W, max(PADL + 412, xs.max() + 29))
     ct = max(0, min(PADT, ys.min() - 28))
-    frames = [fr.crop((cl, ct, cr, H)) for fr in frames]
+    # below his feet: keep the classic 560 px box, plus what a --padb look really uses (and an 8 px margin)
+    base = H - a.padb
+    cb = min(H, max(base, ys.max() + 9)) if a.padb else H
+    frames = [fr.crop((cl, ct, cr, cb)) for fr in frames]
     PADL, PADR, PADT = PADL - cl, PADR - (W - cr), PADT - ct
-    W, H = cr - cl, H - ct
-    print("trimmed: extra px left", PADL, "right", PADR, "top", PADT, "width", W, "height", H)
+    PADB = cb - base
+    W, H = cr - cl, cb - ct
+    print("trimmed: extra px left", PADL, "right", PADR, "top", PADT, "bottom", PADB, "width", W, "height", H)
 if a.wide:
     # The video edge can cut through a wing or the fire; fade the outer 20 px so it never ends in a hard line.
     ramp = np.ones(W)

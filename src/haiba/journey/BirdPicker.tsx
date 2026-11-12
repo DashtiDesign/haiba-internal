@@ -4,6 +4,7 @@ import type { Session } from "./session";
 import {
   LOOK_NAMES,
   lookAnchor,
+  lookDrop,
   lookHeight,
   lookThumb,
   ownedLooks,
@@ -110,7 +111,8 @@ export function BirdPicker({ s }: { s: Session }) {
                   style={{
                     position: "absolute",
                     left: "50%",
-                    bottom: -2,
+                    // a look with room below his feet (the puppy) moves down, so his feet stay on the line
+                    bottom: -2 - 108 * lookHeight(id) * lookDrop(id),
                     height: 108 * lookHeight(id),
                     width: "auto",
                     maxWidth: "none",

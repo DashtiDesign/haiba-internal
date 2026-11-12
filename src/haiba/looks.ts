@@ -35,6 +35,8 @@ export const LOOK_FILES: Record<
     padL?: number;
     padR?: number;
     padT?: number;
+    // 13 Nov: room below his feet, for a look that reaches lower than his soles (the puppy running in front of him)
+    padB?: number;
     name?: string;
     still?: string;
     sound?: string;
@@ -75,11 +77,19 @@ export const LOOK_FILES: Record<
   // lashes). Pink spa headband and a long robe; a pink salon chair pops in, cucumbers and a pink cream mask, then she
   // hops up glowing and the chair vanishes. All markets.
   spa: { ms: 6100, idleMs: 4000, padL: 49, padR: 117, padT: 11 },
+  // 13 Nov: Puppy. A golden puppy (in his toy style) sits by his feet, hops up, runs a circle around him, flops on its
+  // back for belly rubs, then both settle back. It runs in front of him, lower than his feet, so this look has room
+  // below (padB). All markets.
+  puppy: { ms: 6100, idleMs: 4000, padL: 176, padR: 239, padB: 54 },
   shemagh: { ms: 6000, idleMs: 4000 },
 };
 
 /** How tall a look's image is against the classic 560 px, so previews can keep his size the same. */
-export const lookHeight = (id: string) => (560 + (LOOK_FILES[id]?.padT ?? 0)) / 560;
+export const lookHeight = (id: string) =>
+  (560 + (LOOK_FILES[id]?.padT ?? 0) + (LOOK_FILES[id]?.padB ?? 0)) / 560;
+/** How much of a look's image sits below the usual bottom edge (0 for most looks). Move the image down by this
+ * share of its height so his feet stay on the same line. */
+export const lookDrop = (id: string) => (LOOK_FILES[id]?.padB ?? 0) / (560 * lookHeight(id));
 
 /** The start of a look's file names (its id unless the look names its files). */
 export const lookFile = (id: string) => LOOK_FILES[id]?.name ?? id;
@@ -114,6 +124,7 @@ export const LOOK_NAMES: Record<string, string> = {
   fish: "Abood Yowda",
   melon: "Hamdha",
   spa: "Spa day",
+  puppy: "Puppy",
   f1: "Audi F1",
   gold: "Golden parrot",
   dragon: "Dragon rider",

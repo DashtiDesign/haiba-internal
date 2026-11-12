@@ -576,7 +576,7 @@ export default function Rewards() {
                               style={{
                                 position: "absolute",
                                 left: "50%",
-                                bottom: "-2px",
+                                bottom: `${k.b}px`,
                                 height: `${k.h}px`,
                                 width: "auto",
                                 maxWidth: "none",

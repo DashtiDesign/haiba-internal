@@ -120,7 +120,7 @@ export default function BirdLooks() {
             style={{
               position: "absolute",
               left: "50%",
-              bottom: "136px",
+              bottom: `${v.stageB}px`,
               height: `${v.stageH}px`,
               width: "auto",
               maxWidth: "none",
@@ -345,7 +345,7 @@ export default function BirdLooks() {
                       style={{
                         position: "absolute",
                         left: "50%",
-                        bottom: "-2px",
+                        bottom: `${k.b}px`,
                         height: `${k.h}px`,
                         width: "auto",
                         maxWidth: "none",

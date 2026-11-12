@@ -68,6 +68,8 @@ function currentLook(): Look {
   const l = f.padL ?? 0;
   const r = f.padR ?? 0;
   const t = f.padT ?? 0;
+  // room below his feet (the puppy): the image just reaches lower, his feet stay on the same line
+  const b = f.padB ?? 0;
   // 12 Nov: the hub has little room above his head, so a look that reaches high (the falcon's flight, the dragon) is
   // drawn a little smaller, just enough that nothing goes past the top of the screen. His feet stay put.
   const s = Math.min(1, HUB_ROOM / ((545 + t - 20) * PX));
@@ -82,7 +84,7 @@ function currentLook(): Look {
       feetX - (l + 188.5) * PX * s,
       solesY - (545 + t) * PX * s,
       (412 + l + r) * PX * s,
-      (560 + t) * PX * s,
+      (560 + t + b) * PX * s,
     ],
   };
 }

@@ -52,7 +52,8 @@ export function useVals() {
   var PRICE = 200;
   var balance = props.base - (props.heldPts || 0);
   var sa = (props.market ?? "Bahrain") === "Saudi";
-  // [id, name, market, still, where his feet are (% of the width), height against the classic 560 px, has sound]
+  // [id, name, market, still, where his feet are (% of the width), height against the classic 560 px, has sound,
+  //  share of the image below his feet (13 Nov: the puppy runs in front of him, lower than his feet)]
   var LOOKS = [
     ["classic", "Classic", "", "/haiba/motion/hub-still.webp", 45.75, 1.0],
     [
@@ -80,6 +81,16 @@ export function useVals() {
       "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/spa-still.webp",
       41.09,
       1.0196,
+    ],
+    [
+      "puppy",
+      "Puppy",
+      "",
+      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/puppy-still.webp",
+      44.07,
+      1.0964,
+      false,
+      0.0879,
     ],
     [
       "gold",
@@ -209,6 +220,7 @@ export function useVals() {
       still: l[3],
       x: l[4],
       h: Math.round(112 * l[5]),
+      b: Math.round(-2 - 112 * l[5] * (l[7] || 0)),
       sound: !!l[6],
       on: on,
       onStr: String(on),
@@ -272,6 +284,22 @@ export function useVals() {
             })[0][5],
           340,
         ),
+      ),
+    ),
+    // his feet stay on the stage line; a look with room below them (the puppy) starts lower
+    stageB: String(
+      Math.round(
+        136 -
+          Math.min(
+            290 *
+              LOOKS.filter(function (l) {
+                return l[0] === cur.id;
+              })[0][5],
+            340,
+          ) *
+            (LOOKS.filter(function (l) {
+              return l[0] === cur.id;
+            })[0][7] || 0),
       ),
     ),
     loading: !!state.loading,
