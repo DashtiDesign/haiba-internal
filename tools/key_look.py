@@ -15,6 +15,7 @@ ap.add_argument("--pad", help="L,R extra px for a wide look, to match its other 
 ap.add_argument("--wide", action="store_true", help="keep the full video width (for looks that move past the classic box); prints the extra px left and right")
 ap.add_argument("--trim", action="store_true", help="with --wide: keep only the room the look uses")
 ap.add_argument("--padt",type=int, help="extra px on top for a wide look (default: all the room the video has above him)")
+ap.add_argument("--edge", action="store_true", help="13 Nov: clean a 4 px edge band (no lime rule, despill); for golden or yellow characters that kept a green outline")
 ap.add_argument("--padb", type=int, default=0, help="13 Nov: extra px below the classic box, for a look that reaches below his feet (the puppy running in front); with --trim only what is used is kept")
 ap.add_argument("--box",help="top,bottom,cx in source px, to reuse the placement of another file of the same look")
 a = ap.parse_args()
@@ -35,6 +36,13 @@ def key(rgb, bgc):
     spill0 = x[..., 1] - np.maximum(x[..., 0], x[..., 2])
     # Lime and yellow (the Haiba lime logo, volt boots, fins: strong red, almost no blue) are not haze, so they stay.
     lime = (x[..., 0] > 120) & (x[..., 2] < x[..., 0] * 0.6)
+    band = None
+    if a.edge:
+        # 13 Nov (puppy): at a golden edge the mix of gold and green also looks "lime", so the outline stayed green.
+        # In a 4 px band next to the backdrop the lime rule does not apply and the green is taken out.
+        bgm = Image.fromarray(((alpha < 0.5) * 255).astype("uint8"))
+        band = (np.asarray(bgm.filter(ImageFilter.MaxFilter(9))) > 0) & (alpha >= 0.5)
+        lime = lime & ~band
     alpha = np.where(lime, alpha, np.minimum(alpha, np.clip(1 - (spill0 - 28) / 34, 0, 1)))
     # Unmix the backdrop from soft pixels (edges, glow, sparkles, motion blur): colour = (pixel - (1 - a) * green) / a.
     ae = np.maximum(alpha, 0.2)[..., None]
@@ -43,6 +51,9 @@ def key(rgb, bgc):
     r, g, b = x[..., 0], x[..., 1], x[..., 2]
     mx = np.maximum(r, b)
     x[..., 1] = np.where((alpha < 1) & (g > mx + 8), mx + 8, g)  # any green left in a soft pixel goes
+    if band is not None:
+        # edge pixels: green no higher than the average of red and blue (a standard despill), only in the band
+        x[..., 1] = np.where(band, np.minimum(x[..., 1], (r + b) / 2 + 6), x[..., 1])
     im = Image.fromarray(np.dstack([x, alpha * 255]).astype("uint8"), "RGBA")
     al = im.getchannel("A").filter(ImageFilter.MinFilter(3)).filter(ImageFilter.GaussianBlur(0.6))
     im.putalpha(al)

@@ -80,7 +80,9 @@ export const LOOK_FILES: Record<
   // 13 Nov: Puppy. A golden puppy (in his toy style) sits by his feet, hops up, runs a circle around him, flops on its
   // back for belly rubs, then both settle back. It runs in front of him, lower than his feet, so this look has room
   // below (padB). All markets.
-  puppy: { ms: 6100, idleMs: 4000, padL: 176, padR: 239, padB: 54 },
+  // puppy-v2 (13 Nov, late): re-keyed with a clean edge band, so the golden puppy has no green outline. New file names
+  // so phones that kept the first files load these.
+  puppy: { ms: 6100, idleMs: 4000, padL: 176, padR: 239, padB: 54, name: "puppy-v2" },
   shemagh: { ms: 6000, idleMs: 4000 },
 };
 

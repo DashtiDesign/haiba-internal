@@ -119,6 +119,7 @@ BLOBS = {
     "ec53da96493c825a2775d055b5a068e5": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/melon-still.webp",
     "94e88429fa697b4a0aca11f2f6b8484a": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/spa-still.webp",
     "0239f2e37ea1863dcbd77e3617b353fc": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/puppy-still.webp",
+    "56a6c17e5473c5f2265dee57f45e9271": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/puppy-v2-still.webp",
     "92896f197ff2d0f0ffe17bafd86bd74e": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/gold-wide-still.webp",
     "a7de253f602520b5c1d2821d713cd216": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/f1-wide-still.webp",
     "d31ce242c4d4af7fc98023b5e8e34756": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/dragon-wide-still.webp",

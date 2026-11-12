@@ -448,7 +448,7 @@ export function useVals() {
       "puppy",
       "Puppy",
       "",
-      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/puppy-still.webp",
+      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/puppy-v2-still.webp",
       44.07,
       1.0964,
       false,
