@@ -221,42 +221,54 @@ export async function lookLoop(id: string, kind: "reveal" | "idle"): Promise<Blo
   return cachedBlob(`${LOOKS_URL}${lookFile(id)}-${kind}.${ext}`);
 }
 
-// The store preview loops the action and keeps one object URL per look, so reopening it is instant.
-const previews = new Map<string, string>();
-async function preview(id: string): Promise<string | null> {
-  const have = previews.get(id);
-  if (have) return have;
-  // The classic bird previews with his coin trick, the same file the hub plays.
-  const b =
-    id === "classic"
-      ? await cachedBlob(`/haiba/motion/hub-coin.${await loopFormat()}`)
-      : await lookLoop(id, "reveal");
-  if (!b) return null;
-  const u = URL.createObjectURL(b);
-  previews.set(id, u);
-  return u;
-}
-
 /**
- * 12 Nov: looks with sound (recreations of viral clips). The sound plays only when the student taps: the bird on the hub,
- * or a look in the store. Never when a page opens. Each sound starts with the action, so the two stay in time.
- * Sounds are small (under 100 KB), live in the same Cloud folder as the looks and load on the first tap.
+ * 12 Nov (night): sound runs on Web Audio. The old audio element sometimes stayed silent (a late pause from the unlock
+ * step could land after the real play) and started late on phones. Web Audio starts on the exact moment the action
+ * shows. Each sound is downloaded and decoded once per visit. On iPhone it follows the silent switch.
  */
-const sounds = new Map<string, HTMLAudioElement>();
-function lookAudio(id: string): HTMLAudioElement | null {
-  const f = LOOK_FILES[id]?.sound;
-  if (!f) return null;
-  let a = sounds.get(id);
-  if (!a) {
-    a = new Audio(`${LOOKS_URL}${f}`);
-    a.preload = "auto";
-    sounds.set(id, a);
+type AudioCtor = typeof AudioContext;
+let ctx: AudioContext | null = null;
+function audioCtx(): AudioContext | null {
+  if (ctx) return ctx;
+  const w = window as unknown as { AudioContext?: AudioCtor; webkitAudioContext?: AudioCtor };
+  const C = w.AudioContext ?? w.webkitAudioContext;
+  if (!C) return null;
+  try {
+    ctx = new C();
+  } catch {
+    return null;
   }
-  return a;
+  return ctx;
+}
+/** Call from a tap: phones only start sound after one. Later plays on the page are then allowed. */
+export function unlockLookSound() {
+  const c = audioCtx();
+  if (c && c.state !== "running") void c.resume().catch(() => undefined);
+}
+const buffers = new Map<string, Promise<AudioBuffer | undefined>>();
+function soundBuffer(id: string): Promise<AudioBuffer | undefined> {
+  const f = LOOK_FILES[id]?.sound;
+  const c = audioCtx();
+  if (!f || !c) return Promise.resolve(undefined);
+  let p = buffers.get(id);
+  if (!p) {
+    p = fetch(`${LOOKS_URL}${f}`)
+      .then((r) => (r.ok ? r.arrayBuffer() : undefined))
+      .then((ab) =>
+        ab ? new Promise<AudioBuffer>((res, rej) => c.decodeAudioData(ab, res, rej)) : undefined,
+      )
+      .catch(() => undefined)
+      .then((b) => {
+        if (!b) buffers.delete(id);
+        return b;
+      });
+    buffers.set(id, p);
+  }
+  return p;
 }
 export const lookHasSound = (id: string) => !!LOOK_FILES[id]?.sound;
 
-/** Sound on or off for looks, the student's choice from the Bird looks page (saved on the phone, on by default). */
+/** Sound on or off for looks, the student's choice from the Looks page (saved on the phone, on by default). */
 export function lookSoundOff(): boolean {
   try {
     return window.localStorage.getItem("haiba-look-sound") === "off";
@@ -272,60 +284,126 @@ export function setLookSoundOff(off: boolean) {
   }
   if (off) stopLookSounds();
 }
-/** Stops every look sound (another look was picked, or the page closed). */
+let playing: AudioBufferSourceNode | null = null;
+/** Stops the look sound that is playing (another look was picked, or the page closed). */
 export function stopLookSounds() {
-  sounds.forEach((a) => {
-    a.pause();
-    a.currentTime = 0;
-  });
+  try {
+    playing?.stop();
+  } catch {
+    /* already ended */
+  }
+  playing = null;
 }
-/** Plays a look's sound from the start. Call it from the tap itself (phones only allow sound after a tap). */
+function startSound(b: AudioBuffer) {
+  const c = audioCtx();
+  if (!c || lookSoundOff()) return;
+  stopLookSounds();
+  const src = c.createBufferSource();
+  src.buffer = b;
+  src.connect(c.destination);
+  src.start();
+  playing = src;
+}
+/** Plays a look's sound from the start, from the hub tap. The sound starts once it is ready (one short download). */
 export function playLookSound(id: string) {
+  unlockLookSound();
   stopLookSounds();
   if (lookSoundOff()) return;
-  const a = lookAudio(id);
-  if (!a) return;
-  a.currentTime = 0;
-  void a.play().catch(() => {
-    /* sound blocked or not loaded: the look still plays */
+  const want = ++soundAsk;
+  void soundBuffer(id).then((b) => {
+    if (b && want === soundAsk) startSound(b);
   });
 }
+let soundAsk = 0;
+
+// A fresh address per play, decoded before it shows, so the animation starts on frame one right when the sound does.
+async function readyUrl(b: Blob): Promise<string> {
+  const u = URL.createObjectURL(b);
+  const img = new Image();
+  img.src = u;
+  try {
+    await img.decode();
+  } catch {
+    /* shows anyway */
+  }
+  return u;
+}
+const idleFile = async (id: string) =>
+  id === "classic"
+    ? cachedBlob(`/haiba/motion/hub-idle.${await loopFormat()}`)
+    : lookLoop(id, "idle");
+const actionFile = async (id: string) =>
+  id === "classic"
+    ? cachedBlob(`/haiba/motion/hub-coin.${await loopFormat()}`)
+    : lookLoop(id, "reveal");
+// Pause between two actions on the Looks page when a look has no idle file: he holds still this long.
+const PREVIEW_GAP_MS = 4000;
 
 /**
- * The store's tap: the action plays from its first frame together with the sound. Called during the tap, so the sound
- * is allowed; while the action loads the sound waits (paused on its first frame), then both start together.
+ * 12 Nov (night): the Looks page stage plays a look on repeat: the action, a 4 s idle, the action again, and so on.
+ * With sound (after a tap, never when the page opens) the sound starts again with every action, so it can never drift.
+ * show() gets each new image address. Only the newest call keeps running.
  */
-let fresh: string | null = null;
-async function previewTap(id: string): Promise<string | null> {
+let run = 0;
+let shown: string | null = null;
+let timer: number | undefined;
+export function stopLookPreview() {
+  run += 1;
+  window.clearTimeout(timer);
   stopLookSounds();
-  const a = lookSoundOff() ? null : lookAudio(id);
-  if (a) {
-    a.muted = true;
-    void a
-      .play()
-      .then(() => a.pause())
-      .catch(() => undefined);
-  }
-  await preview(id);
-  const b = id === "classic" ? undefined : await lookLoop(id, "reveal");
-  if (!b) return previews.get(id) ?? null;
-  // a new address each time, so the animation starts on frame one with the sound
-  if (fresh) URL.revokeObjectURL(fresh);
-  fresh = URL.createObjectURL(b);
-  if (a) {
-    a.muted = false;
-    a.currentTime = 0;
-    void a.play().catch(() => undefined);
-  }
-  return fresh;
+}
+async function playPreview(id: string, withSound: boolean, show: (src: string | null) => void) {
+  stopLookPreview();
+  const me = run;
+  const live = () => me === run;
+  if (withSound) unlockLookSound();
+  const sound = withSound && lookHasSound(id) && !lookSoundOff() ? soundBuffer(id) : null;
+  const action = await actionFile(id);
+  if (!live()) return;
+  if (!action) return show(null);
+  // wait for the sound too (it is small), but never more than 2 s, so a slow sound does not hold the look back
+  const buf = sound
+    ? await Promise.race([
+        sound,
+        new Promise<undefined>((r) => setTimeout(() => r(undefined), 2000)),
+      ])
+    : undefined;
+  if (!live()) return;
+  const swap = (u: string) => {
+    const old = shown;
+    shown = u;
+    show(u);
+    if (old) window.setTimeout(() => URL.revokeObjectURL(old), 500);
+  };
+  const ms = id === "classic" ? 6000 : (LOOK_FILES[id]?.ms ?? 6000);
+  const idleMs = id === "classic" ? 3900 : (LOOK_FILES[id]?.idleMs ?? 4000);
+  const loop = async () => {
+    const u = await readyUrl(action);
+    if (!live()) return URL.revokeObjectURL(u);
+    swap(u);
+    if (buf && !lookSoundOff()) startSound(buf);
+    timer = window.setTimeout(async () => {
+      const idle = await idleFile(id);
+      if (!live()) return;
+      if (idle) swap(await readyUrl(idle));
+      if (!live()) return;
+      timer = window.setTimeout(loop, idle ? idleMs : PREVIEW_GAP_MS);
+    }, ms);
+  };
+  void loop();
+}
+
+/** Downloads and decodes a look's sound ahead of the first tap (the hub does this for the look he wears). */
+export function preloadLookSound(id: string) {
+  if (lookHasSound(id)) void soundBuffer(id);
 }
 
 declare global {
   interface Window {
     __hbLooks?: {
       has: (id: string) => boolean;
-      preview: (id: string) => Promise<string | null>;
-      tap?: (id: string) => Promise<string | null>;
+      play?: (id: string, withSound: boolean, show: (src: string | null) => void) => void;
+      stopPreview?: () => void;
       stop?: () => void;
       soundOff?: () => boolean;
       setSoundOff?: (off: boolean) => void;
@@ -338,8 +416,8 @@ declare global {
 if (typeof window !== "undefined") {
   window.__hbLooks = {
     has: (id) => id === "classic" || !!LOOK_FILES[id],
-    preview,
-    tap: previewTap,
+    play: (id, withSound, show) => void playPreview(id, withSound, show),
+    stopPreview: stopLookPreview,
     stop: stopLookSounds,
     soundOff: lookSoundOff,
     setSoundOff: setLookSoundOff,

@@ -9,6 +9,7 @@ import {
   lookStill,
   loopFormat,
   playLookSound,
+  preloadLookSound,
   savedLook,
   stopLookSounds,
 } from "./looks";
@@ -143,6 +144,8 @@ export default function HubBird({ onTap }: { onTap?: () => void }) {
       setSrc(look.still);
       setBox(look.box);
     }
+    // A look with sound gets its sound ready now, so the first tap starts both together.
+    preloadLookSound(savedLook());
     reduced.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced.current) return;
     // The still shows first (about 20 KB). Then the random first reveal loads and plays.

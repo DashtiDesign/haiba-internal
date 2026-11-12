@@ -244,6 +244,11 @@ def patch_logic(key, name):
         a = "  useEffect(() => {\n"
         assert a in s, "%s logic patch failed: reset call" % name
         s = s.replace(a, a + "    resetPrototypeLooks();\n", 1)
+    if name == "BirdLooks":
+        # 12 Nov (night): leaving the Looks page stops its repeating preview and sound (boards have no unmount)
+        a = "\n  }, []);\n"
+        assert a in s, "BirdLooks logic patch failed: preview stop"
+        s = s.replace(a, "\n    return function () { if (window.__hbLooks && window.__hbLooks.stopPreview) window.__hbLooks.stopPreview(); };" + a, 1)
     for a, b in LOGIC.get(name, []):
         assert s.count(a) == 1, "%s logic patch failed: %s" % (name, a[:60])
         s = s.replace(a, b)

@@ -30,7 +30,7 @@ export function useVals() {
         "classic";
     } catch (e) {}
     var api = window.__hbLooks;
-    var go = !!(api && api.has(first));
+    var go = !!(api && api.play && api.has(first));
     var off = false;
     try {
       off = window.localStorage.getItem("haiba-look-sound") === "off";
@@ -38,11 +38,15 @@ export function useVals() {
     setState({ ready: true, loading: go, soundOff: off });
     if (go) {
       window.__hbLookWant = first;
-      api.preview(first).then(function (u) {
+      // 12 Nov (night): the stage repeats the look (action, 4 s idle, action). Silent until the student taps.
+      api.play(first, false, function (u) {
         if (window.__hbLookWant === first)
           setState({ prev: u || "", prevFor: first, loading: false });
       });
     }
+    return function () {
+      if (window.__hbLooks && window.__hbLooks.stopPreview) window.__hbLooks.stopPreview();
+    };
   }, []);
 
   var PRICE = 200;
@@ -176,13 +180,14 @@ export function useVals() {
   // Plays the look on the stage. Only the newest tap counts (a quick tap on another look while one loads).
   var play = function (id) {
     window.__hbLookWant = id;
-    if (!api || !api.has(id)) {
+    if (!api || !api.play || !api.has(id)) {
+      if (api && api.stopPreview) api.stopPreview();
       setState({ sel: id, prev: "", prevFor: "", loading: false });
       return;
     }
     setState({ sel: id, prev: "", prevFor: "", loading: true });
-    // a tap plays the look from its start, with its sound if it has one (api.tap); opening the page stays silent
-    (api.tap || api.preview)(id).then(function (u) {
+    // a tap plays the look on repeat from its start (action, 4 s idle, action), with its sound on every action
+    api.play(id, true, function (u) {
       if (window.__hbLookWant === id) setState({ prev: u || "", prevFor: id, loading: false });
     });
   };
