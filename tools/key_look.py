@@ -11,6 +11,7 @@ ap.add_argument("video"); ap.add_argument("out")
 ap.add_argument("--still"); ap.add_argument("--dx", type=float, default=0)
 ap.add_argument("--xfade", type=int, default=3)
 ap.add_argument("--from-still", dest="from_still", help="blend the first and last frames into this still (when a video's first frame drifts from the look's still)")
+ap.add_argument("--pad", help="L,R extra px for a wide look, to match its other file (use with --wide)")
 ap.add_argument("--wide", action="store_true", help="keep the full video width (for looks that move past the classic box); prints the extra px left and right")
 ap.add_argument("--box", help="top,bottom,cx in source px, to reuse the placement of another file of the same look")
 a = ap.parse_args()
@@ -29,7 +30,9 @@ def key(rgb, bgc):
     # Light green haze and glow (lit by the backdrop) is far from the backdrop colour but still green-dominant.
     # Lime props (the dragon's belly) stay under a spill of ~30, so they are kept solid.
     spill0 = x[..., 1] - np.maximum(x[..., 0], x[..., 2])
-    alpha = np.minimum(alpha, np.clip(1 - (spill0 - 28) / 34, 0, 1))
+    # Lime and yellow (the Haiba lime logo, volt boots, fins: strong red, almost no blue) are not haze, so they stay.
+    lime = (x[..., 0] > 120) & (x[..., 2] < x[..., 0] * 0.6)
+    alpha = np.where(lime, alpha, np.minimum(alpha, np.clip(1 - (spill0 - 28) / 34, 0, 1)))
     # Unmix the backdrop from soft pixels (edges, glow, sparkles, motion blur): colour = (pixel - (1 - a) * green) / a.
     ae = np.maximum(alpha, 0.2)[..., None]
     un = np.clip((x - (1 - ae) * bgc) / ae, 0, 255)
@@ -60,6 +63,8 @@ PADL = PADR = 0
 if a.wide:
     srcw = first.shape[1]
     PADL, PADR = round(L * s), round((srcw - (L + W / s)) * s)
+    if a.pad:
+        PADL, PADR = map(int, a.pad.split(","))
     box = (L - PADL / s, T, L + W / s + PADR / s, T + H / s)
     W = W + PADL + PADR
     print("wide: extra px left", PADL, "right", PADR, "width", W)

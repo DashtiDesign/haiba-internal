@@ -22,6 +22,7 @@ import { Route as HaibaFailedRouteImport } from './routes/haiba/failed'
 import { Route as HaibaHadiyaRouteImport } from './routes/haiba/hadiya'
 import { Route as HaibaHelpRouteImport } from './routes/haiba/help'
 import { Route as HaibaJoinRouteImport } from './routes/haiba/join'
+import { Route as HaibaLooksRouteImport } from './routes/haiba/looks'
 import { Route as HaibaMembershipRouteImport } from './routes/haiba/membership'
 import { Route as HaibaPaidRouteImport } from './routes/haiba/paid'
 import { Route as HaibaPayRouteImport } from './routes/haiba/pay'
@@ -122,6 +123,11 @@ const HaibaHelpRoute = HaibaHelpRouteImport.update({
 const HaibaJoinRoute = HaibaJoinRouteImport.update({
   id: '/haiba/join',
   path: '/haiba/join',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaibaLooksRoute = HaibaLooksRouteImport.update({
+  id: '/haiba/looks',
+  path: '/haiba/looks',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HaibaMembershipRoute = HaibaMembershipRouteImport.update({
@@ -318,6 +324,7 @@ export interface FileRoutesByFullPath {
   '/haiba/hadiya': typeof HaibaHadiyaRoute
   '/haiba/help': typeof HaibaHelpRoute
   '/haiba/join': typeof HaibaJoinRoute
+  '/haiba/looks': typeof HaibaLooksRoute
   '/haiba/membership': typeof HaibaMembershipRoute
   '/haiba/paid': typeof HaibaPaidRoute
   '/haiba/pay': typeof HaibaPayRoute
@@ -369,6 +376,7 @@ export interface FileRoutesByTo {
   '/haiba/hadiya': typeof HaibaHadiyaRoute
   '/haiba/help': typeof HaibaHelpRoute
   '/haiba/join': typeof HaibaJoinRoute
+  '/haiba/looks': typeof HaibaLooksRoute
   '/haiba/membership': typeof HaibaMembershipRoute
   '/haiba/paid': typeof HaibaPaidRoute
   '/haiba/pay': typeof HaibaPayRoute
@@ -421,6 +429,7 @@ export interface FileRoutesById {
   '/haiba/hadiya': typeof HaibaHadiyaRoute
   '/haiba/help': typeof HaibaHelpRoute
   '/haiba/join': typeof HaibaJoinRoute
+  '/haiba/looks': typeof HaibaLooksRoute
   '/haiba/membership': typeof HaibaMembershipRoute
   '/haiba/paid': typeof HaibaPaidRoute
   '/haiba/pay': typeof HaibaPayRoute
@@ -474,6 +483,7 @@ export interface FileRouteTypes {
     | '/haiba/hadiya'
     | '/haiba/help'
     | '/haiba/join'
+    | '/haiba/looks'
     | '/haiba/membership'
     | '/haiba/paid'
     | '/haiba/pay'
@@ -525,6 +535,7 @@ export interface FileRouteTypes {
     | '/haiba/hadiya'
     | '/haiba/help'
     | '/haiba/join'
+    | '/haiba/looks'
     | '/haiba/membership'
     | '/haiba/paid'
     | '/haiba/pay'
@@ -576,6 +587,7 @@ export interface FileRouteTypes {
     | '/haiba/hadiya'
     | '/haiba/help'
     | '/haiba/join'
+    | '/haiba/looks'
     | '/haiba/membership'
     | '/haiba/paid'
     | '/haiba/pay'
@@ -628,6 +640,7 @@ export interface RootRouteChildren {
   HaibaHadiyaRoute: typeof HaibaHadiyaRoute
   HaibaHelpRoute: typeof HaibaHelpRoute
   HaibaJoinRoute: typeof HaibaJoinRoute
+  HaibaLooksRoute: typeof HaibaLooksRoute
   HaibaMembershipRoute: typeof HaibaMembershipRoute
   HaibaPaidRoute: typeof HaibaPaidRoute
   HaibaPayRoute: typeof HaibaPayRoute
@@ -758,6 +771,13 @@ declare module '@tanstack/react-router' {
       path: '/haiba/join'
       fullPath: '/haiba/join'
       preLoaderRoute: typeof HaibaJoinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haiba/looks': {
+      id: '/haiba/looks'
+      path: '/haiba/looks'
+      fullPath: '/haiba/looks'
+      preLoaderRoute: typeof HaibaLooksRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/haiba/membership': {
@@ -1028,6 +1048,7 @@ const rootRouteChildren: RootRouteChildren = {
   HaibaHadiyaRoute: HaibaHadiyaRoute,
   HaibaHelpRoute: HaibaHelpRoute,
   HaibaJoinRoute: HaibaJoinRoute,
+  HaibaLooksRoute: HaibaLooksRoute,
   HaibaMembershipRoute: HaibaMembershipRoute,
   HaibaPaidRoute: HaibaPaidRoute,
   HaibaPayRoute: HaibaPayRoute,

@@ -20,14 +20,6 @@ export function useVals() {
     cancelled: [],
     accepted: [],
     done: false,
-    look: "",
-    lookAsk: false,
-    lookGot: false,
-    lookPrev: "",
-    lookFor: "",
-    lookSpent: 0,
-    looksOwned: null,
-    lookWear: "",
     looksReady: false,
   });
   useEffect(() => {
@@ -419,82 +411,48 @@ export function useVals() {
     }
   });
   var left = balance - committed;
-  // 12 Nov: bird looks. The row shows every look; tapping one opens a preview that pulls only that animation
-  // (the app keeps it in memory for the visit). Buy it with points, then set it as your bird here or later in your
-  // profile. Prices are placeholders for now. On the canvas the preview shows the still.
-  var LT = {
-    everyday: ["Everyday", 300, "#F0ECFF", "#4F25D6"],
-    heritage: ["Our heritage", 600, "#FFF3D6", "#7A4E00"],
-    scene: ["Big moments", 1500, "#E6F1FF", "#0B4F99"],
-    legend: ["Legendary", 3000, "#1E1B2E", "#C0F402"],
-  };
-  // Each look stands on a little stage coloured by tier: sky, a curved ground, his shadow. Legendary is a night stage.
-  // Same as STAGE in src/haiba/looks.ts (the profile picker).
-  var STAGE = {
-    everyday:
-      "radial-gradient(130% 62% at 50% 104%, #CDBDFF 0 38%, rgba(205,189,255,0) 39%), linear-gradient(180deg, #F6F2FF 0%, #E7DEFF 100%)",
-    heritage:
-      "radial-gradient(130% 62% at 50% 104%, #EFD39C 0 38%, rgba(239,211,156,0) 39%), linear-gradient(180deg, #FFF8EA 0%, #FCEBC8 100%)",
-    scene:
-      "radial-gradient(130% 62% at 50% 104%, #BFD8F7 0 38%, rgba(191,216,247,0) 39%), linear-gradient(180deg, #F1F7FF 0%, #DCEBFD 100%)",
-    legend:
-      "radial-gradient(130% 62% at 50% 104%, #3A2C7A 0 38%, rgba(58,44,122,0) 39%), radial-gradient(70% 55% at 50% 42%, rgba(192,244,2,0.22) 0%, rgba(192,244,2,0) 70%), linear-gradient(180deg, #17142A 0%, #2A2154 100%)",
-  };
-  var BIRD = "/haiba/motion/hub-still.webp";
+  // 12 Nov: bird looks. A short row of looks; a tile (or See all) opens the Bird looks page with that look on the
+  // stage. All looks cost 200 points for now. Owned looks and the one he wears are saved on the phone.
   var sa = (props.market ?? "Bahrain") === "Saudi";
   var LOOKS = [
     [
-      "f1",
-      "legend",
-      "Audi F1",
-      "Helmet on, engine on. His Audi R26 is ready.",
-      "",
-      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/f1-still.webp",
-    ],
-    [
       "gold",
-      "legend",
       "Golden parrot",
-      "Gold from his crest to his sneakers. Juggles coins and bites one.",
       "",
       "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/gold-still.webp",
     ],
     [
       "dragon",
-      "legend",
       "Dragon rider",
-      "His baby dragon grows big and takes him for a ride.",
       "",
       "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/dragon-card.webp",
     ],
-    ["camp", "scene", "Desert camp", "A winter camp: fire, tea and stars.", "", ""],
-    ["dunes", "scene", "Dune drive", "Drives over the dunes in a 4x4.", "", ""],
-    ["space", "scene", "Space walk", "Floats in a space suit, catching coins.", "", ""],
-    ["pixel", "scene", "Pixel bird", "Turns into an old school game bird and back.", "", ""],
     [
-      "ghutra",
-      "heritage",
-      "Thobe and ghutra",
-      "A white thobe and ghutra for a special day.",
+      "f1",
+      "Audi F1",
+      "",
+      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/f1-still.webp",
+    ],
+    [
+      "football",
+      "Football star",
+      "",
+      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/football-card.webp",
+    ],
+    [
+      "karak",
+      "Karak break",
+      "",
+      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/karak-still.webp",
+    ],
+    [
+      "pearl",
+      "Pearl diver",
       "bh",
-      "",
+      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/pearl-still.webp",
     ],
-    [
-      "shemagh",
-      "heritage",
-      "Thobe and shemagh",
-      "A white thobe and red shemagh for a special day.",
-      "sa",
-      "",
-    ],
-    ["pearl", "heritage", "Pearl diver", "Dives into the sea and comes up with a pearl.", "bh", ""],
-    ["falcon", "heritage", "Falcon friend", "A falcon lands on his wing.", "", ""],
-    ["karak", "everyday", "Karak break", "Pours a cup of karak and takes a sip.", "", ""],
-    ["movie", "everyday", "Movie night", "Popcorn, 3D glasses and a big laugh.", "", ""],
-    ["skater", "everyday", "Skater", "Kicks up his board and lands a trick.", "", ""],
-    ["football", "everyday", "Football star", "Juggles the ball and scores.", "", ""],
   ].filter(function (l) {
-    return !l[4] || l[4] === (sa ? "sa" : "bh");
+    return !l[2] || l[2] === (sa ? "sa" : "bh");
   });
   var lsOwned = ["classic"],
     lsWear = "classic";
@@ -503,145 +461,29 @@ export function useVals() {
       lsOwned = JSON.parse(window.localStorage.getItem("haiba-looks-owned") || '["classic"]');
       lsWear = window.localStorage.getItem("haiba-look") || "classic";
     } catch (e) {}
-  var lkOwned = state.looksOwned || lsOwned,
-    lkWear = state.lookWear || lsWear;
-  var lkSave = function (owned, wear) {
-    try {
-      window.localStorage.setItem("haiba-looks-owned", JSON.stringify(owned));
-      window.localStorage.setItem("haiba-look", wear);
-    } catch (e) {}
-  };
-  var lkLeft = left - (state.lookSpent || 0);
-  left = lkLeft; // points spent on looks count everywhere on this page
-  var api = typeof window !== "undefined" ? window.__hbLooks : null;
-  var openLook = function (id) {
+  var pickLook = function (id) {
     return function () {
-      var has = !!(api && api.has(id));
-      setState({
-        look: id,
-        lookAsk: false,
-        lookGot: false,
-        lookPrev: "",
-        lookFor: has ? "loading" : "",
-      });
-      // Only the newest tap counts (a quick tap on another look while this one loads).
-      window.__hbLookWant = id;
-      if (has)
-        api.preview(id).then(function (u) {
-          if (window.__hbLookWant === id) setState({ lookPrev: u || "", lookFor: "" });
-        });
+      try {
+        if (id) window.sessionStorage.setItem("hb-look-pick", id);
+        else window.sessionStorage.removeItem("hb-look-pick");
+      } catch (e) {}
     };
   };
   var looks = LOOKS.map(function (l) {
-    var t = LT[l[1]],
-      own = lkOwned.indexOf(l[0]) >= 0,
-      wearing = lkWear === l[0];
+    var own = lsOwned.indexOf(l[0]) >= 0,
+      w = lsWear === l[0];
     return {
       id: l[0],
-      name: l[2],
-      desc: l[3],
-      tier: t[0],
-      price: own ? (wearing ? "Yours" : "Yours") : t[1].toLocaleString("en-US"),
-      pts: t[1],
+      name: l[1],
+      still: l[3],
+      wearing: w,
       showCoin: !own,
-      ptsBg: own ? "#E3F7EC" : t[1] <= lkLeft ? "#F0ECFF" : "#F1F1F4",
-      ptsInk: own ? "#1B6B36" : t[1] <= lkLeft ? "#4F25D6" : "#8A8A96",
-      ptsPad: own ? "2px 8px" : "2px 8px 2px 3px",
-      bg: STAGE[l[1]],
-      shadow: l[1] === "legend" ? "rgba(0,0,0,0.45)" : "rgba(30,27,46,0.22)",
-      ring: wearing
-        ? "0 0 0 2.5px #6C3FFA, 0 8px 18px rgba(108,63,250,0.18)"
-        : "0 0 0 1px #ECE8F5, 0 4px 12px rgba(76,52,140,0.06)",
-      tagBg: t[2],
-      tagInk: t[3],
-      legend: l[1] === "legend",
-      still: l[5] || BIRD,
-      own: own,
-      wearing: wearing,
-      aria: l[2] + ", " + (own ? "yours" : t[1] + " points"),
-      open: openLook(l[0]),
+      meta: w ? "On your hub" : own ? "Yours" : "200",
+      metaInk: own && !w ? "#1B6B36" : "#4F25D6",
+      aria: l[1] + ", " + (w ? "on your hub" : own ? "yours" : "200 points"),
+      pick: pickLook(l[0]),
     };
   });
-  var lk = looks.filter(function (k) {
-    return k.id === state.look;
-  })[0];
-  var lkFlat = {
-    lk_name: "",
-    lk_desc: "",
-    lk_tier: "",
-    lk_tagBg: "",
-    lk_tagInk: "",
-    lk_src: BIRD,
-    lk_alt: "",
-    lk_loading: false,
-    lk_asking: false,
-    lk_askLine: "",
-    lk_askSub: "",
-    lk_got: false,
-    lk_showMain: true,
-    lk_label: "",
-    lk_btnBg: "#1E1B2E",
-    lk_btnInk: "#C0F402",
-    lk_act: function () {},
-    lk_buy: function () {},
-    lk_notNow: function () {},
-    lk_onHub: false,
-    lk_short: false,
-  };
-  if (lk) {
-    var short = !lk.own && lk.pts > lkLeft;
-    var wear = function () {
-      setState({ lookWear: lk.id, looksOwned: lkOwned, lookGot: false });
-      lkSave(lkOwned, lk.id);
-    };
-    lkFlat = {
-      lk_name: lk.name,
-      lk_desc: lk.desc,
-      lk_tier: lk.tier,
-      lk_tagBg: lk.tagBg,
-      lk_tagInk: lk.tagInk,
-      lk_src: state.lookPrev || lk.still,
-      lk_alt: "The Haiba bird, " + lk.name + " look",
-      lk_loading: state.lookFor === "loading",
-      lk_asking: !!state.lookAsk,
-      lk_askLine: "Use " + lk.pts.toLocaleString("en-US") + " points for " + lk.name + "?",
-      lk_askSub:
-        "It is yours to keep. You will have " +
-        (lkLeft - lk.pts).toLocaleString("en-US") +
-        " points left.",
-      lk_got: !!state.lookGot && !lk.wearing,
-      lk_showMain: !state.lookAsk,
-      lk_label: lk.wearing
-        ? "On your hub"
-        : lk.own
-          ? "Set as my bird"
-          : short
-            ? "You need " + (lk.pts - lkLeft).toLocaleString("en-US") + " more points"
-            : "Get it for " + lk.pts.toLocaleString("en-US") + " points",
-      lk_btnBg: lk.wearing || short ? "#E4DDF7" : "#1E1B2E",
-      lk_btnInk: lk.wearing || short ? "#4A4660" : "#C0F402",
-      lk_act: function () {
-        if (lk.wearing || short) return;
-        if (lk.own) wear();
-        else setState({ lookAsk: true });
-      },
-      lk_buy: function () {
-        var owned = lkOwned.concat([lk.id]);
-        setState({
-          looksOwned: owned,
-          lookSpent: (state.lookSpent || 0) + lk.pts,
-          lookAsk: false,
-          lookGot: true,
-        });
-        lkSave(owned, lkWear);
-      },
-      lk_notNow: function () {
-        setState({ lookAsk: false });
-      },
-      lk_onHub: lk.wearing,
-      lk_short: short,
-    };
-  }
   var pin = !!state.pinned || props.searchBar === "Pinned (scrolled)";
   // 9 Nov: reward codes that are showing sit on top, the same rows as the hub (journey/codes.ts in the app).
   var codeList = (
@@ -1102,14 +944,10 @@ export function useVals() {
         },
       });
     });
-  return Object.assign(sheetFlat, lkFlat, {
-    balance: lkLeft.toLocaleString("en-US"),
+  return Object.assign(sheetFlat, {
+    balance: left.toLocaleString("en-US"),
     looks: looks,
-    looksNote: "Wear one on your hub",
-    lookOpen: !!lk,
-    closeLook: function () {
-      setState({ look: "", lookAsk: false, lookGot: false });
-    },
+    looksAll: pickLook(""),
     hasCodes: codeList.length > 0,
     myCodes: codeList,
     codesCount: codeList.length === 1 ? "1 to use" : codeList.length + " to use",

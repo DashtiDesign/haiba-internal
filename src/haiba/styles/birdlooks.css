@@ -1,0 +1,10 @@
+@keyframes birdlooks-hb-fade{from{opacity:0}to{opacity:1}}
+@keyframes birdlooks-hb-up{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes birdlooks-hb-pop{0%{opacity:0;transform:scale(.9)}100%{opacity:1;transform:scale(1)}}
+.pg-birdlooks .hb-fade{animation:birdlooks-hb-fade .25s ease both}
+.pg-birdlooks .hb-up{animation:birdlooks-hb-up .35s cubic-bezier(.2,.8,.2,1) both}
+.pg-birdlooks .hb-pop{animation:birdlooks-hb-pop .3s cubic-bezier(.2,.8,.2,1) both}
+.pg-birdlooks .hb-press{transition:transform .16s ease,background-color .2s ease,box-shadow .2s ease}
+.pg-birdlooks .hb-press:active{transform:scale(.97)}
+@media (prefers-reduced-motion:reduce){.pg-birdlooks .hb-fade,.pg-birdlooks .hb-up,.pg-birdlooks .hb-pop{animation:none}
+.pg-birdlooks .hb-press{transition:none}}

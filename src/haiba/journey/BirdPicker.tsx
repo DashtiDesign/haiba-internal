@@ -1,22 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "../nav";
 import type { Session } from "./session";
-import {
-  LOOK_NAMES,
-  LOOK_TIER,
-  lookThumb,
-  ownedLooks,
-  savedLook,
-  stageOf,
-  wearLook,
-} from "../looks";
+import { LOOK_NAMES, lookThumb, ownedLooks, savedLook, wearLook } from "../looks";
 
 /**
  * 12 Nov: "Your bird" in the Haiba profile (/haiba/membership#bird). The looks you own, tap one to put it on your hub.
- * The small hanger button next to the hub bird opens this section. New looks are bought in the points store.
+ * The small hanger button next to the hub bird opens this section; "Get more looks" opens the Bird looks page.
+ * Flat tiles like the Bird looks page (Duolingo and Alan style). The one on the hub has a purple ring and a lime check.
  * Only thumbnails show here; the animation itself loads on the hub (see looks.ts).
- * Each look stands on a small stage coloured by its tier (night stage for legendary), like an outfit picker in a game.
- * The one on the hub has a purple ring and a lime check.
  */
 export function BirdPicker({ s }: { s: Session }) {
   const go = useNavigate();
@@ -34,6 +25,14 @@ export function BirdPicker({ s }: { s: Session }) {
     wearLook(id);
     setWear(id);
   };
+  const more = () => {
+    try {
+      window.sessionStorage.removeItem("hb-look-pick");
+    } catch {
+      /* private mode */
+    }
+    go("/haiba/looks");
+  };
   return (
     <section id="bird" className="jx-group" style={{ scrollMarginTop: 12 }}>
       <div
@@ -43,38 +42,21 @@ export function BirdPicker({ s }: { s: Session }) {
         <span>{s.t("memBird")}</span>
         <button
           className="hb-press"
-          onClick={() => go("/haiba/rewards")}
+          onClick={more}
           style={{
             font: "inherit",
             border: 0,
+            background: "transparent",
+            padding: 0,
             cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            gap: 4,
-            background: "#EDE6FF",
-            color: "#4F25D6",
-            borderRadius: 999,
-            padding: "5px 10px 5px 12px",
             fontSize: 13,
             fontWeight: 800,
+            color: "#6C3FFA",
             textTransform: "none",
             letterSpacing: 0,
           }}
         >
           {s.t("memBirdMore")}
-          <svg
-            aria-hidden="true"
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M9 6l6 6-6 6" />
-          </svg>
         </button>
       </div>
       <div
@@ -82,14 +64,13 @@ export function BirdPicker({ s }: { s: Session }) {
           display: "flex",
           gap: 10,
           margin: "0 -16px",
-          padding: "4px 16px 8px 16px",
+          padding: "2px 16px 6px 16px",
           overflowX: "auto",
           scrollbarWidth: "none",
         }}
       >
         {owned.map((id) => {
           const on = id === wear;
-          const legend = LOOK_TIER[id] === "legend";
           return (
             <button
               key={id}
@@ -102,51 +83,29 @@ export function BirdPicker({ s }: { s: Session }) {
                 flex: "none",
                 width: 104,
                 border: 0,
-                padding: 4,
+                padding: 0,
                 cursor: "pointer",
-                background: "#FFFFFF",
+                background: on ? "#EFE9FF" : "#FFFFFF",
                 color: "#1E1B2E",
-                borderRadius: 18,
+                borderRadius: 16,
+                overflow: "hidden",
                 textAlign: "center",
-                boxShadow: on
-                  ? "0 0 0 2.5px #6C3FFA, 0 8px 18px rgba(108,63,250,0.18)"
-                  : "0 0 0 1px #ECE8F5, 0 4px 12px rgba(76,52,140,0.06)",
+                boxShadow: on ? "inset 0 0 0 2px #6C3FFA" : "none",
               }}
             >
               <span
-                style={{
-                  position: "relative",
-                  display: "block",
-                  height: 118,
-                  borderRadius: 14,
-                  background: stageOf(id),
-                  overflow: "hidden",
-                }}
+                style={{ position: "relative", display: "block", height: 112, overflow: "hidden" }}
               >
-                {/* his shadow on the ground */}
-                <span
-                  aria-hidden="true"
-                  style={{
-                    position: "absolute",
-                    left: "50%",
-                    bottom: 10,
-                    width: 56,
-                    height: 10,
-                    marginLeft: -28,
-                    borderRadius: "50%",
-                    background: legend ? "rgba(0,0,0,0.45)" : "rgba(30,27,46,0.22)",
-                    filter: "blur(3px)",
-                  }}
-                />
                 <img
                   src={lookThumb(id)}
                   alt=""
                   style={{
                     position: "absolute",
                     left: "50%",
-                    bottom: 6,
+                    bottom: -2,
                     height: 108,
                     width: "auto",
+                    maxWidth: "none",
                     transform: "translateX(-50%)",
                     display: "block",
                   }}
@@ -156,8 +115,8 @@ export function BirdPicker({ s }: { s: Session }) {
                     aria-hidden="true"
                     style={{
                       position: "absolute",
-                      right: 6,
-                      top: 6,
+                      right: 7,
+                      top: 7,
                       width: 22,
                       height: 22,
                       borderRadius: "50%",
@@ -166,7 +125,6 @@ export function BirdPicker({ s }: { s: Session }) {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      boxShadow: "0 2px 6px rgba(0,0,0,0.18)",
                     }}
                   >
                     <svg
@@ -187,11 +145,12 @@ export function BirdPicker({ s }: { s: Session }) {
               <span
                 style={{
                   display: "block",
-                  padding: "8px 4px 2px 4px",
+                  padding: "7px 6px 0 6px",
                   fontSize: 13,
-                  fontWeight: 800,
-                  lineHeight: 1.2,
-                  minHeight: 31,
+                  fontWeight: 700,
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
                 }}
               >
                 {LOOK_NAMES[id] ?? id}
@@ -199,10 +158,10 @@ export function BirdPicker({ s }: { s: Session }) {
               <span
                 style={{
                   display: "block",
-                  paddingBottom: 4,
-                  fontSize: 11.5,
+                  padding: "3px 6px 10px 6px",
+                  fontSize: 12.5,
                   fontWeight: 800,
-                  color: on ? "#6C3FFA" : "#8F89A8",
+                  color: on ? "#4F25D6" : "#8F89A8",
                 }}
               >
                 {on ? s.t("memBirdOn") : s.t("memBirdWear")}
@@ -210,19 +169,18 @@ export function BirdPicker({ s }: { s: Session }) {
             </button>
           );
         })}
-        {/* With only a look or two, a tile fills the row; the header button covers it after that. */}
+        {/* With only a look or two, a tile fills the row; the header link covers it after that. */}
         {owned.length < 3 && (
           <button
-            onClick={() => go("/haiba/rewards")}
+            onClick={more}
             className="hb-press"
             style={{
               font: "inherit",
               flex: "none",
               width: 104,
               border: 0,
-              borderRadius: 18,
+              borderRadius: 16,
               background: "#FFFFFF",
-              boxShadow: "0 0 0 1px #ECE8F5, 0 4px 12px rgba(76,52,140,0.06)",
               color: "#1E1B2E",
               cursor: "pointer",
               display: "flex",

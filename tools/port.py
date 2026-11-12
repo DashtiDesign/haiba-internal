@@ -49,6 +49,7 @@ BOARDS = {
     "Travel": ("travel", "Travel"),
     # Webview only: Haiba pages that replace the Haiba parts of core Unipal pages (shop, redeem).
     "Rewards": ("rewards", "Rewards"),
+    "BirdLooks": ("birdlooks", "BirdLooks"),
     "Earn": ("earn", "Earn"),
 }
 PD = 'href="#" onClick={(e: any) => e.preventDefault()}'
@@ -124,6 +125,8 @@ LOGIC = {
         ),
     ],
     "Earn": [("var balance = 1240;", "var balance = props.base;")],
+    # 12 Nov: the bird looks page spends the same points as Your points
+    "BirdLooks": [("var balance = 1240;", "var balance = props.base - (props.heldPts || 0);")],
     "Hub": [
         ("var target = isNew ? 500 : 1240;", "var target = props.available;"),
         ("      navTipCta:", "      navTipHref: isNew && !(gUsed || gReady) ? '/haiba/hadiya' : '/haiba/earn',\n      navTipCta:"),
@@ -201,7 +204,7 @@ def patch_screen(name):
             s = s.replace('position: "absolute", inset: "0", background: "rgba(20,16,40,0.55)", zIndex: "%s"' % z,
                           'position: "fixed", inset: "0", background: "rgba(20,16,40,0.55)", zIndex: "5%s"' % z[-1])
     # 9 Nov: the story flows (top bar, content, footer) and fits any screen height; no fixed 844px layout any more.
-    if name in ("Rewards", "Earn"):
+    if name in ("Rewards", "Earn", "BirdLooks"):
         # Shop sheet covers the screen in the app, above the bottom nav and panel tab
         # (12 Nov: every sheet on the page, the shop sheet and the bird look preview)
         s = s.replace('position: "absolute", inset: "0", background: "rgba(20,16,40,0.5)", zIndex: "10"', 'position: "fixed", inset: "0", background: "rgba(20,16,40,0.5)", zIndex: "70"')

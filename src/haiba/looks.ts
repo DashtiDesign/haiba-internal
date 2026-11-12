@@ -29,6 +29,8 @@ export const LOOK_FILES: Record<
   gold: { ms: 6000, idleMs: 4000 },
   f1: { ms: 6000, idleMs: 4000 },
   dragon: { ms: 6000, idleMs: 4000, padL: 64, padR: 31 },
+  football: { ms: 6000, idleMs: 4000, padL: 17, padR: 36 },
+  pearl: { ms: 6000, idleMs: 4000 },
 };
 
 /** Names for the profile picker. Keep in step with the LOOKS list on the points store board (Rewards.dc.html). */
@@ -50,42 +52,6 @@ export const LOOK_NAMES: Record<string, string> = {
   gold: "Golden parrot",
   dragon: "Dragon rider",
 };
-
-/** Tier of each look; it sets the tile stage colour (same tiers as the points store). */
-export const LOOK_TIER: Record<string, "everyday" | "heritage" | "scene" | "legend"> = {
-  classic: "everyday",
-  karak: "everyday",
-  movie: "everyday",
-  skater: "everyday",
-  football: "everyday",
-  ghutra: "heritage",
-  shemagh: "heritage",
-  pearl: "heritage",
-  falcon: "heritage",
-  camp: "scene",
-  dunes: "scene",
-  space: "scene",
-  pixel: "scene",
-  f1: "legend",
-  gold: "legend",
-  dragon: "legend",
-};
-
-/**
- * 12 Nov: the little stage a look stands on in a tile (store row and profile): sky, a curved ground under his feet,
- * coloured by tier. Legendary looks stand on a night stage with a lime glow. Keep in step with STAGE on Rewards.dc.html.
- */
-export const STAGE: Record<string, string> = {
-  everyday:
-    "radial-gradient(130% 62% at 50% 104%, #CDBDFF 0 38%, rgba(205,189,255,0) 39%), linear-gradient(180deg, #F6F2FF 0%, #E7DEFF 100%)",
-  heritage:
-    "radial-gradient(130% 62% at 50% 104%, #EFD39C 0 38%, rgba(239,211,156,0) 39%), linear-gradient(180deg, #FFF8EA 0%, #FCEBC8 100%)",
-  scene:
-    "radial-gradient(130% 62% at 50% 104%, #BFD8F7 0 38%, rgba(191,216,247,0) 39%), linear-gradient(180deg, #F1F7FF 0%, #DCEBFD 100%)",
-  legend:
-    "radial-gradient(130% 62% at 50% 104%, #3A2C7A 0 38%, rgba(58,44,122,0) 39%), radial-gradient(70% 55% at 50% 42%, rgba(192,244,2,0.22) 0%, rgba(192,244,2,0) 70%), linear-gradient(180deg, #17142A 0%, #2A2154 100%)",
-};
-export const stageOf = (id: string) => STAGE[LOOK_TIER[id] ?? "everyday"]!;
 
 export const CLASSIC_STILL = "/haiba/motion/hub-still.webp";
 
@@ -192,7 +158,11 @@ const previews = new Map<string, string>();
 async function preview(id: string): Promise<string | null> {
   const have = previews.get(id);
   if (have) return have;
-  const b = await lookLoop(id, "reveal");
+  // The classic bird previews with his coin trick, the same file the hub plays.
+  const b =
+    id === "classic"
+      ? await cachedBlob(`/haiba/motion/hub-coin.${await loopFormat()}`)
+      : await lookLoop(id, "reveal");
   if (!b) return null;
   const u = URL.createObjectURL(b);
   previews.set(id, u);
@@ -211,5 +181,9 @@ declare global {
 
 // The ported canvas boards (the points store) call these through window, as boards cannot import modules.
 if (typeof window !== "undefined") {
-  window.__hbLooks = { has: (id) => !!LOOK_FILES[id], preview, thumb: lookThumb };
+  window.__hbLooks = {
+    has: (id) => id === "classic" || !!LOOK_FILES[id],
+    preview,
+    thumb: lookThumb,
+  };
 }
