@@ -110,7 +110,7 @@ BLOBS = {
     "1c3d70a34d95c7399078e2bf8a089a6d": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/gold-still.webp",
     "9e12c2bf06b222b245c164ccf11abb13": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/dragon-card.webp",
     "11caeb0d2594d4d046949fc305429478": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/football-card.webp",
-    "4647dc88d42ac3f352033d790258b6f1": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/karak-still.webp",
+    "4647dc88d42ac3f352033d790258b6f1": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/karak-still-2.webp",
     "827e237a0d8b60f37bbb3c6fd404e53b": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/pearl-still.webp",
     "ff3c167255aa34baeeb95157156a51a9": "/haiba/birds/26-gift.webp",
     "13b432061e8e721b86b394f8f645d382": "/haiba/birds/27-coin.webp",

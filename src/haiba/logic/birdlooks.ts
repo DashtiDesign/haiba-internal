@@ -70,7 +70,7 @@ export function useVals() {
       "karak",
       "Karak break",
       "",
-      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/karak-still.webp",
+      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/karak-still-2.webp",
     ],
     [
       "pearl",

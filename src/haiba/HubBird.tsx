@@ -1,5 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { CLASSIC_STILL, LOOKS_URL, LOOK_FILES, cachedBlob, loopFormat, savedLook } from "./looks";
+import {
+  CLASSIC_STILL,
+  LOOKS_URL,
+  LOOK_FILES,
+  cachedBlob,
+  lookStill,
+  loopFormat,
+  savedLook,
+} from "./looks";
 
 /**
  * The hub mascot (8 Nov). Real animated loops made with Seedance 2.0 from the mascot reference sheet.
@@ -53,7 +61,7 @@ function currentLook(): Look {
   const l = f.padL ?? 0;
   const r = f.padR ?? 0;
   return {
-    still: `${LOOKS_URL}${id}-still.webp`,
+    still: lookStill(id),
     loops: [{ url: file("reveal"), ms: f.ms }],
     idle: file("idle"),
     idleMs: f.idleMs,

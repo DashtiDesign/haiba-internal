@@ -24,13 +24,15 @@ export const LOOKS_URL = RAW_URL.endsWith("/") ? RAW_URL : `${RAW_URL}/`;
 /** Looks that have their files made. padL / padR: extra px left and right of the 412 px classic width. */
 export const LOOK_FILES: Record<
   string,
-  { ms: number; idleMs: number; padL?: number; padR?: number }
+  { ms: number; idleMs: number; padL?: number; padR?: number; still?: string }
 > = {
   gold: { ms: 6000, idleMs: 4000 },
   f1: { ms: 6000, idleMs: 4000 },
   dragon: { ms: 6000, idleMs: 4000, padL: 64, padR: 31 },
   football: { ms: 6000, idleMs: 4000, padL: 17, padR: 36 },
   pearl: { ms: 6000, idleMs: 4000 },
+  // Cloud kept an earlier still under karak-still.webp, so the final one is karak-still-2.webp.
+  karak: { ms: 6000, idleMs: 4000, still: "karak-still-2.webp" },
 };
 
 /** Names for the profile picker. Keep in step with the LOOKS list on the points store board (Rewards.dc.html). */
@@ -59,7 +61,15 @@ export const CLASSIC_STILL = "/haiba/motion/hub-still.webp";
 export function lookThumb(id: string) {
   const f = LOOK_FILES[id];
   if (!f) return CLASSIC_STILL;
-  return `${LOOKS_URL}${id}-${f.padL || f.padR ? "card" : "still"}.webp`;
+  if (f.padL || f.padR) return `${LOOKS_URL}${id}-card.webp`;
+  return lookStill(id);
+}
+
+/** The still the hub rests on (412 wide, or wider for a wide look). */
+export function lookStill(id: string) {
+  const f = LOOK_FILES[id];
+  if (!f) return CLASSIC_STILL;
+  return `${LOOKS_URL}${f.still ?? `${id}-still.webp`}`;
 }
 
 // Saved on the phone, the same keys the prototype has used since 12 Nov.
