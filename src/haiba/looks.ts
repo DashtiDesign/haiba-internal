@@ -66,6 +66,11 @@ export const LOOK_FILES: Record<
     still: "fish-still.webp",
     sound: "fish-sound.m4a",
   },
+  // 12 Nov (night): Hamdha, the second sound look (Bahrain only). The viral clip of the old man who tastes the
+  // watermelon and says "7aam'6a" (sour). A slice pops into his wings, he eats it all, his face goes sour on the word,
+  // then he settles back. The sound is the clip from 9.0 s to just before the laugh (6.5 s), so the word lands at
+  // about 5.8 s, on the sour face. 8 s action because he keeps chewing sour after the word.
+  melon: { ms: 8100, idleMs: 4000, padR: 51, sound: "melon-sound.m4a" },
   shemagh: { ms: 6000, idleMs: 4000 },
 };
 
@@ -103,6 +108,7 @@ export const LOOK_NAMES: Record<string, string> = {
   space: "Space walk",
   pixel: "Pixel bird",
   fish: "Abood Yowda",
+  melon: "Hamdha",
   f1: "Audi F1",
   gold: "Golden parrot",
   dragon: "Dragon rider",

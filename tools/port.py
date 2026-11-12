@@ -236,6 +236,14 @@ def patch_logic(key, name):
         s = re.sub(r"  useEffect\(\(\) => \{.*?\n  \}, \[\]\);\n", "", s, count=1, flags=re.S)
         s = s.replace('import { useEffect } from "react";', 'import { useMotionProgress } from "../useMotionProgress";')
         s = s.replace("var t = state.t;", "var t = useMotionProgress();")
+    if name in ("Rewards", "BirdLooks"):
+        # Lovable (12 Nov): old prototype look purchases are cleared once before the page reads them
+        a = 'import { useDC } from "../dc";'
+        assert s.count(a) == 1, "%s logic patch failed: reset import" % name
+        s = s.replace(a, a + '\nimport { resetPrototypeLooks } from "../resetPrototypeLooks";')
+        a = "  useEffect(() => {\n"
+        assert a in s, "%s logic patch failed: reset call" % name
+        s = s.replace(a, a + "    resetPrototypeLooks();\n", 1)
     for a, b in LOGIC.get(name, []):
         assert s.count(a) == 1, "%s logic patch failed: %s" % (name, a[:60])
         s = s.replace(a, b)

@@ -20,6 +20,7 @@ export function useVals() {
   });
   useEffect(() => {
     resetPrototypeLooks();
+
     // The look picked in the store (or the one he wears) plays as soon as the page opens.
     var first = "classic";
     try {
@@ -57,6 +58,15 @@ export function useVals() {
       "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/fish-still.webp",
       51.41,
       1.2232,
+      true,
+    ],
+    [
+      "melon",
+      "Hamdha",
+      "bh",
+      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/melon-still.webp",
+      40.71,
+      1.0,
       true,
     ],
     [
