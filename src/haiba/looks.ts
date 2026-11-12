@@ -50,7 +50,7 @@ export const LOOK_FILES: Record<
   falcon: { ms: 6000, idleMs: 4000, padL: 244, padR: 304, padT: 307 },
   // Thobe looks: the majlis greeting (agal, hand on chest, a small wave). Ghutra in Bahrain, shemagh in Saudi.
   ghutra: { ms: 6000, idleMs: 4000 },
-  // 12 Nov: the first look with sound, the viral Bahraini fish clip everyone knows as "Aboudi Auda".
+  // 12 Nov: the first look with sound, the viral Bahraini fish clip everyone knows as "Abood Yowda".
   // The sound (fish-sound.m4a, 84 KB) sits in the same Cloud folder and loads on the first tap.
   fish: { ms: 5600, idleMs: 4000, padL: 249, padR: 190, padT: 125, sound: "fish-sound.m4a" },
   shemagh: { ms: 6000, idleMs: 4000 },
@@ -89,7 +89,7 @@ export const LOOK_NAMES: Record<string, string> = {
   dunes: "Dune drive",
   space: "Space walk",
   pixel: "Pixel bird",
-  fish: "Aboudi Auda",
+  fish: "Abood Yowda",
   f1: "Audi F1",
   gold: "Golden parrot",
   dragon: "Dragon rider",

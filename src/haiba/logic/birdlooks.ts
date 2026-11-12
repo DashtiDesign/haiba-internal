@@ -50,7 +50,7 @@ export function useVals() {
     ["classic", "Classic", "", "/haiba/motion/hub-still.webp", 45.75, 1.0],
     [
       "fish",
-      "Aboudi Auda",
+      "Abood Yowda",
       "bh",
       "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/fish-still.webp",
       51.41,

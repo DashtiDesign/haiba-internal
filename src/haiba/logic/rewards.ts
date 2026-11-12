@@ -417,7 +417,7 @@ export function useVals() {
   var LOOKS = [
     [
       "fish",
-      "Aboudi Auda",
+      "Abood Yowda",
       "bh",
       "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/fish-still.webp",
       51.41,
