@@ -437,6 +437,14 @@ export function useVals() {
       true,
     ],
     [
+      "spa",
+      "Spa day",
+      "",
+      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/spa-still.webp",
+      41.09,
+      1.0196,
+    ],
+    [
       "gold",
       "Golden parrot",
       "",

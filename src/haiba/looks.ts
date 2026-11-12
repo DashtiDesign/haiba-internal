@@ -71,6 +71,10 @@ export const LOOK_FILES: Record<
   // then he settles back. The sound is the clip from 9.0 s to just before the laugh (6.5 s), so the word lands at
   // about 5.8 s, on the sour face. 8 s action because he keeps chewing sour after the word.
   melon: { ms: 8100, idleMs: 4000, padR: 51, sound: "melon-sound.m4a" },
+  // 13 Nov: Spa day, the first look with the girl parrot (her own model sheet: ponytail crest, small pink bow, a few
+  // lashes). Pink spa headband and a long robe; a pink salon chair pops in, cucumbers and a pink cream mask, then she
+  // hops up glowing and the chair vanishes. All markets.
+  spa: { ms: 6100, idleMs: 4000, padL: 49, padR: 117, padT: 11 },
   shemagh: { ms: 6000, idleMs: 4000 },
 };
 
@@ -109,6 +113,7 @@ export const LOOK_NAMES: Record<string, string> = {
   pixel: "Pixel bird",
   fish: "Abood Yowda",
   melon: "Hamdha",
+  spa: "Spa day",
   f1: "Audi F1",
   gold: "Golden parrot",
   dragon: "Dragon rider",
