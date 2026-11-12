@@ -235,11 +235,16 @@ function audioCtx(): AudioContext | null {
   if (!C) return null;
   try {
     ctx = new C();
+    // every look sound goes through one volume knob, so Sound off and on only mutes, never restarts anything
+    gain = ctx.createGain();
+    gain.gain.value = lookSoundOff() ? 0 : 1;
+    gain.connect(ctx.destination);
   } catch {
     return null;
   }
   return ctx;
 }
+let gain: GainNode | null = null;
 /** Call from a tap: phones only start sound after one. Later plays on the page are then allowed. */
 export function unlockLookSound() {
   const c = audioCtx();
@@ -282,7 +287,12 @@ export function setLookSoundOff(off: boolean) {
   } catch {
     /* private mode: the choice lasts for this visit only */
   }
-  if (off) stopLookSounds();
+  // 12 Nov (night): the switch only mutes or unmutes. The animation and the sound keep their place.
+  if (gain) gain.gain.value = off ? 0 : 1;
+  if (!off) {
+    unlockLookSound();
+    soundWanted?.();
+  }
 }
 let playing: AudioBufferSourceNode | null = null;
 /** Stops the look sound that is playing (another look was picked, or the page closed). */
@@ -294,14 +304,15 @@ export function stopLookSounds() {
   }
   playing = null;
 }
-function startSound(b: AudioBuffer) {
+// offset: seconds into the sound, to join an action already playing in time
+function startSound(b: AudioBuffer, offset = 0) {
   const c = audioCtx();
-  if (!c || lookSoundOff()) return;
+  if (!c || !gain) return;
   stopLookSounds();
   const src = c.createBufferSource();
   src.buffer = b;
-  src.connect(c.destination);
-  src.start();
+  src.connect(gain);
+  src.start(0, offset);
   playing = src;
 }
 /** Plays a look's sound from the start, from the hub tap. The sound starts once it is ready (one short download). */
@@ -346,9 +357,12 @@ const PREVIEW_GAP_MS = 4000;
  */
 let run = 0;
 let shown: string | null = null;
+// Set while a preview runs: Sound on calls it, so a look that opened silent joins its sound in time.
+let soundWanted: (() => void) | null = null;
 let timer: number | undefined;
 export function stopLookPreview() {
   run += 1;
+  soundWanted = null;
   window.clearTimeout(timer);
   stopLookSounds();
 }
@@ -357,12 +371,13 @@ async function playPreview(id: string, withSound: boolean, show: (src: string | 
   const me = run;
   const live = () => me === run;
   if (withSound) unlockLookSound();
-  const sound = withSound && lookHasSound(id) && !lookSoundOff() ? soundBuffer(id) : null;
+  // loaded even when Sound is off, so turning it on mid action just unmutes it
+  const sound = withSound && lookHasSound(id) ? soundBuffer(id) : null;
   const action = await actionFile(id);
   if (!live()) return;
   if (!action) return show(null);
   // wait for the sound too (it is small), but never more than 2 s, so a slow sound does not hold the look back
-  const buf = sound
+  let buf = sound
     ? await Promise.race([
         sound,
         new Promise<undefined>((r) => setTimeout(() => r(undefined), 2000)),
@@ -377,12 +392,26 @@ async function playPreview(id: string, withSound: boolean, show: (src: string | 
   };
   const ms = id === "classic" ? 6000 : (LOOK_FILES[id]?.ms ?? 6000);
   const idleMs = id === "classic" ? 3900 : (LOOK_FILES[id]?.idleMs ?? 4000);
+  let actionAt = 0;
+  let inAction = false;
+  soundWanted = () => {
+    if (buf || !lookHasSound(id)) return;
+    void soundBuffer(id).then((b) => {
+      if (!b || !live() || buf) return;
+      buf = b;
+      const at = (performance.now() - actionAt) / 1000;
+      if (inAction && at < b.duration) startSound(b, at);
+    });
+  };
   const loop = async () => {
     const u = await readyUrl(action);
     if (!live()) return URL.revokeObjectURL(u);
     swap(u);
-    if (buf && !lookSoundOff()) startSound(buf);
+    actionAt = performance.now();
+    inAction = true;
+    if (buf) startSound(buf);
     timer = window.setTimeout(async () => {
+      inAction = false;
       const idle = await idleFile(id);
       if (!live()) return;
       if (idle) swap(await readyUrl(idle));

@@ -284,8 +284,7 @@ export function useVals() {
           window.localStorage.setItem("haiba-look-sound", off ? "off" : "on");
         } catch (e) {}
       }
-      // turning it on plays the look again from the start, with its sound
-      if (!off) play(cur.id);
+      // 12 Nov (night): only the sound changes; the look keeps playing where it is (the sound joins in time)
     },
     selName: cur.name,
     selShowCoin: !curOwn,
