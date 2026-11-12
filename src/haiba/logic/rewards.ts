@@ -2,6 +2,7 @@
 // Ported 1:1 from the Design canvas board. Page state works like the canvas; shared keys live in the Haiba store.
 import { useEffect } from "react";
 import { useDC } from "../dc";
+import { resetPrototypeLooks } from "../resetPrototypeLooks";
 
 export function useVals() {
   const { state, setState, props, nav } = useDC({
@@ -23,6 +24,7 @@ export function useVals() {
     looksReady: false,
   });
   useEffect(() => {
+    resetPrototypeLooks();
     // Bird looks (12 Nov): owned looks and the one he wears are saved on the phone, read once the page runs.
     setState({ looksReady: true });
     // 9 Nov: once the points card and search scroll away, the search sticks to the top and the points slide in beside it.

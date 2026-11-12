@@ -2,6 +2,7 @@
 // Ported 1:1 from the Design canvas board. Page state works like the canvas; shared keys live in the Haiba store.
 import { useEffect } from "react";
 import { useDC } from "../dc";
+import { resetPrototypeLooks } from "../resetPrototypeLooks";
 
 export function useVals() {
   const { state, setState, props, nav } = useDC({
@@ -18,6 +19,7 @@ export function useVals() {
     soundOff: false,
   });
   useEffect(() => {
+    resetPrototypeLooks();
     // The look picked in the store (or the one he wears) plays as soon as the page opens.
     var first = "classic";
     try {

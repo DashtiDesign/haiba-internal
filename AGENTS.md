@@ -17,3 +17,4 @@
 - Keep home-screen installation manifest-only, with real public app icons and shared root head links; add no app-shell service worker unless offline support is explicitly requested, to avoid stale preview caches.
 - Deliver welcome footage as RGB/alpha packed H.264 through WelcomeVideo's GPU renderer; use opaque alpha for intact-background footage and premultiplied keyed RGB for transparent footage, avoiding double alpha and clamping each half's sampling. Encode with web-optimized faststart and efficient compression without reducing the established frame rate or dimensions.
 - Use full-character idle posters for footage that exits the frame; apply only per-step boundary treatments and sizing in shared welcome CSS so posters and playback remain consistently framed.
+- Apply prototype look resets through a shared versioned browser-storage migration before ownership reads, so old purchases clear once and new test purchases persist.

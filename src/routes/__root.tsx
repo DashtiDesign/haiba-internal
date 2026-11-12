@@ -23,6 +23,7 @@ import PrototypePanel from "../haiba/PrototypePanel";
 import MotionExperience from "../haiba/MotionExperience";
 // Bird looks: makes the on demand loader available to the ported points store board (window.__hbLooks).
 import "../haiba/looks";
+import { resetPrototypeLooks } from "../haiba/resetPrototypeLooks";
 import { MotionConfig } from "motion/react";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
@@ -151,6 +152,9 @@ function RootShell({ children }: { children: ReactNode }) {
 
 /** Keeps the store's home country in step with the country the app passed. */
 function ParamsSync() {
+  useEffect(() => {
+    resetPrototypeLooks();
+  }, []);
   const hb = useHaiba();
   const country = useRouterState({ select: (r) => (r.location.search as AppSearch).country });
   const c = parseCountry(country);

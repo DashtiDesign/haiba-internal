@@ -15,6 +15,8 @@
  * Where they live (12 Nov): the public "bird-looks" folder in Lovable Cloud storage, so a new look is an upload, not a
  * code change. VITE_HAIBA_LOOKS_URL can point somewhere else (for example a local copy while testing).
  */
+import { resetPrototypeLooks } from "./resetPrototypeLooks";
+
 const CLOUD = import.meta.env["VITE_SUPABASE_URL"] as string | undefined;
 const RAW_URL =
   (import.meta.env["VITE_HAIBA_LOOKS_URL"] as string | undefined) ||
@@ -122,6 +124,7 @@ export function lookStill(id: string) {
 
 // Saved on the phone, the same keys the prototype has used since 12 Nov.
 export function savedLook(): string {
+  resetPrototypeLooks();
   try {
     return window.localStorage.getItem("haiba-look") || "classic";
   } catch {
@@ -129,6 +132,7 @@ export function savedLook(): string {
   }
 }
 export function ownedLooks(): string[] {
+  resetPrototypeLooks();
   try {
     const v = JSON.parse(window.localStorage.getItem("haiba-looks-owned") || '["classic"]');
     return Array.isArray(v) && v.length ? v : ["classic"];
