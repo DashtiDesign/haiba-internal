@@ -208,7 +208,7 @@ export default function PaywallPointsApps() {
                   }}
                 >
                   <Artwork
-                    src="/haiba/emoji/ticket.webp"
+                    src="/haiba/promo/phone-coupon.webp"
                     alt=""
                     style={{
                       width: "84px",
@@ -356,7 +356,7 @@ export default function PaywallPointsApps() {
             <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
               <Artwork
                 className="hb-bob"
-                src="/haiba/coins/coin-stack-3d.webp"
+                src="/haiba/promo/pile.webp"
                 alt=""
                 style={{
                   width: "56px",

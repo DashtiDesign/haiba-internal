@@ -264,7 +264,7 @@ export function useVals() {
           : "Then more points every visit.",
     exitIcon:
       KIND === "gifts"
-        ? "/haiba/icons/hadiya.webp"
+        ? "/haiba/promo/box.webp"
         : KIND === "apps"
           ? P2.logo
           : "/haiba/coins/coin-34.webp",

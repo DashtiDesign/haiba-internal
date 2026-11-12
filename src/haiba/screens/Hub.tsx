@@ -104,53 +104,70 @@ export default function Hub() {
           <HubBird onTap={v.poke} />
         </div>
         <Link
-          aria-label="Change your bird's look"
+          aria-label="Change look. Pick a new look for your parrot"
           className="hb-press"
           style={{
             position: "absolute",
-            left: "282px",
-            top: "222px",
+            left: "16px",
+            top: "14px",
             zIndex: "3",
-            width: "40px",
             height: "40px",
-            borderRadius: "50%",
+            boxSizing: "border-box",
+            padding: "0 8px 0 5px",
+            borderRadius: "999px",
             background: "#FFFFFF",
-            color: "#6C3FFA",
+            color: "#1E1B2E",
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
+            gap: "8px",
             textDecoration: "none",
-            boxShadow: "0 6px 14px rgba(76,52,140,0.18)",
+            fontSize: "14px",
+            fontWeight: "800",
+            boxShadow: "0 4px 12px rgba(76,52,140,0.14)",
           }}
-          to="/haiba/membership"
-          hash="bird"
+          to="/haiba/looks"
         >
-          <svg
+          <span
             aria-hidden="true"
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+            style={{
+              width: "30px",
+              height: "30px",
+              borderRadius: "50%",
+              background: "#6C3FFA",
+              color: "#FFFFFF",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
-            <path d="M12 6.5a2 2 0 1 1 2-2"></path>
-            <path d="M12 6.5v1.2L3.6 14.4a1.6 1.6 0 0 0 1 2.9h14.8a1.6 1.6 0 0 0 1-2.9L12 7.7"></path>
-          </svg>
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M12 6.5a2 2 0 1 1 2-2"></path>
+              <path d="M12 6.5v1.2L3.6 14.4a1.6 1.6 0 0 0 1 2.9h14.8a1.6 1.6 0 0 0 1-2.9L12 7.7"></path>
+            </svg>
+          </span>
+          {"Change look"}
           <span
             style={{
-              position: "absolute",
-              right: "-2px",
-              top: "-2px",
-              width: "12px",
-              height: "12px",
-              borderRadius: "50%",
               background: "#C0F402",
-              boxShadow: "0 0 0 2px #FFFFFF",
+              color: "#1F2600",
+              fontSize: "11px",
+              fontWeight: "900",
+              borderRadius: "999px",
+              padding: "3px 7px",
+              letterSpacing: "0.02em",
             }}
-          ></span>
+          >
+            {"NEW"}
+          </span>
         </Link>
         <button
           onClick={v.toggleMenu}

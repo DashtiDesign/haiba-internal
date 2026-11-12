@@ -179,7 +179,7 @@ export type StringKey = keyof typeof en;
 // Arabic for the member screens comes later; missing words fall back to English.
 const ar: Partial<Record<StringKey, string>> = {
   // 12 Nov: Your bird in the profile
-  memBird: "طائرك",
+  memBird: "ببغاؤك",
   memBirdMore: "المتجر",
   memBirdOn: "على صفحتك",
   memBirdEmpty: "إطلالات أكثر",

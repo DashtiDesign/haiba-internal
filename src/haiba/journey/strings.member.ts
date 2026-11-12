@@ -274,7 +274,7 @@ export const memberEn = {
   memUntil: "Valid until {date}",
   memMonth: "Month {n} of 12",
   memBenefits: "Your benefits",
-  memBird: "Your bird",
+  memBird: "Your parrot",
   memBirdMore: "Get more looks",
   memBirdOn: "On your hub",
   memBirdEmpty: "More looks",

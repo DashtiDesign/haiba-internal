@@ -1,7 +1,15 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "../nav";
 import type { Session } from "./session";
-import { LOOK_NAMES, lookThumb, ownedLooks, savedLook, wearLook } from "../looks";
+import {
+  LOOK_NAMES,
+  lookAnchor,
+  lookHeight,
+  lookThumb,
+  ownedLooks,
+  savedLook,
+  wearLook,
+} from "../looks";
 
 /**
  * 12 Nov: "Your bird" in the Haiba profile (/haiba/membership#bird). The looks you own, tap one to put it on your hub.
@@ -103,10 +111,10 @@ export function BirdPicker({ s }: { s: Session }) {
                     position: "absolute",
                     left: "50%",
                     bottom: -2,
-                    height: 108,
+                    height: 108 * lookHeight(id),
                     width: "auto",
                     maxWidth: "none",
-                    transform: "translateX(-50%)",
+                    transform: `translateX(-${lookAnchor(id)}%)`,
                     display: "block",
                   }}
                 />

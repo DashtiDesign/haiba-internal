@@ -517,7 +517,7 @@ export default function Rewards() {
                     }}
                   >
                     <span style={{ fontSize: "18px", fontWeight: "800", letterSpacing: "-0.02em" }}>
-                      {"Bird looks"}
+                      {"Looks for your parrot"}
                     </span>
                     <Link
                       onClick={v.looksAll}
@@ -577,10 +577,10 @@ export default function Rewards() {
                                 position: "absolute",
                                 left: "50%",
                                 bottom: "-2px",
-                                height: "108px",
+                                height: `${k.h}px`,
                                 width: "auto",
                                 maxWidth: "none",
-                                transform: "translateX(-50%)",
+                                transform: `translateX(-${k.x}%)`,
                                 display: "block",
                               }}
                             />

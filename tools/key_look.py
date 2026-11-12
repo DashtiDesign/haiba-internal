@@ -13,7 +13,9 @@ ap.add_argument("--xfade", type=int, default=3)
 ap.add_argument("--from-still", dest="from_still", help="blend the first and last frames into this still (when a video's first frame drifts from the look's still)")
 ap.add_argument("--pad", help="L,R extra px for a wide look, to match its other file (use with --wide)")
 ap.add_argument("--wide", action="store_true", help="keep the full video width (for looks that move past the classic box); prints the extra px left and right")
-ap.add_argument("--box", help="top,bottom,cx in source px, to reuse the placement of another file of the same look")
+ap.add_argument("--trim", action="store_true", help="with --wide: keep only the room the look uses")
+ap.add_argument("--padt",type=int, help="extra px on top for a wide look (default: all the room the video has above him)")
+ap.add_argument("--box",help="top,bottom,cx in source px, to reuse the placement of another file of the same look")
 a = ap.parse_args()
 
 W, H, TOP, BOT, CX = 412, 560, 102, 545, 188.5  # CX = centre of his feet in hub-still
@@ -65,22 +67,41 @@ if a.wide:
     PADL, PADR = round(L * s), round((srcw - (L + W / s)) * s)
     if a.pad:
         PADL, PADR = map(int, a.pad.split(","))
-    box = (L - PADL / s, T, L + W / s + PADR / s, T + H / s)
+    # 12 Nov: room on top too, for looks that fly or throw above his head (the falcon, the dragon's fire).
+    PADT = max(0, round(T * s)) if a.padt is None else a.padt
+    box = (L - PADL / s, T - PADT / s, L + W / s + PADR / s, T + H / s)
     W = W + PADL + PADR
-    print("wide: extra px left", PADL, "right", PADR, "width", W)
+    H = H + PADT
+    print("wide: extra px left", PADL, "right", PADR, "top", PADT, "width", W, "height", H)
 print("source", first.shape, "box top,bottom,cx =", f"{top},{bot},{cx}", "scale", round(s, 4))
 
 frames = []
 for f in files:
     rgb = Image.open(f).convert("RGB")
-    bg = rgb.getpixel((4, 4))
-    # pad with the green so crops past the edge stay keyable
-    pad = 400
+    # pad with the backdrop green so crops past the edge stay keyable. Not the frame's corner pixel: when a wing or
+    # the fire covers the corner, that filled the area past the video with a solid bar (the dragon's green bar, 12 Nov).
+    bg = tuple(int(v) for v in BGC)
+    # enough green around the video for the whole crop (a wide look's idle can reach far past its smaller video)
+    pad = int(max(400, -min(box[0], box[1]), max(box[2] - rgb.width, box[3] - rgb.height))) + 8
     big = Image.new("RGB", (rgb.width + 2 * pad, rgb.height + 2 * pad), bg)
     big.paste(rgb, (pad, pad))
     c = big.crop(tuple(round(v + pad) for v in box))
     frames.append(key(np.array(c), BGC).resize((W, H), Image.LANCZOS))
 
+if a.wide and not a.pad and a.padt is None and a.trim:
+    # A roomy video (bird small in the frame) leaves a lot of empty green. Keep only the room the look uses, plus a
+    # 28 px margin, and never less than the classic 412 x 560 box. The idle then reuses these pads (--pad, --padt).
+    un = np.zeros((H, W), bool)
+    for fr in frames:
+        un |= np.asarray(fr)[..., 3] > 8
+    ys, xs = np.where(un)
+    cl = max(0, min(PADL, xs.min() - 28))
+    cr = min(W, max(PADL + 412, xs.max() + 29))
+    ct = max(0, min(PADT, ys.min() - 28))
+    frames = [fr.crop((cl, ct, cr, H)) for fr in frames]
+    PADL, PADR, PADT = PADL - cl, PADR - (W - cr), PADT - ct
+    W, H = cr - cl, H - ct
+    print("trimmed: extra px left", PADL, "right", PADR, "top", PADT, "width", W, "height", H)
 if a.wide:
     # The video edge can cut through a wing or the fire; fade the outer 20 px so it never ends in a hard line.
     ramp = np.ones(W)

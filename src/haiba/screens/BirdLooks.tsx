@@ -17,7 +17,7 @@ export default function BirdLooks() {
           width: "100%",
           maxWidth: "390px",
           margin: "0 auto",
-          minHeight: "1120px",
+          minHeight: "1320px",
           boxSizing: "border-box",
           background: "#FFFFFF",
           fontFamily: "Figtree, system-ui, sans-serif",
@@ -37,6 +37,7 @@ export default function BirdLooks() {
           <div
             style={{
               position: "absolute",
+              zIndex: "2",
               left: "0",
               right: "0",
               top: "0",
@@ -76,7 +77,7 @@ export default function BirdLooks() {
                 <path d="M15 6l-6 6 6 6"></path>
               </svg>
             </Link>
-            <span style={{ fontSize: "17px", fontWeight: "800" }}>{"Bird looks"}</span>
+            <span style={{ fontSize: "17px", fontWeight: "800" }}>{"Looks"}</span>
             <span
               style={{
                 display: "flex",
@@ -120,10 +121,10 @@ export default function BirdLooks() {
               position: "absolute",
               left: "50%",
               bottom: "136px",
-              height: "290px",
+              height: `${v.stageH}px`,
               width: "auto",
               maxWidth: "none",
-              transform: "translateX(-50%)",
+              transform: `translateX(-${v.stageX}%)`,
               display: "block",
             }}
           />
@@ -147,6 +148,80 @@ export default function BirdLooks() {
               >
                 {"Loading"}
               </span>
+            </>
+          ) : null}
+          {v.showSound ? (
+            <>
+              <button
+                onClick={v.toggleSound}
+                aria-label={v.soundAria}
+                aria-pressed={v.soundOnStr}
+                className="hb-press"
+                style={{
+                  position: "absolute",
+                  right: "16px",
+                  bottom: "146px",
+                  zIndex: "2",
+                  height: "34px",
+                  padding: "0 12px 0 10px",
+                  border: "0",
+                  borderRadius: "999px",
+                  background: "rgba(30,27,46,0.8)",
+                  color: "#FFFFFF",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "7px",
+                  font: "inherit",
+                  fontSize: "12.5px",
+                  fontWeight: "800",
+                  cursor: "pointer",
+                }}
+              >
+                {v.soundOn ? (
+                  <>
+                    <svg
+                      aria-hidden="true"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M11 5L6 9H3v6h3l5 4z" fill="currentColor"></path>
+                      <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
+                      <path d="M18.5 5.5a9 9 0 0 1 0 13"></path>
+                    </svg>
+                  </>
+                ) : null}
+                {v.soundMuted ? (
+                  <>
+                    <svg
+                      aria-hidden="true"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M11 5L6 9H3v6h3l5 4z" fill="currentColor"></path>
+                      <path d="M16 9l5 6M21 9l-5 6"></path>
+                    </svg>
+                  </>
+                ) : null}
+                <span className={`hb-wave ${v.waveClass}`} aria-hidden="true">
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                </span>
+                {v.soundTxt}
+              </button>
             </>
           ) : null}
           <div
@@ -271,13 +346,38 @@ export default function BirdLooks() {
                         position: "absolute",
                         left: "50%",
                         bottom: "-2px",
-                        height: "112px",
+                        height: `${k.h}px`,
                         width: "auto",
                         maxWidth: "none",
-                        transform: "translateX(-50%)",
+                        transform: `translateX(-${k.x}%)`,
                         display: "block",
                       }}
                     />
+                    {k.sound ? (
+                      <>
+                        <span
+                          aria-label="Has sound"
+                          style={{
+                            position: "absolute",
+                            left: "7px",
+                            top: "7px",
+                            height: "22px",
+                            padding: "0 6px",
+                            borderRadius: "999px",
+                            background: "#1E1B2E",
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                        >
+                          <span className="hb-wave" aria-hidden="true" style={{ height: "11px" }}>
+                            <i style={{ height: "5px", transform: "none" }}></i>
+                            <i style={{ height: "11px", transform: "none" }}></i>
+                            <i style={{ height: "7px", transform: "none" }}></i>
+                            <i style={{ height: "9px", transform: "none" }}></i>
+                          </span>
+                        </span>
+                      </>
+                    ) : null}
                     {k.wearing ? (
                       <>
                         <span
@@ -368,7 +468,7 @@ export default function BirdLooks() {
               lineHeight: "1.45",
             }}
           >
-            {"Looks are yours to keep. Change your bird any time here or in your profile."}
+            {"Looks are yours to keep. Change your parrot's look any time here or in your profile."}
           </div>
         </div>
         {v.asking ? (

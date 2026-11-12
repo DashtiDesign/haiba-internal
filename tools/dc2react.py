@@ -28,6 +28,14 @@ ROUTES = {
     "Sub01Offers.dc.html": "/haiba/subscriptions",
 }
 BLOBS = {
+    # 12 Nov: smaller Haiba pages art (focus_pages4)
+    "b89c59f74e9345d64a3368bbb57d8fd6": "/haiba/promo/box.webp",
+    "6ba918ff45118bc3f2a4fa6759ce0caa": "/haiba/promo/pile.webp",
+    "44a51158d820fc55347ada5641ed0eaf": "/haiba/promo/boost.webp",
+    "73fe226dd1d28656ad2a00e30f719fd7": "/haiba/promo/phone-code.webp",
+    "811f87a61b73f6be7103749c3192ab3e": "/haiba/promo/coins-cup.webp",
+    "13ef4eddeb8722122e442bab10365ada": "/haiba/promo/phone-pick.webp",
+    "438ab92e63e6958ff1c501917665f598": "/haiba/promo/phone-coupon.webp",
     "7ab45e5eada618030c6795af3ceeaaac": "/haiba/coins/coin-stack-3d.webp",
     "063548d55310ed6e3f9895fe48ccf152": "/haiba/categories/cafes.webp",
     "722775ab748379b280473732bf12710d": "/haiba/categories/restaurants.webp",
@@ -105,6 +113,24 @@ BLOBS = {
     "413483a80b085a72e185af89d489bed5": "/haiba/motion/hub-shades.webp",
     "46c8e5aa381bb35a0f4c84743e87a87d": "/haiba/motion/hub-coin.webp",
     "6dc8f1d17323a7e9b0b8e9d50368a752": "/haiba/motion/hub-still.webp",
+    # 12 Nov: look stills at full width (tiles and previews centre on his feet), from the bird-looks folder in Cloud.
+    # 12 Nov (evening): final bird look stills, in Lovable Cloud
+    "ce43a12b3fa7a585954bc4c2e7e2aff1": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/fish-still.webp",
+    "92896f197ff2d0f0ffe17bafd86bd74e": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/gold-wide-still.webp",
+    "a7de253f602520b5c1d2821d713cd216": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/f1-wide-still.webp",
+    "d31ce242c4d4af7fc98023b5e8e34756": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/dragon-wide-still.webp",
+    "70fbbb11d2bdbe7c11b9b38c39a9e4e4": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/football-wide-still.webp",
+    "f301acfb20ab2b394c46ab93a722f3fd": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/karak-wide-still.webp",
+    "e8cf4b91660834a29d2656867095d4a5": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/pearl-wide-still.webp",
+    "af699b996cb4e9ce80ca2b30812ed6c8": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/falcon-still.webp",
+    "b0f31d68b9a236fb648c32674f58d7d6": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/ghutra-still.webp",
+    "3b349a07ea97e491133d82cfc050b1d1": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/shemagh-still.webp",
+    "f7ebb9c2c486eaa7038041eee5af8ccc": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/gold-wide-still.webp",
+    "07dc77553ad1f4fd2c2e5cb4e6b6ae1b": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/f1-wide-still.webp",
+    "ae241374264076fa51f1b0bdd1e8ec37": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/dragon-still.webp",
+    "4fb04a89e54f23a7da9d7bf43d93b957": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/football-still.webp",
+    "64f9eed6fae717cd3998e7a7c6a4a60f": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/karak-still-2.webp",
+    "a3c66d04fbea5dd03fabcd573359560a": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/pearl-still.webp",
     # 12 Nov: legend bird looks, their stills, from the bird-looks folder in Lovable Cloud (same files the hub plays).
     "ae876cc4dea11ec8d00332e8c5a350fb": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/f1-still.webp",
     "1c3d70a34d95c7399078e2bf8a089a6d": "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/gold-still.webp",

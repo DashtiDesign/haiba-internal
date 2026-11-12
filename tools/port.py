@@ -81,7 +81,7 @@ SCREEN = {
     # 8 Nov: the hub bird is the HubBird loop player (real animated loops), not a still.
     "Hub": [
         ('import Artwork from "../Artwork";', 'import Artwork from "../Artwork";\nimport HubBird from "../HubBird";'),
-        (re.compile(r'<button\s+aria-label="Say hi to the Unipal bird".*?</button>', re.S), '<HubBird onTap={v.poke} />'),
+        (re.compile(r'<button\s+aria-label="Say hi to the Haiba parrot".*?</button>', re.S), '<HubBird onTap={v.poke} />'),
         # 8 Nov: a reward code row opens the full code screen (4.6) with that reward; menu rows open their pages.
         (re.compile(r'<Link (className="hb-row" style=\{\{[^}]*\}\}) to="/haiba/code\?kind=reward">(.*?)</Link>', re.S),
          r'<a \1 href="#" onClick={(e: any) => { e.preventDefault(); go(r.href); }}>\2</a>'),

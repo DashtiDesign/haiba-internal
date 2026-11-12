@@ -15,6 +15,7 @@ export function useVals() {
     prevFor: "",
     loading: false,
     ready: false,
+    soundOff: false,
   });
   useEffect(() => {
     // The look picked in the store (or the one he wears) plays as soon as the page opens.
@@ -27,7 +28,11 @@ export function useVals() {
     } catch (e) {}
     var api = window.__hbLooks;
     var go = !!(api && api.has(first));
-    setState({ ready: true, loading: go });
+    var off = false;
+    try {
+      off = window.localStorage.getItem("haiba-look-sound") === "off";
+    } catch (e) {}
+    setState({ ready: true, loading: go, soundOff: off });
     if (go) {
       window.__hbLookWant = first;
       api.preview(first).then(function (u) {
@@ -40,43 +45,89 @@ export function useVals() {
   var PRICE = 200;
   var balance = props.base - (props.heldPts || 0);
   var sa = (props.market ?? "Bahrain") === "Saudi";
+  // [id, name, market, still, where his feet are (% of the width), height against the classic 560 px, has sound]
   var LOOKS = [
-    ["classic", "Classic", "", "/haiba/motion/hub-still.webp"],
+    ["classic", "Classic", "", "/haiba/motion/hub-still.webp", 45.75, 1.0],
+    [
+      "fish",
+      "Aboudi Auda",
+      "bh",
+      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/fish-still.webp",
+      51.41,
+      1.2232,
+      true,
+    ],
     [
       "gold",
       "Golden parrot",
       "",
-      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/gold-still.webp",
+      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/gold-wide-still.webp",
+      49.59,
+      1.0768,
     ],
     [
       "dragon",
       "Dragon rider",
       "",
-      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/dragon-card.webp",
+      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/dragon-wide-still.webp",
+      55.25,
+      1.7214,
     ],
     [
       "f1",
       "Audi F1",
       "",
-      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/f1-still.webp",
+      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/f1-wide-still.webp",
+      50.72,
+      1.0536,
     ],
     [
       "football",
       "Football star",
       "",
-      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/football-card.webp",
+      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/football-wide-still.webp",
+      38.79,
+      1.0464,
+    ],
+    [
+      "falcon",
+      "Falcon friend",
+      "",
+      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/falcon-still.webp",
+      45.05,
+      1.5482,
     ],
     [
       "karak",
       "Karak break",
       "",
-      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/karak-still-2.webp",
+      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/karak-wide-still.webp",
+      50.0,
+      1.0,
+    ],
+    [
+      "ghutra",
+      "Thobe and ghutra",
+      "bh",
+      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/ghutra-still.webp",
+      45.75,
+      1.0,
+    ],
+    [
+      "shemagh",
+      "Thobe and shemagh",
+      "sa",
+      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/shemagh-still.webp",
+      45.75,
+      1.0,
     ],
     [
       "pearl",
       "Pearl diver",
       "bh",
-      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/pearl-still.webp",
+      "https://zunghqohbnldmfprudln.supabase.co/storage/v1/object/public/bird-looks/pearl-wide-still.webp",
+      50.37,
+      1.0,
     ],
   ].filter(function (l) {
     return !l[2] || l[2] === (sa ? "sa" : "bh");
@@ -118,7 +169,8 @@ export function useVals() {
       return;
     }
     setState({ sel: id, prev: "", prevFor: "", loading: true });
-    api.preview(id).then(function (u) {
+    // a tap plays the look from its start, with its sound if it has one (api.tap); opening the page stays silent
+    (api.tap || api.preview)(id).then(function (u) {
       if (window.__hbLookWant === id) setState({ prev: u || "", prevFor: id, loading: false });
     });
   };
@@ -130,6 +182,9 @@ export function useVals() {
       id: l[0],
       name: l[1],
       still: l[3],
+      x: l[4],
+      h: Math.round(112 * l[5]),
+      sound: !!l[6],
       on: on,
       onStr: String(on),
       wearing: w,
@@ -175,8 +230,46 @@ export function useVals() {
   return {
     pointsTxt: fmt(left),
     stageSrc: state.prevFor === cur.id && state.prev ? state.prev : cur.still,
-    stageAlt: "The Haiba bird, " + cur.name + " look",
+    stageAlt: "The Haiba parrot, " + cur.name + " look",
+    // centre on his feet, not on the image (each file puts his feet where the hub needs them)
+    stageX: String(
+      LOOKS.filter(function (l) {
+        return l[0] === cur.id;
+      })[0][4],
+    ),
+    // a tall look (the falcon's flight, the dragon) keeps his size until it would leave the stage, then fits it
+    stageH: String(
+      Math.round(
+        Math.min(
+          290 *
+            LOOKS.filter(function (l) {
+              return l[0] === cur.id;
+            })[0][5],
+          340,
+        ),
+      ),
+    ),
     loading: !!state.loading,
+    // 12 Nov: looks with sound show a chip on the stage. Tap it to turn sound off or on (saved on the phone).
+    showSound: !!cur.sound,
+    soundOn: !state.soundOff,
+    soundMuted: !!state.soundOff,
+    soundOnStr: String(!state.soundOff),
+    soundTxt: state.soundOff ? "Sound off" : "Sound on",
+    soundAria: state.soundOff ? "Sound is off. Turn sound on" : "Sound is on. Turn sound off",
+    waveClass: state.soundOff ? "off" : "on",
+    toggleSound: function () {
+      var off = !state.soundOff;
+      setState({ soundOff: off });
+      if (api && api.setSoundOff) api.setSoundOff(off);
+      else {
+        try {
+          window.localStorage.setItem("haiba-look-sound", off ? "off" : "on");
+        } catch (e) {}
+      }
+      // turning it on plays the look again from the start, with its sound
+      if (!off) play(cur.id);
+    },
     selName: cur.name,
     selShowCoin: !curOwn,
     selLine: curWear ? "On your hub" : curOwn ? "Yours" : fmt(PRICE) + " points",

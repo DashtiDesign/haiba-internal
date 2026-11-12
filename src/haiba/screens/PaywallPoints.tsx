@@ -108,7 +108,7 @@ export default function PaywallPoints() {
             <Artwork
               priority
               className="hb-pop hb-bob"
-              src="/haiba/coins/coin-stack-3d.webp"
+              src="/haiba/promo/pile.webp"
               alt="A pile of Haiba coins"
               style={{ width: "180px", height: "180px", objectFit: "contain", display: "block" }}
             />
@@ -184,7 +184,7 @@ export default function PaywallPoints() {
                   }}
                 >
                   <Artwork
-                    src="/haiba/emoji/receipt.webp"
+                    src="/haiba/promo/phone-code.webp"
                     alt=""
                     style={{
                       width: "84px",
@@ -243,7 +243,7 @@ export default function PaywallPoints() {
                   }}
                 >
                   <Artwork
-                    src="/haiba/coins/coin-34.webp"
+                    src="/haiba/promo/boost.webp"
                     alt=""
                     style={{
                       width: "72px",
@@ -318,7 +318,7 @@ export default function PaywallPoints() {
                   }}
                 >
                   <Artwork
-                    src="/haiba/emoji/drink.webp"
+                    src="/haiba/promo/coins-cup.webp"
                     alt=""
                     style={{
                       width: "84px",

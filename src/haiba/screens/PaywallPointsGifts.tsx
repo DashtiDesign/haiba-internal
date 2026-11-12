@@ -108,7 +108,7 @@ export default function PaywallPointsGifts() {
             <Artwork
               priority
               className="hb-pop hb-bob"
-              src="/haiba/icons/hadiya.webp"
+              src="/haiba/promo/box.webp"
               alt="Hadiya, your monthly gift"
               style={{ width: "180px", height: "180px", objectFit: "contain", display: "block" }}
             />
@@ -183,7 +183,7 @@ export default function PaywallPointsGifts() {
                   }}
                 >
                   <Artwork
-                    src="/haiba/icons/hadiya.webp"
+                    src="/haiba/promo/phone-pick.webp"
                     alt=""
                     style={{
                       width: "84px",
@@ -242,7 +242,7 @@ export default function PaywallPointsGifts() {
                   }}
                 >
                   <Artwork
-                    src="/haiba/emoji/receipt.webp"
+                    src="/haiba/promo/phone-code.webp"
                     alt=""
                     style={{
                       width: "84px",
@@ -430,7 +430,7 @@ export default function PaywallPointsGifts() {
             <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
               <Artwork
                 className="hb-bob"
-                src="/haiba/coins/coin-stack-3d.webp"
+                src="/haiba/promo/pile.webp"
                 alt=""
                 style={{
                   width: "56px",
