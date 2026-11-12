@@ -51,8 +51,19 @@ export const LOOK_FILES: Record<
   // Thobe looks: the majlis greeting (agal, hand on chest, a small wave). Ghutra in Bahrain, shemagh in Saudi.
   ghutra: { ms: 6000, idleMs: 4000 },
   // 12 Nov: the first look with sound, the viral Bahraini fish clip everyone knows as "Abood Yowda".
-  // The sound (fish-sound.m4a, 84 KB) sits in the same Cloud folder and loads on the first tap.
-  fish: { ms: 5600, idleMs: 4000, padL: 249, padR: 190, padT: 125, sound: "fish-sound.m4a" },
+  // The sound (fish-sound.m4a, 70 KB) sits in the same Cloud folder and loads on the first tap.
+  // fish-v2 (12 Nov, night): the action now ends on him standing up with the fish, so it no longer blends two poses at
+  // the end. New file names so phones that kept the first version load the new one. The still is unchanged.
+  fish: {
+    ms: 6000,
+    idleMs: 4000,
+    padL: 249,
+    padR: 190,
+    padT: 125,
+    name: "fish-v2",
+    still: "fish-still.webp",
+    sound: "fish-sound.m4a",
+  },
   shemagh: { ms: 6000, idleMs: 4000 },
 };
 
